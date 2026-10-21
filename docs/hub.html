@@ -54,7 +54,18 @@ function overview(){const map=window.ieatSupportMap,estate=document.getElementBy
 document.addEventListener('change',event=>{if(event.target.id!=='estate')return;window.ieatIncidentChosen=false;window.dispatchEvent(new Event('ieat-clear-incident-selection'));window.dispatchEvent(new Event('ieat-clear-support-center'));setTimeout(overview,100)},true);
 window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overview));
 })();
-</script></head>
+</script>
+<style id="emergency-support-single-column">
+/* แสดงการ์ดข้อมูลสนับสนุนใกล้นิคมอุตสาหกรรมเป็นคอลัมน์เดียว */
+#emergencySupportCards{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) !important;
+  width:100%;
+}
+#emergencySupportCards > *{min-width:0;width:100%;max-width:none;}
+</style>
+
+</head>
 <body>
 <header class="portal-header" id="ieatPortalHeader"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></a><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><svg class="scope-search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g clip-path="url(#estateSearchIconClip)"><rect width="24" height="24" fill="white"/><circle cx="10.5" cy="10.5" r="6.5" stroke="#000000" stroke-linejoin="round"/><path d="M19.6464 20.3536C19.8417 20.5488 20.1583 20.5488 20.3536 20.3536C20.5488 20.1583 20.5488 19.8417 20.3536 19.6464L19.6464 20.3536ZM20.3536 19.6464L15.3536 14.6464L14.6464 15.3536L19.6464 20.3536L20.3536 19.6464Z" fill="#000000"/></g><defs><clipPath id="estateSearchIconClip"><rect width="24" height="24" fill="white"/></clipPath></defs></svg><span id="disasterScopeLabel">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a class="nav-active" aria-current="page" href="./hub.html">ภัยพิบัติ</a></nav></div></header>
 
