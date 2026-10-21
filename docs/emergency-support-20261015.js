@@ -59,7 +59,7 @@ function publishSupport(){
 window.addEventListener('ieat-retry-support',load);
 function render(){
  publishSupport();host.replaceChildren();
- const overview=!incident;radius.disabled=overview;
+ const overview=!incident;radius.disabled=overview;pointLabel.hidden=overview;
  const selections=overview?groups.map(g=>g.ids.flatMap(id=>(overviewRows.get(id)||[]).slice(0,g.each))):selectedRows();
  groups.forEach((g,index)=>{const card=document.createElement('article');card.className='risk-ranking-card emergency-support-card';card.append(text('h3',g.title));
   const rows=selections[index];if(overview){const totals=g.ids.map(id=>{const source=sources.find(s=>s.id===id);return source.label+' '+(overviewTotals.has(id)?number(overviewTotals.get(id)):'—')+' รายการ';});card.append(text('p',totals.join(' · '),'support-overview-counts'));}if(!rows.length){card.append(text('p',overview?(overviewLoading?'กำลังโหลดภาพรวมข้อมูลสนับสนุน…':g.ids.some(id=>overviewFailures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่มีรายการในฐานข้อมูล'):loading?'กำลังค้นหาตำแหน่งใกล้เหตุ…':g.ids.some(id=>failures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่พบข้อมูลกลุ่มนี้ในระยะที่เลือก','support-empty'));}
@@ -67,7 +67,7 @@ function render(){
  });
  if(incident){pointLabel.textContent='นิคมอุตสาหกรรม: '+estateName;clear.disabled=false;
   note.textContent=loading?'กำลังค้นหาข้อมูลสนับสนุนในระยะ '+radius.value+' กม.…':(failures.length?'โหลดไม่ได้: '+sources.filter(s=>failures.includes(s.id)).map(s=>s.label).join(', '):'');
- }else{pointLabel.textContent='ภาพรวมฐานข้อมูลสนับสนุนทุกนิคมฯ';clear.disabled=true;note.textContent=overviewLoading?'กำลังโหลดภาพรวม…':'แสดงตัวอย่างตามประเภท ไม่ได้เรียงตามระยะ · เลือกนิคมฯ ด้านบนเพื่อดูสถานที่ใกล้เคียง'+(overviewFailures.length?' · บางแหล่งข้อมูลยังโหลดไม่สำเร็จ':'');}
+ }else{pointLabel.textContent='';clear.disabled=true;note.textContent=overviewLoading?'กำลังโหลดภาพรวม…':(overviewFailures.length?'บางแหล่งข้อมูลยังโหลดไม่สำเร็จ':'');}
 }
 async function fetchJSON(url,params,signal){const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:String(params),signal:AbortSignal.any([signal,AbortSignal.timeout(30000)])});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error)throw Error(data.error.message||'Query failed');return data;}
 async function loadSource(source,origin,limit,signal){
