@@ -3,19 +3,7 @@
 if(window.IEATWorkflowView!=='hazard')return;
 const $=id=>document.getElementById(id),dash=$('riskDashboard'),heading=$('workflow-heading'),panel=$('thermal-panel');if(!dash||!heading||!panel)return;
 const make=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;},link=(text,href,cls='button')=>{const a=make('a',text,cls);a.href=href;return a;},date=v=>new Date(v).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'}),norm=v=>String(v||'').replace(/สำนักงานนิคมฯ|นิคมอุตสาหกรรม|นิคมฯ|\s+/g,'');
-// fire-legacy-helper-copy-cleanup: remove the three redundant satellite-search caveats.
- const removeHelperCopy=()=>{
-  const phrases=['กรอบสืบค้นครอบคลุมไทย','พื้นที่ข้างเคียง','ระยะคำนวณถึงจุดอ้างอิงนิคมฯ','ขอบเขตแปลงโรงงาน','นับจุดตรวจพบตามแหล่งที่เลือก','จำนวนเหตุไฟไหม้','เมฆอาจบดบังการตรวจพบ'];
-  document.querySelectorAll('p,small,li,.muted,.focus-help,.fire-inline-help,.thermal-note,.panel-note').forEach(node=>{
-   if(!node.isConnected)return;
-   const text=(node.textContent||'').replace(/\\s+/g,' ').trim();
-   if(phrases.some(phrase=>text.includes(phrase))&&text.length<260)node.remove();
-  });
- };
- removeHelperCopy();
- const helperCopyObserver=new MutationObserver(removeHelperCopy);
- helperCopyObserver.observe(dash,{childList:true,subtree:true});
- const tab=document.querySelector('[data-page="risk"]');if(tab)tab.textContent='ไฟไหม้ / สารเคมี';
+const tab=document.querySelector('[data-page="risk"]');if(tab)tab.textContent='ไฟไหม้ / สารเคมี';
 heading.querySelector('h1').textContent='ไฟไหม้และสารเคมีรั่วไหล';heading.querySelector('p').textContent='ภาพรวมจุดความร้อนใกล้นิคมฯ และเหตุที่รับแจ้ง เพื่อเฝ้าระวังและเตรียมข้อมูลสนับสนุน';
 const actions=heading.querySelector('.actions');actions.replaceChildren(link('ฐานข้อมูล DSS / RiskMap','./hub.html?view=data'),link('จัดทำรายงาน ↗','./incidents.html','button primary'));
 const eyebrow=make('div','EMCC · เฝ้าระวังพื้นที่นิคมอุตสาหกรรม','fire-eyebrow');heading.prepend(eyebrow);
