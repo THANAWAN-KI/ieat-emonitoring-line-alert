@@ -30,7 +30,7 @@ const sources=[
 ];
 const groups=[{title:'ช่วยเหลือและระงับเหตุ',ids:['hospital','fire','police'],each:2},{title:'น้ำดับเพลิงและเฝ้าระวัง',ids:['hydrant','cctv'],each:3},{title:'ประสานพื้นที่ใกล้เคียง',ids:['community','business'],each:3}];
 let estateName='',estateSequence=0,estateFeatures=null;let map=null,incident=null,marker=null,markers=null,selecting=false,request=0,controller=null,results=new Map(),loading=false,failures=[];
-const metadata=new Map(),number=n=>Number(n).toLocaleString('th-TH'),distance=n=>n<1000?number(Math.round(n))+' ม.':number(Math.round(n/100)/10)+' กม.';
+const fetchedAt=new Map(),metadata=new Map(),number=n=>Number(n).toLocaleString('th-TH'),distance=n=>n<1000?number(Math.round(n))+' ม.':number(Math.round(n/100)/10)+' กม.';
 const text=(tag,value,cls)=>{const e=document.createElement(tag);e.textContent=value;if(cls)e.className=cls;return e;};
 const color=d=>d<=5000?['#4F7D32','#fff']:d<=10000?['#FFD16A','#000']:d<=20000?['#F5B52E','#000']:['#D9361E','#fff'];
 const usable=v=>v!=null&&String(v).trim()&&!/^(null|undefined|ไม่มีข้อมูล|ไม่ระบุ|-|—)$/i.test(String(v).trim());
@@ -48,13 +48,14 @@ function drawSupportMarkers(){
  if(markers)markers.remove();markers=window.L.layerGroup().addTo(map);
  selectedRows().flat().forEach(row=>{const c=color(row.distance);const m=window.L.circleMarker([row.lat,row.lon],{radius:7,color:'#fff',weight:2,fillColor:c[0],fillOpacity:1}).addTo(markers);m.bindTooltip(text('span',row.type+' · '+row.name));m.on('click',()=>{if(!selecting)focusRow(row);});});
 }
-function effectiveSupportRadius(){const checked=Array.from(document.querySelectorAll('.dashboard-buffer-tools input:checked')).map(n=>Number(n.value)).filter(Number.isFinite);return Math.min(Number(radius.value),checked.length?Math.max(...checked):Number(radius.value))}
+function effectiveSupportRadius(){return Number(radius.value)}
 function publishSupport(){
  const limit=effectiveSupportRadius();const rows=Array.from(results.values()).flat().filter(r=>r.distance<=limit*1000).sort((a,b)=>a.distance-b.distance);
- const snapshot={origin:incident?{...incident,name:estateName}:null,radius:limit,searchRadius:Number(radius.value),rows,loading,failures:[...failures]};
+ const snapshot={origin:incident?{...incident,name:estateName}:null,radius:limit,searchRadius:Number(radius.value),rows,loading,failures:[...failures],sources:sources.map(s=>({id:s.id,label:s.label,url:base+encodeURI(s.path),fetchedAt:fetchedAt.get(s.id)||null,sourceUpdatedAt:metadata.get(s.id)?.editingInfo?.lastEditDate||null,status:failures.includes(s.id)?'error':results.has(s.id)?'ready':loading?'loading':'idle'}))};
  window.ieatSupportSnapshot=snapshot;get('emergencyReportFrame')?.contentWindow?.postMessage({type:'dss:nearby-support',...snapshot},location.origin);
+ window.dispatchEvent(new CustomEvent('ieat-support-updated',{detail:snapshot}));
 }
-document.addEventListener('change',e=>{if(e.target.matches('.dashboard-buffer-tools input'))load()});
+window.addEventListener('ieat-retry-support',load);
 function render(){
  publishSupport();host.replaceChildren();
  const selections=selectedRows();
@@ -83,8 +84,8 @@ async function loadSource(source,origin,limit,signal){
 }
 async function load(){
  if(!incident)return;
- controller?.abort();controller=new AbortController();const signal=controller.signal,id=++request,origin={...incident};loading=true;results=new Map();failures=[];drawSupportMarkers();render();
- await Promise.allSettled(sources.map(async source=>{try{const rows=await loadSource(source,origin,effectiveSupportRadius(),signal);if(id!==request)return;results.set(source.id,rows);}catch(e){if(id!==request||signal.aborted)return;failures.push(source.id);console.warn('Emergency support '+source.label,e);}if(id===request){render();drawSupportMarkers();}}));
+ controller?.abort();controller=new AbortController();const signal=controller.signal,id=++request,origin={...incident};loading=true;results=new Map();fetchedAt.clear();failures=[];drawSupportMarkers();render();
+ await Promise.allSettled(sources.map(async source=>{try{const rows=await loadSource(source,origin,effectiveSupportRadius(),signal);if(id!==request)return;results.set(source.id,rows);fetchedAt.set(source.id,new Date().toISOString());}catch(e){if(id!==request||signal.aborted)return;failures.push(source.id);console.warn('Emergency support '+source.label,e);}if(id===request){render();drawSupportMarkers();}}));
  if(id!==request)return;loading=false;render();drawSupportMarkers();
 }
 function setIncident(lat,lon){
@@ -134,3 +135,4 @@ if(estateSource?.value&&window.ieatSupportMap)selectEstate();
 
 render();
 })();
+
