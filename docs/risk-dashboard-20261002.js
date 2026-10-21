@@ -195,11 +195,12 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
    fallbackView=L.map('map',{zoomControl:false}).setView([14,101],6);
    window.ieatSupportMap=fallbackView;window.dispatchEvent(new CustomEvent('ieat-support-map-ready',{detail:{map:fallbackView}}));L.control.zoom({position:'bottomright'}).addTo(fallbackView);
    const tileRoot='https://server.arcgisonline.com/ArcGIS/rest/services/';
-   const basemaps={'gray-vector':{path:'Canvas/World_Light_Gray_Base',reference:'Canvas/World_Light_Gray_Reference',native:16},'streets-vector':{path:'World_Street_Map',native:19},satellite:{path:'World_Imagery',reference:'Reference/World_Boundaries_and_Places',native:19},'topo-vector':{path:'World_Topo_Map',native:19}};
-   const tiles=L.tileLayer('',{attribution:'Tiles © Esri',maxZoom:20}).addTo(fallbackView);
+   const basemaps={'dashboard-light':{path:'World_Street_Map',native:19},'gray-vector':{path:'Canvas/World_Light_Gray_Base',reference:'Canvas/World_Light_Gray_Reference',native:16},'streets-vector':{path:'World_Street_Map',native:19},satellite:{path:'World_Imagery',reference:'Reference/World_Boundaries_and_Places',native:19},'topo-vector':{path:'World_Topo_Map',native:19}};
+   const tiles=L.tileLayer('',{attribution:'Tiles © Esri',maxZoom:20,updateWhenIdle:true,updateWhenZooming:false,keepBuffer:2}).addTo(fallbackView);
    fallbackView.createPane('referenceLabels');fallbackView.getPane('referenceLabels').style.zIndex=350;fallbackView.getPane('referenceLabels').style.pointerEvents='none';
    let referenceTiles=null;
-   function changeBasemap(){const config=basemaps[$('basemap').value]||basemaps['gray-vector'];tiles.options.maxNativeZoom=config.native;tiles.setUrl(tileRoot+config.path+'/MapServer/tile/{z}/{y}/{x}');if(referenceTiles){fallbackView.removeLayer(referenceTiles);referenceTiles=null;}if(config.reference)referenceTiles=L.tileLayer(tileRoot+config.reference+'/MapServer/tile/{z}/{y}/{x}',{pane:'referenceLabels',maxZoom:20,maxNativeZoom:config.native,interactive:false}).addTo(fallbackView);}
+   const lightOption=document.createElement('option');lightOption.value='dashboard-light';lightOption.textContent='แผนที่ถนนโทนอ่อน · Dashboard';$('basemap').prepend(lightOption);if(new URLSearchParams(location.search).get('view')!=='data')$('basemap').value='dashboard-light';
+   function changeBasemap(){$('map').classList.toggle('dashboard-light-basemap',$('basemap').value==='dashboard-light');const config=basemaps[$('basemap').value]||basemaps['gray-vector'];tiles.options.maxNativeZoom=config.native;tiles.setUrl(tileRoot+config.path+'/MapServer/tile/{z}/{y}/{x}');if(referenceTiles){fallbackView.removeLayer(referenceTiles);referenceTiles=null;}if(config.reference)referenceTiles=L.tileLayer(tileRoot+config.reference+'/MapServer/tile/{z}/{y}/{x}',{pane:'referenceLabels',maxZoom:20,maxNativeZoom:config.native,interactive:false}).addTo(fallbackView);}
    changeBasemap();
    L.control.scale({position:'bottomleft',imperial:false,maxWidth:110}).addTo(fallbackView);
    const dashboardTools=L.control({position:'topleft'});
@@ -211,7 +212,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
     document.addEventListener('fullscreenchange',()=>{const expanded=document.fullscreenElement===section||document.fullscreenElement===$('riskDashboard');full.setAttribute('aria-label',expanded?'ออกจากเต็มจอ':'เปิด Dashboard เต็มจอ');full.title=expanded?'ออกจากเต็มจอ':'เปิด Dashboard เต็มจอ';fallbackView.invalidateSize({pan:false});});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&section.classList.contains('dashboard-map-expanded')){section.classList.remove('dashboard-map-expanded');fallbackView.invalidateSize({pan:false});}});
     L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);return box;};dashboardTools.addTo(fallbackView);
-   if(window.ResizeObserver)new ResizeObserver(()=>fallbackView.invalidateSize({pan:false})).observe($('map'));
+   if(window.ResizeObserver){let width=0,height=0,resizePending=false;new ResizeObserver(entries=>{const size=entries[0].contentRect,w=Math.round(size.width),h=Math.round(size.height);if(w===width&&h===height)return;width=w;height=h;if(resizePending)return;resizePending=true;requestAnimationFrame(()=>{resizePending=false;fallbackView.invalidateSize({pan:false})})}).observe($('map'));}
    fallbackInitialBounds=[[5.5,97.3],[20.6,105.7]];fallbackView.fitBounds(fallbackInitialBounds,{padding:[20,20]});
    const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){if(/create[\s_]*buffers/i.test(String(def.title||'')))continue;const shown=parentVisible&&def.visibility!==false;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);
    const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
@@ -274,8 +275,8 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
       }else{
        const params=new URLSearchParams({f:'geojson',where:[def.layerDefinition?.definitionExpression,d?.where].filter(Boolean).map(clause=>'('+clause+')').join(' AND ')||'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',geometry:JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects'});
        if(filtered&&d)params.set('objectIds',ids.join(','));
-       let first=true;
-       result=await queryAllMapFeatures(def.url,params,(features,count)=>{if(!isCurrent())return;paintMapFeatures(def,{type:'FeatureCollection',features},group,first);first=false;loaded.set(def,count);status();},isCurrent);
+       // Paint the complete result once; batch-by-batch plus final painting duplicated all map work.
+       result=await queryAllMapFeatures(def.url,params,null,isCurrent);
       }
       if(!isCurrent()||!fallbackView.hasLayer(group))return;
       paintMapFeatures(def,result,group,true);loaded.set(def,result.type==='FeatureCollection'?result.features.length:result.type==='Feature'?1:0);status();
