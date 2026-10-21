@@ -37,5 +37,8 @@ const detailBox=make('details',null,'focus-estate-details'),detailToggle=make('s
 detailBox.append(detailToggle);const detailBody=make('div',null,'focus-estate-details-body');
 for(const item of [estates.querySelector('#thermal-status'),estates.querySelector('.actions'),estates.querySelector('.source')]){if(item)detailBody.append(item);}
 detailBox.append(detailBody);estates.append(detailBox);
+// Keep the two data tables visible while the incident form and search stay out of the overview.
+const riskTable=dss.querySelector('.operating-zone-section');
+if(riskTable){const comparison=make('div',null,'focus-estate-risk-row');areaRow.prepend(comparison);comparison.append(estates,riskTable);}
 function resizeMap(){window.ieatSupportMap?.invalidateSize({pan:false});}requestAnimationFrame(resizeMap);window.addEventListener('ieat-support-map-ready',resizeMap);window.addEventListener('resize',resizeMap);
 })();
