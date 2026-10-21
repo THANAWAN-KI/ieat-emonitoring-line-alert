@@ -1746,6 +1746,22 @@ html body #riskDashboard.continuous-dashboard .risk-analysis-columns #emergencyS
 })();
 </script>
 
+
+<style id="hide-incident-search-and-support-sections">
+/* ซ่อนส่วนเหตุไฟไหม้/สารเคมีที่รับแจ้ง แถบค้นหาหลัก และภาพรวมข้อมูลสนับสนุน
+   โดยคงตารางโรงงานเสี่ยงรายนิคมฯ และตารางสารเคมี DSS ไว้ */
+html body #riskDashboard .direct-querybar,
+html body #riskDashboard .support-summary-cards,
+html body #riskDashboard .emergency-support-section {
+  display: none !important;
+}
+/* คงส่วนตาราง DSS และตารางโรงงานที่เข้าข่ายความเสี่ยงรายนิคมฯ ไว้ในตำแหน่งเดิม */
+html body #riskDashboard .chemical-details-panel,
+html body #riskDashboard .operating-zone-section {
+  display: block !important;
+}
+</style>
+
 </body></html>
 
 
