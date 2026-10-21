@@ -32,5 +32,10 @@ for(const p of d.points){if(!Number.isFinite(p.nearestDistance)||p.nearestDistan
 const total=bands.reduce((s,b)=>s+b.count,0);$('fire-proximity-total').textContent=total.toLocaleString('th-TH');let angle=0;const stops=[];for(const b of bands){if(b.count){const start=angle;angle+=b.count/Math.max(1,total)*360;stops.push(b.color+' '+start+'deg '+angle+'deg');}const row=make('div',null,'focus-distance-row'),dot=make('i');dot.style.background=b.color;row.append(dot,make('span',b.label),make('b',b.count.toLocaleString('th-TH')));legend.append(row);}ring.style.background=total?'conic-gradient('+stops.join(',')+')':'#e8eff1';ring.setAttribute('aria-label','จุดความร้อนใกล้นิคมฯ '+total+' จุด: '+bands.map(b=>b.label+' '+b.count+' จุด').join(', '));$('fire-proximity-note').textContent='ระยะไม่เกิน '+d.radius+' กม. · นับแต่ละจุดครั้งเดียว · ไม่ใช่ระดับผลกระทบ';sync.textContent=d.source.toUpperCase()+' · ย้อนหลัง '+d.hours+' ชั่วโมง · สืบค้น '+stamp(d.fetchedAt)+' · อัปเดตขณะเปิดหน้าทุก 10 นาที';
 }
 window.addEventListener('ieat-thermal-update',e=>proximityChart(e.detail));if(window.ieatThermalSnapshot)proximityChart(window.ieatThermalSnapshot);
+// Keep provenance available without expanding the ranking panel by default.
+const detailBox=make('details',null,'focus-estate-details'),detailToggle=make('summary','ⓘ รายละเอียดข้อมูล');
+detailBox.append(detailToggle);const detailBody=make('div',null,'focus-estate-details-body');
+for(const item of [estates.querySelector('#thermal-status'),estates.querySelector('.actions'),estates.querySelector('.source')]){if(item)detailBody.append(item);}
+detailBox.append(detailBody);estates.append(detailBox);
 function resizeMap(){window.ieatSupportMap?.invalidateSize({pan:false});}requestAnimationFrame(resizeMap);window.addEventListener('ieat-support-map-ready',resizeMap);window.addEventListener('resize',resizeMap);
 })();
