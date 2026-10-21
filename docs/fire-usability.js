@@ -39,7 +39,7 @@
  `;document.head.append(style);
  const visual=make('style');visual.id='hub-modern-visual';visual.textContent=`
  html body.ieat-modern-hub{background:#fff!important}
- html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{margin:14px 24px 0!important;padding:5px!important;gap:5px!important;border:1px solid #e9ecf2!important;border-radius:12px!important;background:#f6f7fb!important;box-shadow:none!important;align-items:center!important;overflow-x:auto!important}
+ html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{margin:14px 24px 0!important;width:calc(100% - 48px)!important;box-sizing:border-box!important;padding:5px!important;gap:5px!important;border:1px solid #e9ecf2!important;border-radius:12px!important;background:#f6f7fb!important;box-shadow:none!important;align-items:center!important;overflow-x:auto!important}
  html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs .nav-tab{border:0!important;border-radius:8px!important;background:transparent!important;color:#647084!important;min-height:38px!important;padding:8px 20px!important;font:400 13px/1.5 Sarabun,Tahoma,sans-serif!important;transition:background .15s,color .15s}
  html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs .nav-tab.active{background:white!important;color:#3949ab!important;box-shadow:0 2px 7px #25345e13!important;font-weight:500!important}
  html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs .nav-tab:hover{background:#fff!important}
@@ -70,7 +70,7 @@
  ${root} .dashboard-lower-pair :is(.operating-zone-section,.chemical-details-panel){border:1px solid #e7ebf2!important;box-shadow:0 3px 14px #28365c05!important;border-radius:12px!important}
  ${root} .dashboard-lower-pair h3{font:500 15px/1.5 Sarabun,Tahoma,sans-serif!important;color:#26324b!important}
  ${root} .workspace-map{border:1px solid #e7ebf2!important;border-radius:13px!important;box-shadow:0 3px 14px #28365c06!important;overflow:hidden!important}
- @media(max-width:760px){${root} #fire-page-heading{align-items:flex-start;flex-direction:column;gap:9px}${root} #fire-page-heading h1{font-size:21px!important}${root} .fire-steps{gap:13px}html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{margin:10px 12px 0!important}html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs .nav-tab{padding:8px 14px!important}}
+ @media(max-width:760px){${root} #fire-page-heading{align-items:flex-start;flex-direction:column;gap:9px}${root} #fire-page-heading h1{font-size:21px!important}${root} .fire-steps{gap:13px}html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{margin:10px 12px 0!important;width:calc(100% - 24px)!important}html body.ieat-modern-hub .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs .nav-tab{padding:8px 14px!important}}
  `;document.head.append(visual);
  workspace.before(bar);
  const heading=make('div');heading.id='fire-page-heading';heading.innerHTML='<div><h1>ไฟไหม้และสารเคมี</h1><p>ค้นหาโรงงาน ดูข้อมูลสนับสนุน และจัดทำรายงาน</p></div><div class="fire-steps" aria-label="ขั้นตอนการใช้งาน"><span><b>1</b>เลือกโรงงาน</span><span><b>2</b>ดูข้อมูลสนับสนุน</span><span><b>3</b>จัดทำรายงาน</span></div>';bar.before(heading);
