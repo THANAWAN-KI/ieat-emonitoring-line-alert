@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-21T04:51:09.657744+00:00",
+    "fetchedAt": "2026-10-21T11:52:00.417616+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1792417574000,
-    "latestEvent": 1792513774000
+    "oldestEvent": 1792418127000,
+    "latestEvent": 1792574969000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17267",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.056,
+          18.71,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.6,
+        "place": "ต.แม่ตีบ อ.งาว จ.ลำปาง",
+        "time": 1792574969000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17267",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17266",
@@ -210,29 +233,6 @@
         "place": "ประเทศเวียดนาม",
         "time": 1792418127000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17258",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17257",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.793,
-          4.362,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 4.4,
-        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
-        "time": 1792417574000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17257",
         "source": "TMD",
         "types": "",
         "detail": null,
