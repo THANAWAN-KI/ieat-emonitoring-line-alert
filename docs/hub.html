@@ -55,16 +55,6 @@ document.addEventListener('change',event=>{if(event.target.id!=='estate')return;
 window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overview));
 })();
 </script>
-<style id="emergency-support-single-column">
-/* แสดงการ์ดข้อมูลสนับสนุนใกล้นิคมอุตสาหกรรมเป็นคอลัมน์เดียว */
-#emergencySupportCards{
-  display:grid !important;
-  grid-template-columns:minmax(0,1fr) !important;
-  width:100%;
-}
-#emergencySupportCards > *{min-width:0;width:100%;max-width:none;}
-</style>
-
 </head>
 <body>
 <header class="portal-header" id="ieatPortalHeader"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></a><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><svg class="scope-search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g clip-path="url(#estateSearchIconClip)"><rect width="24" height="24" fill="white"/><circle cx="10.5" cy="10.5" r="6.5" stroke="#000000" stroke-linejoin="round"/><path d="M19.6464 20.3536C19.8417 20.5488 20.1583 20.5488 20.3536 20.3536C20.5488 20.1583 20.5488 19.8417 20.3536 19.6464L19.6464 20.3536ZM20.3536 19.6464L15.3536 14.6464L14.6464 15.3536L19.6464 20.3536L20.3536 19.6464Z" fill="#000000"/></g><defs><clipPath id="estateSearchIconClip"><rect width="24" height="24" fill="white"/></clipPath></defs></svg><span id="disasterScopeLabel">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a class="nav-active" aria-current="page" href="./hub.html">ภัยพิบัติ</a></nav></div></header>
@@ -1701,33 +1691,11 @@ html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHe
 <script src="./incident-monitoring.js?v=1" defer></script>
 <script src="./report-route.js?v=workflow-1" defer></script>
 <link rel="stylesheet" href="./fire-dashboard.css?v=4">
-<script src="./fire-dashboard.js?v=6 defer></script>
+<script src="./fire-dashboard.js?v=5" defer></script>
 <link rel="stylesheet" href="./hub-appearance.css?v=6">
 <script src="./hub-appearance.js?v=4" defer></script>
 <link rel="stylesheet" href="./fire-focus.css?v=8">
-<script src="./fire-focus.js?v=5 defer></script>
-<script id="remove-satellite-caveats-direct">
-(()=>{'use strict';
-const phrases=['กรอบสืบค้นครอบคลุมไทย','พื้นที่ข้างเคียง','ระยะคำนวณถึงจุดอ้างอิงนิคมฯ','ขอบเขตแปลงโรงงาน','นับจุดตรวจพบตามแหล่งที่เลือก','เมฆอาจบดบังการตรวจพบ'];
-function clean(root){
- try{
-  const all=root.querySelectorAll('p,small,li,aside,.muted,.focus-help,.panel-note,.source-note,.thermal-note,.fire-inline-help,div,span');
-  for(const el of all){
-   if(!el.isConnected)continue;
-   const t=(el.innerText||el.textContent||'').replace(/\s+/g,' ').trim();
-   if(!t||t.length>300||!phrases.some(p=>t.includes(p)))continue;
-   if([...el.children].some(ch=>phrases.some(p=>(ch.innerText||ch.textContent||'').includes(p))))continue;
-   el.remove();
-  }
-  root.querySelectorAll('iframe').forEach(frame=>{try{if(frame.contentDocument)clean(frame.contentDocument)}catch(_){}});
- }catch(_){}
-}
-const run=()=>clean(document);
-run();
-new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
-document.querySelectorAll('iframe').forEach(f=>f.addEventListener('load',run));
-})();
-</script>
+<script src="./fire-focus.js?v=4" defer></script>
 </body></html>
 
 
