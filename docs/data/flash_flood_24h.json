@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "24h",
   "date": "2026-10-22",
-  "time": "03:00:00",
+  "time": "06:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 1,
@@ -18,8 +18,8 @@
       "station": "หน่วยพิทักษ์อุทยานแห่งชาติที่ กบ.2 (เขาเมืองสูง)",
       "latitude": 10.0237,
       "longitude": 98.66568,
-      "sum_rainfall_mm": 175.7,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 107.5,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -315,8 +315,8 @@
       "station": "เมืองระนอง",
       "latitude": 9.961575,
       "longitude": 98.644485,
-      "sum_rainfall_mm": 64.60000000000001,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 45.2,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -434,8 +434,8 @@
       "station": "บ้านน้ำตก",
       "latitude": 10.085445,
       "longitude": 98.669169,
-      "sum_rainfall_mm": 2.0,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 1.5,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -689,8 +689,8 @@
       "station": "บ้านทรายแดง",
       "latitude": 10.156317,
       "longitude": 98.697453,
-      "sum_rainfall_mm": 8.5,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 6.5,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -944,8 +944,8 @@
       "station": "บ้านบางนอนนอก*",
       "latitude": 9.994826,
       "longitude": 98.647922,
-      "sum_rainfall_mm": 27.0,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 20.5,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1239,8 +1239,8 @@
       "station": "บ้านพรรั้ง",
       "latitude": 9.880111,
       "longitude": 98.626948,
-      "sum_rainfall_mm": 15.5,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 12.5,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1542,8 +1542,8 @@
       "station": "บ้านเขานางหงษ์",
       "latitude": 9.978944,
       "longitude": 98.599994,
-      "sum_rainfall_mm": 38.5,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 17.0,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1581,8 +1581,8 @@
       "station": "ทต.ปากน้ำ",
       "latitude": 9.94654,
       "longitude": 98.5952,
-      "sum_rainfall_mm": 77.60000000000002,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 11.6,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1620,8 +1620,8 @@
       "station": "บ้านห้วยน้ำใส",
       "latitude": 9.727078,
       "longitude": 98.602777,
-      "sum_rainfall_mm": 17.5,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 6.0,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2216,7 +2216,7 @@
       "latitude": 9.638162,
       "longitude": 98.551851,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2811,7 +2811,7 @@
       "latitude": 9.85479,
       "longitude": 98.62825,
       "sum_rainfall_mm": 1.0,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2997,8 +2997,8 @@
       "station": "บ้านบางสังตี*",
       "latitude": 9.959389,
       "longitude": 98.690417,
-      "sum_rainfall_mm": 2.5,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 2.0,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3320,8 +3320,8 @@
       "station": "บ้านหาดส้มแป้น",
       "latitude": 9.95134,
       "longitude": 98.693319,
-      "sum_rainfall_mm": 8.5,
-      "observed_at": "2026-10-21T15:00:00+07:00",
+      "sum_rainfall_mm": 7.0,
+      "observed_at": "2026-10-21T18:00:00+07:00",
       "geometry": {
         "rings": [
           [
