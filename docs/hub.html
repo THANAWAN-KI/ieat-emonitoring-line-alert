@@ -1701,11 +1701,33 @@ html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHe
 <script src="./incident-monitoring.js?v=1" defer></script>
 <script src="./report-route.js?v=workflow-1" defer></script>
 <link rel="stylesheet" href="./fire-dashboard.css?v=4">
-<script src="./fire-dashboard.js?v=5" defer></script>
+<script src="./fire-dashboard.js?v=6 defer></script>
 <link rel="stylesheet" href="./hub-appearance.css?v=6">
 <script src="./hub-appearance.js?v=4" defer></script>
 <link rel="stylesheet" href="./fire-focus.css?v=8">
-<script src="./fire-focus.js?v=4" defer></script>
+<script src="./fire-focus.js?v=5 defer></script>
+<script id="remove-satellite-caveats-direct">
+(()=>{'use strict';
+const phrases=['กรอบสืบค้นครอบคลุมไทย','พื้นที่ข้างเคียง','ระยะคำนวณถึงจุดอ้างอิงนิคมฯ','ขอบเขตแปลงโรงงาน','นับจุดตรวจพบตามแหล่งที่เลือก','เมฆอาจบดบังการตรวจพบ'];
+function clean(root){
+ try{
+  const all=root.querySelectorAll('p,small,li,aside,.muted,.focus-help,.panel-note,.source-note,.thermal-note,.fire-inline-help,div,span');
+  for(const el of all){
+   if(!el.isConnected)continue;
+   const t=(el.innerText||el.textContent||'').replace(/\s+/g,' ').trim();
+   if(!t||t.length>300||!phrases.some(p=>t.includes(p)))continue;
+   if([...el.children].some(ch=>phrases.some(p=>(ch.innerText||ch.textContent||'').includes(p))))continue;
+   el.remove();
+  }
+  root.querySelectorAll('iframe').forEach(frame=>{try{if(frame.contentDocument)clean(frame.contentDocument)}catch(_){}});
+ }catch(_){}
+}
+const run=()=>clean(document);
+run();
+new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
+document.querySelectorAll('iframe').forEach(f=>f.addEventListener('load',run));
+})();
+</script>
 </body></html>
 
 
