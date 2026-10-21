@@ -182,3 +182,6 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.fire-focus .fire-stat.chemical .fire-symbol{background:transparent!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.fire-focus .fire-stat.estate strong{color:#8b4500!important;-webkit-text-fill-color:#8b4500!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.fire-focus .focus-risk-row:nth-child(3) .focus-risk-track i{background:#FF4025!important}
+
+/* A continuous baseline under the hazard tabs, matching the supplied reference. */
+html body .portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{border-bottom:1px solid #dedee3!important;box-shadow:none!important}
