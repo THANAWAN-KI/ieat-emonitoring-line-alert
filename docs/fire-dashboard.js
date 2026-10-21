@@ -33,7 +33,7 @@ inline.append(make('h2','สารเคมี ความเสี่ยง �
 const query=dash.querySelector('.direct-querybar');if(query){inline.append(query);query.querySelector('label[for="dashboardIncidentType"]')?.setAttribute('hidden','');$('dashboardCreateReport')?.setAttribute('hidden','');$('dashboardDownloadImage')?.setAttribute('hidden','');}
 const tables=make('div',null,'fire-data-tables');const chemicals=dash.querySelector('.chemical-details-panel'),risk=dash.querySelector('.operating-zone-section');
 if(chemicals){const title=make('h3','สารเคมีในระบบ DSS');chemicals.prepend(title);tables.append(chemicals);}
-if(risk)tables.append(risk);inline.append(tables);
+if(risk){risk.prepend(make('h3','โรงงานที่เข้าข่ายความเสี่ยงรายนิคมฯ'));tables.append(risk);}inline.append(tables);
 const nearby=dash.querySelector('.emergency-support-section');if(nearby)inline.append(nearby);
 below.before(inline);
 

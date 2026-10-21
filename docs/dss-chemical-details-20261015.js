@@ -28,7 +28,7 @@ function cell(row,text){const td=document.createElement('td');td.textContent=Str
 function render(){
  if(!data)return;
  const term=normalize(search.value),selected=scope;
- filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2]].join(' ')).includes(term)||chemicalMatches(r,search.value)||eppMatches.some(f=>{const a=f.attributes;return companyKey(c[0])===companyKey(a['ชื่อบริษัทภาษาไทย'])||[a['เลขทะเบียนเดิม'],a['เลขทะเบียนใหม่']].filter(Boolean).some(v=>normalize(c[1])===normalize(v))}));});
+ filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2]].join(' ')).includes(term)||chemicalMatches(r,search.value)||eppMatches.some(f=>{const a=f.attributes;return (companyKey(c[0])===companyKey(a['ชื่อบริษัทภาษาไทย'])&&normalize(c[2])===normalize(a['นิคมอุตสาหกรรม']))||[a['เลขทะเบียนเดิม'],a['เลขทะเบียนใหม่']].filter(Boolean).some(v=>normalize(c[1])===normalize(v))}));});
  const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages-1);
  body.replaceChildren();
  for(const [index,r] of filtered.slice(page*pageSize,(page+1)*pageSize).entries()){
