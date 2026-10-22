@@ -214,6 +214,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
     L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);return box;};dashboardTools.addTo(fallbackView);
    if(window.ResizeObserver){let width=0,height=0,resizePending=false;new ResizeObserver(entries=>{const size=entries[0].contentRect,w=Math.round(size.width),h=Math.round(size.height);if(w===width&&h===height)return;width=w;height=h;if(resizePending)return;resizePending=true;requestAnimationFrame(()=>{resizePending=false;fallbackView.invalidateSize({pan:false})})}).observe($('map'));}
    fallbackInitialBounds=[[5.5,97.3],[20.6,105.7]];fallbackView.fitBounds(fallbackInitialBounds,{padding:[20,20]});
+   const geoDataCache=new Map();async function geoData(url){if(!geoDataCache.has(url))geoDataCache.set(url,fetch(url,{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).catch(e=>{geoDataCache.delete(url);throw e;}));return geoDataCache.get(url);}
    const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){if(/create[\s_]*buffers/i.test(String(def.title||'')))continue;const shown=true;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);
    const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
    for(const d of datasets){const url=base+encodeURI(d.path);if(!definitions.some(def=>canonical(def.url)===canonical(url)))definitions.push({title:d.label,url,layerType:'ArcGISFeatureLayer',shown:true});}
@@ -269,12 +270,12 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
      if(selected.type&&!def.contextParcel&&(!d||selected.type!==d.id)){group.clearLayers();return;}
      if(selected.risk&&!def.contextParcel&&d?.id!=='business'){group.clearLayers();return;}
      const filtered=selected.estate||selected.query||selected.risk;
-     if(filtered&&!d&&!def.contextParcel){group.clearLayers();return;}
+     if(filtered&&!d&&!def.contextParcel&&def.layerType!=='GeoJSON'){group.clearLayers();return;}
      const ids=d?visibleRows(d).map(r=>r.id):[];if(filtered&&d&&!ids.length){group.clearLayers();return;}
      try{
       let result;
       if(def.layerType==='GeoJSON'){
-       const response=await fetch(def.url,{signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('HTTP '+response.status);result=await response.json();
+       result=await geoData(def.url);if(result.type==='FeatureCollection'){result={...result,features:result.features.filter(f=>{const p=f.properties||{},g=f.geometry;if(g?.type==='Point'){const c=g.coordinates;if(!c||!Number.isFinite(c[0])||!Number.isFinite(c[1])||!bounds.contains([c[1],c[0]]))return false;}if(selected.estate&&p.comp_zone&&!normalize(p.comp_zone).includes(normalize(selected.estate)))return false;return true;})};}
       }else{
        const params=new URLSearchParams({f:'geojson',where:[def.layerDefinition?.definitionExpression,d?.where].filter(Boolean).map(clause=>'('+clause+')').join(' AND ')||'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',geometry:JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects'});
        if(filtered&&d)params.set('objectIds',ids.join(','));
