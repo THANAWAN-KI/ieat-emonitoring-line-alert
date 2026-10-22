@@ -306,12 +306,12 @@
 
    .ef-table table{font-size:16px}.ef-table td,.ef-table th{color:#0D47A1;padding:12px;line-height:1.7}.ef-table th{font-weight:700;background:#FFFFFF}
    .ef-table .ef-status-cell{min-width:115px;font-weight:700;text-align:center;vertical-align:middle;border:1px solid #FFFFFF;color:#000000}
-   .ef-status-cell[data-severity="normal"],.ef-status-key[data-severity="normal"]{background:#FFFFFF;color:#47A992}
-   .ef-status-cell[data-severity="moderate"],.ef-status-key[data-severity="moderate"]{background:#E3F2FD;color:#0D47A1}
-   .ef-status-cell[data-severity="watch"],.ef-status-key[data-severity="watch"]{background:#E3F2FD;color:#000000}
-   .ef-status-cell[data-severity="high"],.ef-status-key[data-severity="high"]{background:#D32F2F;color:#000000}
-   .ef-status-cell[data-severity="danger"],.ef-status-key[data-severity="danger"]{background:#FFFFFF;color:#000000}
-   .ef-status-cell[data-severity="unknown"],.ef-status-key[data-severity="unknown"]{background:#FFFFFF;color:#0D47A1}
+   .ef-status-cell[data-severity="normal"],.ef-status-key[data-severity="normal"]{background:#2E7D32;color:#000000}
+   .ef-status-cell[data-severity="moderate"],.ef-status-key[data-severity="moderate"]{background:#FBC02D;color:#000000}
+   .ef-status-cell[data-severity="watch"],.ef-status-key[data-severity="watch"]{background:#FBC02D;color:#000000}
+   .ef-status-cell[data-severity="high"],.ef-status-key[data-severity="high"]{background:#F57C00;color:#000000}
+   .ef-status-cell[data-severity="danger"],.ef-status-key[data-severity="danger"]{background:#D32F2F;color:#000000}
+   .ef-status-cell[data-severity="unknown"],.ef-status-key[data-severity="unknown"]{background:#FFFFFF;color:#000000}
    .ef-status-legend{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0;font-size:14px;line-height:1.6}
    .ef-status-key{padding:5px 9px;border-radius:6px;font-weight:600}
 
@@ -451,7 +451,7 @@
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-canal-panel" hidden><h2>คลอง กทม.</h2><div id="efCanalList"></div><small id="efCanalTime"></small></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
 
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261022-black-text&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
+   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261022-four-status&amp;center=101,13&amp;scale=9244648" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -547,7 +547,7 @@ $('efFilter').onchange=()=>renderEstates();
  function exportStationsMap(){
   try{
    const s=stationExportScope();
-   const colors={normal:'#47A992',moderate:'#2185D5',watch:'#0D47A1',high:'#D32F2F',danger:'#D32F2F',unknown:'#0D47A1'};
+   const colors={normal:'#2E7D32',moderate:'#FBC02D',watch:'#FBC02D',high:'#F57C00',danger:'#D32F2F',unknown:'#607D8B'};
    const points=s.rows.map(r=>({name:r.station,kind:r.kind,agency:r.agency||'ThaiWater',province:r.province,value:r.value_text||'ไม่มีค่า',status:r.status||'ไม่ระบุ',observed:time(r.observed_at),lat:r.lat,lon:r.lon,distance:fmt(r.distance),estate:r.nearest?.name||'',color:colors[stationStatusClass(r)]}));
    const payload=JSON.stringify({points,estate:s.estate?{name:s.estate.name,lat:s.estate.lat,lon:s.estate.lon}:null}).replace(/</g,'\\u003c');
    const table=points.map(p=>'<tr><td>'+esc(p.name)+'</td><td>'+esc(p.kind==='rainfall'?'ฝน':'ระดับน้ำ')+'</td><td>'+esc(p.value)+'</td><td>'+esc(p.status)+'</td><td>'+esc(p.estate)+'<br>'+p.distance+' กม.</td><td>'+esc(p.observed)+'</td></tr>').join('');
