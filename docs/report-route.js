@@ -5,6 +5,7 @@
  // Preserve the existing data-selection engine, but remove its report from the dashboard layout.
  section.style.setProperty('display','none','important');
  section.setAttribute('aria-hidden','true');
+ window.addEventListener('ieat-unified-company-select',()=>{section.hidden=false;section.removeAttribute('aria-hidden');section.style.setProperty('display','block','important');if(!frame.getAttribute('src'))frame.src='./dss.html?embedded=dashboard&v=20261022';});
  if(new URLSearchParams(location.search).get('view')!=='incident')return;
  let busy=false;
  const notice=document.createElement('p');notice.id='separate-report-status';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');notice.style.cssText='margin:8px 0;color:#3949ab;font:13px/1.6 Sarabun,sans-serif';
@@ -45,4 +46,5 @@
  }
  document.addEventListener('click',event=>{if(!event.target.closest('#dashboardCreateReport'))return;event.preventDefault();event.stopImmediatePropagation();create();},true);
 })();
+
 
