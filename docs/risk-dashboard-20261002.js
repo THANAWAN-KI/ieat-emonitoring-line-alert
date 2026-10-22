@@ -166,6 +166,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
  }
 
 
+ window.ieatSupportPointMarker=mapPoint;
  async function queryAllMapFeatures(url,params,onBatch,isCurrent=()=>true){
   const idParams=new URLSearchParams(params);idParams.set('f','json');idParams.set('returnIdsOnly','true');idParams.set('returnGeometry','false');idParams.delete('outFields');idParams.delete('resultRecordCount');
   const idData=await json(url+'/query',idParams);if(!isCurrent())throw Error('Map view changed');
