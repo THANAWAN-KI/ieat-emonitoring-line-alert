@@ -73,7 +73,7 @@ def monitoring(path,live=False):
     except Exception as e:return [],{'name':'e-Monitoring กนอ.','status':'error','error':str(e)[:160]}
 def main():
     sources=[('ประกาศเตือนภัย กรมอุตุนิยมวิทยา','https://www.tmd.go.th/api/xml/warning-news','weather'),('ประกาศ CAP กรมอุตุนิยมวิทยา','https://www.tmd.go.th/api/xml/CAP','weather'),('แผ่นดินไหว กรมอุตุนิยมวิทยา','https://earthquake.tmd.go.th/feed/rss_inside.xml','disaster')]
-    ddpm=os.environ.get('DDPM_PUBLIC_CAP_FEED','').strip()
+    ddpm=os.environ.get('DDPM_PUBLIC_CAP_FEED','').strip() or 'https://capportal.apiddpm.com/cap/feed/xml'
     if ddpm and url(ddpm):sources.append(('ปภ.',ddpm,'weather'))
     items=[];health=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
