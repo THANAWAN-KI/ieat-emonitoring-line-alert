@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-21T17:14:32.666089+00:00",
+    "fetchedAt": "2026-10-22T00:42:09.773947+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1792450002000,
-    "latestEvent": 1792591070000
+    "oldestEvent": 1792451056000,
+    "latestEvent": 1792623512000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17271",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.884,
+          19.851,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.7,
+        "place": "ประเทศเมียนมา",
+        "time": 1792623512000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17271",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17270",
@@ -210,29 +233,6 @@
         "place": "ประเทศเวียดนาม",
         "time": 1792451056000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17262",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17261",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.929,
-          17.306,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.0,
-        "place": "ต.คลองมะพลับ อ.ศรีนคร จ.สุโขทัย",
-        "time": 1792450002000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17261",
         "source": "TMD",
         "types": "",
         "detail": null,
