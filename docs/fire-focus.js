@@ -27,7 +27,7 @@ const sync=make('p','กำลังสืบค้นข้อมูลดา�
 const sourceNote=make('p','ข้อมูลรับแจ้งเก็บในเบราว์เซอร์นี้ · จัดทำรายงานผ่านเมนู “รับแจ้งเหตุและรายงาน” ด้านบน','focus-help');received.append(sourceNote);
 const stamp=v=>new Date(v).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'});
 function proximityChart(d){const ring=$('fire-proximity-ring'),legend=$('fire-proximity-legend');legend.replaceChildren();if(d.loading||d.error){ring.style.background='#e8eff1';$('fire-proximity-total').textContent='—';ring.setAttribute('aria-label',d.error?'ข้อมูลดาวเทียมไม่พร้อม':'กำลังโหลดข้อมูล');$('fire-proximity-note').textContent=d.error?'ยังสรุปไม่ได้ เนื่องจากดึงข้อมูลดาวเทียมไม่สำเร็จ':'กำลังสืบค้นข้อมูล…';sync.textContent=d.error?'ข้อมูลดาวเทียมไม่พร้อม กรุณาลองดึงข้อมูลใหม่':'กำลังสืบค้นข้อมูลดาวเทียม…';return;}
-const bands=[{max:5,label:'ไม่เกิน 5 กม.',color:'#006400',count:0},{max:10,label:'มากกว่า 5–10 กม.',color:'#FF9C2A',count:0},{max:30,label:'มากกว่า 10–30 กม.',color:'#FF4025',count:0},{max:50,label:'มากกว่า 30–50 กม.',color:'#b8d0b8',count:0}].filter((b,i,a)=>i===0||a[i-1].max<d.radius);
+const bands=[{max:5,label:'ไม่เกิน 5 กม.',color:'#4C9173',count:0},{max:10,label:'มากกว่า 5–10 กม.',color:'#7DD87D',count:0},{max:30,label:'มากกว่า 10–30 กม.',color:'#5B446A',count:0},{max:50,label:'มากกว่า 30–50 กม.',color:'#906387',count:0}].filter((b,i,a)=>i===0||a[i-1].max<d.radius);
 for(const p of d.points){if(!Number.isFinite(p.nearestDistance)||p.nearestDistance>d.radius)continue;const b=bands.find(b=>p.nearestDistance<=b.max);if(b)b.count++;}
 const total=bands.reduce((s,b)=>s+b.count,0);$('fire-proximity-total').textContent=total.toLocaleString('th-TH');let angle=0;const stops=[];for(const b of bands){if(b.count){const start=angle;angle+=b.count/Math.max(1,total)*360;stops.push(b.color+' '+start+'deg '+angle+'deg');}const row=make('div',null,'focus-distance-row'),dot=make('i');dot.style.background=b.color;row.append(dot,make('span',b.label),make('b',b.count.toLocaleString('th-TH')));legend.append(row);}ring.style.background=total?'conic-gradient('+stops.join(',')+')':'#e8eff1';ring.setAttribute('aria-label','จุดความร้อนใกล้นิคมฯ '+total+' จุด: '+bands.map(b=>b.label+' '+b.count+' จุด').join(', '));$('fire-proximity-note').textContent='ระยะไม่เกิน '+d.radius+' กม. · นับแต่ละจุดครั้งเดียว · ไม่ใช่ระดับผลกระทบ';sync.textContent=d.source.toUpperCase()+' · ย้อนหลัง '+d.hours+' ชั่วโมง · สืบค้น '+stamp(d.fetchedAt)+' · อัปเดตขณะเปิดหน้าทุก 10 นาที';
 }
@@ -40,5 +40,23 @@ detailBox.append(detailBody);estates.append(detailBox);
 // Keep the two data tables visible while the incident form and search stay out of the overview.
 const riskTable=dss.querySelector('.operating-zone-section');
 if(riskTable){const comparison=make('div',null,'focus-estate-risk-row');areaRow.prepend(comparison);comparison.append(estates,riskTable);}
+
+function compactList(){
+ const host=$('thermal-estates');if(!host)return;let page=0;
+ const nav=make('div',null,'dashboard-list-pager'),prev=make('button','ก่อนหน้า'),label=make('span'),next=make('button','ถัดไป');prev.type=next.type='button';nav.append(prev,label,next);host.after(nav);
+ function draw(){const rows=[...host.children],pages=Math.max(1,Math.ceil(rows.length/3));page=Math.min(page,pages-1);rows.forEach((r,i)=>r.classList.toggle('dashboard-page-hidden',i<page*3||i>=(page+1)*3));label.textContent=(page+1)+' / '+pages;prev.disabled=!page;next.disabled=page>=pages-1;nav.hidden=pages<2;}
+ prev.onclick=()=>{page--;draw()};next.onclick=()=>{page++;draw()};new MutationObserver(()=>{page=0;draw()}).observe(host,{childList:true});draw();
+}
+compactList();
+overview.querySelectorAll('.fire-symbol svg [fill]').forEach((n,i)=>{if(n.getAttribute('fill')!=='none')n.setAttribute('fill',['#4C9173','#7DD87D','#5B446A','#906387'][i%4]);});
+overview.querySelectorAll('.fire-symbol svg [stroke]').forEach(n=>{if(n.getAttribute('stroke')!=='none')n.setAttribute('stroke','#5B446A');});
+const chemicalPanel=dash.querySelector('.chemical-details-panel'),estateSource=$('chemicalEstate');
+if(chemicalPanel&&estateSource){
+ const wrap=make('label',null,'fire-estate-window'),caption=make('span','เลือกนิคมฯ'),choices=make('select');choices.size=4;choices.setAttribute('aria-label','เลือกนิคมฯ เพื่อดูสารเคมี');wrap.append(caption,choices);chemicalPanel.querySelector('h3').after(wrap);
+ function syncChoices(){choices.replaceChildren(...[...estateSource.options].filter(o=>o.value).map(o=>{const n=o.cloneNode(true);return n}));choices.value=estateSource.value;}
+ new MutationObserver(syncChoices).observe(estateSource,{childList:true});syncChoices();
+ choices.onchange=()=>{estateSource.value=choices.value;estateSource.dispatchEvent(new Event('change',{bubbles:true}));};estateSource.addEventListener('change',()=>{choices.value=estateSource.value;});
+}
+
 function resizeMap(){window.ieatSupportMap?.invalidateSize({pan:false});}requestAnimationFrame(resizeMap);window.addEventListener('ieat-support-map-ready',resizeMap);window.addEventListener('resize',resizeMap);
 })();
