@@ -248,6 +248,18 @@ async function renderPopupHistory(host,year=2026){
  body.innerHTML=whChart(station,year,bank)+'<p class="popup-history-source">ThaiWater / HII · ค่าเฉลี่ยรายวันและช่วงต่ำสุด–สูงสุด'+(bank!==null?' · เส้นประสีแดง: ระดับตลิ่ง':'')+' · ช่องว่างคือช่วงไม่มีข้อมูล<br>ชุดข้อมูลปรับปรุง '+esc(index.generated_at||'ไม่ระบุ')+'</p>';
  }catch(error){if(host.isConnected&&host.dataset.request===token)body.textContent=error.message+' · กดปีเพื่อลองใหม่'}
 
+ if(host.isConnected&&host.dataset.request===token&&raster)raster.eachLayer(layer=>{
+  if(!(layer instanceof L.Popup))return;
+  const content=layer.getElement()?.querySelector('.leaflet-popup-content')?.firstElementChild;
+  if(!content?.contains(host))return;
+  layer.setContent(content);raster.stop();
+  const mapBox=raster.getContainer().getBoundingClientRect(),box=layer.getElement().getBoundingClientRect();
+  const left=box.left-mapBox.left,right=box.right-mapBox.left,top=box.top-mapBox.top,bottom=box.bottom-mapBox.top;
+  const dx=left<12?left-12:right>mapBox.width-12?right-mapBox.width+12:0;
+  const dy=top<12?top-12:bottom>mapBox.height-12?bottom-mapBox.height+12:0;
+  if(dx||dy)raster.panBy([dx,dy],{animate:false});
+ });
+
 }
 const historyPopups=new WeakSet();function mountPopupHistory(root){const hosts=[];if(root.nodeType!==1)return;if(root.matches('.station-history-inline'))hosts.push(root);hosts.push(...root.querySelectorAll('.station-history-inline'));for(const host of hosts){if(historyPopups.has(host))continue;historyPopups.add(host);renderPopupHistory(host)}}
 new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)mountPopupHistory(node)}).observe(document.body,{childList:true,subtree:true});
