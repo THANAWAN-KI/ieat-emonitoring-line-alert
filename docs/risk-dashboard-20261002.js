@@ -192,7 +192,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
    try{view.destroy()}catch(e){}$('map').replaceChildren();
    if(!window.L)throw Error('Leaflet unavailable');
    const data=await json(portalUrl+'/sharing/rest/content/items/'+webmapId+'/data?f=json');
-   fallbackView=L.map('map',{zoomControl:false}).setView([14,101],6);
+   fallbackView=L.map('map',{zoomControl:false,preferCanvas:true}).setView([14,101],6);
    window.ieatSupportMap=fallbackView;window.dispatchEvent(new CustomEvent('ieat-support-map-ready',{detail:{map:fallbackView}}));L.control.zoom({position:'bottomright'}).addTo(fallbackView);
    const tileRoot='https://server.arcgisonline.com/ArcGIS/rest/services/';
    const basemaps={'dashboard-light':{path:'World_Street_Map',native:19},'gray-vector':{path:'Canvas/World_Light_Gray_Base',reference:'Canvas/World_Light_Gray_Reference',native:16},'streets-vector':{path:'World_Street_Map',native:19},satellite:{path:'World_Imagery',reference:'Reference/World_Boundaries_and_Places',native:19},'topo-vector':{path:'World_Topo_Map',native:19}};
@@ -237,8 +237,10 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
        result={type:'FeatureCollection',features:keep};
       }
       L.geoJSON(result,{style:f=>symbolStyle(def,f.properties||{}),pointToLayer:(f,ll)=>mapPoint(def,f,ll),onEachFeature:(feature,layer)=>{
-       const a=feature.properties||{},name=d?String(pick(a,d.names)):String(pick(a,['Name','Name_Parcel','mercant_na','ชื่อผู้ประกอบการ','name'])),box=el('div');
-       box.append(el('b',name),el('p',def.title));const phone=Object.entries(a).filter(([k,v])=>v&&/โทร|phone|telephone|(^|_)tel($|_)/i.test(k)&&!/fax/i.test(k)).map(([,v])=>String(v)).join(' / ');box.append(el('p','โทร: '+(phone||'ยังไม่มีข้อมูลติดต่อจากต้นทาง')));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box);
+       const a=feature.properties||{},name=d?String(pick(a,d.names)):String(pick(a,['Name','Name_Parcel','mercant_na','ชื่อผู้ประกอบการ','ชื่อบริษัทภาษาไทย','comp_name','StationTH','name'])),box=el('div');
+       box.append(el('b',name),el('p',def.title));const phone=Object.entries(a).filter(([k,v])=>v&&/โทร|phone|telephone|(^|_)tel($|_)/i.test(k)&&!/fax/i.test(k)).map(([,v])=>String(v)).join(' / ');box.append(el('p','โทร: '+(phone||'ยังไม่มีข้อมูลติดต่อจากต้นทาง')));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});
+       const details=el('details'),summary=el('summary','รายละเอียดจากต้นทาง');details.append(summary);const aliases=new Map((def.popupInfo?.fieldInfos||[]).map(v=>[v.fieldName,v.label]));
+       for(const [key,value]of Object.entries(a).filter(([k,v])=>v!=null&&String(v).trim()&&!/^objectid$|^fid$|^shape_/i.test(k)).slice(0,35)){const label=aliases.get(key)||key;if(typeof value==='string'&&/^https:\/\//i.test(value.trim())){const link=el('a',label+' ↗');link.href=value.trim();link.target='_blank';link.rel='noopener';const line=el('p');line.append(link);details.append(line);if(/\.(png|jpe?g|webp)(?:[?#]|$)/i.test(value)){const img=el('img');img.src=value.trim();img.alt=label;img.loading='lazy';img.style.cssText='display:block;width:100%;max-height:260px;object-fit:contain';details.append(img);}}else details.append(el('p',label+': '+String(value).slice(0,900)));}box.append(details);layer.bindPopup(box,{maxWidth:380});
        if(d?.id==='estate'&&fallbackView.getZoom()>=10)layer.bindTooltip(name,{permanent:true,direction:'top',className:'estate-map-label'});
       }}).addTo(staging);
       if(replace)group.clearLayers();group.addLayer(staging);
