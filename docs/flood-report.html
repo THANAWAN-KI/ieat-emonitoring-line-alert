@@ -957,11 +957,10 @@ html body #warning #estateFocusDashboard#estateFocusDashboard .flood-support{bor
 </style><script id="flood-section-navigation-20261022">
 (()=>{'use strict';
 function mount(){const col=document.querySelector('.ef-data-column'),overview=col?.querySelector('.flood-overview');if(!col||!overview)return false;if(col.querySelector('.flood-section-nav'))return true;
-const intro=document.createElement('header');intro.className='flood-page-intro';intro.innerHTML='<h1>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</h1><p>ภาพรวมการเฝ้าระวัง · ระดับน้ำและข้อมูลสนับสนุนบนแผนที่</p>';
 const nav=document.createElement('nav');nav.className='flood-section-nav';nav.setAttribute('aria-label','ส่วนข้อมูลสถานการณ์น้ำ');
 const sections=[['ภาพรวม','.flood-overview'],['สถานีระดับน้ำ','#floodStationsSection'],['เขื่อน / อ่างฯ','#floodDamsSection'],['ผังน้ำ','#floodWaterDiagram']];
 for(const [label,target]of sections){const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.sectionTarget=target;b.setAttribute('aria-current',String(target==='.flood-overview'));nav.append(b)}
-col.prepend(nav);col.prepend(intro);
+col.prepend(nav);
 // The first four metrics summarize the existing data; the last two still open warning lists.
 overview.querySelectorAll('[data-ef-card]').forEach(b=>{if(['ef24','ef48'].includes(b.dataset.efCard))return;const card=document.createElement('article');card.className=b.className;card.style.cssText=b.style.cssText;while(b.firstChild)card.append(b.firstChild);b.replaceWith(card)});
 const buttons=[...nav.querySelectorAll('button')],reduced=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
