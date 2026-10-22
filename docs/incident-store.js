@@ -7,5 +7,6 @@ window.IEATIncidentStore=(()=>{
  const list=()=>run('readonly',(s,done)=>{s.getAll().onsuccess=e=>done(e.target.result);});
  const create=value=>{const now=new Date().toISOString(),r={...value,id:crypto.randomUUID(),createdAt:now,updatedAt:now,status:'รับแจ้ง',verification:'รอตรวจสอบ',notes:[],reports:[],archived:false};return run('readwrite',(s,done)=>{s.add(r);done(r);});};
  const change=(id,mutate)=>run('readwrite',(s,done)=>{s.get(id).onsuccess=e=>{const r=e.target.result;if(!r){done(null);return;}mutate(r);r.updatedAt=new Date().toISOString();s.put(r);done(r);};});
- return {get,list,create,update:(id,patch)=>change(id,r=>Object.assign(r,patch)),note:(id,text)=>change(id,r=>r.notes.push({at:new Date().toISOString(),text})),linkReport:(id,report)=>change(id,r=>{if(!r.reports.some(x=>x.id===report.id))r.reports.push({id:report.id,createdAt:report.createdAt,company:report.company});})};
+ return {get,list,create,remove:id=>run('readwrite',(s,done)=>{s.delete(id);done(true);}),update:(id,patch)=>change(id,r=>Object.assign(r,patch)),note:(id,text)=>change(id,r=>r.notes.push({at:new Date().toISOString(),text})),linkReport:(id,report)=>change(id,r=>{if(!r.reports.some(x=>x.id===report.id))r.reports.push({id:report.id,createdAt:report.createdAt,company:report.company});})};
 })();
+
