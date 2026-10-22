@@ -3,13 +3,59 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-22T07:37:14.060138+00:00",
+    "fetchedAt": "2026-10-22T13:48:56.618845+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1792451056000,
-    "latestEvent": 1792623512000
+    "oldestEvent": 1792491059000,
+    "latestEvent": 1792670223000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17273",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.496,
+          18.888,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.4,
+        "place": "ประเทศเมียนมา",
+        "time": 1792670223000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17273",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17272",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.494,
+          19.253,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.7,
+        "place": "ต. แม่ฮี้ อ.ปาย จ.แม่ฮ่องสอน",
+        "time": 1792668695000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17272",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17271",
@@ -187,52 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1792491059000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17264",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17263",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.323,
-          22.577,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.7,
-        "place": "ประเทศเมียนมา",
-        "time": 1792461955000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17263",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17262",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          107.543,
-          14.998,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.8,
-        "place": "ประเทศเวียดนาม",
-        "time": 1792451056000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17262",
         "source": "TMD",
         "types": "",
         "detail": null,
