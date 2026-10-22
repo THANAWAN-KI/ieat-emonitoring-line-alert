@@ -214,7 +214,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
     L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);return box;};dashboardTools.addTo(fallbackView);
    if(window.ResizeObserver){let width=0,height=0,resizePending=false;new ResizeObserver(entries=>{const size=entries[0].contentRect,w=Math.round(size.width),h=Math.round(size.height);if(w===width&&h===height)return;width=w;height=h;if(resizePending)return;resizePending=true;requestAnimationFrame(()=>{resizePending=false;fallbackView.invalidateSize({pan:false})})}).observe($('map'));}
    fallbackInitialBounds=[[5.5,97.3],[20.6,105.7]];fallbackView.fitBounds(fallbackInitialBounds,{padding:[20,20]});
-   const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){if(/create[\s_]*buffers/i.test(String(def.title||'')))continue;const shown=parentVisible&&def.visibility!==false;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);
+   const definitions=[];function collect(layers,parentVisible=true){for(const def of layers||[]){if(/create[\s_]*buffers/i.test(String(def.title||'')))continue;const shown=true;if(def.layers)collect(def.layers,shown);else if(def.url&&['ArcGISFeatureLayer','GeoJSON'].includes(def.layerType))definitions.push({...def,shown});}}collect(data.operationalLayers);for(const d of datasets){const url=base+encodeURI(d.path);if(!definitions.some(def=>canonical(def.url)===canonical(url)))definitions.push({title:d.label,url,layerType:'ArcGISFeatureLayer',shown:true});}
    const groups={},canonical=u=>decodeURI(u||'').replace(/\/$/,'').toLowerCase();
    for(const def of definitions){def.group=L.layerGroup();groups[def.title]=def.group;if(def.shown)def.group.addTo(fallbackView);def.dataset=datasets.find(d=>canonical(base+encodeURI(d.path))===canonical(def.url));def.contextParcel=/\/e_pp\/featureserver\/0$/i.test(canonical(def.url));}
    const layerControl=L.control.layers({},groups,{collapsed:true,position:'topright'}).addTo(fallbackView);layerControl.getContainer().setAttribute('aria-label','เลือกชั้นข้อมูลบนแผนที่');layerControl.getContainer().title='เลือกชั้นข้อมูล';
@@ -237,7 +237,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
       }
       L.geoJSON(result,{style:f=>symbolStyle(def,f.properties||{}),pointToLayer:(f,ll)=>mapPoint(def,f,ll),onEachFeature:(feature,layer)=>{
        const a=feature.properties||{},name=d?String(pick(a,d.names)):String(pick(a,['Name','Name_Parcel','mercant_na','ชื่อผู้ประกอบการ','name'])),box=el('div');
-       box.append(el('b',name),el('p',def.title));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box);
+       box.append(el('b',name),el('p',def.title));const phone=Object.entries(a).filter(([k,v])=>v&&/โทร|phone|telephone|(^|_)tel($|_)/i.test(k)&&!/fax/i.test(k)).map(([,v])=>String(v)).join(' / ');box.append(el('p','โทร: '+(phone||'ยังไม่มีข้อมูลติดต่อจากต้นทาง')));if(d)box.append(el('p',String(pick(a,d.estates))));riskFields.forEach(f=>{if(flagged(a[f.field]))box.append(el('p',f.label+' · เข้าข่าย'))});layer.bindPopup(box);
        if(d?.id==='estate'&&fallbackView.getZoom()>=10)layer.bindTooltip(name,{permanent:true,direction:'top',className:'estate-map-label'});
       }}).addTo(staging);
       if(replace)group.clearLayers();group.addLayer(staging);
@@ -294,3 +294,4 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
  }
  fallbackMap();
 })();
+

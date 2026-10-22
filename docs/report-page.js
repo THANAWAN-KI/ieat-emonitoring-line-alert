@@ -1,7 +1,7 @@
 (() => {
  'use strict';
  const $=id=>document.getElementById(id),make=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
- let record,links=[];
+ let record,links=[];const embedded=new URLSearchParams(location.search).get('embedded')==='incident';let previewBox;function notifyParent(){if(embedded&&parent!==window)parent.postMessage({type:'incident-report:height',height:Math.ceil(document.body.getBoundingClientRect().height+24)},location.origin);}
  const time=value=>new Date(value).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
  $('back').addEventListener('click',event=>{try{if(!record?.incidentId&&window.opener&&!window.opener.closed&&window.opener.location.origin===location.origin){event.preventDefault();window.opener.focus();window.close();}}catch{}});
  function prepareMap(doc){
@@ -11,7 +11,7 @@
   image.alt='ภาพแผนที่ ณ เวลาจัดทำรายงาน';doc.querySelectorAll('[aria-label="ซูมแผนที่รายงาน"]').forEach(n=>n.remove());
   const weather=doc.getElementById('fbWeather');if(weather){slot.append(weather);for(const [key,value] of Object.entries({position:'absolute',top:'auto',right:'16px',bottom:'16px',width:'250px','max-width':'42%','font-size':'11px'}))weather.style.setProperty(key,value,'important');}
  }
- function size(){const doc=$('report-frame').contentDocument;if(doc)$('report-frame').style.height=Math.max(800,doc.body.scrollHeight,doc.documentElement.scrollHeight)+'px';}
+ function size(){const frame=$('report-frame'),doc=frame.contentDocument;if(!doc)return;const height=Math.max(800,doc.body.scrollHeight,doc.documentElement.scrollHeight),scale=Math.min(1,previewBox.clientWidth/1050);frame.style.width='1050px';frame.style.height=height+'px';frame.style.transform='scale('+scale+')';previewBox.style.height=Math.ceil(height*scale)+'px';notifyParent();}
  async function show(){
   const id=new URLSearchParams(location.search).get('id');
   if(!id){if(location.hash==='#preparing'){$('status').textContent='กำลังรับข้อมูลจาก Dashboard กรุณารอสักครู่…';return;}await archive();return;}
@@ -22,7 +22,7 @@
   const meta=make('div');meta.className='meta';for(const [label,value] of [['โรงงาน',record.company],['ประเภทเหตุ',record.incidentType],...(record.kind==='hazard-specific'?[]:[['ระยะค้นหา',record.radius?record.radius+' กม.':'–']]),['จัดทำเมื่อ',time(record.createdAt)]]){const box=make('div');box.append(make('b',label+' '),document.createTextNode(value||'ไม่ระบุ'));meta.append(box);}
   $('summary').append(meta);const note=make('p','ข้อมูลฉบับนี้เก็บ ณ เวลาจัดทำ ไม่เปลี่ยนตามข้อมูลสดบน Dashboard หากต้องการข้อมูลล่าสุดให้จัดทำรายงานฉบับใหม่');note.className='muted';$('summary').append(note);if(record.mapWarning){const p=make('p',record.mapWarning);p.className='warning';$('summary').append(p);}
   if(record.incidentContext){$('summary').append(make('p','รายการเหตุ '+record.incidentId.slice(0,8)+' · '+record.incidentContext.verification+' · รับแจ้ง '+time(record.incidentContext.receivedAt)));}if(record.supportStatus?.failures?.length){const warning=make('p','ข้อมูลสนับสนุนบางประเภทโหลดไม่สำเร็จ ณ เวลาจัดทำ กรุณาตรวจความครบถ้วนก่อนใช้รายงาน');warning.className='warning';$('summary').append(warning);}
-  const frame=$('report-frame');frame.hidden=false;frame.onload=()=>{const doc=frame.contentDocument;if(doc){prepareMap(doc);size();new ResizeObserver(size).observe(doc.body);doc.fonts?.ready.then(size);doc.querySelectorAll('img').forEach(i=>i.addEventListener('load',size,{once:true}));}$('download').hidden=false;$('status').textContent='ตรวจสอบข้อมูลรายงานก่อนดาวน์โหลด';};frame.srcdoc=record.markup;
+  const frame=$('report-frame');previewBox=make('div');previewBox.style.cssText='position:relative;width:100%;overflow:hidden';frame.before(previewBox);previewBox.append(frame);frame.style.cssText+=';position:absolute;left:0;top:0;transform-origin:top left';new ResizeObserver(size).observe(previewBox);frame.hidden=false;frame.onload=()=>{const doc=frame.contentDocument;if(doc){prepareMap(doc);size();new ResizeObserver(size).observe(doc.body);doc.fonts?.ready.then(size);doc.querySelectorAll('img').forEach(i=>i.addEventListener('load',size,{once:true}));}$('download').hidden=false;const count=doc?.querySelectorAll('#report,#dssPageTwo,[data-report-extra-page]').length||2;$('download').textContent='ดาวน์โหลด PNG '+count+' หน้า';notifyParent();$('status').textContent='ตรวจสอบข้อมูลรายงานก่อนดาวน์โหลด';};frame.srcdoc=record.markup;
  }
  async function archive(){
   document.querySelector('.steps').hidden=true;$('page-title').textContent='รายงานที่บันทึก';$('archive').hidden=false;const rows=(await window.IEATReportStore.list()).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)),box=$('archive-content');box.replaceChildren();
@@ -32,25 +32,27 @@
  let rendering=false;
  $('download').onclick=async()=>{
   const doc=$('report-frame').contentDocument,button=$('download');if(!record||!doc||rendering)return;
-  if(links.length===2){$('downloads').querySelectorAll('a').forEach(a=>a.click());return;}
+  if(links.length===(doc.querySelectorAll('#report,#dssPageTwo,[data-report-extra-page]').length||2)){$('downloads').querySelectorAll('a').forEach(a=>a.click());return;}
   rendering=true;button.disabled=true;links.forEach(URL.revokeObjectURL);links=[];$('downloads').replaceChildren();$('status').textContent='กำลังสร้าง PNG 2 หน้า…';
   try{
    if(typeof html2canvas!=='function')throw Error('ระบบสร้างภาพยังไม่พร้อม กรุณาลองอีกครั้ง');
    await doc.fonts?.ready;
    await Promise.all([...doc.images].map(i=>i.complete?Promise.resolve():new Promise(resolve=>{i.addEventListener('load',resolve,{once:true});i.addEventListener('error',resolve,{once:true});})));
    prepareMap(doc);
-   const pages=[doc.getElementById('report'),doc.getElementById('dssPageTwo')];if(pages.some(x=>!x))throw Error('รายงานไม่ครบ 2 หน้า');
+   const pages=[...doc.querySelectorAll('#report,#dssPageTwo,[data-report-extra-page]')];if(pages.length<2)throw Error('รายงานไม่ครบ 2 หน้า');
    for(let i=0;i<pages.length;i++){
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
     const page=pages[i],canvas=await html2canvas(page,{backgroundColor:'#fff',scale:window.innerWidth<700?1.5:2,useCORS:true,logging:false,width:1050,height:Math.max(1485,page.scrollHeight),windowWidth:1200});
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));canvas.width=0;canvas.height=0;if(!blob)throw Error('สร้างภาพไม่สำเร็จ');
     const url=URL.createObjectURL(blob);links.push(url);const a=make('a','ดาวน์โหลดหน้า '+(i+1));a.href=url;a.download='IEAT-DSS-'+(record.fields?.reportNo||record.id.slice(0,8)).replace(/[^a-zA-Z0-9_-]/g,'-')+'-page-'+(i+1)+'.png';$('downloads').append(a);a.click();
    }
-   $('status').textContent='สร้างภาพครบ 2 หน้าแล้ว กดดาวน์โหลดแต่ละหน้าได้ด้านล่าง';
+   $('status').textContent='สร้างภาพครบ '+pages.length+' หน้าแล้ว กดดาวน์โหลดแต่ละหน้าได้ด้านล่าง';
   }catch(error){$('status').textContent='ดาวน์โหลดไม่สำเร็จ: '+error.message;}finally{rendering=false;button.disabled=false;size();}
  };
  window.addEventListener('pagehide',()=>links.forEach(URL.revokeObjectURL));
+ if(embedded){const css=make('style');css.textContent='body{background:#f3f5f8}body>.wf-header,body>header>div,.actions a,#summary,.steps{display:none!important}body>header{padding:8px 0;border:0;justify-content:flex-end}main{margin:0;padding:0;max-width:none}#downloads a{margin:4px 8px 8px 0}.status{margin:4px 0 10px}';document.head.append(css);new ResizeObserver(notifyParent).observe(document.body);}
  show().catch(error=>{$('status').textContent='เปิดรายงานไม่ได้: '+error.message;});
 })();
+
 
 
