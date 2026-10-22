@@ -1582,7 +1582,7 @@ async function downloadReportPng(){
 (function(){
  if(!window.L){render();updateMap();return}
  const node=document.createElement('div');node.id='dssLiveMap';mapNode.appendChild(node);
- const live=L.map(node,{scrollWheelZoom:true}).setView([Number(state.lat),Number(state.lng)],14);
+ const live=L.map(node,{scrollWheelZoom:true,preferCanvas:true}).setView([Number(state.lat),Number(state.lng)],14);
  const tileOptions={maxZoom:19,crossOrigin:true,attribution:'Tiles © Esri'};
  window.dssLeafletMap=live;
  const basemap=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',tileOptions);
@@ -3716,4 +3716,4 @@ html body #report#report#report#report .report-map-zoom-controls button{color:#3
 
 
 
-<script>if(new URLSearchParams(location.search).get("embedded")==="incident"){const s=document.createElement("script");s.src="./incident-dss.js?v=20261022-inline11";document.body.append(s);}</script>
+<script>if(new URLSearchParams(location.search).get("embedded")==="incident"){const s=document.createElement("script");s.src="./incident-dss.js?v=20261022-inline12";document.body.append(s);}</script>
