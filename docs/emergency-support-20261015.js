@@ -47,7 +47,7 @@ function focusRow(row){
 function drawSupportMarkers(){
  if(!map||!window.L)return;
  if(markers)markers.remove();markers=window.L.layerGroup().addTo(map);
- Array.from(results.values()).flat().filter(row=>row.distance<=effectiveSupportRadius()*1000).forEach(row=>{const c=color(row.distance);const m=window.L.circleMarker([row.lat,row.lon],{radius:7,color:'#fff',weight:2,fillColor:c[0],fillOpacity:1}).addTo(markers);m.bindTooltip(text('span',row.type+' · '+row.name));m.on('click',()=>{if(!selecting)focusRow(row);});});
+ Array.from(results.values()).flat().filter(row=>row.distance<=effectiveSupportRadius()*1000).forEach(row=>{const c=color(row.distance);const m=(window.ieatSupportPointMarker?window.ieatSupportPointMarker({dataset:{id:row.source||sources.find(s=>s.label===row.type)?.id,label:row.type},title:row.type},{properties:{}},window.L.latLng(row.lat,row.lon)):window.L.circleMarker([row.lat,row.lon],{radius:7,color:'#fff',weight:2,fillColor:c[0],fillOpacity:1})).addTo(markers);m.bindTooltip(text('span',row.type+' · '+row.name));m.on('click',()=>{if(!selecting)focusRow(row);});});
 }
 function effectiveSupportRadius(){return Number(radius.value)}
 function publishSupport(){
