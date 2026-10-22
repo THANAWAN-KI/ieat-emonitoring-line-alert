@@ -10,7 +10,7 @@ async function detail(){const r=rows.find(x=>x.id===active);if(!r)return;const h
 const reportArea=el('section',undefined,'incident-report-area'),reportTools=el('div',undefined,'actions');
 const latest=r.reports.at(-1);let preview;
 function openPreview(src){preview=el('iframe');preview.className='incident-report-frame';preview.title='รายงาน'+r.incidentType+' 2 หน้า';preview.src=src;reportArea.replaceChildren(preview);}
-const draftURL=['เหตุเพลิงไหม้','สารเคมีรั่วไหล'].includes(r.incidentType)?'./dss.html?embedded=incident&incident='+encodeURIComponent(r.id):'./hazard-report.html?embedded=incident&incident='+encodeURIComponent(r.id);
+const draftURL=['เหตุเพลิงไหม้','สารเคมีรั่วไหล'].includes(r.incidentType)?'./dss.html?embedded=incident&v=20261022-inline6&incident='+encodeURIComponent(r.id):'./hazard-report.html?embedded=incident&incident='+encodeURIComponent(r.id);
 const edit=el('button',latest?'จัดทำรายงานฉบับใหม่':'แก้ไข / จัดทำรายงาน');edit.type='button';edit.onclick=()=>openPreview(draftURL);reportTools.append(edit);
 if(latest){const full=el('a','เปิดรายงานเต็มหน้า','button');full.href='./report.html?id='+encodeURIComponent(latest.id);full.target='_blank';full.rel='noopener';reportTools.append(full);}
 const data=el('a','ค้นข้อมูลเพิ่มเติมใน Dashboard','button');data.href=reportURL(r);reportTools.append(data);host.append(reportTools,reportArea);
