@@ -778,7 +778,7 @@ html body #warning #estateFocusDashboard #efMapFullscreen{font-size:10px!importa
 @media(max-width:400px){.reference-board{grid-template-columns:1fr;grid-template-rows:repeat(6,320px)}}
 </style>
 <script id="flood-clean-map-default">
-(()=>{function mount(){const frame=document.getElementById('estateFocusMap');if(!frame)return false;const url=new URL(frame.getAttribute('src'),location.href);url.searchParams.set('dashboard','clean');url.searchParams.set('v','20261020-layer-popup-2');frame.src=url.href;return true}if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}})();
+(()=>{function mount(){const frame=document.getElementById('estateFocusMap');if(!frame)return false;const url=new URL(frame.getAttribute('src'),location.href);url.searchParams.set('dashboard','clean');url.searchParams.set('v','20261022-popup-history');frame.src=url.href;return true}if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}})();
 </script>
 <style>.reference-total{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.reference-key{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.reference-key span{overflow-wrap:anywhere}.reference-card footer{overflow-wrap:anywhere}</style><style id="flood-station-search-style">
 html body #warning #estateFocusDashboard .ef-estate-panel .ef-tools{display:none!important}
@@ -920,7 +920,7 @@ html body #warning #estateFocusDashboard #floodStationHistory{display:block!impo
 .station-history-controls{display:flex;gap:12px;align-items:end}.station-history-controls label{display:block;font-size:12px;min-width:0}.station-history-controls label:first-child{flex:1}.station-history-controls select{display:block;width:100%;padding:9px;border:1px solid #D7D7D8;border-radius:8px;background:#FFFFFF;color:#000000;font:400 12px Kanit,sans-serif;margin:5px 0 12px}
 #floodStationHistory .wh-chart{width:100%;overflow:auto}#floodStationHistory .wh-chart svg{display:block;width:100%;min-width:500px;height:auto;max-height:none}#floodStationHistory svg text{font:11px Kanit,sans-serif;fill:#6D6E70}
 #floodStationHistory .station-history-source{font:400 11px/1.65 Kanit,sans-serif;color:#6D6E70}#floodStationHistory .station-history-name{font-size:12px;color:#000000}
-</style><script src="flood-station-history.js?v=20261020-restore-history" defer></script><style id="flood-readable-workspace-20261022">
+</style><style id="flood-readable-workspace-20261022">
 html body #warning #estateFocusDashboard#estateFocusDashboard{color:#172e43!important;font-size:15px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard *{font-family:Kanit,sans-serif!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard .ef-workspace{gap:18px!important;padding:16px!important}
@@ -971,7 +971,7 @@ html body #warning #estateFocusDashboard#estateFocusDashboard .flood-support{bor
 function mount(){const col=document.querySelector('.ef-data-column'),overview=col?.querySelector('.flood-overview');if(!col||!overview)return false;if(col.querySelector('.flood-section-nav'))return true;
 const intro=document.createElement('header');intro.className='flood-page-intro';intro.innerHTML='<h1>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม</h1><p>ภาพรวมการเฝ้าระวัง · ระดับน้ำและข้อมูลสนับสนุนบนแผนที่</p>';
 const nav=document.createElement('nav');nav.className='flood-section-nav';nav.setAttribute('aria-label','ส่วนข้อมูลสถานการณ์น้ำ');
-const sections=[['ภาพรวม','.flood-overview'],['สถานีระดับน้ำ','#floodStationsSection'],['กราฟย้อนหลัง','#floodStationHistory'],['เขื่อน / อ่างฯ','#floodDamsSection'],['ผังน้ำ','#floodWaterDiagram']];
+const sections=[['ภาพรวม','.flood-overview'],['สถานีระดับน้ำ','#floodStationsSection'],['เขื่อน / อ่างฯ','#floodDamsSection'],['ผังน้ำ','#floodWaterDiagram']];
 for(const [label,target]of sections){const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.sectionTarget=target;b.setAttribute('aria-current',String(target==='.flood-overview'));nav.append(b)}
 col.prepend(nav);col.prepend(intro);
 // The first four metrics summarize the existing data; the last two still open warning lists.
@@ -981,8 +981,31 @@ nav.addEventListener('click',e=>{const b=e.target.closest('button[data-section-t
 let pending=false;function mark(){pending=false;const threshold=nav.getBoundingClientRect().bottom+30;let current=buttons[0];for(const b of buttons){const section=col.querySelector(b.dataset.sectionTarget);if(section&&section.getBoundingClientRect().top<=threshold)current=b}buttons.forEach(b=>{const value=String(b===current);if(b.getAttribute('aria-current')!==value)b.setAttribute('aria-current',value)})}function schedule(){if(!pending){pending=true;requestAnimationFrame(mark)}}col.addEventListener('scroll',schedule,{passive:true});window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);return true}
 if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}
 })();
-</script></body>
+</script><style id="flood-blue-dimensional-theme-20261022">
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard{--flood-navy:#0D47A1;--flood-blue:#2196F3;--flood-blue-light:#90CAF9;--flood-cyan:#2196F3}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard *,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-map-column,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-panel{border:0!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-workspace{background:#fff!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-page-intro h1,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(h2,h3,h4),html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-section-label{color:#0D47A1!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-section-nav{padding:8px!important;background:#E3F2FD!important;border-radius:13px;box-shadow:0 5px 16px #0d47a10d}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-section-nav button{background:transparent!important;color:#0D47A1!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-section-nav button[aria-current=true]{background:#2196F3!important;color:#fff!important;box-shadow:0 4px 12px #2196f34d}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi{background:#E3F2FD!important;box-shadow:0 6px 18px #0d47a114!important;border-radius:16px!important;transition:transform .15s,box-shadow .15s}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi:nth-child(2),html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi:nth-child(5){background:#90CAF9!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi:nth-child(3){background:#2196F3!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi:nth-child(6){background:#0D47A1!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi :is(span,strong,small){color:#0D47A1!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi:nth-child(3) :is(span,strong,small),html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi:nth-child(6) :is(span,strong,small){color:#fff!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard button.flood-kpi:hover{transform:translateY(-2px);box-shadow:0 10px 24px #0d47a126!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodStationHistory{display:none!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodStationsSection,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodWaterDiagram,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection>.ef-panel,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-canal-panel,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-warning>details,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-support{background:#fff!important;box-shadow:0 8px 28px #0d47a110!important;border-radius:18px!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .rp-card,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-dam-card,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-reservoir-row,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-canal-card,html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .rp-rank-card{box-shadow:0 5px 16px #0d47a10f!important;border-radius:13px!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-map-column{box-shadow:0 10px 30px #0d47a11f!important;border-radius:20px!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard select{background:#E3F2FD!important;color:#0D47A1!important;box-shadow:0 3px 10px #0d47a10a}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodStationsSection::after{content:"คลิกสถานีบนแผนที่เพื่อดูข้อมูลและกราฟย้อนหลัง (เฉพาะสถานีที่มีข้อมูล)";display:block;padding:12px;margin-top:12px;background:#E3F2FD;border-radius:10px;font-size:12px;color:#0D47A1;line-height:1.7}
+@media(prefers-reduced-motion:reduce){html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard button.flood-kpi:hover{transform:none}}
+</style></body>
 </html>
+
 
 
 
