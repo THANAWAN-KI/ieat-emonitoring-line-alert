@@ -43,7 +43,7 @@
   const wl=n(r.wl),bank=n(r.bank),levels=[wl,bank].filter(v=>v!==null),center=bank??wl??0;
   const lo=Math.floor(Math.min(center-2,...levels)),hi=Math.ceil(Math.max(center+2,...levels)),span=hi-lo||1,y=v=>260-(v-lo)/span*232,step=span>8?Math.ceil(span/8):.5,ticks=[];
   for(let value=lo;value<=hi+.001;value+=step)ticks.push(value);
-  return `<svg class="rp-gauge" viewBox="0 0 142 290" role="img" aria-label="มาตรวัดระดับ ${fmt(wl)} ม.รทก. ตลิ่ง ${fmt(bank)} ม.รทก."><rect x="46" y="28" width="48" height="232" rx="3" fill="#FFFFFF" stroke="#0D47A1" stroke-width="1.6"/>${wl===null?'':`<rect x="47" y="${y(wl)}" width="46" height="${260-y(wl)}" fill="#90CAF9"/>`}${ticks.map((v,i)=>`<path d="M${i%2?75:62} ${y(v)}H93" stroke="#2185D5" stroke-width="1"/>${i%2?'':`<text x="38" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#0D47A1">${fmt(v,1)}</text>`}`).join('')}${bank===null?'':`<path d="M28 ${y(bank)}H111" stroke="#D32F2F" stroke-width="3"/><text x="112" y="${y(bank)-5}" font-size="10" fill="#D32F2F">ตลิ่ง</text>`}<rect x="46" y="28" width="48" height="232" rx="3" fill="none" stroke="#0D47A1" stroke-width="1.6"/><text x="70" y="282" text-anchor="middle" font-size="11" fill="#0D47A1">ม.รทก.</text></svg>`;
+  return `<svg class="rp-gauge" viewBox="0 0 142 290" role="img" aria-label="มาตรวัดระดับ ${fmt(wl)} ม.รทก. ตลิ่ง ${fmt(bank)} ม.รทก."><rect x="46" y="28" width="48" height="232" rx="3" fill="#FFFFFF" stroke="#0D47A1" stroke-width="1.6"/>${wl===null?'':`<rect x="47" y="${y(wl)}" width="46" height="${260-y(wl)}" fill="#90CAF9"/>`}${ticks.map((v,i)=>`<path d="M${i%2?75:62} ${y(v)}H93" stroke="#2185D5" stroke-width="1"/>${i%2?'':`<text x="38" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#0D47A1">${fmt(v,1)}</text>`}`).join('')}${bank===null?'':`<path d="M28 ${y(bank)}H111" stroke="#D32F2F" stroke-width="3"/><text x="112" y="${y(bank)-5}" font-size="10" fill="#000000">ตลิ่ง</text>`}<rect x="46" y="28" width="48" height="232" rx="3" fill="none" stroke="#0D47A1" stroke-width="1.6"/><text x="70" y="282" text-anchor="middle" font-size="11" fill="#0D47A1">ม.รทก.</text></svg>`;
  }
  function stationCard(r){
   const [color,label]=status(r),location=[r.amphoe,r.province].filter(Boolean).join(' · ');
@@ -51,7 +51,7 @@
  }
  function stationSummary(r){
   const g=gap(r),delta=n(r.delta),valid=fresh(r)&&n(r.wl)!==null;
-  return `<div class="rp-visual-card"><div class="rp-visual-art">${stationScene(r)}</div><div class="rp-visual-values"><div class="rp-station-name">${esc(r.name)} · ${esc(r.agency||'ThaiWater')} <small>${esc(r.oldcode||'')}</small></div><div class="rp-big-level">${fmt(r.wl)} <span>ม.รทก.</span></div><div class="rp-bank-gap" data-state="${g!==null&&g>=0?'overflow':'normal'}" style="color:${valid?g!==null&&g>=0?'#D32F2F':'#2185D5':'#47A992'}">${esc(gapText(r))}</div><p class="rp-observed">${esc(r.trend_text?trend(r):delta===null?'ไม่มีค่าแนวโน้ม':delta>0?'กำลังเพิ่ม +'+fmt(delta)+' ม. เทียบค่าก่อนหน้า':delta<0?'กำลังลด −'+fmt(Math.abs(delta))+' ม. เทียบค่าก่อนหน้า':'ระดับน้ำทรงตัว')} · วัดเมื่อ ${esc(time(r.measured_at))}</p>${!valid?'<p class="rp-data-note">ข้อมูลย้อนหลัง / ไม่มีค่าตรวจวัดล่าสุด</p>':''}<div class="rp-data-note">${n(r.flow)===null?'ไม่มีข้อมูลอัตราการไหล':'อัตราการไหล '+fmt(r.flow,0)+' ลบ.ม./วิ'}<small>ระดับตลิ่ง ${fmt(r.bank)} ม.รทก.${r.bank_derived?' (คำนวณจากระดับน้ำ − ระยะจากตลิ่ง)':''}</small></div><button id="rpFocus" type="button">ดูสถานีนี้บนแผนที่ ↗</button></div></div>`;
+  return `<div class="rp-visual-card"><div class="rp-visual-art">${stationScene(r)}</div><div class="rp-visual-values"><div class="rp-station-name">${esc(r.name)} · ${esc(r.agency||'ThaiWater')} <small>${esc(r.oldcode||'')}</small></div><div class="rp-big-level">${fmt(r.wl)} <span>ม.รทก.</span></div><div class="rp-bank-gap" data-state="${g!==null&&g>=0?'overflow':'normal'}" style="color:${valid?g!==null&&g>=0?'#000000':'#2185D5':'#47A992'}">${esc(gapText(r))}</div><p class="rp-observed">${esc(r.trend_text?trend(r):delta===null?'ไม่มีค่าแนวโน้ม':delta>0?'กำลังเพิ่ม +'+fmt(delta)+' ม. เทียบค่าก่อนหน้า':delta<0?'กำลังลด −'+fmt(Math.abs(delta))+' ม. เทียบค่าก่อนหน้า':'ระดับน้ำทรงตัว')} · วัดเมื่อ ${esc(time(r.measured_at))}</p>${!valid?'<p class="rp-data-note">ข้อมูลย้อนหลัง / ไม่มีค่าตรวจวัดล่าสุด</p>':''}<div class="rp-data-note">${n(r.flow)===null?'ไม่มีข้อมูลอัตราการไหล':'อัตราการไหล '+fmt(r.flow,0)+' ลบ.ม./วิ'}<small>ระดับตลิ่ง ${fmt(r.bank)} ม.รทก.${r.bank_derived?' (คำนวณจากระดับน้ำ − ระยะจากตลิ่ง)':''}</small></div><button id="rpFocus" type="button">ดูสถานีนี้บนแผนที่ ↗</button></div></div>`;
  }
 
 
@@ -94,7 +94,7 @@
   $('rpFlowChange').textContent=diff===null?'ยังไม่มีค่าเทียบวันก่อน':(diff>0?'+':'')+fmt(diff,0)+' จากวันก่อน';
   const bangkok=!estateScope.active&&river==='แม่น้ำเจ้าพระยา'?byCode('C.12'):list.slice().reverse().find(v=>n(v.flow)!==null);$('rpDownstreamLabel').textContent=river==='แม่น้ำเจ้าพระยา'?'อัตราการไหลผ่านกรุงเทพฯ':'อัตราการไหล · '+(bangkok?.name||river);$('rpBangkokFlow').textContent=bangkok&&n(bangkok.flow)!==null?fmt(bangkok.flow,0)+' ลบ.ม./วินาที · '+time(bangkok.measured_at):'ไม่มีข้อมูลอัตราการไหลของสายน้ำที่เลือก';
   const max=Math.max(1,...[...daily.values()].map(v=>v.value)),W=1000,H=285,L=18,B=240,bw=54,step=69;
-  $('rpFlowPlot').innerHTML=`<svg class="rp-history-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} 14 วันย้อนหลัง">${days.map((d,i)=>{const v=daily.get(d),previous=daily.get(days[i-1]),delta=v&&previous?v.value-previous.value:null,x=L+i*step,h=v?v.value/max*165:0;return `<g><title>${d}: ${v?fmt(v.value,0)+' ลบ.ม./วินาที':'ไม่มีข้อมูล'}</title>${v?`<rect x="${x}" y="${B-h}" width="${bw}" height="${h}" rx="7" fill="${delta>0?'#E3F2FD':'#47A992'}"/><text x="${x+bw/2}" y="${B-h-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#D32F2F">${fmt(v.value,0)}</text>${delta===null?'':`<text x="${x+bw/2}" y="${B-h-25}" text-anchor="middle" font-size="11" fill="#D32F2F">${delta>0?'+':''}${fmt(delta,0)}</text>`}`:`<path d="M${x} ${B}h${bw}" stroke="#FFFFFF" stroke-width="2"/><text x="${x+bw/2}" y="${B-10}" text-anchor="middle" font-size="10" fill="#47A992">ไม่มีข้อมูล</text>`}<text x="${x+bw/2}" y="265" text-anchor="middle" font-size="11" fill="#2185D5">${new Date(d+'T12:00:00+07:00').toLocaleDateString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'short'})}</text></g>`}).join('')}</svg>`;
+  $('rpFlowPlot').innerHTML=`<svg class="rp-history-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)} 14 วันย้อนหลัง">${days.map((d,i)=>{const v=daily.get(d),previous=daily.get(days[i-1]),delta=v&&previous?v.value-previous.value:null,x=L+i*step,h=v?v.value/max*165:0;return `<g><title>${d}: ${v?fmt(v.value,0)+' ลบ.ม./วินาที':'ไม่มีข้อมูล'}</title>${v?`<rect x="${x}" y="${B-h}" width="${bw}" height="${h}" rx="7" fill="${delta>0?'#E3F2FD':'#47A992'}"/><text x="${x+bw/2}" y="${B-h-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#000000">${fmt(v.value,0)}</text>${delta===null?'':`<text x="${x+bw/2}" y="${B-h-25}" text-anchor="middle" font-size="11" fill="#000000">${delta>0?'+':''}${fmt(delta,0)}</text>`}`:`<path d="M${x} ${B}h${bw}" stroke="#FFFFFF" stroke-width="2"/><text x="${x+bw/2}" y="${B-10}" text-anchor="middle" font-size="10" fill="#47A992">ไม่มีข้อมูล</text>`}<text x="${x+bw/2}" y="265" text-anchor="middle" font-size="11" fill="#2185D5">${new Date(d+'T12:00:00+07:00').toLocaleDateString('th-TH',{timeZone:'Asia/Bangkok',day:'numeric',month:'short'})}</text></g>`}).join('')}</svg>`;
   $('rpFlowNote').textContent=(r?'สถานี '+r.oldcode+' '+r.name:'ไม่มีสถานีอัตราการไหลใน '+river)+' · '+(r?time(r.measured_at):'ไม่มีเวลาตรวจวัด')+' · แท่งแสดงค่าสูงสุดจากรอบที่เก็บได้ของแต่ละวัน · วันที่ไม่มีข้อมูลเว้นไว้';
  }
 
@@ -253,7 +253,7 @@
 #estateFocusDashboard #rpSummary .rp-visual-art{background:#FFFFFF}
 #estateFocusDashboard #rpSummary .rp-big-level{font-size:36px;margin:12px 0}
 #estateFocusDashboard #rpSummary .rp-bank-gap{font-size:18px;color:#47A992!important}
-#estateFocusDashboard #rpSummary .rp-bank-gap[data-state="overflow"]{color:#D32F2F!important}
+#estateFocusDashboard #rpSummary .rp-bank-gap[data-state="overflow"]{color:#000000!important}
 .rp-wave-front{animation:rpWaveFront 6s linear infinite}.rp-wave-back{animation:rpWaveBack 9s linear infinite}.rp-water-ripples{animation:rpRipple 4s ease-in-out infinite}
 @keyframes rpWaveFront{to{transform:translateX(160px)}}@keyframes rpWaveBack{to{transform:translateX(-160px)}}@keyframes rpRipple{50%{transform:translateX(12px);opacity:.3}}
 #estateFocusDashboard #riverSidePanel .rp-station-row{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;border:1px solid #FFFFFF;border-radius:14px;padding:14px;background:#FFFFFF;box-shadow:none;margin:10px 0}
@@ -269,19 +269,19 @@
 @media(max-width:520px){#estateFocusDashboard #rpSummary .rp-visual-card{grid-template-columns:1fr}#estateFocusDashboard #rpSummary .rp-scene{min-height:0;height:auto;aspect-ratio:640/340}.rp-station-top{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.rp-wave-front,.rp-wave-back,.rp-water-ripples{animation:none}}
 
-#estateFocusDashboard #riverSidePanel .rp-station-top em[style*="#90CAF9"]{color:#D32F2F!important}
+#estateFocusDashboard #riverSidePanel .rp-station-top em[style*="#90CAF9"]{color:#000000!important}
 #estateFocusDashboard #riverSidePanel>h2{color:#0D47A1!important;font-size:20px}
 #estateFocusDashboard #rpFlowPanel h3,#estateFocusDashboard #rpHistoryPanel h3{font-size:21px}
 #estateFocusDashboard #rpFlowPanel p,#estateFocusDashboard #rpHistoryPanel p{font-size:13px}
-#estateFocusDashboard #rpFlowValue{font-size:36px;color:#D32F2F!important}
-#estateFocusDashboard #rpFlowChange,#estateFocusDashboard #rpBangkokFlow{color:#D32F2F!important;font-size:15px}
-#estateFocusDashboard #rpFlowValue small{color:#D32F2F!important;font-size:14px}
+#estateFocusDashboard #rpFlowValue{font-size:36px;color:#000000!important}
+#estateFocusDashboard #rpFlowChange,#estateFocusDashboard #rpBangkokFlow{color:#000000!important;font-size:15px}
+#estateFocusDashboard #rpFlowValue small{color:#000000!important;font-size:14px}
 #estateFocusDashboard #rpHistoryPanel .rp-periods button{font-size:13px;padding:9px 12px}
 #estateFocusDashboard #rpHistoryPanel table{border-collapse:collapse;table-layout:fixed;font-size:12px;width:100%}
 #estateFocusDashboard #rpHistoryPanel th,#estateFocusDashboard #rpHistoryPanel td{border:1px solid #D32F2F;text-align:center;vertical-align:middle;padding:10px 6px;overflow-wrap:anywhere}
 #estateFocusDashboard #rpHistoryPanel th{color:#FFFFFF!important}
 #estateFocusDashboard #rpHistoryPanel th:nth-child(1){background:#47A992}
-#estateFocusDashboard #rpHistoryPanel th:nth-child(2){background:#E3F2FD;color:#D32F2F!important}
+#estateFocusDashboard #rpHistoryPanel th:nth-child(2){background:#E3F2FD;color:#000000!important}
 #estateFocusDashboard #rpHistoryPanel th:nth-child(3){background:#D32F2F}
 #estateFocusDashboard #rpHistoryPanel th:nth-child(4){background:#D32F2F}
 #estateFocusDashboard #rpHistoryPanel td:nth-child(1){background:#FFFFFF}#estateFocusDashboard #rpHistoryPanel td:nth-child(2){background:#FFFFFF}#estateFocusDashboard #rpHistoryPanel td:nth-child(3){background:#FFFFFF}#estateFocusDashboard #rpHistoryPanel td:nth-child(4){background:#FFFFFF}
@@ -325,7 +325,7 @@
 #estateFocusDashboard #riverSidePanel{padding:0;border:0;background:transparent;box-shadow:none}
 #rpCounts.rp-overview-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
 #estateFocusDashboard .rp-overview-card{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#FFFFFF;border:1px solid #FFFFFF;border-radius:18px;padding:20px 18px;box-shadow:0 6px 20px #0D47A105;min-width:0}
-#estateFocusDashboard .rp-overview-card h3{font-size:13px;font-weight:500;line-height:1.5;margin:0 0 12px;color:#D32F2F!important}
+#estateFocusDashboard .rp-overview-card h3{font-size:13px;font-weight:500;line-height:1.5;margin:0 0 12px;color:#000000!important}
 #estateFocusDashboard .rp-overview-card strong{font-size:29px;line-height:1.2;font-weight:700;color:var(--metric-color)!important;display:block}
 #estateFocusDashboard .rp-overview-card strong span{font-size:13px;font-weight:500;color:var(--metric-color)!important}
 #estateFocusDashboard .rp-overview-card p{font-size:11px;line-height:1.6;margin:10px 0 0}
