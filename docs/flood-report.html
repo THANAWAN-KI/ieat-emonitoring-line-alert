@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;line-height:1.5;background:#FFFFFF;color:#482121}
-main.container{height:auto;min-height:100dvh;padding:0;min-height:0;width:100%;max-width:none}#warning{height:100%;min-height:0}.dashboard-loading{padding:24px;color:#482121;text-align:center;border-radius:20px;background:white}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:"Sarabun","Sarabun",sans-serif;font-size:16px;line-height:1.5;background:#FFFFFF;color:#D32F2F}
+main.container{height:auto;min-height:100dvh;padding:0;min-height:0;width:100%;max-width:none}#warning{height:100%;min-height:0}.dashboard-loading{padding:24px;color:#D32F2F;text-align:center;border-radius:20px;background:white}
 @media(max-width:950px){html,body{height:auto}main.container{height:auto;padding:0}#warning{height:auto}}
 
 /* Remove heading fills highlighted on the flood dashboard. */
@@ -50,12 +50,12 @@ html,body,main.container,#warning,#estateFocusDashboard{height:100dvh!important;
 #estateFocusDashboard #riverSidePanel .rp-station-top b{font-size:18px!important}
 #estateFocusDashboard #riverSidePanel .rp-station-content strong{font-size:19px!important}
 #estateFocusDashboard .rp-stations-title,#estateFocusDashboard #rpCards .rp-station-content,#estateFocusDashboard #rpCards .rp-station-content :not(em){color:#0D47A1!important}
-#estateFocusDashboard .rp-stations-title{background:#F3F3F3!important}
-#estateFocusDashboard .ef-dam-card,#estateFocusDashboard .ef-reservoir-row{--water-bg:#F3F3F3;--water-ink:#0D47A1;background:var(--water-bg)!important;border:1px solid var(--water-accent)!important;border-left:4px solid var(--water-accent)!important}
-#estateFocusDashboard [data-water-theme="red"]{--water-bg:#F3F3F3;--water-ink:#7A3E3E}
-#estateFocusDashboard [data-water-theme="yellow"]{--water-bg:#F3F3F3;--water-ink:#0D47A1}
-#estateFocusDashboard [data-water-theme="orange"]{--water-bg:#F3F3F3;--water-ink:#7A3E3E}
-#estateFocusDashboard [data-water-theme="unknown"]{--water-bg:#F3F3F3;--water-ink:#0D47A1}
+#estateFocusDashboard .rp-stations-title{background:#FFFFFF!important}
+#estateFocusDashboard .ef-dam-card,#estateFocusDashboard .ef-reservoir-row{--water-bg:#FFFFFF;--water-ink:#0D47A1;background:var(--water-bg)!important;border:1px solid var(--water-accent)!important;border-left:4px solid var(--water-accent)!important}
+#estateFocusDashboard [data-water-theme="red"]{--water-bg:#FFFFFF;--water-ink:#D32F2F}
+#estateFocusDashboard [data-water-theme="yellow"]{--water-bg:#FFFFFF;--water-ink:#0D47A1}
+#estateFocusDashboard [data-water-theme="orange"]{--water-bg:#FFFFFF;--water-ink:#D32F2F}
+#estateFocusDashboard [data-water-theme="unknown"]{--water-bg:#FFFFFF;--water-ink:#0D47A1}
 #estateFocusDashboard .ef-dam-card,#estateFocusDashboard .ef-dam-card h3,#estateFocusDashboard .ef-dam-card p,#estateFocusDashboard .ef-dam-card small,#estateFocusDashboard .ef-dam-card b,#estateFocusDashboard .ef-dam-card .ef-dam-value,#estateFocusDashboard .ef-reservoir-row,#estateFocusDashboard .ef-reservoir-row *{color:var(--water-ink)!important}
 #estateFocusDashboard .ef-dam-card h3,#estateFocusDashboard .ef-reservoir-row b{font-size:17px!important}
 #estateFocusDashboard .ef-dam-value{font-size:30px!important}
@@ -82,7 +82,7 @@ html,body,main.container,#warning,#estateFocusDashboard{height:100dvh!important;
 #estateFocusDashboard #efReservoirList .ef-reservoir-row[data-water-theme]{background:var(--water-bg)!important;border-color:var(--water-accent)!important;color:var(--water-ink)!important}
 #estateFocusDashboard #efReservoirList .ef-reservoir-row *{color:var(--water-ink)!important}
 #estateFocusDashboard #efReservoirList .ef-reservoir-percent span{background:#FFFFFFaa!important;color:var(--water-ink)!important;border:1px solid var(--water-accent)}
-#estateFocusDashboard #efReservoirList .ef-reservoir-bar{background:#EEEEEE!important;height:8px}
+#estateFocusDashboard #efReservoirList .ef-reservoir-bar{background:#FFFFFF!important;height:8px}
 #estateFocusDashboard #efReservoirList .ef-reservoir-bar i{background:var(--water-accent)!important}
 
 /* Remove outlines from dam and reservoir cards and their controls. */
@@ -109,7 +109,7 @@ outline:2px solid #0D47A1!important;outline-offset:2px;
 }
 
 #estateFocusDashboard .ef-canal-panel{background:#FFFFFF;border:0;border-radius:18px;padding:16px;margin-bottom:16px}
-#estateFocusDashboard .ef-canal-panel>h2{background:#F3F3F3;color:#0D47A1!important;padding:12px;border-radius:10px;font-size:19px!important;margin:0 0 12px}
+#estateFocusDashboard .ef-canal-panel>h2{background:#FFFFFF;color:#0D47A1!important;padding:12px;border-radius:10px;font-size:19px!important;margin:0 0 12px}
 #estateFocusDashboard #efCanalList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 #estateFocusDashboard .ef-canal-card{display:flex;flex-direction:column;gap:8px;text-align:left;background:#FFFFFF;border:1px solid #90CAF9;border-radius:14px;padding:16px;color:#0D47A1;font:inherit;cursor:pointer;min-width:0;box-shadow:0 3px 9px #0D47A10b}
 #estateFocusDashboard .ef-canal-card b{font-size:17px;color:#0D47A1!important;line-height:1.6}
@@ -127,31 +127,31 @@ outline:2px solid #0D47A1!important;outline-offset:2px;
 #estateFocusDashboard .ef-canal-content strong{font-size:20px!important;line-height:1.5}
 #estateFocusDashboard .ef-canal-card{gap:8px}
 
-#estateFocusDashboard .rp-new-section{margin:18px 0;padding:16px;background:#F3F3F3;border-radius:16px;color:#0D47A1}
-#estateFocusDashboard .rp-rank-card{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;width:100%;text-align:left;background:#FFFFFF;border:1px solid #EEEEEE;border-radius:12px;padding:12px;margin:8px 0;color:#0D47A1;font:inherit;cursor:pointer}
+#estateFocusDashboard .rp-new-section{margin:18px 0;padding:16px;background:#FFFFFF;border-radius:16px;color:#0D47A1}
+#estateFocusDashboard .rp-rank-card{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;width:100%;text-align:left;background:#FFFFFF;border:1px solid #FFFFFF;border-radius:12px;padding:12px;margin:8px 0;color:#0D47A1;font:inherit;cursor:pointer}
 #estateFocusDashboard .rp-rank-card strong{font-size:23px;color:#0D47A1!important;display:block}
 #estateFocusDashboard .rp-rank-card b{font-size:16px}
 #estateFocusDashboard .rp-rank-card small{display:block;font-size:12px}
-#estateFocusDashboard #rpMainRiver{width:100%;padding:10px;border:1px solid #EEEEEE;background:#FFFFFF;border-radius:9px;font:inherit;margin:10px 0}
+#estateFocusDashboard #rpMainRiver{width:100%;padding:10px;border:1px solid #FFFFFF;background:#FFFFFF;border-radius:9px;font:inherit;margin:10px 0}
 #estateFocusDashboard #rpMainGraph{max-height:600px;overflow:auto;background:#FFFFFF;border-radius:12px}
 #estateFocusDashboard #rpForecastCards{display:grid;gap:12px}
-#estateFocusDashboard .rp-forecast-card{background:#FFFFFF;border:1px solid #EEEEEE;border-radius:12px;padding:14px}
+#estateFocusDashboard .rp-forecast-card{background:#FFFFFF;border:1px solid #FFFFFF;border-radius:12px;padding:14px}
 #estateFocusDashboard .rp-forecast-card img{width:100%;height:auto;margin:10px 0;display:block}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261022-clear-blue2" defer></script>
-<script src="flood-river-panel.js?v=20261022-clear-blue" defer></script>
+<script src="flood-estate-dashboard.js?v=20261022-white-red" defer></script>
+<script src="flood-river-panel.js?v=20261022-white-red" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
-<style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#EEEEEE;color:#0D47A1;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
+<style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#FFFFFF;color:#0D47A1;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
 #estateFocusDashboard .ef-warning{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
-#estateFocusDashboard .ef-warning>.ef-panel{margin-bottom:0;padding:14px;background:#F3F3F3;border:1px solid #E3F2FD;border-radius:14px}
+#estateFocusDashboard .ef-warning>.ef-panel{margin-bottom:0;padding:14px;background:#FFFFFF;border:1px solid #E3F2FD;border-radius:14px}
 #estateFocusDashboard .ef-warning summary{color:#0D47A1;font-size:16px;line-height:1.6}
 #estateFocusDashboard #rpRankingsAfterWarning{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:18px}
 #estateFocusDashboard #rpRankingsAfterWarning .rp-new-section{margin:0;padding:16px;background:white;border:1px solid #E3F2FD;border-radius:18px;box-shadow:0 5px 18px #0D47A10a;min-width:0}
 #estateFocusDashboard #rpRankingsAfterWarning h3{font-size:18px;line-height:1.6;color:#0D47A1;margin:0 0 12px;padding-left:12px;border-left:5px solid #47A992}
-#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{--rank-color:#47A992;display:grid;grid-template-columns:106px minmax(0,1fr);gap:0;padding:0;margin:10px 0;border:1px solid #EEEEEE;border-radius:14px;background:#FFFFFF;overflow:hidden;box-shadow:0 2px 7px #0D47A106;transition:transform .15s,box-shadow .15s;align-items:stretch}
-#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card:nth-child(1){--rank-color:#7A3E3E}
-#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card:nth-child(2){--rank-color:#7A3E3E}
+#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{--rank-color:#47A992;display:grid;grid-template-columns:106px minmax(0,1fr);gap:0;padding:0;margin:10px 0;border:1px solid #FFFFFF;border-radius:14px;background:#FFFFFF;overflow:hidden;box-shadow:0 2px 7px #0D47A106;transition:transform .15s,box-shadow .15s;align-items:stretch}
+#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card:nth-child(1){--rank-color:#D32F2F}
+#estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card:nth-child(2){--rank-color:#D32F2F}
 #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card>div:first-child{background:var(--rank-color);color:white;padding:15px 8px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card strong{font-size:25px;line-height:1.3;color:#FFFFFF!important;font-variant-numeric:tabular-nums}
 #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card>div:first-child small{color:#FFFFFF!important;font-size:11px;line-height:1.5;margin-top:4px}
@@ -170,7 +170,7 @@ outline:2px solid #0D47A1!important;outline-offset:2px;
 #estateFocusDashboard label[for="rpMainRiver"]{display:none!important}
 </style>
 <link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
-<style id="flood-white-borderless-final">html body{background:#fff!important;color:#303841}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard{background:#fff!important;color:#303841!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard *{border:0!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(.ef-workspace,.ef-panel,.ef-map-column,.ef-canal-panel){background:#fff!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(.ef-dam-card,.ef-reservoir-row,.rp-card,.ef-canal-card){background:#F3F3F3!important;color:#303841!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(h2,h3,h4){color:#0D47A1!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-map-frame::after{content:"คลิกตำแหน่งเพื่ออ่านค่า เวลา และแหล่งข้อมูล · เปิดชั้นข้อมูลจากปุ่มบนแผนที่";display:block;color:#3A4750;font-size:13px;background:#fff;padding:8px}</style><style>.ef-reservoir-row[data-water-theme="yellow"] .ef-reservoir-percent span{color:#303841!important}</style><style id="flood-reference-font">html body,html body input,html body select,html body button,html body textarea,html body .leaflet-container,html body .leaflet-popup-content{font-family:"Sarabun",Tahoma,sans-serif!important}</style></head>
+<style id="flood-white-borderless-final">html body{background:#fff!important;color:#303841}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard{background:#fff!important;color:#303841!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard *{border:0!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(.ef-workspace,.ef-panel,.ef-map-column,.ef-canal-panel){background:#fff!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(.ef-dam-card,.ef-reservoir-row,.rp-card,.ef-canal-card){background:#FFFFFF!important;color:#303841!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(h2,h3,h4){color:#0D47A1!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-map-frame::after{content:"คลิกตำแหน่งเพื่ออ่านค่า เวลา และแหล่งข้อมูล · เปิดชั้นข้อมูลจากปุ่มบนแผนที่";display:block;color:#3A4750;font-size:13px;background:#fff;padding:8px}</style><style>.ef-reservoir-row[data-water-theme="yellow"] .ef-reservoir-percent span{color:#303841!important}</style><style id="flood-reference-font">html body,html body input,html body select,html body button,html body textarea,html body .leaflet-container,html body .leaflet-popup-content{font-family:"Sarabun",Tahoma,sans-serif!important}</style></head>
 <body>
 
 
@@ -531,8 +531,8 @@ outline:2px solid #0D47A1!important;outline-offset:2px;
 
 <style id="flood-report-water-theme">
 /* Water dashboard palette; status colors retain their data meaning. */
-body,#warning,#estateFocusDashboard{background:#F3F3F3!important}
-#estateFocusDashboard .ef-data-column{background:#F3F3F3!important;scrollbar-color:#90CAF9 transparent}
+body,#warning,#estateFocusDashboard{background:#FFFFFF!important}
+#estateFocusDashboard .ef-data-column{background:#FFFFFF!important;scrollbar-color:#90CAF9 transparent}
 #estateFocusDashboard .ef-panel,
 #estateFocusDashboard #riverSidePanel,
 #estateFocusDashboard .ef-canal-panel,
@@ -541,7 +541,7 @@ body,#warning,#estateFocusDashboard{background:#F3F3F3!important}
 #estateFocusDashboard #rpRankingsAfterWarning .rp-new-section,
 #estateFocusDashboard .rp-new-section,
 #estateFocusDashboard .today-panel{
- background:#FFFFFF!important;border:1px solid #EEEEEE!important;border-radius:18px!important;
+ background:#FFFFFF!important;border:1px solid #FFFFFF!important;border-radius:18px!important;
  box-shadow:0 4px 16px #0D47A108!important;
 }
 #estateFocusDashboard .ef-panel>h2,
@@ -551,34 +551,34 @@ body,#warning,#estateFocusDashboard{background:#F3F3F3!important}
 #estateFocusDashboard #riverSidePanel .rp-new-section>h3,
 #estateFocusDashboard .rp-stations-title,
 #estateFocusDashboard #rpRankingsAfterWarning h3{
- background:#F3F3F3!important;color:#0D47A1!important;border:0!important;
+ background:#FFFFFF!important;color:#0D47A1!important;border:0!important;
  border-left:4px solid #2185D5!important;border-radius:8px!important;
  padding:10px 12px!important;margin:0 0 14px!important;font-weight:700;line-height:1.6;
 }
 #estateFocusDashboard .today-panel h2,
 #estateFocusDashboard .ef-toolbar h1{color:#0D47A1!important}
-#estateFocusDashboard .today-panel-heading{padding-bottom:12px;border-bottom:1px solid #EEEEEE}
+#estateFocusDashboard .today-panel-heading{padding-bottom:12px;border-bottom:1px solid #FFFFFF}
 #estateFocusDashboard .today-panel-heading h2{border-left:4px solid #2185D5;padding-left:10px}
 #estateFocusDashboard #floodWeatherOverview .today-metrics article{
- background:#FFFFFF!important;border-color:#EEEEEE!important;border-radius:16px!important;
+ background:#FFFFFF!important;border-color:#FFFFFF!important;border-radius:16px!important;
  box-shadow:0 4px 14px #0D47A108!important;
 }
 #estateFocusDashboard #floodWeatherOverview .today-metrics article:first-child strong{color:#0D47A1!important}
-#estateFocusDashboard .today-day{background:#FFFFFF!important;border-color:#EEEEEE!important;border-radius:12px}
+#estateFocusDashboard .today-day{background:#FFFFFF!important;border-color:#FFFFFF!important;border-radius:12px}
 #estateFocusDashboard .ef-map-column{border:1px solid #E3F2FD!important;border-radius:18px!important;box-shadow:0 5px 20px #0D47A10c}
-#estateFocusDashboard .ef-map-foot{background:#FFFFFF!important;color:#0D47A1!important;border-top:1px solid #EEEEEE}
+#estateFocusDashboard .ef-map-foot{background:#FFFFFF!important;color:#0D47A1!important;border-top:1px solid #FFFFFF}
 #estateFocusDashboard .ef-map-head h2{color:#0D47A1!important}
 #estateFocusDashboard #efMapFullscreen,
 #estateFocusDashboard .ef-map-head .ef-actions button,
 #estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button{
- background:#EEEEEE!important;color:#0D47A1!important;border:1px solid #E3F2FD!important;
+ background:#FFFFFF!important;color:#0D47A1!important;border:1px solid #E3F2FD!important;
  border-radius:10px!important;font-weight:700;
 }
 #estateFocusDashboard #efMapFullscreen:hover,
 #estateFocusDashboard #efRelatedDams .ef-dam-card[data-water-theme] button:hover{background:#E3F2FD!important}
-#estateFocusDashboard .rp-forecast-toggle{background:#F3F3F3!important;color:#0D47A1!important;border-radius:10px;border-left:4px solid #2185D5}
+#estateFocusDashboard .rp-forecast-toggle{background:#FFFFFF!important;color:#0D47A1!important;border-radius:10px;border-left:4px solid #2185D5}
 #estateFocusDashboard #rpMainRiver{
- background:#F3F3F3!important;color:#0D47A1!important;border:1px solid #90CAF9!important;
+ background:#FFFFFF!important;color:#0D47A1!important;border:1px solid #90CAF9!important;
  border-left:4px solid #2185D5!important;border-radius:10px;font-weight:600;padding:12px;
 }
 #estateFocusDashboard #rpMainRiver:focus-visible{outline:3px solid #2185D566;outline-offset:2px}
@@ -588,50 +588,50 @@ body,#warning,#estateFocusDashboard{background:#F3F3F3!important}
 #estateFocusDashboard .ef-canal-card:hover{border-color:#90CAF9!important;box-shadow:0 5px 14px #0D47A110!important}
 #estateFocusDashboard .ef-warning>.ef-panel{background:#FFFFFF!important}
 #estateFocusDashboard .ef-warning summary{color:#0D47A1!important}
-@media(max-width:950px){body{background:#F3F3F3!important}}
+@media(max-width:950px){body{background:#FFFFFF!important}}
 </style>
 
 <style id="flood-weather-card-backgrounds">
 /* Retain the original layout; only weather card surfaces change. */
-#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article{background:#F3F3F3!important;border:0!important}
-#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(2){background:#F3F3F3!important}
-#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(3){background:#F3F3F3!important}
-#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(4){background:#F3F3F3!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article{background:#FFFFFF!important;border:0!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(2){background:#FFFFFF!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(3){background:#FFFFFF!important}
+#warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:nth-child(4){background:#FFFFFF!important}
 #warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:before,
 #warning #estateFocusDashboard #floodWeatherOverview .today-metrics article:after{content:none!important;display:none!important}
 </style>
 <style id="executive-summary-popover-style">
-.disaster-executive-link{background:#EEEEEE!important;border-color:#7A3E3E!important;color:#7A3E3E!important;cursor:pointer}
-.disaster-executive-link:hover,.disaster-executive-link[aria-expanded="true"]{background:#7A3E3E!important}
-.disaster-executive-pop{position:fixed;top:100px;right:18px;z-index:250;width:960px;max-width:calc(100vw - 28px);border:1px solid #EEEEEE;border-radius:22px;background:#FFFFFF;box-shadow:0 8px 30px #48212130;overflow:hidden}
+.disaster-executive-link{background:#FFFFFF!important;border-color:#D32F2F!important;color:#D32F2F!important;cursor:pointer}
+.disaster-executive-link:hover,.disaster-executive-link[aria-expanded="true"]{background:#D32F2F!important}
+.disaster-executive-pop{position:fixed;top:100px;right:18px;z-index:250;width:960px;max-width:calc(100vw - 28px);border:1px solid #FFFFFF;border-radius:22px;background:#FFFFFF;box-shadow:0 8px 30px #D32F2F30;overflow:hidden}
 .disaster-executive-pop[hidden]{display:none!important}
-.disaster-executive-pop-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#F3F3F3;color:#7A3E3E;font:600 15px Sarabun,sans-serif;gap:10px;border-bottom:3px solid #7A3E3E}
-.disaster-executive-pop-head button{font:inherit;background:#FFFFFF;border:1px solid #7A3E3E;border-radius:8px;padding:6px 10px;color:#7A3E3E;cursor:pointer}
+.disaster-executive-pop-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#FFFFFF;color:#D32F2F;font:600 15px Sarabun,sans-serif;gap:10px;border-bottom:3px solid #D32F2F}
+.disaster-executive-pop-head button{font:inherit;background:#FFFFFF;border:1px solid #D32F2F;border-radius:8px;padding:6px 10px;color:#D32F2F;cursor:pointer}
 .disaster-executive-pop iframe{display:block;width:100%;height:min(72dvh,650px);border:0;background:#FFFFFF}
 @media(max-width:600px){.disaster-executive-pop{right:8px;max-width:calc(100vw - 16px);border-radius:16px}.disaster-executive-pop iframe{height:70dvh}.disaster-executive-pop-head{font-size:13px;padding:10px}}
 </style>
 <style id="flood-executive-toolbar-style">
-.flood-executive-toolbar{display:flex;justify-content:flex-end;align-items:center;padding:8px 14px;background:#FFFFFF;border-bottom:1px solid #EEEEEE}
-#floodExecutiveButton{font:400 13px Sarabun,sans-serif;padding:8px 12px;background:#EEEEEE;color:#7A3E3E;border:0;cursor:pointer}
+.flood-executive-toolbar{display:flex;justify-content:flex-end;align-items:center;padding:8px 14px;background:#FFFFFF;border-bottom:1px solid #FFFFFF}
+#floodExecutiveButton{font:400 13px Sarabun,sans-serif;padding:8px 12px;background:#FFFFFF;color:#D32F2F;border:0;cursor:pointer}
 #floodExecutivePop{z-index:3000;top:54px;max-height:calc(100dvh - 68px)}
 #floodExecutivePop iframe{height:min(75dvh,680px)}
 </style>
 
 <style id="flood-gistda-layout">
-html body{background:#F3F3F3!important}
+html body{background:#FFFFFF!important}
 .flood-executive-toolbar{height:82px;padding:12px 24px;gap:24px;box-shadow:0 2px 12px #0D47A108;position:relative;z-index:20}
 .flood-brand{display:flex;align-items:center;gap:12px;margin-right:auto;color:#0D47A1}.flood-brand-icon{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:#2185D5;color:white;font-size:38px;line-height:1}.flood-brand small{font-size:10px;letter-spacing:2px;color:#2185D5}.flood-brand h1{font-size:21px;margin:0;line-height:1.5}
-.flood-nav{display:flex;gap:6px;align-self:stretch;align-items:center}.flood-nav button{border:0;background:transparent;padding:10px 13px;font:500 14px Sarabun,sans-serif;color:#0D47A1;border-radius:9px;cursor:pointer}.flood-nav button[aria-current=true]{background:#F3F3F3;color:#0D47A1;font-weight:700}
-#floodExecutiveButton{border-radius:10px;padding:11px 14px;background:#F3F3F3;color:#0D47A1;font-weight:600;white-space:nowrap}
-#estateFocusDashboard .ef-workspace{gap:20px!important;padding:20px!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)!important;background:#F3F3F3}
+.flood-nav{display:flex;gap:6px;align-self:stretch;align-items:center}.flood-nav button{border:0;background:transparent;padding:10px 13px;font:500 14px Sarabun,sans-serif;color:#0D47A1;border-radius:9px;cursor:pointer}.flood-nav button[aria-current=true]{background:#FFFFFF;color:#0D47A1;font-weight:700}
+#floodExecutiveButton{border-radius:10px;padding:11px 14px;background:#FFFFFF;color:#0D47A1;font-weight:600;white-space:nowrap}
+#estateFocusDashboard .ef-workspace{gap:20px!important;padding:20px!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)!important;background:#FFFFFF}
 #estateFocusDashboard .ef-data-column{display:flex!important;flex-direction:column;padding:0 6px 0 0!important;background:transparent!important;scroll-behavior:smooth}#estateFocusDashboard .ef-data-column>*{flex-shrink:0}#estateFocusDashboard .flood-overview{order:-5}#estateFocusDashboard #efProvinceScopeNote{order:-4}#estateFocusDashboard .ef-estate-panel{order:-3}
 #estateFocusDashboard .ef-map-column{border-radius:16px!important;overflow:hidden;position:relative}
-#estateFocusDashboard .ef-panel,#estateFocusDashboard #riverSidePanel,#estateFocusDashboard .today-panel{border:1px solid #EEEEEE!important;border-radius:14px!important;box-shadow:0 2px 8px #0D47A104!important}
-#estateFocusDashboard .ef-panel>h2,#estateFocusDashboard .rp-stations-title{background:transparent!important;border-left:0!important;border-bottom:1px solid #EEEEEE!important;border-radius:0!important;padding:0 0 12px!important;color:#0D47A1!important;font-size:17px!important}
+#estateFocusDashboard .ef-panel,#estateFocusDashboard #riverSidePanel,#estateFocusDashboard .today-panel{border:1px solid #FFFFFF!important;border-radius:14px!important;box-shadow:0 2px 8px #0D47A104!important}
+#estateFocusDashboard .ef-panel>h2,#estateFocusDashboard .rp-stations-title{background:transparent!important;border-left:0!important;border-bottom:1px solid #FFFFFF!important;border-radius:0!important;padding:0 0 12px!important;color:#0D47A1!important;font-size:17px!important}
 .flood-overview{margin-bottom:18px}.flood-section-label{font-size:20px;font-weight:700;color:#0D47A1;margin:0 0 14px}.flood-section-label span{display:block;font-size:12px;font-weight:400;color:#2185D5;margin-top:4px}
-.flood-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.flood-kpi{font:inherit;text-align:left;display:flex;flex-direction:column;align-items:flex-start;min-width:0;border:1px solid #EEEEEE;border-radius:14px;padding:16px 13px;background:#FFFFFF;cursor:pointer;position:relative;overflow:hidden;transition:box-shadow .15s,transform .15s}.flood-kpi:before{content:"";height:4px;background:var(--kpi-color);position:absolute;top:0;left:0;right:0}.flood-kpi>span{font-size:13px;line-height:1.6;color:#0D47A1}.flood-kpi strong{font-size:29px;line-height:1.4;color:var(--kpi-color);margin:8px 0;overflow-wrap:anywhere}.flood-kpi small{font-size:11px;line-height:1.6;color:#47A992}.flood-kpi:hover{transform:translateY(-2px);box-shadow:0 7px 18px #0D47A112}.flood-kpi:focus-visible,.flood-nav button:focus-visible{outline:3px solid #2185D5;outline-offset:2px}
-#estateFocusDashboard #efProvinceScopeNote{background:#F3F3F3!important;font-size:12px;border-radius:10px!important;border-left:3px solid #2185D5;margin:0 0 18px!important}
-#warning #estateFocusDashboard .ef-estate-panel{display:block!important}#estateFocusDashboard #efEstates{max-height:320px;overflow:auto}#estateFocusDashboard .ef-tools input,#estateFocusDashboard .ef-tools select{border:1px solid #EEEEEE;border-radius:9px;padding:11px;font:inherit;min-width:0;background:#FFFFFF}
+.flood-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.flood-kpi{font:inherit;text-align:left;display:flex;flex-direction:column;align-items:flex-start;min-width:0;border:1px solid #FFFFFF;border-radius:14px;padding:16px 13px;background:#FFFFFF;cursor:pointer;position:relative;overflow:hidden;transition:box-shadow .15s,transform .15s}.flood-kpi:before{content:"";height:4px;background:var(--kpi-color);position:absolute;top:0;left:0;right:0}.flood-kpi>span{font-size:13px;line-height:1.6;color:#0D47A1}.flood-kpi strong{font-size:29px;line-height:1.4;color:var(--kpi-color);margin:8px 0;overflow-wrap:anywhere}.flood-kpi small{font-size:11px;line-height:1.6;color:#47A992}.flood-kpi:hover{transform:translateY(-2px);box-shadow:0 7px 18px #0D47A112}.flood-kpi:focus-visible,.flood-nav button:focus-visible{outline:3px solid #2185D5;outline-offset:2px}
+#estateFocusDashboard #efProvinceScopeNote{background:#FFFFFF!important;font-size:12px;border-radius:10px!important;border-left:3px solid #2185D5;margin:0 0 18px!important}
+#warning #estateFocusDashboard .ef-estate-panel{display:block!important}#estateFocusDashboard #efEstates{max-height:320px;overflow:auto}#estateFocusDashboard .ef-tools input,#estateFocusDashboard .ef-tools select{border:1px solid #FFFFFF;border-radius:9px;padding:11px;font:inherit;min-width:0;background:#FFFFFF}
 @media(min-width:951px){html body main.container,html body #warning,html body #estateFocusDashboard{height:calc(100dvh - 82px)!important}#estateFocusDashboard .ef-workspace{height:100%!important}#estateFocusDashboard .ef-map-column{height:100%!important}}
 @media(max-width:1100px){.flood-executive-toolbar{gap:10px;padding:12px 16px}.flood-nav button{font-size:12px;padding:9px}.flood-brand h1{font-size:18px}}
 @media(max-width:950px){.flood-executive-toolbar{height:auto;flex-wrap:wrap;padding:12px}.flood-brand{flex:1}.flood-nav{order:3;width:100%;overflow-x:auto;white-space:nowrap}.flood-nav button{font-size:13px;flex-shrink:0}.flood-brand h1{font-size:18px}#estateFocusDashboard .ef-workspace{padding:10px!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important}#estateFocusDashboard .ef-map-column{width:100%!important;margin:0!important}#estateFocusDashboard .ef-data-column{padding:0!important}.flood-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.flood-kpi{padding:13px 10px}.flood-kpi strong{font-size:24px}#floodExecutivePop{top:120px}}
@@ -644,8 +644,8 @@ html body{background:#F3F3F3!important}
 #warning #estateFocusDashboard .ef-data-column{overflow:hidden!important;gap:10px;min-height:0!important}
 #warning #estateFocusDashboard .ef-data-column>[data-fit-panel]:not(.fit-active),#warning #estateFocusDashboard #riverSidePanel>[data-fit-panel]:not(.fit-active){display:none!important}
 #warning #estateFocusDashboard .ef-data-column>.fit-active{margin:0!important;min-height:0;flex-shrink:1}
-#warning #estateFocusDashboard .fit-controls{order:-20;flex-shrink:0;display:flex;gap:8px;align-items:center;background:#FFFFFF;border:1px solid #EEEEEE;padding:8px 10px;border-radius:12px}
-.fit-controls select{flex:1;min-width:0;padding:8px;border:1px solid #EEEEEE;border-radius:8px;background:#FFFFFF;font:inherit;font-size:14px;color:#0D47A1}.fit-controls button{font:inherit;border:1px solid #EEEEEE;background:#F3F3F3;border-radius:8px;padding:7px 12px;cursor:pointer}.fit-controls button:disabled{opacity:.35;cursor:default}.fit-page{font-size:12px;white-space:nowrap;color:#0D47A1}
+#warning #estateFocusDashboard .fit-controls{order:-20;flex-shrink:0;display:flex;gap:8px;align-items:center;background:#FFFFFF;border:1px solid #FFFFFF;padding:8px 10px;border-radius:12px}
+.fit-controls select{flex:1;min-width:0;padding:8px;border:1px solid #FFFFFF;border-radius:8px;background:#FFFFFF;font:inherit;font-size:14px;color:#0D47A1}.fit-controls button{font:inherit;border:1px solid #FFFFFF;background:#FFFFFF;border-radius:8px;padding:7px 12px;cursor:pointer}.fit-controls button:disabled{opacity:.35;cursor:default}.fit-page{font-size:12px;white-space:nowrap;color:#0D47A1}
 #warning #estateFocusDashboard .flood-overview{flex:none;margin:0!important}.flood-section-label{font-size:18px;margin-bottom:10px}.flood-kpis{gap:8px}.flood-kpi{padding:12px;min-height:106px}.flood-kpi strong{font-size:28px;margin:3px 0}.flood-kpi small{font-size:10px}
 #warning #estateFocusDashboard #efProvinceScopeNote{margin:0!important;padding:8px!important;font-size:11px!important}
 #warning #estateFocusDashboard .fit-overview .ef-estate-panel{flex:none;padding:12px!important}
@@ -688,8 +688,8 @@ html body,html body #estateFocusDashboard,html body #estateFocusDashboard input,
 #warning #estateFocusDashboard .dashboard-analytics{display:grid;grid-template-columns:1fr;gap:10px;min-height:0;color:#0D47A1}
 .dashboard-chart{background:#FFFFFF;border-radius:16px;box-shadow:0 3px 16px #0D47A107;padding:16px;min-width:0;display:flex;flex-direction:column;justify-content:center}
 .dashboard-chart h3{margin:0 0 10px!important;font-size:14px!important;font-weight:500!important}.dashboard-chart small{font-size:11px!important;color:#2185D5;line-height:1.5}
-.dashboard-donut-row{display:flex;align-items:center;justify-content:space-around;gap:18px}.dashboard-donut{width:126px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:conic-gradient(#7A3E3E 0deg,#EEEEEE 0deg);position:relative}.dashboard-donut:before{content:'';position:absolute;inset:12px;border-radius:50%;background:#FFFFFF}.dashboard-donut strong{z-index:1;font-size:25px;font-weight:600;color:#2185D5}.dashboard-donut-legend{font-size:12px;line-height:2}.dashboard-donut-legend span{display:block}.dashboard-donut-legend i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#7A3E3E;margin-right:7px}.dashboard-donut-legend span+span i{background:#EEEEEE}.dashboard-donut-legend b{font-size:20px;font-weight:600;display:block;line-height:1.4}
-.dashboard-bar-row{display:grid;grid-template-columns:110px minmax(0,1fr) 35px;gap:10px;align-items:center;margin:9px 0;font-size:12px}.dashboard-bar-track{height:9px;background:#F3F3F3;border-radius:6px;overflow:hidden}.dashboard-bar-track i{height:100%;display:block;border-radius:6px;background:var(--bar-color,#2185D5);transition:width .3s}.dashboard-bar-row b{text-align:right;font-size:16px;font-weight:500}
+.dashboard-donut-row{display:flex;align-items:center;justify-content:space-around;gap:18px}.dashboard-donut{width:126px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:conic-gradient(#D32F2F 0deg,#FFFFFF 0deg);position:relative}.dashboard-donut:before{content:'';position:absolute;inset:12px;border-radius:50%;background:#FFFFFF}.dashboard-donut strong{z-index:1;font-size:25px;font-weight:600;color:#2185D5}.dashboard-donut-legend{font-size:12px;line-height:2}.dashboard-donut-legend span{display:block}.dashboard-donut-legend i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#D32F2F;margin-right:7px}.dashboard-donut-legend span+span i{background:#FFFFFF}.dashboard-donut-legend b{font-size:20px;font-weight:600;display:block;line-height:1.4}
+.dashboard-bar-row{display:grid;grid-template-columns:110px minmax(0,1fr) 35px;gap:10px;align-items:center;margin:9px 0;font-size:12px}.dashboard-bar-track{height:9px;background:#FFFFFF;border-radius:6px;overflow:hidden}.dashboard-bar-track i{height:100%;display:block;border-radius:6px;background:var(--bar-color,#2185D5);transition:width .3s}.dashboard-bar-row b{text-align:right;font-size:16px;font-weight:500}
 .dashboard-map-tag{position:absolute;left:16px;top:14px;z-index:2;pointer-events:none;border-radius:10px;background:#FFFFFFf0;box-shadow:0 3px 12px #0D47A112;color:#0D47A1;padding:8px 12px;font-size:12px}
 @media(min-width:951px){
 #warning #estateFocusDashboard .ef-workspace{display:grid!important;grid-template-columns:minmax(0,1.65fr) minmax(350px,1fr)!important;grid-template-rows:auto minmax(0,1fr)!important;padding:12px 18px 16px!important;gap:12px 16px!important}
@@ -713,36 +713,36 @@ html body,html body #estateFocusDashboard,html body #estateFocusDashboard input,
 </style>
 
 <style id="flood-brand-palette">
-:root{--flood-white:#FFFFFF;--flood-gray:#7A3E3E;--flood-red:#7A3E3E;--flood-gray-light:#EEEEEE;--flood-gray-mid:#47A992;--flood-black:#482121;--flood-sand:#E3F2FD;--flood-stone:#47A992;--flood-yellow:#E3F2FD;--flood-green-light:#47A992;--flood-green:#47A992;--flood-blue-light:#E3F2FD;--flood-blue:#2185D5;--flood-cyan:#2185D5;--flood-navy:#0D47A1;--flood-maroon:#7A3E3E}
-html body,html body #warning,html body #estateFocusDashboard,html body #estateFocusDashboard .ef-workspace{background:#FFFFFF!important;color:#482121!important}
-html body .flood-executive-toolbar{background:#FFFFFF!important;border:0!important;box-shadow:0 2px 12px #4821210d!important}
-html body .flood-nav button{background:#FFFFFF!important;color:#7A3E3E!important}html body .flood-nav button[aria-current=true]{background:#FFFFFF!important;color:#7A3E3E!important;font-weight:600!important}
-html body #floodExecutiveButton{background:#7A3E3E!important;color:#FFFFFF!important;border:0!important}html body #floodExecutiveButton:hover{background:#7A3E3E!important}
-html body #warning #estateFocusDashboard .flood-kpi{background:#FFFFFF!important;color:#7A3E3E!important;box-shadow:0 3px 18px #4821210c!important}
-html body #warning #estateFocusDashboard .flood-kpi>span{color:#7A3E3E!important}html body #warning #estateFocusDashboard .flood-kpi strong{color:#482121!important}
-html body #warning #estateFocusDashboard .flood-kpi:first-child strong{color:#7A3E3E!important}html body #warning #estateFocusDashboard .flood-kpi:nth-child(2) strong{color:#0D47A1!important}html body #warning #estateFocusDashboard .flood-kpi:nth-child(3) strong{color:#2185D5!important}html body #warning #estateFocusDashboard .flood-kpi:nth-child(n+5) strong{color:#7A3E3E!important}
-html body #warning #estateFocusDashboard .flood-kpi small,html body #warning #estateFocusDashboard .flood-section-label span{color:#7A3E3E!important}
-html body #warning #estateFocusDashboard .dashboard-chart,html body #warning #estateFocusDashboard .ef-panel,html body #warning #estateFocusDashboard .fit-controls,html body #warning #estateFocusDashboard #riverSidePanel,html body #warning #estateFocusDashboard .today-panel,html body #warning #estateFocusDashboard .rp-new-section{background:#FFFFFF!important;color:#482121!important;box-shadow:0 3px 18px #4821210a!important}
-html body #warning #estateFocusDashboard h2,html body #warning #estateFocusDashboard h3,html body #warning #estateFocusDashboard .dashboard-chart h3{color:#7A3E3E!important;background:#FFFFFF!important}
-html body #warning #estateFocusDashboard .dashboard-chart small,html body #warning #estateFocusDashboard .dashboard-donut-legend{color:#7A3E3E!important}
-.dashboard-donut:before{background:#FFFFFF!important}.dashboard-donut strong{color:#7A3E3E!important}.dashboard-donut-legend i{background:#7A3E3E!important}.dashboard-donut-legend span+span i{background:#EEEEEE!important}.dashboard-donut-legend b{color:#482121!important}.dashboard-bar-track{background:#EEEEEE!important}.dashboard-bar-row{color:#7A3E3E!important}.dashboard-bar-row b{color:#482121!important}
-html body #warning #estateFocusDashboard select,html body #warning #estateFocusDashboard input{background:#FFFFFF!important;color:#482121!important;border-color:#EEEEEE!important;accent-color:#7A3E3E!important}
-html body #warning #estateFocusDashboard .fit-controls button{background:#EEEEEE!important;color:#482121!important;border:0!important}html body #warning #estateFocusDashboard .fit-page{color:#7A3E3E!important}
-html body #warning #estateFocusDashboard #efProvinceScopeNote{background:#EEEEEE!important;color:#482121!important}
-html body #warning #estateFocusDashboard .ef-map-foot{background:#FFFFFF!important;color:#7A3E3E!important;border:0!important}html body #warning #estateFocusDashboard #efMapFullscreen{background:#7A3E3E!important;color:#FFFFFF!important;border:0!important}
+:root{--flood-white:#FFFFFF;--flood-gray:#D32F2F;--flood-red:#D32F2F;--flood-gray-light:#FFFFFF;--flood-gray-mid:#47A992;--flood-black:#D32F2F;--flood-sand:#E3F2FD;--flood-stone:#47A992;--flood-yellow:#E3F2FD;--flood-green-light:#47A992;--flood-green:#47A992;--flood-blue-light:#E3F2FD;--flood-blue:#2185D5;--flood-cyan:#2185D5;--flood-navy:#0D47A1;--flood-maroon:#D32F2F}
+html body,html body #warning,html body #estateFocusDashboard,html body #estateFocusDashboard .ef-workspace{background:#FFFFFF!important;color:#D32F2F!important}
+html body .flood-executive-toolbar{background:#FFFFFF!important;border:0!important;box-shadow:0 2px 12px #D32F2F0d!important}
+html body .flood-nav button{background:#FFFFFF!important;color:#D32F2F!important}html body .flood-nav button[aria-current=true]{background:#FFFFFF!important;color:#D32F2F!important;font-weight:600!important}
+html body #floodExecutiveButton{background:#D32F2F!important;color:#FFFFFF!important;border:0!important}html body #floodExecutiveButton:hover{background:#D32F2F!important}
+html body #warning #estateFocusDashboard .flood-kpi{background:#FFFFFF!important;color:#D32F2F!important;box-shadow:0 3px 18px #D32F2F0c!important}
+html body #warning #estateFocusDashboard .flood-kpi>span{color:#D32F2F!important}html body #warning #estateFocusDashboard .flood-kpi strong{color:#D32F2F!important}
+html body #warning #estateFocusDashboard .flood-kpi:first-child strong{color:#D32F2F!important}html body #warning #estateFocusDashboard .flood-kpi:nth-child(2) strong{color:#0D47A1!important}html body #warning #estateFocusDashboard .flood-kpi:nth-child(3) strong{color:#2185D5!important}html body #warning #estateFocusDashboard .flood-kpi:nth-child(n+5) strong{color:#D32F2F!important}
+html body #warning #estateFocusDashboard .flood-kpi small,html body #warning #estateFocusDashboard .flood-section-label span{color:#D32F2F!important}
+html body #warning #estateFocusDashboard .dashboard-chart,html body #warning #estateFocusDashboard .ef-panel,html body #warning #estateFocusDashboard .fit-controls,html body #warning #estateFocusDashboard #riverSidePanel,html body #warning #estateFocusDashboard .today-panel,html body #warning #estateFocusDashboard .rp-new-section{background:#FFFFFF!important;color:#D32F2F!important;box-shadow:0 3px 18px #D32F2F0a!important}
+html body #warning #estateFocusDashboard h2,html body #warning #estateFocusDashboard h3,html body #warning #estateFocusDashboard .dashboard-chart h3{color:#D32F2F!important;background:#FFFFFF!important}
+html body #warning #estateFocusDashboard .dashboard-chart small,html body #warning #estateFocusDashboard .dashboard-donut-legend{color:#D32F2F!important}
+.dashboard-donut:before{background:#FFFFFF!important}.dashboard-donut strong{color:#D32F2F!important}.dashboard-donut-legend i{background:#D32F2F!important}.dashboard-donut-legend span+span i{background:#FFFFFF!important}.dashboard-donut-legend b{color:#D32F2F!important}.dashboard-bar-track{background:#FFFFFF!important}.dashboard-bar-row{color:#D32F2F!important}.dashboard-bar-row b{color:#D32F2F!important}
+html body #warning #estateFocusDashboard select,html body #warning #estateFocusDashboard input{background:#FFFFFF!important;color:#D32F2F!important;border-color:#FFFFFF!important;accent-color:#D32F2F!important}
+html body #warning #estateFocusDashboard .fit-controls button{background:#FFFFFF!important;color:#D32F2F!important;border:0!important}html body #warning #estateFocusDashboard .fit-page{color:#D32F2F!important}
+html body #warning #estateFocusDashboard #efProvinceScopeNote{background:#FFFFFF!important;color:#D32F2F!important}
+html body #warning #estateFocusDashboard .ef-map-foot{background:#FFFFFF!important;color:#D32F2F!important;border:0!important}html body #warning #estateFocusDashboard #efMapFullscreen{background:#D32F2F!important;color:#FFFFFF!important;border:0!important}
 html body #warning #estateFocusDashboard .dashboard-map-tag{background:#FFFFFF!important;color:#0D47A1!important}
-html body #warning #estateFocusDashboard [data-water-theme=red]{--water-accent:#7A3E3E!important;--water-bg:#FFFFFF!important;--water-ink:#7A3E3E!important}html body #warning #estateFocusDashboard [data-water-theme=yellow]{--water-accent:#E3F2FD!important;--water-bg:#E3F2FD!important;--water-ink:#482121!important}html body #warning #estateFocusDashboard [data-water-theme=orange]{--water-accent:#E3F2FD!important;--water-bg:#E3F2FD!important;--water-ink:#7A3E3E!important}html body #warning #estateFocusDashboard [data-water-theme=blue]{--water-accent:#2185D5!important;--water-bg:#E3F2FD!important;--water-ink:#0D47A1!important}html body #warning #estateFocusDashboard [data-water-theme=unknown]{--water-accent:#47A992!important;--water-bg:#EEEEEE!important;--water-ink:#7A3E3E!important}
+html body #warning #estateFocusDashboard [data-water-theme=red]{--water-accent:#D32F2F!important;--water-bg:#FFFFFF!important;--water-ink:#D32F2F!important}html body #warning #estateFocusDashboard [data-water-theme=yellow]{--water-accent:#E3F2FD!important;--water-bg:#E3F2FD!important;--water-ink:#D32F2F!important}html body #warning #estateFocusDashboard [data-water-theme=orange]{--water-accent:#E3F2FD!important;--water-bg:#E3F2FD!important;--water-ink:#D32F2F!important}html body #warning #estateFocusDashboard [data-water-theme=blue]{--water-accent:#2185D5!important;--water-bg:#E3F2FD!important;--water-ink:#0D47A1!important}html body #warning #estateFocusDashboard [data-water-theme=unknown]{--water-accent:#47A992!important;--water-bg:#FFFFFF!important;--water-ink:#D32F2F!important}
 html body #warning #estateFocusDashboard button:focus-visible,html body #warning #estateFocusDashboard select:focus-visible,html body #warning #estateFocusDashboard input:focus-visible{outline:2px solid #0D47A1!important;outline-offset:2px}
 </style>
 
-<style>.dashboard-bar-label{font:400 12px Sarabun,sans-serif!important;color:#7A3E3E!important;display:block!important;position:relative;z-index:1}.dashboard-donut-legend{min-width:0;overflow-wrap:anywhere}.dashboard-donut-legend b{white-space:nowrap}.dashboard-donut-row{justify-content:space-between}</style><style id="flood-reference-layout">
+<style>.dashboard-bar-label{font:400 12px Sarabun,sans-serif!important;color:#D32F2F!important;display:block!important;position:relative;z-index:1}.dashboard-donut-legend{min-width:0;overflow-wrap:anywhere}.dashboard-donut-legend b{white-space:nowrap}.dashboard-donut-row{justify-content:space-between}</style><style id="flood-reference-layout">
 .reference-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:14px;min-height:0}
-.reference-card{background:#FFFFFF;border:0;border-radius:20px;box-shadow:0 3px 20px #48212108;padding:18px 16px;min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;color:#482121}
-#warning #estateFocusDashboard .reference-card h3{margin:0 0 14px!important;padding:0!important;font:500 13px/1.5 Sarabun,sans-serif!important;color:#7A3E3E!important;background:transparent!important;border:0!important}
-.reference-chart{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}.reference-gauge{display:block;width:100%;max-height:210px;margin:auto}.reference-gauge text{font-family:Sarabun,sans-serif;fill:#482121;font-size:18px;font-weight:600}
-.reference-card footer{font-size:10px;line-height:1.6;color:#7A3E3E;margin-top:10px}.reference-total{font-size:12px;color:#7A3E3E;display:flex;align-items:center;justify-content:space-between;gap:6px}.reference-total b{font-size:14px;font-weight:500;color:#482121}.reference-total i,.reference-key i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--dot-color,#7A3E3E)}
-.reference-donut{width:122px;aspect-ratio:1;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;position:relative;flex-shrink:0;background:#EEEEEE}.reference-donut:before{content:'';position:absolute;inset:14px;background:#FFFFFF;border-radius:50%}.reference-donut strong{position:relative;font:600 22px Sarabun,sans-serif;color:#482121}.reference-keys{display:grid;gap:7px}.reference-key{display:flex;justify-content:space-between;gap:8px;font-size:11px;line-height:1.4;color:#7A3E3E}.reference-key span{min-width:0}.reference-key b{color:#482121;font-weight:500}
-.reference-bars{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:12px;flex:1;min-height:0}.reference-bar{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px}.reference-bar-name{font:400 11px/1.5 Sarabun,sans-serif;color:#7A3E3E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.reference-bar-line{display:flex;align-items:center;gap:8px}.reference-bar-track{background:#EEEEEE33;height:13px;border-radius:0 9px 9px 0;flex:1;min-width:0;overflow:hidden}.reference-bar-track i{display:block;height:100%;width:var(--bar-width);background:var(--bar-fill,#E3F2FD);border-radius:0 9px 9px 0}.reference-bar-line b{font:500 11px Sarabun,sans-serif;color:#482121;min-width:34px;text-align:right}.reference-empty{font:400 12px/1.7 Sarabun,sans-serif;color:#7A3E3E;margin:auto;text-align:center}
+.reference-card{background:#FFFFFF;border:0;border-radius:20px;box-shadow:0 3px 20px #D32F2F08;padding:18px 16px;min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;color:#D32F2F}
+#warning #estateFocusDashboard .reference-card h3{margin:0 0 14px!important;padding:0!important;font:500 13px/1.5 Sarabun,sans-serif!important;color:#D32F2F!important;background:transparent!important;border:0!important}
+.reference-chart{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}.reference-gauge{display:block;width:100%;max-height:210px;margin:auto}.reference-gauge text{font-family:Sarabun,sans-serif;fill:#D32F2F;font-size:18px;font-weight:600}
+.reference-card footer{font-size:10px;line-height:1.6;color:#D32F2F;margin-top:10px}.reference-total{font-size:12px;color:#D32F2F;display:flex;align-items:center;justify-content:space-between;gap:6px}.reference-total b{font-size:14px;font-weight:500;color:#D32F2F}.reference-total i,.reference-key i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--dot-color,#D32F2F)}
+.reference-donut{width:122px;aspect-ratio:1;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;position:relative;flex-shrink:0;background:#FFFFFF}.reference-donut:before{content:'';position:absolute;inset:14px;background:#FFFFFF;border-radius:50%}.reference-donut strong{position:relative;font:600 22px Sarabun,sans-serif;color:#D32F2F}.reference-keys{display:grid;gap:7px}.reference-key{display:flex;justify-content:space-between;gap:8px;font-size:11px;line-height:1.4;color:#D32F2F}.reference-key span{min-width:0}.reference-key b{color:#D32F2F;font-weight:500}
+.reference-bars{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:12px;flex:1;min-height:0}.reference-bar{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px}.reference-bar-name{font:400 11px/1.5 Sarabun,sans-serif;color:#D32F2F;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.reference-bar-line{display:flex;align-items:center;gap:8px}.reference-bar-track{background:#FFFFFF;height:13px;border-radius:0 9px 9px 0;flex:1;min-width:0;overflow:hidden}.reference-bar-track i{display:block;height:100%;width:var(--bar-width);background:var(--bar-fill,#E3F2FD);border-radius:0 9px 9px 0}.reference-bar-line b{font:500 11px Sarabun,sans-serif;color:#D32F2F;min-width:34px;text-align:right}.reference-empty{font:400 12px/1.7 Sarabun,sans-serif;color:#D32F2F;margin:auto;text-align:center}
 #warning #estateFocusDashboard .flood-overview,#warning #estateFocusDashboard #floodDashboardAnalytics,#warning #estateFocusDashboard .dashboard-map-tag{display:none!important}
 @media(min-width:951px){
 html body #warning #estateFocusDashboard .ef-workspace{display:grid!important;grid-template-columns:minmax(0,1.8fr) minmax(330px,1fr)!important;grid-template-rows:minmax(0,1fr)!important;padding:12px 18px 18px!important;gap:20px!important}
@@ -750,10 +750,10 @@ html body #warning #estateFocusDashboard .ef-data-column{grid-column:1!important
 html body #warning #estateFocusDashboard .ef-map-column{grid-column:2!important;grid-row:1!important;height:100%!important;min-height:0!important;border-radius:20px!important}
 html body #warning #estateFocusDashboard .ef-data-column.fit-overview{display:grid!important;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important;grid-template-rows:auto minmax(0,1fr) auto!important}
 html body #warning #estateFocusDashboard .fit-overview>.fit-controls{grid-column:1;grid-row:1;padding:0 8px 0 0!important;box-shadow:none!important;background:transparent!important;min-width:0}
-html body #warning #estateFocusDashboard .fit-overview>.fit-controls select{background:#EEEEEE33!important;border:0!important;border-radius:20px!important;min-height:38px}
+html body #warning #estateFocusDashboard .fit-overview>.fit-controls select{background:#FFFFFF!important;border:0!important;border-radius:20px!important;min-height:38px}
 html body #warning #estateFocusDashboard .fit-overview>.ef-estate-panel.fit-active{grid-column:2;grid-row:1;margin:0!important;padding:0!important;flex:none!important;box-shadow:none!important;background:transparent!important;min-height:0;align-self:center}
 html body #warning #estateFocusDashboard .fit-overview .ef-tools{display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important;gap:8px!important}
-html body #warning #estateFocusDashboard .fit-overview .ef-tools input,html body #warning #estateFocusDashboard .fit-overview .ef-tools select{background:#EEEEEE33!important;border:0!important;border-radius:20px!important;height:38px;min-height:38px!important;padding:7px 11px!important;font-size:11px!important}
+html body #warning #estateFocusDashboard .fit-overview .ef-tools input,html body #warning #estateFocusDashboard .fit-overview .ef-tools select{background:#FFFFFF!important;border:0!important;border-radius:20px!important;height:38px;min-height:38px!important;padding:7px 11px!important;font-size:11px!important}
 html body #warning #estateFocusDashboard .ef-data-column.fit-overview>#floodReferenceBoard.fit-active{display:grid!important;grid-column:1/-1;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:14px;min-height:0;overflow:hidden!important;margin:0!important;flex:1}
 html body #warning #estateFocusDashboard .fit-overview>#efProvinceScopeNote.fit-active{grid-column:1/-1;grid-row:3;order:unset;font-size:10px!important;padding:3px!important;margin:0!important;background:transparent!important;box-shadow:none!important}
 html body #warning #estateFocusDashboard .ef-map-foot{font-size:9px!important;padding:8px!important;gap:8px!important}.ef-map-foot span{line-height:1.4!important}
@@ -770,38 +770,38 @@ html body #warning #estateFocusDashboard #efMapFullscreen{font-size:10px!importa
 </script>
 <style>.reference-total{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.reference-key{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px}.reference-key span{overflow-wrap:anywhere}.reference-card footer{overflow-wrap:anywhere}</style><style id="flood-station-search-style">
 html body #warning #estateFocusDashboard .ef-estate-panel .ef-tools{display:none!important}
-.flood-station-search{display:flex;align-items:center;gap:6px;min-width:0;width:100%}.flood-station-search input{width:100%!important;min-width:0;flex:1;border:0!important;border-radius:20px!important;background:#EEEEEE33!important;padding:9px 12px!important;min-height:38px!important;font:400 12px Sarabun,sans-serif!important}.flood-station-search>button{flex:none;background:#7A3E3E!important;color:#FFFFFF!important;border:0!important;border-radius:20px;padding:9px 13px;font:400 11px Sarabun,sans-serif!important;cursor:pointer}
-#floodStationMatches{position:fixed;z-index:4500;max-height:320px;overflow:auto;overscroll-behavior:contain;background:#FFFFFF;box-shadow:0 8px 24px #48212120;border-radius:14px;padding:8px;color:#482121;font:400 12px/1.5 Sarabun,sans-serif}
-#floodStationMatches[hidden]{display:none!important}#floodStationMatches button{display:block;width:100%;border:0;background:#FFFFFF;color:#482121;text-align:left;padding:10px;border-radius:9px;font:400 12px/1.5 Sarabun,sans-serif;cursor:pointer}#floodStationMatches button:hover,#floodStationMatches button:focus-visible{background:#E3F2FD;outline:none}#floodStationMatches small{display:block;color:#7A3E3E;font-size:10px}#floodStationMatches p{margin:7px 10px;color:#7A3E3E;font-size:11px}
+.flood-station-search{display:flex;align-items:center;gap:6px;min-width:0;width:100%}.flood-station-search input{width:100%!important;min-width:0;flex:1;border:0!important;border-radius:20px!important;background:#FFFFFF!important;padding:9px 12px!important;min-height:38px!important;font:400 12px Sarabun,sans-serif!important}.flood-station-search>button{flex:none;background:#D32F2F!important;color:#FFFFFF!important;border:0!important;border-radius:20px;padding:9px 13px;font:400 11px Sarabun,sans-serif!important;cursor:pointer}
+#floodStationMatches{position:fixed;z-index:4500;max-height:320px;overflow:auto;overscroll-behavior:contain;background:#FFFFFF;box-shadow:0 8px 24px #D32F2F20;border-radius:14px;padding:8px;color:#D32F2F;font:400 12px/1.5 Sarabun,sans-serif}
+#floodStationMatches[hidden]{display:none!important}#floodStationMatches button{display:block;width:100%;border:0;background:#FFFFFF;color:#D32F2F;text-align:left;padding:10px;border-radius:9px;font:400 12px/1.5 Sarabun,sans-serif;cursor:pointer}#floodStationMatches button:hover,#floodStationMatches button:focus-visible{background:#E3F2FD;outline:none}#floodStationMatches small{display:block;color:#D32F2F;font-size:10px}#floodStationMatches p{margin:7px 10px;color:#D32F2F;font-size:11px}
 </style>
 
 <style id="flood-dashboard-polish">
-html body .flood-executive-toolbar{justify-content:flex-start!important;gap:8px!important;padding:8px 18px!important;box-shadow:0 2px 14px #48212108!important}
+html body .flood-executive-toolbar{justify-content:flex-start!important;gap:8px!important;padding:8px 18px!important;box-shadow:0 2px 14px #D32F2F08!important}
 html body .flood-nav{margin:0!important;gap:6px!important;flex-wrap:nowrap;overflow-x:auto;min-width:0}
 html body .flood-nav button{padding:10px 14px!important;font-size:13px!important;white-space:nowrap!important;flex-shrink:0}
-html body .flood-nav #floodExecutiveButton{margin-left:8px!important;padding:9px 15px!important;border-radius:9px!important;color:#FFFFFF!important;background:#7A3E3E!important;font-weight:500!important}
-html body .flood-nav #floodExecutiveButton:hover,html body .flood-nav #floodExecutiveButton[aria-expanded=true]{background:#7A3E3E!important;color:#FFFFFF!important}
-html body #floodExecutivePop{left:18px;right:auto;top:62px;max-width:calc(100vw - 36px);border:0;border-radius:18px;box-shadow:0 12px 42px #48212126}
-html body #warning #estateFocusDashboard .reference-card{padding:20px 18px;border-radius:18px;box-shadow:0 4px 22px #4821210b!important;background:#FFFFFF!important}
-html body #warning #estateFocusDashboard .reference-card h3{font-size:14px!important;font-weight:500!important;color:#482121!important;line-height:1.55!important;margin:0 0 16px!important;min-height:43px}
-html body #warning #estateFocusDashboard .reference-card footer{font-size:10px!important;line-height:1.65!important;color:#7A3E3E!important;margin-top:12px}
+html body .flood-nav #floodExecutiveButton{margin-left:8px!important;padding:9px 15px!important;border-radius:9px!important;color:#FFFFFF!important;background:#D32F2F!important;font-weight:500!important}
+html body .flood-nav #floodExecutiveButton:hover,html body .flood-nav #floodExecutiveButton[aria-expanded=true]{background:#D32F2F!important;color:#FFFFFF!important}
+html body #floodExecutivePop{left:18px;right:auto;top:62px;max-width:calc(100vw - 36px);border:0;border-radius:18px;box-shadow:0 12px 42px #D32F2F26}
+html body #warning #estateFocusDashboard .reference-card{padding:20px 18px;border-radius:18px;box-shadow:0 4px 22px #D32F2F0b!important;background:#FFFFFF!important}
+html body #warning #estateFocusDashboard .reference-card h3{font-size:14px!important;font-weight:500!important;color:#D32F2F!important;line-height:1.55!important;margin:0 0 16px!important;min-height:43px}
+html body #warning #estateFocusDashboard .reference-card footer{font-size:10px!important;line-height:1.65!important;color:#D32F2F!important;margin-top:12px}
 .reference-gauge{max-height:240px}.reference-gauge text{font-size:23px}.reference-donut{width:148px;margin:0 auto 20px}.reference-donut:before{inset:17px}.reference-donut strong{font-size:26px}.reference-keys{gap:9px}.reference-key{font-size:12px;align-items:start;line-height:1.5}.reference-key i{width:8px;height:8px}.reference-key b{font-size:12px}.reference-total{font-size:12px;line-height:1.5}.reference-total b{font-size:16px;font-weight:600}
-.reference-bars{gap:10px}.reference-bar{padding:0!important;border:0!important;text-align:left;background:transparent!important;cursor:pointer;width:100%;min-width:0;color:#482121!important;border-radius:8px}.reference-bar:hover .reference-bar-name{color:#7A3E3E!important}.reference-bar:focus-visible{outline:2px solid #0D47A1!important;outline-offset:4px}.reference-bar-name{font-size:12px;line-height:1.5}.reference-bar-track{height:16px;background:#EEEEEE33}.reference-bar-line b{font-size:12px;font-weight:500;min-width:38px}
-html body #warning #estateFocusDashboard .flood-station-search input{background:#EEEEEE33!important;color:#482121!important;border:0!important;border-radius:12px!important;min-height:42px!important;padding:10px 14px!important;font-size:12px!important}
+.reference-bars{gap:10px}.reference-bar{padding:0!important;border:0!important;text-align:left;background:transparent!important;cursor:pointer;width:100%;min-width:0;color:#D32F2F!important;border-radius:8px}.reference-bar:hover .reference-bar-name{color:#D32F2F!important}.reference-bar:focus-visible{outline:2px solid #0D47A1!important;outline-offset:4px}.reference-bar-name{font-size:12px;line-height:1.5}.reference-bar-track{height:16px;background:#FFFFFF}.reference-bar-line b{font-size:12px;font-weight:500;min-width:38px}
+html body #warning #estateFocusDashboard .flood-station-search input{background:#FFFFFF!important;color:#D32F2F!important;border:0!important;border-radius:12px!important;min-height:42px!important;padding:10px 14px!important;font-size:12px!important}
 html body #warning #estateFocusDashboard .flood-station-search>button{border-radius:12px!important;min-height:42px!important;padding:10px 17px!important;font-size:12px!important}
 html body #warning #estateFocusDashboard .fit-controls select{font-size:12px!important;border-radius:12px!important;min-height:42px!important;padding:10px 14px!important}
-html body #warning #estateFocusDashboard .ef-map-column{box-shadow:0 4px 22px #4821210b!important}
-@media(min-width:951px){html body #warning #estateFocusDashboard .ef-workspace{padding-top:18px!important;gap:20px!important}html body #warning #estateFocusDashboard .ef-data-column.fit-overview{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr)!important;gap:14px 10px!important}html body #warning #estateFocusDashboard .ef-data-column.fit-overview>#floodReferenceBoard.fit-active{gap:16px!important}html body #warning #estateFocusDashboard .fit-overview>.fit-controls{padding:0!important}html body #warning #estateFocusDashboard .fit-overview>#efProvinceScopeNote.fit-active{font-size:10px!important;line-height:1.5!important;color:#7A3E3E!important}}
+html body #warning #estateFocusDashboard .ef-map-column{box-shadow:0 4px 22px #D32F2F0b!important}
+@media(min-width:951px){html body #warning #estateFocusDashboard .ef-workspace{padding-top:18px!important;gap:20px!important}html body #warning #estateFocusDashboard .ef-data-column.fit-overview{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr)!important;gap:14px 10px!important}html body #warning #estateFocusDashboard .ef-data-column.fit-overview>#floodReferenceBoard.fit-active{gap:16px!important}html body #warning #estateFocusDashboard .fit-overview>.fit-controls{padding:0!important}html body #warning #estateFocusDashboard .fit-overview>#efProvinceScopeNote.fit-active{font-size:10px!important;line-height:1.5!important;color:#D32F2F!important}}
 @media(min-width:951px) and (max-width:1450px){html body #warning #estateFocusDashboard .reference-card{padding:16px 14px}.reference-donut{width:124px;margin-bottom:16px}.reference-donut:before{inset:14px}.reference-key{font-size:11px;gap:8px}.reference-bar-name{font-size:11px}}
 @media(min-width:951px) and (max-height:800px){html body #warning #estateFocusDashboard .reference-card{padding:12px}html body #warning #estateFocusDashboard .reference-card h3{font-size:12px!important;min-height:34px;margin-bottom:8px!important}.reference-donut{width:90px;margin-bottom:10px}.reference-donut:before{inset:11px}.reference-donut strong{font-size:20px}.reference-keys{gap:4px}.reference-key{font-size:10px}.reference-gauge{max-height:145px}.reference-bars{gap:5px}.reference-bar-track{height:12px}.reference-bar-name,.reference-bar-line b{font-size:10px}html body #warning #estateFocusDashboard .reference-card footer{font-size:9px!important;margin-top:6px}.reference-total,.reference-total b{font-size:11px}}
 @media(max-width:950px){html body .flood-nav{width:100%!important}html body .flood-executive-toolbar{height:auto!important}html body .flood-nav #floodExecutiveButton{margin-left:0!important}html body #floodExecutivePop{left:8px;max-width:calc(100vw - 16px)}html body #warning #estateFocusDashboard .reference-card{padding:14px}.reference-key{font-size:11px}.reference-donut{width:115px}.reference-donut:before{inset:13px}}
 </style>
 <style id="flood-useful-tools-style">
-.flood-useful-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;flex:none;color:#7A3E3E;font:400 11px Sarabun,sans-serif}
+.flood-useful-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0;flex:none;color:#D32F2F;font:400 11px Sarabun,sans-serif}
 .flood-useful-tools>span{font-size:10px;white-space:nowrap;margin-right:3px}
-html body #warning #estateFocusDashboard .flood-useful-tools button{border:0!important;border-radius:9px!important;background:#EEEEEE33!important;color:#7A3E3E!important;padding:7px 9px!important;font:400 11px/1.5 Sarabun,sans-serif!important;cursor:pointer;white-space:nowrap}
+html body #warning #estateFocusDashboard .flood-useful-tools button{border:0!important;border-radius:9px!important;background:#FFFFFF!important;color:#D32F2F!important;padding:7px 9px!important;font:400 11px/1.5 Sarabun,sans-serif!important;cursor:pointer;white-space:nowrap}
 html body #warning #estateFocusDashboard .flood-useful-tools button:hover,html body #warning #estateFocusDashboard .flood-useful-tools button[aria-pressed=true]{background:#E3F2FD!important;color:#0D47A1!important}
-html body #warning #estateFocusDashboard .flood-useful-tools button:nth-of-type(-n+2){background:#FFFFFF!important;color:#7A3E3E!important;box-shadow:inset 0 0 0 1px #EEEEEE}
+html body #warning #estateFocusDashboard .flood-useful-tools button:nth-of-type(-n+2){background:#FFFFFF!important;color:#D32F2F!important;box-shadow:inset 0 0 0 1px #FFFFFF}
 html body #warning #estateFocusDashboard .flood-useful-tools button:focus-visible{outline:2px solid #0D47A1!important;outline-offset:2px}
 html body #warning #estateFocusDashboard .ef-data-column>.flood-useful-tools{display:flex!important;order:-15}
 @media(min-width:951px){html body #warning #estateFocusDashboard .ef-data-column.fit-overview{grid-template-rows:auto auto minmax(0,1fr) auto!important;row-gap:10px!important}html body #warning #estateFocusDashboard .fit-overview>.flood-useful-tools{grid-column:1/-1;grid-row:2;order:unset;margin:0!important}html body #warning #estateFocusDashboard .ef-data-column.fit-overview>#floodReferenceBoard.fit-active{grid-row:3!important}html body #warning #estateFocusDashboard .fit-overview>#efProvinceScopeNote.fit-active{grid-row:4!important}}
@@ -814,24 +814,24 @@ html body #warning #estateFocusDashboard .ef-workspace{grid-template-rows:minmax
 html body #warning #estateFocusDashboard .fit-controls,html body #warning #estateFocusDashboard .ef-estate-panel,html body #warning #estateFocusDashboard #floodUsefulTools,html body #warning #estateFocusDashboard #floodStationMatches,html body #warning #estateFocusDashboard .flood-station-search{display:none!important}
 html body #warning #estateFocusDashboard .ef-data-column>*{flex-shrink:0!important;min-width:0}
 html body #warning #estateFocusDashboard #floodReferenceBoard{display:grid!important;order:0!important;height:max(620px,calc(100dvh - 116px));min-height:620px;margin:0!important;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:16px!important;overflow:hidden}
-html body #warning #estateFocusDashboard #efProvinceScopeNote{order:5!important;padding:0 4px!important;margin:0!important;background:transparent!important;color:#7A3E3E!important;font-size:10px!important;box-shadow:none!important}
+html body #warning #estateFocusDashboard #efProvinceScopeNote{order:5!important;padding:0 4px!important;margin:0!important;background:transparent!important;color:#D32F2F!important;font-size:10px!important;box-shadow:none!important}
 html body #warning #estateFocusDashboard #riverSidePanel{display:contents!important}
 html body #warning #estateFocusDashboard #riverSidePanel>p,html body #warning #estateFocusDashboard #riverSidePanel>.rp-area-picker{display:none!important}
-html body #warning #estateFocusDashboard #floodStationsSection{order:10!important;display:block!important;height:auto!important;overflow:visible!important;margin:0!important;padding:16px!important;border:0!important;background:#FFFFFF!important;border-radius:18px;box-shadow:0 4px 22px #4821210b}
+html body #warning #estateFocusDashboard #floodStationsSection{order:10!important;display:block!important;height:auto!important;overflow:visible!important;margin:0!important;padding:16px!important;border:0!important;background:#FFFFFF!important;border-radius:18px;box-shadow:0 4px 22px #D32F2F0b}
 html body #warning #estateFocusDashboard #floodDamsSection{order:20!important;display:flex;flex-direction:column;gap:16px;padding:0;margin:0}
-html body #warning #estateFocusDashboard #floodDamsSection>h2,html body #warning #estateFocusDashboard #floodStationsSection>h3{margin:0 0 14px!important;padding:0!important;font:500 16px/1.6 Sarabun,sans-serif!important;color:#482121!important;background:transparent!important;border:0!important}
+html body #warning #estateFocusDashboard #floodDamsSection>h2,html body #warning #estateFocusDashboard #floodStationsSection>h3{margin:0 0 14px!important;padding:0!important;font:500 16px/1.6 Sarabun,sans-serif!important;color:#D32F2F!important;background:transparent!important;border:0!important}
 html body #warning #estateFocusDashboard #floodDamsSection>.ef-panel{margin:0!important;padding:16px!important;overflow:visible!important}
 html body #warning #estateFocusDashboard #rpCards,html body #warning #estateFocusDashboard #efRelatedDams,html body #warning #estateFocusDashboard #efReservoirList,html body #warning #estateFocusDashboard #efCanalList{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;max-height:none!important;height:auto!important;overflow:visible!important;padding:0!important;margin:0!important}
 html body #warning #estateFocusDashboard #rpCards .rp-card{min-width:0;padding:12px!important}
 html body #warning #estateFocusDashboard .ef-scroll-caption{display:none!important}
 html body #warning #estateFocusDashboard .ef-warning{order:30!important;margin:0!important}
 html body #warning #estateFocusDashboard .ef-canal-panel{order:25!important}
-html body #warning #estateFocusDashboard .flood-support{display:block;background:#FFFFFF;border-radius:16px;box-shadow:0 4px 18px #48212108;padding:14px;margin:0;min-width:0;overflow:hidden}
-.flood-support>summary{font:500 14px Sarabun,sans-serif;color:#482121;cursor:pointer;padding:4px}.flood-support[open]>summary{margin-bottom:14px}
+html body #warning #estateFocusDashboard .flood-support{display:block;background:#FFFFFF;border-radius:16px;box-shadow:0 4px 18px #D32F2F08;padding:14px;margin:0;min-width:0;overflow:hidden}
+.flood-support>summary{font:500 14px Sarabun,sans-serif;color:#D32F2F;cursor:pointer;padding:4px}.flood-support[open]>summary{margin-bottom:14px}
 html body #warning #estateFocusDashboard .flood-support>*:not(summary){margin:0!important;min-width:0;max-width:100%}
 html body #warning #estateFocusDashboard .ef-map-column{position:relative!important;display:flex!important;flex-direction:column!important}
-html body #warning #estateFocusDashboard #efMapFullscreen{position:absolute!important;top:12px!important;left:12px!important;z-index:50!important;width:38px!important;height:38px!important;min-height:38px!important;min-width:38px!important;padding:8px!important;border:0!important;border-radius:10px!important;background:#FFFFFF!important;color:#482121!important;box-shadow:0 3px 14px #48212118!important;display:grid!important;place-items:center!important;font-size:0!important}
-#efMapFullscreen svg{width:22px!important;height:22px!important;display:block!important;stroke:#482121!important}
+html body #warning #estateFocusDashboard #efMapFullscreen{position:absolute!important;top:12px!important;left:12px!important;z-index:50!important;width:38px!important;height:38px!important;min-height:38px!important;min-width:38px!important;padding:8px!important;border:0!important;border-radius:10px!important;background:#FFFFFF!important;color:#D32F2F!important;box-shadow:0 3px 14px #D32F2F18!important;display:grid!important;place-items:center!important;font-size:0!important}
+#efMapFullscreen svg{width:22px!important;height:22px!important;display:block!important;stroke:#D32F2F!important}
 html body #warning #estateFocusDashboard #efMapExitFullscreen{display:none!important}
 html body #warning #estateFocusDashboard .ef-map-foot{display:block!important;padding:8px!important;font-size:9px!important;line-height:1.5!important;background:#FFFFFF!important}
 @media(min-width:951px){html body #warning #estateFocusDashboard .ef-workspace{grid-template-columns:minmax(0,1.8fr) minmax(330px,1fr)!important;gap:20px!important;height:100%!important}html body #warning #estateFocusDashboard .ef-map-column{height:100%!important;min-height:0!important;grid-column:2!important;grid-row:1!important}html body #warning #estateFocusDashboard .ef-data-column{height:100%!important;grid-column:1!important;grid-row:1!important}}
@@ -855,7 +855,7 @@ const nav=document.querySelector('.flood-nav');nav?.addEventListener('click',eve
 </script>
 <style>html body #warning #estateFocusDashboard .ef-map-column.ef-map-expanded{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:5000!important}html body #warning #estateFocusDashboard .ef-map-column:fullscreen{width:100vw!important;height:100dvh!important}</style><style id="flood-visible-rows">
 html body #warning #estateFocusDashboard #rpCards,html body #warning #estateFocusDashboard #efRelatedDams,html body #warning #estateFocusDashboard #efReservoirList,html body #warning #estateFocusDashboard #efCanalList{max-height:var(--flood-row-height,none)!important;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:#47A992 transparent;overscroll-behavior:contain;padding:2px 6px 2px 2px!important;align-content:start}
-.flood-row-caption{font:400 11px/1.6 Sarabun,sans-serif;color:#7A3E3E;margin:0 0 10px}
+.flood-row-caption{font:400 11px/1.6 Sarabun,sans-serif;color:#D32F2F;margin:0 0 10px}
 html body #warning #estateFocusDashboard .ef-warning{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;align-items:start!important}
 html body #warning #estateFocusDashboard .ef-warning>details{min-width:0;width:100%;margin:0!important}
 html body #warning #estateFocusDashboard .ef-warning>details>div{overflow:auto!important;max-height:480px!important}
@@ -890,8 +890,8 @@ html body #warning #estateFocusDashboard #floodReferenceBoard{grid-template-colu
 @media(max-width:950px){html body #warning #estateFocusDashboard #floodReferenceBoard{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:repeat(3,300px)!important}}
 </style><style id="flood-water-diagram-visible">
 html body #warning #estateFocusDashboard #floodWaterDiagram{display:block!important;order:1!important;flex:none!important;min-width:0;margin:0!important;padding:18px!important;background:#FFFFFF!important;border:0!important;border-radius:14px}
-html body #warning #estateFocusDashboard #floodWaterDiagram h3{font:500 15px Sarabun,sans-serif!important;color:#482121!important;margin:0 0 12px}
-html body #warning #estateFocusDashboard #floodWaterDiagram select{display:block;width:100%;padding:10px 12px;border:1px solid #EEEEEE;border-radius:8px;background:#FFFFFF;color:#482121;font:400 13px Sarabun,sans-serif}
+html body #warning #estateFocusDashboard #floodWaterDiagram h3{font:500 15px Sarabun,sans-serif!important;color:#D32F2F!important;margin:0 0 12px}
+html body #warning #estateFocusDashboard #floodWaterDiagram select{display:block;width:100%;padding:10px 12px;border:1px solid #FFFFFF;border-radius:8px;background:#FFFFFF;color:#D32F2F;font:400 13px Sarabun,sans-serif}
 html body #warning #estateFocusDashboard #rpMainGraph{display:block!important;max-width:100%;overflow-x:auto;overscroll-behavior:contain}
 </style><style id="flood-water-diagram-readable">
 html body #warning #estateFocusDashboard #rpMainGraph{max-height:480px!important;overflow:auto!important;scrollbar-width:thin}
@@ -904,10 +904,10 @@ html body #warning #estateFocusDashboard .ef-map-column{min-width:0!important;wi
 }
 </style><style id="flood-station-history-visible">
 html body #warning #estateFocusDashboard #floodStationHistory{display:block!important;order:11!important;background:#FFFFFF;border-radius:14px;padding:18px;min-width:0;flex:none}
-#floodStationHistory h3{font:500 15px Sarabun,sans-serif;margin:0 0 12px;color:#482121}
-.station-history-controls{display:flex;gap:12px;align-items:end}.station-history-controls label{display:block;font-size:12px;min-width:0}.station-history-controls label:first-child{flex:1}.station-history-controls select{display:block;width:100%;padding:9px;border:1px solid #EEEEEE;border-radius:8px;background:#FFFFFF;color:#482121;font:400 12px Sarabun,sans-serif;margin:5px 0 12px}
-#floodStationHistory .wh-chart{width:100%;overflow:auto}#floodStationHistory .wh-chart svg{display:block;width:100%;min-width:500px;height:auto;max-height:none}#floodStationHistory svg text{font:11px Sarabun,sans-serif;fill:#7A3E3E}
-#floodStationHistory .station-history-source{font:400 11px/1.65 Sarabun,sans-serif;color:#7A3E3E}#floodStationHistory .station-history-name{font-size:12px;color:#482121}
+#floodStationHistory h3{font:500 15px Sarabun,sans-serif;margin:0 0 12px;color:#D32F2F}
+.station-history-controls{display:flex;gap:12px;align-items:end}.station-history-controls label{display:block;font-size:12px;min-width:0}.station-history-controls label:first-child{flex:1}.station-history-controls select{display:block;width:100%;padding:9px;border:1px solid #FFFFFF;border-radius:8px;background:#FFFFFF;color:#D32F2F;font:400 12px Sarabun,sans-serif;margin:5px 0 12px}
+#floodStationHistory .wh-chart{width:100%;overflow:auto}#floodStationHistory .wh-chart svg{display:block;width:100%;min-width:500px;height:auto;max-height:none}#floodStationHistory svg text{font:11px Sarabun,sans-serif;fill:#D32F2F}
+#floodStationHistory .station-history-source{font:400 11px/1.65 Sarabun,sans-serif;color:#D32F2F}#floodStationHistory .station-history-name{font-size:12px;color:#D32F2F}
 </style><style id="flood-readable-workspace-20261022">
 html body #warning #estateFocusDashboard#estateFocusDashboard{color:#0D47A1!important;font-size:15px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard *{font-family:Sarabun,sans-serif!important}
@@ -916,8 +916,8 @@ html body #warning #estateFocusDashboard#estateFocusDashboard .ef-data-column{ga
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-page-intro{order:-50!important;padding:4px 2px 0!important;flex:none}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-page-intro h1{font-size:24px;line-height:1.4;font-weight:500;color:#0D47A1!important;margin:0 0 5px}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-page-intro p{font-size:13px;color:#0D47A1!important;margin:0;line-height:1.7}
-html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav{display:flex!important;position:sticky;top:0;z-index:20;gap:5px;padding:8px 0;background:#FFFFFF;order:-40!important;flex:none;overflow-x:auto;border-bottom:1px solid #EEEEEE;scrollbar-width:thin}
-html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav button{font:400 13px/1.5 Sarabun,sans-serif;white-space:nowrap;background:#F3F3F3;color:#0D47A1!important;border:0;border-radius:8px;min-height:40px;padding:8px 12px;cursor:pointer}
+html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav{display:flex!important;position:sticky;top:0;z-index:20;gap:5px;padding:8px 0;background:#FFFFFF;order:-40!important;flex:none;overflow-x:auto;border-bottom:1px solid #FFFFFF;scrollbar-width:thin}
+html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav button{font:400 13px/1.5 Sarabun,sans-serif;white-space:nowrap;background:#FFFFFF;color:#0D47A1!important;border:0;border-radius:8px;min-height:40px;padding:8px 12px;cursor:pointer}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav button[aria-current=true]{background:#0D47A1;color:white!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav button:focus-visible,html body #warning #estateFocusDashboard#estateFocusDashboard :is(button,select,a):focus-visible{outline:3px solid #2196F3!important;outline-offset:3px}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-overview{display:block!important;order:-30!important;padding:0!important;margin:0!important;border:0!important;background:#FFFFFF!important;flex:none}
@@ -931,7 +931,7 @@ html body #warning #estateFocusDashboard#estateFocusDashboard .flood-kpi>span{fo
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-kpi strong{font-size:28px!important;line-height:1.3!important;font-weight:500!important;margin:9px 0!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-kpi small{font-size:11px!important;color:#0D47A1!important;line-height:1.6!important;display:block!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard #efProvinceScopeNote{order:-20!important;font-size:12px!important;line-height:1.7!important;color:#0D47A1!important;padding:0!important}
-html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationsSection,html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationHistory,html body #warning #estateFocusDashboard#estateFocusDashboard #floodWaterDiagram,html body #warning #estateFocusDashboard#estateFocusDashboard #floodDamsSection>.ef-panel,html body #warning #estateFocusDashboard#estateFocusDashboard .ef-canal-panel{border:1px solid #EEEEEE!important;box-shadow:none!important;border-radius:14px!important;padding:18px!important;background:#FFFFFF!important;margin:0!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationsSection,html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationHistory,html body #warning #estateFocusDashboard#estateFocusDashboard #floodWaterDiagram,html body #warning #estateFocusDashboard#estateFocusDashboard #floodDamsSection>.ef-panel,html body #warning #estateFocusDashboard#estateFocusDashboard .ef-canal-panel{border:1px solid #FFFFFF!important;box-shadow:none!important;border-radius:14px!important;padding:18px!important;background:#FFFFFF!important;margin:0!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationsSection>h3,html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationHistory h3,html body #warning #estateFocusDashboard#estateFocusDashboard #floodWaterDiagram h3,html body #warning #estateFocusDashboard#estateFocusDashboard #floodDamsSection>h2,html body #warning #estateFocusDashboard#estateFocusDashboard .ef-panel>h2{font-size:18px!important;font-weight:500!important;line-height:1.6!important;color:#0D47A1!important;margin:0 0 12px!important;background:transparent!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationsSection{order:10!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationHistory{order:11!important}
@@ -944,12 +944,12 @@ html body #warning #estateFocusDashboard#estateFocusDashboard .rp-station-conten
 html body #warning #estateFocusDashboard#estateFocusDashboard .rp-station-content small,html body #warning #estateFocusDashboard#estateFocusDashboard .rp-station-content p,html body #warning #estateFocusDashboard#estateFocusDashboard .ef-dam-card small,html body #warning #estateFocusDashboard#estateFocusDashboard .station-history-source,html body #warning #estateFocusDashboard#estateFocusDashboard .station-history-name{font-size:12px!important;line-height:1.7!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard .station-history-controls select,html body #warning #estateFocusDashboard#estateFocusDashboard #rpMainRiver{font-size:14px!important;min-height:44px!important;background:#FFFFFF!important;border:1px solid #E3F2FD!important;border-radius:9px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard #floodStationHistory .wh-chart{border-radius:10px;background:#FFFFFF;padding:10px 0;margin-top:10px}
-html body #warning #estateFocusDashboard#estateFocusDashboard .ef-map-column{border:1px solid #EEEEEE!important;border-radius:16px!important;box-shadow:none!important;overflow:hidden}
+html body #warning #estateFocusDashboard#estateFocusDashboard .ef-map-column{border:1px solid #FFFFFF!important;border-radius:16px!important;box-shadow:none!important;overflow:hidden}
 html body #warning #estateFocusDashboard#estateFocusDashboard .ef-map-foot{font-size:11px!important;line-height:1.7!important;padding:10px 12px!important;color:#0D47A1!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard .ef-warning{gap:12px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard .ef-warning summary{font-size:15px!important;line-height:1.6!important;cursor:pointer}
 html body #warning #estateFocusDashboard#estateFocusDashboard .flood-row-caption{font-size:12px!important;color:#0D47A1!important;line-height:1.6!important;margin:0 0 10px!important}
-html body #warning #estateFocusDashboard#estateFocusDashboard .flood-support{border:1px solid #EEEEEE!important;box-shadow:none!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard .flood-support{border:1px solid #FFFFFF!important;box-shadow:none!important}
 @media(min-width:951px){html body #warning #estateFocusDashboard#estateFocusDashboard .ef-workspace{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}}
 @media(max-width:950px){html body #warning #estateFocusDashboard .ef-workspace{display:flex!important;flex-direction:column!important;height:auto!important}html body #warning #estateFocusDashboard#estateFocusDashboard .ef-map-column{order:-1!important;height:48dvh!important;min-height:320px!important;max-height:460px!important}html body #warning #estateFocusDashboard#estateFocusDashboard .ef-data-column{display:flex!important;height:auto!important;max-height:none!important;overflow:visible!important}html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav{top:0}html body #warning #estateFocusDashboard#estateFocusDashboard .flood-page-intro h1{font-size:22px}}
 @media(max-width:550px){html body #warning #estateFocusDashboard#estateFocusDashboard .ef-workspace{padding:10px!important;gap:12px!important}html body #warning #estateFocusDashboard#estateFocusDashboard .flood-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body #warning #estateFocusDashboard#estateFocusDashboard .flood-kpi{min-height:145px;padding:12px!important}html body #warning #estateFocusDashboard#estateFocusDashboard .flood-section-nav button{font-size:12px;padding:8px 10px}html body #warning #estateFocusDashboard#estateFocusDashboard .station-history-controls{flex-wrap:wrap}html body #warning #estateFocusDashboard#estateFocusDashboard .station-history-controls label:first-child{flex:1 1 100%}html body #warning #estateFocusDashboard#estateFocusDashboard .flood-page-intro h1{font-size:20px}}
