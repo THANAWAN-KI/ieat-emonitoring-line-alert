@@ -1,0 +1,42 @@
+name: Refresh official web alert feed
+on:
+  schedule:
+    - cron: '8,23,38,53 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/build_web_alerts.py
+      - .github/workflows/web-alerts.yml
+permissions:
+  contents: write
+concurrency:
+  group: web-alert-feed
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read official sources without sending messages
+        env:
+          DDPM_PUBLIC_CAP_FEED: ${{ vars.DDPM_PUBLIC_CAP_FEED }}
+        run: python scripts/build_web_alerts.py
+      - name: Publish web feed only
+        run: |
+          cp docs/data/web-alerts.json /tmp/web-alerts.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/web-alerts.json docs/data/web-alerts.json
+            git add docs/data/web-alerts.json
+            git diff --cached --quiet && exit 0
+            git commit -m 'Refresh official web alerts'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
