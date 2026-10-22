@@ -58,5 +58,8 @@ if(chemicalPanel&&estateSource){
  choices.onchange=()=>{estateSource.value=choices.value;estateSource.dispatchEvent(new Event('change',{bubbles:true}));};estateSource.addEventListener('change',()=>{choices.value=estateSource.value;});
 }
 
+
+const matrix=$('matrixBody');if(matrix){let matrixPage=0;const scroller=matrix.closest('table').parentElement,nav=make('div',null,'dashboard-list-pager fire-matrix-pager'),prev=make('button','ก่อนหน้า'),label=make('span'),next=make('button','ถัดไป');prev.type=next.type='button';nav.append(prev,label,next);scroller.after(nav);function updateMatrix(){const rows=[...matrix.children],pages=Math.max(1,Math.ceil(rows.length/3));matrixPage=Math.min(matrixPage,pages-1);rows.forEach((r,i)=>r.classList.toggle('fire-compact-hidden',i<matrixPage*3||i>=(matrixPage+1)*3));prev.disabled=matrixPage===0;next.disabled=matrixPage>=pages-1;label.textContent=(matrixPage+1)+' / '+pages;nav.hidden=pages<2;}prev.onclick=()=>{matrixPage--;updateMatrix()};next.onclick=()=>{matrixPage++;updateMatrix()};new MutationObserver(()=>{matrixPage=0;updateMatrix()}).observe(matrix,{childList:true});updateMatrix();}
+
 function resizeMap(){window.ieatSupportMap?.invalidateSize({pan:false});}requestAnimationFrame(resizeMap);window.addEventListener('ieat-support-map-ready',resizeMap);window.addEventListener('resize',resizeMap);
 })();
