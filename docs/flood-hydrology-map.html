@@ -158,7 +158,7 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 <label><input data-layer="canal" type="checkbox" checked>คลอง กทม.<span class="layer-swatch" style="background:#D32F2F" aria-hidden="true"></span></label><label><input data-layer="water" type="checkbox" checked>ระดับน้ำ<span class="layer-swatch" style="background:#D32F2F" aria-hidden="true"></span></label><label class="history-only-label"><input id="historyOnly" type="checkbox">แสดงเฉพาะสถานีที่มีข้อมูลย้อนหลัง 2023–2026<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label><label><input data-layer="flow" type="checkbox" checked>ลูกศรทิศทางน้ำ<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label>
 <label><input data-layer="dam" type="checkbox" checked>เขื่อน<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="boundary" type="checkbox" checked>ขอบเขตนิคมฯ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="satellite" type="checkbox" checked>น้ำท่วมจากดาวเทียม<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label><label><input data-layer="radar" type="checkbox" checked>ฝนจากเรดาร์ (กรมอุตุฯ)<span class="layer-swatch" style="background:#47A992" aria-hidden="true"></span></label>
 <p style="font-size:11px;color:#0D47A1;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#FFFFFF;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#D32F2F"></i>ล้นตลิ่ง / ระดับสูงสุด</span><span><i class="dot" style="background:#F57C00"></i>ระดับสูง / ใกล้ตลิ่ง</span><span><i class="dot" style="background:#FBC02D"></i>เฝ้าระวังตามเกณฑ์ต้นทาง</span><span><i class="dot" style="background:#2E7D32"></i>ปกติ / ต่ำกว่าเกณฑ์</span><span><i class="dot" style="background:#607D8B"></i>ไม่มีค่าล่าสุด</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#90CAF9"></i><i style="background:#90CAF9"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#90CAF9"></i><i style="background:#E3F2FD"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
-<div style="position:absolute;bottom:105px;left:12px;z-index:999;background:#FFFFFFf0;padding:4px 8px;border-radius:6px;font-size:11px;pointer-events:none">→ ทิศปลายน้ำตามแผนที่ OSM · ไม่ใช่กระแสสด</div><div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
+<div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
 
 <script src="flood-rid-source.js?v=20261006-rid-17"></script>
 <script>
@@ -328,23 +328,45 @@ function scoped(){
 function sensorSvg(kind){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(kind==='water'?'<path d="M6 3h7v15H6Z M10 6h3M9 10h4M10 14h3M3 20q3-3 6 0t6 0t6 0"/>':'<path d="M3 5h18M5 5v10M19 5v10M10 5v9M14 5v9M3 18q3-3 6 0t6 0t6 0M3 22q3-3 6 0t6 0t6 0"/>')+'</svg>';}
 
 
+function groupOverviewPoints(list){
+ const map=vector||raster,zoom=map?.getZoom();
+ if(!cleanDashboard||!map||zoom>7)return {points:list,clusters:[]};
+ const buckets=new Map(),points=[];
+ for(const f of list){const r=f.properties,p=vector?vector.project(f.geometry.coordinates):raster.project([r.lat,r.lng],zoom);
+ const key=r.kind+':'+r.color+':'+Math.floor(p.x/60)+':'+Math.floor(p.y/60);
+ if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(f);}
+ const clusters=[];
+ for(const rows of buckets.values()){if(rows.length<3)points.push(...rows);else clusters.push(rows);}
+ return {points,clusters};
+}
+function drawOverviewClusters(clusters){
+ const labels={water:'ระดับน้ำ',canal:'คลอง',estate:'นิคมฯ',rain:'ฝน',rainfall:'ฝน',dam:'เขื่อน',camera:'กล้อง'};
+ for(const rows of clusters){
+ const r=rows[0].properties,lat=rows.reduce((s,f)=>s+f.geometry.coordinates[1],0)/rows.length,lng=rows.reduce((s,f)=>s+f.geometry.coordinates[0],0)/rows.length;
+ const html='<span style="--cluster-color:'+esc(r.kind==='estate'?'#0D47A1':r.color)+'"><b>'+rows.length+'</b><small>'+esc(labels[r.kind]||'สถานี')+'</small></span>';
+ const title=rows.length+' '+(labels[r.kind]||'สถานี')+' · คลิกเพื่อซูม';
+ const zoom=()=>{const coords=rows.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:55,maxZoom:12,duration:400})}else raster.fitBounds(coords.map(p=>[p[1],p[0]]),{padding:[40,40],maxZoom:12});};
+ if(vector){const el=document.createElement('button');el.type='button';el.className='flood-point-cluster';el.setAttribute('aria-label',title);el.innerHTML=html;el.addEventListener('click',zoom);waterMarkers.push(new maplibregl.Marker({element:el}).setLngLat([lng,lat]).addTo(vector));}
+ else L.marker([lat,lng],{icon:L.divIcon({className:'flood-point-cluster',html,iconSize:[38,38],iconAnchor:[19,19]}),title,riseOnHover:true}).on('click',zoom).addTo(groups.points);
+ }
+}
 function render(){
  if(!ready)return;
- syncRemoteOverlays();syncBoundaries();const list=scoped();
+ syncRemoteOverlays();syncBoundaries();const list=scoped(),overviewPoints=groupOverviewPoints(list),displayPoints=overviewPoints.points;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
-  list.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='sensor-marker'+(r.kind==='canal'?' canal-sensor':'');el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=sensorSvg(r.kind);waterMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'520px'}).setHTML(content(r,r.kind))).addTo(vector))});
-  cameraMarkers.forEach(m=>m.remove());cameraMarkers=[];list.filter(f=>f.properties.kind==='camera').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=cameraSvg;const popup=createMapPopup({maxWidth:'520px'}).setHTML(content(r,'camera'));popup.on('open',()=>loadCameraImage(r));cameraMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(popup).addTo(vector))});
-  damMarkers.forEach(m=>m.remove());damMarkers=[];list.filter(f=>f.properties.kind==='dam').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=damSvg+'<span class="estate-name dam-name">เขื่อน'+esc(r.name)+'</span>';el.style.position='absolute';damMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(r,'dam'))).addTo(vector))});
-  estateMarkers.forEach(m=>m.remove());estateMarkers=[];list.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(f.properties,'estate'))).addTo(vector))});
+  displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='sensor-marker'+(r.kind==='canal'?' canal-sensor':'');el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=sensorSvg(r.kind);waterMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'520px'}).setHTML(content(r,r.kind))).addTo(vector))});
+  cameraMarkers.forEach(m=>m.remove());cameraMarkers=[];displayPoints.filter(f=>f.properties.kind==='camera').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=cameraSvg;const popup=createMapPopup({maxWidth:'520px'}).setHTML(content(r,'camera'));popup.on('open',()=>loadCameraImage(r));cameraMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(popup).addTo(vector))});
+  damMarkers.forEach(m=>m.remove());damMarkers=[];displayPoints.filter(f=>f.properties.kind==='dam').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=damSvg+'<span class="estate-name dam-name">เขื่อน'+esc(r.name)+'</span>';el.style.position='absolute';damMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(r,'dam'))).addTo(vector))});
+  estateMarkers.forEach(m=>m.remove());estateMarkers=[];displayPoints.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(f.properties,'estate'))).addTo(vector))});
   if(cleanDashboard){if(vector.getLayer('water-stations'))vector.setPaintProperty('water-stations','circle-radius',3.5);for(const id of ['water-station-symbol','labels','overflow-alert'])if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility','none');}
-  vector.getSource('sensors')?.setData({type:'FeatureCollection',features:list});
+  vector.getSource('sensors')?.setData({type:'FeatureCollection',features:displayPoints});
   vector.setLayoutProperty('discharge-ring','visibility',flags.rings?'visible':'none');
   ['mapped-waterway-casing','mapped-waterways','mapped-water-motion','flow-arrows'].forEach(id=>{if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility',flags.flow?'visible':'none')});
   if(vector.getLayer('gistda'))vector.setLayoutProperty('gistda','visibility',flags.gistda?'visible':'none');if(vector.getLayer('gistda-points'))vector.setLayoutProperty('gistda-points','visibility',flags.gistda?'visible':'none');
  }else if(raster){
   Object.values(groups).forEach(g=>g.clearLayers());
-  list.forEach(f=>{const r=f.properties,k=r.kind;
+  displayPoints.forEach(f=>{const r=f.properties,k=r.kind;
    if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#D32F2F':'#2185D5',weight:2,fillColor:r.diff>=0?'#D32F2F':'#90CAF9',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
    if(k==='water'&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#D32F2F',weight:1.5,fillColor:'#D32F2F',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
    const marker=cleanDashboard&&k==='estate'?L.marker([r.lat,r.lng],{title:r.name,alt:r.name,keyboard:true,icon:L.divIcon({className:'clean-estate-point',html:estateSvg,iconSize:[26,34],iconAnchor:[13,34]})}):cleanDashboard&&k!=='camera'?L.circleMarker([r.lat,r.lng],{radius:k==='estate'?4:3.5,color:'#FFFFFF',weight:1,fillColor:k==='estate'?'#D32F2F':r.color,fillOpacity:.95}):['water','canal'].includes(k)?L.marker([r.lat,r.lng],{zIndexOffset:500,icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="sensor-marker'+(k==='canal'?' canal-sensor':'')+'" style="background:'+r.color+'">'+sensorSvg(k)+'</span>'})}):k==='camera'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="marker-icon" style="background:'+r.color+'">'+cameraSvg+'</span>'})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[30,39],iconAnchor:[15,39],tooltipAnchor:[0,4],html:estateSvg})}):k==='dam'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'',iconSize:[32,32],iconAnchor:[16,16],html:'<span class="marker-icon" style="background:'+r.color+'">'+damSvg+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:k==='dam'?8:k==='estate'?5:5,color:'#FFFFFF',weight:1.8,fillColor:r.color,fillOpacity:.95,className:r.color==='#D32F2F'?'water-critical':''});
@@ -352,7 +374,7 @@ function render(){
   });
   if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#2185D5',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
  }
- drawFlow();queueWaterLabels();
+ drawOverviewClusters(overviewPoints.clusters);drawFlow();queueWaterLabels();
  const count=list.filter(f=>f.properties.kind==='water').length;const fresh=list.filter(f=>f.properties.kind==='water'&&!f.properties.stale).length;
  $('status').textContent='ระดับน้ำ '+count+' จุด · ข้อมูลไม่เกิน 6 ชม. '+fresh+' จุด · คลิกจุดเพื่อดูค่าตรวจวัดและเวลา'+(raster?' · แผนที่แบบ 2 มิติ':'');if(autoFit&&features.length&&fit()){autoFit=false}
 }
@@ -408,6 +430,7 @@ function rasterStart(){
  $('map').style.display='none';$('raster').style.display='block';
  if(!window.L){$('status').textContent='โหลดแผนที่ไม่สำเร็จ กรุณาเปิดใหม่';return}
  raster=L.map('raster',{preferCanvas:true,zoomControl:false}).setView([14,101],6);
+ raster.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
  raster.on('popupopen',event=>mountPopupHistory(event.popup.getElement()));
  riverSvgRenderer=L.svg({padding:.5});
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
@@ -422,7 +445,7 @@ function vectorStart(){
  vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},10000);
  vector.on('error',()=>{if(!ready){clearTimeout(timeout);rasterStart()}});
- vector.on('moveend',queueBoundaries);
+ vector.on('moveend',queueBoundaries);vector.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
@@ -673,4 +696,15 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(!lastWat
 
 
 
-<style>#flood-layer-guide{position:absolute;left:12px;bottom:28px;z-index:600;background:#fffffff2;color:#303841;padding:10px 13px;border:0;border-radius:10px;box-shadow:0 3px 14px #30384118;font:12px/1.65 Kanit,sans-serif;max-width:245px;pointer-events:none}.popup,.leaflet-popup-content-wrapper,.maplibregl-popup-content{border:0!important}</style><aside id="flood-layer-guide" aria-label="อ่านข้อมูลแผนที่"><b>อ่านข้อมูลบนแผนที่</b><br>จุดสถานี: ระดับน้ำ / ปริมาณน้ำ ณ จุดวัด<br>พื้นที่น้ำท่วม: ขอบเขตจากดาวเทียม<br>ภาพเรดาร์: ฝนที่ตรวจพบ<br>ตรวจวันที่และเวลาของข้อมูลใน popup</aside>
+<style>#flood-layer-guide{position:absolute;left:12px;bottom:28px;z-index:600;background:#fffffff2;color:#303841;padding:10px 13px;border:0;border-radius:10px;box-shadow:0 3px 14px #30384118;font:12px/1.65 Kanit,sans-serif;max-width:245px;pointer-events:none}.popup,.leaflet-popup-content-wrapper,.maplibregl-popup-content{border:0!important}</style><details id="flood-layer-guide" aria-label="อ่านข้อมูลแผนที่"><summary>คำอธิบายแผนที่</summary><div><p>จุดสี: สถานะ ณ จุดตรวจวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p><i style="background:#D32F2F"></i>แดง · <i style="background:#F57C00"></i>ส้ม · <i style="background:#FBC02D"></i>เหลือง · <i style="background:#2E7D32"></i>เขียว<br>สถานะขึ้นกับเกณฑ์ของข้อมูลแต่ละประเภท · สีเทา: ไม่มีค่าล่าสุด</p><p>พื้นที่น้ำท่วม: ขอบเขตจากดาวเทียม<br>ภาพเรดาร์: ฝนที่ตรวจพบ<br>ลูกศรสายน้ำ: ทิศตามแผนที่ OSM ไม่ใช่กระแสสด</p><p>คลิกกลุ่มจุดเพื่อซูม · คลิกสถานีดูรายละเอียดและกราฟย้อนหลังที่มีข้อมูล · ตรวจวันที่ในป๊อปอัป</p></div></details>
+<style id="flood-map-polish">
+#flood-layer-guide{bottom:72px;left:10px;padding:0;pointer-events:auto;max-width:min(290px,calc(100vw - 70px));background:#fff;max-height:55vh;overflow:auto}
+#flood-layer-guide summary{cursor:pointer;padding:9px 12px;font-weight:500;color:#0D47A1}
+#flood-layer-guide>div{padding:0 12px 10px;color:#222}
+#flood-layer-guide p{margin:6px 0}#flood-layer-guide i{display:inline-block;width:8px;height:8px;border-radius:50%}
+body.dashboard-clean .status{bottom:28px!important;max-height:36px!important;padding:5px 8px!important;font-size:10px!important}
+.flood-point-cluster{border:0;background:transparent;padding:0;font-family:Kanit,sans-serif;cursor:pointer}
+.flood-point-cluster>span{width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-direction:column;border-radius:50%;background:#fff;box-shadow:0 2px 9px #30384128;outline:2px solid var(--cluster-color);color:#222}
+.flood-point-cluster b{font-size:13px;line-height:16px}.flood-point-cluster small{font-size:9px;line-height:11px}
+.popup,.popup :is(p,small,.value,.water-gap,.water-level){color:#222}.popup h3,.popup a{color:#0D47A1}
+</style>
