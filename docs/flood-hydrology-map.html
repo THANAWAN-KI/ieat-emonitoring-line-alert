@@ -333,7 +333,7 @@ function groupOverviewPoints(list){
  if(!cleanDashboard||!map||zoom>7)return {points:list,clusters:[]};
  const buckets=new Map(),points=[];
  for(const f of list){const r=f.properties,p=vector?vector.project(f.geometry.coordinates):raster.project([r.lat,r.lng],zoom);
- const key=r.kind+':'+r.color+':'+Math.floor(p.x/60)+':'+Math.floor(p.y/60);
+ const key=r.kind+':'+Math.floor(p.x/110)+':'+Math.floor(p.y/110);
  if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(f);}
  const clusters=[];
  for(const rows of buckets.values()){if(rows.length<3)points.push(...rows);else clusters.push(rows);}
@@ -343,7 +343,7 @@ function drawOverviewClusters(clusters){
  const labels={water:'ระดับน้ำ',canal:'คลอง',estate:'นิคมฯ',rain:'ฝน',rainfall:'ฝน',dam:'เขื่อน',camera:'กล้อง'};
  for(const rows of clusters){
  const r=rows[0].properties,lat=rows.reduce((s,f)=>s+f.geometry.coordinates[1],0)/rows.length,lng=rows.reduce((s,f)=>s+f.geometry.coordinates[0],0)/rows.length;
- const html='<span style="--cluster-color:'+esc(r.kind==='estate'?'#0D47A1':r.color)+'"><b>'+rows.length+'</b><small>'+esc(labels[r.kind]||'สถานี')+'</small></span>';
+ const html='<span style="--cluster-color:'+'#0D47A1'+'"><b>'+rows.length+'</b><small>'+esc(labels[r.kind]||'สถานี')+'</small></span>';
  const title=rows.length+' '+(labels[r.kind]||'สถานี')+' · คลิกเพื่อซูม';
  const zoom=()=>{const coords=rows.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:55,maxZoom:12,duration:400})}else raster.fitBounds(coords.map(p=>[p[1],p[0]]),{padding:[40,40],maxZoom:12});};
  if(vector){const el=document.createElement('button');el.type='button';el.className='flood-point-cluster';el.setAttribute('aria-label',title);el.innerHTML=html;el.addEventListener('click',zoom);waterMarkers.push(new maplibregl.Marker({element:el}).setLngLat([lng,lat]).addTo(vector));}
@@ -696,7 +696,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&(!lastWat
 
 
 
-<style>#flood-layer-guide{position:absolute;left:12px;bottom:28px;z-index:600;background:#fffffff2;color:#303841;padding:10px 13px;border:0;border-radius:10px;box-shadow:0 3px 14px #30384118;font:12px/1.65 Kanit,sans-serif;max-width:245px;pointer-events:none}.popup,.leaflet-popup-content-wrapper,.maplibregl-popup-content{border:0!important}</style><details id="flood-layer-guide" aria-label="อ่านข้อมูลแผนที่"><summary>คำอธิบายแผนที่</summary><div><p>จุดสี: สถานะ ณ จุดตรวจวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p><i style="background:#D32F2F"></i>แดง · <i style="background:#F57C00"></i>ส้ม · <i style="background:#FBC02D"></i>เหลือง · <i style="background:#2E7D32"></i>เขียว<br>สถานะขึ้นกับเกณฑ์ของข้อมูลแต่ละประเภท · สีเทา: ไม่มีค่าล่าสุด</p><p>พื้นที่น้ำท่วม: ขอบเขตจากดาวเทียม<br>ภาพเรดาร์: ฝนที่ตรวจพบ<br>ลูกศรสายน้ำ: ทิศตามแผนที่ OSM ไม่ใช่กระแสสด</p><p>คลิกกลุ่มจุดเพื่อซูม · คลิกสถานีดูรายละเอียดและกราฟย้อนหลังที่มีข้อมูล · ตรวจวันที่ในป๊อปอัป</p></div></details>
+<style>#flood-layer-guide{position:absolute;left:12px;bottom:28px;z-index:600;background:#fffffff2;color:#303841;padding:10px 13px;border:0;border-radius:10px;box-shadow:0 3px 14px #30384118;font:12px/1.65 Kanit,sans-serif;max-width:245px;pointer-events:none}.popup,.leaflet-popup-content-wrapper,.maplibregl-popup-content{border:0!important}</style><details id="flood-layer-guide" aria-label="อ่านข้อมูลแผนที่"><summary>คำอธิบายแผนที่</summary><div><p>วงกลมตัวเลข: จำนวนจุดรวม ไม่ใช่ระดับความเสี่ยง · คลิกเพื่อแยกรายสถานี</p><p>จุดสี: สถานะ ณ จุดตรวจวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p><i style="background:#D32F2F"></i>แดง · <i style="background:#F57C00"></i>ส้ม · <i style="background:#FBC02D"></i>เหลือง · <i style="background:#2E7D32"></i>เขียว<br>สถานะขึ้นกับเกณฑ์ของข้อมูลแต่ละประเภท · สีเทา: ไม่มีค่าล่าสุด</p><p>พื้นที่น้ำท่วม: ขอบเขตจากดาวเทียม<br>ภาพเรดาร์: ฝนที่ตรวจพบ<br>ลูกศรสายน้ำ: ทิศตามแผนที่ OSM ไม่ใช่กระแสสด</p><p>คลิกกลุ่มจุดเพื่อซูม · คลิกสถานีดูรายละเอียดและกราฟย้อนหลังที่มีข้อมูล · ตรวจวันที่ในป๊อปอัป</p></div></details>
 <style id="flood-map-polish">
 #flood-layer-guide{bottom:72px;left:10px;padding:0;pointer-events:auto;max-width:min(290px,calc(100vw - 70px));background:#fff;max-height:55vh;overflow:auto}
 #flood-layer-guide summary{cursor:pointer;padding:9px 12px;font-weight:500;color:#0D47A1}
