@@ -3,13 +3,82 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-23T04:52:21.654007+00:00",
+    "fetchedAt": "2026-10-23T11:41:36.168646+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1792668695000,
-    "latestEvent": 1792723518000
+    "oldestEvent": 1792699513000,
+    "latestEvent": 1792748364000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17284",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.94,
+          19.761,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.9,
+        "place": "ต.เมืองนะ อ.เชียงดาว จ.เชียงใหม่",
+        "time": 1792748364000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17284",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17283",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.579,
+          17.936,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.4,
+        "place": "ประเทศเมียนมา",
+        "time": 1792733465000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17283",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17282",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.565,
+          21.544,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.5,
+        "place": "ประเทศเมียนมา",
+        "time": 1792730963000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17282",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17281",
@@ -164,75 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1792699513000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17275",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17274",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.235,
-          21.399,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.1,
-        "place": "ประเทศเมียนมา",
-        "time": 1792691047000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17274",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17273",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.496,
-          18.888,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.4,
-        "place": "ประเทศเมียนมา",
-        "time": 1792670223000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17273",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17272",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          98.494,
-          19.253,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.7,
-        "place": "ต. แม่ฮี้ อ.ปาย จ.แม่ฮ่องสอน",
-        "time": 1792668695000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17272",
         "source": "TMD",
         "types": "",
         "detail": null,
