@@ -1,0 +1,47 @@
+name: Refresh drought water security data
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 */3 * * *'
+  push:
+    branches: [main]
+    paths:
+      - scripts/build_drought_data.py
+      - .github/workflows/drought-data.yml
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: drought-data-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh validated source snapshots
+        run: python scripts/build_drought_data.py
+      - name: Commit drought snapshots only
+        id: commit
+        run: |
+          if [[ -z "$(git status --porcelain -- docs/data/drought-water-latest.json docs/data/drought-context.json docs/data/drought-water-risk.geojson)" ]]; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- docs/data/drought-water-latest.json docs/data/drought-context.json docs/data/drought-water-risk.geojson
+          git commit -m 'Refresh drought water security data'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      - name: Request Pages rebuild for refreshed data
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${{ github.repository }}/pages/builds"
