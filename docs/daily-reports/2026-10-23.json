@@ -1,0 +1,518 @@
+{
+  "report_date": "2026-10-23",
+  "generated_at": "2026-10-23T12:12:24+07:00",
+  "generated_at_th": "23/10/2026 12:12 น.",
+  "station_summary": {
+    "available": true,
+    "total": 183,
+    "online": 119,
+    "offline": 64,
+    "alert": 28,
+    "updated_at": "2 ต.ค. 2569 เวลา 11:31 น."
+  },
+  "sources": [
+    {
+      "name": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/warning-and-events",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/daily",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "GISTDA Disaster Platform",
+      "url": "https://disaster.gistda.or.th/landing/news",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "กรมป้องกันและบรรเทาสาธารณภัย",
+      "url": "https://www.disaster.go.th/th/news/",
+      "ok": false,
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "ศูนย์เตือนภัยพิบัติแห่งชาติ",
+      "url": "https://ndwc.disaster.go.th/ndwc/cms/7085",
+      "ok": false,
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "กรมควบคุมมลพิษ",
+      "url": "https://www.pcd.go.th/pcd_news/",
+      "ok": false,
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "name": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-news",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "กรมโรงงานอุตสาหกรรม",
+      "url": "https://www.diw.go.th/webdiw/pr-news/",
+      "ok": true,
+      "http_status": 200
+    },
+    {
+      "name": "ศูนย์ข้อมูลสถานการณ์น้ำ",
+      "url": "https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-report.html",
+      "ok": true,
+      "http_status": 200
+    }
+  ],
+  "news": [
+    {
+      "source": "แผ่นดินไหว กรมอุตุนิยมวิทยา",
+      "url": "https://earthquake.tmd.go.th/inside-info.html",
+      "title": "แผ่นดินไหว ประเทศเมียนมา (21.544,98.565) ขนาด 2.5 วันที่ 23 ตุลาคม 2569 เวลา 11:49 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd",
+      "summary": "2026-10-23 11:49:23 น. Lat. 21.544 , Long. 98.565 ขนาด 2.5",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "Fri, 23 Oct 2026 11:49:23 +0700",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/seasonal",
+      "title": "คาดหมายอากาศรายฤดู",
+      "summary": "กรณ์อากาศราย 3 เดือน คาดหมายอากาศรายฤดู เตือนภัยและแผ่&",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/forecastWarning",
+      "title": "เตือนภัยและแผ่นดินไหว",
+      "summary": "ายอากาศรายฤดู เตือนภัยและแผ่นดินไหว ประกาศเตือนภัย",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/warning-and-events/warning-storm",
+      "title": "ประกาศเตือนภัย",
+      "summary": "#xE31;ยและแผ่นดินไหว ประกาศเตือนภัย แผนที่สภาพอากาศ <li class=\"list-group-item linkA",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/storms",
+      "title": "แผนที่สภาพอากาศ",
+      "summary": "d-events/warning-storm\">ประกาศเตือนภัย แผนที่สภาพอากาศ เส้นทางเดินพายุ <li class=\"list-group-item linkA",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/EarthQuake",
+      "title": "รายงานแผ่นดินไหว",
+      "summary": "a href=\"/storms\">เส้นทางเดินพายุ รายงานแผ่นดินไหว สภาพอากาศ <li cla",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/content/historiccalrainfall",
+      "title": "การคาดการณ์พื้นที่เสี่ยงภัยน้ำท่วมฉับพลัน",
+      "summary": "#xE15;ุนิยมวิทยาอุทก การคาดการณ์พื้นที่เสี่ยงภัยน้ำท่วมฉับพลัน ข้&",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/ClimateChart/monthly-mean-rainfall-in-thailand-mm-30-years",
+      "title": "แผนภูมิข้อมูลภูมิอากาศ",
+      "summary": "=\"/climate/hightemperaturemap\">สถิติอุณหภูมิ แผนภูมิข้อมูลภูมิอากาศ สถิติพายุหมุนเขตร",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/climate/climateStat/TropicalCyclone",
+      "title": "สถิติพายุหมุนเขตร้อน",
+      "summary": "39;มิข้อมูลภูมิอากาศ สถิติพายุหมุนเขตร้อน อื่น ๆ <li class=\"list-group-item linkA borde",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/forecastSubpage",
+      "title": "พยากรณ์อากาศ",
+      "summary": "พยากรณ์อากาศ เตือนภัยและแผ่นดินไหว",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/warning-and-events",
+      "title": "ประกาศเตือนภัย",
+      "summary": "f=\"/forecast/forecastWarning\">เตือนภัยและแผ่นดินไหว ประกาศเตือนภัย ประกาศเตือนภ",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/content/historiccalrainfall",
+      "title": "การคาดการณ์พื้นที่เสี่ยงภัยน้ำท่วมฉับพลัน",
+      "summary": "#xE15;ุนิยมวิทยาอุทก การคาดการณ์พื้นที่เสี่ยงภัยน้ำท่วมฉับพลัน ข้&",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/sevenday",
+      "title": "พยากรณ์อากาศ 7 วัน",
+      "summary": "4C;อากาศประจำวัน พยากรณ์อากาศ 7 วัน PM 2.5",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/heavyrainriskarea",
+      "title": "พื้นที่เสี่ยงฝนตกหนัก",
+      "summary": "d.go.th/wi.htm\"> PM 2.5 พื้นที่เสี่ยงฝนตกหนัก เตือนภัย</di",
+      "image": "",
+      "category": "น้ำและสภาพอากาศ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261022214634.pdf",
+      "title": "แผ่นดินไหวที่ Xizang ประกาศ ณ วันที่ 22 ตุลาคม 2569 เวลา 21.44 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Xizang ประกาศ ณ วันที่ 22 ตุลาคม 2569 เวลา 21.44 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce.html",
+      "title": "ดูประกาศทั้งหมด",
+      "summary": "กาศ ณ วันที่ 22 ตุลาคม 2569 เวลา 21.44 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด </",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/inside.html",
+      "title": "แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด",
+      "summary": "t> Myanmar แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด <font style=\"font-family: 'Kanit',",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://eq.tmd.go.th",
+      "title": "https://eq.tmd.go.th",
+      "summary": "go.th\" target=\"_blank\">https://earthquake.tmd.go.th Website: https://eq.tmd.go.th สายด่วน แผ่นดินไหว 1182 กด 3",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "GISTDA Disaster Platform",
+      "url": "https://disaster.gistda.or.th/landing/news",
+      "title": "Disaster Platform | Gistda",
+      "summary": "ระบบสนับสนุนการตัดสินใจเพื่อบริหารจัดการภัยพิบัติ",
+      "image": "https://disaster.gistda.or.th/metadata/landing.png",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th",
+      "title": "การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand",
+      "summary": "arentNode.insertBefore(s, x); })(); การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand <div class=\"item\"",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-news",
+      "title": "การจัดตั้งนิคมอุตสาหกรรม",
+      "summary": "การจัดตั้งนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-law",
+      "title": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "summary": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/industrial-estate-development-establishment",
+      "title": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
+      "summary": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/business-operations-in-the-industrial-estate",
+      "title": "การประกอบกิจการในนิคมอุตสาหกรรม",
+      "summary": "การประกอบกิจการในนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/benefits-in-industrial-estates",
+      "title": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
+      "summary": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/industrial-estate-establishment-process",
+      "title": "กระบวนการจัดตั้งนิคมอุตสาหกรรม",
+      "summary": "กระบวนการจัดตั้งนิคมอุตสาหกรรม <a data-mid=\"8207\" href=\"https://www.ieat.go.th/th/getting-approval-i",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/getting-approval-in-principle",
+      "title": "การขออนุมัติในหลักการ",
+      "summary": "นการจัดตั้งนิคมอุตสาหกรรม การขออนุมัติในหลักการ <a data-mid=\"8206\" href=\"https://www.ieat.go.th/th/manual-of-applicat",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieathandbook",
+      "title": "การขอประกอบกิจการในนิคมอุตสาหกรรม",
+      "summary": "้านบริการ การขอประกอบกิจการในนิคมอุตสาหกรรม <a data-mid=\"8194\" href=\"https://www.ieat.go.th/th/se",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/eia-ehia",
+      "title": "โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA",
+      "summary": "ISO 14001 โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA <a data-mid=\"8394\" href=\"https://ehia.ieat.go.th/th\"",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-23",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261020234401.pdf",
+      "title": "แผ่นดินไหวที่ ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย ประกาศ ณ วันที่ 20 ตุลาคม 2569 เวลา 23.43 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย ประกาศ ณ วันที่ 20 ตุลาคม 2569 เวลา 23.43 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-21",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261016105547.pdf",
+      "title": "แผ่นดินไหวที่ Kamchatka Peninsula, Russia ประกาศ ณ วันที่ 16 ตุลาคม 2569 เวลา 10.49 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Kamchatka Peninsula, Russia ประกาศ ณ วันที่ 16 ตุลาคม 2569 เวลา 10.49 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-16",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261013131710.pdf",
+      "title": "แผ่นดินไหวที่ Central Mid-Atlantic Ridge 6.5 ประกาศ ณ วันที่ 13 ตุลาคม 2569 เวลา 13.16 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Central Mid-Atlantic Ridge 6.5 ประกาศ ณ วันที่ 13 ตุลาคม 2569 เวลา 13.16 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-14",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261010034154.pdf",
+      "title": "แผ่นดินไหวที่ Panama 6.7 ประกาศ ณ วันที่ 10 ตุลาคม 2569 เวลา 03.38 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Panama 6.7 ประกาศ ณ วันที่ 10 ตุลาคม 2569 เวลา 03.38 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-10",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261004071816.pdf",
+      "title": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย ประกาศ ณ วันที่ 4 ตุลาคม 2569 เวลา 06.52 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย ประกาศ ณ วันที่ 4 ตุลาคม 2569 เวลา 06.52 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-10-04",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20260920165541.pdf",
+      "title": "Papua New Guinea Region 6.1 ประกาศ ณ วันที่ 20 กันยายน 2569 เวลา 16.54 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> Papua New Guinea Region 6.1 ประกาศ ณ วันที่ 20 กันยายน 2569 เวลา 16.54 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-09-21",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20260917222927.pdf",
+      "title": "อัปเดต Fox Islands, Aleutian Islands 6.5 ประกาศ ณ วันที่ 17 กันยายน 2569 เวลา 22.27 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> อัปเดต Fox Islands, Aleutian Islands 6.5 ประกาศ ณ วันที่ 17 กันยายน 2569 เวลา 22.27 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-09-18",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20260914162525.pdf",
+      "title": "แผ่นดินไหวที่ มณฑลยูนนาน, ประเทศจีน 5.0 ประกาศ ณ วันที่ 14 กันยายน 2569 เวลา 16.23 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ มณฑลยูนนาน, ประเทศจีน 5.0 ประกาศ ณ วันที่ 14 กันยายน 2569 เวลา 16.23 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-09-15",
+      "available": true
+    },
+    {
+      "source": "GISTDA",
+      "url": "https://disaster.gistda.or.th/landing/news/%e0%b8%9e%e0%b8%b7%e0%b9%89%e0%b8%99%e0%b8%97%e0%b8%b5%e0%b9%88%e0%b8%99%e0%b9%89%e0%b8%b3%e0%b8%97%e0%b9%88%e0%b8%a7%e0%b8%a1%e0%b8%9a%e0%b8%a3%e0%b8%b4%e0%b9%80%e0%b8%a7%e0%b8%93%e0%b8%9b%e0%b8%a3-2",
+      "title": "Disaster Platform | Gistda",
+      "summary": "เปิดตรวจสอบข่าวและประกาศล่าสุดจากแหล่งข้อมูลต้นทาง",
+      "image": "./news-images/gistda.png",
+      "matched_keywords": [],
+      "available": true,
+      "category": "ข่าวและประกาศ",
+      "published_date": ""
+    },
+    {
+      "source": "กรมอุตุนิยมวิทยา",
+      "url": "https://www.tmd.go.th/forecast/daily",
+      "title": "ข่าวและประกาศจากกรมอุตุนิยมวิทยา",
+      "summary": "ไม่สามารถดึงรายละเอียดอัตโนมัติได้ในรอบนี้ กรุณาเปิดตรวจสอบจากแหล่งข้อมูลต้นทาง",
+      "matched_keywords": [],
+      "available": false,
+      "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+      "image": "",
+      "hide_image": true,
+      "category": "ข่าวและประกาศ",
+      "published_date": ""
+    },
+    {
+      "source": "ปภ. / ศูนย์เตือนภัยพิบัติแห่งชาติ",
+      "url": "https://ndwc.disaster.go.th/ndwc/cms/7085?id=163329",
+      "title": "ข่าวและประกาศจากปภ. / ศูนย์เตือนภัยพิบัติแห่งชาติ",
+      "summary": "ไม่สามารถดึงรายละเอียดอัตโนมัติได้ในรอบนี้ กรุณาเปิดตรวจสอบจากแหล่งข้อมูลต้นทาง",
+      "matched_keywords": [],
+      "available": false,
+      "error": "HTTP Error 403: Forbidden",
+      "images": [
+        {
+          "title": "รายงานสถานการณ์ประจำวัน",
+          "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/situation-report-2026-09-01.png"
+        },
+        {
+          "title": "พื้นที่เสี่ยงน้ำท่วมฉับพลัน น้ำป่าไหลหลาก และน้ำท่วมขัง",
+          "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%89%E0%B8%B1%E0%B8%9A%E0%B8%9E%E0%B8%A5%E0%B8%B1%E0%B8%99%20%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%9B%E0%B9%88%E0%B8%B2%E0%B9%84%E0%B8%AB%E0%B8%A5%E0%B8%AB%E0%B8%A5%E0%B8%B2%E0%B8%81%20%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%A3%E0%B8%B0%E0%B8%A2%E0%B8%B0%E0%B8%AA%E0%B8%B1%E0%B9%89%E0%B8%99-2026-09-01.jpg"
+        },
+        {
+          "title": "พื้นที่เสี่ยงน้ำล้นตลิ่งและน้ำท่วมขัง",
+          "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/2.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A5%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%87%20%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%97%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B8%82%E0%B8%B1%E0%B8%87-2026-09-01.jpg"
+        },
+        {
+          "title": "พื้นที่เฝ้าระวังดินถล่ม",
+          "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/3.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%94%E0%B8%B4%E0%B8%99%E0%B8%96%E0%B8%A5%E0%B9%88%E0%B8%A1-2026-09-01.jpg"
+        },
+        {
+          "title": "พื้นที่เฝ้าระวังระดับแม่น้ำโขงเพิ่มสูงขึ้น",
+          "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/4.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B9%82%E0%B8%82%E0%B8%87%E0%B9%80%E0%B8%9E%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%AA%E0%B8%B9%E0%B8%87%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99-2026-09-01.jpg"
+        },
+        {
+          "title": "พื้นที่เฝ้าระวังคลื่นลมแรง",
+          "url": "https://ndwc.disaster.go.th/upload/userfiles/ndwc/5.%20%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%84%E0%B8%A5%E0%B8%B7%E0%B9%88%E0%B8%99%E0%B8%A5%E0%B8%A1%E0%B9%81%E0%B8%A3%E0%B8%87-2026-09-01.jpg"
+        }
+      ],
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": ""
+    }
+  ],
+  "news_total": 40,
+  "new_today": 28,
+  "categories": {
+    "แผ่นดินไหวและภัยพิบัติ": 16,
+    "น้ำและสภาพอากาศ": 12,
+    "นิคมฯ และโรงงาน": 10,
+    "ข่าวและประกาศ": 2
+  },
+  "notice": "รวบรวมอัตโนมัติจากแหล่งข้อมูลสาธารณะของหน่วยงาน โปรดเปิดตรวจสอบรายละเอียดจากแหล่งข่าวต้นทางก่อนนำไปใช้อ้างอิง"
+}
