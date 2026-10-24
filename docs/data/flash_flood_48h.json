@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "period": "48h",
-  "date": "2026-10-24",
-  "time": "23:00:00",
+  "date": "2026-10-25",
+  "time": "02:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
   "area_count": 4,
@@ -19,7 +19,7 @@
       "latitude": 13.46648,
       "longitude": 99.94658,
       "sum_rainfall_mm": 115.0,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -157,8 +157,8 @@
       "station": "อบต.ป่าแก่บ่อหิน",
       "latitude": 7.05861,
       "longitude": 99.80006,
-      "sum_rainfall_mm": 154.6,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 156.60000000000002,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -388,8 +388,8 @@
       "station": "มะนัง",
       "latitude": 6.940811,
       "longitude": 99.872925,
-      "sum_rainfall_mm": 150.79999999999998,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 153.8,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -739,8 +739,8 @@
       "station": "โรงเรียนบ้านหนองหอยโข่ง",
       "latitude": 6.992179,
       "longitude": 99.848732,
-      "sum_rainfall_mm": 160.0,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 166.0,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1149,7 +1149,7 @@
       "latitude": 13.500218,
       "longitude": 99.927311,
       "sum_rainfall_mm": 5.0,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1244,7 +1244,7 @@
       "latitude": 7.135542,
       "longitude": 99.937038,
       "sum_rainfall_mm": 95.5,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1750,8 +1750,8 @@
       "station": "บ้านคีรีวง",
       "latitude": 7.112939,
       "longitude": 99.79826,
-      "sum_rainfall_mm": 27.5,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "sum_rainfall_mm": 28.5,
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2258,7 +2258,7 @@
       "latitude": 7.13606,
       "longitude": 99.853031,
       "sum_rainfall_mm": 70.0,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2764,8 +2764,8 @@
       "station": "บ้านป่าแก่บ่อหิน",
       "latitude": 7.030333,
       "longitude": 99.79666,
-      "sum_rainfall_mm": 29.0,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "sum_rainfall_mm": 30.0,
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2996,7 +2996,7 @@
       "latitude": 7.051269,
       "longitude": 99.850141,
       "sum_rainfall_mm": 71.0,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3227,7 +3227,7 @@
       "latitude": 7.098653,
       "longitude": 99.917802,
       "sum_rainfall_mm": 7.5,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3586,7 +3586,7 @@
       "latitude": 6.99506,
       "longitude": 99.886313,
       "sum_rainfall_mm": 54.5,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3944,8 +3944,8 @@
       "station": "รร.ผังปาล์ม 4",
       "latitude": 7.02235,
       "longitude": 99.93085,
-      "sum_rainfall_mm": 129.0,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 129.2,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4303,8 +4303,8 @@
       "station": "บ้านโกตา*",
       "latitude": 6.888344,
       "longitude": 99.812296,
-      "sum_rainfall_mm": 19.5,
-      "observed_at": "2026-10-24T21:00:00+07:00",
+      "sum_rainfall_mm": 27.5,
+      "observed_at": "2026-10-25T00:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4678,8 +4678,8 @@
       "station": "สนามทับทุ่ม บ้านวังนาใน หมู่ที่ 10",
       "latitude": 7.13571,
       "longitude": 99.93736,
-      "sum_rainfall_mm": 112.00000000000004,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 112.00000000000003,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -5085,8 +5085,8 @@
       "station": "ชุมชนประชาบำรุง",
       "latitude": 6.875984,
       "longitude": 99.78319,
-      "sum_rainfall_mm": 41.0,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 72.5,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -5580,8 +5580,8 @@
       "station": "ละงู",
       "latitude": 6.885757,
       "longitude": 99.804344,
-      "sum_rainfall_mm": 48.199999999999996,
-      "observed_at": "2026-10-24T22:00:00+07:00",
+      "sum_rainfall_mm": 61.399999999999984,
+      "observed_at": "2026-10-25T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
