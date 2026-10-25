@@ -1,7 +1,7 @@
 {
-  "report_date": "2026-10-24",
-  "generated_at": "2026-10-24T11:54:25+07:00",
-  "generated_at_th": "24/10/2026 11:54 น.",
+  "report_date": "2026-10-25",
+  "generated_at": "2026-10-25T12:06:27+07:00",
+  "generated_at_th": "25/10/2026 12:06 น.",
   "station_summary": {
     "available": true,
     "total": 183,
@@ -76,11 +76,11 @@
     {
       "source": "แผ่นดินไหว กรมอุตุนิยมวิทยา",
       "url": "https://earthquake.tmd.go.th/inside-info.html",
-      "title": "แผ่นดินไหว ประเทศลาว (19.097,101.719) ขนาด 2.5 วันที่ 24 ตุลาคม 2569 เวลา 11:33 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd",
-      "summary": "2026-10-24 11:33:44 น. Lat. 19.097 , Long. 101.719 ขนาด 2.5",
+      "title": "แผ่นดินไหว ประเทศลาว (19.106,101.991) ขนาด 3.2 วันที่ 25 ตุลาคม 2569 เวลา 11:51 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd",
+      "summary": "2026-10-25 11:51:40 น. Lat. 19.106 , Long. 101.991 ขนาด 3.2",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "Sat, 24 Oct 2026 11:33:44 +0700",
+      "published_date": "Sun, 25 Oct 2026 11:51:40 +0700",
       "available": true
     },
     {
@@ -90,7 +90,7 @@
       "summary": "กรณ์อากาศราย 3 เดือน คาดหมายอากาศรายฤดู เตือนภัยและแผ่&",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -100,7 +100,7 @@
       "summary": "ายอากาศรายฤดู เตือนภัยและแผ่นดินไหว ประกาศเตือนภัย",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -110,7 +110,7 @@
       "summary": "#xE31;ยและแผ่นดินไหว ประกาศเตือนภัย แผนที่สภาพอากาศ <li class=\"list-group-item linkA",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -120,7 +120,7 @@
       "summary": "d-events/warning-storm\">ประกาศเตือนภัย แผนที่สภาพอากาศ เส้นทางเดินพายุ <li class=\"list-group-item linkA",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -130,7 +130,7 @@
       "summary": "a href=\"/storms\">เส้นทางเดินพายุ รายงานแผ่นดินไหว สภาพอากาศ <li cla",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -140,7 +140,7 @@
       "summary": "#xE15;ุนิยมวิทยาอุทก การคาดการณ์พื้นที่เสี่ยงภัยน้ำท่วมฉับพลัน ข้&",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -150,7 +150,7 @@
       "summary": "=\"/climate/hightemperaturemap\">สถิติอุณหภูมิ แผนภูมิข้อมูลภูมิอากาศ สถิติพายุหมุนเขตร",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -160,7 +160,7 @@
       "summary": "39;มิข้อมูลภูมิอากาศ สถิติพายุหมุนเขตร้อน อื่น ๆ <li class=\"list-group-item linkA borde",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -170,7 +170,7 @@
       "summary": "พยากรณ์อากาศ เตือนภัยและแผ่นดินไหว",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -180,7 +180,7 @@
       "summary": "f=\"/forecast/forecastWarning\">เตือนภัยและแผ่นดินไหว ประกาศเตือนภัย ประกาศเตือนภ",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -190,7 +190,7 @@
       "summary": "#xE15;ุนิยมวิทยาอุทก การคาดการณ์พื้นที่เสี่ยงภัยน้ำท่วมฉับพลัน ข้&",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -200,7 +200,7 @@
       "summary": "4C;อากาศประจำวัน พยากรณ์อากาศ 7 วัน PM 2.5",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -210,27 +210,27 @@
       "summary": "d.go.th/wi.htm\"> PM 2.5 พื้นที่เสี่ยงฝนตกหนัก เตือนภัย</di",
       "image": "",
       "category": "น้ำและสภาพอากาศ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
       "source": "กองเฝ้าระวังแผ่นดินไหว",
-      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261024094714.pdf",
-      "title": "แผ่นดินไหวที่ Vanuatu Islands ประกาศ ณ วันที่ 24 ตุลาคม 2569 เวลา 09.42 น.",
-      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Vanuatu Islands ประกาศ ณ วันที่ 24 ตุลาคม 2569 เวลา 09.42 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261025093033.pdf",
+      "title": "แผ่นดินไหวที่ Bonin Islands, Japan Region ประกาศ ณ วันที่ 25 ตุลาคม 2569 เวลา 09.25 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Bonin Islands, Japan Region ประกาศ ณ วันที่ 25 ตุลาคม 2569 เวลา 09.25 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
       "source": "กองเฝ้าระวังแผ่นดินไหว",
       "url": "https://earthquake.tmd.go.th/announce.html",
       "title": "ดูประกาศทั้งหมด",
-      "summary": "กาศ ณ วันที่ 24 ตุลาคม 2569 เวลา 09.42 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด </",
+      "summary": "กาศ ณ วันที่ 25 ตุลาคม 2569 เวลา 09.25 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด </",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -240,7 +240,7 @@
       "summary": "t> Myanmar แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด <font style=\"font-family: 'Kanit',",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -250,7 +250,7 @@
       "summary": "go.th\" target=\"_blank\">https://earthquake.tmd.go.th Website: https://eq.tmd.go.th สายด่วน แผ่นดินไหว 1182 กด 3",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -260,7 +260,7 @@
       "summary": "ระบบสนับสนุนการตัดสินใจเพื่อบริหารจัดการภัยพิบัติ",
       "image": "https://disaster.gistda.or.th/metadata/landing.png",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -270,7 +270,7 @@
       "summary": "arentNode.insertBefore(s, x); })(); การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand <div class=\"item\"",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -280,7 +280,7 @@
       "summary": "การจัดตั้งนิคมอุตสาหกรรม",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -290,7 +290,7 @@
       "summary": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -300,7 +300,7 @@
       "summary": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -310,7 +310,7 @@
       "summary": "การประกอบกิจการในนิคมอุตสาหกรรม",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -320,7 +320,7 @@
       "summary": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -330,7 +330,7 @@
       "summary": "กระบวนการจัดตั้งนิคมอุตสาหกรรม <a data-mid=\"8207\" href=\"https://www.ieat.go.th/th/getting-approval-i",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -340,7 +340,7 @@
       "summary": "นการจัดตั้งนิคมอุตสาหกรรม การขออนุมัติในหลักการ <a data-mid=\"8206\" href=\"https://www.ieat.go.th/th/manual-of-applicat",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -350,7 +350,7 @@
       "summary": "้านบริการ การขอประกอบกิจการในนิคมอุตสาหกรรม <a data-mid=\"8194\" href=\"https://www.ieat.go.th/th/se",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-10-24",
+      "published_date": "2026-10-25",
       "available": true
     },
     {
@@ -360,6 +360,16 @@
       "summary": "ISO 14001 โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA <a data-mid=\"8394\" href=\"https://ehia.ieat.go.th/th\"",
       "image": "",
       "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-10-25",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/announce/file/announce-20261024094714.pdf",
+      "title": "แผ่นดินไหวที่ Vanuatu Islands ประกาศ ณ วันที่ 24 ตุลาคม 2569 เวลา 09.42 น.",
+      "summary": "-image: url(images/announce_03.gif); background-repeat: repeat-x;\" width='643' height='72'> แผ่นดินไหวที่ Vanuatu Islands ประกาศ ณ วันที่ 24 ตุลาคม 2569 เวลา 09.42 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
       "published_date": "2026-10-24",
       "available": true
     },
@@ -516,10 +526,10 @@
       "published_date": ""
     }
   ],
-  "news_total": 41,
+  "news_total": 42,
   "new_today": 28,
   "categories": {
-    "แผ่นดินไหวและภัยพิบัติ": 17,
+    "แผ่นดินไหวและภัยพิบัติ": 18,
     "น้ำและสภาพอากาศ": 12,
     "นิคมฯ และโรงงาน": 10,
     "ข่าวและประกาศ": 2
