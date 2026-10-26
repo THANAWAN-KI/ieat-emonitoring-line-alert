@@ -1816,4 +1816,40 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 html body header#ieatPortalHeader #hub-alert-button{background:#684184!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #684184!important}
 html body header#ieatPortalHeader #hub-alert-button:hover{background:#55336f!important}
 html body header#ieatPortalHeader #hub-alert-button .alert-count{background:#63417f!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
-</style></body></html>
+</style><script id="ieat-header-button-inline-color-fix">
+(function(){
+  function setImportant(el, property, value){if(el)el.style.setProperty(property,value,'important');}
+  function apply(){
+    var header=document.getElementById('ieatPortalHeader');
+    if(!header)return;
+    header.querySelectorAll('.header-nav a.nav-active,.header-nav a.main-nav-current,.header-nav a[aria-current="page"]').forEach(function(el){
+      setImportant(el,'background-color','#63417f');
+      setImportant(el,'background-image','none');
+      setImportant(el,'color','#ffffff');
+      setImportant(el,'-webkit-text-fill-color','#ffffff');
+      setImportant(el,'border-color','#63417f');
+    });
+    var alert=header.querySelector('#hub-alert-button');
+    if(alert){
+      setImportant(alert,'background-color','#684184');
+      setImportant(alert,'background-image','none');
+      setImportant(alert,'color','#ffffff');
+      setImportant(alert,'-webkit-text-fill-color','#ffffff');
+      setImportant(alert,'border-color','#684184');
+      alert.querySelectorAll('.alert-count').forEach(function(count){
+        setImportant(count,'background-color','#684184');
+        setImportant(count,'color','#ffffff');
+        setImportant(count,'-webkit-text-fill-color','#ffffff');
+      });
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});
+  else apply();
+  window.addEventListener('load',apply,{once:true});
+  var header=document.getElementById('ieatPortalHeader');
+  if(header){
+    var observer=new MutationObserver(function(){apply();});
+    observer.observe(header,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-current']});
+  }
+})();
+</script></body></html>
