@@ -3,7 +3,7 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-26T15:13:19.645708+00:00",
+    "fetchedAt": "2026-10-26T21:01:44.469397+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
     "oldestEvent": 1792914005000,
