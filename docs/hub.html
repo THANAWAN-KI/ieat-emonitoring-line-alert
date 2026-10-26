@@ -1777,4 +1777,18 @@ html body input,html body select,html body textarea,html body button,
 html body .leaflet-container,html body .leaflet-container *,
 html body .esri-view,html body .esri-view *,
 html body #riskDashboard,html body #riskDashboard *{font-family:var(--portal-thai-font)!important}
-</style></body></html>
+</style>
+<!-- IEAT unified Thai typography: image-reference font; placed last to override legacy styles -->
+<style id="ieat-unified-thai-typography-v3">
+:root { --portal-thai-font: "Tahoma", "Noto Sans Thai", Arial, sans-serif; }
+html, body, body :is(h1,h2,h3,h4,h5,h6,p,span,div,label,a,button,input,select,textarea,option,small,strong,b,em,li,td,th,summary,time),
+body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),
+body *::before, body *::after,
+body .leaflet-container, body .leaflet-container *,
+body .esri-view, body .esri-view *,
+body #riskDashboard, body #riskDashboard * {
+  font-family: var(--portal-thai-font) !important;
+  font-synthesis: none;
+}
+</style>
+</body></html>
