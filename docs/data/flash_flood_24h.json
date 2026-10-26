@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "24h",
   "date": "2026-10-26",
-  "time": "05:00:00",
+  "time": "08:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 1,
@@ -18,8 +18,8 @@
       "station": "อ่างเก็บน้ำคลองกะทะ",
       "latitude": 7.86148,
       "longitude": 98.32759,
-      "sum_rainfall_mm": 249.59999999999997,
-      "observed_at": "2026-10-25T17:00:00+07:00",
+      "sum_rainfall_mm": 254.00000000000006,
+      "observed_at": "2026-10-25T20:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -164,7 +164,7 @@
       "latitude": 7.848907,
       "longitude": 98.298797,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-10-25T17:00:00+07:00",
+      "observed_at": "2026-10-25T20:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -398,8 +398,8 @@
       "station": "ชุมชนกะตะ",
       "latitude": 7.821118,
       "longitude": 98.30785,
-      "sum_rainfall_mm": 84.0,
-      "observed_at": "2026-10-25T17:00:00+07:00",
+      "sum_rainfall_mm": 87.0,
+      "observed_at": "2026-10-25T20:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -633,8 +633,8 @@
       "station": "บ้านนาใหญ่",
       "latitude": 7.848367,
       "longitude": 98.339244,
-      "sum_rainfall_mm": 71.0,
-      "observed_at": "2026-10-25T17:00:00+07:00",
+      "sum_rainfall_mm": 74.0,
+      "observed_at": "2026-10-25T20:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -776,8 +776,8 @@
       "station": "ทต.ราไวย์",
       "latitude": 7.77087,
       "longitude": 98.31879,
-      "sum_rainfall_mm": 154.39999999999995,
-      "observed_at": "2026-10-25T17:00:00+07:00",
+      "sum_rainfall_mm": 163.39999999999998,
+      "observed_at": "2026-10-25T20:00:00+07:00",
       "geometry": {
         "rings": [
           [
