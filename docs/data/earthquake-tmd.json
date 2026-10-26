@@ -3,13 +3,105 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-26T07:49:34.586305+00:00",
+    "fetchedAt": "2026-10-26T15:13:19.645708+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1792880472000,
-    "latestEvent": 1792985628000
+    "oldestEvent": 1792914005000,
+    "latestEvent": 1793022634000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17319",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.403,
+          18.91,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.3,
+        "place": "ประเทศเมียนมา",
+        "time": 1793022634000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17319",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17318",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.372,
+          18.674,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 4.2,
+        "place": "ประเทศเมียนมา",
+        "time": 1793014574000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17318",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17317",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.086,
+          22.53,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.1,
+        "place": "มณฑลยูนนาน, ประเทศจีน",
+        "time": 1793012880000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17317",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17316",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.058,
+          19.065,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.0,
+        "place": "ประเทศลาว",
+        "time": 1793005187000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17316",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17315",
@@ -131,108 +223,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          97.203,
-          3.629,
+          97.713,
+          4.434,
           null
         ]
       },
       "properties": {
         "mag": 4.7,
         "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
-        "time": 1792913992000,
+        "time": 1792914005000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17310",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17309",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          101.991,
-          19.106,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.2,
-        "place": "ประเทศลาว",
-        "time": 1792903900000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17309",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17308",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          98.43,
-          19.488,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.1,
-        "place": "ต.เวียงเหนือ อ.ปาย จ.แม่ฮ่องสอน",
-        "time": 1792891050000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17308",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17307",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          98.782,
-          22.389,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.2,
-        "place": "พรมแดนประเทศเมียนมา - ประเทศจีน",
-        "time": 1792889428000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17307",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17306",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.447,
-          17.95,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.3,
-        "place": "ประเทศเมียนมา",
-        "time": 1792880472000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17306",
         "source": "TMD",
         "types": "",
         "detail": null,
