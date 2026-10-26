@@ -148,8 +148,8 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
   if(category&&mapGlyphs[category]){
    let icon=dashboardIconCache.get(category);
    if(!icon){
-    const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 52" role="img"><defs><filter id="shadow" x="-40%" y="-30%" width="180%" height="190%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1e1833" flood-opacity=".24"/></filter></defs><ellipse cx="22" cy="47.5" rx="9" ry="2.4" fill="#251a39" opacity=".16"/><path d="M22 2C11.4 2 4 9.6 4 19.3 4 31.4 22 46c18-14.6 18-26.7 18-26.7C40 9.6 32.6 2 22 2Z" fill="'+mapColors[category]+'" stroke="#fff" stroke-width="3" stroke-linejoin="round" filter="url(#shadow)"/><circle cx="22" cy="19" r="13.2" fill="#fff" opacity=".97"/><g transform="translate(11 8) scale(.92)" fill="none" stroke="'+mapColors[category]+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">'+mapGlyphs[category]+'</g></svg>';
-    icon=L.icon({iconUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),iconSize:[36,43],iconAnchor:[18,40],popupAnchor:[0,-38],className:'dashboard-point-icon'});dashboardIconCache.set(category,icon);
+    const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" role="img"><circle cx="22" cy="22" r="19.5" fill="#ffffff" stroke="#ffffff" stroke-width="3"/><circle cx="22" cy="22" r="17" fill="'+mapColors[category]+'"/><circle cx="22" cy="22" r="15" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="1"/><g transform="translate(11 11) scale(.92)" fill="none" stroke="#ffffff" stroke-width="2.15" stroke-linejoin="round" stroke-linecap="round">'+mapGlyphs[category]+'</g></svg>';
+    icon=L.icon({iconUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg),iconSize:[34,34],iconAnchor:[17,17],popupAnchor:[0,-18],className:'dashboard-point-icon'});dashboardIconCache.set(category,icon);
    }
    return L.marker(latlng,{icon,title:def.dataset?.label||def.title,riseOnHover:true,zIndexOffset:category==='estate'?150:0});
   }
