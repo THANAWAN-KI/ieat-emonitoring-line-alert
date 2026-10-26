@@ -84,7 +84,15 @@ html body #hubInformationHeader .weather-pop{top:54px!important}
   .ieat-panel>header,.gis-data-panel>header,.em-panel>header{height:auto!important;min-height:0!important;flex-wrap:wrap!important;gap:7px!important}
 }
 </style>
-<link rel="stylesheet" href="./nav-current.css?v=2"></head><body>
+<link rel="stylesheet" href="./nav-current.css?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="ieat-font-fix-20261026">
+:root{--portal-thai-font:"Sarabun",sans-serif!important}
+html,html body,html body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),html body *::before,html body *::after{font-family:"Sarabun",sans-serif!important}
+</style>
+</head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">ภัยพิบัติ</a></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
 <nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button><button class="tab" data-tab="epp">e-PP</button></nav>
 <section class="requested-overview"><span id="period" hidden></span>
@@ -1764,17 +1772,12 @@ body.epp-mode .dashboard,body.epp-mode .requested-overview,body.epp-mode .overvi
 })();
 </script>
 
-<!-- IEAT unified Thai typography: image-reference font; placed last to override legacy styles -->
-<style id="ieat-unified-thai-typography-v3">
-:root { --portal-thai-font: "Tahoma", "Noto Sans Thai", Arial, sans-serif; }
-html, body, body :is(h1,h2,h3,h4,h5,h6,p,span,div,label,a,button,input,select,textarea,option,small,strong,b,em,li,td,th,summary,time),
-body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),
-body *::before, body *::after,
-body .leaflet-container, body .leaflet-container *,
-body .esri-view, body .esri-view *,
-body #riskDashboard, body #riskDashboard * {
-  font-family: var(--portal-thai-font) !important;
-  font-synthesis: none;
-}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="ieat-font-fix-20261026">
+:root{--portal-thai-font:"Sarabun",sans-serif!important}
+html,html body,html body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),html body *::before,html body *::after{font-family:"Sarabun",sans-serif!important}
 </style>
 </body></html>
