@@ -56,7 +56,15 @@ window.addEventListener('ieat-support-map-ready',()=>requestAnimationFrame(overv
 })();
 </script>
 <link rel="stylesheet" href="./nav-current.css?v=3"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style id="kanit-site-font">html:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root body,html:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root body *:not(.esri-icon):not([class^="esri-icon-"]){font-family:"Sarabun",sans-serif!important}</style><style id="left-aligned-disaster-tabs">html body nav.portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{display:flex!important;justify-content:flex-start!important;flex-wrap:wrap!important;grid-template-columns:none!important}html body nav.portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs>*{flex:0 0 auto!important;width:auto!important;min-width:0!important;padding:10px 20px!important}</style></head>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style id="kanit-site-font">html:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root body,html:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root:root body *:not(.esri-icon):not([class^="esri-icon-"]){font-family:"Sarabun",sans-serif!important}</style><style id="left-aligned-disaster-tabs">html body nav.portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs{display:flex!important;justify-content:flex-start!important;flex-wrap:wrap!important;grid-template-columns:none!important}html body nav.portal-disaster-tabs.portal-disaster-tabs.portal-disaster-tabs>*{flex:0 0 auto!important;width:auto!important;min-width:0!important;padding:10px 20px!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="ieat-font-fix-20261026">
+:root{--portal-thai-font:"Sarabun",sans-serif!important}
+html,html body,html body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),html body *::before,html body *::after{font-family:"Sarabun",sans-serif!important}
+</style>
+</head>
 <body>
 <header class="portal-header" id="ieatPortalHeader"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></a><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><svg class="scope-search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><g clip-path="url(#estateSearchIconClip)"><rect width="24" height="24" fill="white"/><circle cx="10.5" cy="10.5" r="6.5" stroke="#57595B" stroke-linejoin="round"/><path d="M19.6464 20.3536C19.8417 20.5488 20.1583 20.5488 20.3536 20.3536C20.5488 20.1583 20.5488 19.8417 20.3536 19.6464L19.6464 20.3536ZM20.3536 19.6464L15.3536 14.6464L14.6464 15.3536L19.6464 20.3536L20.3536 19.6464Z" fill="#000000"/></g><defs><clipPath id="estateSearchIconClip"><rect width="24" height="24" fill="white"/></clipPath></defs></svg><span id="disasterScopeLabel">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a class="nav-active" aria-current="page" href="./hub.html">ภัยพิบัติ</a></nav></div></header>
 
@@ -1778,17 +1786,12 @@ html body .leaflet-container,html body .leaflet-container *,
 html body .esri-view,html body .esri-view *,
 html body #riskDashboard,html body #riskDashboard *{font-family:var(--portal-thai-font)!important}
 </style>
-<!-- IEAT unified Thai typography: image-reference font; placed last to override legacy styles -->
-<style id="ieat-unified-thai-typography-v3">
-:root { --portal-thai-font: "Tahoma", "Noto Sans Thai", Arial, sans-serif; }
-html, body, body :is(h1,h2,h3,h4,h5,h6,p,span,div,label,a,button,input,select,textarea,option,small,strong,b,em,li,td,th,summary,time),
-body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),
-body *::before, body *::after,
-body .leaflet-container, body .leaflet-container *,
-body .esri-view, body .esri-view *,
-body #riskDashboard, body #riskDashboard * {
-  font-family: var(--portal-thai-font) !important;
-  font-synthesis: none;
-}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="ieat-font-fix-20261026">
+:root{--portal-thai-font:"Sarabun",sans-serif!important}
+html,html body,html body *:not(svg):not(svg *):not(canvas):not(iframe):not(style):not(script),html body *::before,html body *::after{font-family:"Sarabun",sans-serif!important}
 </style>
 </body></html>
