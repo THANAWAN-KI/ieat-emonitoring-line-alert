@@ -86,7 +86,7 @@ html body #hubInformationHeader .weather-pop{top:54px!important}
 </style>
 <link rel="stylesheet" href="./nav-current.css?v=2"></head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">ภัยพิบัติ</a></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
-<nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button></nav>
+<nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button><button class="tab" data-tab="epp">e-PP</button></nav>
 <section class="requested-overview"><span id="period" hidden></span>
 <div class="ieat-gis-dashboard">
  <section class="ieat-kpi-row" aria-label="ข้อมูลสรุป">
@@ -1729,4 +1729,38 @@ html body nav.tabs button.tab:hover{background:rgba(255,255,255,.12)!important}
 </style>
 <link rel="stylesheet" href="./portal-header-20261006.css?v=1">
 <style id="active-main-menu-blue">html body header#hubInformationHeader#hubInformationHeader#hubInformationHeader .header-actions a:is(.nav-active,[aria-current="page"]){color:#3268ff!important;-webkit-text-fill-color:#3268ff!important;background:transparent!important}</style><script src="./workflow-navigation.js?v=2" defer></script>
+<style id="epp-information-tab-style">
+.epp-information-page{display:none;min-height:calc(100vh - 116px);background:#f7f9fb;padding:16px 20px}
+body.epp-mode .epp-information-page{display:flex;flex-direction:column;gap:12px}
+body.epp-mode .dashboard,body.epp-mode .requested-overview,body.epp-mode .overview-showcase,body.epp-mode .esri-overview{display:none!important}
+.epp-information-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.epp-information-header h2{margin:0;font-size:20px;color:#173b68}
+.epp-information-header a{color:#1764bd;text-decoration:none;font-size:14px}
+.epp-information-frame{display:block;width:100%;height:calc(100vh - 210px);min-height:600px;border:1px solid #dfe4ea;border-radius:12px;background:#fff}
+@media(max-width:700px){.epp-information-page{padding:8px}.epp-information-frame{height:calc(100dvh - 190px);min-height:500px}}
+</style>
+<section class="epp-information-page" id="eppInformationPage" aria-label="e-PP Dashboard">
+<div class="epp-information-header"><h2>e-PP Dashboard</h2><a href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/#map" target="_blank" rel="noopener noreferrer">เปิดระบบ e-PP ในหน้าต่างใหม่ ↗</a></div>
+<iframe class="epp-information-frame" id="eppInformationFrame" title="e-PP Dashboard - แผนที่" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" src="about:blank"></iframe>
+</section>
+<script id="epp-information-tab-script">
+(function(){
+ const tab=document.querySelector('nav.tabs .tab[data-tab="epp"]');
+ const page=document.getElementById("eppInformationPage");
+ const frame=document.getElementById("eppInformationFrame");
+ if(!tab||!page||!frame)return;
+ const url="https://nawakonnakhonchai-wq.github.io/epp_dashboard/#map";
+ function showEpp(){
+   if(frame.getAttribute("src")!==url)frame.setAttribute("src",url);
+   document.body.classList.remove("overview-mode","gis-mode","monitor-mode","water-mode","accident-mode");
+   document.body.classList.add("epp-mode");
+   document.querySelectorAll("nav.tabs .tab").forEach(t=>t.classList.toggle("active",t===tab));
+   if(location.hash!=="#epp")history.replaceState(null,"","#epp");
+ }
+ tab.addEventListener("click",function(event){event.preventDefault();event.stopImmediatePropagation();showEpp()},true);
+ document.querySelectorAll('nav.tabs .tab:not([data-tab="epp"])').forEach(t=>t.addEventListener("click",()=>document.body.classList.remove("epp-mode")));
+ window.addEventListener("hashchange",()=>{if(location.hash==="#epp")showEpp();else document.body.classList.remove("epp-mode")});
+ if(location.hash==="#epp")showEpp();
+})();
+</script>
 </body></html>
