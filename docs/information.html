@@ -252,12 +252,12 @@ html,html body,html body *:not(svg):not(svg *):not(canvas):not(iframe):not(style
     <div class="em-station-row" id="em-exec-stations"><article class="em-panel em-status">
      <header><div><h2>สถานะสถานีตรวจวัด</h2><p>สถานะการเชื่อมต่อและเวลารับข้อมูลล่าสุด</p></div><span id="emTableArea">ทุกพื้นที่นิคมฯ</span></header>
      <div class="em-status-summary"><div><i class="green"></i><b>Online</b><strong>—</strong></div><div><i class="gray"></i><b>Offline</b><strong>—</strong></div><div><i class="amber"></i><b>มีรายการแจ้งเตือน</b><strong>—</strong></div><div><i class="red"></i><b>ไม่ระบุสถานะ</b><strong>—</strong></div></div>
-     <div class="em-table-wrap" role="region" aria-label="สถานะสถานีตรวจวัด เลื่อนดูรายการเพิ่มเติม" tabindex="0"><table><colgroup><col style="width:29%"><col style="width:9%"><col style="width:20%"><col style="width:18%"><col style="width:24%"></colgroup><thead><tr><th scope="col">สถานี</th><th scope="col">ระบบ</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สถานะ</th><th scope="col">ข้อมูลล่าสุด</th></tr></thead><tbody><tr><td colspan="5">ไม่มีข้อมูลสถานีสำหรับพื้นที่ที่เลือก</td></tr></tbody></table></div>
+     <div class="em-tools"><label>ค้นหาสถานีหรือพื้นที่<input id="emSearch" type="search" placeholder="ชื่อสถานี หรือนิคมฯ"></label><label>ประเภท<select id="emType"><option value="">ทุกระบบ</option><option>AQMs</option><option>WQMs</option><option>CEMs</option></select></label><label>รายการ<select id="emFilter"><option value="">ทุกสถานี</option><option value="alarm">มีรายการแจ้งเตือน</option><option value="offline">Offline</option><option value="unknown">ไม่ระบุสถานะ</option></select></label></div><p id="emResult" class="em-result">กำลังโหลดข้อมูล…</p><div class="em-table-wrap" role="region" aria-label="สถานะสถานีตรวจวัด เลื่อนดูรายการเพิ่มเติม" tabindex="0"><table><colgroup><col style="width:29%"><col style="width:9%"><col style="width:20%"><col style="width:18%"><col style="width:24%"></colgroup><thead><tr><th scope="col">สถานี</th><th scope="col">ระบบ</th><th scope="col">นิคมอุตสาหกรรม</th><th scope="col">สถานะ</th><th scope="col">ข้อมูลล่าสุด</th></tr></thead><tbody><tr><td colspan="5">ไม่มีข้อมูลสถานีสำหรับพื้นที่ที่เลือก</td></tr></tbody></table></div><div id="emDetail" class="em-detail" aria-live="polite">เลือกชื่อสถานีเพื่อดูค่าตรวจวัดและเวลาจากข้อมูลต้นทาง</div>
     </article></div>
    </main>
 
    <div class="em-map-column" id="em-exec-map"><article class="em-panel em-alert-summary">
-     <header><div><h2>สรุปผลการตรวจวัดและการแจ้งเตือน</h2><p>สถานะและรายการแจ้งเตือนตามข้อมูลที่บันทึกไว้</p></div><span>อัปเดตตามข้อมูลล่าสุด</span></header>
+     <header><div><h2>สรุปผลการตรวจวัดและการแจ้งเตือน</h2><p>รายการแจ้งเตือนและสถานะอาจซ้ำกัน · ตรวจสอบรายละเอียดก่อนดำเนินการ</p></div><span>อัปเดตตามข้อมูลล่าสุด</span></header>
      <div><article><b>ไม่มีรายการแจ้งเตือนในข้อมูล</b><strong>—</strong><small>สถานี</small></article><article><b>มีรายการแจ้งเตือน</b><strong>—</strong><small>สถานี</small></article><article><b>Offline</b><strong>—</strong><small>สถานี</small></article><article><b>ไม่มีค่าตรวจวัด</b><strong>—</strong><small>สถานี</small></article></div>
 
     
@@ -722,6 +722,21 @@ body.monitor-mode .em-system-row article>strong{color:#00387b!important}
   document.querySelectorAll(".em-kpis strong,.em-system-row>article>strong,.em-status-summary strong,.em-alert-summary strong").forEach(el=>el.textContent="…");
   const body=document.querySelector(".em-table-wrap tbody");if(body)body.innerHTML='<tr><td colspan="5">กำลังโหลดข้อมูลล่าสุด…</td></tr>';
  }
+ function renderExplorer(rows){
+  const body=document.querySelector(".em-table-wrap tbody");if(!body)return;
+  const q=(document.getElementById("emSearch")?.value||"").trim().toLowerCase(),type=document.getElementById("emType")?.value||"",filter=document.getElementById("emFilter")?.value||"";
+  const matches=rows.map((s,i)=>({s,i})).filter(({s})=>(!q||(s.name+" "+s.estate+" "+s.code).toLowerCase().includes(q))&&(!type||s.type===type)&&(!filter||(filter==="alarm"?!!hasAlarm(s):filter==="offline"?s.status.startsWith("OFFLINE"):!isOnline(s)&&!s.status.startsWith("OFFLINE")))).sort((a,b)=>Number(!!hasAlarm(b.s))-Number(!!hasAlarm(a.s))||Number(b.s.status.startsWith("OFFLINE"))-Number(a.s.status.startsWith("OFFLINE")));
+  document.getElementById("emResult").textContent="แสดง "+matches.length.toLocaleString("th-TH")+" จาก "+rows.length.toLocaleString("th-TH")+" สถานีในพื้นที่ที่เลือก · กดชื่อสถานีเพื่อดูรายละเอียด";
+  body.innerHTML=matches.length?matches.map(({s,i})=>'<tr><td><button class="em-station-link" type="button" data-index="'+i+'">'+esc(s.name)+'</button>'+(hasAlarm(s)?'<span class="em-warning-label">มีรายการแจ้งเตือน</span>':'')+'</td><td>'+esc(s.type)+'</td><td>'+esc(s.estate)+'</td><td><span class="em-station-status '+(isOnline(s)?'online':s.status.startsWith("OFFLINE")?'offline':'unknown')+'">'+esc(s.status||"ไม่ระบุ")+'</span></td><td>'+esc(s.updated)+'</td></tr>').join(""):'<tr><td colspan="5">ไม่พบสถานีที่ตรงกับตัวกรอง</td></tr>';
+ }
+ function showDetail(s){
+  const el=document.getElementById("emDetail");if(!s||!el)return;
+  const values=Object.entries(s.values).filter(([k,v])=>k.endsWith("_txt")&&text(v)&&!["-","null","none","n/a"].includes(text(v).toLowerCase()));
+  el.innerHTML='<div class="em-detail-head"><div><small>รายละเอียดสถานี</small><h3>'+esc(s.name)+'</h3><p>'+esc(s.estate)+' · '+esc(s.type)+' · ตรวจวัด '+esc(s.updated)+'</p></div>'+(Number.isFinite(s.lat)&&Number.isFinite(s.lon)?'<button id="emDetailMap" type="button">ดูบนแผนที่ ↗</button>':'<small>ไม่มีพิกัดสำหรับซูม</small>')+'</div>'+(hasAlarm(s)?'<p class="em-detail-alert"><b>รายการจากต้นทาง:</b> '+esc(s.alarm)+'</p>':'')+(values.length?'<dl class="em-values">'+values.map(([k,v])=>'<div><dt>'+esc(k.slice(0,-4))+'</dt><dd>'+esc(v)+'</dd></div>').join("")+'</dl>':'<p>ไม่มีค่าตรวจวัดในชุดข้อมูลสถานีนี้</p>')+'<p class="em-detail-foot">ค่าตรวจวัดเป็นข้อมูลที่บันทึกไว้ โปรดตรวจสอบเวลา หน่วย และข้อมูลต้นทางก่อนนำไปใช้ ไม่ใช่ผลยืนยันความปลอดภัยในพื้นที่</p>';
+  el.querySelector("#emDetailMap")?.addEventListener("click",()=>zoomMonitoringMap(s.lat,s.lon,s.name));
+ }
+ document.querySelector(".em-table-wrap tbody")?.addEventListener("click",event=>{const b=event.target.closest(".em-station-link");if(b)showDetail(window.__emRows?.[Number(b.dataset.index)])});
+ ["emSearch","emType","emFilter"].forEach(id=>document.getElementById(id)?.addEventListener(id==="emSearch"?"input":"change",()=>renderExplorer(window.__emRows||[])));
  function renderData(all,name,token){
   if(token!==renderToken)return;
   const rows=selectedRows(all,name);
@@ -739,14 +754,9 @@ body.monitor-mode .em-system-row article>strong{color:#00387b!important}
   const alerts=document.querySelectorAll(".em-alert-summary strong");
   const missing=rows.filter(s=>!Object.keys(s.values).some(k=>k.endsWith("_txt")&&reading(s,k.slice(0,-4)))).length;
   [rows.length-alarms.length,alarms.length,offline.length,missing].forEach((v,i)=>setStrong(alerts,i,v.toLocaleString("th-TH")));
-  const tbody=document.querySelector(".em-table-wrap tbody");
-  if(tbody){
-   const sorted=rows.slice().sort((a,b)=>(isOnline(b)?1:0)-(isOnline(a)?1:0)||Number(hasAlarm(b))-Number(hasAlarm(a)));
-   tbody.innerHTML=sorted.length?sorted.map(s=>{const online=isOnline(s),coords=Number.isFinite(s.lat)&&Number.isFinite(s.lon)?' data-lat="'+s.lat+'" data-lon="'+s.lon+'" data-name="'+esc(s.name)+'" title="คลิกเพื่อซูมไปยังสถานีบนแผนที่"':'';return'<tr'+coords+'><td>'+esc(s.name)+'</td><td>'+esc(s.type)+'</td><td>'+esc(s.estate)+'</td><td><span class="em-station-status '+(online?'online':'offline')+'">'+esc(s.status||'ไม่ระบุ')+'</span></td><td>'+esc(s.updated)+'</td></tr>'}).join(""):'<tr><td colspan="5">ไม่พบสถานี e‑Monitoring สำหรับพื้นที่ที่เลือก</td></tr>';
-   tbody.querySelectorAll("tr[data-lat][data-lon]").forEach(tr=>tr.addEventListener("click",()=>zoomMonitoringMap(Number(tr.dataset.lat),Number(tr.dataset.lon),tr.dataset.name)));
-  }
+  window.__emRows=rows; const detail=document.getElementById("emDetail");if(detail)detail.textContent="เลือกชื่อสถานีเพื่อดูค่าตรวจวัดและเวลาจากข้อมูลต้นทาง"; renderExplorer(rows);
   const latest=document.querySelector(".em-alert-summary>header>span");
-  if(latest)latest.textContent="ข้อมูลล่าสุดจาก e‑Monitoring • "+rows.length.toLocaleString("th-TH")+" สถานี";
+  if(latest)latest.textContent="ข้อมูลที่บันทึกไว้ • "+rows.length.toLocaleString("th-TH")+" สถานี";
  }
  async function refreshData(name,estate){
   const token=++renderToken;
@@ -754,7 +764,7 @@ body.monitor-mode .em-system-row article>strong{color:#00387b!important}
   try{renderData(await loadStations(),name,token)}
   catch(error){
    if(token!==renderToken)return;
-   const snapshot=document.getElementById("emExecutiveSnapshot");if(snapshot)snapshot.textContent="ไม่สามารถโหลดชุดข้อมูลสถานีได้";
+   const snapshot=document.getElementById("emExecutiveSnapshot");if(snapshot)snapshot.textContent="ไม่สามารถโหลดชุดข้อมูลสถานีได้";const result=document.getElementById("emResult");if(result)result.textContent="ไม่สามารถโหลดข้อมูลสถานีได้ในขณะนี้";
    const body=document.querySelector(".em-table-wrap tbody");if(body)body.innerHTML='<tr><td colspan="5">ไม่สามารถโหลดข้อมูล e‑Monitoring ได้ในขณะนี้</td></tr>';
    document.querySelectorAll(".em-kpis strong,.em-system-row>article>strong,.em-status-summary strong,.em-alert-summary strong").forEach(el=>el.textContent="—");
   }
@@ -1856,4 +1866,8 @@ body.monitor-mode .em-panel>header h2{color:#2b3745!important;font-size:17px!imp
 body.monitor-mode .em-benefit{margin-top:15px;background:#fff;border:1px solid #e9eaf0;border-radius:14px;overflow:hidden;box-shadow:0 4px 18px #29364708}body.monitor-mode .em-benefit>header{padding:18px 21px;border-bottom:1px solid #f0f1f3}.em-benefit h2{font-size:17px;margin:0;color:#2b3745}.em-benefit header p{font-size:12px;margin:4px 0 0;color:#89939f}.em-benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}.em-benefit-grid article{display:flex;align-items:start;gap:12px;border:1px solid #edf0f3;padding:15px;border-radius:10px}.em-benefit-grid article>span{display:grid;place-items:center;flex:none;background:#f4edf8;color:#9060aa;border-radius:9px;width:34px;height:34px;font-size:12px;font-weight:700}.em-benefit-grid h3{margin:0;color:#344252;font-size:14px}.em-benefit-grid p{margin:4px 0;color:#788592;font-size:12px;line-height:1.65}.em-benefit-grid a{font-size:12px;font-weight:700;color:#80529c;text-decoration:none}
 @media(max-width:950px){body.monitor-mode .em-layout{grid-template-columns:1fr!important;grid-template-areas:"map" "summary" "chart" "measure" "stations"!important}body.monitor-mode .em-alert-summary{min-height:0}body.monitor-mode .em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){body.monitor-mode .em-dashboard{padding:18px 14px!important}body.monitor-mode .em-executive-hero{align-items:flex-start;flex-direction:column!important}.em-executive-key{width:100%}body.monitor-mode .em-kpis article{min-height:0;gap:8px!important;padding:12px!important}body.monitor-mode .em-kpis article>span{width:36px!important;height:36px!important;flex-basis:36px!important}body.monitor-mode .em-kpis article strong{font-size:22px!important}body.monitor-mode .em-kpis article small{display:none}body.monitor-mode .em-system-row{grid-template-columns:1fr!important}body.monitor-mode .em-map-column>.em-map{height:350px!important;min-height:350px!important}.em-benefit-grid{grid-template-columns:1fr}}
+</style><style id="em-useful-tools">
+body.monitor-mode .em-tools{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;padding:15px 18px 5px}body.monitor-mode .em-tools label{font-size:11px;font-weight:700;color:#65717e}body.monitor-mode .em-tools input,body.monitor-mode .em-tools select{display:block;width:100%;height:40px;margin-top:5px;padding:0 10px;background:#fafbfc;border:1px solid #dce2e8;border-radius:8px;color:#364453;font:inherit;font-size:12px}
+body.monitor-mode .em-result{margin:6px 19px 10px;color:#778390;font-size:11px}body.monitor-mode .em-station-link{background:none;border:0;padding:3px 0;color:#714296;font:inherit;font-weight:700;text-align:left;text-decoration:underline;cursor:pointer}.em-warning-label{display:block;color:#a86a2d;font-size:10px;margin-top:3px}body.monitor-mode .em-station-status.unknown{background:#edf0f2!important;color:#5e6a74!important}
+body.monitor-mode .em-detail{margin:0 18px 18px;padding:17px;background:#f7f8fa;border:1px solid #e9edf1;border-radius:10px;color:#465360;font-size:12px}.em-detail p{margin:5px 0;line-height:1.6}.em-detail-head{display:flex;justify-content:space-between;align-items:start;gap:15px}.em-detail-head small{color:#8a6b9c}.em-detail-head h3{font-size:16px;color:#2c3a48;margin:2px 0}.em-detail-head p{color:#75808c}.em-detail-head button{border:0;border-radius:8px;padding:9px 12px;background:#75479a;color:white;font:inherit;cursor:pointer;white-space:nowrap}.em-detail-alert{padding:10px 12px;background:#fff3e2;border-radius:8px;color:#85561f}.em-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin:12px 0}.em-values div{background:white;border:1px solid #e9edf1;border-radius:8px;padding:9px}.em-values dt{font-size:11px;color:#7e8a95}.em-values dd{margin:3px 0 0;font-size:12px;font-weight:700;color:#344453;overflow-wrap:anywhere}.em-detail-foot{font-size:11px;color:#75818d}@media(max-width:700px){body.monitor-mode .em-tools{grid-template-columns:1fr}.em-detail-head{flex-direction:column}}
 </style></body></html>
