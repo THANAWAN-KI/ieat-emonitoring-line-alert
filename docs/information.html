@@ -212,9 +212,9 @@ html,html body,html body *:not(svg):not(svg *):not(canvas):not(iframe):not(style
 </section><section class="requested-monitor" aria-label="Dashboard ระบบ e-Monitoring">
  <div class="em-dashboard">
   <header class="em-executive-hero">
-   <div><div class="em-eyebrow"><span></span> IEAT · ENVIRONMENTAL MONITORING</div><h1>ติดตามสิ่งแวดล้อม<br><em>ในพื้นที่นิคมอุตสาหกรรม</em></h1><p>ภาพรวมสถานีตรวจวัดคุณภาพอากาศ คุณภาพน้ำ และการระบายจากปล่อง เพื่อสนับสนุนการติดตามและตัดสินใจ</p><div class="em-hero-actions"><button type="button" onclick="document.getElementById('em-exec-map').scrollIntoView({behavior:'smooth'})">ดูแผนที่สถานี <span>↗</span></button><button type="button" onclick="document.getElementById('em-exec-stations').scrollIntoView({behavior:'smooth'})">ตรวจสอบสถานี <span>↓</span></button></div></div>
-   <aside><span>ขอบเขตข้อมูล</span><strong>3 ระบบตรวจวัด</strong><p>AQMs <i>·</i> WQMs <i>·</i> CEMs</p><div>เลือกนิคมอุตสาหกรรมจากตัวเลือกด้านบน เพื่อดูข้อมูลเฉพาะพื้นที่</div></aside>
-  </header>
+ <div class="em-executive-heading"><div class="em-eyebrow">IEAT <span></span> ENVIRONMENTAL INTELLIGENCE</div><h1>ภาพรวมการเฝ้าระวังสิ่งแวดล้อม</h1><p>ข้อมูลตรวจวัดในพื้นที่นิคมอุตสาหกรรม · e-Monitoring</p></div>
+ <div class="em-executive-key"><span>ครอบคลุมระบบตรวจวัด</span><strong>AQMs <i>·</i> WQMs <i>·</i> CEMs</strong><small>เลือกพื้นที่จากเมนูด้านบน</small></div>
+</header>
   <div class="em-snapshot"><span class="em-snapshot-dot"></span><div><strong id="emExecutiveSnapshot">กำลังตรวจสอบเวลาชุดข้อมูล</strong><span>สถานะและค่าตรวจวัดอ้างอิงจากชุดข้อมูลที่บันทึกไว้ โปรดตรวจสอบเวลารายสถานีก่อนใช้งาน</span></div></div>
   <div class="em-section-title"><div><span>01 / ภาพรวม</span><h2>สถานีตรวจวัดในพื้นที่</h2></div><p>จำนวนสถานีตามตัวกรองพื้นที่ที่เลือก</p></div>
   <section class="em-kpis">
@@ -1805,4 +1805,33 @@ body.monitor-mode .em-status-summary div,body.monitor-mode .em-alert-summary art
 body.monitor-mode .em-map>header{background:#fffffff5;border-radius:10px}body.monitor-mode .em-map button{font-family:inherit}body.monitor-mode #em-exec-map,body.monitor-mode #em-exec-stations{scroll-margin-top:22px}
 @media(max-width:850px){body.monitor-mode .em-executive-hero{grid-template-columns:1fr;padding:24px;gap:20px}body.monitor-mode .em-executive-hero aside{padding:15px}body.monitor-mode .em-section-title{align-items:start;flex-direction:column}body.monitor-mode .em-layout{grid-template-columns:1fr!important}body.monitor-mode .em-content,body.monitor-mode .em-map-column{grid-column:auto!important;grid-row:auto!important}}
 @media(max-width:520px){body.monitor-mode .em-dashboard{padding:14px!important}body.monitor-mode .em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}body.monitor-mode .em-kpis article{display:block;min-height:0}body.monitor-mode .em-kpis article>span{margin-bottom:10px}body.monitor-mode .em-executive-hero h1{font-size:26px!important}}
+</style><style id="executive-monitor-refined-20261027">
+body.monitor-mode .em-dashboard{background:#f4f5f6!important;max-width:1680px;padding:26px clamp(20px,3vw,44px) 48px!important;color:#28323e}
+body.monitor-mode .em-executive-hero{display:flex;align-items:center;justify-content:space-between;gap:24px;background:#fff!important;color:#263343!important;border:1px solid #e5e7eb;border-radius:14px;padding:22px 26px!important;box-shadow:0 3px 14px #2434470a}
+body.monitor-mode .em-eyebrow{color:#9470ae;font-size:10px;font-weight:700;letter-spacing:.13em}.em-eyebrow span{display:inline-block;width:4px;height:4px;margin:0 7px 2px;background:#bd96d1;border-radius:50%}
+body.monitor-mode .em-executive-hero h1{margin:6px 0 4px!important;color:#252f3c!important;font-size:27px!important;line-height:1.3!important}
+body.monitor-mode .em-executive-hero p{color:#6a7784!important;font-size:13px!important;margin:0}
+body.monitor-mode .em-executive-key{padding:3px 0 3px 24px;border-left:2px solid #eee7f2;display:grid;gap:3px;min-width:225px}.em-executive-key span,.em-executive-key small{color:#78818c;font-size:11px}.em-executive-key strong{color:#7c479a;font-size:15px}.em-executive-key i{color:#c7a5d7;font-style:normal}
+body.monitor-mode .em-snapshot{margin:10px 0 22px!important;padding:10px 13px!important;border-radius:8px;background:#faf8fc;border:1px solid #ece4f0;font-size:11px!important}
+body.monitor-mode .em-section-title{margin:0 0 10px}.em-section-title span{display:none}.em-section-title h2{font-size:18px;color:#293440}.em-section-title p{font-size:11px}
+body.monitor-mode .em-kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px}body.monitor-mode .em-kpis article:nth-child(n+4){display:none!important}
+body.monitor-mode .em-kpis article{min-height:0;min-width:0;display:flex!important;align-items:center;gap:14px;padding:17px 19px!important;border:1px solid #e5e8ed;border-radius:12px;box-shadow:0 2px 9px #27334408}
+body.monitor-mode .em-kpis article>span{width:43px;height:43px;flex:0 0 43px;border-radius:11px;background:#f4edf8!important;color:#9b4dca!important;margin:0}body.monitor-mode .em-kpis strong{font-size:29px!important;color:#303b49!important}body.monitor-mode .em-kpis b{font-size:13px!important;margin-top:5px}body.monitor-mode .em-kpis small{font-size:11px!important}
+body.monitor-mode .em-system-row{margin:12px 0 19px;gap:12px}body.monitor-mode .em-system-row article{min-height:0;padding:13px 16px!important;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;border-radius:11px!important}
+body.monitor-mode .em-system-row>article>span{width:36px;height:36px;border-radius:9px}body.monitor-mode .em-system-row>article>span svg{width:24px!important;height:24px!important}body.monitor-mode .em-system-row h2{font-size:13px!important;line-height:1.45}body.monitor-mode .em-system-row b{font-size:10px!important;font-weight:400}body.monitor-mode .em-system-row p{display:none}body.monitor-mode .em-system-row article>strong{font-size:13px!important;white-space:nowrap}
+body.monitor-mode .em-layout{display:grid!important;grid-template-columns:minmax(0,1.55fr) minmax(310px,1fr)!important;grid-template-areas:"map summary" "chart chart" "measure measure" "stations stations";gap:14px!important;align-items:start}
+body.monitor-mode .em-content,body.monitor-mode .em-map-column{display:contents!important}
+body.monitor-mode .em-map-column>.em-map{grid-area:map;position:relative;min-height:450px!important;height:450px!important;align-self:stretch}
+body.monitor-mode .em-alert-summary{grid-area:summary;min-height:450px;align-self:stretch}
+body.monitor-mode .em-pm-chart{grid-area:chart;height:350px!important}body.monitor-mode .em-line-chart{height:225px}
+body.monitor-mode .em-two-charts{grid-area:measure}body.monitor-mode .em-station-row{grid-area:stations}
+body.monitor-mode .em-alert-summary>header{min-height:80px}body.monitor-mode .em-alert-summary>div{grid-template-columns:1fr 1fr!important;gap:10px;padding:15px}
+body.monitor-mode .em-alert-summary article{min-height:106px;background:#f7f7f9!important;padding:15px!important;border:1px solid #eceef1}
+body.monitor-mode .em-alert-summary article b{font-size:12px!important;color:#62707e}body.monitor-mode .em-alert-summary article strong{font-size:30px!important;color:#343f4c!important;line-height:1.15}body.monitor-mode .em-alert-summary article:nth-child(2) strong{color:#a54f29!important}body.monitor-mode .em-alert-summary article small{color:#7d8790;font-size:11px!important}
+body.monitor-mode .em-panel{border:1px solid #e5e8ed!important;border-radius:12px!important;box-shadow:0 2px 9px #27334408!important}body.monitor-mode .em-panel h2{color:#2d3743!important}
+body.monitor-mode .em-map>header{position:absolute;top:12px;left:12px;right:12px;background:#fffffff5;box-shadow:0 2px 10px #24344717;padding:11px 14px!important;min-height:58px;border-radius:9px}
+body.monitor-mode .em-map>header h2{font-size:15px!important}body.monitor-mode .em-map>header p{font-size:11px!important}
+body.monitor-mode .em-station-row{scroll-margin-top:16px}.em-table-wrap tbody tr:focus-within{outline:2px solid #9b4dca;outline-offset:-2px}
+@media(max-width:950px){body.monitor-mode .em-layout{grid-template-columns:1fr!important;grid-template-areas:"map" "summary" "chart" "measure" "stations"!important}body.monitor-mode .em-alert-summary{min-height:0}body.monitor-mode .em-map-column>.em-map{height:430px!important;min-height:430px!important}}
+@media(max-width:650px){body.monitor-mode .em-dashboard{padding:14px!important}body.monitor-mode .em-executive-hero{align-items:flex-start;flex-direction:column;padding:18px!important;gap:12px}body.monitor-mode .em-executive-hero h1{font-size:22px!important}body.monitor-mode .em-executive-key{border-left:0;border-top:1px solid #eee7f2;padding:10px 0 0;width:100%}body.monitor-mode .em-kpis{grid-template-columns:1fr!important}body.monitor-mode .em-kpis article{display:flex!important}body.monitor-mode .em-system-row{grid-template-columns:1fr!important}body.monitor-mode .em-map-column>.em-map{height:380px!important;min-height:380px!important}body.monitor-mode .em-two-charts{grid-template-columns:1fr!important}}
 </style></body></html>
