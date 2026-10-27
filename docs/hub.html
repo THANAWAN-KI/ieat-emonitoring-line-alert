@@ -1704,7 +1704,7 @@ html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHe
 <script src="./incident-store.js?v=20261022" defer></script>
 <script src="./report-store.js?v=1" defer></script>
 <script src="./workflow-navigation.js?v=2" defer></script>
-<script src="./hub-workflow.js?v=riskmap-hotspots-20261027" defer></script><script src="./data-thermal-dashboard.js?v=20261027" defer></script>
+<script src="./hub-workflow.js?v=riskmap-hotspots-20261027" defer></script><script src="./data-thermal-dashboard.js?v=map-side-20261027" defer></script>
 <script src="./incident-monitoring.js?v=1" defer></script>
 <script src="./report-route.js?v=20261022-hazard" defer></script>
 <link rel="stylesheet" href="./fire-dashboard.css?v=20261022-4">
@@ -2000,4 +2000,12 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 #data-thermal-dashboard #thermal-panel{box-sizing:border-box;width:100%;margin:0!important;background:#fff;border:1px solid #ebe5ef;border-radius:12px;padding:15px!important}#data-thermal-dashboard #thermal-panel .thermal-metrics,#data-thermal-dashboard #thermal-panel .thermal-legend,#data-thermal-dashboard #thermal-panel h3{display:none!important}
 #data-thermal-dashboard #thermal-estates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-height:220px;overflow:auto;margin-top:10px}#data-thermal-dashboard .thermal-estate{background:#faf8fc;border:1px solid #ede5f1;border-radius:8px;padding:10px;text-align:left;color:#303841;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}#data-thermal-dashboard .thermal-estate small{display:block;font-size:10px}#data-thermal-dashboard .focus-estate-rank{color:#9b4dca}#data-thermal-dashboard .focus-estate-label{flex:1}#data-thermal-dashboard .focus-estate-distance{font-size:13px!important}#data-thermal-dashboard .warning,#data-thermal-dashboard .source,#data-thermal-dashboard #thermal-status{font-size:11px;color:#606c76}
 @media(max-width:800px){#data-thermal-dashboard .data-thermal-cards{grid-template-columns:repeat(2,minmax(0,1fr))}#data-thermal-dashboard .data-thermal-charts{grid-template-columns:1fr}#data-thermal-dashboard #thermal-estates{grid-template-columns:1fr}}@media(max-width:420px){#data-thermal-dashboard .data-thermal-cards{grid-template-columns:1fr 1fr}#data-thermal-dashboard .data-thermal-cards article{padding:10px}}
+</style><style id="riskmap-hotspots-side-layout">
+#riskDashboard.workflow-data .data-thermal-map-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(400px,1fr);gap:14px;align-items:stretch;width:100%;grid-column:1/-1}
+#riskDashboard.workflow-data .data-thermal-map-row #data-thermal-dashboard{min-width:0;margin:0!important}
+#riskDashboard.workflow-data .data-thermal-map-row #riskMapSection{min-height:640px;align-self:stretch}
+#riskDashboard.workflow-data .data-thermal-map-row #riskMapSection>.panel{height:100%;min-height:640px;display:flex;flex-direction:column}
+#riskDashboard.workflow-data .data-thermal-map-row #map{flex:1 1 auto;min-height:570px}
+#riskDashboard.workflow-data .data-thermal-map-row .data-thermal-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:1100px){#riskDashboard.workflow-data .data-thermal-map-row{grid-template-columns:1fr}#riskDashboard.workflow-data .data-thermal-map-row #riskMapSection,#riskDashboard.workflow-data .data-thermal-map-row #riskMapSection>.panel{height:480px;min-height:480px}#riskDashboard.workflow-data .data-thermal-map-row #map{min-height:400px}}
 </style></body></html>
