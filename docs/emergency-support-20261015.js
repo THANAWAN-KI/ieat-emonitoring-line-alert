@@ -30,17 +30,17 @@ const sources=[
 ];
 const groups=[{title:'ช่วยเหลือและระงับเหตุ',ids:['hospital','fire','police'],each:2},{title:'น้ำดับเพลิงและเฝ้าระวัง',ids:['hydrant','cctv'],each:3},{title:'ประสานพื้นที่ใกล้เคียง',ids:['community','business'],each:3}];
 let estateName='',estateSequence=0,estateFeatures=null;let map=null,incident=null,marker=null,markers=null,selecting=false,request=0,controller=null,results=new Map(),loading=false,failures=[];
-const overviewRows=new Map(),overviewTotals=new Map();let overviewLoading=false,overviewCompleted=false,overviewFailures=[];
+const overviewRows=new Map(),overviewTotals=new Map(),cardPages=[0,0,0];let overviewLoading=false,overviewCompleted=false,overviewFailures=[];
 const fetchedAt=new Map(),metadata=new Map(),number=n=>Number(n).toLocaleString('th-TH'),distance=n=>n<1000?number(Math.round(n))+' ม.':number(Math.round(n/100)/10)+' กม.';
 const text=(tag,value,cls)=>{const e=document.createElement(tag);e.textContent=value;if(cls)e.className=cls;return e;};
 const color=d=>d<=5000?['#4F7D32','#fff']:d<=10000?['#FFD16A','#000']:d<=20000?['#F5B52E','#000']:['#D9361E','#fff'];
 const usable=v=>v!=null&&String(v).trim()&&!/^(null|undefined|ไม่มีข้อมูล|ไม่ระบุ|-|—)$/i.test(String(v).trim());
 function first(attrs,fields){return fields.map(f=>attrs[f]).find(usable);}
-function selectedRows(){return groups.map(g=>g.ids.flatMap(id=>(results.get(id)||[]).slice(0,g.each)).sort((a,b)=>a.distance-b.distance));}
+function selectedRows(){return groups.map(g=>g.ids.flatMap(id=>(results.get(id)||[])).sort((a,b)=>a.distance-b.distance));}
 function focusRow(row){
  if(!map)return;
- map.setView([row.lat,row.lon],16);
- const box=document.createElement('div');box.append(text('strong',row.name),text('p',row.type+' · '+distance(row.distance)),text('p','โทร: '+(row.phone||'ไม่มีข้อมูลในระบบ')));
+ if(!Number.isFinite(row.lat)||!Number.isFinite(row.lon))return; map.setView([row.lat,row.lon],16);
+ const box=document.createElement('div');box.append(text('strong',row.name),text('p',row.type+(Number.isFinite(row.distance)?' · '+distance(row.distance):'')),text('p','โทร: '+(row.phone||'ไม่มีข้อมูลในระบบ')));
  if(row.address)box.append(text('p',row.address));
  window.L.popup().setLatLng([row.lat,row.lon]).setContent(box).openOn(map);
 }
@@ -60,10 +60,12 @@ window.addEventListener('ieat-retry-support',load);
 function render(){
  publishSupport();host.replaceChildren();
  const overview=!incident;radius.disabled=overview;pointLabel.hidden=overview;
- const selections=overview?groups.map(g=>g.ids.flatMap(id=>(overviewRows.get(id)||[]).slice(0,g.each))):selectedRows();
- groups.forEach((g,index)=>{const card=document.createElement('article');card.className='risk-ranking-card emergency-support-card';card.append(text('h3',g.title));
+ if(overviewLoading&&!incident)note.textContent='กำลังโหลดข้อมูลจริงจากแหล่งข้อมูล';
+ const selections=overview?groups.map(g=>g.ids.flatMap(id=>(overviewRows.get(id)||[]))):selectedRows();
+ groups.forEach((g,index)=>{const card=document.createElement('article');card.className='risk-ranking-card emergency-support-card';card.dataset.supportPaged='true';card.append(text('h3',g.title));
   const rows=selections[index];if(overview){const totals=g.ids.map(id=>{const source=sources.find(s=>s.id===id);return source.label+' '+(overviewTotals.has(id)?number(overviewTotals.get(id)):'—')+' รายการ';});card.append(text('p',totals.join(' · '),'support-overview-counts'));}if(!rows.length){card.append(text('p',overview?(overviewLoading?'กำลังโหลดภาพรวมข้อมูลสนับสนุน…':g.ids.some(id=>overviewFailures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่มีรายการในฐานข้อมูล'):loading?'กำลังค้นหาตำแหน่งใกล้เหตุ…':g.ids.some(id=>failures.includes(id))?'โหลดข้อมูลบางประเภทไม่สำเร็จ':'ไม่พบข้อมูลกลุ่มนี้ในระยะที่เลือก','support-empty'));}
-  rows.forEach(row=>{const button=document.createElement(overview?'div':'button');if(!overview)button.type='button';button.className='emergency-support-row';const top=document.createElement('div');top.className='support-row-top';const badge=text('strong',overview?'ตัวอย่างข้อมูล':distance(row.distance),'support-distance');const c=color(row.distance);badge.style.background=c[0];badge.style.color=c[1];top.append(text('span',row.type,'support-type'),badge);button.append(top,text('b',row.name,'support-name'),text('span','โทร: '+(row.phone||'ไม่มีข้อมูลในระบบ'),'support-phone'));if(row.address)button.append(text('span',row.address,'support-address'));if(!overview)button.addEventListener('click',()=>focusRow(row));card.append(button);});host.append(card);
+  const pageSize=5,pages=Math.max(1,Math.ceil(rows.length/pageSize));cardPages[index]=Math.min(cardPages[index],pages-1);const visibleRows=rows.slice(cardPages[index]*pageSize,(cardPages[index]+1)*pageSize);
+  visibleRows.forEach(row=>{const button=document.createElement('button');button.type='button';button.className='emergency-support-row';const top=document.createElement('div');top.className='support-row-top';top.append(text('span',row.type,'support-type'));if(Number.isFinite(row.distance)){const badge=text('strong',distance(row.distance),'support-distance');const c=color(row.distance);badge.style.background=c[0];badge.style.color=c[1];top.append(badge);}button.append(top,text('b',row.name,'support-name'),text('span','โทร: '+(row.phone||'ไม่มีข้อมูลในระบบ'),'support-phone'));if(row.address)button.append(text('span',row.address,'support-address'));if(Number.isFinite(row.lat)&&Number.isFinite(row.lon)){button.addEventListener('click',()=>focusRow(row));button.setAttribute('aria-label',row.type+' '+row.name+' ดูบนแผนที่');}else{button.disabled=true;button.append(text('span','ไม่มีพิกัดในระบบ','support-address'));}card.append(button);});if(rows.length){const pager=document.createElement('div');pager.className='support-real-pager';const prev=text('button','ก่อนหน้า'),next=text('button','ถัดไป');prev.type=next.type='button';prev.disabled=cardPages[index]===0;next.disabled=cardPages[index]>=pages-1;prev.onclick=()=>{cardPages[index]--;render();};next.onclick=()=>{cardPages[index]++;render();};pager.append(prev,text('span',(cardPages[index]+1)+' / '+pages+' · '+number(rows.length)+' รายการ'),next);card.append(pager);}host.append(card);
  });
  if(incident){pointLabel.textContent='นิคมอุตสาหกรรม: '+estateName;clear.disabled=false;
   note.textContent=loading?'กำลังค้นหาข้อมูลสนับสนุนในระยะ '+radius.value+' กม.…':(failures.length?'โหลดไม่ได้: '+sources.filter(s=>failures.includes(s.id)).map(s=>s.label).join(', '):'');
@@ -95,12 +97,14 @@ async function loadOverview(force=false){
    if(!meta){const response=await fetch(url+'?f=json',{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error('Metadata failed');meta=await response.json();if(meta.error||!meta.objectIdField||!Array.isArray(meta.fields))throw Error('Invalid layer');metadata.set(source.id,meta);}
    const names=meta.fields.map(f=>f.name),phones=meta.fields.filter(f=>/โทร|phone|(^|[^a-z])tel([^a-z]|$)/i.test(f.name+' '+(f.alias||''))).map(f=>f.name),addresses=meta.fields.filter(f=>/ที่อยู่|address/i.test(f.name+' '+(f.alias||''))).map(f=>f.name);
    const fields=[...new Set([meta.objectIdField,...source.names,...phones,...addresses])].filter(f=>names.includes(f)),signal=new AbortController().signal;
-   const countParams=new URLSearchParams({f:'json',where:source.where||'1=1',returnCountOnly:'true'});
-   const sampleParams=new URLSearchParams({f:'json',where:source.where||'1=1',outFields:fields.join(','),returnGeometry:'false',resultRecordCount:'3',orderByFields:meta.objectIdField+' ASC'});
-   const [countData,data]=await Promise.all([fetchJSON(url+'/query',countParams,signal),fetchJSON(url+'/query',sampleParams,signal)]);
-   if(!Number.isFinite(countData.count)||!Array.isArray(data.features))throw Error('Invalid overview');
-   overviewTotals.set(source.id,countData.count);
-   overviewRows.set(source.id,data.features.slice(0,3).map(f=>({id:f.attributes[meta.objectIdField],sourceId:source.id,type:source.label,name:String(first(f.attributes,source.names)||source.label+' #'+f.attributes[meta.objectIdField]),phone:String(first(f.attributes,phones)||''),address:String(first(f.attributes,addresses)||'')})));
+   const idsData=await fetchJSON(url+'/query',new URLSearchParams({f:'json',where:source.where||'1=1',returnIdsOnly:'true'}),signal);
+   if(!Array.isArray(idsData.objectIds))throw Error('ไม่สามารถอ่านรายการทั้งหมด');
+   const ids=idsData.objectIds.sort((a,b)=>a-b),rows=[];overviewTotals.set(source.id,ids.length);overviewRows.set(source.id,rows);
+   for(let i=0;i<ids.length;i+=300){
+    const params=new URLSearchParams({f:'json',objectIds:ids.slice(i,i+300).join(','),where:source.where||'1=1',outFields:fields.join(','),returnGeometry:'true',outSR:'4326'});
+    const data=await fetchJSON(url+'/query',params,signal);if(data.exceededTransferLimit||!Array.isArray(data.features))throw Error('ข้อมูลไม่ครบ');
+    for(const f of data.features){const g=f.geometry;let p=g&&Number.isFinite(g.x)&&Number.isFinite(g.y)?[g.x,g.y]:g?.points?.[0]||g?.rings?.[0]?.[0]||g?.paths?.[0]?.[0];let lat,lon;if(p&&Number.isFinite(p[0])&&Number.isFinite(p[1])&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90){lon=p[0];lat=p[1];}rows.push({id:f.attributes[meta.objectIdField],sourceId:source.id,type:source.label,name:String(first(f.attributes,source.names)||source.label+' #'+f.attributes[meta.objectIdField]),phone:String(first(f.attributes,phones)||''),address:String(first(f.attributes,addresses)||''),lat,lon});}
+   }
   }catch(error){overviewFailures.push(source.id);console.warn('Support overview '+source.label,error.message);}
   if(!incident)render();
  }
@@ -110,6 +114,7 @@ async function loadOverview(force=false){
 
 async function load(){
  if(!incident){loadOverview(true);return;}
+ cardPages.fill(0);
  controller?.abort();controller=new AbortController();const signal=controller.signal,id=++request,origin={...incident};loading=true;results=new Map();fetchedAt.clear();failures=[];drawSupportMarkers();render();
  await Promise.allSettled(sources.map(async source=>{try{const rows=await loadSource(source,origin,effectiveSupportRadius(),signal);if(id!==request)return;results.set(source.id,rows);fetchedAt.set(source.id,new Date().toISOString());}catch(e){if(id!==request||signal.aborted)return;failures.push(source.id);console.warn('Emergency support '+source.label,e);}if(id===request){render();drawSupportMarkers();}}));
  if(id!==request)return;loading=false;render();drawSupportMarkers();
