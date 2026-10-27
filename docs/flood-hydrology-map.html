@@ -273,7 +273,10 @@ function waterPopup(r){
  const status=has?(diff>=0?'ล้นตลิ่ง '+fmt(diff)+' ม.':'ต่ำกว่าตลิ่ง '+fmt(Math.abs(diff))+' ม.'):'ไม่มีระดับตลิ่งให้เปรียบเทียบ';
  const historyCode=whCode(r.oldcode||r.code||''),stamp=date(r.measured_at),at=Number.isFinite(stamp)?new Date(stamp).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}):'ไม่ระบุเวลา';
  const history=historyAvailable(r)?'<details class="station-history-disclosure"><summary>ดูกราฟระดับน้ำย้อนหลัง 2023–2026</summary><section class="station-history-inline" data-history-code="'+esc(historyCode)+'" data-history-bank="'+(bank!==null&&Number.isFinite(bank)?esc(bank):'')+'"><div class="popup-history-years" role="group" aria-label="เลือกปีระดับน้ำย้อนหลัง"></div><div class="popup-history-body" role="status">กำลังเตรียมกราฟ…</div></section></details>':'';
- return '<div class="popup"><h3>'+esc((r.oldcode||r.code||'')+' · '+r.name)+'</h3><small>'+esc([...new Set([r.province,r.district,r.river].filter(Boolean).map(v=>String(v).replace(/^จังหวัด/,'')))].join(' · '))+'</small><div class="value">'+(wl!==null&&Number.isFinite(wl)?fmt(wl)+' ม.รทก.':'ไม่มีค่าตรวจวัด')+'</div><span class="badge">'+esc(status)+'</span><p>ระดับตลิ่ง '+(bank!==null&&Number.isFinite(bank)?fmt(bank)+' ม.รทก.':'ไม่มีค่า')+'<br>น้ำไหลผ่าน '+(r.discharge==null?'ไม่มีค่า':fmt(r.discharge)+' ลบ.ม./วินาที')+'<br>แนวโน้ม '+esc(r.trend_text||'ไม่ระบุ')+'</p><small>ตรวจวัด '+esc(at)+(old(r,'water')||r.stale?' · ข้อมูลเก่าเกิน 6 ชั่วโมง':'')+'<br>'+esc(String(r.source_name||'กรมชลประทาน').replace('RID GeoJSON','กรมชลประทาน (RID)'))+' · <a href="'+esc(r.source_url||window.IEAT_RID.url)+'" target="_blank" rel="noopener">ข้อมูลต้นทาง</a></small>'+history+'</div>';
+ const tone=!has?'unknown':diff>=0?'high':'normal';
+ const locationText=[...new Set([r.province,r.district,r.river].filter(Boolean).map(v=>String(v).replace(/^จังหวัด/,'')))].join(' · ');
+ const stale=old(r,'water')||r.stale;
+ return '<div class="popup station-popup"><div class="station-popup-head"><span class="station-popup-kicker">สถานีวัดระดับน้ำ</span><h3>'+esc([r.oldcode||r.code,r.name].filter(Boolean).join(' · '))+'</h3>'+(locationText?'<div class="station-popup-location">'+esc(locationText)+'</div>':'')+'</div><div class="station-popup-reading"><span>ระดับน้ำปัจจุบัน</span><strong>'+(wl!==null&&Number.isFinite(wl)?fmt(wl)+' <small>ม.รทก.</small>':'ไม่มีค่าตรวจวัด')+'</strong><div class="station-popup-status '+tone+'"><i></i>'+esc(status)+'</div></div><dl class="station-popup-details"><div><dt>ระดับตลิ่ง</dt><dd>'+(bank!==null&&Number.isFinite(bank)?fmt(bank)+' ม.รทก.':'ไม่มีค่า')+'</dd></div><div><dt>น้ำไหลผ่าน</dt><dd>'+(r.discharge==null?'ไม่มีค่า':fmt(r.discharge)+' ลบ.ม./วินาที')+'</dd></div><div><dt>แนวโน้ม</dt><dd>'+esc(r.trend_text||'ไม่ระบุ')+'</dd></div></dl><div class="station-popup-footer"><div>ตรวจวัด '+esc(at)+'</div>'+(stale?'<div class="station-popup-stale">ข้อมูลเก่าเกิน 6 ชั่วโมง</div>':'')+'<div>'+esc(String(r.source_name||'กรมชลประทาน').replace('RID GeoJSON','กรมชลประทาน (RID)'))+' · <a href="'+esc(r.source_url||window.IEAT_RID.url)+'" target="_blank" rel="noopener">ข้อมูลต้นทาง ↗</a></div></div>'+history+'</div>';
 }
 
 function estateFloodPlan(name){
@@ -700,6 +703,20 @@ body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,bo
 .flood-cluster-symbol svg{width:20px;height:20px}.flood-cluster-symbol svg[viewBox="0 0 32 32"]{width:32px;height:32px}
 .flood-point-cluster .flood-cluster-symbol b{position:absolute;right:-7px;top:-7px;min-width:17px;padding:1px 3px;border:1px solid #ddd;border-radius:10px;background:white;color:#303841;font:700 10px/14px Sarabun,sans-serif;text-align:center}
 .flood-point-cluster:focus-visible{outline:3px solid #7653a4;outline-offset:3px}
+</style><style id="station-popup-redesign-20261027">
+.station-popup{box-sizing:border-box;width:270px;max-width:calc(100vw - 85px);color:#243142!important;font-family:Sarabun,sans-serif!important;line-height:1.5}
+.station-popup-head{padding:0 23px 12px 0;border-bottom:1px solid #e8edf2}
+.station-popup .station-popup-kicker{display:block;color:#6d7d8f;font-size:11px;font-weight:600;letter-spacing:.02em}
+.station-popup h3{margin:3px 0 2px!important;color:#143d6c!important;font-size:17px!important;line-height:1.4!important;overflow-wrap:anywhere}
+.station-popup-location{font-size:12px;color:#6b7886}
+.station-popup-reading{padding:13px 0 11px}.station-popup-reading>span{display:block;font-size:12px;color:#68798b}.station-popup-reading>strong{display:block;font-size:29px;line-height:1.3;color:#162d46}.station-popup-reading>strong small{font-size:15px;font-weight:600}
+.station-popup-status{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;background:#e7f5ef;color:#216749}
+.station-popup-status.high{background:#fff0ef;color:#ae3034}.station-popup-status.unknown{background:#f0f2f4;color:#5c6976}.station-popup-status i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.station-popup-details{margin:0!important;padding:4px 12px!important;background:#f5f8fb;border-radius:10px}
+.station-popup-details div{display:flex;justify-content:space-between;gap:12px;padding:7px 0}.station-popup-details div+div{border-top:1px solid #e5ebf1}
+.station-popup-details dt{color:#6c7b8b;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#25364a;font-size:12px;font-weight:600}
+.station-popup-footer{margin-top:12px;color:#6c7b8b;font-size:11px;line-height:1.7}.station-popup-footer a{color:#245c9d;font-weight:600}.station-popup-stale{color:#b34437;font-weight:600}
+.station-popup .station-history-disclosure{margin-top:10px}
 </style></body></html>
 
 
