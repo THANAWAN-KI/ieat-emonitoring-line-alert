@@ -5,6 +5,13 @@ const style=make('style');style.textContent=`${root}:not(.workflow-data) #emerge
 function nav(active){document.querySelectorAll('.header-nav a').forEach(a=>{const yes=active==='incident'?a.hasAttribute('data-incident-nav'):active==='data'?a.getAttribute('href')?.includes('information.html'):a.getAttribute('href')==='./hub.html';a.classList.toggle('nav-active',yes);if(yes)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});}
 if(view==='data'){
  dash.classList.add('workflow-data');
+ // Keep factory search above the data panels and the report.
+ document.addEventListener('DOMContentLoaded',()=>{
+  dash.prepend(bar);
+  const input=$('chemicalSearch'),label=bar.querySelector('label[for="chemicalSearch"]');
+  if(label?.firstChild?.nodeType===3)label.firstChild.textContent='ค้นหาโรงงาน / บริษัท / สารเคมี';
+  if(input)input.placeholder='ชื่อโรงงาน / บริษัท / เลขทะเบียน / สารเคมี / CAS';
+ },{once:true});
  nav('data');document.querySelector('.portal-disaster-tabs')?.style.setProperty('display','none','important');heading.remove();
 }
 if(view==='incident'){
