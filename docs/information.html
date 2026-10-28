@@ -475,6 +475,183 @@ body.monitor-mode .em-dashboard .em-map-chips button{font-size:11px;padding:9px 
 @media(max-width:1200px) and (min-width:901px){body.monitor-mode .em-reference-shell{grid-template-columns:minmax(0,1.85fr) minmax(310px,1fr)!important;gap:14px}body.monitor-mode .em-analytics{grid-template-columns:minmax(0,1fr) 210px;gap:13px}body.monitor-mode .em-dashboard .em-kpis article{padding:16px 10px!important;gap:0}body.monitor-mode .em-dashboard .em-kpis article>span{display:none!important}body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:28px!important}body.monitor-mode .em-dashboard .em-kpis article b{font-size:10px!important}body.monitor-mode .em-dashboard .em-ring{width:145px;height:145px}body.monitor-mode .em-dashboard .em-ring>div{width:107px;height:107px}}
 @media(max-width:900px){body.monitor-mode{overflow:auto!important}body.monitor-mode .em-reference-shell{display:flex!important;flex-direction:column;height:auto;min-height:0}body.monitor-mode .em-analytics{overflow:visible;grid-template-columns:minmax(0,1fr) 240px;order:2;padding:0}body.monitor-mode .em-reference-right{height:520px;order:1}body.monitor-mode .em-dashboard .em-reference-right>.em-map{height:520px!important}body.monitor-mode .em-dashboard .em-kpis article>span{display:none!important}}
 @media(max-width:600px){body.monitor-mode .em-dashboard{padding:12px!important}body.monitor-mode .em-analytics{display:flex;flex-direction:column;gap:16px}body.monitor-mode .em-reference-left,body.monitor-mode .em-reference-middle{display:flex!important;width:100%;gap:16px}body.monitor-mode .em-dashboard .em-kpis article{padding:16px 11px!important;min-height:96px;gap:0}body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:27px!important}body.monitor-mode .em-dashboard .em-kpis article b{font-size:11px!important}body.monitor-mode .em-reference-right{height:430px}body.monitor-mode .em-dashboard .em-reference-right>.em-map{height:430px!important}body.monitor-mode .em-dashboard .em-estate-chart{height:235px;padding:18px 14px 0;gap:8px}body.monitor-mode .em-dashboard .em-estate-bars{gap:6px}body.monitor-mode .em-dashboard .em-estate-track i{width:22px}body.monitor-mode .em-dashboard .em-estate-name{font-size:9px}body.monitor-mode .em-dashboard .em-ring{width:175px;height:175px}body.monitor-mode .em-dashboard .em-ring>div{width:130px;height:130px}}
+</style><style id="monitor-modern-presentation-theme">/* Contemporary presentation palette and typography, scoped to Monitoring. */
+html body.monitor-mode{--modern-ink:#142b45;--modern-blue:#2468ed;--modern-teal:#0e9e8b;background:#f1f4f8!important}
+html body.monitor-mode .tabs{background:#fff!important;background-image:none!important;border-bottom:1px solid #e1e7ee!important;padding-left:20px;gap:4px;align-items:center}
+html body.monitor-mode .tabs .tab{color:#778698!important;background:transparent!important;border:0!important;font-size:13px!important;height:38px;border-radius:8px;padding:0 17px}
+html body.monitor-mode .tabs .tab.active{background:#edf3ff!important;color:#2160d7!important;box-shadow:none!important;border:0!important;font-weight:600}
+html body.monitor-mode #hubInformationHeader .brand h1{color:#142b45!important}
+html body.monitor-mode .em-dashboard{background:#f1f4f8!important;padding:20px 22px!important;color:#142b45}
+html body.monitor-mode .em-reference-shell{height:calc(100dvh - 158px);gap:22px}
+html body.monitor-mode .em-analytics{gap:20px;scrollbar-color:#d2dbe6 transparent}
+html body.monitor-mode .em-reference-left,html body.monitor-mode .em-reference-middle{gap:20px}
+html body.monitor-mode .em-dashboard .em-panel,html body.monitor-mode .em-dashboard .em-visual-card,html body.monitor-mode .em-dashboard .em-kpis article{border:1px solid #e7ecf3!important;border-radius:14px!important;box-shadow:0 4px 16px #1c365204!important;background:#fff}
+html body.monitor-mode .em-dashboard .em-kpis{gap:12px}
+html body.monitor-mode .em-dashboard .em-kpis article{padding:21px 18px!important;min-height:124px;position:relative;display:flex!important;flex-direction:row-reverse!important;justify-content:space-between;align-items:center;gap:8px;overflow:hidden}
+html body.monitor-mode .em-dashboard .em-kpis article>span{width:34px;height:34px;flex-basis:34px;border-radius:9px;background:#f2f5fa!important;color:#3d6aab!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-family:'Noto Sans Thai','Segoe UI',sans-serif!important;font-size:38px!important;line-height:1.1!important;letter-spacing:-.045em;color:#162f4d!important;font-weight:600}
+html body.monitor-mode .em-dashboard .em-kpis article b{font-size:11px!important;color:#718297!important;line-height:1.55;font-weight:500;margin-top:10px!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child{background:#173a61!important;border-color:#173a61!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article:first-child strong{color:#fff!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child b{color:#bdd4ef!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child>span{background:#ffffff12!important;color:#8dbbf6!important}
+html body.monitor-mode .em-dashboard .em-kpis article.online>span{background:#eaf8f4!important;color:#0e9e8b!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article.online strong{color:#0b8a78!important}
+html body.monitor-mode .em-dashboard .em-kpis article.em-attention>span{background:#fff4e9!important;color:#d98a2e!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article.em-attention strong{color:#c57c26!important}
+html body.monitor-mode .em-dashboard .em-kpis article.offline,html body.monitor-mode .em-dashboard .em-kpis article:nth-child(4),html body.monitor-mode .em-dashboard .em-kpis article:nth-child(5),html body.monitor-mode .em-dashboard .em-kpis article:nth-child(6){display:none!important}
+html body.monitor-mode .em-dashboard .em-panel>header{padding:22px 22px 16px!important;border-bottom:1px solid #f0f3f7!important}
+html body.monitor-mode .em-dashboard .em-panel>header h2{font-size:15px!important;color:#1e3651!important;font-weight:600;line-height:1.65}
+html body.monitor-mode .em-dashboard .em-panel>header p{font-size:10px!important;color:#8b9aab!important;margin-top:5px;line-height:1.7}
+html body.monitor-mode .em-dashboard .em-chart-filter select{background:#f3f6fa;border:1px solid #e6ecf3;border-radius:7px;font-size:11px;color:#5f748c;padding:8px 10px}
+html body.monitor-mode .em-dashboard .em-estate-chart{padding-top:25px}
+html body.monitor-mode .em-dashboard .em-estate-track i{border-radius:6px 6px 0 0;background:#2c6de3;width:28px}
+html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(n+2) i{background:#7ca2df}
+html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(n+4) i{background:#aec4e7}
+html body.monitor-mode .em-dashboard .em-estate-bar:hover i{background:#174a9e}
+html body.monitor-mode .em-dashboard .em-estate-track b{color:#48617e!important;font-size:10px!important;font-weight:600}
+html body.monitor-mode .em-dashboard .em-estate-name{font-size:9px;color:#8393a5;line-height:1.5;padding-top:10px}
+html body.monitor-mode .em-dashboard .em-bar-axis{font-size:9px;color:#98a6b7}
+html body.monitor-mode .em-dashboard .em-estate-card footer{font-size:9px;color:#9cabbc;padding:12px 22px 16px}
+html body.monitor-mode .em-dashboard .em-visual-card{padding:21px 20px 24px}
+html body.monitor-mode .em-dashboard .em-visual-card h2{border:0;border-radius:0;padding:0 0 14px;text-align:left;font-size:12px!important;font-weight:600;color:#34516f;background:transparent;border-bottom:1px solid #f0f3f7;line-height:1.6}
+html body.monitor-mode .em-dashboard .em-ring{width:156px;height:156px;margin:24px auto 22px}
+html body.monitor-mode .em-dashboard .em-ring>div{width:122px;height:122px}
+html body.monitor-mode .em-dashboard .em-ring strong{font-size:29px;color:#183b64;font-weight:600;letter-spacing:-.04em}
+html body.monitor-mode .em-dashboard .em-ring small{font-size:9px;color:#94a3b4;letter-spacing:0}
+html body.monitor-mode .em-dashboard .em-ring-legend{gap:13px;padding-top:5px}
+html body.monitor-mode .em-dashboard .em-ring-legend>div{font-size:10px;color:#7d90a6}
+html body.monitor-mode .em-dashboard .em-ring-legend i{width:7px;height:7px}
+html body.monitor-mode .em-dashboard .em-ring-legend b{font-size:11px;color:#45617f;font-weight:600}
+html body.monitor-mode .em-dashboard .em-visual-card>p{font-size:9px!important;color:#98a6b7;line-height:1.8;text-align:left;margin-top:12px}
+html body.monitor-mode .em-dashboard .em-semi path{stroke:#edf3f5;stroke-width:15;stroke-linecap:round}
+html body.monitor-mode .em-dashboard .em-semi path#emGaugePath{stroke:#17a896}
+html body.monitor-mode .em-dashboard .em-semi strong{font-size:26px;color:#183b64;letter-spacing:-.04em}
+html body.monitor-mode .em-dashboard .em-gauge-count{border-top:1px solid #f0f3f7;padding-top:14px;gap:12px}
+html body.monitor-mode .em-dashboard .em-gauge-count span{font-size:10px;color:#899aaf}
+html body.monitor-mode .em-dashboard .em-gauge-count b{font-size:12px;color:#34516e;font-weight:500}
+html body.monitor-mode .em-dashboard .em-alert-count{font-size:10px;color:#8192a8}
+html body.monitor-mode .em-dashboard .em-alert-count b{font-size:11px;color:#45617f}
+html body.monitor-mode .em-dashboard .em-pm-chart>header>span{background:#f1f5fc;color:#4f76ac!important;border-radius:6px;font-size:10px!important;padding:8px 11px}
+html body.monitor-mode .em-dashboard .em-pm-chart footer{font-size:9px!important;color:#99a8ba!important;background:#fff}
+html body.monitor-mode .em-dashboard .em-measurement-row>strong{color:#376ab2!important;font-size:13px!important}
+html body.monitor-mode .em-dashboard .em-measurement-row>b{color:#6a829e!important;font-size:11px!important}
+html body.monitor-mode .em-dashboard .em-measurement-row i{height:5px!important;background:#eef3f8!important;border-radius:2px}
+html body.monitor-mode .em-dashboard .em-water-bars .em-measurement-row i em{background:#2f75d8;border-radius:2px}
+html body.monitor-mode .em-dashboard .em-emission-list .em-measurement-row i em{background:#2c9aab;border-radius:2px}
+html body.monitor-mode .em-dashboard .em-reference-right>.em-map{border-radius:14px!important;border:1px solid #e2e9f0!important;box-shadow:0 4px 16px #1c365208!important}
+html body.monitor-mode .em-dashboard .em-map-chips{border-radius:10px;background:#fffffff5;box-shadow:0 5px 18px #12345512;padding:5px}
+html body.monitor-mode .em-dashboard .em-map-chips button{border-radius:6px;background:transparent;color:#8898aa;font-size:10px;padding:9px 10px}
+html body.monitor-mode .em-dashboard .em-map-chips button.active{background:#eaf1fc;color:#285b9d}
+html body.monitor-mode .em-dashboard .em-map-chips button.active:before{display:none}
+html body.monitor-mode .em-dashboard .em-clean-legend{border-radius:10px;box-shadow:0 4px 20px #173a6012}
+html body.monitor-mode .em-dashboard .em-clean-legend b{color:#5a7390;font-size:11px;font-weight:500}
+html body.monitor-mode .em-dashboard .em-clean-legend span{font-size:10px;color:#7c8fa5}
+html body.monitor-mode .em-dashboard .em-map-fullscreen,html body.monitor-mode .em-dashboard .em-map-home{border-radius:9px;color:#6783a3;box-shadow:0 4px 15px #173a6012}
+html body.monitor-mode .em-dashboard #emPmMap .leaflet-control-zoom,html body.monitor-mode .em-dashboard #emPmMap .leaflet-control-layers{border-radius:10px;box-shadow:0 4px 15px #173a6012}
+html body.monitor-mode .em-dashboard .em-benefit{border-radius:14px!important}
+html body.monitor-mode .em-dashboard .em-benefit h2{color:#1f3a58}
+html body.monitor-mode .em-dashboard .em-benefit-grid article>span{background:#edf3fc;color:#4779b8;border-radius:6px}
+html body.monitor-mode .em-dashboard .em-benefit-grid a{color:#376cae}
+html body.monitor-mode .em-dashboard .em-tools input,html body.monitor-mode .em-dashboard .em-tools select{background:#f5f7fa;border:1px solid #e5ebf3;border-radius:7px;color:#4b6686}
+html body.monitor-mode .em-dashboard .em-table-wrap th{background:#f4f7fb!important;color:#6a819d!important}
+html body.monitor-mode .em-dashboard .em-detail{background:#f3f6fa;color:#48617f;border:1px solid #e3eaf3;border-radius:8px}
+@media(min-width:1700px){html body.monitor-mode .em-analytics{grid-template-columns:minmax(0,1fr) 280px}html body.monitor-mode .em-dashboard .em-kpis article{min-height:130px;padding:24px!important}html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:40px!important}html body.monitor-mode .em-dashboard .em-kpis article b{font-size:13px!important}html body.monitor-mode .em-dashboard .em-panel>header h2{font-size:17px!important}html body.monitor-mode .em-dashboard .em-visual-card h2{font-size:14px!important}html body.monitor-mode .em-dashboard .em-ring{width:180px;height:180px}html body.monitor-mode .em-dashboard .em-ring>div{width:140px;height:140px}html body.monitor-mode .em-dashboard .em-ring-legend>div{font-size:12px}html body.monitor-mode .em-dashboard .em-estate-name{font-size:11px}}
+@media(max-width:1200px) and (min-width:901px){html body.monitor-mode .em-dashboard .em-kpis article{padding:17px 10px!important}html body.monitor-mode .em-dashboard .em-kpis article>span{display:none!important}html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:32px!important}}
+@media(max-width:900px){html body.monitor-mode .em-reference-shell{height:auto}html body.monitor-mode .em-dashboard{padding:14px!important}}
+@media(max-width:600px){html body.monitor-mode .em-dashboard{padding:12px!important}html body.monitor-mode .em-dashboard .em-kpis article{padding:17px 11px!important;min-height:105px}html body.monitor-mode .em-dashboard .em-kpis article>span{display:none!important}html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:29px!important}html body.monitor-mode .em-dashboard .em-kpis article b{font-size:10px!important}html body.monitor-mode .em-dashboard .em-visual-card{padding:22px}html body.monitor-mode .em-dashboard .em-visual-card h2{font-size:14px!important}html body.monitor-mode .em-dashboard .em-ring-legend>div{font-size:12px}}
+</style><style id="monitor-modern-map">
+html body.monitor-mode .em-dashboard .em-map.em-imagery #emPmMap .leaflet-tile-pane{filter:saturate(.6) brightness(.82) contrast(1.1)}
+html body.monitor-mode .em-dashboard .em-map.em-imagery{background:#112c42!important}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-map-chips{background:#122c42e8;border:1px solid #ffffff26;backdrop-filter:blur(16px);box-shadow:0 7px 25px #00000025}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-map-chips button{color:#a4bbce;background:transparent}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-map-chips button.active{background:#2f76d8;color:#fff}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend{background:#122c42e8;border:1px solid #ffffff26;backdrop-filter:blur(16px);box-shadow:0 7px 25px #00000025}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend b,html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend button{color:#d5e5f4}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend span,html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend p,html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend small{color:#a4bbce}
+html body.monitor-mode .em-dashboard .em-map.em-imagery .em-clean-legend a{color:#83b9ff}
+html body.monitor-mode .em-dashboard .em-map.em-imagery #emPmMap .leaflet-control-attribution{background:#112c42b0;color:#a4bbce}
+html body.monitor-mode .em-dashboard .em-map.em-imagery #emPmMap .leaflet-control-attribution a{color:#c5ddf0}
+html body.monitor-mode .em-dashboard .em-map.em-imagery #emPmMap .leaflet-control-scale-line{background:#112c42b0;border-color:#a4bbce;color:#c5ddf0;text-shadow:none}
+</style><style id="monitor-innovation-surface">/* Presentation surface: restrained midnight blue, crisp type and linked geography. */
+html body.monitor-mode .em-dashboard{background:#0a1827!important;color:#d8e8f7;padding:13px 18px 18px!important}
+html body.monitor-mode .em-reference-shell{height:calc(100dvh - 190px);min-height:500px}
+html body.monitor-mode .em-presentation-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;height:32px;margin:0 3px 12px;color:#67849d}
+html body.monitor-mode .em-data-stamp{font-size:10px;letter-spacing:.02em}
+html body.monitor-mode .em-data-stamp:before{content:'';display:inline-block;background:#388dc0;width:5px;height:5px;border-radius:50%;margin-right:7px}
+html body.monitor-mode .em-presentation-toggle{display:flex;align-items:center;gap:8px;border:1px solid #2b465c;background:#142d43;color:#bfd9ec;border-radius:7px;font-family:inherit;font-size:11px;padding:7px 12px;cursor:pointer}
+html body.monitor-mode .em-presentation-toggle>span{font-size:17px}
+html body.monitor-mode .em-presentation-toggle:hover{background:#1c3a53;border-color:#4a87b1}
+html body.monitor-mode .em-dashboard .em-panel,html body.monitor-mode .em-dashboard .em-visual-card,html body.monitor-mode .em-dashboard .em-kpis article{background:#102539!important;border:1px solid #213d53!important;box-shadow:0 6px 22px #0000000d!important;border-radius:12px!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child{background:linear-gradient(125deg,#15527c,#147ca3)!important;border:1px solid #378cac!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{color:#f0f8ff!important;font-size:40px!important;font-weight:600}
+html body.monitor-mode .em-dashboard .em-kpis article b{color:#93b2cb!important;font-size:11px!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child b{color:#c2e8f5!important}
+html body.monitor-mode .em-dashboard .em-kpis article>span{background:#18374f!important;color:#81bbdf!important}
+html body.monitor-mode .em-dashboard .em-kpis article.online>span{background:#123e40!important;color:#52cebb!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article.online strong{color:#5ed6c2!important}
+html body.monitor-mode .em-dashboard .em-kpis article.em-attention>span{background:#40372d!important;color:#e2af73!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article.em-attention strong{color:#f0be83!important}
+html body.monitor-mode .em-dashboard .em-panel>header{border-color:#20394e!important}
+html body.monitor-mode .em-dashboard .em-panel>header h2{color:#d4e6f5!important;font-size:15px!important}
+html body.monitor-mode .em-dashboard .em-panel>header p{color:#6689a6!important;font-size:10px!important}
+html body.monitor-mode .em-dashboard .em-chart-filter select{background:#17334a;border-color:#28465e;color:#a0bed6}
+html body.monitor-mode .em-dashboard .em-estate-bars{background-image:repeating-linear-gradient(to top,transparent 0,transparent calc(25% - 1px),#213a4f 25%)}
+html body.monitor-mode .em-dashboard .em-estate-track i{background:linear-gradient(to top,#2d76b4,#54c7e4)!important;border-radius:5px 5px 0 0}
+html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(n+2) i{background:linear-gradient(to top,#24557b,#4b99c1)!important}
+html body.monitor-mode .em-dashboard .em-estate-track b{color:#a6c5dc!important}
+html body.monitor-mode .em-dashboard .em-estate-name,html body.monitor-mode .em-dashboard .em-bar-axis{color:#6e94b2}
+html body.monitor-mode .em-dashboard .em-estate-card footer{color:#587b98}
+html body.monitor-mode .em-dashboard .em-visual-card h2{color:#abc7dd;background:transparent;border-color:#20394e}
+html body.monitor-mode .em-dashboard .em-ring>div{background:#102539}
+html body.monitor-mode .em-dashboard .em-ring strong{color:#e7f5ff}
+html body.monitor-mode .em-dashboard .em-ring small{color:#6c91af}
+html body.monitor-mode .em-dashboard .em-ring-legend>div,html body.monitor-mode .em-dashboard .em-gauge-count span{color:#7a9fbc}
+html body.monitor-mode .em-dashboard .em-ring-legend b,html body.monitor-mode .em-dashboard .em-gauge-count b{color:#c4deef}
+html body.monitor-mode .em-dashboard .em-visual-card>p{color:#5d829f}
+html body.monitor-mode .em-dashboard .em-semi path{stroke:#1d3b51}
+html body.monitor-mode .em-dashboard .em-semi path#emGaugePath{stroke:#47c7b6}
+html body.monitor-mode .em-dashboard .em-semi strong{color:#d2ecfb}
+html body.monitor-mode .em-dashboard .em-gauge-count{border-color:#20394e}
+html body.monitor-mode .em-dashboard .em-alert-count{color:#7a9fbc}
+html body.monitor-mode .em-dashboard .em-alert-count b{color:#c4deef}
+html body.monitor-mode .em-dashboard .em-pm-chart>header>span{background:#19394f;color:#78b9e5!important}
+html body.monitor-mode .em-dashboard .em-line-chart{background:none!important}
+html body.monitor-mode .em-dashboard .em-line-chart svg>path[stroke="#e7ebef"]{stroke:#213a4f}
+html body.monitor-mode .em-dashboard .em-line-chart svg>path[stroke="#00387b"]{stroke:#56b5e3}
+html body.monitor-mode .em-dashboard .em-line-chart svg>path[fill="#00387b"]{fill:#47b2e5;opacity:.15}
+html body.monitor-mode .em-dashboard .em-line-chart svg>circle{fill:#7dccf0}
+html body.monitor-mode .em-dashboard .em-line-chart svg text{fill:#668faa}
+html body.monitor-mode .em-dashboard .em-y span{color:#6789a4!important}
+html body.monitor-mode .em-dashboard .em-pm-chart footer{background:#102539;color:#587e9b!important}
+html body.monitor-mode .em-dashboard .em-measurement-row{border-color:#21394e}
+html body.monitor-mode .em-dashboard .em-measurement-row>b{color:#8eafc9!important}
+html body.monitor-mode .em-dashboard .em-measurement-row>strong{color:#63b9e4!important}
+html body.monitor-mode .em-dashboard .em-measurement-row>small{color:#587c99!important}
+html body.monitor-mode .em-dashboard .em-measurement-row i{background:#1a3a50!important}
+html body.monitor-mode .em-dashboard .em-reference-right>.em-map{border:1px solid #2b465b!important;border-radius:12px!important}
+html body.monitor-mode .em-dashboard .em-status-summary div{background:#183246}
+html body.monitor-mode .em-dashboard .em-status-summary b,html body.monitor-mode .em-dashboard .em-status-summary strong{color:#9ab9d0}
+html body.monitor-mode .em-dashboard .em-tools label{color:#7a9fbc}
+html body.monitor-mode .em-dashboard .em-tools input,html body.monitor-mode .em-dashboard .em-tools select{background:#17334a;border-color:#28465e;color:#a0bed6}
+html body.monitor-mode .em-dashboard .em-table-wrap table{background:#102539;border-color:#244158}
+html body.monitor-mode .em-dashboard .em-table-wrap th{background:#18354a!important;color:#97bad3!important;border-color:#244158}
+html body.monitor-mode .em-dashboard .em-table-wrap td{color:#9cb9cf!important;border-color:#213b50}
+html body.monitor-mode .em-dashboard .em-table-wrap tbody tr:nth-child(even){background:#132a3e}
+html body.monitor-mode .em-dashboard .em-station-link{color:#69b4df!important}
+html body.monitor-mode .em-dashboard .em-result{color:#6b90ad}
+html body.monitor-mode .em-dashboard .em-detail{background:#152f44;color:#91b1ca;border-color:#28465d}
+html body.monitor-mode .em-dashboard .em-benefit{background:#102539;border-color:#213d53!important}
+html body.monitor-mode .em-dashboard .em-benefit h2,html body.monitor-mode .em-dashboard .em-benefit-grid h3{color:#bfd8eb}
+html body.monitor-mode .em-dashboard .em-benefit-grid p{color:#7197b3}
+html body.monitor-mode .em-dashboard .em-benefit-grid a{color:#6bb3df}
+html body.monitor-mode .em-dashboard .em-benefit>header{border-color:#21394e}
+html body.monitor-mode .em-dashboard .em-snapshot{background:#102539;border-color:#213d53!important;color:#6a91b0}
+html body.monitor-mode .em-dashboard .em-snapshot strong{color:#83a9c5}
+html body.monitor-mode .em-dashboard.em-presenting{height:100dvh;width:100vw;overflow:hidden;padding:18px 24px!important}
+html body.monitor-mode .em-dashboard.em-presenting .em-reference-shell{height:calc(100dvh - 82px)}
+@media(max-width:900px){html body.monitor-mode .em-reference-shell{height:auto}}
+@media(max-width:600px){html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:29px!important}html body.monitor-mode .em-presentation-toolbar{height:auto;min-height:30px}html body.monitor-mode .em-data-stamp{font-size:8px;max-width:60%}html body.monitor-mode .em-presentation-toggle{font-size:9px;padding:7px 9px}}
 </style></head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">ภัยพิบัติ</a></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
 <nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button><button class="tab" data-tab="epp">e-PP</button></nav>
@@ -751,7 +928,7 @@ html body td{font-size:11px!important;line-height:1.35!important}
 (function(){
  function apply(){
   document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-   el.style.setProperty("font-family","Sarabun, 'TH Sarabun New', sans-serif","important");
+   el.style.setProperty("font-family",el.closest(".requested-monitor")?"Noto Sans Thai, Segoe UI, sans-serif":"Sarabun, TH Sarabun New, sans-serif","important");
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
@@ -1861,9 +2038,9 @@ async function updateMap(rows){if(typeof activeTab!=='undefined'&&activeTab!=='m
 map=L.map(layer,{zoomSnap:0.5,zoomDelta:0.5,zoomControl:false,attributionControl:true,scrollWheelZoom:true,preferCanvas:false}).setView([13.4,101],6);
 const credits='Tiles © Esri — Esri, HERE, Garmin, FAO, NOAA, USGS';
 const light=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:credits,maxZoom:16});
-const topo=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:credits,maxZoom:18}).addTo(map);
+const topo=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:credits,maxZoom:18});
 const labels=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,pane:'tilePane',attribution:''});
-const imagery=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:credits,maxZoom:18});
+const imagery=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:credits,maxZoom:18}).addTo(map);map.createPane('emPlaceLabels');map.getPane('emPlaceLabels').style.zIndex=350;map.getPane('emPlaceLabels').style.pointerEvents='none';const placeLabels=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{pane:'emPlaceLabels',maxZoom:18,attribution:''}).addTo(map);
 const basemaps={'แผนที่ภูมิประเทศ':topo,'แผนที่สีอ่อน':light,'ภาพถ่ายดาวเทียม':imagery};
 stationCluster=L.markerClusterGroup?L.markerClusterGroup({maxClusterRadius:38,disableClusteringAtZoom:6,showCoverageOnHover:false,spiderfyOnMaxZoom:true,animate:false,iconCreateFunction:cluster=>L.divIcon({className:'em-cluster-icon',html:'<div style="--cluster-color:#3977df"><span>'+cluster.getChildCount()+'</span></div>',iconSize:[36,36]})}).addTo(map):L.layerGroup().addTo(map);
 stationGroups={AQMs:L.layerGroup().addTo(map),WQMs:L.layerGroup().addTo(map),CEMs:L.layerGroup().addTo(map),PM25:L.layerGroup().addTo(map)};
@@ -1871,18 +2048,18 @@ mapStationCollection={AQMs:L.layerGroup(),WQMs:L.layerGroup(),CEMs:L.layerGroup(
 map.on('layeradd layerremove',event=>{if(Object.values(stationGroups).includes(event.layer))syncStationClusters()});
 
 L.control.zoom({position:'bottomright'}).addTo(map);L.control.layers(basemaps,{'คุณภาพอากาศ AQMs':stationGroups.AQMs,'คุณภาพน้ำ WQMs':stationGroups.WQMs,'จากปล่อง CEMs':stationGroups.CEMs,'PM2.5 / Air4Thai':stationGroups.PM25},{position:'bottomright'}).addTo(map);L.control.scale({imperial:false,position:'bottomleft'}).addTo(map);
-map.on('baselayerchange',event=>{if(event.layer===light)labels.addTo(map);else map.removeLayer(labels)});
+map.on('baselayerchange',event=>{if(event.layer===light)labels.addTo(map);else map.removeLayer(labels);if(event.layer===imagery)placeLabels.addTo(map);else map.removeLayer(placeLabels);panel.classList.toggle('em-imagery',event.layer===imagery)});panel.classList.add('em-imagery');
 const tools=document.createElement('div');tools.className='em-map-chips';tools.setAttribute('aria-label','ชั้นข้อมูลสถานี');
 Object.entries(stationGroups).forEach(([key,group])=>{const button=document.createElement('button');button.type='button';button.textContent=key==='PM25'?'PM2.5':key;button.className='active';button.setAttribute('aria-pressed','true');button.onclick=()=>{const on=map.hasLayer(group);if(on)map.removeLayer(group);else group.addTo(map);button.classList.toggle('active',!on);button.setAttribute('aria-pressed',String(!on))};tools.appendChild(button)});panel.appendChild(tools);
-const legend=document.createElement('div');legend.className='em-clean-legend collapsed';legend.innerHTML='<div><b>สัญลักษณ์สถานีตรวจวัด</b><button type="button" aria-label="ขยายคำอธิบายสัญลักษณ์">+</button></div><section><span><i style="background:#3478ed"></i>AQMs · อากาศ</span><span><i style="background:#1bb5bc"></i>WQMs · น้ำ</span><span><i style="background:#986cdd"></i>CEMs · ปล่อง</span><span><i style="background:#ee8053"></i>มีรายการแจ้งเตือน</span><span><i style="background:#a1aab6"></i>ไม่เชื่อมต่อ / ไม่ระบุ</span><p>ตัวเลขในวงกลม = จำนวนจุดตรวจวัด</p><p>PM2.5 (µg/m³)</p><div class="em-pm-scale"><i></i><i></i><i></i><i></i><i></i></div><small>0–15　16–25　26–37.5　38–75　&gt;75</small><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=43f93c5608a74dd19a48b0ffc6bd639d" target="_blank" rel="noopener">เปิดแผนที่ ArcGIS Online ↗</a></section>';
+const legend=document.createElement('div');legend.className='em-clean-legend collapsed';legend.innerHTML='<div><b>สัญลักษณ์สถานีตรวจวัด</b><button type="button" aria-label="ขยายคำอธิบายสัญลักษณ์">+</button></div><section><span><i style="background:#2e6de6"></i>AQMs · อากาศ</span><span><i style="background:#16ae9b"></i>WQMs · น้ำ</span><span><i style="background:#6484ac"></i>CEMs · ปล่อง</span><span><i style="background:#ee8053"></i>มีรายการแจ้งเตือน</span><span><i style="background:#a1aab6"></i>ไม่เชื่อมต่อ / ไม่ระบุ</span><p>ตัวเลขในวงกลม = จำนวนจุดตรวจวัด</p><p>PM2.5 (µg/m³)</p><div class="em-pm-scale"><i></i><i></i><i></i><i></i><i></i></div><small>0–15　16–25　26–37.5　38–75　&gt;75</small><a href="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?webmap=43f93c5608a74dd19a48b0ffc6bd639d" target="_blank" rel="noopener">เปิดแผนที่ ArcGIS Online ↗</a></section>';
 legend.querySelector('button').onclick=()=>{const closed=legend.classList.toggle('collapsed');legend.querySelector('button').textContent=closed?'+':'−';legend.querySelector('button').setAttribute('aria-label',closed?'ขยายคำอธิบายสัญลักษณ์':'ย่อคำอธิบายสัญลักษณ์')};panel.appendChild(legend);
 const full=document.createElement('button');full.className='em-map-fullscreen';full.type='button';full.textContent='⛶';full.setAttribute('aria-label','เปิดแผนที่เต็มหน้าจอ');full.onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else panel.requestFullscreen?.()};panel.appendChild(full);const home=document.createElement('button');home.type='button';home.className='em-map-home';home.textContent='⌂';home.setAttribute('aria-label','กลับไปยังพื้นที่ที่เลือก');home.onclick=()=>{const area=typeof activeEstate!=='undefined'?activeEstate:null;if(!area||area[0].includes('ทั่วประเทศ'))map.fitBounds([[5.8,97.4],[20.5,105.7]],{paddingTopLeft:[30,68],paddingBottomRight:[38,65]});else map.setView([area[1],area[2]],11)};panel.appendChild(home);
-window.zoomMonitoringStation=(lat,lon)=>{map.setView([lat,lon],14);map.invalidateSize()};new ResizeObserver(()=>map.invalidateSize()).observe(layer);
+window.zoomMonitoringStation=(lat,lon)=>{map.setView([lat,lon],14);map.invalidateSize()};window.focusMonitoringEstate=(name,type)=>{const rows=(window.__emRows||[]).filter(s=>s.estate===name&&(!type||s.type===type)&&Number.isFinite(s.lat)&&Number.isFinite(s.lon));if(rows.length)map.fitBounds(rows.map(s=>[s.lat,s.lon]),{padding:[48,60],maxZoom:13});};new ResizeObserver(()=>map.invalidateSize()).observe(layer);
 }
 Object.values(mapStationCollection).forEach(group=>group.clearLayers());
 const e=typeof activeEstate!=='undefined'?activeEstate:null,national=!e||e[0].includes('ทั่วประเทศ'),key=x=>String(x).replace(/นิคมอุตสาหกรรม|\s|[()]/g,'');
 const filtered=all.filter(f=>national||key(f.properties.IndustryZone)&&(key(f.properties.IndustryZone).includes(key(e[0]))||key(e[0]).includes(key(f.properties.IndustryZone))));
-filtered.forEach(f=>{const p=f.properties,c=f.geometry?.coordinates;if(!c||!Number.isFinite(Number(c[0]))||!Number.isFinite(Number(c[1])))return;const system=/AIR|AQM/i.test(p.Type)?'AQMs':/WQM/i.test(p.Type)?'WQMs':'CEMs',alarm=p.ParameterAlram&&p.ParameterAlram!=='-',online=/^ONLINE/.test(p.Status),tone=alarm?'#ee8053':!online?'#a1aab6':({AQMs:'#3478ed',WQMs:'#1bb5bc',CEMs:'#986cdd'})[system];
+filtered.forEach(f=>{const p=f.properties,c=f.geometry?.coordinates;if(!c||!Number.isFinite(Number(c[0]))||!Number.isFinite(Number(c[1])))return;const system=/AIR|AQM/i.test(p.Type)?'AQMs':/WQM/i.test(p.Type)?'WQMs':'CEMs',alarm=p.ParameterAlram&&p.ParameterAlram!=='-',online=/^ONLINE/.test(p.Status),tone=alarm?'#ee8053':!online?'#a1aab6':({AQMs:'#2e6de6',WQMs:'#16ae9b',CEMs:'#6484ac'})[system];
 const readings=Object.entries(p).filter(([k,v])=>k.endsWith('_txt')&&v&&v!=='-').map(([k,v])=>'<div><b>'+esc(k.slice(0,-4))+'</b><span>'+esc(v)+'</span></div>').join('');
 L.circleMarker([Number(c[1]),Number(c[0])],{radius:online?4.2:3.2,color:'#fff',weight:1.2,fillColor:tone,fillOpacity:.95}).bindTooltip(esc(p.StationTH||system),{direction:'top'}).bindPopup('<div class="em-popup"><small>'+esc(system)+' · '+esc(p.IndustryZone)+'</small><h3>'+esc(p.StationTH)+'</h3><p>'+esc(p.Status)+(alarm?' · มีรายการแจ้งเตือน':'')+'</p><div class="em-popup-values">'+readings+'</div><footer>ข้อมูล ณ '+esc(p['LastUpdate-TH']||'ไม่ระบุเวลา')+'</footer></div>',{maxWidth:320}).addTo(mapStationCollection[system]);});
 rows.forEach(s=>{if(!s.lat||!s.lon)return;L.circleMarker([Number(s.lat),Number(s.lon)],{radius:5,color:'#fff',weight:1.4,fillColor:color(s.value),fillOpacity:.95}).bindTooltip(esc(s.name),{direction:'top'}).bindPopup('<div class="em-popup"><small>PCD / Air4Thai</small><h3>'+esc(s.name)+'</h3><p>PM2.5 <b>'+esc(s.value??'ไม่มีข้อมูล')+' µg/m³</b></p><footer>'+esc(time(s.time))+'</footer></div>').addTo(mapStationCollection.PM25)});syncStationClusters();
@@ -2230,7 +2407,7 @@ root.prepend(shell);
 const old=root.querySelector('.em-layout');if(old)old.remove();
 const number=x=>Number(String(x).replace(/[^\d.]/g,''))||0;
 function sync(){const values=[...left.querySelectorAll('.em-kpis article strong')].map(x=>number(x.textContent)),[total,online,offline,aq,wq,ce]=values;const ready=left.querySelector('.em-kpis strong').textContent.match(/\d/);document.getElementById('emRingTotal').textContent=ready?total.toLocaleString('th-TH'):'—';
-let offset=0;const colors=['#3478ed','#22bbc2','#aa7ae4'],counts=[aq,wq,ce];const parts=counts.map((count,i)=>{const begin=offset;offset+=total?count/total*100:0;return colors[i]+' '+begin+'% '+offset+'%'});document.getElementById('emTypeRing').style.background=ready&&total?'conic-gradient('+parts.join(',')+')':'#edf0f4';
+let offset=0;const colors=['#43a8dd','#42c8b5','#406987'],counts=[aq,wq,ce];const parts=counts.map((count,i)=>{const begin=offset;offset+=total?count/total*100:0;return colors[i]+' '+begin+'% '+offset+'%'});document.getElementById('emTypeRing').style.background=ready&&total?'conic-gradient('+parts.join(',')+')':'#edf0f4';
 document.getElementById('emRingLegend').innerHTML=['AQMs · อากาศ','WQMs · น้ำ','CEMs · ปล่อง'].map((name,i)=>'<div><span><i style="background:'+colors[i]+'"></i>'+name+'</span><b>'+(ready?counts[i].toLocaleString('th-TH'):'—')+'</b></div>').join('');
 const pct=total?online/total*100:0;document.getElementById('emGaugePath').setAttribute('stroke-dasharray',pct+' '+(100-pct));document.getElementById('emGaugeValue').textContent=ready?pct.toFixed(1)+' %':'—';document.getElementById('emOnlineValue').textContent=ready?online:'—';document.getElementById('emOfflineValue').textContent=ready?offline:'—';}
 new MutationObserver(sync).observe(left.querySelector('.em-kpis'),{subtree:true,childList:true,characterData:true});sync();
@@ -2246,12 +2423,23 @@ middle.querySelector('.em-alert-summary').before(alert);
 function number(x){return Number(String(x).replace(/[^\d.]/g,''))||0}
 function draw(){const rows=window.__emRows||[],type=bars.querySelector('select').value,filtered=rows.filter(s=>!type||s.type===type),counts=new Map();filtered.forEach(s=>{if(s.estate&&s.estate!=='-')counts.set(s.estate,(counts.get(s.estate)||0)+1)});const top=[...counts].sort((a,b)=>b[1]-a[1]).slice(0,6),max=Math.max(5,Math.ceil(Math.max(0,...top.map(x=>x[1]))/5)*5),plot=bars.querySelector('.em-estate-bars');plot.replaceChildren();bars.querySelector('.em-bar-axis').replaceChildren();[max,max*.75,max*.5,max*.25,0].forEach(n=>{const label=document.createElement('span');label.textContent=Number.isInteger(n)?n:n.toFixed(1);bars.querySelector('.em-bar-axis').append(label)});
 if(!top.length){const empty=document.createElement('p');empty.className='em-bars-empty';empty.textContent=rows.length?'ไม่พบสถานีที่ระบุพื้นที่สำหรับระบบนี้':'กำลังโหลดข้อมูลสถานี…';plot.append(empty)}
-top.forEach(([name,count])=>{const button=document.createElement('button');button.type='button';button.className='em-estate-bar';button.title=name+' · '+count+' สถานี';button.setAttribute('aria-label',name+' '+count+' สถานี คลิกดูรายการ');const track=document.createElement('span');track.className='em-estate-track';const bar=document.createElement('i');bar.style.height=(count/max*100)+'%';const value=document.createElement('b');value.textContent=count;bar.append(value);track.append(bar);const label=document.createElement('span');label.className='em-estate-name';label.textContent=name.replace(/นิคมอุตสาหกรรม/g,'').replace('ดับบลิวเอชเอ','WHA');button.append(track,label);button.onclick=()=>{const input=document.getElementById('emSearch');input.value=name;input.dataset.exactEstate=name;document.getElementById('emType').value=type;document.getElementById('emFilter').value='';input.dispatchEvent(new Event('input',{bubbles:true}));left.querySelector('.em-station-row').scrollIntoView({behavior:'smooth',block:'start'})};plot.append(button)});
-const all=number(left.querySelector('.em-kpis article strong').textContent),alarms=number(document.getElementById('emAttentionCount').textContent),pct=all?alarms/all*100:0;document.getElementById('emAlertRate').textContent=all?pct.toFixed(1)+' %':'—';document.getElementById('emAlertTotal').textContent=all?alarms+' สถานี':'—';alert.querySelector('.em-ring').style.background=all?'conic-gradient(#f5a244 0 '+pct+'%,#f0f2f6 '+pct+'% 100%)':'#f0f2f6';
+top.forEach(([name,count])=>{const button=document.createElement('button');button.type='button';button.className='em-estate-bar';button.title=name+' · '+count+' สถานี';button.setAttribute('aria-label',name+' '+count+' สถานี คลิกดูรายการ');const track=document.createElement('span');track.className='em-estate-track';const bar=document.createElement('i');bar.style.height=(count/max*100)+'%';const value=document.createElement('b');value.textContent=count;bar.append(value);track.append(bar);const label=document.createElement('span');label.className='em-estate-name';label.textContent=name.replace(/นิคมอุตสาหกรรม/g,'').replace('ดับบลิวเอชเอ','WHA');button.append(track,label);button.onclick=()=>{const input=document.getElementById('emSearch');input.value=name;input.dataset.exactEstate=name;document.getElementById('emType').value=type;document.getElementById('emFilter').value='';input.dispatchEvent(new Event('input',{bubbles:true}));window.focusMonitoringEstate?.(name,type);left.querySelector('.em-station-row').scrollIntoView({behavior:'smooth',block:'start'})};plot.append(button)});
+const all=number(left.querySelector('.em-kpis article strong').textContent),alarms=number(document.getElementById('emAttentionCount').textContent),pct=all?alarms/all*100:0;document.getElementById('emAlertRate').textContent=all?pct.toFixed(1)+' %':'—';document.getElementById('emAlertTotal').textContent=all?alarms+' สถานี':'—';alert.querySelector('.em-ring').style.background=all?'conic-gradient(#e4ad6d 0 '+pct+'%,#1d3b51 '+pct+'% 100%)':'#f0f2f6';
 }
 bars.querySelector('select').addEventListener('change',draw);new MutationObserver(draw).observe(left.querySelector('.em-kpis'),{subtree:true,childList:true,characterData:true});draw();
 })();
+</script><script id="monitor-presentation-mode">(()=>{
+const root=document.querySelector('.em-dashboard'),shell=root?.querySelector('.em-reference-shell');if(!shell)return;
+const toolbar=document.createElement('div');toolbar.className='em-presentation-toolbar';
+const stamp=document.createElement('span');stamp.className='em-data-stamp';stamp.textContent='กำลังโหลดเวลาชุดข้อมูล…';
+const button=document.createElement('button');button.type='button';button.className='em-presentation-toggle';button.innerHTML='<span aria-hidden="true">⛶</span> โหมดนำเสนอ';button.setAttribute('aria-label','เปิดโหมดนำเสนอเต็มจอ');
+button.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await root.requestFullscreen()}catch(e){console.error(e)}};
+function state(){const active=document.fullscreenElement===root;root.classList.toggle('em-presenting',active);button.innerHTML='<span aria-hidden="true">⛶</span> '+(active?'ออกจากโหมดนำเสนอ':'โหมดนำเสนอ');button.setAttribute('aria-label',active?'ออกจากโหมดนำเสนอเต็มจอ':'เปิดโหมดนำเสนอเต็มจอ')}
+document.addEventListener('fullscreenchange',state);toolbar.append(stamp,button);root.prepend(toolbar);
+const snapshot=document.getElementById('emExecutiveSnapshot');const sync=()=>stamp.textContent=snapshot?.textContent||'ตรวจสอบเวลาข้อมูลรายสถานี';if(snapshot)new MutationObserver(sync).observe(snapshot,{childList:true,characterData:true,subtree:true});sync();
+})();
 </script></body></html>
+
 
 
 
