@@ -200,7 +200,24 @@ body.monitor-mode .em-dashboard :is(a,button,input,select):focus-visible{outline
 body.monitor-mode .em-dashboard .em-map-fallback{position:absolute;inset:0 0 var(--map-caption-height);width:100%;height:calc(100% - var(--map-caption-height));border:0;z-index:2}
 body.monitor-mode .em-dashboard .em-alert-summary header a{color:#00387b;font-size:11px;text-decoration:none;overflow-wrap:anywhere}
 </style>
-</head><body>
+<style id="monitor-existing-heading-layout">
+/* Use the existing portal heading and active tab; lead with the data. */
+body.monitor-mode .em-dashboard{padding-top:12px!important}
+body.monitor-mode .em-dashboard .em-snapshot{justify-content:flex-end;margin:0 0 12px!important;padding:0!important;border:0;background:transparent;gap:7px;font-size:11px!important;color:#6a7988;min-height:22px}
+body.monitor-mode .em-dashboard .em-snapshot strong{color:#536b80;font-weight:500}
+body.monitor-mode .em-dashboard .em-snapshot-dot{background:#829368;width:5px;height:5px}
+body.monitor-mode .em-dashboard .em-kpis{gap:12px}
+body.monitor-mode .em-dashboard .em-kpis article{min-height:104px;padding:16px 20px!important;border-radius:9px}
+body.monitor-mode .em-dashboard .em-kpis article strong{font-size:36px!important}
+body.monitor-mode .em-dashboard .em-kpis article b{font-size:14px!important;margin-top:6px}
+body.monitor-mode .em-dashboard .em-kpis article small{font-size:11px!important}
+body.monitor-mode .em-dashboard .em-system-row{margin:12px 0 16px}
+body.monitor-mode .em-dashboard .em-system-row article{min-height:68px;padding:11px 18px!important}
+body.monitor-mode .em-dashboard .em-layout{gap:16px!important}
+body.monitor-mode .em-dashboard .em-map-column>.em-map{height:540px!important;min-height:540px!important}
+@media(min-width:1600px){body.monitor-mode .em-dashboard .em-layout{grid-template-columns:minmax(0,2.3fr) minmax(340px,1fr)!important;grid-template-areas:"map summary" "chart chart" "measure measure" "stations stations"!important}body.monitor-mode .em-dashboard .em-two-charts{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){body.monitor-mode .em-dashboard{padding-top:12px!important}body.monitor-mode .em-dashboard .em-snapshot{justify-content:flex-start;line-height:1.6}body.monitor-mode .em-dashboard .em-kpis article{min-height:96px;padding:14px!important}body.monitor-mode .em-dashboard .em-kpis article strong{font-size:30px!important}body.monitor-mode .em-dashboard .em-system-row article{min-height:48px}body.monitor-mode .em-dashboard .em-map-column>.em-map{height:440px!important;min-height:440px!important}}
+</style></head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">ภัยพิบัติ</a></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
 <nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button><button class="tab" data-tab="epp">e-PP</button></nav>
 <section class="requested-overview"><span id="period" hidden></span>
@@ -319,9 +336,7 @@ body.monitor-mode .em-dashboard .em-alert-summary header a{color:#00387b;font-si
  </div>
 </section><section class="requested-monitor" aria-label="Dashboard ระบบ e-Monitoring">
  <div class="em-dashboard">
-  <header class="em-executive-hero"><div class="em-executive-heading"><div class="em-eyebrow"><span class="em-logo-dot"></span> IEAT ENVIRONMENTAL MONITORING</div><h1>สิ่งแวดล้อมรอบนิคมฯ<br><em>ข้อมูลที่ทุกคนเข้าถึงได้</em></h1><p>ติดตามคุณภาพอากาศ น้ำ และการระบายจากปล่อง ผ่านเครือข่ายสถานีตรวจวัดของ กนอ.</p></div><div class="em-executive-key"><span>สำรวจข้อมูลสิ่งแวดล้อม</span><strong>อากาศ <i>·</i> น้ำ <i>·</i> ปล่อง</strong><button type="button" class="em-explore-action" onclick="document.getElementById('em-exec-stations').scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('emSearch').focus({preventScroll:true})">ค้นหาสถานีในพื้นที่ของคุณ <span aria-hidden="true">↗</span></button></div></header>
-  <div class="em-snapshot"><span class="em-snapshot-dot"></span><div><strong id="emExecutiveSnapshot">กำลังตรวจสอบเวลาชุดข้อมูล</strong><span>สถานะและค่าตรวจวัดอ้างอิงจากชุดข้อมูลที่บันทึกไว้ โปรดตรวจสอบเวลารายสถานีก่อนใช้งาน</span></div></div>
-  <div class="em-section-title"><div><span>01 / ภาพรวม</span><h2>สถานีตรวจวัดในพื้นที่</h2></div><p>จำนวนสถานีตามตัวกรองพื้นที่ที่เลือก</p></div>
+  <div class="em-snapshot"><span class="em-snapshot-dot"></span><div><strong id="emExecutiveSnapshot">กำลังตรวจสอบเวลาชุดข้อมูล</strong><span>ตรวจสอบเวลาข้อมูลรายสถานีก่อนใช้งาน</span></div></div>
   <section class="em-kpis">
    <article><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V9m7 10V4m7 15v-7M2 22h20"/></svg></span><div><strong>—</strong><b>สถานีทั้งหมด</b><small>สถานีตรวจวัดทุกระบบ</small></div></article>
    <article class="online"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span><div><strong>—</strong><b>สถานีเชื่อมต่อ</b><small>ตามข้อมูลที่บันทึกล่าสุด</small></div></article>
@@ -1911,4 +1926,5 @@ body.monitor-mode .em-tools{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap
 body.monitor-mode .em-result{margin:6px 19px 10px;color:#778390;font-size:11px}body.monitor-mode .em-station-link{background:none;border:0;padding:3px 0;color:#714296;font:inherit;font-weight:700;text-align:left;text-decoration:underline;cursor:pointer}.em-warning-label{display:block;color:#a86a2d;font-size:10px;margin-top:3px}body.monitor-mode .em-station-status.unknown{background:#edf0f2!important;color:#5e6a74!important}
 body.monitor-mode .em-detail{margin:0 18px 18px;padding:17px;background:#f7f8fa;border:1px solid #e9edf1;border-radius:10px;color:#465360;font-size:12px}.em-detail p{margin:5px 0;line-height:1.6}.em-detail-head{display:flex;justify-content:space-between;align-items:start;gap:15px}.em-detail-head small{color:#8a6b9c}.em-detail-head h3{font-size:16px;color:#2c3a48;margin:2px 0}.em-detail-head p{color:#75808c}.em-detail-head button{border:0;border-radius:8px;padding:9px 12px;background:#75479a;color:white;font:inherit;cursor:pointer;white-space:nowrap}.em-detail-alert{padding:10px 12px;background:#fff3e2;border-radius:8px;color:#85561f}.em-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin:12px 0}.em-values div{background:white;border:1px solid #e9edf1;border-radius:8px;padding:9px}.em-values dt{font-size:11px;color:#7e8a95}.em-values dd{margin:3px 0 0;font-size:12px;font-weight:700;color:#344453;overflow-wrap:anywhere}.em-detail-foot{font-size:11px;color:#75818d}@media(max-width:700px){body.monitor-mode .em-tools{grid-template-columns:1fr}.em-detail-head{flex-direction:column}}
 </style></body></html>
+
 
