@@ -3,13 +3,59 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-27T20:42:50.313454+00:00",
+    "fetchedAt": "2026-10-28T01:24:31.021223+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793012880000,
-    "latestEvent": 1793124255000
+    "oldestEvent": 1793014574000,
+    "latestEvent": 1793142727000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17329",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.949,
+          19.943,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.8,
+        "place": "ประเทศเมียนมา",
+        "time": 1793142727000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17329",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17328",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.299,
+          21.178,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.0,
+        "place": "ประเทศเมียนมา",
+        "time": 1793134647000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17328",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17327",
@@ -49,29 +95,6 @@
         "place": "หมู่เกาะนิโคบาร์ ประเทศอินเดีย",
         "time": 1793121775000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17326",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17323",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.604,
-          18.509,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.6,
-        "place": "ต.บุญนาคพัฒนา อ.เมืองลำปาง จ.ลำปาง",
-        "time": 1793091609000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17323",
         "source": "TMD",
         "types": "",
         "detail": null,
@@ -210,29 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1793014574000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17318",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17317",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          101.086,
-          22.53,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.1,
-        "place": "มณฑลยูนนาน, ประเทศจีน",
-        "time": 1793012880000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17317",
         "source": "TMD",
         "types": "",
         "detail": null,
