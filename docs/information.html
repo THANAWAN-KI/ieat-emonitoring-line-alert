@@ -771,7 +771,7 @@ html body.monitor-mode .em-dashboard.em-presenting .em-reference-shell{height:ca
  </div>
 </section><section class="requested-monitor" aria-label="Dashboard ระบบ e-Monitoring">
  <div class="em-dashboard">
-  <div class="em-snapshot"><span class="em-snapshot-dot"></span><div><strong id="emExecutiveSnapshot">กำลังตรวจสอบเวลาชุดข้อมูล</strong><span>ตรวจสอบเวลาข้อมูลรายสถานีก่อนใช้งาน</span></div></div>
+  <div class="em-snapshot"><span class="em-snapshot-dot"></span><div><strong id="emExecutiveSnapshot">กำลังตรวจสอบเวลาชุดข้อมูล</strong><span>ตรวจสอบเวลาข้อมูลรายสถานีก่อนใช้งาน • ออนไลน์หมายถึงการเชื่อมต่อ ไม่ใช่การยืนยันว่าปลอดภัย</span></div></div>
   <section class="em-kpis">
    <article><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V9m7 10V4m7 15v-7M2 22h20"/></svg></span><div><strong>—</strong><b>สถานีทั้งหมด</b><small>สถานีตรวจวัดทุกระบบ</small></div></article>
    <article class="online"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg></span><div><strong>—</strong><b>สถานีเชื่อมต่อ</b><small>ตามข้อมูลที่บันทึกล่าสุด</small></div></article>
@@ -823,7 +823,7 @@ html body.monitor-mode .em-dashboard.em-presenting .em-reference-shell{height:ca
     <header><div><h2>แผนที่สถานี e‑Monitoring</h2><p id="emMapSubtitle">AQMs • WQMs • CEMs</p></div><button id="emFullMap" type="button">เปิดเต็มหน้าจอ ↗</button></header>
    </aside></div>
   </div>
-  <section class="em-benefit"><header><div><h2>ร่วมติดตาม ดูแลสิ่งแวดล้อม</h2><p>ตรวจสอบวันเวลาและแหล่งข้อมูลก่อนนำไปใช้</p></div></header><div class="em-benefit-grid"><article><span>01</span><div><h3>สำหรับประชาชน</h3><p>ติดตามสถานีใกล้พื้นที่ และแจ้งเหตุผิดปกติให้หน่วยงานตรวจสอบ</p><a href="./incidents.html">ไปยังหน้ารับแจ้งเหตุ ↗</a></div></article><article><span>02</span><div><h3>สำหรับผู้ประกอบการ</h3><p>ตรวจสอบสถานีและรายการแจ้งเตือนในนิคมฯ พร้อมเทียบข้อมูลต้นทาง</p><a href="./emonitoring-dashboard.html">สำรวจสถานีรายพื้นที่ ↗</a></div></article></div></section>
+  <section class="em-benefit"><header><div><h2>ข้อมูลเพื่อการตัดสินใจและดูแลประชาชน</h2><p>ตรวจสอบวันเวลาและแหล่งข้อมูลก่อนนำไปใช้</p></div></header><div class="em-benefit-grid"><article><span>01</span><div><h3>สำหรับประชาชน</h3><p>เลือกสถานีใกล้บ้าน ตรวจสอบค่าที่วัด หน่วย และเวลาล่าสุด หากพบกลิ่น ควัน หรือเหตุผิดปกติ ให้แจ้งตำแหน่งและเวลาเพื่อให้หน่วยงานตรวจสอบ และติดตามประกาศทางการ</p><a href="./incidents.html">ไปยังหน้ารับแจ้งเหตุ ↗</a></div></article><article><span>02</span><div><h3>สำหรับนายกรัฐมนตรีและผู้บริหาร</h3><p>เริ่มจากพื้นที่มีรายการแจ้งเตือน ตรวจสอบข้อมูลต้นทางและความสดของข้อมูล ประสานหน่วยงานยืนยันเหตุ ผลกระทบต่อประชาชน ผู้รับผิดชอบ และกำหนดเวลารายงานผลก่อนสั่งการ</p><a href="./emonitoring-dashboard.html">สำรวจสถานีรายพื้นที่ ↗</a></div></article></div></section>
  </div>
 </section><main class="dashboard"><section class="left"><div class="summary" id="summary"></div><article class="card chart-card"><div class="chart-head"><h2 id="chartTitle"></h2><span class="filter" id="chartFilter"></span></div><div class="bar-chart" id="bars"></div></article><article class="card lower"><div class="lower-title"><b id="lowerTitle"></b><span class="filter">⌁ เลือกมุมมอง　⌄</span></div><div class="legend"><span><i></i>ข้อมูลหลัก</span><span><i class="alt"></i>ข้อมูลสนับสนุน</span></div><div class="spark"><svg viewBox="0 0 600 110" preserveAspectRatio="none"><path d="M0 92 C70 80,95 88,145 62 S230 20,280 55 S370 90,430 42 S520 32,600 12" fill="none" stroke="#2868ef" stroke-width="4"/><path d="M0 101 C80 94,130 64,190 82 S290 93,350 70 S470 77,600 49" fill="none" stroke="#631a9d" stroke-width="3"/></svg></div></article></section>
 <aside class="middle"><article class="card mid-card"><select aria-label="ตัวกรอง"><option>จำแนกตามระบบข้อมูล</option></select><div class="donut"><strong id="donutValue"></strong></div><h3 id="donutTitle"></h3><p id="donutText"></p></article><article class="card mid-card"><select aria-label="ตัวชี้วัด"><option id="gaugeSelect"></option></select><div class="gauge"><strong id="gaugeValue"></strong></div><div class="mini-row"><span><i class="dot"></i><span id="gaugeTitle"></span></span><b id="gaugeSide"></b></div></article></aside>
@@ -2570,7 +2570,16 @@ root.querySelectorAll('.em-map-fullscreen').forEach(button=>button.innerHTML=svg
 const presentation=root.querySelector('.em-presentation-toggle');
 if(presentation){const refresh=()=>{const slot=presentation.querySelector('span[aria-hidden="true"]');if(slot&&!slot.querySelector('svg'))slot.innerHTML=svg('expand')};refresh();new MutationObserver(refresh).observe(presentation,{childList:true,subtree:true})}
 })();
-</script></body></html>
+</script><style id="monitor-readable-type-20261028">
+html body.monitor-mode .em-dashboard .em-estate-name{font-size:12px!important;line-height:1.6!important}
+html body.monitor-mode .em-dashboard .em-visual-card h2{font-size:14px!important}
+html body.monitor-mode .em-dashboard .em-benefit p{font-size:14px!important;line-height:1.8!important}
+html body.monitor-mode .em-dashboard .em-benefit h3{font-size:17px!important}
+html body.monitor-mode .em-dashboard .em-snapshot{font-size:13px!important;line-height:1.8!important;flex-wrap:wrap}
+html body.monitor-mode .em-dashboard :is(button,input,select){min-height:40px}
+html body.monitor-mode .em-dashboard :is(strong,td){font-variant-numeric:tabular-nums lining-nums}
+@media(prefers-reduced-motion:reduce){html body.monitor-mode .em-dashboard *,html body.monitor-mode .em-dashboard *::before,html body.monitor-mode .em-dashboard *::after{animation:none!important;transition:none!important}}
+</style></body></html>
 
 
 
