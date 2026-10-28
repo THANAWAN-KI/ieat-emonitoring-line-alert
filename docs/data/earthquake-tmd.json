@@ -3,13 +3,59 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-28T16:38:56.405874+00:00",
+    "fetchedAt": "2026-10-28T22:37:03.245525+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793052991000,
-    "latestEvent": 1793199254000
+    "oldestEvent": 1793090105000,
+    "latestEvent": 1793218559000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17334",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.523,
+          22.341,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.7,
+        "place": "ประเทศเมียนมา",
+        "time": 1793218559000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17334",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17333",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.924,
+          21.177,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.7,
+        "place": "ประเทศลาว",
+        "time": 1793217296000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17333",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17332",
@@ -187,52 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1793090105000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17324",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17322",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.701,
-          19.784,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.7,
-        "place": "ต.ป่าก่อดำ อ.แม่ลาว จ.เชียงราย",
-        "time": 1793071850000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17322",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17321",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.392,
-          18.687,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.9,
-        "place": "ประเทศเมียนมา",
-        "time": 1793052991000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17321",
         "source": "TMD",
         "types": "",
         "detail": null,
