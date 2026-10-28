@@ -617,6 +617,11 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  let queuedCompany=null,pendingIncident=null,incidentLayer=null,focusLayer=null;
  window.addEventListener('ieat-unified-company-select',event=>{
   queuedCompany=event.detail.feature;
+  const selectedName=queuedCompany.attributes?.['ชื่อบริษัทภาษาไทย']||queuedCompany.attributes?.mercant_name||'โรงงานที่เลือก';
+  search.value=selectedName;
+  let status=document.getElementById('factoryMapSelectionStatus');
+  if(!status){status=document.createElement('p');status.id='factoryMapSelectionStatus';status.setAttribute('role','status');status.style.cssText='grid-column:1/-1;margin:6px 0;font:13px Sarabun,sans-serif;color:#3949ab';search.closest('.direct-querybar').append(status);}
+  status.textContent='เลือก '+selectedName+' แล้ว · กำลังเชื่อมตำแหน่งโรงงานกับแผนที่และรายงาน…';
   frame.contentWindow?.postMessage({type:'dss:select-epp',feature:queuedCompany},location.origin);
   // Selection updates the map and report in place; only the report button navigates.
  });
@@ -631,6 +636,8 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   L.marker([data.lat,data.lng],{zIndexOffset:2000}).bindPopup(label).bindTooltip(label.cloneNode(true),{permanent:true,direction:'top',offset:[0,-32],className:'emergency-company-label'}).addTo(incidentLayer);
   // Dashboard buffer controls own all radius rings; this layer owns the incident pin only.
   map.invalidateSize();map.setView([data.lat,data.lng],15,{animate:false});pendingIncident=null;
+  const status=document.getElementById('factoryMapSelectionStatus');if(status)status.textContent='แผนที่และรายงานเชื่อมกับ '+data.name+' แล้ว';
+  if(queuedCompany)mapSection.scrollIntoView({behavior:'smooth',block:'center'});
  }
  window.addEventListener('ieat-support-map-ready',()=>{requestAnimationFrame(()=>{if(pendingIncident)showIncident(pendingIncident)})});
  window.addEventListener('message',event=>{
