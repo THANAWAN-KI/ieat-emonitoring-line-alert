@@ -654,7 +654,7 @@ html body.monitor-mode .em-dashboard.em-presenting .em-reference-shell{height:ca
 @media(max-width:600px){html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:29px!important}html body.monitor-mode .em-presentation-toolbar{height:auto;min-height:30px}html body.monitor-mode .em-data-stamp{font-size:8px;max-width:60%}html body.monitor-mode .em-presentation-toggle{font-size:9px;padding:7px 9px}}
 </style><style>html body.monitor-mode .em-dashboard.em-presenting{position:fixed;inset:0;z-index:10000;max-width:none;margin:0}</style></head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">ภัยพิบัติ</a></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
-<nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="accident">สถิติอุบัติเหตุ</button><button class="tab" data-tab="epp">e-PP</button></nav>
+<nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="epp">e-PP</button></nav>
 <section class="requested-overview"><span id="period" hidden></span>
 <div class="ieat-gis-dashboard">
  <section class="ieat-kpi-row" aria-label="ข้อมูลสรุป">
@@ -2438,7 +2438,59 @@ button.onclick=async()=>{if(root.classList.contains('em-presenting')){root.class
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)root.classList.remove('em-presenting');updateButton()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.fullscreenElement){root.classList.remove('em-presenting');updateButton()}});toolbar.append(stamp,button);root.prepend(toolbar);
 const snapshot=document.getElementById('emExecutiveSnapshot');const sync=()=>stamp.textContent=snapshot?.textContent||'ตรวจสอบเวลาข้อมูลรายสถานี';if(snapshot)new MutationObserver(sync).observe(snapshot,{childList:true,characterData:true,subtree:true});sync();
 })();
-</script></body></html>
+</script><style id="monitor-lavender-presentation-20261028">
+/* Lavender presentation, scoped to the monitoring screen. */
+html body.monitor-mode{background:#f5f2fa!important}
+html body.monitor-mode .em-dashboard{--em-navy:#633ca6;--modern-ink:#302344;--modern-blue:#7950c5;--modern-teal:#168775;background:#f5f2fa!important;color:#302344!important}
+html body.monitor-mode .em-dashboard .em-panel,html body.monitor-mode .em-dashboard .em-visual-card,html body.monitor-mode .em-dashboard .em-kpis article,html body.monitor-mode .em-dashboard .em-benefit{background:#fff!important;border:1px solid #e8e0f1!important;box-shadow:0 5px 22px #4e287b09!important;border-radius:18px!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child{background:linear-gradient(125deg,#563184,#8251ba)!important;border-color:#7246a8!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{color:#6439a0!important;font-weight:700}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article:first-child strong{color:#fff!important}
+html body.monitor-mode .em-dashboard .em-kpis article b{color:#6f5d81!important;font-size:12px!important;font-weight:500}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child b{color:#eee2ff!important}
+html body.monitor-mode .em-dashboard .em-kpis article>span{background:#f0e9fa!important;color:#7748b4!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child>span{background:#ffffff20!important;color:#fff!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article.online strong{color:#168775!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article.em-attention strong{color:#b4771b!important}
+html body.monitor-mode .em-dashboard .em-panel>header{background:transparent!important;border-bottom:1px solid #eee8f4!important}
+html body.monitor-mode .em-dashboard .em-panel>header h2,html body.monitor-mode .em-dashboard .em-visual-card h2{color:#443057!important;font-weight:700!important}
+html body.monitor-mode .em-dashboard .em-panel>header p,html body.monitor-mode .em-dashboard .em-visual-card>p{color:#7d708c!important;font-size:11px!important}
+html body.monitor-mode .em-dashboard .em-visual-card h2{background:transparent!important;border-bottom-color:#eee8f4!important}
+html body.monitor-mode .em-dashboard .em-chart-filter select,html body.monitor-mode .em-dashboard .em-tools input,html body.monitor-mode .em-dashboard .em-tools select{background:#f6f2fb!important;border:1px solid #e3d8ef!important;color:#654887!important}
+html body.monitor-mode .em-dashboard .em-estate-track i{background:linear-gradient(0deg,#6f42b3,#a77bd6)!important;border-radius:7px 7px 0 0!important}
+html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(n+2) i{background:linear-gradient(0deg,#9570c5,#c0a3e0)!important}
+html body.monitor-mode .em-dashboard .em-estate-bar:hover i{background:#6338a3!important}
+html body.monitor-mode .em-dashboard .em-estate-track b{color:#654b80!important}
+html body.monitor-mode .em-dashboard .em-estate-name,html body.monitor-mode .em-dashboard .em-bar-axis,html body.monitor-mode .em-dashboard .em-estate-card footer{color:#7d708c!important}
+html body.monitor-mode .em-dashboard .em-ring>div{background:#fff!important}
+html body.monitor-mode .em-dashboard .em-ring strong,html body.monitor-mode .em-dashboard .em-semi strong{color:#633b98!important}
+html body.monitor-mode .em-dashboard .em-ring small,html body.monitor-mode .em-dashboard .em-ring-legend>div,html body.monitor-mode .em-dashboard .em-gauge-count span,html body.monitor-mode .em-dashboard .em-alert-count{color:#7a6b89!important}
+html body.monitor-mode .em-dashboard .em-ring-legend b,html body.monitor-mode .em-dashboard .em-gauge-count b,html body.monitor-mode .em-dashboard .em-alert-count b{color:#513967!important}
+html body.monitor-mode .em-dashboard .em-semi path{stroke:#eee7f5!important}
+html body.monitor-mode .em-dashboard .em-semi path#emGaugePath{stroke:#9270c6!important}
+html body.monitor-mode .em-dashboard .em-gauge-count{border-color:#eee8f4!important}
+html body.monitor-mode .em-dashboard .em-pm-chart>header>span{background:#f1eafa!important;color:#71479f!important}
+html body.monitor-mode .em-dashboard .em-pm-chart footer{background:#fff!important;color:#7d708c!important}
+html body.monitor-mode .em-dashboard .em-measurement-row>b{color:#756186!important}
+html body.monitor-mode .em-dashboard .em-measurement-row>strong{color:#7047a6!important}
+html body.monitor-mode .em-dashboard .em-measurement-row>small{color:#81728f!important}
+html body.monitor-mode .em-dashboard .em-measurement-row i{background:#f1ebf7!important}
+html body.monitor-mode .em-dashboard .em-water-bars .em-measurement-row i em{background:#9672c9!important}
+html body.monitor-mode .em-dashboard .em-emission-list .em-measurement-row i em{background:#ba88c9!important}
+html body.monitor-mode .em-dashboard .em-data-stamp{color:#776386!important}
+html body.monitor-mode .em-dashboard .em-presentation-toggle{background:#7143a6!important;border:1px solid #7143a6!important;color:#fff!important;border-radius:10px!important}
+html body.monitor-mode .em-dashboard .em-map-chips,html body.monitor-mode .em-dashboard .em-clean-legend{background:#fffffff5!important;border:1px solid #e4d8f0!important;box-shadow:0 4px 18px #45236618!important}
+html body.monitor-mode .em-dashboard .em-map-chips button{background:transparent!important;color:#78648c!important}
+html body.monitor-mode .em-dashboard .em-map-chips button.active{background:#7950b5!important;color:#fff!important}
+html body.monitor-mode .em-dashboard .em-clean-legend b,html body.monitor-mode .em-dashboard .em-clean-legend span{color:#604675!important}
+html body.monitor-mode .em-dashboard .em-table-wrap th{background:#f1eafa!important;color:#634780!important}
+html body.monitor-mode .em-dashboard .em-table-wrap td{color:#574568!important;border-color:#eee8f4!important}
+html body.monitor-mode .em-dashboard .em-table-wrap tbody tr:nth-child(even){background:#faf8fd!important}
+html body.monitor-mode .em-dashboard .em-station-link{color:#7747ab!important}
+html body.monitor-mode .em-dashboard .em-status-summary div,html body.monitor-mode .em-dashboard .em-detail{background:#f7f3fc!important;color:#604775!important;border-color:#e8dff1!important}
+html body.monitor-mode .em-dashboard .em-benefit h2,html body.monitor-mode .em-dashboard .em-benefit h3{color:#52356c!important}
+html body.monitor-mode .em-dashboard :is(button,a,input,select):focus-visible{outline:3px solid #b18ad9!important;outline-offset:3px}
+</style></body></html>
 
 
 
