@@ -2,7 +2,15 @@
  'use strict';
  const frame=document.getElementById('emergencyReportFrame'),section=document.getElementById('emergencyReportPage');
  if(!frame||!section)return;
- // Preserve the existing data-selection engine, but remove its report from the dashboard layout.
+ // Keep the embedded report visible in the DSS / RiskMap data workspace.
+ const view=new URLSearchParams(location.search).get('view');
+ if(view==='data'){
+  section.hidden=false;
+  section.removeAttribute('aria-hidden');
+  section.style.setProperty('display','block','important');
+  if(!frame.getAttribute('src'))frame.src='./dss.html?embedded=dashboard&v=20261022';
+  return;
+ }
  section.style.setProperty('display','none','important');
  section.setAttribute('aria-hidden','true');
  window.addEventListener('ieat-unified-company-select',()=>{section.hidden=false;section.removeAttribute('aria-hidden');section.style.setProperty('display','block','important');if(!frame.getAttribute('src'))frame.src='./dss.html?embedded=dashboard&v=20261022';});
