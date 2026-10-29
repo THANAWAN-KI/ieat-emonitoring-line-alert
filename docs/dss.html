@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 124942)
-Total output lines: 3713
-
 <!doctype html>
 <html lang="th">
 <head>
@@ -893,7 +890,7 @@ function updateMap(){
   const colors=getBufferColors(),opacities=getBufferOpacities();
   radii.forEach((km,i)=>{
     const ring=document.createElement('div'),label=document.createElement('span');
-    ring.style.cssText='position:absolute;left:50%;top:50%;border:3px solid '+colors[i]+Math.round(opacities[i]*255).toString(16).padStart(2,'0')+';background:'+colors[i]+'14;border-radius:50%;transform:translate(-50%,-50%);box-sizing:border-box';
+    ring.style.cssText='position:absolute;left:50%;top:50%;border:3px solid '+colors[i]+Math.round(opacities[i]*255).toString(16).padStart(2,'0')+';background:transparent;border-radius:50%;transform:translate(-50%,-50%);box-sizing:border-box';
     label.textContent=km+' Km';label.style.cssText='position:absolute;left:85.355%;top:14.645%;transform:translate(-50%,-50%);padding:3px 9px;background:white;border:1px solid '+colors[i]+';border-radius:14px;color:'+colors[i]+';font-size:13px;font-weight:700;white-space:nowrap';
     ring.appendChild(label);bufferOverlay.appendChild(ring);
     requestAnimationFrame(()=>{const side=mapNode.clientHeight*km/spanKm;ring.style.width=side+'px';ring.style.height=side+'px'});
@@ -1324,7 +1321,7 @@ function incidentSourceReport(item){
 let factoryNameIndex=[],factoryNameIndexPromise;
 function dssSearchContent(attrs){
  const p=attrs.dssFeature?.properties||{};
- return [attrs.mercant_name,attrs['ชื่อบริษัทภาษาอังกฤษ'],attrs.IEAT,attrs.fid14n,attrs.FactoryID,...Object.entries(p).filter(([key])=>/^hazard\d+_(name|casNo|unNo)$/.test(key)).map(([,value])=>value)].map(value=>normalizeSearchTerm(value||'')).join('|');
+ return [attrs.mercant_name,attrs['ชื่อบริษัทภาษาอังกฤษ'],attrs.IEAT,attrs.fid14n,attrs.FactoryID].map(value=>normalizeSearchTerm(value||'')).join('|');
 }
 function formatEppDate(value){const date=new Date(value);if(!Number.isFinite(date.getTime()))return String(value);if(date.getUTCFullYear()>2400)date.setUTCFullYear(date.getUTCFullYear()-543);return date.toLocaleDateString('th-TH',{timeZone:'Asia/Bangkok'})}
 function normalizeEppFeature(feature){
@@ -1607,7 +1604,7 @@ async function downloadReportPng(){
  const radiusLayer=L.layerGroup().addTo(live);
  const colors=['#e41b13','#fdc800','#1ba548'];
  const ringOutlines=colors.map(()=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color:'#34303a',weight:3,opacity:.8,fill:false,interactive:false}).addTo(radiusLayer));
- const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:2,opacity:1,fillColor:color,fill:false,fillOpacity:0}).addTo(radiusLayer));
+ const circles=colors.map(color=>L.circle([Number(state.lat),Number(state.lng)],{radius:1000,color,weight:3,opacity:1,fill:false,fillOpacity:0}).addTo(radiusLayer));
  const distanceLabels=colors.map(()=>L.marker([Number(state.lat),Number(state.lng)],{interactive:false}).addTo(radiusLayer));
  const supportGroups=Object.fromEntries(Object.keys(supportMapTypes()).map(type=>[type,L.layerGroup().addTo(live)]));
  const supportLayers={clearLayers(){Object.values(supportGroups).forEach(group=>group.clearLayers())}};
@@ -1650,7 +1647,7 @@ async function downloadReportPng(){
    circles.forEach((circle,i)=>{
      if(i>=radii.length){radiusLayer.removeLayer(ringOutlines[i]);radiusLayer.removeLayer(circle);radiusLayer.removeLayer(distanceLabels[i]);return}
      if(!radiusLayer.hasLayer(ringOutlines[i]))ringOutlines[i].addTo(radiusLayer);ringOutlines[i].setLatLng([lat,lng]).setRadius(radii[i]*1000);ringOutlines[i].bringToBack();if(!radiusLayer.hasLayer(circle))circle.addTo(radiusLayer);if(!radiusLayer.hasLayer(distanceLabels[i]))distanceLabels[i].addTo(radiusLayer);
-     circle.setStyle({color:activeColors[i],opacity:activeOpacities[i],fillColor:activeColors[i]});circle.setLatLng([lat,lng]).setRadius(radii[i]*1000);circle.bringToFront();
+     circle.setStyle({color:activeColors[i],weight:3,opacity:1,fill:false,fillOpacity:0});circle.setLatLng([lat,lng]).setRadius(radii[i]*1000);circle.bringToFront();
      distanceLabels[i].setLatLng(bufferLabelPoint(lat,lng,radii[i])).setIcon(L.divIcon({className:'dss-buffer-distance',html:'<span style="color:'+activeColors[i]+';border-color:'+activeColors[i]+'">'+radii[i]+' Km</span>',iconSize:[70,24],iconAnchor:[35,12]}));
    });
    pin.setLatLng([lat,lng]);
@@ -1671,7 +1668,7 @@ async function downloadReportPng(){
    const rx=Math.abs(east.x-west.x)/2,ry=Math.abs(south.y-north.y)/2;
    if(!Number.isFinite(rx)||!Number.isFinite(ry)||rx<=0||ry<=0)return;
    ctx.beginPath();ctx.ellipse(center.x,center.y,rx,ry,0,0,Math.PI*2);
-   ctx.fillStyle=circle.options.fillColor||circle.options.color;ctx.globalAlpha=circle.options.fillOpacity;ctx.fill();
+   // Radius overlays are outlines only, including exported PNGs.
    ctx.globalAlpha=.8;ctx.strokeStyle='#34303a';ctx.lineWidth=circle.options.weight+1;ctx.stroke();ctx.globalAlpha=circle.options.opacity;ctx.strokeStyle=circle.options.color;ctx.lineWidth=circle.options.weight;ctx.stroke();ctx.globalAlpha=1;
   });
   if(window.dssDrawDispersionExport)window.dssDrawDispersionExport(ctx,live);
@@ -3397,11 +3394,11 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   const company=el('div',selected?state.company:missing);company.className='p2-company';page.append(company);
   const facts=el('div');facts.className='p2-facts';
   [['นิคมฯ / ท่าเรือ',state.estate],['เลขทะเบียน',state.registration]].forEach(([label,v])=>{const item=el('div');item.append(el('div',label),el('strong',value(v)));facts.append(item)});page.append(facts);
-  const catalog=selected&&Array.isArray(state.hazardCatalog)?state.hazardCatalog:[];
-  page.append(el('h2','1. สารเคมีในฐานข้อมูลโรงงาน · '+catalog.length+' รายการ'));
-  const chemicalRows=catalog.map((item,index)=>[index+1,item.name,item.cas,item.un,item.volume,item.unit]);
+  const chemicalIncident=/สารเคมี/.test(state.event||'');const catalog=selected?(window.dssIncidentChemicalRows?window.dssIncidentChemicalRows():(Array.isArray(state.hazardCatalog)?state.hazardCatalog:[])):[];
+  page.append(el('h2',(chemicalIncident?'1. สารเคมีที่ได้รับแจ้งว่ารั่วไหล · ':'1. สารเคมีในฐานข้อมูลโรงงาน · ')+catalog.length+' รายการ'));if(chemicalIncident&&!catalog.length)page.append(el('p',state.leakChemical||'ยังไม่ได้เลือกสารที่เกี่ยวข้องกับเหตุ'));
+  const chemicalRows=catalog.map((item,index)=>[index+1,item.name,item.cas,item.un,item.volume,item.unit]);if(chemicalIncident&&!chemicalRows.length&&!/กำลังโหลด|ไม่สำเร็จ/.test(String(state.chemical)))chemicalRows.push([state.leakChemical||'ยังไม่ได้เลือกสารที่เกี่ยวข้องกับเหตุ','','','','','']);
   if(!chemicalRows.length&&/ไม่สำเร็จ|กำลังโหลด/.test(String(state.chemical)))chemicalRows.push([/ไม่สำเร็จ/.test(state.chemical)?'เชื่อมต่อข้อมูลสารเคมีไม่สำเร็จ':'กำลังโหลดข้อมูล','','','','','']);
-  page.append(table(['ลำดับ','ชื่อสารเคมี','CAS No.','UN No.','ปริมาณ','หน่วย'],chemicalRows));
+  page.append(table(['ลำดับ','ชื่อสารเคมี','CAS No.','UN No.','ปริมาณจัดเก็บ','หน่วย'],chemicalRows));
   const note=el('p',(state.chemicalDataSource||'ข้อมูลสารเคมี DSS')+' · รายการในฐานข้อมูลโรงงาน ไม่ใช่การยืนยันสารที่เกี่ยวข้องกับเหตุ');note.className='p2-note';page.append(note);
   page.append(el('h2','2. อุปกรณ์ระงับเหตุในฐานข้อมูลโรงงาน · '+equipment.length+' รายการ'));
   const equipmentRows=selected?equipment.map((item,index)=>[index+1,item.name,item.type,item.amount,item.amountUnit,item.volume,item.volumeUnit]):[];
@@ -3698,7 +3695,7 @@ html body #report#report#report#report #fbWeather .report-weather-arrow svg path
 html body #dssPageTwo#dssPageTwo#dssPageTwo table th{background:#efefef!important;color:#3949ab!important}
 html body #dssPageTwo#dssPageTwo#dssPageTwo table tbody tr:nth-child(even){background:#f7f7fb!important}
 html body #report#report#report#report .report-map-zoom-controls button{color:#3949ab!important}
-</style><style id="dss-sarabun-font">html body,html body *:not(.esri-icon):not([class^="esri-icon-"]):not([class*=" esri-icon-"]):not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out){font-family:"Sarabun",sans-serif!important}</style></body></html>
+</style><style id="dss-sarabun-font">html body,html body *:not(.esri-icon):not([class^="esri-icon-"]):not([class*=" esri-icon-"]):not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out){font-family:"Sarabun",sans-serif!important}</style><link rel="stylesheet" href="./dss-report-workbench.css?v=20261029-1"><script src="./dss-report-workbench.js?v=20261029-1"></script></body></html>
 
 
 
