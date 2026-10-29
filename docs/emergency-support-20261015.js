@@ -57,7 +57,7 @@ function drawSupportMarkers(){
   const key=row.source||row.type,count=counts.get(key)||0;if(count>=(networkLinks?1:3))return false;counts.set(key,count+1);return true;
  });
  rows.forEach(row=>{
- if(incident&&networkLinks){
+ if(incident&&networkLinks&&compact){
   const source=row.source||sources.find(s=>s.label===row.type)?.id;
   const stroke=({hospital:'#9b4dca',fire:'#b05b32',police:'#606c76',hydrant:'#28734e',cctv:'#606c76',community:'#28734e',business:'#9b4dca'})[source]||'#9b4dca';
   L.polyline([[incident.lat,incident.lon],[row.lat,row.lon]],{color:stroke,weight:2,opacity:.75,dashArray:'5 7',className:'support-network-link'}).addTo(networkLines).bindTooltip(text('span',row.type+' · '+distance(row.distance)+' (ระยะเส้นตรง)'));
