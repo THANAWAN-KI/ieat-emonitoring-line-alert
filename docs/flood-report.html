@@ -139,8 +139,8 @@ outline:2px solid #0D47A1!important;outline-offset:2px;
 #estateFocusDashboard .rp-forecast-card img{width:100%;height:auto;margin:10px 0;display:block}
 </style>
 <script src="flood-rid-source.js?v=20261006-rid-17" defer></script>
-<script src="flood-estate-dashboard.js?v=20261029-remove-overview-title" defer></script>
-<script src="flood-river-panel.js?v=20261027-sarabun" defer></script>
+<script src="flood-estate-dashboard.js?v=20261029-standard1" defer></script>
+<script src="flood-river-panel.js?v=20261029-standard1" defer></script>
 <script src="flood-weather-overview.js?v=20261006-svg-weather-37" defer></script>
 <style>.rp-forecast-toggle{cursor:pointer;padding:12px 16px;border-radius:10px;background:#FFFFFF;color:#0D47A1;font-weight:700;font-size:16px}#rpForecastPanel[open] .rp-forecast-toggle{margin-bottom:12px}#rpRankingsAfterWarning .rp-new-section{margin:0 0 16px}</style><style>
 #estateFocusDashboard .ef-warning{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
@@ -192,7 +192,7 @@ html body #warning #estateFocusDashboard .ef-data-column .flood-kpi:before{conte
 html body #warning #estateFocusDashboard .ef-data-column :is(h2,h3,.rp-stations-title){color:#27233b!important}
 html body #warning #estateFocusDashboard .ef-data-column :is(p,small,.ef-scroll-caption){color:#667286}
 @media(max-width:950px){html body #warning #estateFocusDashboard .ef-data-column{padding:12px!important}}
-</style><script src="flood-icons.js?v=8f75bcb0"></script></head>
+</style><script src="flood-icons.js?v=8f75bcb0"></script><script src="flood-water-status.js?v=20261029-standard1"></script><style id="standard-water-status-colors">#estateFocusDashboard [data-water-theme^="standard-"]{--water-bg:#fff!important;--water-ink:#263746!important}#estateFocusDashboard #efReservoirList [data-water-theme^="standard-"] .ef-reservoir-percent span{background:var(--water-accent)!important;color:white!important}#waterStatusGuide{padding:6px 10px;color:#435461;font:11px/1.6 Sarabun,sans-serif}#waterStatusGuide summary{cursor:pointer}#waterStatusGuide p{margin:5px 0}#waterStatusGuide i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}</style></head>
 <body>
 
 
@@ -1099,6 +1099,7 @@ window.addEventListener('resize',schedule);
 })();
 </script></body>
 </html>
+
 
 
 

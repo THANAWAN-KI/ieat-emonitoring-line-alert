@@ -207,7 +207,7 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 #mapStatusKey summary{padding:7px 10px;cursor:pointer;font-weight:600}#mapStatusKey>div{padding:0 11px 10px}#mapStatusKey p{margin:5px 0}#mapStatusKey i{width:9px;height:9px;display:inline-block;border-radius:50%;margin-right:5px}#mapStatusKey small{font-size:10px;color:#657785}
 #flood-layer-guide{display:none}
 .imagery-basemap .estate-name,.imagery-basemap .fd-pin-name,.imagery-basemap .prep-name{background:#fffffff2!important;color:#263d4b!important}
-</style><style id="aerial-camera-controls">#aerialTourButton{position:absolute;top:12px;left:112px;z-index:1050;border:0;border-radius:10px;padding:10px 12px;background:#fff;color:#6e5095;box-shadow:0 3px 12px #23374b20;font:12px Sarabun,sans-serif;cursor:pointer}#aerialTourButton span{margin-right:4px;font-size:15px}#aerialTourButton[aria-pressed=true]{background:#eee8f6}#aerialTourHint{position:absolute;left:12px;top:65px;z-index:1050;max-width:min(360px,calc(100vw - 30px));background:#fffffff2;border-radius:10px;padding:9px 12px;color:#506273;box-shadow:0 3px 14px #24364c20;font:11px/1.6 Sarabun,sans-serif;pointer-events:none}#aerialTourHint[hidden]{display:none}@media(max-width:650px){#aerialTourButton{left:110px;font-size:11px;padding:10px 8px}}</style><script src="flood-icons.js?v=8f75bcb0"></script></head>
+</style><style id="aerial-camera-controls">#aerialTourButton{position:absolute;top:12px;left:112px;z-index:1050;border:0;border-radius:10px;padding:10px 12px;background:#fff;color:#6e5095;box-shadow:0 3px 12px #23374b20;font:12px Sarabun,sans-serif;cursor:pointer}#aerialTourButton span{margin-right:4px;font-size:15px}#aerialTourButton[aria-pressed=true]{background:#eee8f6}#aerialTourHint{position:absolute;left:12px;top:65px;z-index:1050;max-width:min(360px,calc(100vw - 30px));background:#fffffff2;border-radius:10px;padding:9px 12px;color:#506273;box-shadow:0 3px 14px #24364c20;font:11px/1.6 Sarabun,sans-serif;pointer-events:none}#aerialTourHint[hidden]{display:none}@media(max-width:650px){#aerialTourButton{left:110px;font-size:11px;padding:10px 8px}}</style><script src="flood-icons.js?v=8f75bcb0"></script><script src="flood-water-status.js?v=20261029-standard1"></script><style>#mapStatusKey{max-height:65vh;overflow:auto}#mapLegend .keys{display:none}</style></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>120</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="120" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#0D47A1"/><path d="M12 2V20L4 25Z" fill="#90CAF9"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
 <label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="gray">แผนที่พื้นเรียบสีเทา + อาคาร 3 มิติ</option><option value="satellite">ภาพดาวเทียม + อาคาร 3 มิติ</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
@@ -268,28 +268,9 @@ function pointCondition(r,k){
  if(k==='camera')return r.reported_online===true?state('#2196D2','กล้องต้นทางแจ้งพร้อมใช้งาน','เป็นสถานะกล้อง ไม่ใช่เกณฑ์น้ำท่วม; ตรวจเวลาภาพในรายละเอียด'):state('#607D8B','กล้องไม่พร้อม / ไม่ระบุสถานะ','ไม่ใช้สถานะกล้องแทนความเสี่ยงน้ำท่วม');
  if(k==='estate')return state('#70519f','นิคมอุตสาหกรรม','ตำแหน่งอ้างอิง กนอ.');
  if(old(r,k))return state('#607D8B','ข้อมูลเก่าหรือเวลาไม่ครบ','ตรวจเวลาตรวจวัดก่อนใช้ข้อมูล');
- if(k==='canal'){
-  if(r.wl==null)return state('#607D8B','ไม่มีค่าระดับน้ำ','');
-  if(r.bank!=null&&r.wl>=r.bank||r.critical!=null&&r.wl>=r.critical)return state('#D32F2F','ถึงเกณฑ์วิกฤต / ตลิ่ง','เทียบระดับตลิ่งหรือวิกฤตที่ต้นทางระบุ');
-  if(r.warning!=null&&r.wl>=r.warning)return state('#E9B52A','ถึงเกณฑ์เฝ้าระวัง','เทียบระดับเตือนที่ต้นทางระบุ');
-  return r.bank==null&&r.warning==null&&r.critical==null?state('#2196D2','มีค่าตรวจวัด แต่ไม่มีเกณฑ์เทียบ','ยังไม่จัดระดับความเสี่ยง'):state('#2E7D32','ต่ำกว่าเกณฑ์เตือน','เกณฑ์เฉพาะสถานีคลอง กทม.');
- }
- if(k==='water'){
-  if(r.wl==null)return state('#607D8B','ไม่มีค่าระดับน้ำ','');
-  if(r.diff!=null&&r.diff>=0||r.status==='ล้นตลิ่ง')return state('#D32F2F','ถึงหรือสูงกว่าตลิ่ง','เทียบระดับน้ำกับระดับตลิ่ง');
-  const levels={1:['#D32F2F','น้ำน้อยวิกฤต'],2:['#E9B52A','น้ำน้อย'],3:['#2E7D32','น้ำปกติ'],4:['#2196D2','น้ำมาก'],5:['#D32F2F','ล้นตลิ่ง']},source=levels[Number(r.situation_level)];
-  if(source)return state(source[0],source[1],'สถานะ situation_level จาก ThaiWater; ช่วงเกณฑ์ 10 / 30 / 70 / 100% ไม่ใช่ร้อยละของค่า ม.รทก.');
-  if(r.status==='ใกล้ตลิ่ง'||r.diff!=null&&r.diff>-.5)return state('#E9B52A','ใกล้ตลิ่ง / ควรติดตาม','ใช้สถานะ RID หรือระยะต่ำกว่าตลิ่งไม่เกิน 0.5 ม. เมื่อไม่มีชั้นสถานะจากต้นทาง');
-  return r.bank!=null?state('#2E7D32','ต่ำกว่าตลิ่ง','ไม่มีชั้นสถานะปริมาณน้ำ จึงแสดงผลเทียบตลิ่งเท่านั้น'):state('#2196D2','มีค่าตรวจวัด แต่ไม่มีตลิ่งเทียบ','ยังไม่จัดระดับความเสี่ยง');
- }
- if(k==='dam'){
-  const p=r.percent;if(p==null||!Number.isFinite(Number(p)))return state('#607D8B','ไม่มีค่าปริมาณกักเก็บ','');
-  if(p>100)return state('#D32F2F','เกินความจุอ่าง','ปริมาณกักเก็บมากกว่า 100%');
-  if(p>80)return state('#2196D2','น้ำมาก','ปริมาณกักเก็บมากกว่า 80% ถึง 100%');
-  if(p>50)return state('#2E7D32','น้ำปกติ','ปริมาณกักเก็บมากกว่า 50% ถึง 80%');
-  if(p>30)return state('#E9B52A','น้ำน้อย','ปริมาณกักเก็บมากกว่า 30% ถึง 50%');
-  return state('#D32F2F','น้ำน้อยวิกฤต','ปริมาณกักเก็บไม่เกิน 30%; สีแดงนี้ไม่ได้หมายถึงน้ำท่วม');
- }
+ if(k==='water')return window.IEAT_WATER_STATUS.water(r);
+ if(k==='canal')return window.IEAT_WATER_STATUS.canal(r);
+ if(k==='dam')return window.IEAT_WATER_STATUS.dam(r.percent);
  return state('#2196D2','ข้อมูลประกอบ','ยังไม่มีเกณฑ์เฉพาะ');
 }
 function color(r,k){return pointCondition(r,k).hex}
@@ -376,10 +357,10 @@ function waterPopup(r){
  const status=has?(diff>=0?'ล้นตลิ่ง '+fmt(diff)+' ม.':'ต่ำกว่าตลิ่ง '+fmt(Math.abs(diff))+' ม.'):'ไม่มีระดับตลิ่งให้เปรียบเทียบ';
  const historyCode=whCode(r.oldcode||r.code||''),stamp=date(r.measured_at),at=Number.isFinite(stamp)?new Date(stamp).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'}):'ไม่ระบุเวลา';
  const history=historyAvailable(r)?'<details class="station-history-disclosure"><summary>ดูกราฟระดับน้ำย้อนหลัง 2023–2026</summary><section class="station-history-inline" data-history-code="'+esc(historyCode)+'" data-history-bank="'+(bank!==null&&Number.isFinite(bank)?esc(bank):'')+'"><div class="popup-history-years" role="group" aria-label="เลือกปีระดับน้ำย้อนหลัง"></div><div class="popup-history-body" role="status">กำลังเตรียมกราฟ…</div></section></details>':'';
- const tone=!has?'unknown':diff>=0?'high':'normal';
+ const condition=pointCondition(r,'water'),tone=!has?'unknown':diff>=0?'high':'normal';
  const locationText=[...new Set([r.province,r.district,r.river].filter(Boolean).map(v=>String(v).replace(/^จังหวัด/,'')))].join(' · ');
  const stale=old(r,'water')||r.stale;
- return '<div class="popup station-popup"><div class="station-popup-head"><span class="station-popup-kicker">สถานีวัดระดับน้ำ</span><h3>'+esc([r.oldcode||r.code,r.name].filter(Boolean).join(' · '))+'</h3>'+(locationText?'<div class="station-popup-location">'+esc(locationText)+'</div>':'')+'</div><div class="station-popup-reading"><span>ระดับน้ำปัจจุบัน</span><strong>'+(wl!==null&&Number.isFinite(wl)?fmt(wl)+' <small>ม.รทก.</small>':'ไม่มีค่าตรวจวัด')+'</strong><div class="station-popup-status '+tone+'"><i></i>'+esc(status)+'</div></div><dl class="station-popup-details"><div><dt>ระดับตลิ่ง</dt><dd>'+(bank!==null&&Number.isFinite(bank)?fmt(bank)+' ม.รทก.':'ไม่มีค่า')+'</dd></div><div><dt>น้ำไหลผ่าน</dt><dd>'+(r.discharge==null?'ไม่มีค่า':fmt(r.discharge)+' ลบ.ม./วินาที')+'</dd></div><div><dt>แนวโน้ม</dt><dd>'+esc(r.trend_text||'ไม่ระบุ')+'</dd></div></dl><div class="station-popup-footer"><div>ตรวจวัด '+esc(at)+'</div>'+(stale?'<div class="station-popup-stale">ข้อมูลเก่าเกิน 6 ชั่วโมง</div>':'')+'<div>'+esc(String(r.source_name||'กรมชลประทาน').replace('RID GeoJSON','กรมชลประทาน (RID)'))+' · <a href="'+esc(r.source_url||window.IEAT_RID.url)+'" target="_blank" rel="noopener">ข้อมูลต้นทาง ↗</a></div></div>'+history+'</div>';
+ return '<div class="popup station-popup"><div class="station-popup-head"><span class="station-popup-kicker">สถานีวัดระดับน้ำ</span><h3>'+esc([r.oldcode||r.code,r.name].filter(Boolean).join(' · '))+'</h3>'+(locationText?'<div class="station-popup-location">'+esc(locationText)+'</div>':'')+'</div><div class="station-popup-reading"><span>ระดับน้ำปัจจุบัน</span><strong>'+(wl!==null&&Number.isFinite(wl)?fmt(wl)+' <small>ม.รทก.</small>':'ไม่มีค่าตรวจวัด')+'</strong><div class="station-popup-status '+tone+'" style="color:'+condition.hex+'"><i style="background:'+condition.hex+'"></i>'+esc(condition.label)+' · '+esc(status)+'</div></div><dl class="station-popup-details"><div><dt>ระดับตลิ่ง</dt><dd>'+(bank!==null&&Number.isFinite(bank)?fmt(bank)+' ม.รทก.':'ไม่มีค่า')+'</dd></div><div><dt>น้ำไหลผ่าน</dt><dd>'+(r.discharge==null?'ไม่มีค่า':fmt(r.discharge)+' ลบ.ม./วินาที')+'</dd></div><div><dt>แนวโน้ม</dt><dd>'+esc(r.trend_text||'ไม่ระบุ')+'</dd></div></dl><div class="station-popup-footer"><div>ตรวจวัด '+esc(at)+'</div>'+(stale?'<div class="station-popup-stale">ข้อมูลเก่าเกิน 6 ชั่วโมง</div>':'')+'<div>'+esc(String(r.source_name||'กรมชลประทาน').replace('RID GeoJSON','กรมชลประทาน (RID)'))+' · <a href="'+esc(r.source_url||window.IEAT_RID.url)+'" target="_blank" rel="noopener">ข้อมูลต้นทาง ↗</a></div></div>'+history+'</div>';
 }
 
 function estateFloodPlan(name){
@@ -584,7 +565,7 @@ function drawOverviewClusters(clusters){
  for(const rows of clusters){
  const r=rows[0].properties,lat=rows.reduce((s,f)=>s+f.geometry.coordinates[1],0)/rows.length,lng=rows.reduce((s,f)=>s+f.geometry.coordinates[0],0)/rows.length;
  const clusterIcon=r.kind==='estate'?estateSvg:r.kind==='dam'?damSvg:r.kind==='camera'?cameraSvg:sensorSvg(r.kind==='canal'?'canal':'water');
- const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#7653a4':(['#D32F2F','#E9B52A','#2196D2','#2E7D32','#607D8B'].find(c=>colors.includes(c))||'#647887');
+ const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#7653a4':(['#D32F2F','#F57C00','#FBC02D','#8D6E63','#2196D2','#2E7D32','#607D8B'].find(c=>colors.includes(c))||'#647887');
  const html='<span class="flood-cluster-symbol" style="background:'+clusterColor+'">'+clusterIcon+'<b>'+rows.length+'</b></span><small class="fd-cluster-label">'+esc(labels[r.kind]||'สถานี')+'</small>';
  const title=rows.length+' '+(labels[r.kind]||'สถานี')+' · คลิกเพื่อซูม';
  const zoom=()=>{const coords=rows.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:55,maxZoom:12,duration:400})}else raster.fitBounds(coords.map(p=>[p[1],p[0]]),{padding:[40,40],maxZoom:12});};
@@ -596,7 +577,7 @@ function drawOverviewClusters(clusters){
 
 
 function syncStatusKey(){
- let key=$('mapStatusKey');if(!key){key=document.createElement('details');key.id='mapStatusKey';key.innerHTML='<summary>สีสถานะข้อมูล</summary><div><p><i style="background:#D32F2F"></i>แดง · วิกฤต / เกินเกณฑ์</p><p><i style="background:#E9B52A"></i>เหลือง · เฝ้าระวัง / น้ำน้อย</p><p><i style="background:#2E7D32"></i>เขียว · ปกติ / ต่ำกว่าเกณฑ์เตือน</p><p><i style="background:#2196D2"></i>ฟ้า · น้ำมาก / ข้อมูลประกอบ</p><p><i style="background:#607D8B"></i>เทา · ไม่มีค่า / ข้อมูลเก่า / กล้องไม่พร้อม</p><small>สัญลักษณ์กลางหมุดบอกชนิดข้อมูล สีและเกณฑ์แยกตามชนิด; ดูความหมายเฉพาะจุดในแถบขวา<br>ระดับน้ำใช้สถานะต้นทางหรือเทียบตลิ่ง · เขื่อนใช้ร้อยละกักเก็บ<br>CCTV สีฟ้าเป็นข้อมูลกล้อง ไม่ใช่สถานะน้ำท่วม<br>แดงของน้ำน้อยวิกฤตไม่ใช่น้ำท่วม</small></div>';$('mapStage').appendChild(key)}
+ let key=$('mapStatusKey');if(!key){key=document.createElement('details');key.id='mapStatusKey';key.innerHTML='<summary>เกณฑ์สีสถานะข้อมูล</summary><div>'+window.IEAT_WATER_STATUS.legendHTML+'</div>';$('mapStage').appendChild(key)}
 }
 
 function syncPinLegend(){
@@ -1114,4 +1095,5 @@ body.dashboard-clean .status{bottom:28px!important;max-height:36px!important;pad
 .popup img[data-camera-image]{width:100%;max-height:240px;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
 .popup [data-camera-refresh]{border:1px solid #d9c9f0;border-radius:10px;background:#f5f0ff;color:#66459c;padding:8px 12px;font-family:Sarabun,sans-serif}
 </style>
+
 

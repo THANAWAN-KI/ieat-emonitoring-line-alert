@@ -24,8 +24,9 @@
  });
  function fresh(r){const a=Date.now()-stamp(r.measured_at);return Number.isFinite(a)&&a>=-300000&&a<=21600000}
  function gap(r){return n(r.wl)!==null&&n(r.bank)!==null?r.wl-r.bank:null}
- function nearBank(r){return n(r.percent)!==null&&Number(r.percent)>=90}
- function status(r){if(!fresh(r)||n(r.wl)===null)return ['#607D8B','ไม่มีค่าล่าสุด'];const g=gap(r);return g!==null&&g>=0?['#D32F2F','ล้นตลิ่ง']:nearBank(r)?['#F57C00','ใกล้ตลิ่ง']:['#2E7D32','ต่ำกว่าตลิ่ง']}
+ function nearBank(r){const state=window.IEAT_WATER_STATUS.water(r);return state.key==='standard-orange'&&state.label.includes('ตลิ่ง')}
+ function status(r){if(!fresh(r)||n(r.wl)===null)return ['#607D8B','ไม่มีค่าล่าสุด'];const state=window.IEAT_WATER_STATUS.water(r);return [state.hex,state.label]}
+
  function gapText(r){const g=gap(r);return g===null?'ไม่มีระดับตลิ่ง':(g>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(g))+' ม.'}
  function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:r.source_name||'RID GeoJSON'}},location.origin)}
  function trend(r){return r.trend_text?({'เพิ่มขึ้น':'▲ เพิ่มขึ้น','ลดลง':'▼ ลดลง','คงที่':'• คงที่'}[r.trend_text]||r.trend_text):'ไม่ระบุแนวโน้ม'}
@@ -149,7 +150,7 @@
  function normalizeFaonamFeed(raw){
   const text=value=>typeof value==='object'&&value!==null?String(value.th||''):String(value||'');
   const data=raw.waterlevel_data?.data;if(!Array.isArray(data)||!data.length)throw Error('ไม่มีข้อมูลสายน้ำจากต้นทาง');
-  const records=data.map(r=>{const t=r.station||{},g=r.geocode||{},wl=n(r.waterlevel_msl),bank=n(t.min_bank),previous=n(r.waterlevel_msl_previous),diff=wl!==null&&bank!==null?Math.round((wl-bank)*100)/100:null;return {id:t.id,code:t.tele_station_oldcode,oldcode:t.tele_station_oldcode,name:text(t.tele_station_name),river:text(r.river_name).trim(),province:text(g.province_name),district:text(g.amphoe_name),lat:n(t.tele_station_lat),lng:n(t.tele_station_long),wl,bank,diff,flow:n(r.discharge),delta:wl!==null&&previous!==null?Math.round((wl-previous)*100)/100:null,measured_at:r.waterlevel_datetime,source_name:'ThaiWater / '+text(r.agency?.agency_shortname),source_url:'https://faonam.com/rivers',status:diff!==null&&diff>=0?'ล้นตลิ่ง':r.situation_level===4?'ใกล้ตลิ่ง':'ต่ำกว่าตลิ่ง'};}).filter(r=>r.river&&r.code);
+  const records=data.map(r=>{const t=r.station||{},g=r.geocode||{},wl=n(r.waterlevel_msl),bank=n(t.min_bank),previous=n(r.waterlevel_msl_previous),diff=wl!==null&&bank!==null?Math.round((wl-bank)*100)/100:null;return {id:t.id,code:t.tele_station_oldcode,oldcode:t.tele_station_oldcode,name:text(t.tele_station_name),river:text(r.river_name).trim(),province:text(g.province_name),district:text(g.amphoe_name),lat:n(t.tele_station_lat),lng:n(t.tele_station_long),wl,bank,diff,situation_level:n(r.situation_level),flow:n(r.discharge),delta:wl!==null&&previous!==null?Math.round((wl-previous)*100)/100:null,measured_at:r.waterlevel_datetime,source_name:'ThaiWater / '+text(r.agency?.agency_shortname),source_url:'https://faonam.com/rivers',status:diff!==null&&diff>=0?'ล้นตลิ่ง':r.situation_level===4?'ใกล้ตลิ่ง':'ต่ำกว่าตลิ่ง'};}).filter(r=>r.river&&r.code);
   const counts=new Map();records.forEach(r=>counts.set(r.river,(counts.get(r.river)||0)+1));
   return {rows:records,rivers:[...counts].filter(([name,count])=>count>=3).map(([name,stations])=>({name,stations}))};
  }
@@ -350,6 +351,7 @@ mainGraph?.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.t
 host.addEventListener('click',e=>{if(suppressClick){e.preventDefault();return}choose(e)});host.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){if(e.target.matches('[data-rp-id]')){e.preventDefault();choose(e)}}});loadFaonamRivers();setInterval(loadFaonamRivers,3600000);loadRiverGeometry();refresh();setInterval(()=>{if(!document.hidden)refresh()},3600000)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
+
 
 
 
