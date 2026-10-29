@@ -47,7 +47,14 @@ function focusRow(row){
 function drawSupportMarkers(){
  if(!map||!window.L)return;
  if(markers)markers.remove();markers=window.L.layerGroup().addTo(map);
- Array.from(results.values()).flat().filter(row=>row.distance<=effectiveSupportRadius()*1000).forEach(row=>{const c=color(row.distance);const m=(window.ieatSupportPointMarker?window.ieatSupportPointMarker({dataset:{id:row.source||sources.find(s=>s.label===row.type)?.id,label:row.type},title:row.type},{properties:{}},window.L.latLng(row.lat,row.lon)):window.L.circleMarker([row.lat,row.lon],{radius:7,color:'#fff',weight:2,fillColor:c[0],fillOpacity:1})).addTo(markers);m.bindTooltip(text('span',row.type+' · '+row.name));m.on('click',()=>{if(!selecting)focusRow(row);});});
+ const compact=new URLSearchParams(location.search).get('view')==='data';
+ const counts=new Map();
+ const rows=Array.from(results.values()).flat().filter(row=>row.distance<=effectiveSupportRadius()*1000).sort((a,b)=>a.distance-b.distance).filter(row=>{
+  if(!compact)return true;
+  if(map.getZoom()<12)return false;
+  const key=row.source||row.type,count=counts.get(key)||0;if(count>=3)return false;counts.set(key,count+1);return true;
+ });
+ rows.forEach(row=>{const c=color(row.distance);const m=(window.ieatSupportPointMarker?window.ieatSupportPointMarker({dataset:{id:row.source||sources.find(s=>s.label===row.type)?.id,label:row.type},title:row.type},{properties:{}},window.L.latLng(row.lat,row.lon)):window.L.circleMarker([row.lat,row.lon],{radius:7,color:'#fff',weight:2,fillColor:c[0],fillOpacity:1})).addTo(markers);m.bindTooltip(text('span',row.type+' · '+row.name));m.on('click',()=>{if(!selecting)focusRow(row);});});
 }
 function effectiveSupportRadius(){return Number(radius.value)}
 function publishSupport(){
@@ -127,7 +134,7 @@ function setIncident(lat,lon){
  marker.on('dragend',()=>{const p=marker.getLatLng();setIncident(p.lat,p.lng);});load();
 }
 function choose(){if(!map){note.textContent='กำลังเตรียมแผนที่ กรุณารอ';return;}selecting=!selecting;map.getContainer().style.cursor=selecting?'crosshair':'';pick.textContent=selecting?'คลิกจุดเกิดเหตุบนแผนที่':incident?'ย้ายจุดเกิดเหตุ':'กำหนดจุดเกิดเหตุ';note.textContent=selecting?'คลิกตำแหน่งเกิดเหตุบนแผนที่ด้านขวา':incident?'เลือกย้ายจุดเกิดเหตุได้ทุกเมื่อ':'ยังไม่ได้เลือกจุดเกิดเหตุ';if(selecting)get('map').scrollIntoView({behavior:'smooth',block:'center'});}
-function bindMap(nextMap){if(map===nextMap)return;map=nextMap;pick.disabled=false;localPick.disabled=false;map.on('click',e=>{if(selecting){map.closePopup();setIncident(e.latlng.lat,e.latlng.lng);}});}
+function bindMap(nextMap){if(map===nextMap)return;map=nextMap;map.on('zoomend',drawSupportMarkers);pick.disabled=false;localPick.disabled=false;map.on('click',e=>{if(selecting){map.closePopup();setIncident(e.latlng.lat,e.latlng.lng);}});}
 pick.addEventListener('click',choose);localPick.addEventListener('click',choose);radius.addEventListener('change',load);
 clear.addEventListener('click',()=>{controller?.abort();request++;incident=null;selecting=false;loading=false;results=new Map();failures=[];if(marker)marker.remove();if(markers)markers.remove();if(map)map.getContainer().style.cursor='';pick.textContent='กำหนดจุดเกิดเหตุ';localPick.textContent='เลือกจุดเกิดเหตุ';render();});
 window.addEventListener('ieat-support-map-ready',e=>bindMap(e.detail.map));if(window.ieatSupportMap)bindMap(window.ieatSupportMap);
