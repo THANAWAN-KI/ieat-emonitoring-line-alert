@@ -325,7 +325,8 @@ function nearbyEstate(f){
 function scoped(){
  const province=$('province').value;
  const base=features.filter(f=>flags[f.properties.kind]&&(estateProvinceScope?.active?(f.properties.kind==='estate'?f.properties.name===estateProvinceScope.name:nearbyEstate(f)):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)));
- return historyOnly?base.filter(f=>f.properties.kind==='water'&&historyAvailable(f.properties)):base;
+ const visible=watchMapData?base.filter(f=>watchMapData.estates.some(e=>f.properties.kind==='estate'?e.name===f.properties.name:e.stations.some(r=>r.name===f.properties.name||String(r.id)===String(f.properties.code||f.properties.id)))):base;
+ return historyOnly?visible.filter(f=>f.properties.kind==='water'&&historyAvailable(f.properties)):visible;
 }
 
 function sensorSvg(kind){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(kind==='water'?'<path d="M6 3h7v15H6Z M10 6h3M9 10h4M10 14h3M3 20q3-3 6 0t6 0t6 0"/>':'<path d="M3 5h18M5 5v10M19 5v10M10 5v9M14 5v9M3 18q3-3 6 0t6 0t6 0M3 22q3-3 6 0t6 0t6 0"/>')+'</svg>';}
@@ -379,7 +380,7 @@ function render(){
   });
   if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#2185D5',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
  }
- drawOverviewClusters(overviewPoints.clusters);drawFlow();queueWaterLabels();
+ drawOverviewClusters(overviewPoints.clusters);drawFlow();queueWaterLabels();drawWatchMap();
  const count=list.filter(f=>f.properties.kind==='water').length;const fresh=list.filter(f=>f.properties.kind==='water'&&!f.properties.stale).length;
  $('status').textContent='ระดับน้ำ '+count+' จุด · ข้อมูลไม่เกิน 6 ชม. '+fresh+' จุด · คลิกจุดเพื่อดูค่าตรวจวัดและเวลา'+(raster?' · แผนที่แบบ 2 มิติ':'');if(autoFit&&features.length&&fit()){autoFit=false}
 }
@@ -441,7 +442,7 @@ function rasterStart(){
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
- ready=true;render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);
+ ready=true;render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
 }
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
@@ -468,7 +469,7 @@ function vectorStart(){
   vector.on('click','water-stations',openSensorPopup);
   vector.on('click','points',e=>{const p=e.features[0];createMapPopup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   ['water-stations','points'].forEach(id=>{vector.on('mouseenter',id,()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave',id,()=>vector.getCanvas().style.cursor='')});
-  ready=true;render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);
+  ready=true;render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{phase++;if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase%2?[1,4]:[0,2,1,2])},500)}
   if(gistda)addGistda();addFlow();
  });
@@ -619,8 +620,50 @@ $('historyOnly').addEventListener('change',async event=>{
  if(historyOnly){try{await loadHistoryIndex()}catch(e){}}
  render();
 });
+let watchMapData=null,watchMapLayer=null,watchMapMarkers=[];
+function clearWatchMap(){
+ watchMapData=null;watchMapMarkers.forEach(m=>m.remove());watchMapMarkers=[];
+ if(watchMapLayer&&raster){raster.removeLayer(watchMapLayer);watchMapLayer=null}
+ if(vector?.getSource('watch-estate-links'))vector.getSource('watch-estate-links').setData({type:'FeatureCollection',features:[]});
+ document.getElementById('watchMapLegend')?.remove();
+}
+function watchEstatePopup(e){return '<div class="popup"><h3>'+esc(e.name)+'</h3><button type="button" data-watch-estate="'+esc(e.id)+'" style="padding:8px 12px;border:1px solid #713b91;border-radius:8px;background:white;color:#713b91;font:13px Sarabun;cursor:pointer">ซูมดูนิคมฯ นี้และระยะถึงสถานี</button><p><b>'+esc(e.reason)+'</b><br>ระดับน้ำเข้าเกณฑ์ '+e.waterCount+' สถานี · ฝนเข้าเกณฑ์ '+e.rainCount+' สถานี</p><h4>สถานีระดับน้ำที่เกี่ยวข้อง</h4>'+(e.stations.length?e.stations.map(s=>'<p style="border-top:1px solid #ddd;padding-top:8px"><b>'+esc(s.name)+'</b><br>ห่าง '+s.distanceKm.toFixed(2)+' กม. (ระยะเส้นตรง)<br>ระดับน้ำ '+esc(s.level??'–')+' ม.รทก. · ตลิ่ง '+esc(s.bank??'–')+' ม.รทก.<br>เวลาตรวจวัด '+esc(s.observed)+(s.qualifying?'':'<br>สถานีใกล้เคียงประกอบการดูพื้นที่ ไม่ใช่เหตุที่เข้าเกณฑ์')+'</p>').join(''):'<p>ไม่มีสถานีระดับน้ำที่มีข้อมูลพร้อมใช้ภายใน 30 กม. นิคมฯ นี้อาจเข้าเกณฑ์จากฝน</p>')+'<small>เส้นประแสดงระยะ ไม่ใช่เส้นทางน้ำไหลหรือขอบเขตน้ำท่วม</small></div>'}
+function showWatchMapData(data){
+ clearWatchMap();clearExecutiveFocus();watchMapData={...data,estates:(data.estates||[]).filter(e=>valid({lat:e.lat,lng:e.lon})).map(e=>({...e,stations:(e.stations||[]).filter(s=>valid({lat:s.lat,lng:s.lon})&&Number.isFinite(s.distanceKm))}))};
+ autoFit=false;estateProvinceScope=null;$('province').value='';render();
+ const coords=watchMapData.estates.flatMap(e=>[[e.lon,e.lat],...e.stations.map(s=>[s.lon,s.lat])]);
+ if(!ready||!coords.length)return;
+ if(vector){const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:{top:110,bottom:45,left:45,right:45},maxZoom:12,duration:700})}
+ else if(raster)raster.fitBounds(coords.map(p=>[p[1],p[0]]),{paddingTopLeft:[40,110],paddingBottomRight:[40,40],maxZoom:12});
+}
+document.addEventListener('click',event=>{const button=event.target.closest('[data-watch-estate]');if(!button||!watchMapData)return;const estate=watchMapData.estates.find(e=>e.id===button.dataset.watchEstate);if(estate)showWatchMapData({...watchMapData,estates:[estate]})});
+function drawWatchMap(){
+ if(!ready||!watchMapData)return;
+ watchMapMarkers.forEach(m=>m.remove());watchMapMarkers=[];
+ if(watchMapLayer&&raster)raster.removeLayer(watchMapLayer);
+ if(raster){if(!raster.getPane('watchPoints')){raster.createPane('watchPoints');raster.getPane('watchPoints').style.zIndex='650'}watchMapLayer=L.layerGroup().addTo(raster);}
+ const estates=watchMapData.estates,lines=[],seen=new Set(),zoom=vector?vector.getZoom():raster?.getZoom();
+ let legend=document.getElementById('watchMapLegend');if(!legend){legend=document.createElement('div');legend.id='watchMapLegend';legend.style.cssText='position:absolute;z-index:1400;left:12px;right:12px;top:64px;background:#fffffff2;border:1px solid #c8b2d7;border-radius:9px;padding:8px 12px;font:12px/1.7 Sarabun,sans-serif;color:#68418f;pointer-events:none';document.body.append(legend)}
+ legend.textContent=watchMapData.title+' '+estates.length+' แห่ง · หมุดม่วง: นิคมฯ · หมุดน้ำเงิน: ระดับน้ำ · เส้นประ: ระยะเส้นตรง (กม.)'+(!estates.length?' · ไม่พบรายการที่พร้อมแสดง':' · คลิกหมุดเพื่อดูรายละเอียด');
+ function pin(coords,label,html,color,station){
+  if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='width:34px;height:34px;border:3px solid white;border-radius:50%;background:'+color+';color:white;font:600 13px Sarabun;box-shadow:0 0 0 3px '+color+'55;cursor:pointer';el.textContent=station?'≋':'น';const marker=new maplibregl.Marker({element:el}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
+  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:L.divIcon({className:'',iconSize:[34,34],iconAnchor:[17,17],html:'<span style="display:grid;place-items:center;width:34px;height:34px;border:3px solid white;border-radius:50%;background:'+color+';color:white;box-shadow:0 0 0 3px '+color+'55;font:600 14px Sarabun">'+(station?'≋':'น')+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:420,maxHeight:innerHeight*.7}).addTo(watchMapLayer)}
+ }
+ estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#713b91',false);e.stations.forEach(s=>{
+  const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
+  lines.push({type:'Feature',geometry:{type:'LineString',coordinates:coords},properties:{}});
+  const stationKey=s.lat+':'+s.lon+':'+s.name;if(!seen.has(stationKey)){seen.add(stationKey);const html='<div class="popup"><h3>'+esc(s.name)+'</h3><p>ระดับน้ำ '+esc(s.level??'–')+' ม.รทก.<br>ตลิ่ง '+esc(s.bank??'–')+' ม.รทก.<br>เวลาตรวจวัด '+esc(s.observed)+'</p><p>'+estates.flatMap(other=>other.stations.filter(t=>t.name===s.name&&t.lat===s.lat&&t.lon===s.lon).map(t=>esc(other.name)+' · '+t.distanceKm.toFixed(2)+' กม.')).join('<br>')+'</p><small>ระยะเส้นตรงจากพิกัดสถานีถึงพิกัดอ้างอิงนิคมฯ</small></div>';pin(coords[1],s.name,html,'#2185D5',true)}
+  const middle=[(e.lon+s.lon)/2,(e.lat+s.lat)/2];
+  if(vector&&((zoom||0)>=9||estates.length===1)){const el=document.createElement('span');el.style.cssText='background:white;border:1px solid #c8b2d7;border-radius:5px;padding:2px 6px;color:#68418f;font:12px Sarabun;white-space:nowrap;pointer-events:none';el.textContent=label;watchMapMarkers.push(new maplibregl.Marker({element:el}).setLngLat(middle).addTo(vector))}
+  else if(raster){const line=L.polyline(coords.map(p=>[p[1],p[0]]),{color:'#713b91',weight:2.5,dashArray:'6 6'}).bindTooltip(esc(e.name)+' ↔ '+esc(s.name)+' · '+label+' (ระยะเส้นตรง)',{sticky:true});line.addTo(watchMapLayer);if((zoom||0)>=9||estates.length===1)L.marker([middle[1],middle[0]],{pane:'watchPoints',interactive:false,icon:L.divIcon({className:'',iconSize:[88,22],iconAnchor:[44,11],html:'<span style="background:white;color:#68418f;border:1px solid #c8b2d7;border-radius:5px;padding:2px 6px;font:12px Sarabun;white-space:nowrap">'+label+'</span>'})}).addTo(watchMapLayer)}
+ })});
+ if(vector){const collection={type:'FeatureCollection',features:lines};if(!vector.getSource('watch-estate-links')){vector.addSource('watch-estate-links',{type:'geojson',data:collection});vector.addLayer({id:'watch-estate-distance',type:'line',source:'watch-estate-links',paint:{'line-color':'#713b91','line-width':2.5,'line-dasharray':[2,2]}})}else vector.getSource('watch-estate-links').setData(collection)}
+}
+
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
+ if(d.type==='flood-watch-clear'){clearWatchMap();return}
+ if(d.type==='flood-watch-focus'){showWatchMapData(d);return}
  if(d.type==='flood-province-scope'){estateProvinceScope=d;render();if(d.active&&d.estate)focus({lat:d.estate.lat,lon:d.estate.lon,label:d.name,scale:150000});return}
  if(d.type==='flood-map-resize'){if(vector)vector.resize();if(raster)raster.invalidateSize();return}
  if(d.type==='flood-map-focus'){focus(d);return}
