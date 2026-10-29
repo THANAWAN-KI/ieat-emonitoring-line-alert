@@ -334,8 +334,8 @@ function roundedTreeInstances(features){
 }
 function roundTreeFaces(tree,scale=1){
  const faces=[],hash=tree.id.split('').reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,9),base=[.32+(hash%9)/100,.41+(hash%8)/100,.19+(hash%5)/100],light=[-.4,-.5,.77];
- function triangle(a,b,c,color=base,alpha=1){const u=b.map((v,i)=>v-a[i]),v=c.map((x,i)=>x-a[i]),n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],len=Math.hypot(...n)||1,shade=.62+.38*Math.max(0,n.reduce((s,x,i)=>s+x/len*light[i],0));faces.push({points:[a,b,c],normal:n.map(x=>x/len),color:color.map(x=>Math.min(1,x*shade)),alpha})}
- const trunk=tree.bottom+1,steps=10;
+ function triangle(a,b,c,color=base,alpha=1){const u=b.map((v,i)=>v-a[i]),v=c.map((x,i)=>x-a[i]),n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],len=Math.hypot(...n)||1,shade=.62+.38*Math.max(0,n.reduce((s,x,i)=>s+x/len*light[i],0));faces.push({points:[a,b,c],trunk:color!==base,normal:n.map(x=>x/len),color:color.map(x=>Math.min(1,x*shade)),alpha})}
+ const trunk=tree.bottom+2,steps=10;
  for(let i=0;i<steps;i++){const a=i*2*Math.PI/steps,b=(i+1)*2*Math.PI/steps,pa=[.25*Math.cos(a),.25*Math.sin(a),0],pb=[.25*Math.cos(b),.25*Math.sin(b),0],ta=[pa[0],pa[1],trunk*scale],tb=[pb[0],pb[1],trunk*scale];triangle(pa,pb,tb,[.42,.35,.27]);triangle(pa,tb,ta,[.42,.35,.27])}
  const mid=(tree.top+tree.bottom)/2*scale,rz=(tree.top-tree.bottom)/2*scale,rx=tree.radius*(.94+(hash%9)/100),ry=tree.radius;
  const vertex=(i,j)=>{const phi=-Math.PI/2+i*Math.PI/6,theta=j*Math.PI/5;return [rx*Math.cos(phi)*Math.cos(theta),ry*Math.cos(phi)*Math.sin(theta),mid+rz*Math.sin(phi)]};
@@ -347,7 +347,7 @@ function drawRoundTreesSvg(features,svg,metersPerPixel){
  const ns='http://www.w3.org/2000/svg',trees=roundedTreeInstances(features).sort((a,b)=>a.lat-b.lat).reverse(),scale=estateDepth/45;
  for(const t of trees){const anchor=raster.latLngToLayerPoint([t.lat,t.lon]),shadow=document.createElementNS(ns,'ellipse');shadow.setAttribute('cx',anchor.x+t.radius/metersPerPixel*.65);shadow.setAttribute('cy',anchor.y+t.radius/metersPerPixel*.35);shadow.setAttribute('rx',t.radius/metersPerPixel*1.35);shadow.setAttribute('ry',t.radius/metersPerPixel*.65);shadow.setAttribute('fill','#283622');shadow.setAttribute('opacity','.14');svg.appendChild(shadow);
  const faces=roundTreeFaces(t,scale).filter(f=>f.normal[0]*.35-f.normal[1]*1.6+f.normal[2]>.01).sort((a,b)=>a.points.reduce((s,p)=>s+p[1],0)-b.points.reduce((s,p)=>s+p[1],0));
- for(const face of faces){const points=face.points.map(p=>({x:anchor.x+(p[0]-p[2]*.35)/metersPerPixel,y:anchor.y+(-p[1]-p[2]*1.6)/metersPerPixel})),path=document.createElementNS(ns,'path');path.setAttribute('d',points.map((p,i)=>(i?'L':'M')+p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' ')+'Z');path.setAttribute('fill','rgb('+face.color.map(x=>Math.round(x*255)).join(',')+')');svg.appendChild(path)}
+ for(const face of faces){const points=face.points.map(p=>{const mid=(t.top+t.bottom)/2*scale,z=face.trunk?p[2]*1.6:mid*1.6+(p[2]-mid)*.9,xz=face.trunk?p[2]*.35:mid*.35+(p[2]-mid)*.2;return {x:anchor.x+(p[0]-xz)/metersPerPixel,y:anchor.y+(-p[1]-z)/metersPerPixel}}),path=document.createElementNS(ns,'path');path.setAttribute('d',points.map((p,i)=>(i?'L':'M')+p.x.toFixed(2)+' '+p.y.toFixed(2)).join(' ')+'Z');path.setAttribute('fill','rgb('+face.color.map(x=>Math.round(x*255)).join(',')+')');svg.appendChild(path)}
  }
 }
 let roundTreeGlLayer=null,roundTreeGlFailed=false;
