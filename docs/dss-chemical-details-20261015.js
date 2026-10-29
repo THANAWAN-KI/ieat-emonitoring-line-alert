@@ -28,16 +28,17 @@ function cell(row,text){const td=document.createElement('td');td.textContent=Str
 function render(){
  if(!data)return;
  const term=normalize(search.value),selected=scope;
- filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2]].join(' ')).includes(term)||chemicalMatches(r,search.value)||eppMatches.some(f=>{const a=f.attributes;return (companyKey(c[0])===companyKey(a['ชื่อบริษัทภาษาไทย'])&&normalize(c[2])===normalize(a['นิคมอุตสาหกรรม']))||[a['เลขทะเบียนเดิม'],a['เลขทะเบียนใหม่']].filter(Boolean).some(v=>normalize(c[1])===normalize(v))}));});
+ filtered=data.rows.filter(r=>{const c=data.companies[r[0]];return (!selected||normalize(c[2])===selected)&&(!term||normalize([c[0],c[1],c[2]].join(' ')).includes(term)||(companyKey(search.value).length>=2&&companyKey(c[0]).includes(companyKey(search.value)))||chemicalMatches(r,search.value)||eppMatches.some(f=>{const a=f.attributes;return (companyKey(c[0])===companyKey(a['ชื่อบริษัทภาษาไทย'])&&normalize(c[2])===normalize(a['นิคมอุตสาหกรรม']))||[a['เลขทะเบียนเดิม'],a['เลขทะเบียนใหม่']].filter(Boolean).some(v=>normalize(c[1])===normalize(v))}));});
  const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages-1);
  body.replaceChildren();
  for(const [index,r] of filtered.slice(page*pageSize,(page+1)*pageSize).entries()){
   const company=data.companies[r[0]],tr=document.createElement('tr');
   cell(tr,page*pageSize+index+1);
-  const companyCell=document.createElement('td'),companyButton=document.createElement('button');companyButton.type='button';companyButton.textContent=company[0];companyButton.title='เลือกบริษัทนี้เพื่อจัดทำรายงาน';companyButton.onclick=()=>{search.value=company[0];searchEpp()};companyCell.append(companyButton);tr.append(companyCell);cell(tr,company[2]);cell(tr,data.names[r[1]]);cell(tr,data.cas[r[2]]);cell(tr,r[3]);cell(tr,r[4]);cell(tr,data.units[r[5]]);body.append(tr);
+  const companyCell=document.createElement('td'),companyButton=document.createElement('button');companyButton.type='button';companyButton.textContent=company[0];companyButton.title='เลือกบริษัทนี้เพื่อจัดทำรายงาน';companyButton.onclick=()=>{search.value=company[0];searchEpp()};companyCell.append(companyButton);if(data.companySources?.[r[0]]==='catalog'){const origin=document.createElement('small');origin.textContent='คลังสารเคมี DSS';origin.style.display='block';origin.style.color='#606c76';companyCell.append(origin)}tr.append(companyCell);cell(tr,company[2]);cell(tr,data.names[r[1]]);cell(tr,data.cas[r[2]]);cell(tr,r[3]);cell(tr,r[4]);cell(tr,data.units[r[5]]);body.append(tr);
  }
  if(!filtered.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=8;td.textContent='ไม่พบรายการสารเคมีตามตัวกรอง';tr.append(td);body.append(tr);}
  status.textContent='พบ '+number(filtered.length)+' จาก '+number(data.rows.length)+' รายการ · แสดง '+(filtered.length?number(page*pageSize+1):'0')+'–'+number(Math.min((page+1)*pageSize,filtered.length));
+ if(data.sourceWarning)status.textContent+=' · '+data.sourceWarning;
  pageLabel.textContent='หน้า '+number(page+1)+' / '+number(pages);prev.disabled=page===0;next.disabled=page>=pages-1;
 }
 function syncScope(){
@@ -100,23 +101,19 @@ document.addEventListener('pointerdown',event=>{if(!eppBox.contains(event.target
 document.addEventListener('keydown',event=>{if(event.key==='Escape')dismissCompanySuggestions()});
 search.setAttribute('aria-controls',eppBox.id);search.setAttribute('aria-expanded','false');
 window.ieatRunCompanySearch=searchEpp;
-search.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(searchEpp,350);});
+search.addEventListener('input',()=>{clearTimeout(timer);eppMatches=[];page=0;render();timer=setTimeout(searchEpp,350);});
 
 estate.addEventListener('change',()=>{scope=estate.value;page=0;render();});
 source.addEventListener('change',syncScope);source.addEventListener('input',syncScope);
 prev.addEventListener('click',()=>{if(page>0){page--;render();}});next.addEventListener('click',()=>{if((page+1)*pageSize<filtered.length){page++;render();}});
 (async()=>{try{
- const response=await fetch('./data/dss-chemical-details-20261015.json',{cache:'no-cache',signal:AbortSignal.timeout(30000)});
- if(!response.ok)throw Error('HTTP '+response.status);
- const packed=await response.json();if(packed.encoding!=='gzip-base64'||typeof DecompressionStream==='undefined')throw Error('เบราว์เซอร์ไม่รองรับข้อมูลรายงานนี้');
- const bytes=Uint8Array.from(atob(packed.data),c=>c.charCodeAt(0));
- const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
- const result=JSON.parse(await new Response(stream).text());
+ const result=await window.IEATDssChemicalCatalog.load();
  if(result.schemaVersion!==1||result.period!=='2026-01-01/2026-10-15'||!Array.isArray(result.rows)||!Array.isArray(result.companies)||!Array.isArray(result.names)||!Array.isArray(result.cas)||!Array.isArray(result.units))throw Error('รูปแบบรายงานไม่ถูกต้อง');
  if(!result.rows.every(r=>Array.isArray(r)&&r.length===6&&result.companies[r[0]]&&typeof result.names[r[1]]==='string'&&typeof result.cas[r[2]]==='string'&&typeof result.units[r[5]]==='string'))throw Error('รายการรายงานไม่ถูกต้อง');
- data=result;
+ data=result;const period=document.querySelector('.chemical-report-period');if(period)period.textContent='รายงานสารเคมี 1 ม.ค.–15 ต.ค. 2569 และคลังสารเคมี DSS ของโรงงานที่ไม่มีในรายงาน';
  const names=new Map();data.companies.forEach(c=>names.set(normalize(c[2]),c[2]));
  [...names].sort((a,b)=>a[1].localeCompare(b[1],'th')).forEach(([key,name])=>estate.add(new Option(name,key)));
  search.disabled=false;estate.disabled=false;syncScope();
  }catch(error){status.textContent='โหลดรายละเอียดสารเคมีไม่สำเร็จ กรุณารีเฟรชหน้า';console.warn('Chemical report details',error);}})();
 })();
+
