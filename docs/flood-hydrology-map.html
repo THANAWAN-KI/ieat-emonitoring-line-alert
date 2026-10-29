@@ -741,7 +741,7 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-map-snapshot'){try{let dataUrl;if(vector&&ready){await new Promise(resolve=>{vector.once('render',resolve);vector.triggerRepaint()});dataUrl=vector.getCanvas().toDataURL('image/png')}else if(raster&&window.html2canvas){const canvas=await html2canvas($('raster'),{useCORS:true,backgroundColor:'#FFFFFF',logging:false});dataUrl=canvas.toDataURL('image/png')}else throw Error('แผนที่ยังไม่พร้อม');event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,dataUrl},event.origin)}catch(e){event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,error:e.message},event.origin)}}
 });
 fetch('./data/water_flow_major.geojson?v=20261001',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{waterways=d;addFlow();drawFlow()}).catch(()=>{$('status').textContent+=' · โหลดแนวลูกศรไม่สำเร็จ'});
-vectorStart();load();loadCanals();cameras();loadHistoryIndex().then(()=>queueRender()).catch(()=>{});setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
+vectorStart();setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);load();loadCanals();cameras();loadHistoryIndex().then(()=>queueRender()).catch(()=>{});setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
 function remoteInfo(){
  const lines=[];
  if(flags.satellite)lines.push(satelliteFeed?'น้ำท่วมจากดาวเทียม GISTDA · วันที่ภาพ '+satelliteFeed.passes.map(p=>p.date).filter((v,i,a)=>a.indexOf(v)===i).join(', ')+' · ภาพตามรอบดาวเทียม':satelliteError||'กำลังโหลดภาพดาวเทียม…');
