@@ -9,8 +9,8 @@ if(view==='data'){
  document.addEventListener('DOMContentLoaded',()=>{
   dash.prepend(bar);
   const input=$('chemicalSearch'),label=bar.querySelector('label[for="chemicalSearch"]');
-  if(label?.firstChild?.nodeType===3)label.firstChild.textContent='ค้นหาโรงงาน / บริษัท / สารเคมี';
-  if(input)input.placeholder='ชื่อโรงงาน / บริษัท / เลขทะเบียน / สารเคมี / CAS';
+  if(label?.firstChild?.nodeType===3)label.firstChild.textContent='ค้นหาโรงงาน / เลขทะเบียน';
+  if(input)input.placeholder='ชื่อโรงงาน / เลขทะเบียน';
  },{once:true});
  nav('data');document.querySelector('.portal-disaster-tabs')?.style.setProperty('display','none','important');heading.remove();
 }
