@@ -12,6 +12,9 @@ const paths={
  flood:'<path d="m3 10 9-7 9 7M6 8v7m12-7v7M10 12h4v4M2 18c2-2 4 2 6 0s4 2 6 0 4 2 8 0M2 22c2-2 4 2 6 0s4 2 6 0 4 2 8 0"/>',
  rain:'<path d="M6 13a4 4 0 0 1 0-8 6 6 0 0 1 11-1 4.5 4.5 0 0 1 1 9M7 17l-1 3m6-3-1 3m6-3-1 3"/>',
  layers:'<path d="m12 3 10 6-10 6L2 9Zm-10 10 10 6 10-6M2 17l10 6 10-6"/>',
+ satellite:'<path d="m8 8 8 8m-5-11 8 8-6 6-8-8Zm-9 2 5-5 4 4-5 5Zm11 11 5-5 4 4-5 5M3 15a6 6 0 0 1 6 6M3 19a2 2 0 0 1 2 2"/>',
+ radar:'<circle cx="12" cy="12" r="9"/><path d="m12 12 6-6M3 12h9v9M7 12a5 5 0 0 1 8-4M7 16a5 5 0 0 0 10-4"/>',
+ expand:'<path d="M9 3H3v6M15 3h6v6M3 15v6h6m12-6v6h-6"/>',
  cube:'<path d="m12 2 9 5v10l-9 5-9-5V7Zm0 10 9-5M12 12 3 7m9 5v10M7.5 4.5l9 5"/>',
  orbit:'<path d="m8 14 4-3 4 3M9 18h6M12 11V7"/><path d="M4 8C0 11 2 17 10 19c7 1 13-1 12-5m-4-7 3 1-1-3M4 8C7 5 15 5 21 8"/>',
  pause:'<path d="M8 5v14M16 5v14"/>',
@@ -38,6 +41,8 @@ button:focus-visible{outline:3px solid #9879bb;outline-offset:3px}
 `;document.head.appendChild(style);
 function decorate(el,kind){if(!el||el.querySelector('.ieat-icon'))return;el.insertAdjacentHTML('afterbegin',svg(kind)+' ')}
 function sync(){
+ decorate(document.querySelector('#mapLayers>summary'),'layers');decorate(document.getElementById('efMapFullscreen'),'expand');decorate(document.getElementById('efMapExitFullscreen'),'expand');
+ document.querySelectorAll('[data-layer="satellite"],[data-layer="radar"],[data-layer="flow"]').forEach(input=>{const swatch=input.parentElement.querySelector('.layer-swatch');if(swatch&&!swatch.querySelector('.ieat-icon')){swatch.classList.add('fd-legend-icon');swatch.innerHTML=svg(input.dataset.layer)}});
  document.querySelectorAll('[data-detail-tab]').forEach(b=>decorate(b,b.dataset.detailTab==='prep'?'protection':b.dataset.detailTab));
  decorate(document.getElementById('supportMapButton'),'protection');decorate(document.getElementById('estateView3d'),'cube');
  const close=document.getElementById('mapDetailsClose');if(close&&!close.querySelector('.ieat-icon'))close.innerHTML=svg('close');
