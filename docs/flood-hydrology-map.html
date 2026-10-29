@@ -687,8 +687,8 @@ function vectorStart(){
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
-  if(vector.getLayer('water'))vector.setPaintProperty('water','fill-color','#90CAF9');
-  if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#2185D5');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,2.5,9,4.5,13,8])}
+  if(vector.getLayer('water'))vector.setPaintProperty('water','fill-color','#68AED0');
+  if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#418DBA');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,2.5,9,4.5,13,8])}
 
   vector.addSource('sensors',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,22],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#D32F2F','#90CAF9'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#D32F2F','#2185D5'],'circle-stroke-width':1.4}});
@@ -715,11 +715,11 @@ function syncWaterAreas(){
  const layers=[['small','Water area small scale',1,5,null],['medium','Water area medium scale',5,7,0],['large','Water area large scale',7,11,0],['detail','Water area',11,24,7]];
  if(vector&&ready){
  if(!vector.getSource('esri-water-shape'))vector.addSource('esri-water-shape',{type:'vector',tiles:[esriWaterTiles],minzoom:0,maxzoom:16,attribution:'Water areas © Esri'});
- for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#388fc4','fill-opacity':.92}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
+ for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#68AED0','fill-opacity':.94}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
  }else if(raster&&L.vectorGrid){
  if(!waterAreaRaster){
   if(!raster.getPane('waterArea')){const pane=raster.createPane('waterArea');pane.style.zIndex='350';pane.style.pointerEvents='none'}
-  const styles=new Proxy({}, {get:(_t,name)=>{const match=layers.find(l=>l[1]===name);if(!match)return [];return (p,z)=>z>=match[2]&&z<match[3]&&(match[4]===null||p._symbol===match[4])?{fill:true,fillColor:'#388fc4',fillOpacity:.92,stroke:false,weight:0}:[]}});
+  const styles=new Proxy({}, {get:(_t,name)=>{const match=layers.find(l=>l[1]===name);if(!match)return [];return (p,z)=>z>=match[2]&&z<match[3]&&(match[4]===null||p._symbol===match[4])?{fill:true,fillColor:'#68AED0',fillOpacity:.94,stroke:false,weight:0}:[]}});
   waterAreaRaster=L.vectorGrid.protobuf(esriWaterTiles,{rendererFactory:L.canvas.tile,vectorTileLayerStyles:styles,interactive:false,pane:'waterArea',maxNativeZoom:16,maxZoom:19,attribution:'Water areas © Esri'});
  }
  if(flags.flow&&!raster.hasLayer(waterAreaRaster))waterAreaRaster.addTo(raster);else if(!flags.flow&&raster.hasLayer(waterAreaRaster))waterAreaRaster.remove();
@@ -729,21 +729,21 @@ function syncWaterAreas(){
 function addFlow(){
  if(!vector||!ready||!waterways||vector.getSource('mapped-flow'))return;
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream')}});
- vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#FFFFFF','line-width':1.3,'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
+ vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#E4F5FF','line-width':1.3,'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
  {let phase=0;setInterval(()=>{if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion'))return;phase=(phase+.1)%8;vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])},60)}
  const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:5,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':.65,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
- img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#0D47A1" stroke-width="1.5" stroke-linejoin="round"/></svg>');
+ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#F3FBFF" stroke="#2B6697" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream');
  const flowWidth=raster.getZoom()<9?4:raster.getZoom()<13?7:11;
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#FFFFFF',weight:1.3,opacity:.85,lineCap:'butt',dashArray:'3 21',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#E4F5FF',weight:1.3,opacity:.85,lineCap:'butt',dashArray:'3 21',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  if(raster.getZoom()<7)return;
  const bounds=raster.getBounds().pad(.15);let count=0;
  for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
  for(let i=1;i<cs.length;i++){const a=L.latLng(cs[i-1][1],cs[i-1][0]),b=L.latLng(cs[i][1],cs[i][0]);const p=raster.latLngToLayerPoint(a),q=raster.latLngToLayerPoint(b),len=p.distanceTo(q);if(!len)continue;
- let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[18,12],iconAnchor:[9,6],html:'<svg width="18" height="12" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="white" stroke="#0D47A1" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
+ let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[18,12],iconAnchor:[9,6],html:'<svg width="18" height="12" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#F3FBFF" stroke="#2B6697" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
  }}}
 
 function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#2185D5','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#2185D5','circle-radius':5}},'discharge-ring')}
