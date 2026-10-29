@@ -488,9 +488,9 @@ function render(){
  syncRemoteOverlays();syncBoundaries();const list=scoped(),overviewPoints=groupOverviewPoints(list),displayPoints=overviewPoints.points;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
-  displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='sensor-marker'+(r.kind==='canal'?' canal-sensor':'');el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=sensorSvg(r.kind);waterMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'520px'}).setHTML(content(r,r.kind))).addTo(vector))});
-  cameraMarkers.forEach(m=>m.remove());cameraMarkers=[];displayPoints.filter(f=>f.properties.kind==='camera').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=cameraSvg;const popup=createMapPopup({maxWidth:'520px'}).setHTML(content(r,'camera'));popup.on('open',()=>loadCameraImage(r));cameraMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(popup).addTo(vector))});
-  damMarkers.forEach(m=>m.remove());damMarkers=[];displayPoints.filter(f=>f.properties.kind==='dam').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.color;el.innerHTML=damSvg+'<span class="estate-name dam-name">เขื่อน'+esc(r.name)+'</span>';el.style.position='absolute';damMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(r,'dam'))).addTo(vector))});
+  displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='sensor-marker'+(r.kind==='canal'?' canal-sensor':'');el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background=r.kind==='canal'?'#149eae':'#2776ca';el.innerHTML=sensorSvg(r.kind);waterMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'520px'}).setHTML(content(r,r.kind))).addTo(vector))});
+  cameraMarkers.forEach(m=>m.remove());cameraMarkers=[];displayPoints.filter(f=>f.properties.kind==='camera').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background='#8056c7';el.innerHTML=cameraSvg;const popup=createMapPopup({maxWidth:'520px'}).setHTML(content(r,'camera'));popup.on('open',()=>loadCameraImage(r));cameraMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(popup).addTo(vector))});
+  damMarkers.forEach(m=>m.remove());damMarkers=[];displayPoints.filter(f=>f.properties.kind==='dam').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='marker-icon';el.tabIndex=0;el.setAttribute('aria-label',r.name);el.style.background='#dfa126';el.innerHTML=damSvg+'<span class="estate-name dam-name">เขื่อน'+esc(r.name)+'</span>';el.style.position='absolute';damMarkers.push(new maplibregl.Marker({element:el}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(r,'dam'))).addTo(vector))});
   estateMarkers.forEach(m=>m.remove());estateMarkers=[];displayPoints.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).setPopup(createMapPopup({maxWidth:'330px'}).setHTML(content(f.properties,'estate'))).addTo(vector))});
   if(cleanDashboard){if(vector.getLayer('water-stations'))vector.setPaintProperty('water-stations','circle-radius',3.5);for(const id of ['water-station-symbol','labels','overflow-alert'])if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility','none');}
   vector.getSource('sensors')?.setData({type:'FeatureCollection',features:displayPoints});
@@ -909,9 +909,12 @@ body.dashboard-clean .status{bottom:28px!important;max-height:36px!important;pad
 .flood-point-cluster b{font-size:13px;line-height:16px}.flood-point-cluster small{font-size:9px;line-height:11px}
 .popup,.popup :is(p,small,.value,.water-gap,.water-level){color:#222}.popup h3,.popup a{color:#0D47A1}
 </style>
-
-
-
-
-
-
+<style id="flood-final-ui-20261029">
+#mapDataAudit,#flood-layer-guide,.ef-map-foot .source-note{display:none!important}
+.sensor-marker,.marker-icon{border:2px solid #fff!important;box-shadow:0 4px 14px #132b4860!important}
+.maplibregl-popup-content,.leaflet-popup-content-wrapper{border-radius:18px!important;box-shadow:0 14px 38px #152b4740!important}
+.popup{color:#24364a!important;line-height:1.6!important}
+.popup h3{font-size:18px!important;color:#20334f!important}
+.popup img[data-camera-image]{width:100%;max-height:240px;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.popup [data-camera-refresh]{border:1px solid #d9c9f0;border-radius:10px;background:#f5f0ff;color:#66459c;padding:8px 12px;font-family:Sarabun,sans-serif}
+</style>
