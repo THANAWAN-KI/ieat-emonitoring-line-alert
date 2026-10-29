@@ -23,7 +23,7 @@ const style=document.createElement('style');style.textContent=`
 `;document.head.appendChild(style);
 let mode={active:true,estate:'บางปะอิน'},context=null,markers=[],outline=null,rasterOutline=null,outlinePromise=null,parentSeen=false,needsFocus=true,timer=null;
 const active=()=>mode.active&&mode.estate.includes('บางปะอิน');
-function svg(kind,color){return '<svg viewBox="0 0 36 44" aria-hidden="true"><path d="M18 43C14 36 2 28 2 18a16 16 0 1 1 32 0c0 10-12 18-16 25Z" fill="white" stroke="'+color+'" stroke-width="2"/><g transform="translate(6 5)" fill="none" stroke="'+color+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+icons[kind]+'</g></svg>'}
+function svg(kind,color){return '<svg viewBox="0 0 36 44" aria-hidden="true"><path d="M18 43C14 36 2 28 2 18a16 16 0 1 1 32 0c0 10-12 18-16 25Z" fill="'+color+'" stroke="white" stroke-width="2"/><circle cx="18" cy="18" r="12" fill="white"/><g transform="translate(8 8) scale(.84)" fill="none" stroke="'+color+'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+window.IEAT_ICONS.paths[kind]+'</g></svg>'}
 function mount(item,kind,name,color,id){
  const el=document.createElement('div');el.className='prep-feature '+(item.side||'right');el.innerHTML='<button type="button" aria-label="'+esc(name)+'">'+svg(kind,color)+'</button><span class="prep-name">'+esc(name)+'</span>';
  let marker;if(context.vector){const wrap=document.createElement('div');wrap.className='prep-anchor';wrap.appendChild(el);marker=new maplibregl.Marker({element:wrap,anchor:'bottom'}).setLngLat([item.lon,item.lat]).addTo(context.vector)}
