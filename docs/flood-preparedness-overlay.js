@@ -36,7 +36,7 @@ style.textContent=`
 const bar=document.createElement('div');bar.id='ieat-preparedness';bar.hidden=true;
 bar.innerHTML='<b>ปัจจุบัน · รับมือน้ำท่วม</b><span>ตำแหน่ง / แนวเส้นประมาณจากผัง · ขีดความสามารถตามแผน</span><button type="button" id="prep-label-toggle" aria-pressed="true">ซ่อนป้าย</button><button type="button" data-flood-plan="bang-pa-in">ดูผังต้นฉบับ ↗</button>';
 document.body.appendChild(bar);
-let mode={active:true,estate:'บางปะอิน'},focusTimer=null,labels=true,context=null,markers=[],outline=null,outlinePromise=null,rasterOutline=null,active=false;
+let mode={active:true,estate:'บางปะอิน'},focusTimer=null,parentModeSeen=false,needsFocus=false,labels=true,context=null,markers=[],outline=null,outlinePromise=null,rasterOutline=null,active=false;
 const isBangpain=()=>mode.active&&mode.estate.includes('บางปะอิน');
 const plan=()=>window.IEAT_ESTATE_DIAGRAMS?.find(p=>p.key==='bang-pa-in');
 function pin(color,text){return '<button type="button" class="prep-pin" aria-label="'+esc(text)+'"><svg viewBox="0 0 32 38" aria-hidden="true"><path d="M16 37C12 31 2 23 2 15a14 14 0 1 1 28 0c0 8-10 16-14 22Z" fill="'+color+'" stroke="white" stroke-width="2"/></svg></button>'}
@@ -51,6 +51,15 @@ function popup(item){
  const p=plan(),content='<div class="popup"><h3>สถานีสูบน้ำ '+item.id+'</h3><p><b>กำลังตามผัง '+number(item.capacity)+' ลบ.ม./ชม.</b></p><p>ไฟสำรองตามผัง 800 kVA ทุกสถานี</p><p>ทั้งนิคมฯ: '+esc(p?.pumps||'4 สถานี · 18 เครื่อง')+'</p><small>ตำแหน่งประมาณจากการเทียบภาพผังกับภาพดาวเทียม ไม่ใช่พิกัดสำรวจ<br>ยังไม่มีสถานะเดินเครื่องสด</small><p><button data-flood-plan="bang-pa-in">ดูผังต้นฉบับ</button></p></div>';
  if(context.vector)new maplibregl.Popup({maxWidth:'300px',offset:35}).setLngLat([item.lon,item.lat]).setHTML(content).addTo(context.vector);
  else L.popup({maxWidth:300,offset:[0,-30]}).setLatLng([item.lat,item.lon]).setContent(content).openOn(context.raster);
+}
+function focusExample(){
+ if(!needsFocus||!context||!isBangpain())return;
+ clearTimeout(focusTimer);focusTimer=setTimeout(()=>{
+  if(!isBangpain()||!context)return;needsFocus=false;
+  window.IEATPreparednessMap?.().clearSelectionPopup?.();
+  if(context.vector)context.vector.fitBounds([[100.57824,14.18448],[100.59333,14.21330]],{padding:{top:90,bottom:100,left:110,right:110},maxZoom:15,pitch:55,bearing:-15});
+  else context.raster.fitBounds([[14.18448,100.57824],[14.21330,100.59333]],{padding:[85,85],maxZoom:15});
+ },300);
 }
 function attach(){
  const next=window.IEATPreparednessMap?.();if(!next?.ready||(!next.vector&&!next.raster))return;
@@ -71,7 +80,7 @@ function attach(){
  protection.querySelector('button').setAttribute('data-flood-plan','bang-pa-in');
  const map=context.vector||context.raster;map.on('zoomend',refresh);map.on('moveend',refresh);
  if(!outlinePromise)outlinePromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=prep-approx1').then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{outline=d;drawOutline();refresh()}).catch(()=>{outlinePromise=null});
- drawOutline();refresh();
+ drawOutline();refresh();focusExample();
 }
 function drawOutline(){
  if(!context||!outline)return;
@@ -95,13 +104,10 @@ bar.querySelector('#prep-label-toggle').onclick=e=>{labels=!labels;e.target.text
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==parent)return;
  if(e.data?.type==='flood-preparedness-mode'){
- const was=isBangpain();mode={active:!!e.data.active,estate:String(e.data.estate||'')};attach();refresh();
- if(!was&&isBangpain()){clearTimeout(focusTimer);focusTimer=setTimeout(()=>{
-  if(!isBangpain()||!context)return;
-  window.IEATPreparednessMap?.().clearSelectionPopup?.();
-  if(context.vector)context.vector.fitBounds([[100.57824,14.18448],[100.59333,14.21330]],{padding:{top:90,bottom:100,left:110,right:110},maxZoom:15,pitch:55,bearing:-15});
-  else context.raster.fitBounds([[14.18448,100.57824],[14.21330,100.59333]],{padding:[85,85],maxZoom:15});
- },300)}
+ const was=isBangpain();mode={active:!!e.data.active,estate:String(e.data.estate||'')};
+ needsFocus=isBangpain()&&(!parentModeSeen||!was||needsFocus);parentModeSeen=true;
+ if(!isBangpain())clearTimeout(focusTimer);
+ attach();refresh();focusExample();
 }
 });
 document.addEventListener('ieat-map-ready',attach);attach();
