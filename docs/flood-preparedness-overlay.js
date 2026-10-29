@@ -22,12 +22,13 @@ style.textContent=`
 .prep-pin-wrap.left .prep-tag{left:auto;right:40px;border-left:0;border-right:3px solid #188c9f}
 .prep-tag:before{content:'';position:absolute;left:-9px;bottom:9px;width:9px;border-top:1px solid #188c9f}
 .prep-pin-wrap.left .prep-tag:before{left:auto;right:-9px}
+.prep-station-1 .prep-tag{bottom:-20px}
 .prep-tag b{display:block;color:#1d6679;font-size:13px}.prep-tag strong{display:block;font-size:15px;color:#223743;margin-top:2px}.prep-tag small{display:block;color:#677580;font-size:10px;margin-top:3px}
 .prep-summary .prep-tag{border-color:#70519f;white-space:normal;width:190px}
 .prep-summary .prep-tag b{color:#70519f}.prep-summary .prep-tag strong{font-size:14px}
 .prep-line-label .prep-tag{border-color:#408a74;width:185px;white-space:normal}
 .prep-line-label .prep-tag b{color:#357660}
-#ieat-preparedness{position:absolute;z-index:850;left:50%;transform:translateX(-50%);bottom:30px;max-width:calc(100vw - 135px);display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fffffff2;border:0;border-radius:11px;box-shadow:0 3px 15px #233b4d20;padding:7px 11px;color:#384853;font:11px/1.5 Sarabun,sans-serif}
+#ieat-preparedness{position:absolute;z-index:850;left:50%;transform:translateX(-50%);bottom:30px;width:max-content;max-width:calc(100% - 100px);display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fffffff2;border:0;border-radius:11px;box-shadow:0 3px 15px #233b4d20;padding:7px 11px;color:#384853;font:11px/1.5 Sarabun,sans-serif}
 #ieat-preparedness[hidden]{display:none}#ieat-preparedness b{color:#70519f}#ieat-preparedness button{font:inherit;color:#70519f;border:0;background:#f0eaf7;padding:5px 8px;border-radius:6px;cursor:pointer}
 .prep-compact .prep-tag{display:none}.prep-no-labels .prep-tag{display:none}
 .prep-hidden{display:none!important}
@@ -35,7 +36,7 @@ style.textContent=`
 `;document.head.appendChild(style);
 const bar=document.createElement('div');bar.id='ieat-preparedness';bar.hidden=true;
 bar.innerHTML='<b>ปัจจุบัน · รับมือน้ำท่วม</b><span>ตำแหน่ง / แนวเส้นประมาณจากผัง · ขีดความสามารถตามแผน</span><button type="button" id="prep-label-toggle" aria-pressed="true">ซ่อนป้าย</button><button type="button" data-flood-plan="bang-pa-in">ดูผังต้นฉบับ ↗</button>';
-document.body.appendChild(bar);
+(document.getElementById('mapStage')||document.body).appendChild(bar);
 let mode={active:true,estate:'บางปะอิน'},focusTimer=null,parentModeSeen=false,needsFocus=false,labels=true,context=null,markers=[],outline=null,outlinePromise=null,rasterOutline=null,active=false;
 const isBangpain=()=>mode.active&&mode.estate.includes('บางปะอิน');
 const plan=()=>window.IEAT_ESTATE_DIAGRAMS?.find(p=>p.key==='bang-pa-in');
@@ -68,6 +69,7 @@ function attach(){
  context=next;
  for(const s of stations){
  const el=mountMarker(s,pin('#188c9f','สถานีสูบน้ำ '+s.id+' · ตำแหน่งประมาณ')+'<div class="prep-tag"><b>สถานีสูบน้ำ '+s.id+'</b><strong>'+number(s.capacity)+' ลบ.ม./ชม.</strong><small>กำลังตามผัง · ตำแหน่งประมาณ</small></div>');
+ el.classList.add('prep-station-'+s.id);
  el.querySelector('button').insertAdjacentHTML('beforeend','<b>'+s.id+'</b>');
  el.querySelector('button').onclick=e=>{e.stopPropagation();popup(s)};
  }
