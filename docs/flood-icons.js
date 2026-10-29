@@ -41,7 +41,8 @@ button:focus-visible{outline:3px solid #9879bb;outline-offset:3px}
 `;document.head.appendChild(style);
 function decorate(el,kind){if(!el||el.querySelector('.ieat-icon'))return;el.insertAdjacentHTML('afterbegin',svg(kind)+' ')}
 function sync(){
- decorate(document.querySelector('#mapLayers>summary'),'layers');decorate(document.getElementById('efMapFullscreen'),'expand');decorate(document.getElementById('efMapExitFullscreen'),'expand');
+ decorate(document.querySelector('#mapLayers>summary'),'layers');
+ document.querySelectorAll('#efMapFullscreen,#efMapExitFullscreen').forEach(b=>{if(b.querySelector('.ieat-icon'))return;const old=b.querySelector('svg');if(old)old.outerHTML=svg('expand');else decorate(b,'expand')});
  document.querySelectorAll('[data-layer="satellite"],[data-layer="radar"],[data-layer="flow"]').forEach(input=>{const swatch=input.parentElement.querySelector('.layer-swatch');if(swatch&&!swatch.querySelector('.ieat-icon')){swatch.classList.add('fd-legend-icon');swatch.innerHTML=svg(input.dataset.layer)}});
  document.querySelectorAll('[data-detail-tab]').forEach(b=>decorate(b,b.dataset.detailTab==='prep'?'protection':b.dataset.detailTab));
  decorate(document.getElementById('supportMapButton'),'protection');decorate(document.getElementById('estateView3d'),'cube');
