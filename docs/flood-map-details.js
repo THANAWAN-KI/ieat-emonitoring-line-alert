@@ -45,5 +45,5 @@ function list(k){
 }
 aside.addEventListener('click',e=>{const st=e.target.closest('[data-support-station]');if(st){prep(st.dataset.supportStation,true);return}const b=e.target.closest('[data-detail-tab]');if(b){if(b.dataset.detailTab==='prep')prep();else list(b.dataset.detailTab)}});
 window.IEAT_MAP_DETAILS={show,prep,close,setEstate(name){estate=String(name||'');if(!aside.hidden&&tab==='prep')prep()},showHTML(html){open('point');$('mapDetailsBody').innerHTML=typeof html==='string'?html:'';bridge()?.mountHistory?.($('mapDetailsBody'))}};
-window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='flood-support-open'){estate=String(e.data.estate||estate);prep()}});
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='flood-support-close'){close();return}if(e.data?.type==='flood-support-open'){estate=String(e.data.estate||estate);prep(e.data.station??null,Number.isFinite(e.data.station))}});
 })();
