@@ -1067,24 +1067,35 @@ html body #warning #estateFocusDashboard #rpCards{max-height:none!important;over
 </style>
 <script id="ieat-water-station-carousel-script">
 (()=>{
-const perPage=2;let page=0,host=null,pager=null,caption=null;
+const perPage=2;let page=0,pager=null,lastCards=[];
 function render(){
-host=document.getElementById('rpCards');if(!host)return;
+const host=document.getElementById('rpCards');if(!host)return;
 const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));
 if(!cards.length)return;
-const pages=Math.ceil(cards.length/perPage);page=Math.min(page,pages-1);
-cards.forEach((card,i)=>card.classList.toggle('ieat-page-hidden',Math.floor(i/perPage)!==page));
-if(!pager){pager=document.createElement('nav');pager.id='ieatWaterStationPager';pager.setAttribute('aria-label','เปลี่ยนหน้าสถานีระดับน้ำ');pager.innerHTML='<button type="button" data-dir="-1" aria-label="หน้าก่อนหน้า">‹ ก่อนหน้า</button><span class="ieat-page-count" aria-live="polite"></span><button type="button" data-dir="1" aria-label="หน้าถัดไป">ถัดไป ›</button>';host.after(pager);pager.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{page+=Number(b.dataset.dir);render()}))}
+const changed=cards.length!==lastCards.length||cards.some((card,i)=>card!==lastCards[i]);
+if(changed){page=0;lastCards=cards.slice()}
+const pages=Math.ceil(cards.length/perPage);page=Math.max(0,Math.min(page,pages-1));
+cards.forEach((card,i)=>{const hide=Math.floor(i/perPage)!==page;card.classList.toggle('ieat-page-hidden',hide);card.hidden=hide});
+if(!pager||pager.parentElement!==host.parentElement){
+pager=document.createElement('nav');pager.id='ieatWaterStationPager';pager.setAttribute('aria-label','เปลี่ยนหน้าสถานีระดับน้ำ');
+pager.innerHTML='<button type="button" data-dir="-1" aria-label="หน้าก่อนหน้า">‹ ก่อนหน้า</button><span class="ieat-page-count" aria-live="polite"></span><button type="button" data-dir="1" aria-label="หน้าถัดไป">ถัดไป ›</button>';
+host.after(pager);
+pager.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{page+=Number(b.dataset.dir);render()}));
+}
 pager.querySelector('[data-dir="-1"]').disabled=page===0;
 pager.querySelector('[data-dir="1"]').disabled=page>=pages-1;
-pager.querySelector('.ieat-page-count').textContent=(page+1)+' / '+pages;
+const count=(page+1)+' / '+pages;if(pager.querySelector('.ieat-page-count').textContent!==count)pager.querySelector('.ieat-page-count').textContent=count;
 pager.hidden=pages<=1;
-caption=host.previousElementSibling;
-if(caption?.classList.contains('flood-row-caption'))caption.textContent=cards.length+' รายการ · แสดง '+(page*perPage+1)+'–'+Math.min((page+1)*perPage,cards.length)+' · คลิกเพื่อดูหน้าถัดไป';
+const caption=host.previousElementSibling;
+if(caption?.classList.contains('flood-row-caption')){
+const label=cards.length+' รายการ · แสดง '+(page*perPage+1)+'–'+Math.min((page+1)*perPage,cards.length)+' · กดปุ่มเพื่อดูหน้าถัดไป';
+if(caption.textContent!==label)caption.textContent=label;
+}
 }
 let scheduled=false;function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;render()})}
-const root=document.getElementById('warning');if(root)new MutationObserver(records=>{if(records.some(r=>r.type==='childList'&&Array.from(r.addedNodes).some(n=>n.nodeType===1&&n.id!=='ieatWaterStationPager')))schedule()}).observe(root,{childList:true,subtree:true});
-window.addEventListener('resize',schedule);schedule();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
+const timer=setInterval(()=>{const host=document.getElementById('rpCards');if(!host)return;const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));if(cards.length!==lastCards.length||cards.some((c,i)=>c!==lastCards[i])||!document.getElementById('ieatWaterStationPager'))schedule()},1200);
+window.addEventListener('resize',schedule);
 })();
 </script></body>
 </html>
