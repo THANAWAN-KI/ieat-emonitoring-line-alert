@@ -698,42 +698,22 @@ $('efFilter').onchange=()=>renderEstates();
  document.addEventListener('click',event=>{const button=event.target.closest('[data-canal-id]');if(!button)return;const row=canalRows.find(r=>String(r.id)===button.dataset.canalId);if(row&&row.lat!==null&&row.lng!==null)$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:row.lat,lon:row.lng,scale:75000,label:row.name,kind:'canal',station:{...row,source_name:'สำนักการระบายน้ำ กทม.',source_url:'https://faonam.com/p/71'}},location.origin)});
 
  // Expo entry: keep selection inside the existing dashboard data pipeline.
- let expoInitial=false,expoExample='',expoTab='now',expoStation='',expoRise=0;
+ let expoInitial=false,expoExample='';
+
  function expoMount(){
   if($('expoExplore'))return;
-  const panel=document.createElement('section');panel.id='expoExplore';panel.style.cssText='order:-100;flex:none;padding:18px;background:#f2f8fd;border-radius:18px';
-  panel.innerHTML=`<form id="expoSearchForm" style="display:flex;gap:8px;flex-wrap:wrap"><label style="flex:1;min-width:180px">ค้นหานิคมอุตสาหกรรม<input id="expoSearch" list="efEstateOptions" type="search" required placeholder="พิมพ์ชื่อนิคมฯ แล้วเลือกจากรายการ" style="display:block;width:100%;padding:12px;font:inherit"></label><button type="submit">สำรวจพื้นที่</button><button id="expoReset" type="button">กลับสู่นิคมฯ ตัวอย่าง</button></form><p id="expoSelection" role="status">กำลังโหลดนิคมฯ ตัวอย่าง…</p><div role="group" aria-label="ช่วงเวลาสถานการณ์น้ำ" style="display:flex;gap:6px;flex-wrap:wrap">${[['past','อดีต'],['now','ปัจจุบัน'],['future','จำลองอนาคต']].map(([id,label])=>`<button type="button" data-expo-tab="${id}" aria-pressed="${id==='now'}">${label}</button>`).join('')}</div><div id="expoContent" aria-live="polite"></div><p><a href="https://ieat.maps.arcgis.com/home/webscene/viewer.html?webscene=19dcff93eeb64f208d09d328656dd492" target="_blank" rel="noopener">ดูตัวอย่างรูปแบบเมือง 3 มิติ ↗</a> <small>ตัวอย่างรูปแบบ 3 มิติของ Esri (เมืองพอร์ตแลนด์)</small></p><p style="font-size:12px">สถานีภายใน 30 กม. เป็นข้อมูลประกอบเบื้องต้นตามระยะเส้นตรง ยังไม่ยืนยันความเชื่อมโยงทางน้ำหรือการท่วมภายในนิคมฯ</p>`;
-  document.querySelector('.ef-data-column').prepend(panel);
-  const style=document.createElement('style');style.textContent='#expoExplore button{font:inherit;padding:10px 13px;border-radius:10px;background:#e3eef8;cursor:pointer}#expoExplore button[aria-pressed=true]{background:#c7e2f6;box-shadow:inset 0 -3px #0d47a1}#expoContent{padding-top:14px}#expoContent select{width:100%;padding:10px;font:inherit}#expoExplore :focus-visible{outline:3px solid #2185d5!important;outline-offset:2px}#expoContent .expo-values{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}#expoContent .expo-values div{padding:12px;background:#fff;border-radius:12px}#expoContent strong{display:block;font-size:24px}';document.head.append(style);
-  $('expoSearchForm').onsubmit=e=>{e.preventDefault();const value=$('expoSearch').value,estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(value));if(!estate){$('expoSelection').textContent='กรุณาเลือกชื่อนิคมฯ จากรายการที่ระบบมีข้อมูล';return}expoStation='';expoRise=0;applyHeaderEstate(estate.name);};
-  $('expoReset').onclick=()=>{expoTab='now';expoStation='';expoRise=0;applyHeaderEstate(expoExample)};
-  panel.addEventListener('click',e=>{const tab=e.target.closest('[data-expo-tab]');if(tab){expoTab=tab.dataset.expoTab;expoRender()}if(e.target.closest('[data-expo-history]')){const target=$('floodStationHistory')||$('rpHistoryPanel');if(target){target.scrollIntoView({behavior:'smooth',block:'start'});target.open=true}else window.open('https://bigdata-swoc.rid.go.th/pier/all','_blank','noopener')}});
-  panel.addEventListener('change',e=>{if(e.target.id==='expoStation'){expoStation=e.target.value;expoRise=0;expoRender()}});
-  panel.addEventListener('input',e=>{if(e.target.id==='expoRise'){expoRise=Number(e.target.value);expoScenario()}});
+  const panel=document.createElement('section');panel.id='expoExplore';panel.className='flood-current-controls';
+  panel.innerHTML='<form id="expoSearchForm"><label for="expoSearch">พื้นที่ที่ติดตาม</label><div class="current-estate-search"><input id="expoSearch" list="efEstateOptions" type="search" required placeholder="ค้นหานิคมอุตสาหกรรม"><button type="submit">เลือกพื้นที่</button></div></form><p id="expoSelection" role="status">กำลังโหลดพื้นที่…</p><button id="expoSupport" type="button">ข้อมูลสนับสนุนการเตรียมความพร้อม ↗</button>';
+  const column=document.querySelector('.ef-data-column'),overview=column?.querySelector('.flood-overview');if(overview)overview.after(panel);else column?.prepend(panel);
+  $('expoSearchForm').onsubmit=e=>{e.preventDefault();const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey($('expoSearch').value));if(!estate){$('expoSelection').textContent='กรุณาเลือกนิคมฯ จากรายการ';return}applyHeaderEstate(estate.name)};
+  $('expoSupport').onclick=()=>$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-support-open',estate:headerEstate},location.origin);
  }
- function expoScenario(){
-  const r=expoRows().find(r=>String(r.code||r.id)===expoStation);if(!$('expoScenario'))return;
-  if(!r||num(r.wl)===null||num(r.bank)===null){$('expoScenario').textContent='สถานีนี้ไม่มีระดับน้ำหรือระดับตลิ่งครบ จึงยังคำนวณไม่ได้';return}
-  const level=Number(r.wl)+expoRise,gap=level-Number(r.bank);
-  $('expoScenario').textContent='เพิ่ม '+fmt(expoRise)+' ม. → ระดับสมมติ '+fmt(level)+' ม.รทก. · '+(gap>=0?'สูงกว่าหรือเท่าตลิ่ง '+fmt(gap)+' ม.':'ต่ำกว่าตลิ่ง '+fmt(-gap)+' ม.');
- }
- function expoRows(){const estate=(current?.estates||[]).find(e=>estateKey(e.name)===estateKey(headerEstate));return estate?(window.IEAT_EXPO_RID||[]).filter(r=>point(r)&&km(estate,r)<=RADIUS).sort((a,b)=>km(estate,a)-km(estate,b)):[]}
- function publishPreparedness(){ $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-preparedness-mode',active:expoTab==='now',estate:headerEstate},location.origin); }
+ function publishPreparedness(){ $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-preparedness-mode',active:true,estate:headerEstate},location.origin); }
  function expoRender(){
-  publishPreparedness();
-  if(!$('expoExplore'))return;
+  publishPreparedness();if(!$('expoExplore'))return;
   const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(headerEstate));
-  $('expoSelection').textContent=estate?(estate.name===expoExample?'นิคมฯ ตัวอย่าง: ':'พื้นที่ที่เลือก: ')+estate.name:'กำลังรอข้อมูลพื้นที่';
+  $('expoSelection').textContent=estate?estate.name:'เลือกนิคมฯ เพื่อดูข้อมูลในพื้นที่';
   if(estate)$('expoSearch').value=estate.name;
-  document.querySelectorAll('[data-expo-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.expoTab===expoTab)));
-  const rows=expoRows();if(!rows.some(r=>String(r.code||r.id)===expoStation))expoStation=String(rows[0]?.code||rows[0]?.id||'');
-  const r=rows.find(r=>String(r.code||r.id)===expoStation),picker=rows.length?'<label>สถานีใกล้นิคมฯ (เรียงตามระยะ)<select id="expoStation">'+rows.map(v=>'<option value="'+esc(v.code||v.id)+'" '+(String(v.code||v.id)===expoStation?'selected':'')+'>'+esc(v.name)+' · '+fmt(km(estate,v))+' กม.</option>').join('')+'</select></label>':'<p>ไม่พบข้อมูลสถานี RID ภายใน 30 กม. ของพื้นที่นี้</p>';
-  const provenance=r?'<p style="font-size:12px">ตรวจวัด '+esc(time(r.measured_at))+' · RID GeoJSON'+(window.IEAT_RID.fresh(r)?'':' · ข้อมูลเก่าหรือข้อมูลไม่ครบ โปรดตรวจเวลาตรวจวัด')+'</p>':'';
-  let content='';
-  if(expoTab==='now')content='<h2>ปัจจุบัน · ข้อมูลตรวจวัด</h2>'+picker+(r?'<div class="expo-values"><div>ระดับน้ำ<strong>'+fmt(r.wl)+'</strong>ม.รทก.</div><div>อัตราการไหล<strong>'+fmt(r.flow)+'</strong>ลบ.ม./วินาที</div><div>ระดับตลิ่ง<strong>'+fmt(r.bank)+'</strong>ม.รทก.'+(r.bank_derived?' (คำนวณจากข้อมูลต้นทาง)':'')+'</div><div>ระยะเทียบตลิ่ง<strong>'+(r.wl!==null&&r.bank!==null?fmt(r.wl-r.bank):'–')+'</strong>ม. (+ สูงกว่าตลิ่ง)</div></div>':'')+provenance+'<p>ดูประกาศเฝ้าระวัง 24 / 48 ชั่วโมงและข้อมูลเขื่อนด้านล่าง</p><p>ตัวอย่างบางปะอิน: สถานีสูบน้ำและป้ายกำลังสูบแสดงตรงตำแหน่งบนแผนที่ · ตำแหน่งและแนวเส้นเป็นค่าประมาณจากผัง · ข้อมูลเป็นขีดความสามารถตามแผน ไม่ใช่สถานะเดินเครื่องสด</p>';
-  if(expoTab==='past')content='<h2>อดีต · สำรวจข้อมูลย้อนหลัง</h2>'+picker+'<p>ชุดข้อมูล RID ที่หน้านี้โหลดเป็นค่าล่าสุด ยังไม่มีประวัติรายสถานีที่ยืนยันครบ จึงยังไม่แสดงกราฟย้อนหลังของนิคมฯ นี้</p><p>ตรวจกราฟย้อนหลังที่มีอยู่ด้านล่าง และตรวจชื่อสถานี ช่วงเวลา และแหล่งข้อมูลก่อนเปรียบเทียบ</p><button type="button" data-expo-history>ดูส่วนข้อมูลย้อนหลัง</button> <a href="https://bigdata-swoc.rid.go.th/pier/all" target="_blank" rel="noopener">เปิดข้อมูลต้นทาง RID ↗</a>';
-  if(expoTab==='future')content='<h2>จำลองอนาคต · ทดลองเพิ่มระดับน้ำ</h2>'+picker+'<label for="expoRise">เพิ่มจากค่าตรวจวัด 0–3 เมตร (ขั้นละ 0.1 เมตร)</label><input id="expoRise" type="range" min="0" max="3" step="0.1" value="'+expoRise+'" style="width:100%" '+(!r||r.wl===null||r.bank===null?'disabled':'')+'><p id="expoScenario" role="status"></p>'+provenance+'<p><b>สถานการณ์สมมติ ไม่ใช่การพยากรณ์น้ำท่วม</b></p><p>ผลเป็นการเพิ่มระดับน้ำ ณ สถานีเทียบกับตลิ่งเท่านั้น ยังไม่สามารถสรุปความลึกหรือขอบเขตน้ำท่วมโรงงาน ถนน หรืออาคาร และยังไม่แสดงน้ำท่วมบนแผนที่ 3 มิติ</p>';
-  $('expoContent').innerHTML=content;if(expoTab==='future')expoScenario();
  }
  function expoUpdate(data){
   expoMount();
