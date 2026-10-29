@@ -207,10 +207,10 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 #mapStatusKey summary{padding:7px 10px;cursor:pointer;font-weight:600}#mapStatusKey>div{padding:0 11px 10px}#mapStatusKey p{margin:5px 0}#mapStatusKey i{width:9px;height:9px;display:inline-block;border-radius:50%;margin-right:5px}#mapStatusKey small{font-size:10px;color:#657785}
 #flood-layer-guide{display:none}
 .imagery-basemap .estate-name,.imagery-basemap .fd-pin-name,.imagery-basemap .prep-name{background:#fffffff2!important;color:#263d4b!important}
-</style></head>
+</style><style id="aerial-camera-controls">#aerialTourButton{position:absolute;top:12px;left:112px;z-index:1050;border:0;border-radius:10px;padding:10px 12px;background:#fff;color:#6e5095;box-shadow:0 3px 12px #23374b20;font:12px Sarabun,sans-serif;cursor:pointer}#aerialTourButton span{margin-right:4px;font-size:15px}#aerialTourButton[aria-pressed=true]{background:#eee8f6}#aerialTourHint{position:absolute;left:12px;top:65px;z-index:1050;max-width:min(360px,calc(100vw - 30px));background:#fffffff2;border-radius:10px;padding:9px 12px;color:#506273;box-shadow:0 3px 14px #24364c20;font:11px/1.6 Sarabun,sans-serif;pointer-events:none}#aerialTourHint[hidden]{display:none}@media(max-width:650px){#aerialTourButton{left:110px;font-size:11px;padding:10px 8px}}</style></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>120</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="120" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#0D47A1"/><path d="M12 2V20L4 25Z" fill="#90CAF9"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
-<label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="satellite">ภาพดาวเทียม + อาคาร 3 มิติ</option><option value="gray">แผนที่พื้นเรียบสีเทา</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
+<label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="gray">แผนที่พื้นเรียบสีเทา + อาคาร 3 มิติ</option><option value="satellite">ภาพดาวเทียม + อาคาร 3 มิติ</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
 <label><input data-layer="canal" type="checkbox" checked>คลอง กทม.<span class="layer-swatch" style="background:#089a9b" aria-hidden="true"></span></label><label><input data-layer="water" type="checkbox" checked>ระดับน้ำ<span class="layer-swatch" style="background:#2677ca" aria-hidden="true"></span></label><label class="history-only-label"><input id="historyOnly" type="checkbox">แสดงเฉพาะสถานีที่มีข้อมูลย้อนหลัง 2023–2026<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label><label><input data-layer="flow" type="checkbox" checked>ลูกศรทิศทางน้ำ<span class="layer-swatch" style="background:#2185D5" aria-hidden="true"></span></label>
 <label><input data-layer="dam" type="checkbox" checked>เขื่อน<span class="layer-swatch" style="background:#d58b1a" aria-hidden="true"></span></label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ<span class="layer-swatch" style="background:#8064c6" aria-hidden="true"></span></label><label><input data-layer="boundary" type="checkbox" checked>ขอบเขตนิคมฯ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="satellite" type="checkbox" checked>น้ำท่วมจากดาวเทียม<span class="layer-swatch" style="background:#168de0" aria-hidden="true"></span></label><label><input data-layer="radar" type="checkbox" checked>ฝนจากเรดาร์ (กรมอุตุฯ)<span class="layer-swatch" style="background:#47A992" aria-hidden="true"></span></label>
 <p style="font-size:11px;color:#0D47A1;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#FFFFFF;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#D32F2F"></i>ล้นตลิ่ง / ระดับสูงสุด</span><span><i class="dot" style="background:#F57C00"></i>ระดับสูง / ใกล้ตลิ่ง</span><span><i class="dot" style="background:#FBC02D"></i>เฝ้าระวังตามเกณฑ์ต้นทาง</span><span><i class="dot" style="background:#2E7D32"></i>ปกติ / ต่ำกว่าเกณฑ์</span><span><i class="dot" style="background:#607D8B"></i>ไม่มีค่าล่าสุด</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#90CAF9"></i><i style="background:#90CAF9"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#D32F2F"></i><i style="background:#90CAF9"></i><i style="background:#E3F2FD"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
@@ -230,7 +230,7 @@ let waterMarkers=[];let damMarkers=[];let estateMarkers=[];let waterways=null;
 let riverSvgRenderer=null;
 
 const basemapUrls={satellite:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',gray:'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'};
-let selectedBasemap='satellite',rasterBaseLayer=null;
+let selectedBasemap='gray',rasterBaseLayer=null;
 function chooseBasemap(value){
  selectedBasemap=value==='gray'?'gray':'satellite';
  if(vector?.getSource('esri-gray'))vector.getSource('esri-gray').setTiles([basemapUrls[selectedBasemap]]);
@@ -241,7 +241,7 @@ function chooseBasemap(value){
 let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
 window.IEATPreparednessMap=()=>({vector,raster,ready,
  clearSelectionPopup:()=>{autoFit=false;selectedMarker?.getPopup?.()?.remove();raster?.closePopup()},
- focusPoint:(lon,lat)=>{autoFit=false;if(vector)vector.flyTo({center:[lon,lat],zoom:15,pitch:55,bearing:-15});else raster?.setView([lat,lon],15)},
+ focusPoint:(lon,lat)=>{stopAerialTour();autoFit=false;if(vector)vector.flyTo({center:[lon,lat],zoom:15,pitch:55,bearing:-15});else raster?.setView([lat,lon],15)},
  pointContent:(r,k)=>{const s=pointCondition(r,k);return '<div class="map-point-status" style="border-left:4px solid '+s.hex+'"><b>'+esc(s.label)+'</b><small>'+esc(s.criterion)+'</small></div>'+(k==='camera'?content(r,k):baseContent(r,k))},loadCamera:r=>loadCameraImage(r),mountHistory:root=>mountPopupHistory(root),points:()=>scoped().map(f=>f.properties)
 });
 
@@ -386,7 +386,7 @@ function estateFloodPlan(name){
  const body=window.ieatEstatePlanPopup?.(name)||'';return body?'<details class="estate-plan-popup"><summary>ผังและข้อมูลรับมือน้ำท่วม ↗</summary>'+body+'</details>':'<p class="estate-plan-missing">ยังไม่มีผังรับมือน้ำท่วมของพื้นที่นี้ในระบบ</p>';
 }
 
-function showMapDetails(r,k){window.IEAT_MAP_DETAILS?.show(r,k)}
+function showMapDetails(r,k){stopAerialTour();window.IEAT_MAP_DETAILS?.show(r,k)}
 function baseContent(r,k){
  if(k==='canal')return canalPopup(r);if(k==='water')return waterPopup(r);
  const fresh=old(r,k)?'ข้อมูลเก่า / เวลาไม่ผ่านเกณฑ์':'เวลาตรวจวัด '+(r.measured_at||'ไม่ระบุ')+' (ไทย)';
@@ -876,7 +876,7 @@ async function loadCameraImage(r,force=false){
  }catch(e){img.style.display='none';time.textContent='โหลดภาพล่าสุดไม่สำเร็จ';state.textContent='ต้นทางอาจไม่มีภาพหรือไม่ตอบสนอง · เปิดต้นทางด้านล่างเพื่อตรวจสอบ'}
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-camera-refresh]');if(!b)return;const r=features.find(f=>f.properties.kind==='camera'&&String(f.properties.id)===b.dataset.cameraRefresh)?.properties;if(r)loadCameraImage(r,true)});
-$('basemapChoice').addEventListener('change',e=>chooseBasemap(e.target.value));chooseBasemap('satellite');
+$('basemapChoice').addEventListener('change',e=>chooseBasemap(e.target.value));chooseBasemap('gray');
 $('province').addEventListener('change',()=>{render();fit();parent.postMessage({type:'flood-map-province',province:$('province').value},location.origin)});
 document.querySelectorAll('.controls details').forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)document.querySelectorAll('.controls details').forEach(other=>{if(other!==menu)other.open=false;});}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape')document.querySelectorAll('.controls details').forEach(menu=>{menu.open=false;});});
@@ -942,6 +942,52 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-map-snapshot'){try{let dataUrl;if(vector&&ready){await new Promise(resolve=>{vector.once('render',resolve);vector.triggerRepaint()});dataUrl=vector.getCanvas().toDataURL('image/png')}else if(raster&&window.html2canvas){const canvas=await html2canvas($('raster'),{useCORS:true,backgroundColor:'#FFFFFF',logging:false});dataUrl=canvas.toDataURL('image/png')}else throw Error('แผนที่ยังไม่พร้อม');event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,dataUrl},event.origin)}catch(e){event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,error:e.message},event.origin)}}
 });
 fetch('./data/water_flow_major.geojson?v=20261001',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{waterways=d;addFlow();drawFlow()}).catch(()=>{$('status').textContent+=' · โหลดแนวลูกศรไม่สำเร็จ'});
+
+/* Camera presentation only: measured data and model heights do not change. */
+const aerialButton=document.createElement('button');aerialButton.id='aerialTourButton';aerialButton.type='button';aerialButton.setAttribute('aria-pressed','false');aerialButton.innerHTML='<span aria-hidden="true">▷</span> ชมมุมสูง';document.body.appendChild(aerialButton);
+const aerialHint=document.createElement('div');aerialHint.id='aerialTourHint';aerialHint.hidden=true;aerialHint.setAttribute('role','status');document.body.appendChild(aerialHint);
+let aerialPlaying=false,aerialFrame=null,aerialTimer=null,aerialLaunch=null,aerialMap=null,aerialHintTimer=null;
+function aerialNotice(text){aerialHint.textContent=text;aerialHint.hidden=false;clearTimeout(aerialHintTimer);aerialHintTimer=setTimeout(()=>aerialHint.hidden=true,6500)}
+function stopAerialTour(){
+ aerialPlaying=false;cancelAnimationFrame(aerialFrame);clearTimeout(aerialTimer);
+ if(aerialMap&&aerialLaunch)aerialMap.off('moveend',aerialLaunch);aerialLaunch=null;
+ aerialMap?.stop?.();aerialMap=null;
+ aerialButton.setAttribute('aria-pressed','false');aerialButton.innerHTML='<span aria-hidden="true">▷</span> ชมมุมสูง';
+}
+function startAerialTour(){
+ if(!ready){aerialNotice('กำลังเตรียมแผนที่ กรุณารอข้อมูลโหลดครบ');return}
+ stopAerialTour();autoFit=false;
+ const estate=estateProvinceScope?.estate,isExample=String(estateProvinceScope?.name||'').includes('บางปะอิน');
+ const map=vector||raster;if(!estate&&map.getZoom()<10){aerialNotice('เลือกนิคมฯ หรือซูมเข้าพื้นที่ก่อนเริ่มชมมุมสูง');return}const center=isExample?[100.585786,14.19889]:estate?[Number(estate.lon??estate.lng),Number(estate.lat)]:vector?[map.getCenter().lng,map.getCenter().lat]:[map.getCenter().lng,map.getCenter().lat];
+ if(!center.every(Number.isFinite))return;
+ aerialPlaying=true;aerialMap=map;aerialButton.setAttribute('aria-pressed','true');aerialButton.innerHTML='<span aria-hidden="true">Ⅱ</span> หยุดชมมุมสูง';
+ const manual=event=>{if(event.originalEvent)stopAerialTour()};
+ if(!map.__ieatAerialManualBound){map.on('dragstart',stopAerialTour);map.on('zoomstart',manual);map.getContainer().addEventListener('pointerdown',stopAerialTour,{passive:true});map.getContainer().addEventListener('wheel',stopAerialTour,{passive:true});if(vector)map.on('rotatestart',manual);map.__ieatAerialManualBound=true}
+ if(vector){
+  $('estateView3d').setAttribute('aria-pressed','true');$('estateView3d').textContent='มุมมอง 3D';
+  let started=0,last=0;
+  const frame=now=>{
+   if(!aerialPlaying||aerialMap!==map||document.hidden)return;
+   if(!started)started=now;
+   if(now-last>=33){last=now;map.jumpTo({bearing:-25+(now-started)*.006});}
+   aerialFrame=requestAnimationFrame(frame);
+  };
+  aerialLaunch=()=>{aerialLaunch=null;if(aerialPlaying)aerialFrame=requestAnimationFrame(frame)};
+  map.once('moveend',aerialLaunch);
+  map.flyTo({center,zoom:Math.min(14.8,Math.max(14,map.getZoom())),pitch:62,bearing:-25,duration:2600,essential:false});
+  aerialNotice('ชมมุมสูง 3 มิติ · กล้องจะหมุนช้า ๆ รอบพื้นที่ · กดหยุดหรือลากแผนที่เพื่อควบคุมเอง');
+ }else{
+  /* Preserve access on browsers without WebGL: an honest pan/zoom tour. */
+  const stops=[[center[0],center[1]+.006],[center[0]+.004,center[1]],[center[0],center[1]-.006],[center[0]-.004,center[1]]];let index=0;
+  const next=()=>{if(!aerialPlaying||document.hidden)return;const p=stops[index++%stops.length];map.flyTo([p[1],p[0]],14.6,{duration:4.5});aerialTimer=setTimeout(next,6500)};next();
+  aerialNotice('โหมดสำรอง: เลื่อนและซูมชมมุมสูง · การหมุนกล้อง 3 มิติต้องใช้ WebGL');
+ }
+}
+aerialButton.onclick=()=>aerialPlaying?stopAerialTour():startAerialTour();
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAerialTour()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')stopAerialTour()});
+window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent)return;if(['flood-map-focus','flood-province-scope','flood-support-open'].includes(event.data?.type))stopAerialTour()});
+
 vectorStart();load();loadCanals();cameras();loadHistoryIndex().then(()=>queueRender()).catch(()=>{});setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
 function remoteInfo(){
  const lines=[];
