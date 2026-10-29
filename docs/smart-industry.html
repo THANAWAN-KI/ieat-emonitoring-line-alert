@@ -57,21 +57,25 @@ fetch('./emonitoring-stations.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 
 <script id="smart-industry-layout">
 (()=>{const main=document.querySelector('main'),grid=document.querySelector('.overview-grid'),panel=document.querySelector('.map-panel');const side=document.createElement('div');side.className='side-panel';side.append(document.querySelector('.systems'),document.querySelector('.war-metrics'),document.querySelector('.em-support'));grid.append(side);const toolbar=document.createElement('div');toolbar.className='map-toolbar';toolbar.append(document.querySelector('.war-area'),document.querySelector('.map-skins'));panel.querySelector('.map-stage').after(toolbar);const badge=document.createElement('div');badge.className='intro-badge';badge.innerHTML='<i aria-hidden="true"></i>เครือข่ายข้อมูลสิ่งแวดล้อม';document.querySelector('.intro').append(badge);const foot=document.createElement('footer');foot.className='page-caption';foot.innerHTML='<span>EMCC Virtual · ศูนย์ข้อมูลนิคมอุตสาหกรรมอัจฉริยะ</span><span>สำรวจพื้นที่ · เข้าถึงข้อมูล · สนับสนุนการตัดสินใจ</span>';main.append(foot)})();
 </script><script id="expo-presentation">(()=>{
- document.title='Smart Industry | กนอ. · Thailand Smart City Expo 2026';
- document.querySelector('.eyebrow').textContent='IEAT / THAILAND SMART CITY EXPO 2026';
- document.querySelector('.intro h1').innerHTML='นิคมอุตสาหกรรมอัจฉริยะ<br><span>Smart Industry</span>';
- document.querySelector('.em-intro-caption').textContent='เชื่อมข้อมูลสิ่งแวดล้อม สู่การพัฒนานิคมอุตสาหกรรมอัจฉริยะและโอกาสการลงทุน';
- const brand=document.querySelector('.brand');brand.innerHTML='กนอ. · Smart Industry<small>การนิคมอุตสาหกรรมแห่งประเทศไทย</small>';
- const badge=document.querySelector('.intro-badge');badge.innerHTML='<i aria-hidden="true"></i>สำรวจพื้นที่และทดลองใช้งาน';
- const event=document.createElement('span');event.className='expo-event';event.textContent='Thailand Smart City Expo 2026 · ศูนย์การประชุมแห่งชาติสิริกิติ์';document.querySelector('.intro>div').append(event);
- const themes=document.createElement('section');themes.className='expo-themes';themes.setAttribute('aria-label','แนวคิดการจัดแสดง Smart Industry');themes.innerHTML='<div class="expo-theme"><span>01</span><div><b>นิคมอุตสาหกรรมอัจฉริยะ</b><small>ข้อมูลสิ่งแวดล้อมและโมเดลการพัฒนาพื้นที่</small></div></div><div class="expo-theme"><span>02</span><div><b>พลังงานสะอาดและโครงสร้างพื้นฐาน</b><small>แนวคิดโซลูชันเพื่ออุตสาหกรรมแห่งอนาคต</small></div></div><div class="expo-theme"><span>03</span><div><b>พื้นที่ศักยภาพและโอกาสลงทุน</b><small>ข้อมูลประกอบการเลือกฐานการผลิต</small></div></div>';document.querySelector('.intro').after(themes);
- document.querySelector('.map-head h2').textContent='สำรวจเครือข่ายนิคมอุตสาหกรรม';
- document.querySelector('.em-primary-entry .system-no').textContent='ระบบสาธิตหลัก / ENVIRONMENT';
- document.querySelector('.em-primary-entry .system h3').textContent='สำรวจสถานีตรวจวัดอากาศ น้ำ และปล่อง ผ่านข้อมูลเชิงพื้นที่ของนิคมอุตสาหกรรม';
- document.querySelector('.em-primary-entry .open').innerHTML='ทดลองสำรวจ e‑Monitoring<span aria-hidden="true">↗</span>';
- document.querySelector('.page-caption').innerHTML='<span>กนอ. · Thailand Smart City Expo 2026</span><span>Smart Industry · สิ่งแวดล้อม · โครงสร้างพื้นฐาน · การลงทุน</span>';
-})();
-</script></body></html>
+document.title='e-Monitoring | ระบบตรวจวัดคุณภาพสิ่งแวดล้อม · กนอ.';
+document.querySelector('.eyebrow').textContent='SMART INDUSTRY / ENVIRONMENTAL TECHNOLOGY';
+document.querySelector('.intro h1').innerHTML='กนอ. · เทคโนโลยีเพื่อสิ่งแวดล้อม<br><span>e‑Monitoring</span>';
+document.querySelector('.em-intro-caption').textContent='ระบบตรวจวัดคุณภาพสิ่งแวดล้อมในนิคมอุตสาหกรรม · สำรวจข้อมูลอากาศ น้ำ และมลพิษจากปล่องผ่าน Dashboard';
+document.querySelector('.brand').innerHTML='กนอ. · Smart Industry<small>ระบบตรวจวัดคุณภาพสิ่งแวดล้อม e‑Monitoring</small>';
+document.querySelector('.intro-badge').innerHTML='<i aria-hidden="true"></i>ทดลองสำรวจ Dashboard';
+const event=document.createElement('span');event.className='expo-event';event.textContent='Thailand Smart City Expo 2026 · กลุ่มเทคโนโลยีเพื่อสิ่งแวดล้อม';document.querySelector('.intro>div').append(event);
+const themes=document.createElement('section');themes.className='expo-themes';themes.setAttribute('aria-label','ข้อมูลตรวจวัดคุณภาพสิ่งแวดล้อม');themes.innerHTML='<div class="expo-theme"><span>01 / AIR</span><div><b>คุณภาพอากาศ · AQMs</b><small>สำรวจสถานีและข้อมูลตรวจวัดคุณภาพอากาศ</small></div></div><div class="expo-theme"><span>02 / WATER</span><div><b>คุณภาพน้ำ · WQMs</b><small>สำรวจสถานีและข้อมูลตรวจวัดคุณภาพน้ำ</small></div></div><div class="expo-theme"><span>03 / EMISSION</span><div><b>มลพิษจากปล่อง · CEMs</b><small>สำรวจข้อมูลตรวจวัดมลพิษจากปล่องโรงงาน</small></div></div>';document.querySelector('.intro').after(themes);
+document.querySelector('.map-head h2').textContent='เครือข่ายสถานีตรวจวัดคุณภาพสิ่งแวดล้อม';
+document.querySelector('.map-head p').textContent='เลือกพื้นที่บนแผนที่ แล้วคลิกสถานีเพื่อดูรายละเอียด';
+document.querySelector('.em-primary-entry .system-no').textContent='ระบบจัดแสดงหลัก / ENVIRONMENTAL MONITORING';
+document.querySelector('.em-primary-entry .system h3').textContent='สำรวจข้อมูลตรวจวัดคุณภาพสิ่งแวดล้อม เลือกพื้นที่และสถานีที่สนใจ พร้อมตรวจสอบเวลาของข้อมูล';
+document.querySelector('.em-primary-entry .open').innerHTML='เปิด Dashboard e‑Monitoring<span aria-hidden="true">↗</span>';
+document.querySelector('.em-support>header h2').textContent='ข้อมูลสนับสนุนเมื่อเกิดเหตุ';
+document.querySelector('.em-support>header small').textContent='e‑PP · DSS · RiskMap';
+document.querySelector('.em-usecases summary').textContent='ข้อมูลนี้ช่วยประชาชนและเจ้าหน้าที่อย่างไร';
+document.querySelector('.em-usecases-content h3').textContent='จากข้อมูลสิ่งแวดล้อม สู่การติดตามสถานการณ์';
+document.querySelector('.page-caption').innerHTML='<span>กนอ. · Thailand Smart City Expo 2026 · เทคโนโลยีเพื่อสิ่งแวดล้อม</span><span>สำรวจสถานี · ตรวจข้อมูลและเวลา · สนับสนุนการติดตามสถานการณ์</span>';
+})();</script></body></html>
 
 
 
