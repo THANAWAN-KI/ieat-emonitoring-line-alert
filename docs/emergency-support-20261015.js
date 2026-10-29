@@ -53,7 +53,7 @@ function drawSupportMarkers(){
  const counts=new Map();
  const rows=Array.from(results.values()).flat().filter(row=>row.distance<=effectiveSupportRadius()*1000).sort((a,b)=>a.distance-b.distance).filter(row=>{
   if(!compact)return true;
-  if(map.getZoom()<12)return false;
+  if(!networkLinks&&map.getZoom()<12)return false;
   const key=row.source||row.type,count=counts.get(key)||0;if(count>=(networkLinks?1:3))return false;counts.set(key,count+1);return true;
  });
  rows.forEach(row=>{
@@ -150,7 +150,7 @@ function bindMap(nextMap){if(map===nextMap)return;map=nextMap;map.on('zoomend',d
    const label=document.createElement('label'),toggle=document.createElement('input');toggle.type='checkbox';toggle.checked=networkLinks;toggle.setAttribute('aria-label','เชื่อมข้อมูลรอบจุดเกิดเหตุ');label.append(toggle,document.createTextNode(' เชื่อมข้อมูลรอบจุดเกิดเหตุ'));
    const button=text('button','ดูวงรัศมีและเครือข่าย');button.type='button';
    const hint=text('small','เส้นประ = ระยะเส้นตรง ไม่ใช่เส้นทางเดินทาง');
-   button.onclick=()=>{if(!incident)return;const points=Array.from(results.values()).map(rows=>rows.filter(r=>r.distance<=effectiveSupportRadius()*1000).sort((a,b)=>a.distance-b.distance)[0]).filter(Boolean);map.fitBounds(L.latLngBounds([[incident.lat,incident.lon],...points.map(r=>[r.lat,r.lon])]),{padding:[64,64],maxZoom:14});};
+   button.onclick=()=>{if(!incident)return;const points=Array.from(results.values()).map(rows=>rows.filter(r=>r.distance<=effectiveSupportRadius()*1000).sort((a,b)=>a.distance-b.distance)[0]).filter(Boolean);const bounds=L.latLngBounds([[incident.lat,incident.lon],...points.map(r=>[r.lat,r.lon])]);const radii=[...document.querySelectorAll('.dashboard-buffer-tools input:checked')].map(n=>Number(n.value)).filter(Number.isFinite);if(radii.length)bounds.extend(L.circle([incident.lat,incident.lon],{radius:Math.max(...radii)*1000}).getBounds());map.fitBounds(bounds,{padding:[48,48],maxZoom:14});};
    toggle.onchange=()=>{networkLinks=toggle.checked;drawSupportMarkers()};
    const sync=()=>{panel.hidden=!incident;button.disabled=!incident};window.addEventListener('ieat-support-updated',sync);sync();
    panel.append(label,button,hint);L.DomEvent.disableClickPropagation(panel);L.DomEvent.disableScrollPropagation(panel);return panel;
