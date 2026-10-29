@@ -663,6 +663,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  const tiles=[];
  source.eachLayer(layer=>{
   let clone;
+  const pane=layer.options?.pane;if(pane&&!map.getPane(pane)){const node=map.createPane(pane),original=source.getPane(pane);if(original)node.style.zIndex=getComputedStyle(original).zIndex;}
   if(layer instanceof L.TileLayer){clone=L.tileLayer(layer._url,{...layer.options,crossOrigin:true});tiles.push(clone)}
   else if(layer instanceof L.Marker){clone=L.marker(layer.getLatLng(),{...layer.options,draggable:false});}
   else if(layer instanceof L.Circle){clone=L.circle(layer.getLatLng(),{...layer.options,renderer:undefined,radius:layer.getRadius()});}
@@ -675,6 +676,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  await Promise.all(tiles.map(tile=>new Promise(resolve=>{if(!tile.isLoading())return resolve();const finish=()=>{clearTimeout(timer);tile.off('load',finish);resolve()};const timer=setTimeout(finish,6000);tile.on('load',finish)})));
  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
+ container.querySelectorAll('canvas,svg').forEach(node=>node.style.setProperty('max-width','none','important'));
  const svgs=Array.from(container.querySelectorAll('.leaflet-overlay-pane svg')),rasters=[];
  for(const svg of svgs){
  const copy=svg.cloneNode(true),originals=svg.querySelectorAll('*'),copies=copy.querySelectorAll('*');
