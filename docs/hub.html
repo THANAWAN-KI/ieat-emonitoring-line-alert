@@ -652,7 +652,27 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   }
  });
  window.ieatCaptureReportMap=async (renderer)=>{
- const map=window.ieatSupportMap,container=document.getElementById('map');if(!map||!container)throw Error('แผนที่ Dashboard ยังไม่พร้อม');
+ if(window.ieatLandscapeCapturePending)return window.ieatLandscapeCapturePending;
+ const task=(async()=>{
+ const source=window.ieatSupportMap;if(!source||!window.L)throw Error('แผนที่ Dashboard ยังไม่พร้อม');
+ const container=document.createElement('div');container.id='dssLandscapeCapture';container.style.cssText='position:fixed;left:-12000px;top:0;width:986px;height:480px;min-height:0;max-height:none;z-index:-1;pointer-events:none;background:#f3f6f8';
+ document.body.append(container);
+ const map=L.map(container,{zoomControl:false,attributionControl:false,zoomAnimation:false,fadeAnimation:false,markerZoomAnimation:false,preferCanvas:true,zoomSnap:0});
+ try{
+ map.fitBounds(source.getBounds(),{padding:[12,12],animate:false});
+ const tiles=[];
+ source.eachLayer(layer=>{
+  let clone;
+  if(layer instanceof L.TileLayer){clone=L.tileLayer(layer._url,{...layer.options,crossOrigin:true});tiles.push(clone)}
+  else if(layer instanceof L.Marker){clone=L.marker(layer.getLatLng(),{...layer.options,draggable:false});}
+  else if(layer instanceof L.Circle){clone=L.circle(layer.getLatLng(),{...layer.options,renderer:undefined,radius:layer.getRadius()});}
+  else if(layer instanceof L.CircleMarker){clone=L.circleMarker(layer.getLatLng(),{...layer.options,renderer:undefined});}
+  else if(layer instanceof L.Polygon){clone=L.polygon(layer.getLatLngs(),{...layer.options,renderer:undefined});}
+  else if(layer instanceof L.Polyline){clone=L.polyline(layer.getLatLngs(),{...layer.options,renderer:undefined});}
+  if(!clone)return;clone.addTo(map);
+  const tip=layer.getTooltip?.();if(tip?.options.permanent){const content=tip.getContent();clone.bindTooltip(typeof content==='string'?content:content.cloneNode(true),{...tip.options});}
+ });
+ await Promise.all(tiles.map(tile=>new Promise(resolve=>{if(!tile.isLoading())return resolve();const finish=()=>{clearTimeout(timer);tile.off('load',finish);resolve()};const timer=setTimeout(finish,6000);tile.on('load',finish)})));
  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  await Promise.allSettled(Array.from(container.querySelectorAll('img.leaflet-tile')).filter(img=>!img.complete).map(img=>new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});setTimeout(resolve,3000)})));
  const svgs=Array.from(container.querySelectorAll('.leaflet-overlay-pane svg')),rasters=[];
@@ -664,10 +684,14 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  try{const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url});const c=document.createElement('canvas');c.width=Math.ceil(rect.width);c.height=Math.ceil(rect.height);c.getContext('2d').drawImage(img,0,0,c.width,c.height);rasters.push({url:c.toDataURL('image/png'),left:rect.left-parentRect.left,top:rect.top-parentRect.top,width:rect.width,height:rect.height})}finally{URL.revokeObjectURL(url)}
  }
  const canvas=await renderer(container,{backgroundColor:'#f3f6f8',scale:2,useCORS:true,allowTaint:false,logging:false,width:container.clientWidth,height:container.clientHeight,ignoreElements:el=>el.classList?.contains('leaflet-control-container')||el.classList?.contains('field-report-wind'),onclone(doc){
- Array.from(doc.querySelectorAll('#map .leaflet-overlay-pane svg')).forEach((svg,i)=>{const r=rasters[i];if(!r)return;const img=doc.createElement('img');img.src=r.url;img.style.cssText='position:absolute;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;max-width:none;transform:none';svg.replaceWith(img)});
+ Array.from(doc.querySelectorAll('#dssLandscapeCapture .leaflet-overlay-pane svg')).forEach((svg,i)=>{const r=rasters[i];if(!r)return;const img=doc.createElement('img');img.src=r.url;img.style.cssText='position:absolute;left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;max-width:none;transform:none';svg.replaceWith(img)});
  }});
  return canvas.toDataURL('image/png');
 
+ }finally{map.remove();container.remove()}
+ })();
+ window.ieatLandscapeCapturePending=task;
+ try{return await task}finally{window.ieatLandscapeCapturePending=null}
  };
 })();
 </script>
