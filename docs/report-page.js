@@ -6,7 +6,7 @@
  $('back').addEventListener('click',event=>{try{if(!record?.incidentId&&window.opener&&!window.opener.closed&&window.opener.location.origin===location.origin){event.preventDefault();window.opener.focus();window.close();}}catch{}});
  function prepareMap(doc){
   const slot=doc.getElementById('fieldBriefMap'),image=doc.getElementById('dashboardReportMapImage');if(!slot||!image)return;
-  for(const [key,value] of Object.entries({height:Math.round(986*(Number(slot.dataset.reportMapRatio)||(image.naturalWidth?image.naturalHeight/image.naturalWidth:0.55)))+'px','aspect-ratio':'auto',position:'relative',overflow:'hidden'}))slot.style.setProperty(key,value,'important');
+  for(const [key,value] of Object.entries({height:'480px','aspect-ratio':'auto',position:'relative',overflow:'hidden'}))slot.style.setProperty(key,value,'important');
   for(const [key,value] of Object.entries({width:'100%',height:'100%','object-fit':'contain'}))image.style.setProperty(key,value,'important');
   image.alt='ภาพแผนที่ ณ เวลาจัดทำรายงาน';doc.querySelectorAll('[aria-label="ซูมแผนที่รายงาน"]').forEach(n=>n.remove());
   const weather=doc.getElementById('fbWeather');if(weather){slot.append(weather);for(const [key,value] of Object.entries({position:'absolute',top:'auto',right:'16px',bottom:'16px',width:'250px','max-width':'42%','font-size':'11px'}))weather.style.setProperty(key,value,'important');}
