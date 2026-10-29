@@ -439,10 +439,10 @@ async function loadMappedFootprints(){
  }catch(e){if(token!==footprintEpoch)return;mappedBuildingFootprints=[];syncIllustrativeModels();$('estate3dState').textContent=' · โหลดแนวอาคารไม่สำเร็จ · ข้อมูลน้ำยังใช้งานได้';}
 }
 function illustrativeEstateModels(features){
- const names=new Set(features.map(f=>f.properties?.['นิคมอุตสาหกรรม']).filter(Boolean)),map=vector||raster;
- if(!map||!names.size)return {type:'FeatureCollection',features:[]};
+ const map=vector||raster;
+ if(!map)return {type:'FeatureCollection',features:[]};
  const b=map.getBounds();
- return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(!names.has(f.properties.estate))return false;if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#e5e9ec'}}:f)};
+ return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#e5e9ec'}}:f)};
 }
 
 // Software-rendered isometric overlay keeps illustrative volumes visible without WebGL.
@@ -539,11 +539,11 @@ $('estateDepth').addEventListener('input',()=>{estateDepth=Number($('estateDepth
 $('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
 function queueBoundaries(){clearTimeout(boundaryTimer);if(flags.boundary&&ready)boundaryTimer=setTimeout(loadBoundaries,350);else if(!flags.boundary){boundaryAbort?.abort();boundaryVersion++;}}
 async function loadBoundaries(){
- if(!flags.boundary||!ready)return;boundaryAbort?.abort();boundaryAbort=new AbortController();const version=++boundaryVersion,signal=boundaryAbort.signal,b=(vector||raster).getBounds(),zoom=(vector||raster).getZoom();
+ if(!flags.boundary||!ready)return;loadMappedFootprints();boundaryAbort?.abort();boundaryAbort=new AbortController();const version=++boundaryVersion,signal=boundaryAbort.signal,b=(vector||raster).getBounds(),zoom=(vector||raster).getZoom();
  const envelope={xmin:b.getWest(),ymin:b.getSouth(),xmax:b.getEast(),ymax:b.getNorth(),spatialReference:{wkid:4326}};const all=[];
  $('boundaryInfo').textContent='ขอบเขตนิคมฯ: กำลังโหลดพื้นที่ในแผนที่…';
  try{let offset=0;while(true){const q=new URLSearchParams({where:'1=1',outFields:'OBJECTID,นิคมอุตสาหกรรม',returnGeometry:'true',outSR:'4326',f:'geojson',geometry:JSON.stringify(envelope),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultOffset:String(offset),resultRecordCount:'1000',orderByFields:'OBJECTID',maxAllowableOffset:String(zoom<9?.001:.00003)});const response=await fetch(boundaryService+'/query?'+q,{signal});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error||!Array.isArray(data.features))throw Error(data.error?.message||'รูปแบบข้อมูลไม่ถูกต้อง');all.push(...data.features);if(data.features.length<1000&&!data.exceededTransferLimit)break;offset+=data.features.length;if(!data.features.length)break;}
- if(version!==boundaryVersion)return;boundaryData={type:'FeatureCollection',features:all};syncBoundaries();loadMappedFootprints();$('boundaryInfo').textContent='ขอบเขตนิคมฯ: กนอ. · '+all.length.toLocaleString('th-TH')+' พื้นที่/แปลงในมุมมองนี้';
+ if(version!==boundaryVersion)return;boundaryData={type:'FeatureCollection',features:all};syncBoundaries();$('boundaryInfo').textContent='ขอบเขตนิคมฯ: กนอ. · '+all.length.toLocaleString('th-TH')+' พื้นที่/แปลงในมุมมองนี้';
  }catch(e){if(e.name==='AbortError')return;$('boundaryInfo').textContent='โหลดขอบเขตนิคมฯ ไม่สำเร็จ · เลื่อนแผนที่หรือเปิดเลเยอร์เพื่อลองใหม่';}
 }
 let waterLabelFrame=null;
@@ -690,7 +690,7 @@ function rasterStart(){
  raster.on('zoomend moveend',queueRasterIllustrations);raster.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
  raster.on('popupopen',event=>{const html=event.popup.getContent();raster.closePopup(event.popup);window.IEAT_MAP_DETAILS?.showHTML(typeof html==='string'?html:html?.outerHTML||'')});
  riverSvgRenderer=L.svg({padding:.5});
- rasterBaseLayer=L.tileLayer(basemapUrls[selectedBasemap],{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
+ rasterBaseLayer=L.tileLayer(basemapUrls[selectedBasemap],{attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
  ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
@@ -698,7 +698,7 @@ function rasterStart(){
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
  try{
- vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray'}]},center:[101,14],zoom:6,pitch:55,bearing:-15,preserveDrawingBuffer:true,attributionControl:true});
+ vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray'}]},center:[101,14],zoom:6,pitch:55,bearing:-15,preserveDrawingBuffer:true,attributionControl:true});
  vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
