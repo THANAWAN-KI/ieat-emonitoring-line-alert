@@ -890,7 +890,7 @@ html body #warning #estateFocusDashboard #rpRankingsAfterWarning .rp-rank-card{g
 </style>
 <script id="flood-visible-rows-script">
 (()=>{
-const sets=[['rpCards','.rp-card',2,'สถานีระดับน้ำ'],['efRelatedDams','.ef-dam-card',2,'เขื่อน'],['efReservoirList','.ef-reservoir-row',4,'อ่างเก็บน้ำขนาดกลาง'],['efCanalList','.ef-canal-card',4,'คลอง กทม.']];let scheduled=false;const observed=new WeakSet();
+const sets=[['efRelatedDams','.ef-dam-card',2,'เขื่อน'],['efReservoirList','.ef-reservoir-row',4,'อ่างเก็บน้ำขนาดกลาง'],['efCanalList','.ef-canal-card',4,'คลอง กทม.']];let scheduled=false;const observed=new WeakSet();
 function measure(){scheduled=false;for(const [id,selector,limit,label] of sets){const host=document.getElementById(id);if(!host)continue;const cards=[...host.children].filter(el=>el.matches(selector));if(!observed.has(host)){observed.add(host);new ResizeObserver(schedule).observe(host);new MutationObserver(schedule).observe(host,{childList:true,subtree:true,characterData:true})}if(!cards.length){host.style.removeProperty('--flood-row-height');const caption=host.previousElementSibling;if(caption?.classList.contains('flood-row-caption'))caption.remove();continue}
 const bounds=host.getBoundingClientRect(),positions=cards.map(card=>({card,top:Math.round(card.getBoundingClientRect().top-bounds.top+host.scrollTop),bottom:card.getBoundingClientRect().bottom-bounds.top+host.scrollTop})),tops=[...new Set(positions.map(p=>p.top))].sort((a,b)=>a-b),overflow=tops.length>limit;const height=overflow?Math.ceil(Math.max(...positions.filter(p=>p.top<=tops[limit-1]).map(p=>p.bottom))+3)+'px':'none';if(host.style.getPropertyValue('--flood-row-height')!==height)host.style.setProperty('--flood-row-height',height);
 let caption=host.previousElementSibling;if(!caption?.classList.contains('flood-row-caption')){caption=document.createElement('p');caption.className='flood-row-caption';host.before(caption)}const text=cards.length+' รายการ · '+(overflow?'แสดงครั้งละ '+limit+' แถว · เลื่อนดูรายการที่เหลือ':'แสดง '+tops.length+' แถว');if(caption.textContent!==text)caption.textContent=text;host.tabIndex=overflow?0:-1;host.setAttribute('aria-label','รายการ'+label+' '+cards.length+' รายการ');}}
@@ -1057,7 +1057,36 @@ html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboa
 color:#823BC4!important;stroke:#823BC4!important;
 }
 #estateFocusDashboard .flood-kpis .flood-kpi .ef-kpi-icon{background:#F3EBFC!important}
-</style><style id="ieat-overview-title-black-20261029">#estateFocusDashboard .flood-overview .flood-section-label{color:#000!important}</style><style id="ieat-hide-tracked-area-panel-20261029">#estateFocusDashboard #expoExplore{display:none!important}</style><style id="ieat-station-heading-20px-bold-20261029">html body #warning #estateFocusDashboard #floodStationsSection .rp-stations-title{font-size:20px!important;font-weight:700!important;line-height:1.4!important;color:#000000!important}</style></body>
+</style><style id="ieat-overview-title-black-20261029">#estateFocusDashboard .flood-overview .flood-section-label{color:#000!important}</style><style id="ieat-hide-tracked-area-panel-20261029">#estateFocusDashboard #expoExplore{display:none!important}</style><style id="ieat-station-heading-20px-bold-20261029">html body #warning #estateFocusDashboard #floodStationsSection .rp-stations-title{font-size:20px!important;font-weight:700!important;line-height:1.4!important;color:#000000!important}</style><style id="ieat-water-station-carousel">
+html body #warning #estateFocusDashboard #rpCards>.rp-card.ieat-page-hidden{display:none!important}
+html body #warning #estateFocusDashboard #rpCards{max-height:none!important;overflow:visible!important;height:auto!important}
+#ieatWaterStationPager{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0 0;font-family:Sarabun,sans-serif}
+#ieatWaterStationPager button{background:#fff;color:#7834b5;border:1px solid #d8c2eb;border-radius:10px;padding:7px 15px;font:700 15px Sarabun,sans-serif;cursor:pointer}
+#ieatWaterStationPager button:disabled{opacity:.35;cursor:default}
+#ieatWaterStationPager .ieat-page-count{font:600 14px Sarabun,sans-serif;color:#333}
+</style>
+<script id="ieat-water-station-carousel-script">
+(()=>{
+const perPage=2;let page=0,host=null,pager=null,caption=null;
+function render(){
+host=document.getElementById('rpCards');if(!host)return;
+const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));
+if(!cards.length)return;
+const pages=Math.ceil(cards.length/perPage);page=Math.min(page,pages-1);
+cards.forEach((card,i)=>card.classList.toggle('ieat-page-hidden',Math.floor(i/perPage)!==page));
+if(!pager){pager=document.createElement('nav');pager.id='ieatWaterStationPager';pager.setAttribute('aria-label','เปลี่ยนหน้าสถานีระดับน้ำ');pager.innerHTML='<button type="button" data-dir="-1" aria-label="หน้าก่อนหน้า">‹ ก่อนหน้า</button><span class="ieat-page-count" aria-live="polite"></span><button type="button" data-dir="1" aria-label="หน้าถัดไป">ถัดไป ›</button>';host.after(pager);pager.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{page+=Number(b.dataset.dir);render()}))}
+pager.querySelector('[data-dir="-1"]').disabled=page===0;
+pager.querySelector('[data-dir="1"]').disabled=page>=pages-1;
+pager.querySelector('.ieat-page-count').textContent=(page+1)+' / '+pages;
+pager.hidden=pages<=1;
+caption=host.previousElementSibling;
+if(caption?.classList.contains('flood-row-caption'))caption.textContent=cards.length+' รายการ · แสดง '+(page*perPage+1)+'–'+Math.min((page+1)*perPage,cards.length)+' · คลิกเพื่อดูหน้าถัดไป';
+}
+let scheduled=false;function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;render()})}
+const root=document.getElementById('warning');if(root)new MutationObserver(records=>{if(records.some(r=>r.type==='childList'&&Array.from(r.addedNodes).some(n=>n.nodeType===1&&n.id!=='ieatWaterStationPager')))schedule()}).observe(root,{childList:true,subtree:true});
+window.addEventListener('resize',schedule);schedule();
+})();
+</script></body>
 </html>
 
 
