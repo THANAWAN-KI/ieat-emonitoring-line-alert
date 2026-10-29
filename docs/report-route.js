@@ -52,7 +52,7 @@
     const slot=first.querySelector('#fieldBriefMap'),weather=first.querySelector('#fbWeather'),image=new Image();
     image.src=mapImage;await image.decode();image.id='dashboardReportMapImage';image.alt='แผนที่จุดเกิดเหตุและข้อมูลสนับสนุน';
     slot.replaceChildren(image);if(weather)slot.append(weather);
-    slot.dataset.reportMapRatio=String(image.naturalHeight/image.naturalWidth);
+    slot.dataset.reportMapRatio=String(480/986);slot.style.setProperty('height','480px','important');
    }
    const footer=doc.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+field(doc,'reportNo')+' | หน้า 1 / 2';brief.append(footer);
 
