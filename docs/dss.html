@@ -3513,7 +3513,7 @@ image.addEventListener('load',()=>{image.style.transform=''});
 
 
 const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
-function fitImage(){if(!image.naturalWidth)return;const height=Math.round(Math.min(440,slot.clientWidth*9/16));slot.style.setProperty('height',height+'px','important')}
+function fitImage(){if(!image.naturalWidth)return;const height=Math.round(slot.clientWidth*480/986);slot.style.setProperty('height',height+'px','important')}
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
@@ -3726,7 +3726,7 @@ html body #report#report #fieldBriefMap #fbWeather{z-index:800!important}
 #fieldBriefMap .field-reference-number{border-radius:50%!important;background:#64249b!important}
 #fieldBriefMap .field-reference-ready{background:#28734e!important}
 html body #report#report#report #fieldBriefMap .leaflet-overlay-pane>canvas,html body #report#report#report #fieldBriefMap .leaflet-overlay-pane>svg{max-width:none!important;max-height:none!important}
-html body #report#report#report #fieldBriefMap{height:clamp(200px,42vw,440px)!important;min-height:0!important;aspect-ratio:auto!important}
+html body #report#report#report #fieldBriefMap{height:auto!important;min-height:0!important;aspect-ratio:986/480!important}
 html body #report#report#report.dss-field-export #fieldBriefMap{height:480px!important}
 html body #report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;background:#f3f6f8!important}
 @media print{@page{size:A4 portrait;margin:10mm}html body #report#report#report #fieldBriefMap{height:90mm!important;break-inside:avoid}}
