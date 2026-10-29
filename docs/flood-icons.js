@@ -35,6 +35,8 @@ const style=document.createElement('style');style.textContent=`
 #mapDetails nav button{display:inline-flex;align-items:center;gap:4px}#mapDetails nav .ieat-icon{width:15px;height:15px}
 #supportMapButton .ieat-icon{width:18px;height:18px;margin-right:5px}#estateView3d .ieat-icon{width:17px;height:17px;margin-right:5px}
 #aerialTourButton span{display:inline-flex;vertical-align:middle}#aerialTourButton .ieat-icon{width:19px;height:19px}
+.ieat-3d-tools{left:58px!important}#aerialTourButton{left:178px!important}
+@media(max-width:650px){#aerialTourButton{left:12px!important;top:66px!important}#supportMapButton{top:66px!important;right:12px!important}}
 #mapDetailsClose{display:grid;place-items:center}#mapDetailsClose .ieat-icon{width:16px;height:16px}
 #estateFocusDashboard .ef-kpi-icon{box-shadow:inset 0 0 0 1px #8459aa15!important;border-radius:14px!important}#estateFocusDashboard .ef-kpi-icon .ieat-icon{stroke-width:1.65}
 button:focus-visible{outline:3px solid #9879bb;outline-offset:3px}
