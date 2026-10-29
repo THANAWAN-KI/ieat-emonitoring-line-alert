@@ -507,7 +507,7 @@ function rasterStart(){
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
- ready=true;render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
+ ready=true;setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
 }
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
@@ -534,7 +534,7 @@ function vectorStart(){
   vector.on('click','water-stations',openSensorPopup);
   vector.on('click','points',e=>{const p=e.features[0];createMapPopup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   ['water-stations','points'].forEach(id=>{vector.on('mouseenter',id,()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave',id,()=>vector.getCanvas().style.cursor='')});
-  ready=true;render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
+  ready=true;setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{phase++;if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase%2?[1,4]:[0,2,1,2])},500)}
   if(gistda)addGistda();addFlow();
  });
@@ -741,7 +741,7 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-map-snapshot'){try{let dataUrl;if(vector&&ready){await new Promise(resolve=>{vector.once('render',resolve);vector.triggerRepaint()});dataUrl=vector.getCanvas().toDataURL('image/png')}else if(raster&&window.html2canvas){const canvas=await html2canvas($('raster'),{useCORS:true,backgroundColor:'#FFFFFF',logging:false});dataUrl=canvas.toDataURL('image/png')}else throw Error('แผนที่ยังไม่พร้อม');event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,dataUrl},event.origin)}catch(e){event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,error:e.message},event.origin)}}
 });
 fetch('./data/water_flow_major.geojson?v=20261001',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{waterways=d;addFlow();drawFlow()}).catch(()=>{$('status').textContent+=' · โหลดแนวลูกศรไม่สำเร็จ'});
-vectorStart();setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);load();loadCanals();cameras();loadHistoryIndex().then(()=>queueRender()).catch(()=>{});setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
+vectorStart();load();loadCanals();cameras();loadHistoryIndex().then(()=>queueRender()).catch(()=>{});setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
 function remoteInfo(){
  const lines=[];
  if(flags.satellite)lines.push(satelliteFeed?'น้ำท่วมจากดาวเทียม GISTDA · วันที่ภาพ '+satelliteFeed.passes.map(p=>p.date).filter((v,i,a)=>a.indexOf(v)===i).join(', ')+' · ภาพตามรอบดาวเทียม':satelliteError||'กำลังโหลดภาพดาวเทียม…');
