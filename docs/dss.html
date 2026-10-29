@@ -1539,13 +1539,13 @@ async function downloadReportPng(){
   if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function')mapImage=await parent.ieatCaptureReportMap(html2canvas,{lat:Number(state.lat),lng:Number(state.lng),points:['fire','hospital','hydrant','police','community','cctv'].map(type=>(state.supportLocations||[]).filter(p=>p.type===type).sort((a,b)=>a.distance-b.distance)[0]).filter(p=>p&&Number.isFinite(Number(p.distance))&&Number(p.distance)<=50)});
   else{
    if(window.dssWaitMapReady)await window.dssWaitMapReady();
-   mapImage=(await html2canvas(document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:e=>e.classList?.contains('leaflet-control-container')})).toDataURL('image/png');
+   mapImage=(await html2canvas(window.dssLeafletMap?.getContainer()||document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:e=>e.classList?.contains('leaflet-control-container')})).toDataURL('image/png');
   }
   const mapRaster=new Image();await new Promise((resolve,reject)=>{mapRaster.onload=resolve;mapRaster.onerror=reject;mapRaster.src=mapImage});
   const firstStage=document.createElement('div');firstStage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const firstNode=document.getElementById('report').cloneNode(true);firstNode.classList.add('dss-field-export','dss-two-page-first');firstNode.style.setProperty('width','1050px','important');firstNode.style.setProperty('height','auto','important');firstNode.style.setProperty('padding','32px','important');firstNode.style.setProperty('box-sizing','border-box','important');firstNode.style.setProperty('max-height','none','important');
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
-  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);slot.style.setProperty('height',Math.round(986*mapRaster.naturalHeight/mapRaster.naturalWidth)+'px','important');
+  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);slot.style.setProperty('height','480px','important');
   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
   let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
   const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
@@ -3485,8 +3485,8 @@ html body #dssPageTwo#dssPageTwo th{background:#edf3e8!important;color:#000!impo
 </style><style id="centered-report-map-weather">
 html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid{display:block!important;grid-template-columns:1fr!important}
 html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid>div:last-child{display:none!important}
-html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{position:relative!important;display:block!important;width:100%!important;height:640px!important;max-height:none!important;margin:0 auto!important;border:0!important;background:#f3f6f8!important;overflow:hidden!important}
-html body #report#report.dss-field-export #dssFieldBrief #fieldBriefMap{height:760px!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{position:relative!important;display:block!important;width:100%!important;height:440px!important;max-height:none!important;margin:0 auto!important;border:0!important;background:#f3f6f8!important;overflow:hidden!important}
+html body #report#report.dss-field-export #dssFieldBrief #fieldBriefMap{height:480px!important}
 html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;margin:0!important}
 html body #report#report.dss-field-document #dssFieldBrief #reportMapCanvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:0!important}
 html body #report#report.dss-field-document #dssFieldBrief #fbWeather{display:block!important;position:absolute!important;right:16px!important;bottom:16px!important;z-index:800!important;width:250px!important;max-width:42%!important;padding:12px!important;margin:0!important;box-sizing:border-box!important;border:1px solid #d5dbd0!important;border-radius:4px!important;background:#fffffff5!important;box-shadow:0 2px 10px #0002!important}
@@ -3513,7 +3513,7 @@ image.addEventListener('load',()=>{image.style.transform=''});
 
 
 const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
-function fitImage(){if(!image.naturalWidth)return;const height=Math.round(slot.clientWidth*image.naturalHeight/image.naturalWidth);slot.style.setProperty('height',height+'px','important')}
+function fitImage(){if(!image.naturalWidth)return;const height=Math.round(Math.min(440,slot.clientWidth*9/16));slot.style.setProperty('height',height+'px','important')}
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
@@ -3722,7 +3722,12 @@ html body #report#report #fieldBriefMap.has-live-report-map>#dssLiveMap{display:
 html body #report#report #fieldBriefMap.has-live-report-map>.report-map-zoom-controls{display:none!important}
 html body #report#report #fieldBriefMap #fbWeather{z-index:800!important}
 </style>
-</body></html>
+<style id="a4-landscape-report-map">
+html body #report#report#report #fieldBriefMap{height:clamp(200px,42vw,440px)!important;min-height:0!important;aspect-ratio:auto!important}
+html body #report#report#report.dss-field-export #fieldBriefMap{height:480px!important}
+html body #report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;background:#f3f6f8!important}
+@media print{@page{size:A4 portrait;margin:10mm}html body #report#report#report #fieldBriefMap{height:90mm!important;break-inside:avoid}}
+</style></body></html>
 
 
 
