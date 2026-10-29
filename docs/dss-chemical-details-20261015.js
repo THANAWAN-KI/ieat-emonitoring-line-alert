@@ -44,7 +44,7 @@ function render(){
 function syncScope(){
  scope=source.value?normalize(source.selectedOptions[0]?.textContent||source.value):'';
  if(scope&&!Array.from(estate.options).some(o=>o.value===scope)){const o=new Option(source.selectedOptions[0]?.textContent||source.value,scope);estate.add(o);}
- estate.value=scope;page=0;eppMatches=[];dismissCompanySuggestions();render();search.placeholder=scope?'โรงงานใน '+(source.selectedOptions[0]?.textContent||'นิคมฯ')+' / สารเคมี / CAS':'บริษัท / ทะเบียน / สารเคมี / CAS';if(search.value.trim().length>=2)searchEpp();
+ estate.value=scope;page=0;eppMatches=[];dismissCompanySuggestions();render();search.placeholder=scope?'โรงงานใน '+(source.selectedOptions[0]?.textContent||'นิคมฯ')+' / เลขทะเบียน':'ชื่อโรงงาน / เลขทะเบียน';if(search.value.trim().length>=2)searchEpp();
 }
 
 function showChemicalMatches(){
