@@ -184,6 +184,7 @@ const cameraSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" strok
 let waterMarkers=[];let damMarkers=[];let estateMarkers=[];let waterways=null;
 let riverSvgRenderer=null;
 let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
+window.IEATPreparednessMap=()=>({vector,raster,ready,clearSelectionPopup:()=>{selectedMarker?.getPopup?.()?.remove();raster?.closePopup()}});
 
 new ResizeObserver(()=>{if(vector)vector.resize();if(raster)raster.invalidateSize()}).observe(document.getElementById('mapStage'));
 
@@ -569,7 +570,7 @@ function rasterStart(){
  L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
- ready=true;setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
+ ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
 }
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
@@ -596,7 +597,7 @@ function vectorStart(){
   vector.on('click','water-stations',openSensorPopup);
   vector.on('click','points',e=>{const p=e.features[0];createMapPopup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   ['water-stations','points'].forEach(id=>{vector.on('mouseenter',id,()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave',id,()=>vector.getCanvas().style.cursor='')});
-  ready=true;setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
+  ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{phase++;if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase%2?[1,4]:[0,2,1,2])},500)}
   if(gistda)addGistda();addFlow();
  });
@@ -887,7 +888,7 @@ body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,bo
 .station-popup-details dt{color:#6c7b8b;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#25364a;font-size:12px;font-weight:600}
 .station-popup-footer{margin-top:12px;color:#6c7b8b;font-size:11px;line-height:1.7}.station-popup-footer a{color:#245c9d;font-weight:600}.station-popup-stale{color:#b34437;font-weight:600}
 .station-popup .station-history-disclosure{margin-top:10px}
-</style><script src="flood-preparedness-overlay.js?v=20261029-1"></script></body></html>
+</style><script src="flood-preparedness-overlay.js?v=20261029-anchored-2"></script></body></html>
 
 
 
