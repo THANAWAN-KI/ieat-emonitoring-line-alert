@@ -2996,7 +2996,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!im
  const el=(tag,value,cls)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;if(cls)n.className=cls;return n};
  let lastQr='';
  function paint(){
-  text('fbDocumentMeta',(state.reportNo||'')+' · จัดทำ '+(state.date||'—')+' (เวลาไทย)');
+  const unitLink=document.createElement('a');unitLink.href='https://oc.ieat.go.th/th';unitLink.target='_blank';unitLink.rel='noopener';unitLink.textContent='ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย';unitLink.style.cssText='color:inherit;text-decoration:none';document.getElementById('fbDocumentMeta').replaceChildren(unitLink);
   const facts=document.getElementById('fbFacts');facts.replaceChildren();
   [['โรงงาน / พื้นที่เกิดเหตุ',state.company,true],['นิคมฯ / ท่าเรือ',state.estate],['ประเภทเหตุ',state.event],['ตำแหน่ง / ที่อยู่',short(state.address,120),true]].forEach(([label,value,wide])=>{
    const box=el('div',undefined,'fb-fact'+(wide?' fb-wide':''));box.append(el('small',label),el('strong',value||'—'));facts.append(box);
@@ -3390,7 +3390,7 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   const header=el('header');header.className='p2-header';
   const logo=document.querySelector('#dssFieldBrief .fb-logo')?.cloneNode();if(logo)header.append(logo);
   const heading=el('div');heading.append(el('h1','รายละเอียดข้อมูล DSS รายโรงงาน'));
-  const meta=el('div',(state.reportNo||'')+' · จัดทำ '+(state.date||missing)+' (เวลาไทย)');meta.className='p2-meta';heading.append(meta);header.append(heading);page.append(header);
+  const meta=el('div');meta.className='p2-meta';const unitLink=el('a','ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย');unitLink.href='https://oc.ieat.go.th/th';unitLink.target='_blank';unitLink.rel='noopener';unitLink.style.cssText='color:inherit;text-decoration:none';meta.append(unitLink);heading.append(meta);header.append(heading);page.append(header);
   const company=el('div',selected?state.company:missing);company.className='p2-company';page.append(company);
   const facts=el('div');facts.className='p2-facts';
   [['นิคมฯ / ท่าเรือ',state.estate],['เลขทะเบียน',state.registration]].forEach(([label,v])=>{const item=el('div');item.append(el('div',label),el('strong',value(v)));facts.append(item)});page.append(facts);
