@@ -3315,36 +3315,21 @@ html body #report.dss-field-export #dssFieldBrief #fbMapCaption .report-field{fo
 html body #report.dss-field-export #dssFieldBrief .report-notification-text{font-size:14px;line-height:1.4}
 html body #report.dss-field-export #dssFieldBrief .report-catalog-item{font-size:12px!important;padding:3px 0!important}
 html body #report.dss-field-export #dssFieldBrief .fb-map{height:470px!important}
-</style><script id="report-chemical-source-alignment-20261018">
+</style><script src="./dss-chemical-catalog.js?v=20261029-catalog"></script><script id="report-chemical-source-alignment-20261018">
 (function(){
- let sourcePromise,sequence=0;
- const norm=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|[\s\u200b-\u200d]/g,'').trim();
- async function source(){
-  if(!sourcePromise)sourcePromise=(async()=>{
-   const response=await fetch('./data/dss-chemical-details-20261015.json',{cache:'no-cache',signal:AbortSignal.timeout(30000)});
-   if(!response.ok)throw Error('HTTP '+response.status);
-   const packed=await response.json();if(packed.encoding!=='gzip-base64')throw Error('รูปแบบข้อมูลไม่ถูกต้อง');
-   const bytes=Uint8Array.from(atob(packed.data),character=>character.charCodeAt(0));
-   const data=JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
-   if(data.schemaVersion!==1||data.period!=='2026-01-01/2026-10-15'||!Array.isArray(data.rows)||!Array.isArray(data.companies))throw Error('รูปแบบข้อมูลไม่ถูกต้อง');
-   return data;
-  })().catch(error=>{sourcePromise=null;throw error});
-  return sourcePromise;
- }
+ let sequence=0;
+ const norm=value=>window.IEATDssChemicalCatalog.normalize(value);
+ const source=()=>window.IEATDssChemicalCatalog.load();
  window.dssLoadReportChemicals=async function(){
   const request=++sequence,company=state.company,registration=String(state.registration||'').split(' / ').map(norm).filter(v=>v&&v!=='—');
   state.hazardCatalog=[];state.chemical='กำลังโหลดข้อมูลสารเคมี';state.chemicalDataTime='';render();
   try{
    const data=await source();if(request!==sequence||company!==state.company)return;
-   let indices=data.companies.flatMap((entry,index)=>registration.includes(norm(entry[1]))?[index]:[]);
-   if(!indices.length){
-    const matches=data.companies.flatMap((entry,index)=>norm(entry[0])===norm(company)&&norm(entry[2])===norm(state.estate)?[index]:[]);
-    if(matches.length===1)indices=matches;
-   }
+   const indices=window.IEATDssChemicalCatalog.findCompanies(data,company,state.estate,registration);
    const accepted=new Set(indices),rows=data.rows.filter(row=>accepted.has(row[0]));
-   state.hazardCatalog=rows.map(row=>({name:data.names[row[1]],cas:data.cas[row[2]],un:String(row[3]||''),volume:String(row[4]??''),unit:data.units[row[5]],state:'',container:'',response:''}));
+   state.hazardCatalog=rows.map(row=>({name:data.names[row[1]],cas:data.cas[row[2]],un:String(row[3]||''),volume:String(row[4]??''),unit:data.units[row[5]],state:'',container:'',response:'',...(data.rowDetails?.[data.rows.indexOf(row)]||{})}));
    state.chemical=state.hazardCatalog.map(item=>item.name+' · '+item.volume+' '+item.unit).join('\n')||'ไม่พบข้อมูล';
-   state.chemicalDataSource='รายงานสารเคมี DSS · 1 ม.ค.–15 ต.ค. 2569';
+   state.chemicalDataSource=indices.some(i=>data.companySources?.[i]==='catalog')?'คลังสารเคมี DSS ของโรงงาน':'รายงานสารเคมี DSS · 1 ม.ค.–15 ต.ค. 2569';
    state.chemicalDataTime=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
   }catch(error){
    if(request!==sequence||company!==state.company)return;
@@ -3417,14 +3402,14 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   const chemicalRows=catalog.map((item,index)=>[index+1,item.name,item.cas,item.un,item.volume,item.unit]);
   if(!chemicalRows.length&&/ไม่สำเร็จ|กำลังโหลด/.test(String(state.chemical)))chemicalRows.push([/ไม่สำเร็จ/.test(state.chemical)?'เชื่อมต่อข้อมูลสารเคมีไม่สำเร็จ':'กำลังโหลดข้อมูล','','','','','']);
   page.append(table(['ลำดับ','ชื่อสารเคมี','CAS No.','UN No.','ปริมาณ','หน่วย'],chemicalRows));
-  const note=el('p','รายงานสารเคมี DSS · 1 ม.ค.–15 ต.ค. 2569 · รายการในฐานข้อมูลโรงงาน ไม่ใช่การยืนยันสารที่เกี่ยวข้องกับเหตุ');note.className='p2-note';page.append(note);
+  const note=el('p',(state.chemicalDataSource||'ข้อมูลสารเคมี DSS')+' · รายการในฐานข้อมูลโรงงาน ไม่ใช่การยืนยันสารที่เกี่ยวข้องกับเหตุ');note.className='p2-note';page.append(note);
   page.append(el('h2','2. อุปกรณ์ระงับเหตุในฐานข้อมูลโรงงาน · '+equipment.length+' รายการ'));
   const equipmentRows=selected?equipment.map((item,index)=>[index+1,item.name,item.type,item.amount,item.amountUnit,item.volume,item.volumeUnit]):[];
   if(selected&&!equipmentRows.length&&equipmentStatus!==missing)equipmentRows.push([equipmentStatus,'','','','','','']);
   page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ปริมาตร / แรงดัน','หน่วย'],equipmentRows));
   
   const time=el('div','เวลาสืบค้นข้อมูลสารเคมี: '+value(state.chemicalDataTime));time.className='p2-meta';page.append(time);
-  const footer=el('div','แหล่งข้อมูล: รายงานสารเคมี DSS · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 2');footer.className='dss-page-footer';page.append(footer);
+  const footer=el('div','แหล่งข้อมูล: '+(state.chemicalDataSource||'สารเคมี DSS')+' · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 2');footer.className='dss-page-footer';page.append(footer);
   const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG 2 หน้า';
  }
  window.dssRefreshPageTwo=async function(){
@@ -3718,3 +3703,4 @@ html body #report#report#report#report .report-map-zoom-controls button{color:#3
 
 
 <script>if(new URLSearchParams(location.search).get("embedded")==="incident"){const s=document.createElement("script");s.src="./incident-dss.js?v=20261022-inline12";document.body.append(s);}</script>
+
