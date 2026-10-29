@@ -74,10 +74,10 @@ function attach(){
  el.querySelector('button').onclick=e=>{e.stopPropagation();popup(s)};
  }
  const p=plan();
- const system=mountMarker({lon:100.5869,lat:14.1975},pin('#70519f','ข้อมูลรับน้ำรวมทั้งนิคมฯ')+'<div class="prep-tag"><b>พื้นที่รับน้ำรวมทั้งนิคมฯ</b><strong>'+esc(p?.storage||'200,000 ลบ.ม.')+'</strong><small>ข้อมูลรวมทั้งระบบ · หมุดนี้ไม่ใช่ตำแหน่งบ่อ</small></div>','prep-summary');
+ const system=mountMarker({lon:100.5869,lat:14.1975},pin('#70519f','ข้อมูลรับน้ำรวมทั้งนิคมฯ')+'<div class="prep-tag"><b>ระบบรับมือน้ำท่วม · ทั้งนิคมฯ</b><strong>4 สถานี · 18 เครื่อง</strong><strong>'+esc(p?.capacity||'32,400 ลบ.ม./ชม.')+'</strong><span>'+esc(p?.storage||'รับน้ำ 200,000 ลบ.ม.')+'</span><small>รองรับฝนตามผัง '+esc(p?.rain||'65 มม./ชม.')+'<br>ข้อมูลรวมทั้งระบบ · หมุดนี้ไม่ใช่ตำแหน่งบ่อ</small></div>','prep-summary');
  system.querySelector('button').insertAdjacentHTML('beforeend','<b>≈</b>');
  system.querySelector('button').setAttribute('data-flood-plan','bang-pa-in');
- const protection=mountMarker({lon:100.5873,lat:14.2111},pin('#408a74','ข้อมูลแนวป้องกันตามผัง')+'<div class="prep-tag"><b>แนวป้องกันตามผัง</b><strong>+6 MSL · ยาว 10 กม.</strong><small>เส้นประใช้ขอบเขตนิคมฯ เป็นแนวประมาณ ไม่ใช่แนวเขื่อนสำรวจ</small></div>','prep-line-label');
+ const protection=mountMarker({lon:100.5873,lat:14.2111},pin('#408a74','ข้อมูลแนวป้องกันตามผัง')+'<div class="prep-tag"><b>แนวป้องกันตามผัง</b><strong>+6 MSL · ยาว 10 กม.</strong><span>ไฟสำรอง 800 kVA ทุกสถานี</span><small>เส้นประใช้ขอบเขตนิคมฯ เป็นแนวประมาณ ไม่ใช่แนวเขื่อนสำรวจ</small></div>','prep-line-label');
  protection.querySelector('button').insertAdjacentHTML('beforeend','<b>≈</b>');
  protection.querySelector('button').setAttribute('data-flood-plan','bang-pa-in');
  const map=context.vector||context.raster;map.on('zoomend',refresh);map.on('moveend',refresh);
