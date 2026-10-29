@@ -184,7 +184,7 @@ const cameraSvg="<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" strok
 let waterMarkers=[];let damMarkers=[];let estateMarkers=[];let waterways=null;
 let riverSvgRenderer=null;
 let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
-window.IEATPreparednessMap=()=>({vector,raster,ready,clearSelectionPopup:()=>{selectedMarker?.getPopup?.()?.remove();raster?.closePopup()}});
+window.IEATPreparednessMap=()=>({vector,raster,ready,clearSelectionPopup:()=>{autoFit=false;selectedMarker?.getPopup?.()?.remove();raster?.closePopup()}});
 
 new ResizeObserver(()=>{if(vector)vector.resize();if(raster)raster.invalidateSize()}).observe(document.getElementById('mapStage'));
 
