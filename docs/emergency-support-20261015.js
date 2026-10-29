@@ -138,7 +138,7 @@ async function load(){
 function setIncident(lat,lon){
  if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)return;
  incident={lat,lon};selecting=false;map.getContainer().style.cursor='';pick.textContent='ย้ายจุดเกิดเหตุ';localPick.textContent='ย้ายจุดเกิดเหตุ';
- if(marker)marker.remove();marker=window.L.marker([lat,lon],{draggable:false,title:'ตำแหน่งอ้างอิงนิคมอุตสาหกรรม'}).addTo(map);marker.bindTooltip(estateName||'นิคมอุตสาหกรรม',{permanent:true,direction:'top',offset:[0,-32],className:'incident-support-label emergency-company-label'});
+ if(marker)marker.remove();marker=window.L.marker([lat,lon],{draggable:true,autoPan:true,title:'ลากหมุดเพื่อย้ายจุดเกิดเหตุ'}).addTo(map);marker.bindTooltip(estateName||'นิคมอุตสาหกรรม',{permanent:true,direction:'top',offset:[0,-32],className:'incident-support-label emergency-company-label'});
  marker.on('dragend',()=>{const p=marker.getLatLng();setIncident(p.lat,p.lng);});load();
 }
 function choose(){if(!map){note.textContent='กำลังเตรียมแผนที่ กรุณารอ';return;}selecting=!selecting;map.getContainer().style.cursor=selecting?'crosshair':'';pick.textContent=selecting?'คลิกจุดเกิดเหตุบนแผนที่':incident?'ย้ายจุดเกิดเหตุ':'กำหนดจุดเกิดเหตุ';note.textContent=selecting?'คลิกตำแหน่งเกิดเหตุบนแผนที่ด้านขวา':incident?'เลือกย้ายจุดเกิดเหตุได้ทุกเมื่อ':'ยังไม่ได้เลือกจุดเกิดเหตุ';if(selecting)get('map').scrollIntoView({behavior:'smooth',block:'center'});}
