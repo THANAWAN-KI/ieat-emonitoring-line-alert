@@ -105,6 +105,9 @@ function refresh(){
 bar.querySelector('#prep-label-toggle').onclick=e=>{labels=!labels;e.target.textContent=labels?'ซ่อนป้าย':'แสดงป้าย';e.target.setAttribute('aria-pressed',String(labels));refresh()};
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==parent)return;
+ if(e.data?.type==='flood-province-scope'&&e.data.active&&String(e.data.name||'').includes('บางปะอิน')&&isBangpain()){
+  needsFocus=true;attach();focusExample();
+ }
  if(e.data?.type==='flood-preparedness-mode'){
  const was=isBangpain();mode={active:!!e.data.active,estate:String(e.data.estate||'')};
  needsFocus=isBangpain()&&(!parentModeSeen||!was||needsFocus);parentModeSeen=true;
