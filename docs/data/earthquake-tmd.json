@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-10-29T05:50:46.308277+00:00",
+    "fetchedAt": "2026-10-29T13:04:04.898859+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793090105000,
-    "latestEvent": 1793218559000
+    "oldestEvent": 1793121775000,
+    "latestEvent": 1793256168000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17335",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          94.739,
+          23.197,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.9,
+        "place": "ประเทศเมียนมา",
+        "time": 1793256168000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17335",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17334",
@@ -210,29 +233,6 @@
         "place": "หมู่เกาะนิโคบาร์ ประเทศอินเดีย",
         "time": 1793121775000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17326",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17324",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.352,
-          21.982,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.9,
-        "place": "ประเทศเมียนมา",
-        "time": 1793090105000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17324",
         "source": "TMD",
         "types": "",
         "detail": null,
