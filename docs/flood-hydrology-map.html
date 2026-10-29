@@ -238,6 +238,21 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 body.map-details-open #supportMapButton{display:none!important}
 body.map-details-open .controls,body.map-details-open .ieat-3d-tools,body.map-details-open #aerialTourButton,body.map-details-open #mapCompass{right:314px!important}
 @media(max-width:650px){body.map-details-open .controls,body.map-details-open .ieat-3d-tools,body.map-details-open #aerialTourButton,body.map-details-open #mapCompass{right:14px!important}}
+</style><style id="gistda-reference-map-ui-palette">
+body{font-family:Sarabun,system-ui,sans-serif!important;color:#363636}
+#mapDetails,#mapDetailsBody{background:#FFFFFF!important;color:#363636!important}
+#mapDetails h2,#mapDetailsBody h3{font:400 20px/32px Sarabun,sans-serif!important;color:#363636!important}
+#mapDetails nav button{font:400 14px/20px Sarabun,sans-serif!important;color:#757575!important}
+#mapDetails nav button[aria-pressed=true]{color:#306BEC!important;box-shadow:inset 0 -2px #306BEC!important;background:#FFFFFF!important}
+#mapDetailsBody th,#mapDetailsBody td{font:400 14px/20px Sarabun,sans-serif!important;color:#363636!important;background:#FFFFFF!important}
+.map-support-point{font:400 14px/20px Sarabun,sans-serif!important;color:#363636!important;background:#FFFFFF!important}
+.map-support-point[aria-pressed=true]{box-shadow:inset 3px 0 #306BEC,0 2px 9px #3636360c!important}
+.map-details-note,.map-support-point small{color:#757575!important;font-family:Sarabun,sans-serif!important}
+#estateView3d .ieat-icon,#aerialTourButton .ieat-icon,#supportMapButton .ieat-icon,#mapLayers>summary .ieat-icon{color:#757575!important}
+#aerialTourButton[aria-pressed=true] .ieat-icon,#estateView3d[aria-pressed=true] .ieat-icon{color:#306BEC!important}
+#mapCompass{color:#757575!important}
+#mapStatusKey,#satelliteKey{background:#FFFFFF!important;color:#363636!important;font-family:Sarabun,sans-serif!important}
+#satelliteKey small,#mapStatusKey small{color:#757575!important}
 </style></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>120</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="120" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#0D47A1"/><path d="M12 2V20L4 25Z" fill="#90CAF9"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
