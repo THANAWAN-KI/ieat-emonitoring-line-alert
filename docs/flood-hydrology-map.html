@@ -588,8 +588,15 @@ function syncIllustrativeModels(){
  vector.setLayoutProperty('estate-illustration','visibility',flags.boundary?'visible':'none');
 }
 
+function syncGlobalBuildings(){
+ if(!vector||!ready)return;
+ if(!vector.getSource('context-buildings'))vector.addSource('context-buildings',{type:'vector',tiles:['https://basemaps.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/tile/{z}/{y}/{x}.pbf'],minzoom:0,maxzoom:16,attribution:'Buildings © Esri and its data providers; heights approximate where unavailable'});
+ if(!vector.getLayer('context-buildings'))vector.addLayer({id:'context-buildings',type:'fill-extrusion',source:'context-buildings','source-layer':'Building',minzoom:14,paint:{'fill-extrusion-color':'#A7AAAD','fill-extrusion-height':['max',3,['to-number',['coalesce',['get','height'],['get','Height'],8],8]],'fill-extrusion-base':0,'fill-extrusion-opacity':.92,'fill-extrusion-vertical-gradient':true}},'discharge-ring');
+ const local=String(estateProvinceScope?.name||'').includes('บางปะอิน')&&mappedBuildingFootprints.length>0;
+ vector.setLayoutProperty('context-buildings','visibility',flags.boundary&&$('estateView3d').getAttribute('aria-pressed')==='true'&&!local?'visible':'none');
+}
 function syncBoundaries(){
- syncEstateOuter();syncIllustrativeModels();
+ syncEstateOuter();syncIllustrativeModels();syncGlobalBuildings();
  if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#d6e5ef','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':0,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
  if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#674188',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.55,fill:false,fillOpacity:0},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
 }
@@ -598,7 +605,7 @@ $('estateExample3d').addEventListener('click',showEstateIllustrationExample);
 $('estateParcelVisibility').addEventListener('change',syncBoundaries);
 $('estateTreeVisibility').addEventListener('change',()=>{syncIllustrativeModels();});
 $('estateDepth').addEventListener('input',()=>{estateDepth=Number($('estateDepth').value);queueRasterIllustrations();if(vector&&ready)updateRoundTreeGL(illustrativeEstateModels(boundaryData.features).features);$('estateDepthValue').textContent=estateDepth;if(vector?.getLayer('estate-illustration')){vector.setPaintProperty('estate-illustration','fill-extrusion-height',['*',['get','height'],estateDepth/45]);vector.setPaintProperty('estate-illustration','fill-extrusion-base',['*',['get','base'],estateDepth/45]);}});
-$('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
+$('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();syncGlobalBuildings();vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
 function queueBoundaries(){clearTimeout(boundaryTimer);if(flags.boundary&&ready)boundaryTimer=setTimeout(loadBoundaries,350);else if(!flags.boundary){boundaryAbort?.abort();boundaryVersion++;}}
 async function loadBoundaries(){
  if(!flags.boundary||!ready)return;loadMappedFootprints();boundaryAbort?.abort();boundaryAbort=new AbortController();const version=++boundaryVersion,signal=boundaryAbort.signal,b=(vector||raster).getBounds(),zoom=(vector||raster).getZoom();
@@ -740,7 +747,7 @@ function focus(d){
  if(d.lat==null||d.lon==null||!Number.isFinite(Number(d.lat))||!Number.isFinite(Number(d.lon)))return;
  autoFit=false;$('province').value='';render();
  const zoom=d.scale?Math.max(5,Math.min(15,Math.log2(591657527/Number(d.scale)))):12;
- if(vector)vector.flyTo({center:[Number(d.lon),Number(d.lat)],zoom,pitch:55,bearing:-15});else raster.setView([d.lat,d.lon],zoom,{animate:false});
+ if(vector)vector.flyTo({center:[Number(d.lon),Number(d.lat)],zoom,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:$('estateView3d').getAttribute('aria-pressed')==='true'?-15:0});else raster.setView([d.lat,d.lon],zoom,{animate:false});
  if(d.station)showMapDetails({...d.station,lat:Number(d.lat),lng:Number(d.lon)},d.kind==='canal'?'canal':'water');
  if(d.executive)showExecutiveFocus(d);
 }
