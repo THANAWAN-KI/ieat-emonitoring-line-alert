@@ -605,19 +605,55 @@ $('efFilter').onchange=()=>renderEstates();
 
 
 
+
+ let estatePickerDraft='',estatePickerOpener=null;
+ function closeEstatePicker(){
+  const pane=$('ioEstatePanel');if(pane)pane.hidden=true;
+  $('ioEstatePicker')?.setAttribute('aria-expanded','false');
+  if(estatePickerOpener?.isConnected)estatePickerOpener.focus();
+ }
+ function openEstatePicker(){
+  let pane=$('ioEstatePanel');if(pane&&!pane.hidden){closeEstatePicker();return}
+  estatePickerOpener=$('ioEstatePicker');estatePickerDraft=headerEstate;
+  if(!pane){
+   pane=document.createElement('section');pane.id='ioEstatePanel';pane.hidden=true;pane.setAttribute('role','dialog');pane.setAttribute('aria-labelledby','ioEstatePanelTitle');
+   pane.innerHTML='<div class="io-picker-head"><h2 id="ioEstatePanelTitle">เลือกนิคมอุตสาหกรรม</h2><button type="button" id="ioEstatePickerClose" aria-label="ปิดตัวเลือกนิคมฯ">×</button></div><label for="ioEstatePanelSearch">ค้นหานิคมอุตสาหกรรม</label><input id="ioEstatePanelSearch" type="search" placeholder="พิมพ์ชื่อนิคมฯ" autocomplete="off"><div id="ioEstatePickerOptions" role="group" aria-label="รายชื่อนิคมอุตสาหกรรม"></div><p id="ioEstatePickerSelection" role="status"></p><div class="io-picker-actions"><button type="button" id="ioEstatePickerReset">รีเซ็ต</button><button type="button" id="ioEstatePickerApply">แสดงข้อมูล</button></div>';
+   document.body.appendChild(pane);
+   $('ioEstatePickerClose').onclick=closeEstatePicker;
+   $('ioEstatePanelSearch').oninput=renderEstatePickerOptions;
+   $('ioEstatePickerReset').onclick=()=>{estatePickerDraft='';$('ioEstatePanelSearch').value='';renderEstatePickerOptions()};
+   $('ioEstatePickerApply').onclick=()=>{const name=estatePickerDraft;closeEstatePicker();applyHeaderEstate(name)};
+   pane.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeEstatePicker()}});
+   document.addEventListener('pointerdown',e=>{if(!pane.hidden&&!pane.contains(e.target)&&!$('ioEstatePicker')?.contains(e.target)){pane.hidden=true;$('ioEstatePicker')?.setAttribute('aria-expanded','false')}});
+   pane.addEventListener('click',e=>{const b=e.target.closest('[data-picker-estate]');if(!b)return;estatePickerDraft=b.dataset.pickerEstate;renderEstatePickerOptions()});
+  }
+  $('ioEstatePanelSearch').value='';
+  pane.hidden=false;$('ioEstatePicker').setAttribute('aria-expanded','true');
+  const box=estatePickerOpener.getBoundingClientRect(),width=Math.min(390,innerWidth-24);
+  pane.style.setProperty('--io-picker-left',Math.max(12,Math.min(box.right+24,innerWidth-width-12))+'px');
+  pane.style.setProperty('--io-picker-top',Math.max(12,Math.min(box.top,innerHeight-420))+'px');
+  renderEstatePickerOptions();$('ioEstatePanelSearch').focus();
+ }
+ function renderEstatePickerOptions(){
+  const host=$('ioEstatePickerOptions');if(!host)return;
+  const q=estateKey($('ioEstatePanelSearch').value);
+  const rows=(current?.estates||[]).filter(point).filter(e=>!q||estateKey(e.name).includes(q)).slice().sort((a,b)=>a.name.localeCompare(b.name,'th'));
+  const option=(name,label)=>'<button type="button" data-picker-estate="'+esc(name)+'" aria-pressed="'+String(estatePickerDraft===name)+'"><span>'+esc(label)+'</span><span aria-hidden="true">'+(estatePickerDraft===name?'✓':'')+'</span></button>';
+  host.innerHTML=(!q?option('','ทุกนิคมอุตสาหกรรม'):'')+rows.map(e=>option(e.name,e.name)).join('')+(rows.length?'':'<p>ไม่พบนิคมฯ ที่ค้นหา</p>');
+  $('ioEstatePickerSelection').textContent='พื้นที่ที่เลือก: '+(estatePickerDraft||'ทุกนิคมอุตสาหกรรม');
+ }
  function renderOverviewCharts(m,data){
   const overview=document.querySelector('.flood-overview');if(!overview)return;
   let filter=$('ieatOverviewFilter');
   if(!filter){
    filter=document.createElement('section');filter.id='ieatOverviewFilter';filter.className='ieat-summary-card';
-   filter.innerHTML='<div class="io-area"><span>พื้นที่ทั้งหมด</span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><form><label class="io-sr" for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button></form><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
+
+   filter.innerHTML='<div class="io-area"><span>พื้นที่ทั้งหมด</span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><button id="ioEstatePicker" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ioEstatePanel"><span class="io-picker-label">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
    overview.prepend(filter);
-   const search=()=>{const q=$('ieatOverviewSearch').value.trim();if(!q){applyHeaderEstate('');return}const matches=(current?.estates||[]).filter(r=>estateKey(r.name).includes(estateKey(q)));const estate=matches.find(r=>estateKey(r.name)===estateKey(q))||(matches.length===1?matches[0]:null);if(!estate){filter.querySelector('p').hidden=false;filter.querySelector('p').textContent=matches.length?'พบหลายพื้นที่ กรุณาเลือกชื่อจากรายการ':'ไม่พบชื่อนิคมฯ ที่ค้นหา';return}applyHeaderEstate(estate.name)};
-   filter.querySelector('form').onsubmit=e=>{e.preventDefault();search()};
-   $('ieatOverviewSearch').onchange=search;
-   $('ieatAllEstates').onclick=()=>{applyHeaderEstate('');$('ieatOverviewSearch').value=''};
+   $('ioEstatePicker').onclick=()=>openEstatePicker();
+   $('ieatAllEstates').onclick=()=>applyHeaderEstate('');
   }
-  if(document.activeElement!==$('ieatOverviewSearch'))$('ieatOverviewSearch').value=headerEstate;
+  $('ioEstatePicker').querySelector('.io-picker-label').textContent=headerEstate||'เลือกนิคมอุตสาหกรรม';
   filter.querySelector('.io-area>span').textContent=headerEstate?'พื้นที่ที่เลือก':'พื้นที่ทั้งหมด';
   filter.querySelector('p').textContent='';filter.querySelector('p').hidden=true;
   const dateRow=filter.querySelector('.io-date');dateRow.innerHTML="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 50 50\" aria-hidden=\"true\" style=\"width:24px;height:24px;flex-shrink:0\"><title>date</title><g fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path stroke=\"#306CFE\" d=\"M41.667 43.75H8.333a2.083 2.083 0 0 1-2.083-2.083V20.833h37.5v20.834a2.083 2.083 0 0 1-2.083 2.083M43.75 12.5a2.083 2.083 0 0 0-2.083-2.083H8.333A2.083 2.083 0 0 0 6.25 12.5v8.333h37.5z\"/><path stroke=\"#344054\" d=\"M33.333 6.25v8.333M16.667 6.25v8.333\"/></g></svg><span></span>";dateRow.querySelector('span').textContent='รอบข้อมูล '+time(data.generated_at);
