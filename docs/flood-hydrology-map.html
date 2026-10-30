@@ -303,7 +303,7 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
 const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:true,gistda:false,boundary:true,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:true,gistda:false,boundary:true,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
 
 let historyOnly=false;
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
@@ -450,7 +450,7 @@ const boundaryService='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest
 let footprintIndexPromise=null,footprintEpoch=0,mappedBuildingFootprints=[];
 const footprintRequests=new Map();
 async function loadMappedFootprints(){
- const map=vector||raster;if(!map||map.getZoom()<10)return;
+ const map=vector||raster;if(!map||map.getZoom()<10||cleanDashboard&&$('estateView3d').getAttribute('aria-pressed')!=='true')return;
  const token=++footprintEpoch;const b=map.getBounds(),bbox=[b.getWest(),b.getSouth(),b.getEast(),b.getNorth()];
  $('estate3dState').textContent=' · กำลังโหลดแนวอาคารจากภาพถ่าย…';
  try{
@@ -467,7 +467,7 @@ async function loadMappedFootprints(){
 }
 function illustrativeEstateModels(features){
  const map=vector||raster;
- if(!map)return {type:'FeatureCollection',features:[]};
+ if(!map||cleanDashboard&&$('estateView3d').getAttribute('aria-pressed')!=='true')return {type:'FeatureCollection',features:[]};
  const b=map.getBounds();
  return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#e5e9ec'}}:f)};
 }
@@ -511,8 +511,8 @@ function syncRoundTreeGL(features){
 let estateOuterData={type:'FeatureCollection',features:[]},estateOuterPromise=null,estateOuterRaster=null,estateSelectionRaster=null;
 function syncEstateOuter(){
  if(!estateOuterPromise)estateOuterPromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=round-trees1',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{estateOuterData=d;syncEstateOuter()}).catch(()=>{estateOuterPromise=null});
- if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#7e9eae','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',flags.boundary?'visible':'none')}
- if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#7e9eae',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
+ if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#674188','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',flags.boundary?'visible':'none')}
+ if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#674188',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
 }
 function highlightEstateParcel(lon,lat){
  function inRing(r){let inside=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const a=r[i],b=r[j];if((a[1]>lat)!==(b[1]>lat)&&lon<(b[0]-a[0])*(lat-a[1])/(b[1]-a[1])+a[0])inside=!inside}return inside}
@@ -555,8 +555,8 @@ function syncIllustrativeModels(){
 
 function syncBoundaries(){
  syncEstateOuter();syncIllustrativeModels();
- if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#d6e5ef','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':0,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#afc0ca','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
- if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#afc0ca',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.55,fill:false,fillOpacity:0},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
+ if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#d6e5ef','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':0,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
+ if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#674188',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.55,fill:false,fillOpacity:0},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
 }
 function boundaryPopup(f){return '<div class="popup"><h3>'+esc(f.properties?.['นิคมอุตสาหกรรม']||'ขอบเขตนิคมอุตสาหกรรม')+'</h3><p>ขอบเขตพื้นที่/แปลงที่ดินจากชั้น e_PP · กนอ.</p><p>ยกขอบเขตเพื่อแสดงผล 3 มิติ ไม่ใช่อาคารหรือความสูงจริง</p><a target="_blank" rel="noopener" href="'+boundaryService+'">เปิดแหล่งข้อมูล</a>'+estateFloodPlan(f.properties?.['นิคมอุตสาหกรรม'])+'</div>';}
 $('estateExample3d').addEventListener('click',showEstateIllustrationExample);
@@ -720,7 +720,7 @@ function rasterStart(){
  rasterBaseLayer=L.tileLayer(basemapUrls[selectedBasemap],{attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true}).addTo(raster);
  L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
  groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
- ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
+ ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(!cleanDashboard&&map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
 }
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
@@ -747,7 +747,7 @@ function vectorStart(){
   vector.on('click','water-stations',openSensorPopup);
   vector.on('click','points',e=>{const p=e.features[0];createMapPopup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   ['water-stations','points'].forEach(id=>{vector.on('mouseenter',id,()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave',id,()=>vector.getCanvas().style.cursor='')});
-  ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
+  ready=true;document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(!cleanDashboard&&map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{phase++;if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase%2?[1,4]:[0,2,1,2])},500)}
   if(gistda)addGistda();addFlow();
  });
@@ -1110,7 +1110,7 @@ body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,bo
 .station-popup-details dt{color:#6c7b8b;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#25364a;font-size:12px;font-weight:600}
 .station-popup-footer{margin-top:12px;color:#6c7b8b;font-size:11px;line-height:1.7}.station-popup-footer a{color:#245c9d;font-weight:600}.station-popup-stale{color:#b34437;font-weight:600}
 .station-popup .station-history-disclosure{margin-top:10px}
-</style><script src="flood-map-details.js?v=20261029-modes1"></script><script src="flood-preparedness-overlay.js?v=20261029-icons2"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script></body></html>
+</style><script src="flood-map-details.js?v=20261029-modes1"></script><script src="flood-preparedness-overlay.js?v=20261030-overview"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script></body></html>
 
 
 
