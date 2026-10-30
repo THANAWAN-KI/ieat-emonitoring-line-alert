@@ -706,12 +706,22 @@ $('efFilter').onchange=()=>renderEstates();
  let reservoirs=[],reservoirStamp='',reservoirBusy=false,reservoirError='';
  function waterCardTheme(percent){return window.IEAT_WATER_STATUS.dam(percent)}
 
+
+ const waterPages={reservoir:{page:0,key:''},canal:{page:0,key:''}};
+ function waterPageRows(kind,rows){const state=waterPages[kind],key=(provinceScope.name||'all')+'|'+rows.map(r=>r.id).join('|');if(state.key!==key){state.key=key;state.page=0}state.page=Math.max(0,Math.min(state.page,rows.length-1));return rows.slice(state.page,state.page+1)}
+ function renderWaterPager(kind,host,rows,renderAgain){
+  const state=waterPages[kind],id=kind==='reservoir'?'ieatReservoirPager':'ieatCanalPager';
+  let pager=$(id);if(!pager){pager=document.createElement('nav');pager.id=id;pager.className='ieat-water-pager';pager.setAttribute('aria-label',kind==='reservoir'?'เปลี่ยนหน้าอ่างเก็บน้ำ':'เปลี่ยนหน้าคลอง กทม.');host.after(pager)}
+  pager.hidden=rows.length<=1;pager.innerHTML='<button type="button" data-water-page="-1" '+(state.page===0?'disabled':'')+'>‹ ก่อนหน้า</button><span aria-live="polite">'+(state.page+1)+' / '+rows.length+'</span><button type="button" data-water-page="1" '+(state.page>=rows.length-1?'disabled':'')+'>ถัดไป ›</button>';
+  pager.querySelectorAll('button').forEach(b=>b.onclick=()=>{state.page+=Number(b.dataset.waterPage);renderAgain()});
+ }
  function renderReservoirs(){
   const list=$('efReservoirList');if(!list)return;
   const latest=reservoirs.filter(r=>num(r.percent)!==null&&Number.isFinite(timestamp(r.measured_at))&&Date.now()-timestamp(r.measured_at)<=172800000&&timestamp(r.measured_at)<=Date.now()+300000);
   let rows=filterWaterScope(latest).sort((a,b)=>Number(b.percent)-Number(a.percent));if(!provinceScope.active)rows=rows.slice(0,8);
   const panel=list.closest('.ef-reservoir-panel');if(panel)panel.hidden=rows.length===0;
-  list.innerHTML=rows.length?rows.map(r=>{const p=num(r.percent),theme=waterCardTheme(p),color=theme.color,label=theme.label;return '<button type="button" class="ef-reservoir-row" data-water-theme="'+theme.key+'" style="--water-accent:'+color+'" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small>'+distanceLabel(r)+'</button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
+  list.innerHTML=rows.length?waterPageRows('reservoir',rows).map(r=>{const p=num(r.percent),theme=waterCardTheme(p),color=theme.color,label=theme.label;return '<button type="button" class="ef-reservoir-row" data-water-theme="'+theme.key+'" style="--water-accent:'+color+'" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div><div class="ef-reservoir-bar"><i style="width:'+Math.min(100,Math.max(0,p))+'%;background:'+color+'"></i></div><small>ข้อมูล '+esc(r.measured_at)+'</small>'+distanceLabel(r)+'</button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
+  renderWaterPager('reservoir',list,rows,renderReservoirs);
   $('efReservoirTime').textContent='แสดงเฉพาะข้อมูลตรวจวัดไม่เกิน 48 ชั่วโมง · แต่ละรายการระบุวันที่ตรวจวัด · ข้อมูลรายวัน · สัดส่วนน้ำต่อความจุปกติ · ThaiWater / กรมชลประทาน · โหลดใหม่ทุก 1 ชั่วโมง'+(reservoirError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงค่าครั้งก่อน':'');
  }
  async function loadReservoirs(){
@@ -755,16 +765,17 @@ $('efFilter').onchange=()=>renderEstates();
   const host=$('efCanalList');if(!host)return;
   let rows=filterWaterScope(canalRows).filter(r=>num(r.wl)!==null&&Date.now()-timestamp(r.measured_at)<=86400000&&timestamp(r.measured_at)<=Date.now()+300000).sort((a,b)=>(scopeDistance(a)??Infinity)-(scopeDistance(b)??Infinity));if(!provinceScope.active)rows=rows.slice(0,8);
   host.closest('.ef-canal-panel').hidden=false;
-  host.innerHTML=rows.map(r=>{
+  host.innerHTML=waterPageRows('canal',rows).map(r=>{
 
    const gap=r.bank===null?null:r.wl-r.bank,near=r.warning!==null&&r.wl>=r.warning;
    const condition=window.IEAT_WATER_STATUS.canal(r),color=condition.hex,label=condition.label;
    const lo=Math.min(0,r.wl,r.bank??0)-.2,hi=Math.max(2,r.wl,r.bank??0)+.5,y=v=>155-(v-lo)/(hi-lo)*130;
    const gauge='<svg viewBox="0 0 80 185" role="img" aria-label="มาตรวัดระดับน้ำ"><rect x="24" y="25" width="28" height="130" rx="1" fill="#FFFFFF" stroke="#0D47A1"/><rect x="25" y="'+y(r.wl)+'" width="26" height="'+Math.max(0,155-y(r.wl))+'" fill="#90CAF9"/>'+[0,1,2,3,4,5].map(i=>{const v=lo+(hi-lo)*i/5;return '<path d="M40 '+y(v)+' H51" stroke="#90CAF9"/><text x="17" y="'+(y(v)+3)+'" font-size="7" text-anchor="end" fill="#0D47A1">'+v.toFixed(1)+'</text>'}).join('')+(r.bank===null?'':'<path d="M16 '+y(r.bank)+' H61" stroke="#D9361E" stroke-width="1.5"/><text x="63" y="'+(y(r.bank)-3)+'" fill="#000000" font-size="6">ตลิ่ง</text>')+'<text x="38" y="169" font-size="6" text-anchor="middle" fill="#0D47A1">ม.รทก.</text></svg>';
-   return '<button type="button" class="ef-canal-card" data-canal-id="'+esc(r.id)+'"><b>'+esc(r.code)+' · '+esc(r.name)+'</b><div class="ef-canal-body"><div class="ef-canal-gauge">'+gauge+'</div><div class="ef-canal-content"><span class="ef-canal-status" style="background:'+color+'">'+label+'</span>'+distanceLabel(r)+'<small>'+esc(r.district)+' · กรุงเทพมหานคร</small><strong style="color:'+color+'">'+(gap===null?'ไม่มีระดับตลิ่ง':(gap>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+Math.abs(gap).toLocaleString('th-TH',{maximumFractionDigits:2})+' ม.')+'</strong><small>ระดับ '+r.wl.toLocaleString('th-TH',{maximumFractionDigits:2})+' ม.รทก.</small><small>อัปเดต '+esc(time(r.measured_at))+' · สำนักการระบายน้ำ กทม.</small></div></div></button>';
+   return '<button type="button" class="ef-canal-card" style="--water-accent:'+color+'" data-canal-id="'+esc(r.id)+'"><b>'+esc(r.code)+' · '+esc(r.name)+'</b><div class="ef-canal-body"><div class="ef-canal-gauge">'+gauge+'</div><div class="ef-canal-content"><span class="ef-canal-status" style="background:'+color+'">'+label+'</span>'+distanceLabel(r)+'<small>'+esc(r.district)+' · กรุงเทพมหานคร</small><strong style="color:'+color+'">'+(gap===null?'ไม่มีระดับตลิ่ง':(gap>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+Math.abs(gap).toLocaleString('th-TH',{maximumFractionDigits:2})+' ม.')+'</strong><small>ระดับ '+r.wl.toLocaleString('th-TH',{maximumFractionDigits:2})+' ม.รทก.</small><small>อัปเดต '+esc(time(r.measured_at))+' · สำนักการระบายน้ำ กทม.</small></div></div></button>';
 
   }).join('');
   if(!rows.length)host.innerHTML='<p>ไม่พบข้อมูลคลองล่าสุดในพื้นที่ที่เลือก'+(canalError?' · โหลดข้อมูลไม่สำเร็จ':'')+'</p>';
+  renderWaterPager('canal',host,rows,renderCanals);
   $('efCanalTime').textContent=(provinceScope.active?'คลองภายใน 30 กม. จากนิคมฯ ที่เลือก · เรียงใกล้ที่สุดก่อน · ':'')+'สำนักการระบายน้ำ กรุงเทพมหานคร ผ่าน Faonam · โหลดใหม่ทุก 1 ชั่วโมง'+(canalError?' · โหลดรอบใหม่ไม่สำเร็จ แสดงข้อมูลครั้งก่อน':'');
  }
  async function loadCanalsPanel(){
