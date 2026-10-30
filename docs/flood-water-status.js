@@ -1,8 +1,13 @@
 /* One status policy for station cards, map pins and detail panels. */
 (()=>{'use strict';
 const n=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
-const palette={red:'#B30707',orange:'#F09B4D',yellow:'#EBE700',green:'#21AD02',blue:'#99D3F0',lightBlue:'#E3F2FD',navy:'#0D47A1',lavender:'#C3ACD0',purple:'#674188',brown:'#0D47A1',gray:'#0D47A1'};
-const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],label,criterion});
+const statusPairs={
+ blue:['#99D3F0','#0A5378'],teal:['#99F0E7','#148C80'],green:['#21AD02','#165708'],
+ yellow:['#EBE700','#B5B204'],orange:['#F09B4D','#7A4310'],brown:['#CF6B08','#8A4A0A'],
+ red:['#B30707','#520707'],gray:['#E5E7EB','#667085']
+};
+const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#99D3F0',navy:'#0A5378',lavender:'#C3ACD0',purple:'#674188'};
+const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],background:statusPairs[key]?.[0]||palette[key],textColor:statusPairs[key]?.[1]||'#303841',label,criterion});
 const unknown=()=>state('gray','ไม่มีค่าหรือเกณฑ์เทียบ','ยังไม่จัดเป็นสถานการณ์ปกติ');
 function water(r){
  const wl=n(r.wl??r.waterlevel_msl),bank=n(r.bank??r.bankfull_msl);if(wl===null)return unknown();
@@ -72,7 +77,18 @@ const legendHTML=
  '<details><summary>ปริมาณฝนสะสม 24 ชั่วโมง · กรมอุตุนิยมวิทยา</summary>'+rainLegendHTML+'<small>ใช้ชื่อและช่วงค่าตามกรมอุตุนิยมวิทยา สีเป็นรูปแบบการแสดงผลของแดชบอร์ด ไม่ใช่สีทางการของหน่วยงาน; อ่านช่วงเวลาสะสมตามข้อมูลต้นทาง</small></details>'+ 
  '<p><b>คลอง กทม.</b> ใช้ warning_level / critical_level / bank ของแต่ละสถานี: เขียวต่ำกว่าเตือน ส้มถึงระดับเตือน แดงถึงระดับวิกฤตหรือตลิ่ง</p>'+
  '<small>เทา = ไม่มีค่า/เกณฑ์หรือข้อมูลเก่า ไม่นับเป็นระดับความรุนแรง กล้องใช้สีบอกความพร้อมของอุปกรณ์ แนวโน้มเพิ่ม–ลดแสดงแยกจากสีสถานะ<br>อ้างอิง: <a href="'+sourceRoot+'การแจ้งข่าวสาร/" target="_blank" rel="noopener">ThaiWater: ปริมาณน้ำ 5 ระดับ</a> · <a href="'+sourceRoot+'การแจ้งเตือนภัยเหตุการ/" target="_blank" rel="noopener">ThaiWater: เตือนน้ำล้นตลิ่ง 3 ระดับ</a> · <a href="https://www.tmd.go.th/info/เกณฑ์อากาศร้อน" target="_blank" rel="noopener">กรมอุตุฯ: เกณฑ์ปริมาณฝน 4 ระดับ</a></small>';
-window.IEAT_WATER_STATUS={water,canal,dam,rain,palette,legendHTML,rainClasses,rainLegendHTML};
+window.IEAT_WATER_STATUS={water,canal,dam,rain,palette,statusPairs,legendHTML,rainClasses,rainLegendHTML};
+const pairStyle=document.createElement('style');pairStyle.id='unified-water-status-pairs';
+const root='html body #warning '+'#estateFocusDashboard'.repeat(46);
+pairStyle.textContent=Object.values(statusPairs).map(([fill,ink])=>{
+ const card=root+' [style*="--rp-status-color:'+fill+'"]';
+ const water=root+' [style*="--water-accent:'+fill+'"]';
+ return card+' .rp-station-top em{background:'+fill+'!important;color:'+ink+'!important;border:1px solid '+ink+'!important}'+
+ card+' .rp-station-content strong{color:'+ink+'!important}'+
+ water+' .dam-inline-status,'+water+' .ef-canal-status,'+water+' .ef-reservoir-percent span{background:'+fill+'!important;color:'+ink+'!important;border:1px solid '+ink+'!important}'+
+ water+' .ef-dam-value,'+water+' .ef-reservoir-percent,'+water+' .ef-canal-content strong{color:'+ink+'!important}';
+}).join('');
+document.head.appendChild(pairStyle);
 const criteriaStyle=document.createElement('style');criteriaStyle.textContent='.water-criteria-table{width:100%;border-collapse:collapse;font-size:11px;margin:7px 0}.water-criteria-table th,.water-criteria-table td{text-align:left;padding:5px 6px;vertical-align:top}.water-criteria-table th{background:#f3f5f7}.water-criteria-table i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}#waterStatusGuide>details,#mapStatusKey details{padding:7px 0;border-bottom:1px solid #e8edf1}#waterStatusGuide>details>summary,#mapStatusKey details>summary{font-weight:600;cursor:pointer}#waterStatusGuide small,#mapStatusKey small{line-height:1.7}';document.head.appendChild(criteriaStyle);
 function guide(){const overview=document.querySelector('.flood-overview');if(!overview||document.getElementById('waterStatusGuide'))return;const el=document.createElement('details');el.id='waterStatusGuide';el.innerHTML='<summary>เกณฑ์สีสถานะ · ใช้ตรงกับหมุดแผนที่</summary>'+legendHTML;overview.appendChild(el)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',guide);else guide();
