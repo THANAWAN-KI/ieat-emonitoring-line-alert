@@ -25,7 +25,7 @@
  function fresh(r){const a=Date.now()-stamp(r.measured_at);return Number.isFinite(a)&&a>=-300000&&a<=21600000}
  function gap(r){return n(r.wl)!==null&&n(r.bank)!==null?r.wl-r.bank:null}
  function nearBank(r){const state=window.IEAT_WATER_STATUS.water(r);return state.key==='standard-orange'&&state.label.includes('ตลิ่ง')}
- function status(r){if(!fresh(r)||n(r.wl)===null)return ['#0D47A1','ไม่มีค่าล่าสุด'];const state=window.IEAT_WATER_STATUS.water(r);return [state.hex,state.label]}
+ function status(r){if(!fresh(r)||n(r.wl)===null)return ['#E5E7EB','ไม่มีค่าล่าสุด'];const state=window.IEAT_WATER_STATUS.water(r);return [state.hex,state.label]}
 
  function gapText(r){const g=gap(r);return g===null?'ไม่มีระดับตลิ่ง':(g>=0?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+fmt(Math.abs(g))+' ม.'}
  function focus(r){if(n(r.lat)===null||n(r.lng)===null)return;$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:Number(r.lat),lon:Number(r.lng),label:r.name,scale:75000,station:{...r,discharge:r.flow,source_name:r.source_name||'RID GeoJSON'}},location.origin)}
