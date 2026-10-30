@@ -125,6 +125,29 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 </style>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-diagrams.js?v=20261007-plans54-mobile3"></script><script src="flood-estate-plans-2569.js?v=20261007-plans54-mobile3"></script><style>.maplibregl-popup-content:has(.fp-estate),.leaflet-popup-content:has(.fp-estate){max-height:min(70vh,600px);overflow-y:auto;overscroll-behavior:contain}</style><link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
+<style id="ieat-flood-map-modern-purple-pins-20261030">
+/* Dashboard map only: restore meaningful purple pictograms in place of tiny dots. */
+body.dashboard-clean .flood-data-pin,
+body.dashboard-clean .sensor-marker,
+body.dashboard-clean .marker-icon{width:36px!important;height:44px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;overflow:visible!important}
+body.dashboard-clean .flood-data-pin .fd-pin-shape{position:absolute!important;left:3px!important;top:2px!important;width:30px!important;height:30px!important;border:2px solid #fff!important;border-radius:50% 50% 50% 0!important;transform:rotate(-45deg)!important;background:#823BC4!important;box-shadow:0 2px 9px #42205a48!important}
+body.dashboard-clean .flood-data-pin .fd-pin-icon{display:grid!important;place-items:center!important;width:26px!important;height:26px!important;transform:rotate(45deg)!important;color:#fff!important}
+body.dashboard-clean .flood-data-pin .fd-pin-icon svg,
+body.dashboard-clean .sensor-marker svg,
+body.dashboard-clean .marker-icon svg{display:block!important;width:19px!important;height:19px!important;visibility:visible!important;opacity:1!important;color:#fff!important}
+body.dashboard-clean .flood-data-pin .fd-pin-icon svg *{visibility:visible!important}
+body.dashboard-clean .flood-data-pin .fd-status{display:block!important}
+body.dashboard-clean .flood-data-pin .fd-flow-mini{display:grid!important;background:#823BC4!important}
+body.dashboard-clean .flood-data-pin .fd-pin-name{display:none!important}
+body.dashboard-clean .flood-data-pin:hover .fd-pin-name,
+body.dashboard-clean .flood-data-pin:focus-visible .fd-pin-name{display:block!important}
+body.dashboard-clean .estate-pin,
+body.dashboard-clean .clean-estate-point{background:transparent!important;border:0!important;box-shadow:none!important}
+body.dashboard-clean .estate-pin>svg,
+body.dashboard-clean .clean-estate-point>svg{display:block!important;visibility:visible!important}
+body.dashboard-clean .flood-point-cluster .flood-cluster-symbol{background:#823BC4!important}
+@media(max-width:600px){body.dashboard-clean .flood-data-pin .fd-pin-name{max-width:100px!important;font-size:10px!important}}
+</style>
 <style id="clean-dashboard-map-style">
 body.dashboard-clean .sensor-marker,body.dashboard-clean .marker-icon,body.dashboard-clean .estate-pin{width:8px!important;height:8px!important;border:1px solid #FFFFFF!important;border-radius:50%!important;box-shadow:none!important;padding:0!important;min-width:0!important;min-height:0!important}
 body.dashboard-clean .estate-pin{background:#D9361E!important}
