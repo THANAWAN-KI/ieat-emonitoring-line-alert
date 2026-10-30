@@ -1,7 +1,7 @@
 /* One status policy for station cards, map pins and detail panels. */
 (()=>{'use strict';
 const n=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
-const palette={red:'#D9361E',orange:'#F5B52E',yellow:'#FFD16A',green:'#4F7D32',blue:'#2196F3',lightBlue:'#E3F2FD',navy:'#0D47A1',lavender:'#C3ACD0',purple:'#674188',brown:'#674188',gray:'#C3ACD0'};
+const palette={red:'#D9361E',orange:'#F5B52E',yellow:'#FFD16A',green:'#4F7D32',blue:'#2196F3',lightBlue:'#E3F2FD',navy:'#0D47A1',lavender:'#C3ACD0',purple:'#674188',brown:'#0D47A1',gray:'#0D47A1'};
 const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],label,criterion});
 const unknown=()=>state('gray','ไม่มีค่าหรือเกณฑ์เทียบ','ยังไม่จัดเป็นสถานการณ์ปกติ');
 function water(r){
