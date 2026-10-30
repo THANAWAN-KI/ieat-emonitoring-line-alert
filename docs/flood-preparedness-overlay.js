@@ -21,7 +21,7 @@ const style=document.createElement('style');style.textContent=`
 .prep-feature.left .prep-name{left:auto;right:40px}.prep-feature.prep-hidden{display:none}
 .prep-feature button:focus-visible{outline:3px solid #9072b8;outline-offset:2px}
 `;document.head.appendChild(style);
-let mode={active:true,estate:'บางปะอิน'},context=null,markers=[],outline=null,rasterOutline=null,outlinePromise=null,parentSeen=false,needsFocus=true,timer=null;
+let mode={active:new URLSearchParams(location.search).get('dashboard')!=='clean',estate:'บางปะอิน'},context=null,markers=[],outline=null,rasterOutline=null,outlinePromise=null,parentSeen=false,needsFocus=true,timer=null;
 const active=()=>mode.active&&mode.estate.includes('บางปะอิน');
 function svg(kind,color){return '<svg viewBox="0 0 36 44" aria-hidden="true"><path d="M18 43C14 36 2 28 2 18a16 16 0 1 1 32 0c0 10-12 18-16 25Z" fill="'+color+'" stroke="white" stroke-width="2"/><circle cx="18" cy="18" r="12" fill="white"/><g transform="translate(8 8) scale(.84)" fill="none" stroke="'+color+'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+window.IEAT_ICONS.paths[kind]+'</g></svg>'}
 function mount(item,kind,name,color,id){
