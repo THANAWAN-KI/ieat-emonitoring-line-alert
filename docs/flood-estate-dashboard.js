@@ -85,7 +85,7 @@
 
  function scopedModel(m){
   if(headerEstate)return m;
-  if(!riverScope)return {...m,estates:[],watch:[]};
+  if(!riverScope)return m;
   const stations=riverScope.stations.filter(point),estates=m.estates.map(e=>({...e,riverDistance:stations.length?Math.min(...stations.map(r=>km(e,r))):Infinity})).filter(e=>e.riverDistance<=RADIUS);
   const ids=new Set(estates.map(e=>String(e.id))),distance=new Map(estates.map(e=>[String(e.id),e.riverDistance]));
   const watch=m.watch.filter(e=>ids.has(String(e.id))).map(e=>{
@@ -603,27 +603,22 @@ $('efFilter').onchange=()=>renderEstates();
  }
 
 
+
  function renderOverviewCharts(m,data){
   const overview=document.querySelector('.flood-overview');if(!overview)return;
   let filter=$('ieatOverviewFilter');
   if(!filter){
    filter=document.createElement('section');filter.id='ieatOverviewFilter';filter.className='ieat-summary-card';
-   filter.innerHTML='<label for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><form><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="พิมพ์ชื่อนิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button></form><p role="status"></p><small>ข้อมูลรอบล่าสุด · สถานีภายในระยะ 30 กม. จากนิคมฯ</small>';
+   filter.innerHTML='<h2 style="font-size:20px;margin:0 0 12px">ภาพรวมสถานการณ์น้ำ</h2><label for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><form><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="ทุกนิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button><button type="button" id="ieatAllEstates">ทั้งหมด</button></form><p role="status"></p><small></small>';
    overview.prepend(filter);
-   filter.querySelector('form').onsubmit=e=>{e.preventDefault();const q=$('ieatOverviewSearch').value.trim();const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(q));if(!estate){filter.querySelector('p').textContent='กรุณาเลือกชื่อนิคมฯ จากรายการ';return}applyHeaderEstate(estate.name)};
-   $('ieatOverviewSearch').onchange=()=>{const q=$('ieatOverviewSearch').value;const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(q));if(estate)applyHeaderEstate(estate.name)};
+   const search=()=>{const q=$('ieatOverviewSearch').value.trim();if(!q){applyHeaderEstate('');return}const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(q));if(!estate){filter.querySelector('p').textContent='กรุณาเลือกชื่อนิคมฯ จากรายการ';return}applyHeaderEstate(estate.name)};
+   filter.querySelector('form').onsubmit=e=>{e.preventDefault();search()};
+   $('ieatOverviewSearch').onchange=search;
+   $('ieatAllEstates').onclick=()=>applyHeaderEstate('');
   }
   if(document.activeElement!==$('ieatOverviewSearch'))$('ieatOverviewSearch').value=headerEstate;
-  filter.querySelector('p').textContent=headerEstate||'ทุกนิคมอุตสาหกรรม';
-  let charts=$('ieatOverviewCharts');if(!charts){charts=document.createElement('div');charts.id='ieatOverviewCharts';overview.append(charts)}
-  const rows=m.water.slice().filter(r=>num(r.bankfull_msl)!==null).sort((a,b)=>(Number(b.waterlevel_msl)-Number(b.bankfull_msl))-(Number(a.waterlevel_msl)-Number(a.bankfull_msl)));
-  const pages=Math.max(1,Math.ceil(rows.length/5));let page=Math.min(Number(charts.dataset.page||0),pages-1);charts.dataset.page=page;
-  const colors=['#306BEC','#609EF0','#A3C8FA','#C5DCFC','#E5EFFD'];
-  const max=Math.max(1,...rows.map(r=>Math.abs(Number(r.waterlevel_msl)-Number(r.bankfull_msl))));
-  const wet=m.water.filter(r=>Number(r.severity_score)>=2).length,normal=m.water.length-wet,total=m.water.length;
-  charts.innerHTML='<section class="ieat-summary-card"><h3>ระดับน้ำเทียบตลิ่ง <b>'+rows.length.toLocaleString('th-TH')+'</b> สถานี</h3><small>ส่วนต่างระดับน้ำ (เมตร) · ค่าบวก = สูงกว่าตลิ่ง</small><div class="ieat-water-bars">'+(rows.length?rows.slice(page*5,page*5+5).map((r,i)=>{const gap=Number(r.waterlevel_msl)-Number(r.bankfull_msl);return '<div class="ieat-water-row"><span title="'+esc(r.station||r.name)+'">'+esc(r.station||r.name)+'</span><i><em style="width:'+Math.max(2,Math.abs(gap)/max*100)+'%;background:'+colors[i]+'"></em></i><b>'+ (gap>0?'+':'')+gap.toFixed(2)+'</b></div>'}).join(''):'<p>ไม่มีข้อมูลระดับน้ำและตลิ่งที่ผ่านเกณฑ์เวลาในพื้นที่นี้</p>')+'</div><div class="ieat-chart-pager"><button type="button" data-page="-1" '+(page===0?'disabled':'')+'>‹</button><span>หน้า '+(page+1)+' / '+pages+'</span><button type="button" data-page="1" '+(page===pages-1?'disabled':'')+'>›</button></div></section>'+
-  '<section class="ieat-summary-card"><h3>สถานะสถานีระดับน้ำ <b>'+total+'</b> สถานี</h3><div class="ieat-pie-content">'+(total?'<div class="ieat-status-pie" role="img" aria-label="เข้าเกณฑ์เฝ้าระวัง '+wet+' สถานี และไม่เข้าเกณฑ์ '+normal+' สถานี" style="background:conic-gradient(#306BEC 0 '+(wet/total*100)+'%,#A3C8FA '+(wet/total*100)+'% 100%)"></div>':'<p>ยังไม่มีข้อมูลพร้อมสรุป</p>')+'<div class="ieat-pie-legend"><p><i style="background:#306BEC"></i>เข้าเกณฑ์เฝ้าระวัง <b>'+wet+'</b></p><p><i style="background:#A3C8FA"></i>ไม่เข้าเกณฑ์ <b>'+normal+'</b></p></div></div><small>คัดกรองจากสถานีใกล้นิคมฯ ตามเกณฑ์เดิมของระบบ ไม่ใช่จำนวนบ้านหรือพื้นที่น้ำท่วม</small></section>';
-  charts.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{charts.dataset.page=page+Number(b.dataset.page);renderOverviewCharts(m,data)});
+  filter.querySelector('p').textContent=headerEstate||'ทุกนิคมอุตสาหกรรมทั่วประเทศ';
+  filter.querySelector('small').textContent='นิคมฯ ในพื้นที่ที่เลือก '+m.estates.length+' แห่ง · '+(m.usable?'ประเมินจากสถานีภายใน 30 กม. ตามเกณฑ์เดิมของระบบ':'ข้อมูลยังไม่พร้อมสรุปสถานการณ์');
  }
 
  function render(data){
@@ -763,7 +758,7 @@ $('efFilter').onchange=()=>renderEstates();
    const preferred=estates.find(e=>/บางปะอิน/.test(e.name)&&score(e)>0);
    const example=preferred||estates.slice().sort((a,b)=>score(b)-score(a)||String(a.name).localeCompare(String(b.name),'th'))[0];
    expoExample=example.name;
-   if(!headerEstate){const requested=estates.find(e=>String(e.id)===selected||estateKey(e.name)===estateKey(selected));headerEstate=(requested||example).name;selected=String((requested||example).id);}
+   if(!headerEstate&&selected){const requested=estates.find(e=>String(e.id)===selected||estateKey(e.name)===estateKey(selected));if(requested){headerEstate=requested.name;selected=String(requested.id);}}
   }
   expoRender();
  }
