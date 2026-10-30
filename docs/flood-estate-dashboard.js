@@ -648,13 +648,13 @@ $('efFilter').onchange=()=>renderEstates();
   if(!filter){
    filter=document.createElement('section');filter.id='ieatOverviewFilter';filter.className='ieat-summary-card';
 
-   filter.innerHTML='<div class="io-area"><span>พื้นที่ทั้งหมด</span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><button id="ioEstatePicker" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ioEstatePanel"><span class="io-picker-label">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
+   filter.innerHTML='<div class="io-area"><span class="io-area-title" style="display:inline-flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;flex-shrink:0"><title>map-outline</title><path fill="#2196F3" d="m15 19.923l-6-2.1l-3.958 1.53q-.384.143-.713-.083T4 18.634V6.404q0-.268.13-.489t.378-.307L9 4.077l6 2.1l3.958-1.53q.384-.143.713.054t.329.588v12.384q0 .287-.159.498q-.158.212-.426.298zm-.5-1.22v-11.7l-5-1.745v11.7zm1 0L19 17.55V5.7l-3.5 1.304zM5 18.3l3.5-1.342v-11.7L5 6.45zM15.5 7.004v11.7zm-7-1.746v11.7z"/></svg><span class="io-area-text">พื้นที่ทั้งหมด</span></span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><button id="ioEstatePicker" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ioEstatePanel"><span class="io-picker-label">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
    overview.prepend(filter);
    $('ioEstatePicker').onclick=()=>openEstatePicker();
    $('ieatAllEstates').onclick=()=>applyHeaderEstate('');
   }
   $('ioEstatePicker').querySelector('.io-picker-label').textContent=headerEstate||'เลือกนิคมอุตสาหกรรม';
-  filter.querySelector('.io-area>span').textContent=headerEstate?'พื้นที่ที่เลือก':'พื้นที่ทั้งหมด';
+  filter.querySelector('.io-area-text').textContent=headerEstate?'พื้นที่ที่เลือก':'พื้นที่ทั้งหมด';
   filter.querySelector('p').textContent='';filter.querySelector('p').hidden=true;
   const dateRow=filter.querySelector('.io-date');dateRow.innerHTML="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 50 50\" aria-hidden=\"true\" style=\"width:24px;height:24px;flex-shrink:0\"><title>date</title><g fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path stroke=\"#306CFE\" d=\"M41.667 43.75H8.333a2.083 2.083 0 0 1-2.083-2.083V20.833h37.5v20.834a2.083 2.083 0 0 1-2.083 2.083M43.75 12.5a2.083 2.083 0 0 0-2.083-2.083H8.333A2.083 2.083 0 0 0 6.25 12.5v8.333h37.5z\"/><path stroke=\"#344054\" d=\"M33.333 6.25v8.333M16.667 6.25v8.333\"/></g></svg><span></span>";dateRow.querySelector('span').textContent='รอบข้อมูล '+time(data.generated_at);
   let charts=$('ieatOverviewCharts');if(!charts){charts=document.createElement('div');charts.id='ieatOverviewCharts';overview.append(charts)}
