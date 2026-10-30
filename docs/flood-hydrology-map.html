@@ -288,8 +288,8 @@ body.dashboard-clean .flood-point-cluster .flood-cluster-symbol{background:#823B
 </style>
 </head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
-<div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>120</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="120" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#0D47A1"/><path d="M12 2V20L4 25Z" fill="#90CAF9"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
-<label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="gray">แผนที่พื้นเรียบสีเทา + อาคาร 3 มิติ</option><option value="satellite">ภาพดาวเทียม + อาคาร 3 มิติ</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
+<div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>45</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="45" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#0D47A1"/><path d="M12 2V20L4 25Z" fill="#90CAF9"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
+<label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="gray">แผนที่ภูมิประเทศโทนอ่อน + อาคาร 3 มิติ</option><option value="satellite">ภาพดาวเทียม + อาคาร 3 มิติ</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
 <label><input data-layer="canal" type="checkbox" checked>คลอง กทม.<span class="layer-swatch" style="background:#089a9b" aria-hidden="true"></span></label><label><input data-layer="water" type="checkbox" checked>ระดับน้ำ<span class="layer-swatch" style="background:#2677ca" aria-hidden="true"></span></label><label class="history-only-label"><input id="historyOnly" type="checkbox">แสดงเฉพาะสถานีที่มีข้อมูลย้อนหลัง 2023–2026<span class="layer-swatch" style="background:#2196F3" aria-hidden="true"></span></label><label><input data-layer="rings" type="checkbox" checked>ปริมาณน้ำไหล<span class="layer-swatch" style="background:#2196F3" aria-hidden="true"></span></label><label><input data-layer="flow" type="checkbox" checked>ลูกศรทิศทางน้ำ<span class="layer-swatch" style="background:#2196F3" aria-hidden="true"></span></label>
 <label><input data-layer="dam" type="checkbox" checked>เขื่อน<span class="layer-swatch" style="background:#d58b1a" aria-hidden="true"></span></label><label><input data-layer="camera" type="checkbox" checked>CCTV ริมน้ำ<span class="layer-swatch" style="background:#8064c6" aria-hidden="true"></span></label><label><input data-layer="boundary" type="checkbox" checked>ขอบเขตนิคมฯ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="estate" type="checkbox" checked>นิคมฯ<span class="layer-swatch" style="background:#0D47A1" aria-hidden="true"></span></label><label><input data-layer="satellite" type="checkbox" checked>น้ำท่วมจากดาวเทียม<span class="layer-swatch" style="background:#2196F3" aria-hidden="true"></span></label><label><input data-layer="radar" type="checkbox" checked>ฝนจากเรดาร์ (กรมอุตุฯ)<span class="layer-swatch" style="background:#47A992" aria-hidden="true"></span></label>
 <p style="font-size:11px;color:#0D47A1;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#FFFFFF;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#D9361E"></i>ล้นตลิ่ง / ระดับสูงสุด</span><span><i class="dot" style="background:#F5B52E"></i>ระดับสูง / ใกล้ตลิ่ง</span><span><i class="dot" style="background:#FFD16A"></i>เฝ้าระวังตามเกณฑ์ต้นทาง</span><span><i class="dot" style="background:#4F7D32"></i>ปกติ / ต่ำกว่าเกณฑ์</span><span><i class="dot" style="background:#C3ACD0"></i>ไม่มีค่าล่าสุด</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#90CAF9"></i><i style="background:#90CAF9"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#90CAF9"></i><i style="background:#E3F2FD"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
@@ -308,7 +308,7 @@ const cameraSvg=window.IEAT_ICONS.svg('camera');let cameraMarkers=[];
 let waterMarkers=[];let damMarkers=[];let estateMarkers=[];let waterways=null;
 let riverSvgRenderer=null;
 
-const basemapUrls={satellite:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',gray:'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'};
+const basemapUrls={satellite:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',gray:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'};
 let selectedBasemap='gray',rasterBaseLayer=null;
 function chooseBasemap(value){
  selectedBasemap=value==='gray'?'gray':'satellite';
@@ -336,20 +336,21 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
 const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:true,gistda:false,boundary:true,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:false,gistda:false,boundary:false,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
 
 let historyOnly=false;
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
-function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?72:6)*3600000||Boolean(r.stale)}
+function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?48:k==='rain'?24:6)*3600000||Boolean(r.stale)}
 
 function pointCondition(r,k){
- const state=(hex,label,criterion)=>({hex,label,criterion});
+ const state=(hex,label,criterion)=>({hex,textColor:hex==='#E5E7EB'?'#667085':hex==='#674188'?'#674188':'#0A5378',label,criterion});
  if(k==='camera')return r.reported_online===true?state('#2196F3','กล้องต้นทางแจ้งพร้อมใช้งาน','เป็นสถานะกล้อง ไม่ใช่เกณฑ์น้ำท่วม; ตรวจเวลาภาพในรายละเอียด'):state('#C3ACD0','กล้องไม่พร้อม / ไม่ระบุสถานะ','ไม่ใช้สถานะกล้องแทนความเสี่ยงน้ำท่วม');
  if(k==='estate')return state('#674188','นิคมอุตสาหกรรม','ตำแหน่งอ้างอิง กนอ.');
- if(old(r,k))return state('#C3ACD0','ข้อมูลเก่าหรือเวลาไม่ครบ','ตรวจเวลาตรวจวัดก่อนใช้ข้อมูล');
+ if(old(r,k))return state('#E5E7EB','ข้อมูลเก่าหรือเวลาไม่ครบ','ตรวจเวลาตรวจวัดก่อนใช้ข้อมูล');
  if(k==='water')return window.IEAT_WATER_STATUS.water(r);
  if(k==='canal')return window.IEAT_WATER_STATUS.canal(r);
  if(k==='dam')return window.IEAT_WATER_STATUS.dam(r.percent);
+ if(k==='rain')return window.IEAT_WATER_STATUS.rain(r.rain);
  return state('#2196F3','ข้อมูลประกอบ','ยังไม่มีเกณฑ์เฉพาะ');
 }
 function color(r,k){return pointCondition(r,k).hex}
@@ -461,11 +462,11 @@ function baseContent(r,k){
 const floodPinTypes={water:{label:'ระดับน้ำ',color:'#2677ca'},canal:{label:'คลอง กทม.',color:'#089a9b'},dam:{label:'เขื่อน / อ่างเก็บน้ำ',color:'#d58b1a'},camera:{label:'CCTV ริมน้ำ',color:'#8064c6'}};
 function dataPinHTML(r,k){
  const type=floodPinTypes[k],state=pointCondition(r,k),icon=k==='camera'?cameraSvg:k==='dam'?damSvg:sensorSvg(k);
- return '<span class="fd-pin-shape" title="'+esc(state.label)+'" style="--pin-ink:'+(state.hex==='#E9B52A'?'#83620f':state.hex)+';background:'+state.hex+'"><span class="fd-pin-icon" style="color:'+(state.hex==='#E9B52A'?'#594a20':'white')+'">'+icon+'</span></span>'+((k==='water'&&flags.rings&&r.discharge!=null&&Number(r.discharge)>0)?'<span class="fd-flow-mini" title="อัตราน้ำไหลผ่าน '+esc(r.discharge)+' ลบ.ม./วินาที">'+sensorSvg('flow')+'</span>':'')+'<span class="fd-pin-name">'+esc(r.name||'')+'</span>';
+ return '<span class="fd-pin-shape" title="'+esc(state.label)+'" style="--pin-ink:'+(state.textColor||'#303841')+';background:'+state.hex+'"><span class="fd-pin-icon" style="color:'+(state.textColor||'#303841')+'">'+icon+'</span></span>'+((k==='water'&&flags.rings&&r.discharge!=null&&Number(r.discharge)>0)?'<span class="fd-flow-mini" title="อัตราน้ำไหลผ่าน '+esc(r.discharge)+' ลบ.ม./วินาที">'+sensorSvg('flow')+'</span>':'')+'<span class="fd-pin-name">'+esc(r.name||'')+'</span>';
 }
 function content(r,k){
  if(!floodPinTypes[k])return baseContent(r,k);
- const t=floodPinTypes[k],title=esc([r.code,r.name].filter(Boolean).join(' · '));
+ const t={...floodPinTypes[k],color:pointCondition(r,k).hex},title=esc([r.code,r.name].filter(Boolean).join(' · '));
  if(k==='camera')return '<article class="popup flood-card" style="--fc-color:'+t.color+'"><div data-camera-id="'+esc(r.id)+'"><div class="fc-preview fc-camera"><span class="fc-image-badge">ภาพล่าสุดจากต้นทาง</span><div class="fc-placeholder">'+cameraSvg+'<span>กำลังขอภาพ CCTV</span></div><img data-camera-image alt="ภาพ CCTV '+esc(r.name)+'" style="display:none"></div><div class="fc-title"><div><small>'+t.label+'</small><h3>'+title+'</h3></div><a href="https://telemetry.dwr.go.th/reportCctv" target="_blank" rel="noopener">เปิด ↗</a></div><div class="fc-caption"><p data-camera-time>กำลังโหลดภาพล่าสุด…</p><p data-camera-state></p><p>ภาพนิ่งที่ต้นทางบันทึก · ไม่ใช่วิดีโอสด</p><button type="button" data-camera-refresh="'+esc(r.id)+'">อัปเดตภาพ</button></div></div></article>';
  const value=k==='dam'?fmt(r.percent)+'%':fmt(r.wl)+' <small>ม.รทก.</small>';
  const sub=k==='dam'?'ปริมาณน้ำเทียบระดับเก็บกักปกติ':k==='canal'?'ระดับน้ำในคลอง':'ระดับน้ำตรวจวัด';
@@ -475,7 +476,7 @@ function content(r,k){
 
 function waterLabel(r){const gap=Number(r.diff);return (r.code||r.name||'สถานี')+'\n'+(r.diff==null?'ไม่มีค่าเทียบตลิ่ง':(gap>=0?'สูงกว่าตลิ่ง':'ต่ำกว่าตลิ่ง')+'\n'+fmt(Math.abs(gap))+' ม.');}
 
-let estateDepth=120;
+let estateDepth=45;
 let boundaryData={type:'FeatureCollection',features:[]},boundaryLayer=null,boundaryTimer=null,boundaryAbort=null,boundaryVersion=0;
 const boundaryService='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP/FeatureServer/0';
 // Deterministic decorative geometry, clipped to parcel polygons. Not surveyed buildings.
@@ -502,7 +503,7 @@ function illustrativeEstateModels(features){
  const map=vector||raster;
  if(!map||cleanDashboard&&$('estateView3d').getAttribute('aria-pressed')!=='true')return {type:'FeatureCollection',features:[]};
  const b=map.getBounds();
- return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#e5e9ec'}}:f)};
+ return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#A7AAAD'}}:f)};
 }
 
 // Software-rendered isometric overlay keeps illustrative volumes visible without WebGL.
@@ -543,6 +544,7 @@ function syncRoundTreeGL(features){
 }
 let estateOuterData={type:'FeatureCollection',features:[]},estateOuterPromise=null,estateOuterRaster=null,estateSelectionRaster=null;
 function syncEstateOuter(){
+ if(cleanDashboard&&!flags.boundary){if(vector?.getLayer('estate-outer-line'))vector.setLayoutProperty('estate-outer-line','visibility','none');if(raster&&estateOuterRaster){raster.removeLayer(estateOuterRaster);estateOuterRaster=null}return}
  if(!estateOuterPromise)estateOuterPromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=round-trees1',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{estateOuterData=d;syncEstateOuter()}).catch(()=>{estateOuterPromise=null});
  if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#674188','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',flags.boundary?'visible':'none')}
  if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#674188',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
@@ -596,7 +598,7 @@ $('estateExample3d').addEventListener('click',showEstateIllustrationExample);
 $('estateParcelVisibility').addEventListener('change',syncBoundaries);
 $('estateTreeVisibility').addEventListener('change',()=>{syncIllustrativeModels();});
 $('estateDepth').addEventListener('input',()=>{estateDepth=Number($('estateDepth').value);queueRasterIllustrations();if(vector&&ready)updateRoundTreeGL(illustrativeEstateModels(boundaryData.features).features);$('estateDepthValue').textContent=estateDepth;if(vector?.getLayer('estate-illustration')){vector.setPaintProperty('estate-illustration','fill-extrusion-height',['*',['get','height'],estateDepth/45]);vector.setPaintProperty('estate-illustration','fill-extrusion-base',['*',['get','base'],estateDepth/45]);}});
-$('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
+$('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
 function queueBoundaries(){clearTimeout(boundaryTimer);if(flags.boundary&&ready)boundaryTimer=setTimeout(loadBoundaries,350);else if(!flags.boundary){boundaryAbort?.abort();boundaryVersion++;}}
 async function loadBoundaries(){
  if(!flags.boundary||!ready)return;loadMappedFootprints();boundaryAbort?.abort();boundaryAbort=new AbortController();const version=++boundaryVersion,signal=boundaryAbort.signal,b=(vector||raster).getBounds(),zoom=(vector||raster).getZoom();
@@ -618,6 +620,7 @@ function nearbyEstate(f){
  return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=(estateProvinceScope.radiusKm||30);
 }
 function scoped(){
+ if(cleanDashboard&&!estateProvinceScope?.active&&!watchMapData)return [];
  const province=$('province').value;
  const base=features.filter(f=>flags[f.properties.kind]&&(estateProvinceScope?.active?(f.properties.kind==='estate'?f.properties.name===estateProvinceScope.name:nearbyEstate(f)):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)));
  const visible=watchMapData?base.filter(f=>watchMapData.estates.some(e=>f.properties.kind==='estate'?e.name===f.properties.name:e.stations.some(r=>r.name===f.properties.name||String(r.id)===String(f.properties.code||f.properties.id)))):base;
@@ -644,7 +647,7 @@ function drawOverviewClusters(clusters){
  for(const rows of clusters){
  const r=rows[0].properties,lat=rows.reduce((s,f)=>s+f.geometry.coordinates[1],0)/rows.length,lng=rows.reduce((s,f)=>s+f.geometry.coordinates[0],0)/rows.length;
  const clusterIcon=r.kind==='estate'?estateSvg:r.kind==='dam'?damSvg:r.kind==='camera'?cameraSvg:sensorSvg(r.kind==='canal'?'canal':'water');
- const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#674188':(['#D9361E','#F5B52E','#FFD16A','#674188','#2196F3','#4F7D32','#C3ACD0'].find(c=>colors.includes(c))||'#647887');
+ const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#674188':(['#B30707','#EBE700','#FFD16A','#674188','#2196F3','#21AD02','#C3ACD0'].find(c=>colors.includes(c))||'#647887');
  const html='<span class="flood-cluster-symbol" style="background:'+clusterColor+'">'+clusterIcon+'<b>'+rows.length+'</b></span><small class="fd-cluster-label">'+esc(labels[r.kind]||'สถานี')+'</small>';
  const title=rows.length+' '+(labels[r.kind]||'สถานี')+' · คลิกเพื่อซูม';
  const zoom=()=>{const coords=rows.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:55,maxZoom:12,duration:400})}else raster.fitBounds(coords.map(p=>[p[1],p[0]]),{padding:[40,40],maxZoom:12});};
@@ -686,8 +689,8 @@ function render(){
  }else if(raster){
   Object.values(groups).forEach(g=>g.clearLayers());
   displayPoints.forEach(f=>{const r=f.properties,k=r.kind;
-   if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#D9361E':'#2196F3',weight:2,fillColor:r.diff>=0?'#D9361E':'#90CAF9',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
-   if(k==='water'&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#D9361E',weight:1.5,fillColor:'#D9361E',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
+   if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#B30707':'#2196F3',weight:2,fillColor:r.diff>=0?'#B30707':'#90CAF9',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
+   if(k==='water'&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#B30707',weight:1.5,fillColor:'#B30707',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
    const marker=floodPinTypes[k]?L.marker([r.lat,r.lng],{zIndexOffset:500,title:floodPinTypes[k].label+' · '+r.name,icon:L.divIcon({className:'flood-data-pin',iconSize:[36,48],iconAnchor:[18,46],tooltipAnchor:[0,-42],popupAnchor:[0,-42],html:dataPinHTML(r,k)})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[42,56],iconAnchor:[21,54],tooltipAnchor:[0,-45],html:estateSvg})}):L.circleMarker([r.lat,r.lng],{radius:5,color:'#FFFFFF',weight:1.8,fillColor:r.color,fillOpacity:.95});
    marker.bindTooltip(esc(r.name||''),{permanent:false,direction:'top',offset:[0,-38]}).addTo(groups.points);marker.on('click',()=>showMapDetails(r,k));
   });
@@ -715,13 +718,13 @@ function showExecutiveFocus(d){
  if(vector){
   if(!vector.getSource('executive-links')){
    vector.addSource('executive-links',{type:'geojson',data:collection});
-   vector.addLayer({id:'executive-distance',type:'line',source:'executive-links',filter:['==',['get','kind'],'distance'],paint:{'line-color':'#D9361E','line-width':2.5,'line-dasharray':[2,2]}});
+   vector.addLayer({id:'executive-distance',type:'line',source:'executive-links',filter:['==',['get','kind'],'distance'],paint:{'line-color':'#B30707','line-width':2.5,'line-dasharray':[2,2]}});
    vector.addLayer({id:'executive-river',type:'line',source:'executive-links',filter:['==',['get','kind'],'river'],paint:{'line-color':'#2196F3','line-width':8}});
   }else vector.getSource('executive-links').setData(collection);
   targets.slice(1).forEach(p=>{const el=document.createElement('div');el.className='marker-icon';el.style.background='#0D47A1';el.style.position='absolute';el.innerHTML=(p.kind==='dam'?damSvg:sensorSvg('water'))+'<span class="estate-name" style="color:#0D47A1;border-color:#90CAF9">'+esc(p.label||'จุดที่เกี่ยวข้อง')+'</span>';executiveMarkers.push(new maplibregl.Marker({element:el}).setLngLat([Number(p.lon),Number(p.lat)]).addTo(vector));});
   const bounds=new maplibregl.LngLatBounds();bounds.extend(origin);targets.forEach(p=>bounds.extend([Number(p.lon),Number(p.lat)]));if(!d.estateZoom)vector.fitBounds(bounds,{padding:{top:180,bottom:80,left:65,right:65},maxZoom:13,duration:800});
  }else if(raster){
-  executiveRasterLayer=L.layerGroup().addTo(raster);L.geoJSON(collection,{style:f=>f.properties.kind==='river'?{color:'#2196F3',weight:8}:{color:'#D9361E',weight:3,dashArray:'6 6'}}).addTo(executiveRasterLayer);
+  executiveRasterLayer=L.layerGroup().addTo(raster);L.geoJSON(collection,{style:f=>f.properties.kind==='river'?{color:'#2196F3',weight:8}:{color:'#B30707',weight:3,dashArray:'6 6'}}).addTo(executiveRasterLayer);
   targets.slice(1).forEach(p=>L.circleMarker([p.lat,p.lon],{radius:9,color:'#FFFFFF',weight:2,fillColor:'#0D47A1',fillOpacity:1}).bindTooltip(esc(p.label||'จุดที่เกี่ยวข้อง'),{permanent:true,direction:'top'}).addTo(executiveRasterLayer));
   if(!d.estateZoom)raster.fitBounds([origin.slice().reverse(),...targets.map(p=>[p.lat,p.lon])],{paddingTopLeft:[60,180],paddingBottomRight:[60,80],maxZoom:13});
  }
@@ -758,7 +761,7 @@ function rasterStart(){
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
  try{
- vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray'}]},center:[101,14],zoom:6,pitch:55,bearing:-15,preserveDrawingBuffer:true,attributionControl:true});
+ vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray'}]},center:[101,14],zoom:6,pitch:cleanDashboard?0:55,bearing:cleanDashboard?0:-15,preserveDrawingBuffer:true,attributionControl:true});
  vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
@@ -770,8 +773,8 @@ function vectorStart(){
   if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#418DBA');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,2.5,9,4.5,13,8])}
 
   vector.addSource('sensors',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-  vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,22],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#D9361E','#90CAF9'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#D9361E','#2196F3'],'circle-stroke-width':1.4}});
-  vector.addLayer({id:'overflow-alert',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>=',['coalesce',['get','diff'],-999],0],['==',['get','stale'],false]],paint:{'circle-radius':11,'circle-color':'#D9361E','circle-opacity':.1,'circle-stroke-color':'#D9361E','circle-stroke-width':1.5,'circle-stroke-opacity':1}});
+  vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,22],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#B30707','#90CAF9'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#B30707','#2196F3'],'circle-stroke-width':1.4}});
+  vector.addLayer({id:'overflow-alert',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>=',['coalesce',['get','diff'],-999],0],['==',['get','stale'],false]],paint:{'circle-radius':11,'circle-color':'#B30707','circle-opacity':.1,'circle-stroke-color':'#B30707','circle-stroke-width':1.5,'circle-stroke-opacity':1}});
   vector.addLayer({id:'points',type:'circle',source:'sensors',filter:['!', ['in',['get','kind'],['literal',['estate','dam','camera','water','canal']]]],paint:{'circle-radius':['match',['get','kind'],'dam',8,'estate',5,5],'circle-color':['get','color'],'circle-stroke-color':'#FFFFFF','circle-stroke-width':1.8}});
   vector.addLayer({id:'water-stations',type:'circle',source:'sensors',filter:['in',['get','kind'],['literal',['water','canal']]],paint:{'circle-radius':['match',['get','kind'],'water',11,10],'circle-color':['get','color'],'circle-stroke-color':'#FFFFFF','circle-stroke-width':2,'circle-opacity':.98}});
   vector.addLayer({id:'water-station-symbol',type:'symbol',source:'sensors',filter:['in',['get','kind'],['literal',['water','canal']]],layout:{'text-field':['match',['get','kind'],'water','≋','คลอง','≈'],'text-size':13,'text-allow-overlap':true,'text-ignore-placement':true},paint:{'text-color':'#FFFFFF','text-halo-color':'#FFFFFF','text-halo-width':.2}});
@@ -840,7 +843,7 @@ function normalizeCanals(data){
 }
 function canalPopup(r){
  const levels=[r.wl,r.outer,r.bank,r.warning,r.critical].map(numeric).filter(v=>v!==null),lo=Math.min(...levels)-.5,hi=Math.max(...levels)+.5,y=v=>100-(v-lo)/(hi-lo)*85,c=color(r,'canal');
- const gauge='<svg viewBox="0 0 40 115" width="40" height="115" aria-label="มาตรวัดระดับน้ำ"><rect x="17" y="15" width="16" height="85" fill="#FFFFFF"/><rect x="17" y="'+y(r.wl)+'" width="16" height="'+(100-y(r.wl))+'" fill="'+c+'"/>'+Array.from({length:18},(_,i)=>'<path d="M'+(i%3?11:4)+' '+(15+i*5)+'H33" stroke="'+(i%3?'#47A992':'#D9361E')+'" stroke-width="1"/>').join('')+(r.bank!=null?'<path d="M0 '+y(r.bank)+'H39" stroke="#D9361E" stroke-width="2"/>':'')+'</svg>';
+ const gauge='<svg viewBox="0 0 40 115" width="40" height="115" aria-label="มาตรวัดระดับน้ำ"><rect x="17" y="15" width="16" height="85" fill="#FFFFFF"/><rect x="17" y="'+y(r.wl)+'" width="16" height="'+(100-y(r.wl))+'" fill="'+c+'"/>'+Array.from({length:18},(_,i)=>'<path d="M'+(i%3?11:4)+' '+(15+i*5)+'H33" stroke="'+(i%3?'#47A992':'#B30707')+'" stroke-width="1"/>').join('')+(r.bank!=null?'<path d="M0 '+y(r.bank)+'H39" stroke="#D9361E" stroke-width="2"/>':'')+'</svg>';
  return '<div class="popup canal-popup" style="display:flex;gap:10px;min-width:235px">'+gauge+'<div><b>'+esc((r.code||'')+' · '+r.name)+'</b><br>ในคลอง '+fmt(r.wl)+' ม. รทก.<br>ฝั่งนอก '+fmt(r.outer)+' ม. รทก.<br>'+esc('เขต'+r.district)+' · '+(old(r,'canal')?'ข้อมูลย้อนหลัง':'อัปเดต')+' '+esc(new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}))+'<br><small>ตลิ่ง '+fmt(r.bank)+' ม. รทก.</small><br><a href="'+esc(r.source_url)+'" target="_blank" rel="noopener">ดูข้อมูลสถานีคลอง ↗</a></div></div>';
 }
 async function loadCanals(){
@@ -851,6 +854,13 @@ async function loadCanals(){
  catch(e){sourceErrors['คลอง กทม.']=loaded?'ใช้ไฟล์สำรอง · '+e.message:e.message;updateDataAudit();}
 }
 
+async function loadDashboardStorage(){
+ const results=await Promise.allSettled(['related_dams_latest','medium_reservoirs_latest'].map(async name=>{
+ const response=await fetch('./data/'+name+'.json?v='+Math.floor(Date.now()/3600000),{signal:AbortSignal.timeout(20000)});
+ if(!response.ok)throw Error(response.status);const data=await response.json();return (data.rows||[]).filter(r=>valid({...r,lng:r.lng??r.lon})).map(r=>({...r,lng:r.lng??r.lon,source_name:name==='medium_reservoirs_latest'?'ThaiWater / อ่างเก็บน้ำขนาดกลาง':'ThaiWater / เขื่อนที่เกี่ยวข้อง'}));
+ }));
+ extras=extras.filter(x=>!x.dashboardStorage);extras.push({kind:'dam',dashboardStorage:true,rows:results.filter(r=>r.status==='fulfilled').flatMap(r=>r.value)});build();
+}
 function build(){
  const values=[];function add(rows,k,sourceStale=false){if(k==='road')return;(rows||[]).forEach(r=>{if(!valid(r))return;if(k==='water')r={...r,diff:r.wl!=null&&r.bank!=null?Math.round((r.wl-r.bank)*100)/100:null};const stale=old(r,k);if(k==='water'&&(r.wl==null||!Number.isFinite(Number(r.wl))))return;values.push({type:'Feature',geometry:{type:'Point',coordinates:[Number(r.lng),Number(r.lat)]},properties:{...r,source_problem:sourceStale,water_label:k==='water'?waterLabel(r):'',kind:k,stale,color:color({...r,stale},k)}})})}
  if(national){['dam','water'].forEach(k=>{const f=national.feeds[k],age=Date.now()-Date.parse(f?.fetched_at||'');add(f?.rows?.map(r=>({...r,source_name:'ThaiWater / '+(r.agency||'สสน.'),source_url:f.source_url})),k,Boolean(national.failures[k]))})}
@@ -1009,7 +1019,21 @@ window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
  if(d.type==='flood-watch-clear'){clearWatchMap();return}
  if(d.type==='flood-watch-focus'){showWatchMapData(d);return}
- if(d.type==='flood-province-scope'){estateProvinceScope=d;render();if(d.active&&d.estate)focus({lat:d.estate.lat,lon:d.estate.lon,label:d.name,scale:150000});return}
+ if(d.type==='flood-province-scope'){
+ const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
+ if(changed)clearWatchMap();estateProvinceScope=d;
+ if(cleanDashboard){
+ const active=!!(d.active&&d.estate);
+ Object.assign(flags,{estate:active,boundary:active,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:active,rings:false,radar:false,gistda:false,satellite:true});
+ document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);
+ $('estateView3d').setAttribute('aria-pressed',String(active));$('estateView3d').textContent=active?'มุมมอง 3D':'มุมมอง 2D';
+ if(active)cameras();
+ }
+ render();queueBoundaries();
+ if(d.active&&d.estate)focus({lat:d.estate.lat,lon:d.estate.lon,label:d.name,scale:75000});
+ else if(cleanDashboard){if(vector)vector.flyTo({center:[101,13],zoom:5.5,pitch:0,bearing:0});else raster?.setView([13,101],5.5)}
+ return
+}
  if(d.type==='flood-map-resize'){if(vector)vector.resize();if(raster)raster.invalidateSize();return}
  if(d.type==='flood-map-focus'){focus(d);return}
  if(d.type==='flood-water-feed'&&Array.isArray(d.rows)){
@@ -1020,6 +1044,7 @@ window.addEventListener('message',async event=>{
  }
  if(d.type==='flood-map-snapshot'){try{let dataUrl;if(vector&&ready){await new Promise(resolve=>{vector.once('render',resolve);vector.triggerRepaint()});dataUrl=vector.getCanvas().toDataURL('image/png')}else if(raster&&window.html2canvas){const canvas=await html2canvas($('raster'),{useCORS:true,backgroundColor:'#FFFFFF',logging:false});dataUrl=canvas.toDataURL('image/png')}else throw Error('แผนที่ยังไม่พร้อม');event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,dataUrl},event.origin)}catch(e){event.source.postMessage({type:'flood-map-snapshot-result',id:d.id,error:e.message},event.origin)}}
 });
+loadDashboardStorage();
 fetch('./data/water_flow_major.geojson?v=20261001',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{waterways=d;addFlow();drawFlow()}).catch(()=>{$('status').textContent+=' · โหลดแนวลูกศรไม่สำเร็จ'});
 
 /* Camera presentation only: measured data and model heights do not change. */
