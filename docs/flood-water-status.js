@@ -30,6 +30,8 @@ function dam(value){
  return state('brown','น้ำน้อยวิกฤต','ปริมาณกักเก็บไม่เกิน 30% ของความจุปกติ');
 }
 
+const rainClasses=[["น้ำฝนสะสมน้อยมากถึงไม่มีเลย","#99D3F0","#0A5378"],["น้ำฝนสะสมระดับน้อย","#99F0E7","#148C80"],["น้ำฝนสะสมระดับปานกลาง","#21AD02","#165708"],["น้ำฝนสะสมระดับปานกลางค่อนข้างสูง","#EBE700","#B5B204"],["น้ำฝนสะสมหนาแน่นสูง","#F09B4D","#7A4310"],["น้ำฝนสะสมระดับรุนแรง","#CF6B08","#8A4A0A"],["น้ำฝนสะสมหนาแน่นสูงสุด / ระดับวิกฤต","#B30707","#520707"]];
+const rainLegendHTML='<div class="rain-palette-legend">'+rainClasses.map(([label,fill,ink])=>'<div style="display:flex;gap:8px;align-items:center;margin:6px 0"><i aria-hidden="true" style="width:24px;height:16px;flex:0 0 24px;border-radius:4px;background:'+fill+';border:1px solid '+ink+'"></i><span style="color:'+ink+'">'+label+'</span></div>').join('')+'</div>';
 const sourceRoot='https://standard.thaiwater.net/docs/การจัดทำมาตรฐานน้ำ-ระย-2/ข้อมูลและเกณฑ์ของข้อมู/เกณฑ์ของข้อมูลสำหรับกา/';
 const waterClasses=[
  ['brown','น้ำน้อยวิกฤต','ไม่เกิน 10%'],
@@ -56,10 +58,10 @@ const legendHTML=
  '<details open><summary>เตือนน้ำล้นตลิ่ง · 3 ระดับ</summary>'+table(floodClasses)+'<small>เกณฑ์เหตุการณ์จากมาตรฐานข้อมูลน้ำ ThaiWater; ระบบรวมค่าขอบเขตห่างตลิ่ง 0.50 ม. ไว้ในสีส้ม และให้เกณฑ์นี้มาก่อนสถานะปริมาณน้ำเมื่อถึงช่วงเตือนภัย</small></details>'+
  '<details><summary>ปริมาณน้ำท่า ThaiWater · 5 ระดับ</summary>'+table(waterClasses)+'<small>อ่านชั้นสถานะ situation_level จากต้นทาง ไม่หารค่า ม.รทก. ด้วยระดับตลิ่งเพื่อสร้างร้อยละเอง</small></details>'+
  '<details><summary>น้ำในอ่างเก็บน้ำ · 5 ระดับ</summary>'+table(storageClasses)+'<small>ร้อยละปริมาณน้ำต่อความจุเก็บกักปกติ เกิน 100% ไม่ใช่ข้อสรุปว่าเขื่อนเสียหาย</small></details>'+
- '<details><summary>ความหนักของฝน กรมอุตุฯ · 4 ระดับ</summary><p>เล็กน้อย 0.1–10.0 มม.<br>ปานกลาง 10.1–35.0 มม.<br>หนัก 35.1–90.0 มม.<br>หนักมาก ตั้งแต่ 90.1 มม.</p><small>เกณฑ์ปริมาณฝนคนละชุดกับระดับน้ำ สีในภาพเรดาร์ใช้คำอธิบายจากผู้ให้บริการภาพ ไม่เปลี่ยนสีเรดาร์ตามหมุดระดับน้ำ</small></details>'+
+ '<details><summary>ระดับน้ำฝนสะสม · 7 ระดับ</summary>'+rainLegendHTML+'<small>ชุดสีสำหรับน้ำฝนสะสม · ช่วงปริมาณฝนของแต่ละระดับยังไม่ได้กำหนด จึงยังไม่ใช้ 7 สีนี้จัดระดับค่าตรวจวัด</small></details>'+ 
  '<p><b>คลอง กทม.</b> ใช้ warning_level / critical_level / bank ของแต่ละสถานี: เขียวต่ำกว่าเตือน ส้มถึงระดับเตือน แดงถึงระดับวิกฤตหรือตลิ่ง</p>'+
  '<small>เทา = ไม่มีค่า/เกณฑ์หรือข้อมูลเก่า ไม่นับเป็นระดับความรุนแรง กล้องใช้สีบอกความพร้อมของอุปกรณ์ แนวโน้มเพิ่ม–ลดแสดงแยกจากสีสถานะ<br>อ้างอิง: <a href="'+sourceRoot+'การแจ้งข่าวสาร/" target="_blank" rel="noopener">ThaiWater: ปริมาณน้ำ 5 ระดับ</a> · <a href="'+sourceRoot+'การแจ้งเตือนภัยเหตุการ/" target="_blank" rel="noopener">ThaiWater: เตือนน้ำล้นตลิ่ง 3 ระดับ</a> · <a href="https://www.tmd.go.th/info/เกณฑ์อากาศร้อน" target="_blank" rel="noopener">กรมอุตุฯ: เกณฑ์ปริมาณฝน 4 ระดับ</a></small>';
-window.IEAT_WATER_STATUS={water,canal,dam,palette,legendHTML};
+window.IEAT_WATER_STATUS={water,canal,dam,palette,legendHTML,rainClasses,rainLegendHTML};
 const criteriaStyle=document.createElement('style');criteriaStyle.textContent='.water-criteria-table{width:100%;border-collapse:collapse;font-size:11px;margin:7px 0}.water-criteria-table th,.water-criteria-table td{text-align:left;padding:5px 6px;vertical-align:top}.water-criteria-table th{background:#f3f5f7}.water-criteria-table i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}#waterStatusGuide>details,#mapStatusKey details{padding:7px 0;border-bottom:1px solid #e8edf1}#waterStatusGuide>details>summary,#mapStatusKey details>summary{font-weight:600;cursor:pointer}#waterStatusGuide small,#mapStatusKey small{line-height:1.7}';document.head.appendChild(criteriaStyle);
 function guide(){const overview=document.querySelector('.flood-overview');if(!overview||document.getElementById('waterStatusGuide'))return;const el=document.createElement('details');el.id='waterStatusGuide';el.innerHTML='<summary>เกณฑ์สีสถานะ · ใช้ตรงกับหมุดแผนที่</summary>'+legendHTML;overview.appendChild(el)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',guide);else guide();
