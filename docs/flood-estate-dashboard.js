@@ -610,17 +610,17 @@ $('efFilter').onchange=()=>renderEstates();
   let filter=$('ieatOverviewFilter');
   if(!filter){
    filter=document.createElement('section');filter.id='ieatOverviewFilter';filter.className='ieat-summary-card';
-   filter.innerHTML='<div class="io-area"><span>พื้นที่ทั้งหมด</span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><form><label class="io-sr" for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button></form><p role="status"></p><div class="io-date"></div>';
+   filter.innerHTML='<div class="io-area"><span>พื้นที่ทั้งหมด</span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><form><label class="io-sr" for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button></form><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
    overview.prepend(filter);
-   const search=()=>{const q=$('ieatOverviewSearch').value.trim();if(!q){applyHeaderEstate('');return}const matches=(current?.estates||[]).filter(r=>estateKey(r.name).includes(estateKey(q)));const estate=matches.find(r=>estateKey(r.name)===estateKey(q))||(matches.length===1?matches[0]:null);if(!estate){filter.querySelector('p').textContent=matches.length?'พบหลายพื้นที่ กรุณาเลือกชื่อจากรายการ':'ไม่พบชื่อนิคมฯ ที่ค้นหา';return}applyHeaderEstate(estate.name)};
+   const search=()=>{const q=$('ieatOverviewSearch').value.trim();if(!q){applyHeaderEstate('');return}const matches=(current?.estates||[]).filter(r=>estateKey(r.name).includes(estateKey(q)));const estate=matches.find(r=>estateKey(r.name)===estateKey(q))||(matches.length===1?matches[0]:null);if(!estate){filter.querySelector('p').hidden=false;filter.querySelector('p').textContent=matches.length?'พบหลายพื้นที่ กรุณาเลือกชื่อจากรายการ':'ไม่พบชื่อนิคมฯ ที่ค้นหา';return}applyHeaderEstate(estate.name)};
    filter.querySelector('form').onsubmit=e=>{e.preventDefault();search()};
    $('ieatOverviewSearch').onchange=search;
    $('ieatAllEstates').onclick=()=>{applyHeaderEstate('');$('ieatOverviewSearch').value=''};
   }
   if(document.activeElement!==$('ieatOverviewSearch'))$('ieatOverviewSearch').value=headerEstate;
   filter.querySelector('.io-area>span').textContent=headerEstate?'พื้นที่ที่เลือก':'พื้นที่ทั้งหมด';
-  filter.querySelector('p').textContent=headerEstate||'ภาพรวมทุกนิคมอุตสาหกรรมทั่วประเทศ';
-  filter.querySelector('.io-date').textContent='◷ รอบข้อมูล '+time(data.generated_at);
+  filter.querySelector('p').textContent='';filter.querySelector('p').hidden=true;
+  const dateRow=filter.querySelector('.io-date');dateRow.innerHTML="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 50 50\" aria-hidden=\"true\" style=\"width:24px;height:24px;flex-shrink:0\"><title>date</title><g fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path stroke=\"#306CFE\" d=\"M41.667 43.75H8.333a2.083 2.083 0 0 1-2.083-2.083V20.833h37.5v20.834a2.083 2.083 0 0 1-2.083 2.083M43.75 12.5a2.083 2.083 0 0 0-2.083-2.083H8.333A2.083 2.083 0 0 0 6.25 12.5v8.333h37.5z\"/><path stroke=\"#344054\" d=\"M33.333 6.25v8.333M16.667 6.25v8.333\"/></g></svg><span></span>";dateRow.querySelector('span').textContent='รอบข้อมูล '+time(data.generated_at);
   let charts=$('ieatOverviewCharts');if(!charts){charts=document.createElement('div');charts.id='ieatOverviewCharts';overview.append(charts)}
   const rows=m.watch.slice().sort((a,b)=>b.alerts.length-a.alerts.length||a.name.localeCompare(b.name,'th'));
   const pages=Math.max(1,Math.ceil(rows.length/5));const scope=headerEstate||'all';if(charts.dataset.scope!==scope){charts.dataset.scope=scope;charts.dataset.page='0'}
