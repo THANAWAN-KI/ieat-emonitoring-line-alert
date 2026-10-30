@@ -604,21 +604,38 @@ $('efFilter').onchange=()=>renderEstates();
 
 
 
+
  function renderOverviewCharts(m,data){
   const overview=document.querySelector('.flood-overview');if(!overview)return;
   let filter=$('ieatOverviewFilter');
   if(!filter){
    filter=document.createElement('section');filter.id='ieatOverviewFilter';filter.className='ieat-summary-card';
-   filter.innerHTML='<h2 style="font-size:20px;margin:0 0 12px">ภาพรวมสถานการณ์น้ำ</h2><label for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><form><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="ทุกนิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button><button type="button" id="ieatAllEstates">ทั้งหมด</button></form><p role="status"></p><small></small>';
+   filter.innerHTML='<div class="io-area"><span>พื้นที่ทั้งหมด</span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><form><label class="io-sr" for="ieatOverviewSearch">ค้นหานิคมอุตสาหกรรม</label><input id="ieatOverviewSearch" type="search" list="efEstateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" autocomplete="off"><button type="submit">ค้นหา</button></form><p role="status"></p><div class="io-date"></div>';
    overview.prepend(filter);
-   const search=()=>{const q=$('ieatOverviewSearch').value.trim();if(!q){applyHeaderEstate('');return}const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(q));if(!estate){filter.querySelector('p').textContent='กรุณาเลือกชื่อนิคมฯ จากรายการ';return}applyHeaderEstate(estate.name)};
+   const search=()=>{const q=$('ieatOverviewSearch').value.trim();if(!q){applyHeaderEstate('');return}const matches=(current?.estates||[]).filter(r=>estateKey(r.name).includes(estateKey(q)));const estate=matches.find(r=>estateKey(r.name)===estateKey(q))||(matches.length===1?matches[0]:null);if(!estate){filter.querySelector('p').textContent=matches.length?'พบหลายพื้นที่ กรุณาเลือกชื่อจากรายการ':'ไม่พบชื่อนิคมฯ ที่ค้นหา';return}applyHeaderEstate(estate.name)};
    filter.querySelector('form').onsubmit=e=>{e.preventDefault();search()};
    $('ieatOverviewSearch').onchange=search;
-   $('ieatAllEstates').onclick=()=>applyHeaderEstate('');
+   $('ieatAllEstates').onclick=()=>{applyHeaderEstate('');$('ieatOverviewSearch').value=''};
   }
   if(document.activeElement!==$('ieatOverviewSearch'))$('ieatOverviewSearch').value=headerEstate;
-  filter.querySelector('p').textContent=headerEstate||'ทุกนิคมอุตสาหกรรมทั่วประเทศ';
-  filter.querySelector('small').textContent='นิคมฯ ในพื้นที่ที่เลือก '+m.estates.length+' แห่ง · '+(m.usable?'ประเมินจากสถานีภายใน 30 กม. ตามเกณฑ์เดิมของระบบ':'ข้อมูลยังไม่พร้อมสรุปสถานการณ์');
+  filter.querySelector('.io-area>span').textContent=headerEstate?'พื้นที่ที่เลือก':'พื้นที่ทั้งหมด';
+  filter.querySelector('p').textContent=headerEstate||'ภาพรวมทุกนิคมอุตสาหกรรมทั่วประเทศ';
+  filter.querySelector('.io-date').textContent='◷ รอบข้อมูล '+time(data.generated_at);
+  let charts=$('ieatOverviewCharts');if(!charts){charts=document.createElement('div');charts.id='ieatOverviewCharts';overview.append(charts)}
+  const rows=m.watch.slice().sort((a,b)=>b.alerts.length-a.alerts.length||a.name.localeCompare(b.name,'th'));
+  const pages=Math.max(1,Math.ceil(rows.length/5));const scope=headerEstate||'all';if(charts.dataset.scope!==scope){charts.dataset.scope=scope;charts.dataset.page='0'}
+  const page=Math.max(0,Math.min(Number(charts.dataset.page||0),pages-1));charts.dataset.page=page;
+  const covered=m.usable?m.estates.filter(e=>m.near.some(r=>km(e,r)<=RADIUS)):[],unknown=m.estates.length-covered.length;
+  const watch=m.usable?m.watch.length:0,clear=Math.max(0,covered.length-watch);
+  const groups=[{label:'เข้าเกณฑ์เฝ้าระวัง',n:watch,c:'#306BEC'},{label:'ไม่พบสถานีเข้าเกณฑ์',n:clear,c:'#9EC5FA'},{label:'ข้อมูลไม่พอประเมิน',n:unknown,c:'#E5E9F0'}];
+  const colors=['#306BEC','#609EF0','#9EC5FA','#C5DCFC','#E0ECFC'];const max=Math.max(1,...rows.map(r=>r.alerts.length));
+  let angle=0;const gradient=groups.map(g=>{const from=angle;angle+=m.estates.length?g.n/m.estates.length*100:0;return g.c+' '+from+'% '+angle+'%'}).join(',');
+  const icon=window.IEAT_ICONS?.svg('layers')||'';
+  charts.innerHTML='<section class="io-card io-total"><h2>ภาพรวมสถานการณ์น้ำ</h2><div class="io-total-number"><b>'+fmt(m.estates.length)+'</b><span>นิคมอุตสาหกรรมในพื้นที่ที่เลือก</span></div><div class="io-mini-stats"><div><b>'+(m.usable?fmt(watch):'—')+'</b><span>เข้าเกณฑ์เฝ้าระวัง</span></div><div><b>'+(m.usable?fmt(m.watch.filter(e=>e.water.length).length):'—')+'</b><span>ใกล้น้ำเข้าเกณฑ์</span></div><div><b>'+(m.usable?fmt(m.watch.filter(e=>e.rain.length).length):'—')+'</b><span>ใกล้ฝนเข้าเกณฑ์</span></div></div><small>'+(m.usable?'คัดกรองจากสถานีภายใน 30 กม. · ข้อมูลระดับน้ำไม่เกิน 6 ชม. และฝนไม่เกิน 24 ชม.':'ข้อมูลยังไม่พร้อมประเมิน · ตรวจสอบรอบข้อมูลและความครบถ้วน')+'</small></section>'+
+  '<section class="io-card"><h3><span class="io-icon">'+icon+'</span>นิคมฯ เข้าเกณฑ์เฝ้าระวัง <b>'+(m.usable?fmt(watch):'—')+'</b><span>แห่ง</span></h3><small>เรียงตามจำนวนสถานีที่เข้าเกณฑ์ใกล้นิคมฯ</small><div class="io-bars">'+(rows.length?rows.slice(page*5,page*5+5).map((r,i)=>'<button type="button" class="io-bar" data-overview-estate="'+esc(r.name)+'" title="'+esc(r.name)+'"><span>'+esc(r.name.replace('นิคมอุตสาหกรรม',''))+'</span><i><em style="width:'+r.alerts.length/max*100+'%;background:'+colors[i]+'"></em></i><b>'+fmt(r.alerts.length)+'</b></button>').join(''):'<p class="io-empty">'+(m.usable?'ไม่พบนิคมฯ เข้าเกณฑ์เฝ้าระวังในพื้นที่ที่เลือก':'ยังไม่มีข้อมูลพร้อมสรุป')+'</p>')+'</div><small class="io-axis">จำนวนสถานีเข้าเกณฑ์ · คลิกชื่อนิคมฯ เพื่อดูพื้นที่</small><nav class="io-pager" aria-label="เปลี่ยนหน้านิคมฯ"><button type="button" data-io-page="-1" '+(page===0?'disabled':'')+'>‹</button><span>หน้า '+(page+1)+' / '+pages+'</span><button type="button" data-io-page="1" '+(page===pages-1?'disabled':'')+'>›</button></nav></section>'+
+  '<section class="io-card"><h3><span class="io-icon">'+icon+'</span>สัดส่วนสถานะนิคมฯ <b>'+fmt(m.estates.length)+'</b><span>แห่ง</span></h3><div class="io-pie-row"><div class="io-pie" role="img" aria-label="'+esc(groups.map(g=>g.label+' '+g.n+' แห่ง').join(', '))+'" style="background:conic-gradient('+gradient+')"></div><div class="io-legend">'+groups.map(g=>'<div><i style="background:'+g.c+'"></i><span>'+g.label+'</span><b>'+fmt(g.n)+'</b></div>').join('')+'</div></div><small>ผลคัดกรองจากสถานีใกล้นิคมฯ · สถานีหนึ่งอาจอยู่ใกล้หลายนิคมฯ<br>ไม่ใช่การยืนยันว่าน้ำท่วมภายในนิคมฯ</small></section>';
+  charts.querySelectorAll('[data-io-page]').forEach(btn=>btn.onclick=()=>{charts.dataset.page=page+Number(btn.dataset.ioPage);renderOverviewCharts(m,data)});
+  charts.querySelectorAll('[data-overview-estate]').forEach(btn=>btn.onclick=()=>applyHeaderEstate(btn.dataset.overviewEstate));
  }
 
  function render(data){
