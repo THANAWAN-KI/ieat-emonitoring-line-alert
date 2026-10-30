@@ -625,7 +625,7 @@ $('efFilter').onchange=()=>renderEstates();
   const rows=m.watch.slice().sort((a,b)=>b.alerts.length-a.alerts.length||a.name.localeCompare(b.name,'th'));
   const pages=Math.max(1,Math.ceil(rows.length/5));const scope=headerEstate||'all';if(charts.dataset.scope!==scope){charts.dataset.scope=scope;charts.dataset.page='0'}
   const page=Math.max(0,Math.min(Number(charts.dataset.page||0),pages-1));charts.dataset.page=page;
-  const covered=m.usable?m.estates.filter(e=>m.near.some(r=>km(e,r)<=RADIUS)):[],unknown=m.estates.length-covered.length;
+  const covered=m.usable?m.estates.filter(e=>[...m.water,...m.rain].some(r=>km(e,r)<=RADIUS)):[],unknown=m.estates.length-covered.length;
   const watch=m.usable?m.watch.length:0,clear=Math.max(0,covered.length-watch);
   const groups=[{label:'เข้าเกณฑ์เฝ้าระวัง',n:watch,c:'#306BEC'},{label:'ไม่พบสถานีเข้าเกณฑ์',n:clear,c:'#9EC5FA'},{label:'ข้อมูลไม่พอประเมิน',n:unknown,c:'#E5E9F0'}];
   const colors=['#306BEC','#609EF0','#9EC5FA','#C5DCFC','#E0ECFC'];const max=Math.max(1,...rows.map(r=>r.alerts.length));
@@ -759,7 +759,7 @@ $('efFilter').onchange=()=>renderEstates();
   $('expoSearchForm').onsubmit=e=>{e.preventDefault();const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey($('expoSearch').value));if(!estate){$('expoSelection').textContent='กรุณาเลือกนิคมฯ จากรายการ';return}applyHeaderEstate(estate.name)};
   $('expoSupport').onclick=()=>$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-support-open',estate:headerEstate},location.origin);
  }
- function publishPreparedness(){ $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-preparedness-mode',active:true,estate:headerEstate},location.origin); }
+ function publishPreparedness(){ const map=$('estateFocusMap')?.contentWindow;map?.postMessage({type:'flood-preparedness-mode',active:!!headerEstate,estate:headerEstate},location.origin);if(!headerEstate)map?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin); }
  function expoRender(){
   publishPreparedness();if(!$('expoExplore'))return;
   const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey(headerEstate));
