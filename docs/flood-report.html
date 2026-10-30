@@ -217,7 +217,7 @@ html body #warning #estateFocusDashboard .ef-data-column :is(p,small,.ef-scroll-
 </style><style id="standard-water-status-colors">#estateFocusDashboard [data-water-theme^="standard-"]{--water-bg:#fff!important;--water-ink:#263746!important}#estateFocusDashboard #efReservoirList [data-water-theme^="standard-"] .ef-reservoir-percent span{background:var(--water-accent)!important;color:white!important}#waterStatusGuide{padding:6px 10px;color:#435461;font:11px/1.6 Sarabun,sans-serif}#waterStatusGuide summary{cursor:pointer}#waterStatusGuide p{margin:5px 0}#waterStatusGuide i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}</style><style id="overview-three-white-cards">html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpis>.flood-kpi{background:#FFFFFF!important;background-image:none!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpis>.flood-kpi:hover{background:#FFFFFF!important}</style><script defer src="flood-icons.js?v=8f75bcb0"></script>
 <script defer src="flood-water-status.js?v=20261029-agency2"></script>
 <script defer src="flood-rid-source.js?v=20261006-rid-17"></script>
-<script defer src="flood-estate-dashboard.js?v=20261029-standard1"></script>
+<script defer src="flood-estate-dashboard.js?v=20261030-overview-charts"></script>
 <script defer src="flood-river-panel.js?v=20261029-standard1"></script>
 <script defer src="flood-weather-overview.js?v=20261006-svg-weather-37"></script>
 <style id="dashboard-refined-responsive">
@@ -427,6 +427,19 @@ html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboa
 @media(max-width:600px){#floodModeBar button{font-size:14px!important;line-height:20px!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpi .ef-kpi-label{font-size:14px!important}}
 </style><style id="flood-hide-top-mode-tabs">/* Views remain available from the left toolbar. */
 #floodModeBar > nav{display:none!important}
+</style>
+<style id="ieat-overview-reference-cards">
+html body #warning #estateFocusDashboard .flood-overview #ieatOverviewFilter,
+html body #warning #estateFocusDashboard .flood-overview #ieatOverviewCharts .ieat-summary-card{background:#fff!important;border-radius:22px!important;padding:20px!important;margin:0 0 16px!important;box-shadow:0 3px 8px #0000000d,0 10px 24px #00000008!important;border:0!important;color:#424242!important}
+#ieatOverviewFilter label{display:block;font-size:16px;margin-bottom:12px}#ieatOverviewFilter form{display:flex;gap:8px}#ieatOverviewFilter input{width:100%;min-width:0;padding:12px!important;background:#f7f9fc!important;border-radius:12px!important;font:16px Sarabun,sans-serif}#ieatOverviewFilter button{padding:10px 16px;background:#306bec;color:white;border-radius:12px;font:14px Sarabun,sans-serif;cursor:pointer}#ieatOverviewFilter p{margin:12px 0 6px;color:#306bec}#ieatOverviewFilter small,#ieatOverviewCharts small{font-size:12px;color:#858585;line-height:1.6}
+html body #warning #estateFocusDashboard #ieatOverviewCharts h3{font:500 17px/1.6 Sarabun,sans-serif!important;color:#424242!important;margin:0 0 8px!important}#ieatOverviewCharts h3 b{color:#306bec;font-size:23px}
+#ieatOverviewCharts .ieat-water-bars{padding:18px 0 10px;min-height:210px}
+#ieatOverviewCharts .ieat-water-row{display:grid;grid-template-columns:minmax(75px,1fr) minmax(70px,1.8fr) 48px;align-items:center;gap:9px;margin:17px 0;font-size:12px;color:#777}
+#ieatOverviewCharts .ieat-water-row>span{white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#ieatOverviewCharts .ieat-water-row>i{height:24px;background:#f4f7fc;display:block;border-radius:0 16px 16px 0}
+#ieatOverviewCharts .ieat-water-row em{height:100%;display:block;border-radius:0 16px 16px 0}#ieatOverviewCharts .ieat-water-row b{font-weight:400;color:#555;font-variant-numeric:tabular-nums}
+#ieatOverviewCharts .ieat-chart-pager{display:flex;gap:12px;justify-content:center;align-items:center;color:#747c8b;font-size:13px;margin:10px 0 0}#ieatOverviewCharts .ieat-chart-pager button{background:#f5f6f9;border-radius:8px;padding:6px 12px;color:#546177;font:18px Sarabun,sans-serif;cursor:pointer}#ieatOverviewCharts button:disabled{opacity:.35;cursor:default}
+#ieatOverviewCharts .ieat-pie-content{display:flex;align-items:center;gap:20px;padding:24px 0;flex-wrap:wrap}#ieatOverviewCharts .ieat-status-pie{width:160px;aspect-ratio:1;border-radius:50%;flex-shrink:0}#ieatOverviewCharts .ieat-pie-legend{flex:1;min-width:150px;font-size:13px;color:#777}#ieatOverviewCharts .ieat-pie-legend p{display:flex;gap:8px;align-items:center}#ieatOverviewCharts .ieat-pie-legend i{width:11px;height:11px;border-radius:50%;flex-shrink:0}#ieatOverviewCharts .ieat-pie-legend b{margin-left:auto;color:#424242}
 </style>
 </head>
 <body>
