@@ -628,9 +628,9 @@ $('efFilter').onchange=()=>renderEstates();
   }
   $('ioEstatePanelSearch').value='';
   pane.hidden=false;$('ioEstatePicker').setAttribute('aria-expanded','true');
-  const box=estatePickerOpener.getBoundingClientRect(),width=Math.min(390,innerWidth-24);
+  const box=estatePickerOpener.getBoundingClientRect(),width=Math.min(480,innerWidth-24);
   pane.style.setProperty('--io-picker-left',Math.max(12,Math.min(box.right+24,innerWidth-width-12))+'px');
-  pane.style.setProperty('--io-picker-top',Math.max(12,Math.min(box.top,innerHeight-420))+'px');
+  pane.style.setProperty('--io-picker-top',Math.max(12,Math.min(box.top,innerHeight-540))+'px');
   renderEstatePickerOptions();$('ioEstatePanelSearch').focus();
  }
  function renderEstatePickerOptions(){
@@ -647,13 +647,13 @@ $('efFilter').onchange=()=>renderEstates();
   if(!filter){
    filter=document.createElement('section');filter.id='ieatOverviewFilter';filter.className='ieat-summary-card';
 
-   filter.innerHTML='<div class="io-area"><span class="io-area-title" style="display:inline-flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;flex-shrink:0"><title>map-outline</title><path fill="#2196F3" d="m15 19.923l-6-2.1l-3.958 1.53q-.384.143-.713-.083T4 18.634V6.404q0-.268.13-.489t.378-.307L9 4.077l6 2.1l3.958-1.53q.384-.143.713.054t.329.588v12.384q0 .287-.159.498q-.158.212-.426.298zm-.5-1.22v-11.7l-5-1.745v11.7zm1 0L19 17.55V5.7l-3.5 1.304zM5 18.3l3.5-1.342v-11.7L5 6.45zM15.5 7.004v11.7zm-7-1.746v11.7z"/></svg><span class="io-area-text">พื้นที่ทั้งหมด</span></span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><button id="ioEstatePicker" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ioEstatePanel"><span class="io-picker-label">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
+   filter.innerHTML='<div class="io-area"><span class="io-area-title" style="display:inline-flex;align-items:center;gap:8px"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>map-duotone</title><g fill="#2196F3"><path d="M3 8.71v8.128c0 1.043 0 1.565.283 1.958s.778.558 1.768.888l1.165.388c1.367.456 2.05.684 2.739.591L9 20.657v-14a3 3 0 0 1-.34.031c-.54.019-1.074-.16-2.141-.515c-1.398-.466-2.097-.699-2.629-.462a1.5 1.5 0 0 0-.497.358C3 6.5 3 7.236 3 8.71m18 6.58V7.163c0-1.043 0-1.565-.283-1.958s-.778-.558-1.768-.888l-1.165-.388c-1.367-.456-2.05-.684-2.739-.591L15 3.343v14q.17-.025.34-.031c.54-.019 1.074.16 2.141.515c1.398.466 2.097.699 2.629.462a1.5 1.5 0 0 0 .497-.358C21 17.5 21 16.764 21 15.29" opacity=".5"/><path d="M9.247 6.61q-.123.027-.247.047v14c.67-.104 1.269-.503 2.442-1.285l1.382-.922c.936-.624 1.404-.936 1.93-1.06q.12-.03.246-.047v-14c-.67.103-1.269.503-2.442 1.284l-1.382.922c-.936.624-1.404.936-1.93 1.06m8.235 11.218l.254.084z"/></g></svg><span class="io-area-text">พื้นที่ทั้งหมด</span></span><button id="ieatAllEstates" type="button">ทุกนิคมฯ ↺</button></div><button id="ioEstatePicker" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="ioEstatePanel"><span class="io-picker-label">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><p role="status" hidden></p><div class="io-date" style="display:flex;align-items:center;gap:8px"></div>';
    overview.prepend(filter);
    $('ioEstatePicker').onclick=()=>openEstatePicker();
    $('ieatAllEstates').onclick=()=>applyHeaderEstate('');
   }
   $('ioEstatePicker').querySelector('.io-picker-label').textContent=headerEstate||'เลือกนิคมอุตสาหกรรม';
-  filter.querySelector('.io-area-text').textContent=headerEstate?'พื้นที่ที่เลือก':'พื้นที่ทั้งหมด';
+  filter.querySelector('.io-area-text').textContent='พื้นที่นิคมอุตสาหกรรม';
   filter.querySelector('p').textContent='';filter.querySelector('p').hidden=true;
   const dateRow=filter.querySelector('.io-date');dateRow.innerHTML="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 50 50\" aria-hidden=\"true\" style=\"width:24px;height:24px;flex-shrink:0\"><title>date</title><g fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"><path stroke=\"#2196F3\" d=\"M41.667 43.75H8.333a2.083 2.083 0 0 1-2.083-2.083V20.833h37.5v20.834a2.083 2.083 0 0 1-2.083 2.083M43.75 12.5a2.083 2.083 0 0 0-2.083-2.083H8.333A2.083 2.083 0 0 0 6.25 12.5v8.333h37.5z\"/><path stroke=\"#0D47A1\" d=\"M33.333 6.25v8.333M16.667 6.25v8.333\"/></g></svg><span></span>";dateRow.querySelector('span').textContent='รอบข้อมูล '+time(data.generated_at);
   let charts=$('ieatOverviewCharts');if(!charts){charts=document.createElement('div');charts.id='ieatOverviewCharts';overview.append(charts)}
