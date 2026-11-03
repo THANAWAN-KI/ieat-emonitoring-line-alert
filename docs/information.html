@@ -2848,7 +2848,16 @@ html body.monitor-mode .em-dashboard .expo-intro p{display:none!important}
 </style>
 <script id="monitor-title-cleanup">
 (()=>{const intro=document.querySelector('.em-dashboard .expo-intro');if(!intro)return;intro.querySelectorAll('p').forEach(p=>p.remove());const h=intro.querySelector('h2');if(h){h.textContent="e-Monitoring · ระบบเฝ้าระวังและติดตามตรวจสอบคุณภาพสิ่งแวดล้อมภายในนิคมอุตสาหกรรมแบบเรียลไทม์";h.style.removeProperty('font-size');h.style.removeProperty('font-weight');h.style.removeProperty('line-height');}})();
-</script></body></html>
+</script><style id="monitor-purple-sidebar">
+html body.monitor-mode .em-dashboard .expo-controls button{color:#5B2D82!important}
+html body.monitor-mode .em-dashboard .expo-controls button .rail-icon{color:#5B2D82!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true] .rail-icon{background:#5B2D82!important;color:#fff!important;box-shadow:0 4px 10px #5B2D8240!important}
+html body.monitor-mode .em-dashboard .expo-controls button:hover .rail-icon{background:#f1eaf7!important;color:#5B2D82!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true]:hover .rail-icon{background:#5B2D82!important;color:#fff!important}
+html body.monitor-mode .em-dashboard .expo-controls button:focus-visible{outline-color:#5B2D82!important}
+html body.monitor-mode .em-dashboard .expo-controls button[data-type="AQMs"] svg path[fill="#e3e3e3"]{fill:#5B2D8215!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true][data-type="AQMs"] svg path[fill="#e3e3e3"]{fill:#ffffff30!important}
+</style></body></html>
 
 
 
