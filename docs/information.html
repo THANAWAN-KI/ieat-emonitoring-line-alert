@@ -2887,6 +2887,23 @@ function apply(){const value=input.value.trim();original.value=value;const exact
 input.addEventListener('input',apply);input.addEventListener('change',apply);wrap.querySelector('button').onclick=()=>{input.value='';apply();window.focusMonitoringEstate?.('',document.getElementById('emType')?.value||'');};
 original.addEventListener('input',()=>{if(input.value!==original.value)input.value=original.value;});const kpis=root.querySelector('.em-kpis');if(kpis)new MutationObserver(populate).observe(kpis,{childList:true,subtree:true,characterData:true});populate();
 })();
+</script><style id="monitor-map60-compact-header">
+html body.monitor-mode .em-dashboard .em-reference-shell{grid-template-columns:64px minmax(0,2fr) minmax(0,3fr)!important}
+html body.monitor-mode .em-dashboard .expo-intro{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;gap:12px!important;align-items:center!important}
+html body.monitor-mode .em-dashboard .expo-intro>div:first-child{grid-column:1/-1!important}
+html body.monitor-mode .em-dashboard .expo-intro h2{font-size:20px!important;line-height:1.5!important}
+html body.monitor-mode .em-dashboard .expo-date{margin:0!important;font-size:12px!important;min-width:0!important;gap:7px!important}
+html body.monitor-mode .em-dashboard .expo-area-search{margin:0!important;min-width:0!important;gap:7px!important}
+html body.monitor-mode .em-dashboard .expo-area-search input{min-width:0!important;max-width:none!important;width:100%!important;font-size:13px!important;padding:9px!important}
+html body.monitor-mode .em-dashboard .expo-area-search button,html body.monitor-mode .em-dashboard .expo-area-result{display:none!important}
+html body.monitor-mode .em-dashboard .em-reference-left{display:flex!important;flex-direction:column!important;min-width:0!important}
+html body.monitor-mode .em-dashboard .em-reference-left>*{width:100%!important;min-width:0!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-snapshot{display:none!important}
+html body.monitor-mode .em-dashboard .em-reference-middle,html body.monitor-mode .em-dashboard .em-two-charts{grid-template-columns:1fr!important}
+@media(max-width:800px){html body.monitor-mode .em-dashboard .em-reference-shell{grid-template-columns:64px minmax(0,1fr)!important}html body.monitor-mode .em-dashboard .expo-intro h2{font-size:18px!important}}
+</style><script id="monitor-clean-area-labels">
+(()=>{const input=document.querySelector('.expo-area-search input');if(input)input.placeholder='ค้นหานิคมอุตสาหกรรม';})();
 </script></body></html>
 
 
