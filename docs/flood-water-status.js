@@ -2,9 +2,9 @@
 (()=>{'use strict';
 const n=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
 const statusPairs={
- blue:['#99D3F0','#0A5378'],teal:['#99F0E7','#148C80'],green:['#21AD02','#165708'],
- yellow:['#EBE700','#B5B204'],orange:['#F09B4D','#7A4310'],brown:['#CF6B08','#8A4A0A'],
- red:['#B30707','#520707'],gray:['#E5E7EB','#667085']
+ blue:['#99D3F0','#000000'],teal:['#99F0E7','#148C80'],green:['#21AD02','#FFFFFF'],
+ yellow:['#EBE700','#000000'],orange:['#F09B4D','#000000'],brown:['#CF6B08','#FFFFFF'],
+ red:['#B30707','#FFFFFF'],gray:['#E5E7EB','#667085']
 };
 const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#99D3F0',navy:'#0A5378',lavender:'#C3ACD0',purple:'#674188'};
 const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],background:statusPairs[key]?.[0]||palette[key],textColor:statusPairs[key]?.[1]||'#303841',label,criterion});
