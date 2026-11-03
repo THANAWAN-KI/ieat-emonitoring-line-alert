@@ -2860,7 +2860,16 @@ html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true][da
 </style><style id="monitor-heading-purple-24">
 html body.monitor-mode .em-dashboard .expo-intro h2{font-size:24px!important;color:#5B2D82!important;font-weight:700!important;line-height:1.45!important}
 @media(max-width:650px){html body.monitor-mode .em-dashboard .expo-intro h2{font-size:21px!important}}
-</style></body></html>
+</style><style id="monitor-title-date-card">
+html body.monitor-mode .em-dashboard .expo-intro{padding:20px 22px!important;border:1px solid #f0edf3!important;border-bottom:1px solid #f0edf3!important;border-radius:18px!important;background:#fff!important;box-shadow:0 3px 6px #29252608,0 8px 16px #29252612!important;margin:0 0 4px!important}
+html body.monitor-mode .em-dashboard .expo-intro h2{font-size:22px!important;line-height:1.5!important;font-weight:700!important;color:#5B2D82!important;margin:0!important}
+html body.monitor-mode .em-dashboard .expo-date{display:flex!important;align-items:center;gap:10px;margin-top:14px;color:#60616a!important;font-size:13px;line-height:1.6;font-weight:400}
+html body.monitor-mode .em-dashboard .expo-date svg{width:18px;height:18px;flex-shrink:0}
+@media(max-width:650px){html body.monitor-mode .em-dashboard .expo-intro h2{font-size:20px!important}html body.monitor-mode .em-dashboard .expo-intro{padding:16px!important}}
+</style>
+<script id="monitor-title-data-date">
+(()=>{const intro=document.querySelector('.em-dashboard .expo-intro');if(!intro)return;const date=document.createElement('div');date.className='expo-date';date.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 2v6m10-6v6M3 11h18"/></svg>';const label=document.createElement('span');date.append(label);intro.append(date);const source=document.getElementById('emExecutiveSnapshot');function sync(){const text=source?.textContent?.trim();label.textContent=text||'กำลังตรวจสอบวันที่อัปเดตข้อมูล';}if(source)new MutationObserver(sync).observe(source,{childList:true,subtree:true,characterData:true});sync();})();
+</script></body></html>
 
 
 
