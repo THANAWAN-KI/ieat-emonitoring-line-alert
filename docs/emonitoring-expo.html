@@ -214,7 +214,7 @@ header:before{display:none}header small{color:#303841;font-size:16px;font-weight
 @media(max-height:700px){.map-tool-rail{top:92px;gap:5px}.map-tool-rail button{width:38px;height:38px;padding:9px}.zoom-pill button{height:36px}}
 @media(max-width:850px){.map-tool-rail{right:10px;top:95px;gap:5px}.map-tool-rail button{width:36px;height:36px;padding:8px}.zoom-pill button{height:34px}.gis-layers{right:56px;bottom:14px;width:250px}.gis-layers:not([open]){width:190px}.basemap-options{right:56px}.three-d-message{right:56px;font-size:10px}}
 @media(max-width:600px){.map-tool-rail{top:80px;gap:4px}.map-tool-rail button{width:30px;height:30px;padding:6px}.zoom-pill button{height:29px}.gis-layers{right:48px;max-width:calc(100% - 60px)}}
-</style></head><body><aside class="navigation-rail" aria-label="เมนูหลัก"><div class="rail-menu" aria-hidden="true">☰</div><nav><button type="button" id="overviewNav" aria-pressed="true" aria-label="ภาพรวม" title="ภาพรวม"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21l4-4 4 4M8 9h1m3 0h1m3 0h1"/></svg><small>ภาพรวม</small></button><button type="button" disabled aria-label="เมนู 2 (เตรียมไว้)" title="เตรียมไว้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10h4v10m4 0V4h4v16m4 0V8h2v12M2 20h22"/></svg></button><button type="button" disabled aria-label="เมนู 3 (เตรียมไว้)" title="เตรียมไว้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l8 8M7 3l4 4-4 4-4-4zM17 13l4 4-4 4-4-4zM3 16a5 5 0 005 5M2 12a9 9 0 0010 10"/></svg></button><button type="button" disabled aria-label="เมนู 4 (เตรียมไว้)" title="เตรียมไว้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/></svg></button></nav></aside><header><small>e-Monitoring / IEAT</small><h1>ระบบเฝ้าระวังและติดตามตรวจสอบคุณภาพสิ่งแวดล้อมภายในนิคมอุตสาหกรรมแบบเรียลไทม์</h1><p>จากเครือข่ายทั่วประเทศ สู่ข้อมูลสถานีในพื้นที่ที่คุณสนใจ</p></header><main class="layout"><section class="data"><nav class="tabs" aria-label="เลือกระบบตรวจวัด"><button data-type="AQMs" aria-pressed="false"><span>AQMs</span><small>คุณภาพอากาศ</small></button><button data-type="WQMs" aria-pressed="false"><span>WQMs</span><small>คุณภาพน้ำ</small></button><button data-type="CEMs" aria-pressed="false"><span>CEMs</span><small>อากาศจากปล่อง</small></button></nav><div class="presentation-controls"><button id="demoToggle" type="button" aria-pressed="false">▶ เริ่มสาธิตอัตโนมัติ</button><button id="fullScreen" type="button" aria-label="เต็มหน้าจอ">⛶</button></div><div id="demoScene" role="status" class="demo-scene">เลือกพื้นที่ แล้วสำรวจด้วยตัวเอง</div>
+</style><style id="gistda-live-connection">.gistda-key-dialog{width:min(440px,calc(100vw - 32px));padding:25px;border:1px solid #dfe5ec;border-radius:24px;color:#354149;box-shadow:0 15px 70px #192b4b30;font:13px Poppins,"Noto Sans Thai Looped",sans-serif}.gistda-key-dialog::backdrop{background:#23334855;backdrop-filter:blur(3px)}.gistda-key-dialog h2{color:#0d47a1;font-size:18px;margin:0 0 12px}.gistda-key-dialog p{line-height:1.8;color:#687581}.gistda-key-dialog label{display:block;margin:17px 0 8px;font-weight:500}.gistda-key-dialog input{width:100%;border:1px solid #cdd9e7;border-radius:12px;padding:12px;font:inherit}.gistda-key-dialog .key-privacy{font-size:11px}.key-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:20px}.key-actions button{border:1px solid #dfe5ec;background:#fff;color:#537087;border-radius:22px;padding:10px 16px;font:inherit}.key-actions button[type=submit]{background:#316bf0;color:white;border-color:#316bf0}#gistdaKeyStatus{color:#a53535;font-size:11px}.dimension-controls{max-width:calc(100% - 105px)}#gistdaConnection{font-size:10px;padding:8px 10px}</style></head><body><dialog id="gistdaKeyDialog" class="gistda-key-dialog" aria-labelledby="gistdaKeyTitle"><form id="gistdaKeyForm"><h2 id="gistdaKeyTitle">เชื่อมต่ออาคาร 3D ของ GISTDA</h2><p>กรอก API Key เพื่อโหลดอาคารตามพื้นที่ที่เปิดดูทั่วประเทศไทย</p><label for="gistdaSessionKey">GISTDA API Key</label><input id="gistdaSessionKey" type="password" autocomplete="off" spellcheck="false" required><p class="key-privacy">คีย์ใช้เฉพาะในหน้านี้และส่งไปยัง GISTDA โดยตรง เมื่อปิดหรือโหลดหน้าใหม่ต้องกรอกอีกครั้ง</p><div class="key-actions"><button id="cancelGistdaKey" type="button">ดูแผนที่ก่อน</button><button type="submit">เชื่อมต่อ GISTDA</button></div><p id="gistdaKeyStatus" role="status"></p></form></dialog><aside class="navigation-rail" aria-label="เมนูหลัก"><div class="rail-menu" aria-hidden="true">☰</div><nav><button type="button" id="overviewNav" aria-pressed="true" aria-label="ภาพรวม" title="ภาพรวม"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21l4-4 4 4M8 9h1m3 0h1m3 0h1"/></svg><small>ภาพรวม</small></button><button type="button" disabled aria-label="เมนู 2 (เตรียมไว้)" title="เตรียมไว้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10h4v10m4 0V4h4v16m4 0V8h2v12M2 20h22"/></svg></button><button type="button" disabled aria-label="เมนู 3 (เตรียมไว้)" title="เตรียมไว้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l8 8M7 3l4 4-4 4-4-4zM17 13l4 4-4 4-4-4zM3 16a5 5 0 005 5M2 12a9 9 0 0010 10"/></svg></button><button type="button" disabled aria-label="เมนู 4 (เตรียมไว้)" title="เตรียมไว้"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/></svg></button></nav></aside><header><small>e-Monitoring / IEAT</small><h1>ระบบเฝ้าระวังและติดตามตรวจสอบคุณภาพสิ่งแวดล้อมภายในนิคมอุตสาหกรรมแบบเรียลไทม์</h1><p>จากเครือข่ายทั่วประเทศ สู่ข้อมูลสถานีในพื้นที่ที่คุณสนใจ</p></header><main class="layout"><section class="data"><nav class="tabs" aria-label="เลือกระบบตรวจวัด"><button data-type="AQMs" aria-pressed="false"><span>AQMs</span><small>คุณภาพอากาศ</small></button><button data-type="WQMs" aria-pressed="false"><span>WQMs</span><small>คุณภาพน้ำ</small></button><button data-type="CEMs" aria-pressed="false"><span>CEMs</span><small>อากาศจากปล่อง</small></button></nav><div class="presentation-controls"><button id="demoToggle" type="button" aria-pressed="false">▶ เริ่มสาธิตอัตโนมัติ</button><button id="fullScreen" type="button" aria-label="เต็มหน้าจอ">⛶</button></div><div id="demoScene" role="status" class="demo-scene">เลือกพื้นที่ แล้วสำรวจด้วยตัวเอง</div>
 
 <div class="filters"><input id="estate" list="estates" type="search" placeholder="ค้นหานิคมฯ ที่คุณสนใจ" aria-label="ค้นหานิคมอุตสาหกรรม"><datalist id="estates"></datalist><button id="reset">ล้าง</button></div><p id="stamp" class="stamp" role="status">กำลังโหลดข้อมูล…</p>
 <section class="story"><span class="eyebrow">FROM NATIONAL NETWORK TO YOUR ESTATE</span><h2 id="storyTitle">นิคมฯ ที่คุณสนใจ ติดตามสิ่งแวดล้อมอย่างไร?</h2><p>เลือกพื้นที่ด้านล่าง แล้วดูแผนที่และข้อมูลเปลี่ยนพร้อมกัน</p><div id="quickEstates" class="quick"></div></section><div class="kpis"><article class="card"><strong id="total">—</strong><span>จุดตรวจวัด</span></article><article class="card"><strong id="areas">—</strong><span>พื้นที่นิคมฯ ที่ระบุ</span></article></div>
@@ -230,7 +230,7 @@ header:before{display:none}header small{color:#303841;font-size:16px;font-weight
 <button id="toolMeasure" aria-pressed="false" aria-label="วัดระยะทาง" title="วัดระยะทาง"></button>
 <button id="toolLocate" aria-label="ซูมไปพื้นที่ที่เลือก" title="ไปพื้นที่ที่เลือก"></button>
 <button id="toolShare" aria-label="คัดลอกลิงก์แผนที่" title="คัดลอกลิงก์"></button>
-</div><div id="basemapOptions" class="basemap-options" hidden><strong>แผนที่ฐาน</strong><button id="baseGrey" type="button">ภูมิประเทศโทนเทา</button><button id="baseSatellite" type="button">ภาพถ่ายดาวเทียม</button></div><div class="dimension-controls" aria-label="รูปแบบแผนที่"><button id="show2D" type="button" aria-pressed="true">2D</button><button id="show3D" type="button" aria-pressed="false">3D · บางปะอิน</button></div><div id="threeDMessage" class="three-d-message" role="status" hidden></div><div id="map3d" hidden aria-label="แผนที่อาคาร 3 มิติ บางปะอิน"></div><div class="showcase-brand"><span>IEAT / ENVIRONMENTAL INTELLIGENCE</span><h2>หนึ่งเครือข่าย<br>มองเห็นสิ่งแวดล้อมทั้งพื้นที่</h2><p>สำรวจข้อมูลจริงจากสถานีตรวจวัด กนอ.</p></div><div class="network-animation" aria-hidden="true"><svg viewBox="0 0 700 700" preserveAspectRatio="xMidYMid slice"><path d="M100 170Q300 40 350 350M590 140Q450 150 350 350M100 570Q120 400 350 350M600 550Q520 400 350 350" class="net-line"/><circle r="4" class="packet"><animateMotion dur="5s" repeatCount="indefinite" path="M100 170Q300 40 350 350"/></circle><circle r="4" class="packet"><animateMotion dur="6s" repeatCount="indefinite" path="M590 140Q450 150 350 350"/></circle><circle r="4" class="packet"><animateMotion dur="4s" repeatCount="indefinite" path="M100 570Q120 400 350 350"/></circle><circle cx="350" cy="350" r="35" class="core-ring"/><circle cx="350" cy="350" r="24" fill="#1E1735" stroke="#A044FF"/><text x="350" y="354" text-anchor="middle" fill="white" font-size="11">EMCC</text></svg><span>ภาพอธิบายการรวมข้อมูล · ไม่ใช่การรับส่งสัญญาณสด</span></div><div id="simMapPanel" class="sim-map-panel" hidden><span class="sim-badge">สถานการณ์จำลอง</span><h3 id="simMapTitle"></h3><p id="simMapText"></p><div class="sim-signal"><i></i><span id="simMapPhase"></span></div></div><div class="map-heading"><small>ENVIRONMENTAL MONITORING NETWORK</small><strong id="mapArea">เครือข่ายทั่วประเทศ</strong><span id="mapScope">เลือกนิคมฯ เพื่อสำรวจ</span></div><div class="map-note"><span class="dot"></span>ขอบเขตนิคมฯ · ผู้ประกอบการ · AQMs / WQMs / CEMs<br><span id="provinceStatus">กำลังโหลดเส้นจังหวัด…</span><br><small class="map-version">แผนที่เทา + GISTDA 3D · รุ่น bang-pa-in-3d-1</small></div></section></main>
+</div><div id="basemapOptions" class="basemap-options" hidden><strong>แผนที่ฐาน</strong><button id="baseGrey" type="button">ภูมิประเทศโทนเทา</button><button id="baseSatellite" type="button">ภาพถ่ายดาวเทียม</button></div><div class="dimension-controls" aria-label="รูปแบบแผนที่"><button id="show2D" type="button" aria-pressed="true">2D</button><button id="show3D" type="button" aria-pressed="false">3D</button><button id="gistdaConnection" type="button" title="ตั้งค่า API Key ของ GISTDA">API Key</button></div><div id="threeDMessage" class="three-d-message" role="status" hidden></div><div id="map3d" hidden aria-label="แผนที่อาคาร 3 มิติ ประเทศไทย"></div><div class="showcase-brand"><span>IEAT / ENVIRONMENTAL INTELLIGENCE</span><h2>หนึ่งเครือข่าย<br>มองเห็นสิ่งแวดล้อมทั้งพื้นที่</h2><p>สำรวจข้อมูลจริงจากสถานีตรวจวัด กนอ.</p></div><div class="network-animation" aria-hidden="true"><svg viewBox="0 0 700 700" preserveAspectRatio="xMidYMid slice"><path d="M100 170Q300 40 350 350M590 140Q450 150 350 350M100 570Q120 400 350 350M600 550Q520 400 350 350" class="net-line"/><circle r="4" class="packet"><animateMotion dur="5s" repeatCount="indefinite" path="M100 170Q300 40 350 350"/></circle><circle r="4" class="packet"><animateMotion dur="6s" repeatCount="indefinite" path="M590 140Q450 150 350 350"/></circle><circle r="4" class="packet"><animateMotion dur="4s" repeatCount="indefinite" path="M100 570Q120 400 350 350"/></circle><circle cx="350" cy="350" r="35" class="core-ring"/><circle cx="350" cy="350" r="24" fill="#1E1735" stroke="#A044FF"/><text x="350" y="354" text-anchor="middle" fill="white" font-size="11">EMCC</text></svg><span>ภาพอธิบายการรวมข้อมูล · ไม่ใช่การรับส่งสัญญาณสด</span></div><div id="simMapPanel" class="sim-map-panel" hidden><span class="sim-badge">สถานการณ์จำลอง</span><h3 id="simMapTitle"></h3><p id="simMapText"></p><div class="sim-signal"><i></i><span id="simMapPhase"></span></div></div><div class="map-heading"><small>ENVIRONMENTAL MONITORING NETWORK</small><strong id="mapArea">เครือข่ายทั่วประเทศ</strong><span id="mapScope">เลือกนิคมฯ เพื่อสำรวจ</span></div><div class="map-note"><span class="dot"></span>ขอบเขตนิคมฯ · ผู้ประกอบการ · AQMs / WQMs / CEMs<br><span id="provinceStatus">กำลังโหลดเส้นจังหวัด…</span><br><small class="map-version">แผนที่ GISTDA 3D · ประเทศไทย</small></div></section></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
 (()=>{'use strict';const $=id=>document.getElementById(id),names={AQMs:'คุณภาพอากาศ',WQMs:'คุณภาพน้ำ',CEMs:'อากาศจากปล่อง'},colors={AQMs:'#437fce',WQMs:'#739943',CEMs:'#7773ae'};let rows=[],type='',map,layer,markers=new Map(),selected=null,historyStations=[];
 if(window.L){
@@ -365,7 +365,7 @@ async function loadOperators(){
    staged.forEach(g=>{const center=g.getBounds().getCenter(),p=map.project(center,map.getZoom()),key=Math.floor(p.x/38)+':'+Math.floor(p.y/38);if(!cells.has(key))cells.set(key,[]);cells.get(key).push(g);});
    cells.forEach(items=>{if(items.length===1){items[0].addTo(group);return;}const bounds=L.latLngBounds([]);items.forEach(g=>bounds.extend(g.getBounds()));const marker=L.marker(bounds.getCenter(),{pane:'operatorParcels',icon:mapMarkerIcon('operators',items.length)}).bindTooltip(items.length.toLocaleString('th-TH')+' ผู้ประกอบการ · คลิกเพื่อขยาย');marker.on('click',()=>map.fitBounds(bounds,{maxZoom:14,padding:[50,50]}));marker.addTo(group);});
   }if(gisEnabled.operators&&!map.hasLayer(group))group.addTo(map);
-  gisCount('operators',staged.length,staged.length.toLocaleString('th-TH')+' '+(parcels?'แปลง':'จุด')+' ในมุมมอง');if(threeViewer)refreshThreeD().catch(()=>{});
+  gisCount('operators',staged.length,staged.length.toLocaleString('th-TH')+' '+(parcels?'แปลง':'จุด')+' ในมุมมอง');if(threeViewer)refreshThreeD().then(()=>focusThreeD()).catch(()=>{});
  }catch(e){if(e.name!=='AbortError'&&sequence===operatorSequence){group.clearLayers();gisCount('operators',0,'โหลดไม่สำเร็จ');console.error('Operators',e);}}
 }
 async function loadProvinces(){
@@ -398,20 +398,20 @@ function loadCesium(){
  });
  return cesiumLoad;
 }
-function inThreeArea(coordinates){return coordinates&&coordinates[0]>=100.56&&coordinates[0]<=100.65&&coordinates[1]>=14.16&&coordinates[1]<=14.25;}
+function validThreeCoordinates(coordinates){return Array.isArray(coordinates)&&Number.isFinite(Number(coordinates[0]))&&Number.isFinite(Number(coordinates[1]))&&Math.abs(coordinates[0])<=180&&Math.abs(coordinates[1])<=90;}
 async function refreshThreeD(){
  if(!threeViewer)return;
  const C=window.Cesium,version=++threeSyncVersion;
  const q=$('estate').value.trim();
  threeViewer.entities.removeAll();
- if(gisEnabled.office)gisFeatures.office.filter(f=>inThreeArea(f.geometry?.coordinates)).forEach(f=>{threeViewer.entities.add({name:geoName(f,'office'),position:C.Cartesian3.fromDegrees(...f.geometry.coordinates.slice(0,2),20),billboard:{image:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(mapSymbolSVG('office')),width:34,height:42,disableDepthTestDistance:Infinity},description:'ตำแหน่งสำนักงานนิคมฯ · ArcGIS กนอ.'});});
- rows.filter(r=>valid(r)&&gisEnabled[r.system]&&inThreeArea(r.geometry.coordinates)&&(!type||r.system===type)).forEach(r=>{
+ if(gisEnabled.office)gisFeatures.office.filter(f=>validThreeCoordinates(f.geometry?.coordinates)&&estateMatch(geoName(f,'office'),q)).forEach(f=>{threeViewer.entities.add({name:geoName(f,'office'),position:C.Cartesian3.fromDegrees(...f.geometry.coordinates.slice(0,2),20),billboard:{image:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(mapSymbolSVG('office')),width:34,height:42,disableDepthTestDistance:Infinity},description:'ตำแหน่งสำนักงานนิคมฯ · ArcGIS กนอ.'});});
+ rows.filter(r=>valid(r)&&gisEnabled[r.system]&&validThreeCoordinates(r.geometry.coordinates)&&estateMatch(r.properties.IndustryZone,q)&&(!type||r.system===type)).forEach(r=>{
   const p=r.properties;
   threeViewer.entities.add({name:r.system+' · '+(p.Code||''),position:C.Cartesian3.fromDegrees(...r.geometry.coordinates.slice(0,2),25),billboard:{image:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(mapSymbolSVG(r.system)),width:29,height:34,disableDepthTestDistance:Number.POSITIVE_INFINITY},description:pointPopup(r)});
  });
- const estateFeatures=gisEnabled.boundary?gisFeatures.boundary.filter(f=>estateMatch(geoName(f,'boundary'),'บางปะอิน')):[];
+ const estateFeatures=gisEnabled.boundary?gisFeatures.boundary.filter(f=>estateMatch(geoName(f,'boundary'),q)):[];
  const operatorFeatures=[];if(gisEnabled.operators)gisGroups.operators?.eachLayer(g=>{
-  if(!g.getBounds||!g.getBounds().isValid())return;const center=g.getBounds().getCenter();if(!inThreeArea([center.lng,center.lat]))return;
+  if(!g.getBounds||!g.getBounds().isValid())return;const center=g.getBounds().getCenter();if(!validThreeCoordinates([center.lng,center.lat]))return;
   const data=g.toGeoJSON();(data.features||[data]).forEach(f=>{f.properties={...f.properties,name:f.properties['ชื่อบริษัทภาษาไทย']||f.properties['ชื่อบริษัทภาษาอังกฤษ']||'แปลงผู้ประกอบการ'};operatorFeatures.push(f);});
  });
  const collection={type:'FeatureCollection',features:[...estateFeatures,...operatorFeatures]};
@@ -421,48 +421,88 @@ async function refreshThreeD(){
  threeSource=source;await threeViewer.dataSources.add(source);threeViewer.scene.requestRender();
 }
 $('show2D').onclick=()=>{switchTo2D();threeMessage('');};
-$('show3D').onclick=async()=>{
- stopDemo();pauseScenario();const button=$('show3D');button.disabled=true;
- threeMessage('กำลังตรวจข้อมูลอาคาร GISTDA 3 มิติ…');
+
+let gistdaSessionKey='',gistdaLiveTiles=null,gistdaConnecting=false,threeAreaFocus=null;
+const gistdaEntry='https://api-gateway.gistda.or.th/api/2.0/resources/3d-tiles/thailand-lod/tileset.json';
+function focusThreeD(force=false){
+ if(!threeViewer)return;const C=window.Cesium,q=$('estate').value.trim();
+ if(!force&&q===threeAreaFocus)return;threeAreaFocus=q;
+ const coordinates=[];
+ const collect=value=>{if(Array.isArray(value)&&typeof value[0]==='number'){if(validThreeCoordinates(value))coordinates.push(value);}else if(Array.isArray(value))value.forEach(collect);};
+ if(q){
+  gisFeatures.boundary.filter(f=>estateMatch(geoName(f,'boundary'),q)).forEach(f=>collect(f.geometry.coordinates));
+  rows.filter(r=>valid(r)&&estateMatch(r.properties.IndustryZone,q)).forEach(r=>collect(r.geometry.coordinates));
+ }
+ if(coordinates.length){
+  const xs=coordinates.map(p=>p[0]),ys=coordinates.map(p=>p[1]);
+  threeViewer.camera.flyTo({destination:C.Rectangle.fromDegrees(Math.min(...xs)-.008,Math.min(...ys)-.008,Math.max(...xs)+.008,Math.max(...ys)+.008),orientation:{heading:.18,pitch:-.75,roll:0},duration:1.4});
+ }else if(!q||force){
+  threeViewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(100.8,13.7,1800000),orientation:{heading:0,pitch:-1.3,roll:0},duration:1.4});
+ }
+}
+function promptGistdaKey(){
+ const dialog=$('gistdaKeyDialog');$('gistdaKeyStatus').textContent='';
+ if(!dialog.open)dialog.showModal();$('gistdaSessionKey').focus();
+}
+async function connectGistda(){
+ if(!gistdaSessionKey||!threeViewer||gistdaConnecting)return;
+ gistdaConnecting=true;$('gistdaConnection').disabled=true;threeMessage('กำลังเชื่อมต่ออาคาร 3D จาก GISTDA…');
  try{
-  const response=await fetch('./assets/gistda3d/bang-pa-in/status.json?v='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(15000)});
-  if(!response.ok)throw Error('กำลังเตรียมข้อมูลอาคารบางปะอิน กรุณาลองใหม่หลังงาน GitHub Actions เสร็จ');
-  const status=await response.json();
-  if(!status.ready)throw Error('ข้อมูล 3D ยังไม่พร้อม: '+status.message);
+  const C=window.Cesium;
+  const resource=new C.Resource({url:gistdaEntry,headers:{'API-Key':gistdaSessionKey}});
+  const tiles=await C.Cesium3DTileset.fromUrl(resource,{maximumScreenSpaceError:24,cacheBytes:128*1024*1024,dynamicScreenSpaceError:true});
+  tiles.colorBlendMode=C.Cesium3DTileColorBlendMode.REPLACE;
+  tiles.customShader=new C.CustomShader({
+   mode:C.CustomShaderMode.MODIFY_MATERIAL,lightingModel:C.LightingModel.PBR,translucencyMode:C.CustomShaderTranslucencyMode.OPAQUE,
+   fragmentShaderText:'void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) { material.diffuse = vec3(0.68); material.emissive = vec3(0.0); material.specular = vec3(0.0); material.roughness = 1.0; material.alpha = 1.0; }'
+  });
+  if(gistdaLiveTiles)threeViewer.scene.primitives.remove(gistdaLiveTiles);
+  threeViewer.scene.primitives.add(tiles);gistdaLiveTiles=tiles;
+  tiles.tileFailed.addEventListener(()=>threeMessage('โหลดอาคารบางส่วนไม่สำเร็จ ตรวจสิทธิ์ API และการเชื่อมต่อ GISTDA'));
+  $('gistdaConnection').textContent='เชื่อมต่อ GISTDA แล้ว';threeViewer.scene.requestRender();
+  threeMessage('เชื่อมต่อ GISTDA แล้ว · เลือกนิคมฯ หรือซูมเข้าเพื่อดูอาคาร');setTimeout(()=>{if(gistdaLiveTiles)threeMessage('');},5000);
+ }catch(error){
+  gistdaSessionKey='';$('gistdaConnection').textContent='API Key';
+  const code=Number(error?.statusCode||0);
+  const message=code===401||code===403?'คีย์ยังไม่มีสิทธิ์ใช้ Thailand LOD1 หรือหมดอายุ กรุณาตรวจสอบที่ GISTDA':'เชื่อมต่ออาคาร GISTDA ไม่สำเร็จ กรุณาตรวจคีย์และการอนุญาตเรียก API จากเว็บไซต์นี้';
+  $('gistdaKeyStatus').textContent=message;threeMessage(message);
+  if(!$('gistdaKeyDialog').open)$('gistdaKeyDialog').showModal();
+ }finally{gistdaConnecting=false;$('gistdaConnection').disabled=false;}
+}
+$('cancelGistdaKey').onclick=()=>{$('gistdaSessionKey').value='';$('gistdaKeyDialog').close();};
+$('gistdaKeyDialog').addEventListener('cancel',()=>{$('gistdaSessionKey').value='';});
+$('gistdaKeyForm').onsubmit=async event=>{
+ event.preventDefault();const key=$('gistdaSessionKey').value.trim();if(!key)return;
+ gistdaSessionKey=key;$('gistdaSessionKey').value='';$('gistdaKeyDialog').close();await connectGistda();
+};
+$('gistdaConnection').onclick=()=>{if(!$('map3d').hidden)promptGistdaKey();else $('show3D').click();};
+$('show3D').onclick=async()=>{
+ stopDemo();pauseScenario();const button=$('show3D');button.disabled=true;threeMessage('กำลังเปิดแผนที่ 3D…');
+ try{
   await loadCesium();const C=window.Cesium;
   if(!threeViewer){
    threeViewer=new C.Viewer('map3d',{baseLayer:false,baseLayerPicker:false,terrainProvider:new C.EllipsoidTerrainProvider(),animation:false,timeline:false,geocoder:false,homeButton:false,sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,requestRenderMode:true,maximumRenderTimeChange:Infinity,infoBox:true,selectionIndicator:true});
-   const provider=new C.UrlTemplateImageryProvider({url:'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:16,credit:'Esri, HERE, DeLorme, MapmyIndia, OpenStreetMap contributors'});
-   const imageLayer=threeViewer.imageryLayers.addImageryProvider(provider);imageLayer.saturation=0;imageLayer.brightness=1.05;imageLayer.contrast=.95;
-   const tiles=await C.Cesium3DTileset.fromUrl('./assets/gistda3d/bang-pa-in/tileset.json',{maximumScreenSpaceError:16,cacheBytes:96*1024*1024});
-   threeViewer.scene.primitives.add(tiles);
-   tiles.colorBlendMode=C.Cesium3DTileColorBlendMode.REPLACE;
-   tiles.customShader=new C.CustomShader({
-    mode:C.CustomShaderMode.MODIFY_MATERIAL,
-    lightingModel:C.LightingModel.PBR,
-    translucencyMode:C.CustomShaderTranslucencyMode.OPAQUE,
-    fragmentShaderText:'void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) { material.diffuse = vec3(0.68); material.emissive = vec3(0.0); material.specular = vec3(0.0); material.roughness = 1.0; material.alpha = 1.0; }'
+   const provider=new C.UrlTemplateImageryProvider({url:'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:16,credit:'Esri, HERE, DeLorme, OpenStreetMap contributors'});
+   const base=threeViewer.imageryLayers.addImageryProvider(provider);base.saturation=0;base.brightness=1.05;base.contrast=.95;
+   const frame=C.Transforms.eastNorthUpToFixedFrame(C.Cartesian3.fromDegrees(100.589,14.198));
+   const direction=C.Matrix4.multiplyByPointAsVector(frame,new C.Cartesian3(-.5,.25,-1),new C.Cartesian3());
+   threeViewer.scene.light=new C.DirectionalLight({direction:C.Cartesian3.normalize(direction,direction),intensity:1.3});
+   threeViewer.scene.globe.baseColor=C.Color.fromCssColorString('#f4f5f6');threeViewer.scene.globe.enableLighting=false;threeViewer.scene.globe.depthTestAgainstTerrain=false;threeViewer.scene.fog.enabled=false;
+   threeViewer.creditDisplay.addStaticCredit(new C.Credit('อาคาร 3D: GISTDA · Thailand LOD1',true));
+   threeViewer.camera.moveEnd.addEventListener(()=>{
+    if($('map3d').hidden||!map)return;
+    const rectangle=threeViewer.camera.computeViewRectangle();
+    if(rectangle)map.fitBounds([[C.Math.toDegrees(rectangle.south),C.Math.toDegrees(rectangle.west)],[C.Math.toDegrees(rectangle.north),C.Math.toDegrees(rectangle.east)]],{animate:false});
    });
-   const lightFrame=C.Transforms.eastNorthUpToFixedFrame(C.Cartesian3.fromDegrees(100.589,14.198));
-   const lightDirection=C.Matrix4.multiplyByPointAsVector(lightFrame,new C.Cartesian3(-.5,.25,-1),new C.Cartesian3());
-   threeViewer.scene.light=new C.DirectionalLight({direction:C.Cartesian3.normalize(lightDirection,lightDirection),intensity:1.3});
-   threeViewer.scene.globe.enableLighting=false;
-   threeViewer.scene.fog.enabled=false;
-   threeViewer.scene.backgroundColor=C.Color.fromCssColorString('#f4f5f6');
-   threeViewer.scene.globe.baseColor=C.Color.fromCssColorString('#f4f5f6');
-   threeViewer.scene.globe.depthTestAgainstTerrain=false;
-   threeViewer.creditDisplay.addStaticCredit(new C.Credit('อาคาร 3D: GISTDA · Thailand LOD1 · ข้อมูลตัวอย่างบางปะอิน',true));
-   tiles.tileFailed.addEventListener(()=>{threeMessage('โหลดอาคารบางส่วนไม่สำเร็จ กด 2D เพื่อกลับแผนที่ภาพรวม');});
   }
-  $('map3d').hidden=false;threeViewer.useDefaultRenderLoop=true;threeViewer.resize();
-  document.querySelector('.map-wrap').classList.add('mode-3d');
+  $('map3d').hidden=false;threeViewer.useDefaultRenderLoop=true;threeViewer.resize();document.querySelector('.map-wrap').classList.add('mode-3d');
   $('show2D').setAttribute('aria-pressed','false');button.setAttribute('aria-pressed','true');
-  await refreshThreeD();
-  threeViewer.camera.flyToBoundingSphere(new C.BoundingSphere(C.Cartesian3.fromDegrees(100.589,14.198,0),1000),{offset:new C.HeadingPitchRange(.18,-.62,5600),duration:1.6});
-  threeMessage('อาคาร 3D · บางปะอิน · ใช้ Ctrl + ลากเพื่อหมุนมุมมอง');setTimeout(()=>{if(!$('map3d').hidden)threeMessage('');},5000);
- }catch(e){
-  if(threeViewer){threeViewer.destroy();threeViewer=null;threeSource=null;}
-  switchTo2D();threeMessage(e.message||'เปิดแผนที่ 3 มิติไม่สำเร็จ ใช้แผนที่ 2D ต่อได้');
+  await refreshThreeD();focusThreeD(true);
+  if(!gistdaSessionKey){threeMessage('กรอก API Key เพื่อเชื่อมต่ออาคาร GISTDA');promptGistdaKey();}
+  else if(!gistdaLiveTiles)await connectGistda();else threeMessage('');
+ }catch(error){
+  if(threeViewer){threeViewer.destroy();threeViewer=null;threeSource=null;gistdaLiveTiles=null;}
+  switchTo2D();threeMessage('เปิดมุมมอง 3D ไม่สำเร็จในเบราว์เซอร์นี้ ใช้แผนที่ 2D ต่อได้');
  }finally{button.disabled=false;}
 };
 
@@ -549,5 +589,6 @@ drawResponse();$('simMapPanel').hidden=true;document.querySelector('.map-wrap').
 
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setType(b.dataset.type));$('estate').oninput=()=>{$('detail').hidden=true;render()};$('reset').onclick=()=>{$('estate').value='';$('detail').hidden=true;render()};
 fetch('./emonitoring-stations.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(j=>{if(!Array.isArray(j.features))throw Error('Invalid station data');rows=j.features.map(f=>({...f,system:f.properties.Type==='AIR QUALITY'?'AQMs':String(f.properties.Type).toUpperCase()==='WQMS'?'WQMs':String(f.properties.Type).toUpperCase()==='CEMS'?'CEMs':''})).filter(r=>r.system);[...new Set(rows.map(r=>r.properties.IndustryZone).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th')).forEach(e=>{const o=document.createElement('option');o.value=e;$('estates').append(o)});const d=new Date(j.fetched_at);$('stamp').textContent=Number.isNaN(d.getTime())?'ตรวจสอบเวลาข้อมูลรายสถานี':'ชุดข้อมูลดึงเมื่อ '+d.toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'medium',timeStyle:'short'});render()}).catch(e=>{$('stamp').textContent='โหลดข้อมูลไม่สำเร็จ กรุณาเปิดหน้าใหม่อีกครั้ง';$('stations').textContent='ยังไม่มีข้อมูลสำหรับแสดง';console.error(e)});
+requestAnimationFrame(()=>$('show3D').click());
 })();
 </script></body></html>
