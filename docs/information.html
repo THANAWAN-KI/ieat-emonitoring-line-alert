@@ -939,7 +939,7 @@ html body td{font-size:11px!important;line-height:1.35!important}
 (function(){
  function apply(){
   document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-   el.style.setProperty("font-family","Sarabun, TH Sarabun New, sans-serif","important");
+   el.style.setProperty("font-family",el.closest(".requested-monitor")?'Poppins, "Noto Sans Thai Looped", system-ui, sans-serif':"Sarabun, TH Sarabun New, sans-serif","important");
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
@@ -2834,7 +2834,14 @@ html body.monitor-mode .em-dashboard .expo-controls button[data-type="AQMs"] svg
 html body.monitor-mode .em-dashboard .expo-controls button[data-type="AQMs"] svg path[fill="#fff"]{fill:transparent!important}
 html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true][data-type="AQMs"] svg path[fill="#e3e3e3"]{fill:#ffffff30!important}
 @media(max-width:800px){html body.monitor-mode .em-dashboard .em-reference-shell{grid-template-columns:64px minmax(0,1fr)!important}}
-</style></body></html>
+</style><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="monitor-exact-reference-font">
+html body.monitor-mode,html body.monitor-mode .em-dashboard,html body.monitor-mode .em-dashboard *:not(svg):not(svg *):not(canvas):not(iframe),html body.monitor-mode .em-dashboard *::before,html body.monitor-mode .em-dashboard *::after{font-family:Poppins,"Noto Sans Thai Looped",system-ui,sans-serif!important}
+html body.monitor-mode .em-dashboard .expo-intro h2{font-size:26px!important;font-weight:700!important;line-height:1.45!important}
+</style>
+<script id="monitor-exact-reference-inline">
+(()=>{document.querySelectorAll('.em-dashboard [style]').forEach(el=>{if(el.style.fontFamily)el.style.setProperty('font-family','Poppins, "Noto Sans Thai Looped", system-ui, sans-serif','important')});})();
+</script></body></html>
 
 
 
