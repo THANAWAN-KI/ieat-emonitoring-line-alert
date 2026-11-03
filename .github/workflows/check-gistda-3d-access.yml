@@ -1,0 +1,46 @@
+name: Check GISTDA 3D API access
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/check-gistda-3d-access.yml]
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check API response without exposing key
+        env:
+          GISTDA_3D_API_KEY: ${{ secrets.GISTDA_3D_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os,json,urllib.request,urllib.error
+          from pathlib import Path
+          from datetime import datetime,timezone
+          result={'checked_at':datetime.now(timezone.utc).isoformat(),'service':'GISTDA Thailand LOD1'}
+          key=os.environ.get('GISTDA_3D_API_KEY','').strip()
+          try:
+              if not key:raise RuntimeError('Missing repository secret GISTDA_3D_API_KEY')
+              request=urllib.request.Request('https://api-gateway.gistda.or.th/api/2.0/resources/3d-tiles/thailand-lod/tileset.json',headers={'API-Key':key,'Range':'bytes=0-8191'})
+              with urllib.request.urlopen(request,timeout=35) as response:
+                  chunk=response.read(8192)
+                  result.update(http_status=response.status,content_type=response.headers.get('Content-Type'),content_length=response.headers.get('Content-Length'),json_prefix=chunk.lstrip().startswith(b'{'))
+              result['message']='API responded; full tileset download requires separate validation'
+          except urllib.error.HTTPError as error:
+              result.update(http_status=error.code,message='GISTDA returned HTTP '+str(error.code))
+          except Exception as error:
+              result['message']=str(error).replace(key,'[redacted]') if key else str(error)
+          path=Path('docs/assets/gistda3d/access-check.json');path.parent.mkdir(parents=True,exist_ok=True)
+          path.write_text(json.dumps(result,ensure_ascii=False));print(json.dumps(result,ensure_ascii=False))
+          PY
+      - name: Save diagnostic result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/gistda3d/access-check.json
+          git commit -m "Record GISTDA 3D API access check"
+          git pull --rebase origin main
+          git push origin HEAD:main
