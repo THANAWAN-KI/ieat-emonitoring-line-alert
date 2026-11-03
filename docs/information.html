@@ -2783,7 +2783,10 @@ html body.monitor-mode .em-dashboard #emPmMap{height:100%!important;inset:0!impo
 </style>
 <script id="monitor-left-rail-structure">
 (()=>{const root=document.querySelector('.em-dashboard'),shell=root?.querySelector('.em-reference-shell'),analytics=shell?.querySelector('.em-analytics'),nav=root?.querySelector('.expo-controls'),intro=root?.querySelector('.expo-intro');if(!shell||!analytics||!nav)return;shell.prepend(nav);if(intro)analytics.prepend(intro);nav.setAttribute('aria-label','เมนูประเภทข้อมูล e-Monitoring');window.dispatchEvent(new Event('resize'));})();
-</script></body></html>
+</script><style id="monitor-hide-site-header-final">
+html body.monitor-mode header#hubInformationHeader#hubInformationHeader#hubInformationHeader{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+html.monitor-standalone body header#hubInformationHeader#hubInformationHeader#hubInformationHeader{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important}
+</style></body></html>
 
 
 
