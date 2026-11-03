@@ -2869,6 +2869,24 @@ html body.monitor-mode .em-dashboard .expo-date svg{width:18px;height:18px;flex-
 </style>
 <script id="monitor-title-data-date">
 (()=>{const intro=document.querySelector('.em-dashboard .expo-intro');if(!intro)return;const date=document.createElement('div');date.className='expo-date';date.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 2v6m10-6v6M3 11h18"/></svg>';const label=document.createElement('span');date.append(label);intro.append(date);const source=document.getElementById('emExecutiveSnapshot');function sync(){const text=source?.textContent?.trim();label.textContent=text||'กำลังตรวจสอบวันที่อัปเดตข้อมูล';}if(source)new MutationObserver(sync).observe(source,{childList:true,subtree:true,characterData:true});sync();})();
+</script><style id="monitor-header-line-estate">
+html body.monitor-mode .em-dashboard .expo-intro{border:0!important;border-radius:0!important;padding:8px 4px 18px!important;box-shadow:0 6px 7px -6px #29252666!important;border-bottom:1px solid #dedde2!important;background:transparent!important;margin-bottom:8px!important}
+html body.monitor-mode .em-dashboard .expo-area-search{display:flex;align-items:center;gap:10px;margin-top:16px;color:#5B2D82;font-size:14px}
+html body.monitor-mode .em-dashboard .expo-area-search svg{width:19px;height:19px;flex-shrink:0}
+html body.monitor-mode .em-dashboard .expo-area-search input{width:100%;max-width:420px;border:1px solid #e3ddeb!important;border-radius:10px!important;padding:10px 12px!important;background:#fff!important;color:#292526!important;font-size:14px!important}
+html body.monitor-mode .em-dashboard .expo-area-search button{border:0;background:transparent;color:#5B2D82;font-size:13px;cursor:pointer;padding:8px;white-space:nowrap}
+html body.monitor-mode .em-dashboard .expo-area-result{font-size:12px;color:#777;margin-top:7px}
+</style>
+<script id="monitor-header-estate-search">
+(()=>{const root=document.querySelector('.em-dashboard'),intro=root?.querySelector('.expo-intro'),original=document.getElementById('emSearch');if(!intro||!original)return;
+const wrap=document.createElement('div');wrap.className='expo-area-search';wrap.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5"/><circle cx="14" cy="14" r="5"/><path d="m18 18 4 4"/></svg><input type="search" list="expoEstateOptions" placeholder="พื้นที่ทั้งหมด · ค้นหานิคมอุตสาหกรรม" aria-label="ค้นหาพื้นที่นิคมอุตสาหกรรม"><datalist id="expoEstateOptions"></datalist><button type="button">พื้นที่ทั้งหมด</button>';
+const hint=document.createElement('div');hint.className='expo-area-result';hint.setAttribute('role','status');intro.append(wrap,hint);
+const input=wrap.querySelector('input'),options=wrap.querySelector('datalist');
+function populate(){const names=[...new Set((window.__emRows||[]).map(s=>s.estate).filter(s=>s&&s!=='-'))].sort((a,b)=>a.localeCompare(b,'th'));if(names.join('|')===options.dataset.names)return;options.dataset.names=names.join('|');options.replaceChildren(...names.map(name=>{const o=document.createElement('option');o.value=name;return o}));}
+function apply(){const value=input.value.trim();original.value=value;const exact=[...options.options].some(o=>o.value===value);if(exact)original.dataset.exactEstate=value;else delete original.dataset.exactEstate;original.dispatchEvent(new Event('input',{bubbles:true}));if(exact)window.focusMonitoringEstate?.(value,document.getElementById('emType')?.value||'');hint.textContent=value?(exact?'พื้นที่ที่เลือก: '+value:'กำลังค้นหานิคมฯ: '+value):'แสดงทุกพื้นที่นิคมอุตสาหกรรม';}
+input.addEventListener('input',apply);input.addEventListener('change',apply);wrap.querySelector('button').onclick=()=>{input.value='';apply();window.focusMonitoringEstate?.('',document.getElementById('emType')?.value||'');};
+original.addEventListener('input',()=>{if(input.value!==original.value)input.value=original.value;});const kpis=root.querySelector('.em-kpis');if(kpis)new MutationObserver(populate).observe(kpis,{childList:true,subtree:true,characterData:true});populate();
+})();
 </script></body></html>
 
 
