@@ -652,7 +652,18 @@ html body.monitor-mode .em-dashboard.em-presenting{height:100dvh;width:100vw;ove
 html body.monitor-mode .em-dashboard.em-presenting .em-reference-shell{height:calc(100dvh - 82px)}
 @media(max-width:900px){html body.monitor-mode .em-reference-shell{height:auto}}
 @media(max-width:600px){html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong{font-size:29px!important}html body.monitor-mode .em-presentation-toolbar{height:auto;min-height:30px}html body.monitor-mode .em-data-stamp{font-size:8px;max-width:60%}html body.monitor-mode .em-presentation-toggle{font-size:9px;padding:7px 9px}}
-</style><style>html body.monitor-mode .em-dashboard.em-presenting{position:fixed;inset:0;z-index:10000;max-width:none;margin:0}</style></head><body>
+</style><style>html body.monitor-mode .em-dashboard.em-presenting{position:fixed;inset:0;z-index:10000;max-width:none;margin:0}</style><script id="monitor-standalone-init">
+if(new URLSearchParams(location.search).get('standalone')==='1'){
+document.documentElement.classList.add('monitor-standalone');
+if(location.hash!=='#monitor')history.replaceState(null,'',location.pathname+location.search+'#monitor');
+}
+</script>
+<style id="monitor-standalone-style">
+html.monitor-standalone body>.header,html.monitor-standalone #hubInformationHeader,html.monitor-standalone body>.tabs,html.monitor-standalone nav.tabs{display:none!important}
+html.monitor-standalone body.monitor-mode .requested-monitor{margin-top:0!important;padding-top:0!important;min-height:100dvh!important}
+html.monitor-standalone body.monitor-mode .em-dashboard{min-height:100dvh!important}
+html.monitor-standalone body.monitor-mode .em-presentation-toolbar{margin-top:0!important}
+</style></head><body>
 <header class="header" id="hubInformationHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><div><h1>ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</h1></div></div><div class="header-right"><button class="clock" id="clock" aria-expanded="false"></button><div class="scope-wrap"><button class="scope" id="scopeBtn" aria-expanded="false">พื้นที่นิคมอุตสาหกรรมทั่วประเทศ</button><div class="estate-pop" id="estatePop"><div class="search-box"><img src="./assets/search.png" alt=""><input id="estateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม"></div><div class="estate-list" id="estateList"></div></div></div><nav class="header-actions" aria-label="เมนูหลัก"><a class="main-nav-link" href="./daily-situation.html">หน้าแรก</a><a class="main-nav-link nav-active" href="./information.html#overview" aria-current="page">ข้อมูล</a><a class="main-nav-link" href="./hub.html">ภัยพิบัติ</a></nav></div><div class="weather-pop" id="weatherPop"><div class="weather-item"><img class="weather-symbol" src="./assets/extreme-rain-fill.png" alt=""><b id="rainValue">กำลังโหลด</b><span>ปริมาณฝน</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/humidity-fill.png" alt=""><b id="humidityValue">กำลังโหลด</b><span>ความชื้นสัมพัทธ์</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/windsock.png" alt=""><b id="directionValue">กำลังโหลด</b><span>ทิศทางลม</span></div><div class="weather-item"><img class="weather-symbol" src="./assets/wind-onshore-fill.png" alt=""><b id="windValue">กำลังโหลด</b><span>ความเร็วลม</span></div></div></header>
 <nav class="tabs"><button class="tab active" data-tab="overview">ภาพรวม</button><button class="tab" data-tab="gis">ข้อมูลระบบ GIS</button><button class="tab" data-tab="monitor">e‑Monitoring</button><button class="tab" data-tab="water">ข้อมูลระดับน้ำ</button><button class="tab" data-tab="epp">e-PP</button></nav>
 <section class="requested-overview"><span id="period" hidden></span>
