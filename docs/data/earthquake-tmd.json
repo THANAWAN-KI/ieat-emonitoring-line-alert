@@ -3,13 +3,82 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-03T16:16:29.091473+00:00",
+    "fetchedAt": "2026-11-03T21:50:38.114641+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793628454000,
-    "latestEvent": 1793717868000
+    "oldestEvent": 1793650754000,
+    "latestEvent": 1793736514000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17366",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.789,
+          14.859,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.3,
+        "place": "ประเทศเวียดนาม",
+        "time": 1793736514000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17366",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17368",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          93.567,
+          23.331,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.5,
+        "place": "ประเทศเมียนมา",
+        "time": 1793729713000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17368",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17367",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.331,
+          22.877,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.9,
+        "place": "มณฑลยูนนาน, ประเทศจีน",
+        "time": 1793729458000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17367",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17365",
@@ -164,75 +233,6 @@
         "place": "มณฑลยูนนาน, ประเทศจีน",
         "time": 1793650754000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17359",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17358",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          105.961,
-          18.098,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.9,
-        "place": "ประเทศเวียดนาม",
-        "time": 1793641400000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17358",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17357",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.927,
-          21.012,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.8,
-        "place": "ประเทศเมียนมา",
-        "time": 1793631135000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17357",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17356",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.436,
-          21.795,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.7,
-        "place": "ประเทศเมียนมา",
-        "time": 1793628454000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17356",
         "source": "TMD",
         "types": "",
         "detail": null,
