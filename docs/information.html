@@ -2640,51 +2640,22 @@ const audience=document.createElement('section');audience.className='expo-audien
 root.append(audience);
 })();
 </script>
-<style id="expo-visitor-value-style">
-html body.monitor-mode .expo-visitor{margin:0 0 18px;padding:20px;border:1px solid #eadfea;border-radius:16px;background:#fff}
-html body.monitor-mode .expo-visitor h2{font-size:22px;margin:0 0 6px}
-html body.monitor-mode .expo-visitor p{font-size:13px;line-height:1.8;margin:4px 0}
-html body.monitor-mode .expo-visitor label{display:block;margin:12px 0 8px;font-size:13px;font-weight:600;color:#4b164c}
-html body.monitor-mode .expo-visitor select{width:100%;max-width:560px;padding:10px;border-radius:8px}
-html body.monitor-mode .expo-value-result{padding:14px 16px;background:#faf4fa;border-radius:10px;margin-top:10px}
-html body.monitor-mode .expo-try{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-html body.monitor-mode .expo-try button{padding:14px;border:1px solid #dfcbe1;border-radius:12px;background:#fff;text-align:left;color:#4b164c;cursor:pointer;font:inherit}
-html body.monitor-mode .expo-try b{display:block;font-size:15px}
-html body.monitor-mode .expo-try span{display:block;font-size:12px;margin-top:5px;line-height:1.6}
-html body.monitor-mode .expo-try button:hover{background:#f8e7f6}
-html body.monitor-mode .expo-takeaway{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}
-html body.monitor-mode .expo-takeaway button{padding:10px 16px;background:#4b164c;color:white;border:0;border-radius:9px;cursor:pointer;font:inherit}
-html body.monitor-mode .expo-visitor :focus-visible{outline:3px solid #dd88cf;outline-offset:3px}
-@media(max-width:650px){html body.monitor-mode .expo-try{grid-template-columns:1fr}}
-html body.monitor-mode .expo-start{margin-top:14px;padding:12px 20px;border:0;border-radius:10px;background:#4b164c;color:#fff;font:inherit;font-weight:600;cursor:pointer}
-html body.monitor-mode .expo-reading-guide{padding:12px 16px;border-left:4px solid #dd88cf;background:#faf4fa;font-size:13px;color:#4b164c!important}
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="monitor-clean-pm25-font">
+html body.monitor-mode,html body.monitor-mode *:not(svg):not(svg *):not(canvas):not(iframe),html body.monitor-mode *::before,html body.monitor-mode *::after{font-family:"Sarabun","TH Sarabun New",sans-serif!important}
+html body.monitor-mode{font-size:16px!important;font-weight:400!important;line-height:1.6!important}
+html body.monitor-mode .em-dashboard .em-panel>header h2,html body.monitor-mode .em-dashboard .em-visual-card h2{font-size:20px!important;font-weight:600!important;line-height:1.45!important}
+html body.monitor-mode .em-dashboard .em-kpis article strong{font-size:28px!important;font-weight:500!important;line-height:1.15!important}
+html body.monitor-mode .em-dashboard .em-table-wrap :is(th,td){font-size:12px!important;line-height:1.4!important}
+html body.monitor-mode .expo-intro{margin-bottom:12px;padding-bottom:12px}
+html body.monitor-mode .expo-intro h2{font-size:24px!important;font-weight:600!important;line-height:1.4!important}
+html body.monitor-mode .expo-badge,html body.monitor-mode .expo-intro small{display:none!important}
 </style>
-<script id="expo-visitor-value">
-(()=>{
-const root=document.querySelector('.em-dashboard');if(!root)return;
-const box=document.createElement('section');box.className='expo-visitor';box.setAttribute('aria-label','สำรวจข้อมูลสิ่งแวดล้อม');
-box.innerHTML='<h2>สำรวจข้อมูลสิ่งแวดล้อม</h2><p>เลือกพื้นที่และประเภทสถานี เพื่อดูข้อมูลตรวจวัดและเวลาอัปเดต</p><div class="expo-try"><button type="button" data-try="area"><b>01 เลือกพื้นที่ที่คุณสนใจ</b><span>เปิดช่องค้นหา ลองพิมพ์ชื่อนิคมฯ เช่น มาบตาพุด แล้วดูสถานีในพื้นที่</span></button><button type="button" data-try="type"><b>02 ลองเลือกอากาศ น้ำ หรือปล่อง</b><span>กดประเภทข้อมูลด้านบน แล้วดูจำนวนสถานีในกราฟและรายการที่เปลี่ยนไป</span></button><button type="button" data-try="station"><b>03 เปิดข้อมูลสถานีด้วยตัวเอง</b><span>กดชื่อสถานีในตาราง เพื่อดูค่าตรวจวัด หน่วย และเวลาของข้อมูล</span></button></div><p id="expoTryHint" role="status">เริ่มได้ทันที: เลือกหนึ่งขั้นตอน แล้วทดลองกับข้อมูลที่แสดงอยู่จริง</p><div class="expo-takeaway"><button type="button" id="expoCopyLink">เก็บลิงก์ไว้ดูต่อหลังจบงาน</button><span id="expoCopyStatus" role="status"></span></div>';
-root.querySelector('.expo-controls')?.after(box);
+<script id="monitor-clean-overview">
+(()=>{const root=document.querySelector('.em-dashboard');if(!root)return;
 const intro=root.querySelector('.expo-intro');
-if(intro){
-intro.querySelector('h2').textContent='ภาพรวมการเฝ้าระวังสิ่งแวดล้อม';
-intro.querySelector('p').textContent='e-Monitoring · คุณภาพอากาศ คุณภาพน้ำ และการระบายอากาศจากปล่อง';
-const start=document.createElement('button');start.type='button';start.className='expo-start';start.textContent='ลองสำรวจนิคมฯ ที่คุณสนใจ →';
-start.onclick=()=>box.querySelector('[data-try="area"]').click();intro.querySelector('div').append(start);
-}
-const guide=document.createElement('p');guide.className='expo-reading-guide';guide.textContent='อ่านข้อมูลให้ได้ประโยชน์: สถานีอยู่ที่ไหน → ตรวจวัดอะไร → หน่วยอะไร → อัปเดตเมื่อไร → ใช้ประกอบงานใด';
-root.querySelector('.em-reference-shell')?.before(guide);
-box.querySelectorAll('[data-try]').forEach(button=>button.onclick=()=>{
-const action=button.dataset.try;let target;
-if(action==='area'){target=document.getElementById('emSearch');box.querySelector('#expoTryHint').textContent='พิมพ์ชื่อนิคมฯ ในช่องค้นหา แล้วกดชื่อสถานีในผลลัพธ์เพื่อเปิดรายละเอียด'}
-if(action==='type'){target=root.querySelector('.expo-controls');box.querySelector('#expoTryHint').textContent='เลือกปุ่มอากาศ น้ำ หรือปล่อง แล้วเปรียบเทียบกราฟจำนวนสถานีและรายการด้านล่าง'}
-if(action==='station'){target=root.querySelector('.em-station-row');box.querySelector('#expoTryHint').textContent='กดชื่อสถานีหนึ่งแห่งในตาราง แล้วตรวจสอบค่าที่วัด หน่วย และวันเวลาในรายละเอียด'}
-target?.scrollIntoView({behavior:'smooth',block:'center'});if(action==='area')target?.focus({preventScroll:true});else target?.querySelector('button')?.focus({preventScroll:true});
-});
-box.querySelector('#expoCopyLink').onclick=async()=>{
-const url=new URL(location.href);url.search='';url.hash='monitor';const status=box.querySelector('#expoCopyStatus');
-try{await navigator.clipboard.writeText(url.href);status.textContent='คัดลอกแล้ว · ส่งให้ตัวเองเพื่อเปิดดูต่อได้'}catch(e){status.textContent='คัดลอกลิงก์นี้: '+url.href}
-};
+if(intro){intro.querySelector('h2').textContent='ภาพรวมการเฝ้าระวังสิ่งแวดล้อม';intro.querySelector('p').textContent='e-Monitoring · คุณภาพอากาศ คุณภาพน้ำ และการระบายอากาศจากปล่อง';}
+const links=root.querySelector('.expo-audience');if(links)links.remove();
 })();
 </script></body></html>
 
