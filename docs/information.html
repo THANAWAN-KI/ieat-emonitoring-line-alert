@@ -2636,7 +2636,7 @@ const controls=document.createElement('nav');controls.className='expo-controls';
 [['','ภาพรวมทุกระบบ'],['AQMs','อากาศ · AQMs'],['WQMs','น้ำ · WQMs'],['CEMs','ปล่อง · CEMs']].forEach(([value,label])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.type=value;b.setAttribute('aria-pressed',String(!value));b.onclick=()=>{const select=document.getElementById('emType');if(select){select.value=value;select.dispatchEvent(new Event('change',{bubbles:true}))}const chart=root.querySelector('.em-estate-card select');if(chart){chart.value=value;chart.dispatchEvent(new Event('change',{bubbles:true}))}};controls.append(b)});
 intro.after(controls);
 const select=document.getElementById('emType');const sync=()=>controls.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.type===(select?.value||''))));select?.addEventListener('change',sync);sync();
-const audience=document.createElement('section');audience.className='expo-audience';audience.innerHTML='<h2>ข้อมูลเดียวกัน สร้างประโยชน์ได้หลายมิติ</h2><div class="expo-use-grid"><article><h3>ภาครัฐและหน่วยงานพื้นที่</h3><p>เห็นเครือข่ายตรวจวัดและสถานะข้อมูล เพื่อจัดลำดับการติดตามและประสานงานในพื้นที่</p></article><article><h3>โรงงาน วิศวกร และธุรกิจน้ำ</h3><p>ติดตามคุณภาพน้ำ อากาศ และการระบายจากปล่อง เพื่อสนับสนุนการตรวจสอบระบบและวางแผนบำรุงรักษา</p></article><article><h3>นักลงทุนและผู้พัฒนาพื้นที่</h3><p>ใช้บริบทสิ่งแวดล้อมประกอบการศึกษาพื้นที่ สำหรับอสังหาริมทรัพย์ คลังสินค้า ขนส่ง โรงแรม และกิจการบริการ</p></article><article><h3>นักวิชาการและเครือข่ายความร่วมมือ</h3><p>ใช้ข้อมูลประกอบการศึกษา ออกแบบ และหารือความร่วมมือ สำหรับที่ปรึกษา สถาปนิก สมาคม และสถานทูต</p></article></div><div class="expo-links"><a href="./flood-report.html">ติดตามสถานการณ์น้ำและภัยพิบัติ ↗</a><a href="./hub.html?view=data">DSS / RiskMap · สนับสนุนเหตุฉุกเฉิน ↗</a></div><p class="expo-scope">ข้อมูลที่แสดงในหน้านี้: AQMs · WQMs · CEMs — ตรวจสอบวันเวลาและรายละเอียดรายสถานีก่อนนำไปใช้ | การจัดการขยะและสุขอนามัยอุตสาหกรรมยังไม่มีชุดข้อมูลแสดงในหน้านี้</p>';
+const audience=document.createElement('section');audience.className='expo-audience';audience.innerHTML='<h2>ระบบที่เกี่ยวข้อง</h2><div class="expo-links"><a href="./flood-report.html">ติดตามสถานการณ์น้ำและภัยพิบัติ ↗</a><a href="./hub.html?view=data">DSS / RiskMap · สนับสนุนเหตุฉุกเฉิน ↗</a></div><p class="expo-scope">ข้อมูลที่แสดงในหน้านี้: AQMs · WQMs · CEMs — ตรวจสอบวันเวลาและรายละเอียดรายสถานีก่อนนำไปใช้ | การจัดการขยะและสุขอนามัยอุตสาหกรรมยังไม่มีชุดข้อมูลแสดงในหน้านี้</p>';
 root.append(audience);
 })();
 </script>
@@ -2662,29 +2662,18 @@ html body.monitor-mode .expo-reading-guide{padding:12px 16px;border-left:4px sol
 <script id="expo-visitor-value">
 (()=>{
 const root=document.querySelector('.em-dashboard');if(!root)return;
-const box=document.createElement('section');box.className='expo-visitor';box.setAttribute('aria-label','ผู้ชมได้อะไรและทดลองใช้งาน');
-box.innerHTML='<h2>มาที่บูธนี้ คุณได้อะไรกลับไป?</h2><p>รู้ว่าจะดูข้อมูลสิ่งแวดล้อมของพื้นที่ที่สนใจจากที่ไหน อ่านข้อมูลอย่างไร และนำไปตั้งคำถามหรือวางแผนงานต่อได้อย่างไร</p><label for="expoVisitorRole">เลือกงานของคุณ เพื่อดูประโยชน์ที่เกี่ยวข้อง</label><select id="expoVisitorRole"><option value="public">ภาครัฐ / รัฐวิสาหกิจ / หน่วยงานพื้นที่</option><option value="factory">โรงงาน / วิศวกร / ผู้ดูแลระบบน้ำและน้ำเสีย</option><option value="design">สถาปนิก / นักออกแบบ / อสังหาริมทรัพย์ / ผู้รับเหมา</option><option value="business">นักลงทุน / คลังสินค้า / ขนส่ง / ร้านค้า / โรงแรม</option><option value="health">โรงพยาบาล / ผู้ดูแลสุขอนามัย / ชุมชน</option><option value="research">นักวิชาการ / ที่ปรึกษา / สมาคม / สถานทูต</option></select><div class="expo-value-result" aria-live="polite"></div><div class="expo-try"><button type="button" data-try="area"><b>01 เลือกพื้นที่ที่คุณสนใจ</b><span>เปิดช่องค้นหา ลองพิมพ์ชื่อนิคมฯ เช่น มาบตาพุด แล้วดูสถานีในพื้นที่</span></button><button type="button" data-try="type"><b>02 ลองเลือกอากาศ น้ำ หรือปล่อง</b><span>กดประเภทข้อมูลด้านบน แล้วดูจำนวนสถานีในกราฟและรายการที่เปลี่ยนไป</span></button><button type="button" data-try="station"><b>03 เปิดข้อมูลสถานีด้วยตัวเอง</b><span>กดชื่อสถานีในตาราง เพื่อดูค่าตรวจวัด หน่วย และเวลาของข้อมูล</span></button></div><p id="expoTryHint" role="status">เริ่มได้ทันที: เลือกหนึ่งขั้นตอน แล้วทดลองกับข้อมูลที่แสดงอยู่จริง</p><div class="expo-takeaway"><button type="button" id="expoCopyLink">เก็บลิงก์ไว้ดูต่อหลังจบงาน</button><span id="expoCopyStatus" role="status"></span></div>';
+const box=document.createElement('section');box.className='expo-visitor';box.setAttribute('aria-label','สำรวจข้อมูลสิ่งแวดล้อม');
+box.innerHTML='<h2>สำรวจข้อมูลสิ่งแวดล้อม</h2><p>เลือกพื้นที่และประเภทสถานี เพื่อดูข้อมูลตรวจวัดและเวลาอัปเดต</p><div class="expo-try"><button type="button" data-try="area"><b>01 เลือกพื้นที่ที่คุณสนใจ</b><span>เปิดช่องค้นหา ลองพิมพ์ชื่อนิคมฯ เช่น มาบตาพุด แล้วดูสถานีในพื้นที่</span></button><button type="button" data-try="type"><b>02 ลองเลือกอากาศ น้ำ หรือปล่อง</b><span>กดประเภทข้อมูลด้านบน แล้วดูจำนวนสถานีในกราฟและรายการที่เปลี่ยนไป</span></button><button type="button" data-try="station"><b>03 เปิดข้อมูลสถานีด้วยตัวเอง</b><span>กดชื่อสถานีในตาราง เพื่อดูค่าตรวจวัด หน่วย และเวลาของข้อมูล</span></button></div><p id="expoTryHint" role="status">เริ่มได้ทันที: เลือกหนึ่งขั้นตอน แล้วทดลองกับข้อมูลที่แสดงอยู่จริง</p><div class="expo-takeaway"><button type="button" id="expoCopyLink">เก็บลิงก์ไว้ดูต่อหลังจบงาน</button><span id="expoCopyStatus" role="status"></span></div>';
 root.querySelector('.expo-controls')?.after(box);
 const intro=root.querySelector('.expo-intro');
 if(intro){
-intro.querySelector('h2').textContent='ลองสำรวจพื้นที่ของคุณ';
-intro.querySelector('p').textContent='รู้ว่าติดตามอะไร เห็นข้อมูลจากที่ไหน และนำไปใช้ต่ออย่างไร';
+intro.querySelector('h2').textContent='ภาพรวมการเฝ้าระวังสิ่งแวดล้อม';
+intro.querySelector('p').textContent='e-Monitoring · คุณภาพอากาศ คุณภาพน้ำ และการระบายอากาศจากปล่อง';
 const start=document.createElement('button');start.type='button';start.className='expo-start';start.textContent='ลองสำรวจนิคมฯ ที่คุณสนใจ →';
 start.onclick=()=>box.querySelector('[data-try="area"]').click();intro.querySelector('div').append(start);
 }
 const guide=document.createElement('p');guide.className='expo-reading-guide';guide.textContent='อ่านข้อมูลให้ได้ประโยชน์: สถานีอยู่ที่ไหน → ตรวจวัดอะไร → หน่วยอะไร → อัปเดตเมื่อไร → ใช้ประกอบงานใด';
 root.querySelector('.em-reference-shell')?.before(guide);
-const messages={
-public:['สิ่งที่ได้: เห็นจุดตรวจวัดและช่องว่างของการเชื่อมต่อในพื้นที่','นำไปใช้ต่อ: จัดรายการสถานีที่ควรตรวจสอบข้อมูล และเตรียมคำถามเพื่อประสานผู้รับผิดชอบ'],
-factory:['สิ่งที่ได้: รู้ว่ามีสถานีอากาศ น้ำ และปล่องใดอยู่ในนิคมฯ ที่สนใจ','นำไปใช้ต่อ: เปิดรายละเอียดและเวลาตรวจวัด เพื่อประกอบการตรวจสอบหน้างานและวางแผนดูแลระบบ'],
-design:['สิ่งที่ได้: เห็นบริบทเครือข่ายตรวจวัดสิ่งแวดล้อมรอบพื้นที่ศึกษา','นำไปใช้ต่อ: ตั้งโจทย์สำรวจพื้นที่และรวบรวมข้อมูลเพิ่มเติมสำหรับการออกแบบและพัฒนาโครงการ'],
-business:['สิ่งที่ได้: รู้ช่องทางติดตามสิ่งแวดล้อมของพื้นที่ธุรกิจและหน้าติดตามภัยพิบัติ','นำไปใช้ต่อ: ใช้ประกอบการศึกษาทำเลและเตรียมแผนความต่อเนื่องทางธุรกิจร่วมกับข้อมูลด้านอื่น'],
-health:['สิ่งที่ได้: อ่านแนวโน้มฝุ่นและตรวจสอบเวลาอัปเดตของสถานีที่เกี่ยวข้อง','นำไปใช้ต่อ: ใช้ประกอบการวางแผนติดตามสภาพแวดล้อมของสถานประกอบการหรือชุมชน'],
-research:['สิ่งที่ได้: เข้าใจการเชื่อมข้อมูลสถานีตรวจวัดกับแผนที่และกราฟ','นำไปใช้ต่อ: ระบุพื้นที่ ประเภทข้อมูล และช่วงเวลาที่ต้องศึกษา เพื่อหารือการวิจัยหรือความร่วมมือต่อ']
-};
-const role=box.querySelector('select'),result=box.querySelector('.expo-value-result');
-function render(){result.replaceChildren();messages[role.value].forEach(t=>{const p=document.createElement('p');p.textContent=t;result.append(p)});const note=document.createElement('p');note.textContent='ก่อนใช้ตัดสินใจ: ตรวจสอบเวลา หน่วย และข้อมูลต้นทาง — ข้อมูลสถานีเป็นข้อมูลเฉพาะจุด';result.append(note)}
-role.addEventListener('change',render);render();
 box.querySelectorAll('[data-try]').forEach(button=>button.onclick=()=>{
 const action=button.dataset.try;let target;
 if(action==='area'){target=document.getElementById('emSearch');box.querySelector('#expoTryHint').textContent='พิมพ์ชื่อนิคมฯ ในช่องค้นหา แล้วกดชื่อสถานีในผลลัพธ์เพื่อเปิดรายละเอียด'}
