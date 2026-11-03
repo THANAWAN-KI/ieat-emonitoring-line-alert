@@ -939,7 +939,7 @@ html body td{font-size:11px!important;line-height:1.35!important}
 (function(){
  function apply(){
   document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-   el.style.setProperty("font-family",el.closest(".requested-monitor")?"Noto Sans Thai, Segoe UI, sans-serif":"Sarabun, TH Sarabun New, sans-serif","important");
+   el.style.setProperty("font-family","Sarabun, TH Sarabun New, sans-serif","important");
   });
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
@@ -2418,7 +2418,7 @@ root.prepend(shell);
 const old=root.querySelector('.em-layout');if(old)old.remove();
 const number=x=>Number(String(x).replace(/[^\d.]/g,''))||0;
 function sync(){const values=[...left.querySelectorAll('.em-kpis article strong')].map(x=>number(x.textContent)),[total,online,offline,aq,wq,ce]=values;const ready=left.querySelector('.em-kpis strong').textContent.match(/\d/);document.getElementById('emRingTotal').textContent=ready?total.toLocaleString('th-TH'):'—';
-let offset=0;const colors=['#43a8dd','#42c8b5','#406987'],counts=[aq,wq,ce];const parts=counts.map((count,i)=>{const begin=offset;offset+=total?count/total*100:0;return colors[i]+' '+begin+'% '+offset+'%'});document.getElementById('emTypeRing').style.background=ready&&total?'conic-gradient('+parts.join(',')+')':'#edf0f4';
+let offset=0;const colors=['#1ba4cb','#79d3f2','#175c80'],counts=[aq,wq,ce];const parts=counts.map((count,i)=>{const begin=offset;offset+=total?count/total*100:0;return colors[i]+' '+begin+'% '+offset+'%'});document.getElementById('emTypeRing').style.background=ready&&total?'conic-gradient('+parts.join(',')+')':'#edf0f4';
 document.getElementById('emRingLegend').innerHTML=['AQMs · อากาศ','WQMs · น้ำ','CEMs · ปล่อง'].map((name,i)=>'<div><span><i style="background:'+colors[i]+'"></i>'+name+'</span><b>'+(ready?counts[i].toLocaleString('th-TH'):'—')+'</b></div>').join('');
 const pct=total?online/total*100:0;document.getElementById('emGaugePath').setAttribute('stroke-dasharray',pct+' '+(100-pct));document.getElementById('emGaugeValue').textContent=ready?pct.toFixed(1)+' %':'—';document.getElementById('emOnlineValue').textContent=ready?online:'—';document.getElementById('emOfflineValue').textContent=ready?offline:'—';}
 new MutationObserver(sync).observe(left.querySelector('.em-kpis'),{subtree:true,childList:true,characterData:true});sync();
@@ -2668,7 +2668,46 @@ const intro=root.querySelector('.expo-intro');
 if(intro){intro.querySelector('h2').textContent='ภาพรวมการเฝ้าระวังสิ่งแวดล้อม';intro.querySelector('p').textContent='e-Monitoring · คุณภาพอากาศ คุณภาพน้ำ และการระบายอากาศจากปล่อง';}
 const links=root.querySelector('.expo-audience');if(links)links.remove();
 })();
-</script></body></html>
+</script><style id="monitor-reference-colors-gis-type">
+html body.monitor-mode,html body.monitor-mode .em-dashboard{background:#fff!important;color:#292526!important}
+html body.monitor-mode .em-dashboard{--em-navy:#175c80;--modern-blue:#1ba4cb;--modern-ink:#292526}
+html body.monitor-mode,html body.monitor-mode *:not(svg):not(svg *):not(canvas):not(iframe){font-family:"Sarabun","TH Sarabun New",sans-serif!important}
+html body.monitor-mode .em-dashboard :is(.em-panel,.em-visual-card,.em-kpis article,.em-snapshot,.em-detail){background:#fff!important;border:1px solid #dce1e4!important;box-shadow:0 2px 5px #00000012!important;border-radius:5px!important}
+html body.monitor-mode .em-dashboard :is(h2,h3,b,strong,td,th){color:#292526!important}
+html body.monitor-mode .em-dashboard :is(p,small,footer,.em-estate-name,.em-data-stamp,.em-ring-legend>div,.em-gauge-count span){color:#555f64!important}
+html body.monitor-mode .em-dashboard .em-panel>header h2,html body.monitor-mode .em-dashboard .em-visual-card h2{font-size:19px!important;font-weight:600!important}
+html body.monitor-mode .em-dashboard .em-panel>header p{font-size:14px!important}
+html body.monitor-mode .em-dashboard .em-panel>header>span{font-size:13px!important;background:#f4f6f7!important;color:#555f64!important}
+html body.monitor-mode .em-dashboard .em-kpis article strong{font-size:30px!important;font-weight:700!important;line-height:1!important;color:#175c80!important}
+html body.monitor-mode .em-dashboard .em-kpis article b{font-size:16px!important;line-height:1.4!important;font-weight:600!important;color:#292526!important}
+html body.monitor-mode .em-dashboard .em-kpis article small{font-size:13px!important}
+html body.monitor-mode .em-dashboard .em-kpis article:first-child{background:#fff!important}
+html body.monitor-mode .em-dashboard .em-kpis article>span{background:#edf7fb!important;color:#1ba4cb!important}
+html body.monitor-mode .em-dashboard .em-table-wrap :is(th,td){font-size:13px!important;color:#292526!important}
+html body.monitor-mode .em-dashboard .em-table-wrap th{background:#f1f4f5!important}
+html body.monitor-mode .em-dashboard .em-table-wrap tbody tr:nth-child(even){background:#fafcfc!important}
+html body.monitor-mode .em-dashboard :is(input,select){background:#fff!important;color:#292526!important;border-color:#dce1e4!important;color-scheme:light}
+html body.monitor-mode .em-dashboard .em-estate-track i{background:#1ba4cb!important;border-radius:2px 2px 0 0!important}
+html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(2n) i{background:#79d3f2!important}
+html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(3n) i{background:#175c80!important}
+html body.monitor-mode .em-dashboard :is(.em-estate-name,.em-bar-axis){font-size:12px!important}
+html body.monitor-mode .em-dashboard .em-ring>div{background:#fff!important}
+html body.monitor-mode .em-dashboard .em-ring-legend>div,html body.monitor-mode .em-dashboard .em-gauge-count span{font-size:13px!important}
+html body.monitor-mode .em-dashboard .em-semi path{stroke:#edf1f2!important}
+html body.monitor-mode .em-dashboard .em-semi #emGaugePath{stroke:#80b64c!important}
+html body.monitor-mode .em-dashboard .em-water-bars .em-measurement-row i em{background:#1ba4cb!important}
+html body.monitor-mode .em-dashboard .em-emission-list .em-measurement-row i em{background:#d9b826!important}
+html body.monitor-mode .em-dashboard .em-measurement-row i{background:#edf1f2!important}
+html body.monitor-mode .em-dashboard .em-pm-chart footer{background:#fff!important}
+html body.monitor-mode .em-dashboard :is(.em-map-chips,.em-clean-legend){background:#fffffff5!important;border-color:#dce1e4!important}
+html body.monitor-mode .em-dashboard .em-map-chips button{color:#175c80!important}
+html body.monitor-mode .em-dashboard .em-map-chips button.active,html body.monitor-mode .expo-controls button[aria-pressed=true],html body.monitor-mode .em-dashboard .em-presentation-toggle{background:#175c80!important;border-color:#175c80!important;color:#fff!important}
+html body.monitor-mode .expo-controls button{border-color:#dce1e4!important;color:#175c80;background:#fff}
+html body.monitor-mode .em-dashboard .em-clean-legend :is(b,span){color:#292526!important}
+html body.monitor-mode .expo-intro{border-color:#dce1e4!important}
+html body.monitor-mode .expo-intro h2{font-size:24px!important;color:#292526!important}
+html body.monitor-mode .em-dashboard :is(button,a,input,select):focus-visible{outline:3px solid #79d3f2!important}
+</style></body></html>
 
 
 
