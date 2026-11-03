@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 ENTRY = 'https://api-gateway.gistda.or.th/api/2.0/resources/3d-tiles/thailand-lod/tileset.json'
 OUTPUT = Path('docs/assets/gistda3d/bang-pa-in')
 KEY = os.environ.get('GISTDA_3D_API_KEY', '').strip()
-BBOX = [100.56, 14.16, 100.65, 14.25]
+BBOX = [100.574, 14.18, 100.607, 14.22]
 LIMIT = 150 * 1024 * 1024
 IDENTITY = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
 
@@ -53,9 +53,10 @@ def overlaps(volume, matrix):
     if distance < radius or distance < 6000000:
         return True
     lon = math.degrees(math.atan2(y, x))
-    lat = math.degrees(math.atan2(z, math.hypot(x,y)))
-    # Geocentric latitude differs from geodetic latitude: expand conservatively.
-    span = math.degrees(math.asin(min(1, radius/distance))) + .25
+    p = math.hypot(x, y)
+    theta = math.atan2(z * 6378137.0, p * 6356752.314245)
+    lat = math.degrees(math.atan2(z + .006739496742276 * 6356752.314245 * math.sin(theta)**3, p - .00669437999014 * 6378137.0 * math.cos(theta)**3))
+    span = math.degrees(math.asin(min(1, radius/distance))) + .002
     lon_span = span/max(.1, math.cos(math.radians(lat)))
     return not (lon+lon_span < BBOX[0] or lon-lon_span > BBOX[2] or lat+span < BBOX[1] or lat-span > BBOX[3])
 
@@ -131,6 +132,8 @@ class Snapshot:
                 self.binary_count += 1
         (self.folder/name).write_bytes(raw)
         self.files[key] = name
+        if len(self.files) % 10 == 0:
+            print('Downloaded',len(self.files),'resources;',self.total,'bytes',flush=True)
         self.active.remove(key)
         return name
 
