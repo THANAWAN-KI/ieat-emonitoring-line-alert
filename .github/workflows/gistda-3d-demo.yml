@@ -1,0 +1,39 @@
+name: Prepare GISTDA 3D Bang Pa-in
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/fetch_gistda_3d.py
+      - .github/workflows/gistda-3d-demo.yml
+permissions:
+  contents: write
+concurrency:
+  group: gistda-3d-demo
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch selected 3D tiles without publishing credentials
+        env:
+          GISTDA_3D_API_KEY: ${{ secrets.GISTDA_3D_API_KEY }}
+        run: python scripts/fetch_gistda_3d.py
+      - name: Publish snapshot or diagnostic status
+        if: always()
+        run: |
+          if [ -f docs/assets/gistda3d/bang-pa-in/status.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/assets/gistda3d/bang-pa-in/
+            if ! git diff --cached --quiet; then
+              git commit -m "Update GISTDA Bang Pa-in 3D snapshot"
+              git pull --rebase origin main
+              git push origin HEAD:main
+            fi
+          fi
