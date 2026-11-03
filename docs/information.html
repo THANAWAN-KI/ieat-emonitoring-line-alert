@@ -2818,7 +2818,23 @@ html body.monitor-mode .em-dashboard .em-reference-right{min-width:0!important}
 </style>
 <script id="monitor-reference-font-inline-fix">
 (()=>{const root=document.querySelector('.em-dashboard');if(!root)return;root.querySelectorAll('[style]').forEach(el=>{if(el.style.fontFamily)el.style.removeProperty('font-family')});})();
-</script></body></html>
+</script><style id="monitor-compact-navy-rail">
+html body.monitor-mode .em-dashboard .em-reference-shell{grid-template-columns:64px minmax(0,3fr) minmax(0,2fr)!important}
+html body.monitor-mode .em-dashboard .expo-controls{padding:12px 6px!important;gap:12px!important;align-items:center!important;background:#fff!important;box-shadow:3px 0 10px #172c4810!important}
+html body.monitor-mode .em-dashboard .expo-controls button{position:relative!important;width:48px!important;min-height:48px!important;height:48px!important;padding:3px!important;gap:0!important;border-radius:50%!important;color:#173b68!important}
+html body.monitor-mode .em-dashboard .expo-controls button>span:not(.rail-icon){display:none!important}
+html body.monitor-mode .em-dashboard .expo-controls button .rail-icon{width:42px!important;height:42px!important;background:transparent!important;color:#173b68!important;filter:none!important;box-shadow:none!important}
+html body.monitor-mode .em-dashboard .expo-controls button svg{width:23px!important;height:23px!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true] .rail-icon{background:#173b68!important;color:#fff!important;box-shadow:0 4px 9px #173b6838!important}
+html body.monitor-mode .em-dashboard .expo-controls button:hover .rail-icon{outline:0!important;background:#edf2f8!important;color:#173b68!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true]:hover .rail-icon{background:#173b68!important;color:#fff!important}
+html body.monitor-mode .em-dashboard .expo-controls button:focus-visible{outline:2px solid #173b68!important;outline-offset:2px!important}
+html body.monitor-mode .em-dashboard .expo-controls button[data-type="AQMs"] svg path[stroke]{stroke:currentColor!important}
+html body.monitor-mode .em-dashboard .expo-controls button[data-type="AQMs"] svg path[fill="#e3e3e3"]{fill:#173b6815!important}
+html body.monitor-mode .em-dashboard .expo-controls button[data-type="AQMs"] svg path[fill="#fff"]{fill:transparent!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true][data-type="AQMs"] svg path[fill="#e3e3e3"]{fill:#ffffff30!important}
+@media(max-width:800px){html body.monitor-mode .em-dashboard .em-reference-shell{grid-template-columns:64px minmax(0,1fr)!important}}
+</style></body></html>
 
 
 
