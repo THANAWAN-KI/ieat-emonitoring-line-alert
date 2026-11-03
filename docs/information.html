@@ -2665,7 +2665,7 @@ html body.monitor-mode .expo-badge,html body.monitor-mode .expo-intro small{disp
 <script id="monitor-clean-overview">
 (()=>{const root=document.querySelector('.em-dashboard');if(!root)return;
 const intro=root.querySelector('.expo-intro');
-if(intro){intro.querySelector('h2').textContent='ระบบเฝ้าระวังและติดตามตรวจสอบคุณภาพสิ่งแวดล้อมภายในนิคมอุตสาหกรรมแบบเรียลไทม์';intro.querySelector('p').textContent='e-Monitoring · คุณภาพอากาศ คุณภาพน้ำ และการระบายอากาศจากปล่อง';}
+if(intro){intro.querySelector('h2').textContent='e-Monitoring · ระบบเฝ้าระวังและติดตามตรวจสอบคุณภาพสิ่งแวดล้อมภายในนิคมอุตสาหกรรมแบบเรียลไทม์';intro.querySelector('p').textContent='e-Monitoring · คุณภาพอากาศ คุณภาพน้ำ และการระบายอากาศจากปล่อง';}
 const links=root.querySelector('.expo-audience');if(links)links.remove();
 })();
 </script><style id="monitor-reference-colors-gis-type">
@@ -2841,6 +2841,13 @@ html body.monitor-mode .em-dashboard .expo-intro h2{font-size:26px!important;fon
 </style>
 <script id="monitor-exact-reference-inline">
 (()=>{document.querySelectorAll('.em-dashboard [style]').forEach(el=>{if(el.style.fontFamily)el.style.setProperty('font-family','Poppins, "Noto Sans Thai Looped", system-ui, sans-serif','important')});})();
+</script><style id="monitor-title-reference-size">
+html body.monitor-mode .em-dashboard .expo-intro h2{font-size:26px!important;font-weight:700!important;line-height:1.45!important;letter-spacing:0!important;margin:0!important}
+html body.monitor-mode .em-dashboard .expo-intro p{display:none!important}
+@media(max-width:650px){html body.monitor-mode .em-dashboard .expo-intro h2{font-size:22px!important}}
+</style>
+<script id="monitor-title-cleanup">
+(()=>{const intro=document.querySelector('.em-dashboard .expo-intro');if(!intro)return;intro.querySelectorAll('p').forEach(p=>p.remove());const h=intro.querySelector('h2');if(h){h.textContent="e-Monitoring · ระบบเฝ้าระวังและติดตามตรวจสอบคุณภาพสิ่งแวดล้อมภายในนิคมอุตสาหกรรมแบบเรียลไทม์";h.style.removeProperty('font-size');h.style.removeProperty('font-weight');h.style.removeProperty('line-height');}})();
 </script></body></html>
 
 
