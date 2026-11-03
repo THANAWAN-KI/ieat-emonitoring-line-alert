@@ -2418,7 +2418,7 @@ root.prepend(shell);
 const old=root.querySelector('.em-layout');if(old)old.remove();
 const number=x=>Number(String(x).replace(/[^\d.]/g,''))||0;
 function sync(){const values=[...left.querySelectorAll('.em-kpis article strong')].map(x=>number(x.textContent)),[total,online,offline,aq,wq,ce]=values;const ready=left.querySelector('.em-kpis strong').textContent.match(/\d/);document.getElementById('emRingTotal').textContent=ready?total.toLocaleString('th-TH'):'—';
-let offset=0;const colors=['#1ba4cb','#79d3f2','#175c80'],counts=[aq,wq,ce];const parts=counts.map((count,i)=>{const begin=offset;offset+=total?count/total*100:0;return colors[i]+' '+begin+'% '+offset+'%'});document.getElementById('emTypeRing').style.background=ready&&total?'conic-gradient('+parts.join(',')+')':'#edf0f4';
+let offset=0;const colors=['#0087d2','#0eb24e','#6561ac'],counts=[aq,wq,ce];const parts=counts.map((count,i)=>{const begin=offset;offset+=total?count/total*100:0;return colors[i]+' '+begin+'% '+offset+'%'});document.getElementById('emTypeRing').style.background=ready&&total?'conic-gradient('+parts.join(',')+')':'#edf0f4';
 document.getElementById('emRingLegend').innerHTML=['AQMs · อากาศ','WQMs · น้ำ','CEMs · ปล่อง'].map((name,i)=>'<div><span><i style="background:'+colors[i]+'"></i>'+name+'</span><b>'+(ready?counts[i].toLocaleString('th-TH'):'—')+'</b></div>').join('');
 const pct=total?online/total*100:0;document.getElementById('emGaugePath').setAttribute('stroke-dasharray',pct+' '+(100-pct));document.getElementById('emGaugeValue').textContent=ready?pct.toFixed(1)+' %':'—';document.getElementById('emOnlineValue').textContent=ready?online:'—';document.getElementById('emOfflineValue').textContent=ready?offline:'—';}
 new MutationObserver(sync).observe(left.querySelector('.em-kpis'),{subtree:true,childList:true,characterData:true});sync();
@@ -2715,6 +2715,41 @@ html body.monitor-mode .em-dashboard .expo-intro h2{color:#292526!important;font
 html body.monitor-mode .em-dashboard .expo-intro p{color:#6561ac!important}
 html body.monitor-mode .em-dashboard .em-presentation-toolbar .em-presentation-toggle{background:#6561ac!important;border-color:#6561ac!important;color:#fff!important}
 html body.monitor-mode .em-dashboard .expo-intro{position:relative;border-bottom:1px solid #dedede!important;box-shadow:0 4px 5px -3px rgba(0,0,0,.24)!important;background:#fff!important;padding-bottom:16px!important;margin-bottom:18px!important}
+</style><style id="monitor-gistda-expo-layout">
+html body.monitor-mode .em-dashboard{background:#fff!important;color:#292526!important;padding:18px 24px!important}
+html body.monitor-mode #hubInformationHeader,html body.monitor-mode nav.tabs,html body.monitor-mode .em-dashboard .em-presentation-toolbar{display:none!important}
+html body.monitor-mode .em-dashboard .expo-intro p{color:#cd004b!important}
+html body.monitor-mode .em-dashboard .expo-controls{display:flex!important;gap:4px!important;border-bottom:1px solid #e5e7eb!important;margin-bottom:18px!important;padding:0!important}
+html body.monitor-mode .em-dashboard .expo-controls button{background:transparent!important;color:#737373!important;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;padding:12px 18px!important;font-size:15px!important;font-weight:400!important;box-shadow:none!important}
+html body.monitor-mode .em-dashboard .expo-controls button[aria-pressed=true]{background:transparent!important;border-bottom-color:#0087d2!important;color:#0087d2!important}
+html body.monitor-mode .em-dashboard .em-reference-shell{display:grid!important;grid-template-columns:minmax(0,1.4fr) minmax(340px,1fr)!important;gap:20px!important;align-items:start!important;height:auto!important}
+html body.monitor-mode .em-dashboard .em-analytics{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(190px,.34fr)!important;gap:18px!important}
+html body.monitor-mode .em-dashboard .em-reference-left,html body.monitor-mode .em-dashboard .em-reference-middle{gap:18px!important;padding:0!important;overflow:visible!important}
+html body.monitor-mode .em-dashboard :is(.em-panel,.em-visual-card,.em-kpis article){background:#fff!important;border:1px solid #f3f4f6!important;border-radius:20px!important;box-shadow:0 3px 9px #262b3806,0 8px 22px #262b3809!important}
+html body.monitor-mode .em-dashboard .em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+html body.monitor-mode .em-dashboard .em-kpis article{min-height:118px!important;padding:20px!important;display:flex!important;flex-direction:row!important;align-items:center!important;gap:14px!important}
+html body.monitor-mode .em-dashboard .em-kpis article:is(.offline,.em-attention){display:none!important}
+html body.monitor-mode .em-dashboard .em-kpis article>span{display:grid!important;place-items:center!important;order:-1!important;width:46px!important;height:46px!important;flex:0 0 46px!important;border-radius:50%!important;background:#f1f5ff!important;color:#0087d2!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article strong,html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article:first-child strong{color:#0087d2!important;font-size:32px!important;line-height:1.2!important;font-weight:600!important}
+html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article b,html body.monitor-mode .em-dashboard .em-reference-left .em-kpis article:first-child b{color:#292526!important;font-size:15px!important;font-weight:400!important}
+html body.monitor-mode .em-dashboard .em-panel>header{border-bottom:0!important;padding:20px 22px 12px!important}
+html body.monitor-mode .em-dashboard .em-panel>header h2,html body.monitor-mode .em-dashboard .em-visual-card h2{background:transparent!important;color:#292526!important;font-size:18px!important;font-weight:600!important;border:0!important;border-radius:0!important}
+html body.monitor-mode .em-dashboard .em-panel>header p{color:#737373!important;font-size:13px!important}
+html body.monitor-mode .em-dashboard .em-estate-card select{background:#0087d2!important;border:0!important;border-radius:22px!important;padding:9px 14px!important;color:#fff!important;color-scheme:light!important}
+html body.monitor-mode .em-dashboard .em-estate-track i,html body.monitor-mode .em-dashboard .em-estate-bar:nth-child(n) i{background:#0087d2!important;border-radius:18px 18px 0 0!important}
+html body.monitor-mode .em-dashboard .em-estate-track b{color:#292526!important}
+html body.monitor-mode .em-dashboard .em-estate-name,html body.monitor-mode .em-dashboard .em-bar-axis{color:#7b7b7b!important}
+html body.monitor-mode .em-dashboard .em-visual-card{padding:22px 18px!important}
+html body.monitor-mode .em-dashboard .em-semi #emGaugePath{stroke:#f37023!important}
+html body.monitor-mode .em-dashboard .em-ring strong,html body.monitor-mode .em-dashboard .em-semi strong{color:#6561ac!important}
+html body.monitor-mode .em-dashboard .em-reference-right{position:sticky!important;top:16px!important;height:calc(100dvh - 210px)!important;min-height:540px!important}
+html body.monitor-mode .em-dashboard .em-reference-right>.em-map{height:100%!important;border-radius:20px!important}
+html body.monitor-mode .em-dashboard .em-water-bars .em-measurement-row i em{background:#0eb24e!important}
+html body.monitor-mode .em-dashboard .em-emission-list .em-measurement-row i em{background:#fcb711!important}
+html body.monitor-mode .em-dashboard .em-map-chips button.active{background:#31328b!important;color:#fff!important}
+html body.monitor-mode .em-dashboard .em-map-chips button{color:#31328b!important}
+@media(max-width:1150px){html body.monitor-mode .em-dashboard .em-reference-shell{grid-template-columns:1fr!important}html body.monitor-mode .em-dashboard .em-reference-right{position:relative!important;top:0!important;height:550px!important}}
+@media(max-width:650px){html body.monitor-mode .em-dashboard{padding:12px!important}html body.monitor-mode .em-dashboard .em-analytics{grid-template-columns:1fr!important}html body.monitor-mode .em-dashboard .em-kpis article{padding:12px!important}html body.monitor-mode .em-dashboard .expo-controls{overflow:auto!important;flex-wrap:nowrap!important}html body.monitor-mode .em-dashboard .expo-controls button{white-space:nowrap;padding:12px!important}}
 </style></body></html>
 
 
