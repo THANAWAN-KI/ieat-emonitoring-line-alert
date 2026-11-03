@@ -415,7 +415,7 @@ async function refreshThreeD(){
   const data=g.toGeoJSON();(data.features||[data]).forEach(f=>{f.properties={...f.properties,name:f.properties['ชื่อบริษัทภาษาไทย']||f.properties['ชื่อบริษัทภาษาอังกฤษ']||'แปลงผู้ประกอบการ'};operatorFeatures.push(f);});
  });
  const collection={type:'FeatureCollection',features:[...estateFeatures,...operatorFeatures]};
- const source=await C.GeoJsonDataSource.load(collection,{stroke:C.Color.fromCssColorString('#7773ae'),strokeWidth:3,fill:C.Color.fromCssColorString('#7773ae').withAlpha(.10),clampToGround:true});
+ const source=await C.GeoJsonDataSource.load(collection,{stroke:C.Color.fromCssColorString('#7773ae'),strokeWidth:2,fill:C.Color.fromCssColorString('#7773ae').withAlpha(.025),clampToGround:true});
  if(version!==threeSyncVersion){return;}
  if(threeSource)threeViewer.dataSources.remove(threeSource,true);
  threeSource=source;await threeViewer.dataSources.add(source);threeViewer.scene.requestRender();
@@ -432,10 +432,23 @@ $('show3D').onclick=async()=>{
   await loadCesium();const C=window.Cesium;
   if(!threeViewer){
    threeViewer=new C.Viewer('map3d',{baseLayer:false,baseLayerPicker:false,terrainProvider:new C.EllipsoidTerrainProvider(),animation:false,timeline:false,geocoder:false,homeButton:false,sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,requestRenderMode:true,maximumRenderTimeChange:Infinity,infoBox:true,selectionIndicator:true});
-   const provider=new C.UrlTemplateImageryProvider({url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:13,credit:'Esri, USGS, NOAA'});
-   const imageLayer=threeViewer.imageryLayers.addImageryProvider(provider);imageLayer.saturation=0;imageLayer.brightness=1.1;
+   const provider=new C.UrlTemplateImageryProvider({url:'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:16,credit:'Esri, HERE, DeLorme, MapmyIndia, OpenStreetMap contributors'});
+   const imageLayer=threeViewer.imageryLayers.addImageryProvider(provider);imageLayer.saturation=0;imageLayer.brightness=1.05;imageLayer.contrast=.95;
    const tiles=await C.Cesium3DTileset.fromUrl('./assets/gistda3d/bang-pa-in/tileset.json',{maximumScreenSpaceError:16,cacheBytes:96*1024*1024});
-   threeViewer.scene.primitives.add(tiles);tiles.style=new C.Cesium3DTileStyle({color:"color('white')"});
+   threeViewer.scene.primitives.add(tiles);
+   tiles.colorBlendMode=C.Cesium3DTileColorBlendMode.REPLACE;
+   tiles.customShader=new C.CustomShader({
+    mode:C.CustomShaderMode.MODIFY_MATERIAL,
+    lightingModel:C.LightingModel.PBR,
+    translucencyMode:C.CustomShaderTranslucencyMode.OPAQUE,
+    fragmentShaderText:'void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) { material.diffuse = vec3(0.68); material.emissive = vec3(0.0); material.specular = vec3(0.0); material.roughness = 1.0; material.alpha = 1.0; }'
+   });
+   const lightFrame=C.Transforms.eastNorthUpToFixedFrame(C.Cartesian3.fromDegrees(100.589,14.198));
+   const lightDirection=C.Matrix4.multiplyByPointAsVector(lightFrame,new C.Cartesian3(-.5,.25,-1),new C.Cartesian3());
+   threeViewer.scene.light=new C.DirectionalLight({direction:C.Cartesian3.normalize(lightDirection,lightDirection),intensity:1.3});
+   threeViewer.scene.globe.enableLighting=false;
+   threeViewer.scene.fog.enabled=false;
+   threeViewer.scene.backgroundColor=C.Color.fromCssColorString('#f4f5f6');
    threeViewer.scene.globe.baseColor=C.Color.fromCssColorString('#f4f5f6');
    threeViewer.scene.globe.depthTestAgainstTerrain=false;
    threeViewer.creditDisplay.addStaticCredit(new C.Credit('อาคาร 3D: GISTDA · Thailand LOD1 · ข้อมูลตัวอย่างบางปะอิน',true));
@@ -445,8 +458,8 @@ $('show3D').onclick=async()=>{
   document.querySelector('.map-wrap').classList.add('mode-3d');
   $('show2D').setAttribute('aria-pressed','false');button.setAttribute('aria-pressed','true');
   await refreshThreeD();
-  threeViewer.camera.flyToBoundingSphere(new C.BoundingSphere(C.Cartesian3.fromDegrees(100.589,14.198,0),1000),{offset:new C.HeadingPitchRange(0,-.65,3800),duration:1.6});
-  threeMessage('อาคาร 3D จริงจาก GISTDA · ตัวอย่างบางปะอิน · ลากเพื่อเลื่อน ใช้ Ctrl + ลากเพื่อหมุนมุมมอง');
+  threeViewer.camera.flyToBoundingSphere(new C.BoundingSphere(C.Cartesian3.fromDegrees(100.589,14.198,0),1000),{offset:new C.HeadingPitchRange(.18,-.62,5600),duration:1.6});
+  threeMessage('อาคาร 3D · บางปะอิน · ใช้ Ctrl + ลากเพื่อหมุนมุมมอง');setTimeout(()=>{if(!$('map3d').hidden)threeMessage('');},5000);
  }catch(e){
   if(threeViewer){threeViewer.destroy();threeViewer=null;threeSource=null;}
   switchTo2D();threeMessage(e.message||'เปิดแผนที่ 3 มิติไม่สำเร็จ ใช้แผนที่ 2D ต่อได้');
@@ -460,7 +473,7 @@ $('toolBasemap').onclick=()=>$('basemapOptions').hidden=!$('basemapOptions').hid
 let satelliteBase=null;
 function chooseBase(satellite){
  if(!map)return;
- if(threeViewer&&!$('map3d').hidden){const C=window.Cesium;threeViewer.imageryLayers.removeAll();const provider=new C.UrlTemplateImageryProvider({url:satellite?'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}':'https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:satellite?19:13,credit:'Esri, USGS, NOAA, Maxar'});const base=threeViewer.imageryLayers.addImageryProvider(provider);base.saturation=satellite?1:0;threeViewer.scene.requestRender();$('basemapOptions').hidden=true;return;}
+ if(threeViewer&&!$('map3d').hidden){const C=window.Cesium;threeViewer.imageryLayers.removeAll();const provider=new C.UrlTemplateImageryProvider({url:satellite?'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}':'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:satellite?19:16,credit:'Esri, USGS, NOAA, Maxar'});const base=threeViewer.imageryLayers.addImageryProvider(provider);base.saturation=satellite?1:0;threeViewer.scene.requestRender();$('basemapOptions').hidden=true;return;}
  if(!satelliteBase)satelliteBase=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxNativeZoom:19,maxZoom:19,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics, GIS User Community'});
  if(satellite){satelliteBase.addTo(map);satelliteBase.bringToFront();}else if(map.hasLayer(satelliteBase))map.removeLayer(satelliteBase);
  $('basemapOptions').hidden=true;
