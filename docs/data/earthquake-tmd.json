@@ -3,13 +3,59 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-02T23:31:57.608339+00:00",
+    "fetchedAt": "2026-11-03T06:49:55.173912+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793512517000,
-    "latestEvent": 1793650754000
+    "oldestEvent": 1793515940000,
+    "latestEvent": 1793683424000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17361",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          94.631,
+          23.471,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 4.3,
+        "place": "ประเทศเมียนมา",
+        "time": 1793683424000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17361",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17360",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.528,
+          19.916,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.5,
+        "place": "ประเทศเมียนมา",
+        "time": 1793668771000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17360",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17359",
@@ -187,52 +233,6 @@
         "place": "ต.ควร อ.ปง จ.พะเยา",
         "time": 1793515940000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17352",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17351",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.314,
-          19.105,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.7,
-        "place": "ต.ควร อ.ปง จ.พะเยา",
-        "time": 1793512976000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17351",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17349",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.327,
-          19.129,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.0,
-        "place": "ต.ควร อ.ปง จ.พะเยา",
-        "time": 1793512517000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17349",
         "source": "TMD",
         "types": "",
         "detail": null,
