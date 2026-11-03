@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/tiles/[...path].mjs": {
+      "maxDuration": 60
+    }
+  }
+}
