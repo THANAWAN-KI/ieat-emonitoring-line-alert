@@ -83,7 +83,8 @@ style.textContent=`
 #expoBoothActions button:focus-visible{outline:2px solid #2196F3;outline-offset:2px}
 @media(min-width:1100px){html body #estateFocusDashboard .ef-workspace{grid-template-columns:minmax(0,2fr) minmax(0,3fr)!important}}
 @media(max-width:1320px){#expoBoothActions button{font-size:11px;padding:7px}}
-@media(max-width:600px){#expoBoothSubtitle{white-space:normal;overflow-wrap:break-word}}\n@media(max-width:950px){#expoBoothActions{max-width:45%;overflow-x:auto}#expoBoothActions button{min-height:40px;flex:0 0 auto}}
+@media(max-width:600px){#expoBoothSubtitle{white-space:normal;overflow-wrap:break-word}}
+@media(max-width:950px){#expoBoothActions{max-width:45%;overflow-x:auto}#expoBoothActions button{min-height:40px;flex:0 0 auto}}
 @media(prefers-reduced-motion:reduce){#expoBoothActions button{transition:none}}
 `;
 document.head.append(style);
