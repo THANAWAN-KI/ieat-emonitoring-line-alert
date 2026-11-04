@@ -1598,6 +1598,17 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
 }
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
+ if(d.type==='booth-camera'){
+ if(!ready)return;
+ const reply=()=>parent.postMessage({type:'booth-camera-status',ready:true,mode:vector?'3d':'2d',playing:aerialPlaying},location.origin);
+ if(d.action==='init'||d.action==='reset'){
+  stopAerialTour();autoFit=false;
+  if(vector){vector.jumpTo({center:[100.585786,14.19889],zoom:14.4,pitch:62,bearing:-25});vector.dragRotate.enable();vector.touchZoomRotate.enableRotation();startAerialTour();}
+  else if(raster){raster.setView([14.19889,100.585786],14);}
+ }else if(d.action==='orbit'){if(d.playing)startAerialTour();else stopAerialTour();}
+ else if(d.action==='left'||d.action==='right'){stopAerialTour();if(vector)vector.easeTo({bearing:vector.getBearing()+(d.action==='left'?-45:45),pitch:62,duration:700});}
+ reply();return;
+ }
  if(d.type==='flood-reference-map-tools'&&d.action==='layers'){const menu=$('mapLayers');menu.open=!menu.open;return;}
  if(d.type==='flood-prep-support'){
   preparednessSupport=!!d.active;
@@ -1655,6 +1666,7 @@ const aerialHint=document.createElement('div');aerialHint.id='aerialTourHint';ae
 let aerialPlaying=false,aerialFrame=null,aerialTimer=null,aerialLaunch=null,aerialMap=null,aerialHintTimer=null;
 function aerialNotice(text){aerialHint.textContent=text;aerialHint.hidden=false;clearTimeout(aerialHintTimer);aerialHintTimer=setTimeout(()=>aerialHint.hidden=true,6500)}
 function stopAerialTour(){
+ if(new URLSearchParams(location.search).get('booth')==='1')parent.postMessage({type:'booth-camera-status',ready:true,mode:vector?'3d':'2d',playing:false},location.origin);
  aerialPlaying=false;cancelAnimationFrame(aerialFrame);clearTimeout(aerialTimer);
  if(aerialMap&&aerialLaunch)aerialMap.off('moveend',aerialLaunch);aerialLaunch=null;
  aerialMap?.stop?.();aerialMap=null;
