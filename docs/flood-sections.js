@@ -49,7 +49,13 @@
  let samples=true;try{samples=sessionStorage.getItem('ieat-exhibition-samples')!=='off';}catch(_){}
  const demoTag='<span class="ex-demo-tag">ข้อมูลจำลองเพื่อการสาธิต</span>';
  const table=(head,rows)=>'<div class="ex-report-table"><table><thead><tr>'+head.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(x=>'<td>'+esc(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
- const plain=(selector,fallback='ยังไม่มีข้อมูลในชุดที่โหลดได้')=>document.querySelector(selector)?.textContent?.replace(/\s+/g,' ').trim()||fallback;
+ const plain=(selector,fallback='ยังไม่มีข้อมูลในชุดที่โหลดได้')=>{
+ const element=document.querySelector(selector);if(!element)return fallback;
+ const copy=element.cloneNode(true);
+ copy.querySelectorAll('svg,select,option,script,style,summary,[id$="Pager"],.ex-prep-selector,.prep-support,.ex-docs,.ex-reference-documents,.storage-scene').forEach(n=>n.remove());
+ const walker=document.createTreeWalker(copy,NodeFilter.SHOW_TEXT);const parts=[];let node;while((node=walker.nextNode())){const value=node.textContent.replace(/\\s+/g,' ').trim();if(value)parts.push(value);}
+ return parts.join(' · ')||fallback;
+ };
  const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  const sendCamera=(action,playing)=>$('estateFocusMap')?.contentWindow?.postMessage({type:'dashboard-camera',action,playing},location.origin);
  function reportView(){
