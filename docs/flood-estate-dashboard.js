@@ -927,32 +927,7 @@ $('efFilter').onchange=()=>renderEstates();
     apply(conversion,{'grid-column':hasCamera?'2':'1','grid-row':hasCamera?'2':'auto','background':'#E3F2FD','border':'0','border-radius':'10px','padding':'7px 9px','text-align':'center','margin':'0','color':'#111111','-webkit-text-fill-color':'#111111','line-height':'1.5','font-size':'clamp(10px,1vw,12px)','white-space':'normal'});
    }
   }
-  const allRanks=document.getElementById('rpRankingsAfterWarning');
-  if(allRanks){
-   apply(allRanks,{'display':'grid','grid-template-columns':'repeat(auto-fit,minmax(min(100%,310px),1fr))','gap':'12px','align-items':'stretch','min-width':'0','background':'transparent','border':'0','box-shadow':'none'});
-   allRanks.querySelectorAll(':scope > section').forEach(section=>{
-    const green=!!section.querySelector('#rpFlowRanks'),soft=green?'#E7F9E2':'#E3F2FD',medium=green?'#CDF3C4':'#CBEAFF',accent=green?'#146C37':'#0D47A1';
-    apply(section,{'background':green?'#F7FDF5':'#F7FAFE','border':'0','border-radius':'18px','padding':'13px','min-width':'0','box-shadow':'0 4px 15px #0D47A10d'});
-    const heading=section.querySelector('h3');
-    if(heading){
-     if(!heading.querySelector('.ieat-rank-heading-svg'))heading.insertAdjacentHTML('afterbegin','<span class="ieat-rank-heading-svg">'+symbol(green?'flow':'dam')+'</span>');
-     apply(heading,{'display':'flex','align-items':'center','gap':'9px','border':'0','background':soft,'border-radius':'12px','padding':'11px','margin':'0 0 9px','font-size':'clamp(13px,1.3vw,16px)','font-weight':'750','line-height':'1.45','color':'#111111','-webkit-text-fill-color':'#111111'});
-     apply(heading.querySelector('.ieat-rank-heading-svg'),{'display':'inline-flex','color':accent,'flex-shrink':'0'});
-    }
-    const ranks=section.querySelector('#rpDamRanks,#rpFlowRanks');
-    apply(ranks,{'display':'grid','gap':'8px','border':'0','background':'transparent','padding':'0'});
-    ranks?.querySelectorAll('.ieat-new-rank').forEach(button=>{
-     apply(button,{'display':'grid','grid-template-columns':'32px minmax(0,1fr) minmax(57px,auto)','gap':'9px','align-items':'center','width':'100%','min-height':'77px','border':'0','border-radius':'13px','background':'#FFFFFF','padding':'9px','margin':'0','text-align':'left','box-shadow':'0 3px 12px #0D47A112','min-width':'0','cursor':'pointer'});
-     const number=button.querySelector('.ieat-rank-index'),copy=button.querySelector('.ieat-rank-copy'),value=button.querySelector('.ieat-rank-value');
-     apply(number,{'display':'grid','place-items':'center','align-self':'start','width':'31px','height':'31px','border':'0','background':soft,'border-radius':'9px','color':'#111111','-webkit-text-fill-color':'#111111','font-size':'14px','font-weight':'750','box-shadow':'none'});
-     apply(copy,{'display':'flex','flex-direction':'column','gap':'2px','min-width':'0','color':'#111111','-webkit-text-fill-color':'#111111','padding':'0'});
-     copy?.querySelectorAll('b,small').forEach(el=>apply(el,{'display':'block','font-size':el.tagName==='B'?'clamp(11px,1.1vw,14px)':'10px','line-height':'1.45','font-weight':el.tagName==='B'?'700':'400','color':'#111111','-webkit-text-fill-color':'#111111','overflow-wrap':'anywhere','border':'0','padding':'0','margin':'0','background':'transparent'}));
-     apply(value,{'display':'grid','place-items':'center','align-self':'center','min-width':'57px','min-height':'43px','border':'0','border-radius':'11px','background':medium,'color':'#111111','-webkit-text-fill-color':'#111111','padding':'7px 9px','font-size':'clamp(17px,1.65vw,24px)','font-weight':'800','font-variant-numeric':'tabular-nums','box-shadow':'0 2px 8px #0D47A115','white-space':'nowrap','text-shadow':'none'});
-    });
-    const footer=section.querySelector(':scope > small:last-child');
-    apply(footer,{'display':'block','background':soft,'color':'#111111','-webkit-text-fill-color':'#111111','border':'0','border-radius':'9px','margin-top':'10px','padding':'9px','font-size':'10px','line-height':'1.55'});
-   });
-  }
+  // Top-five rankings are styled solely by flood-river-panel.js; no inline overrides.
   // Number-first action cards: borderless surfaces and readable black labels on pale blue.
   document.querySelectorAll('#estateFocusDashboard .io-mini-stats [data-ef-card]').forEach(card=>{
    apply(card,{'border':'0','border-radius':'13px','box-shadow':'0 3px 12px #0D47A114','background':'#FFFFFF'});
