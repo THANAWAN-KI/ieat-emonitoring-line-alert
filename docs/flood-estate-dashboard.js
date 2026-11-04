@@ -51,7 +51,7 @@
   const complete=Number(data.schema_version)>=3&&data.coverage?.stations_complete===true&&Array.isArray(data.stations)&&data.stations.length===Number(data.summary?.station_count)&&['ok','partial','stale'].includes(data.status);
   const generated=timestamp(data.generated_at),age=now-generated;
   const fresh=r=>{const age=now-timestamp(r.observed_at);return Number.isFinite(age)&&age>=-300000&&age<=MAX_AGE};
-  const stations=(data.stations||[]).filter(r=>point(r)&&fresh(r)&&(r.kind!=='waterlevel'||(now-timestamp(r.observed_at)<=21600000&&num(r.waterlevel_msl)!==null&&num(r.bankfull_msl)!==null)));
+  const stations=(data.stations||[]).filter(r=>point(r)&&fresh(r)&&(r.kind!=='waterlevel'||(now-timestamp(r.observed_at)<=21600000&&num(r.waterlevel_msl)!==null)));
   const near=stations.map(r=>{let nearest=null,distance=Infinity;estates.forEach(e=>{const d=km(r,e);if(d<distance){distance=d;nearest=e}});return {...r,distance,nearest}}).filter(r=>r.distance<=RADIUS);
   const stationValues=near.filter(r=>(r.kind==='rainfall'&&num(r.rainfall_mm)!==null)||(r.kind==='waterlevel'&&num(r.waterlevel_msl)!==null));
   const usable=complete&&Number.isFinite(age)&&age>=-300000&&age<=MAX_AGE&&stationValues.length>0&&data.status!=='stale';
@@ -691,12 +691,19 @@ $('efFilter').onchange=()=>renderEstates();
    $(id).innerHTML=!ds.available?'<p class="ef-empty">ข้อมูลประกาศหรือพิกัดนิคมฯ ไม่พร้อม / เกินช่วง 24 ชั่วโมง จึงยังสรุปจำนวนไม่ได้</p>':`<p>รอบประกาศ ${esc(time(new Date(ds.issued).toISOString()))}${ds.unlocated?' · มี '+ds.unlocated+' รายการที่ไม่มีพิกัด จึงไม่รวมในการคำนวณ':''}</p>`+(ds.rows.length?ds.rows.map(r=>warningCard(r,id==='efWarning24'?24:48)).join(''):'<p class="ef-empty">ไม่พบตำบลในรายการเฝ้าระวังที่จุดสถานีประเมินอยู่ภายใน 30 กม. จากนิคมฯ ในชุดข้อมูลนี้</p>');
   }
   deliverExecutiveFocus();
+  window.IEAT_EXPO_CURRENT_DATA=data;
+  document.dispatchEvent(new CustomEvent('ieat-flood-data-rendered',{detail:{data}}));
  }
  async function load(){
   if(busy)return;busy=true;if($('efRefresh'))$('efRefresh').disabled=true;
   try{const res=await fetch('./data/thaiwater_latest.json?v='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);const data=await res.json();if(!data.summary||!Array.isArray(data.estates))throw Error('รูปแบบข้อมูลไม่ครบ');
-   const rid=await window.IEAT_RID.load();window.IEAT_EXPO_RID=rid;const water=rid.map(r=>({...r,kind:'waterlevel',station:r.name,lon:r.lng,observed_at:r.measured_at,waterlevel_msl:r.wl,bankfull_msl:r.bank,storage_percent:r.percent,value_text:fmt(r.wl)+' ม.รทก.',severity_score:r.status==='ล้นตลิ่ง'?4:r.status==='ใกล้ตลิ่ง'?2:0}));
-   data.stations=[...(data.stations||[]).filter(r=>r.kind!=='waterlevel'),...water];data.summary.station_count=data.stations.length;render(data)}
+   // Retain all source-verified station records; RID is supplementary and optional.
+   render(data);
+   if(window.IEAT_RID?.load){
+     Promise.resolve().then(()=>window.IEAT_RID.load())
+       .then(rows=>{window.IEAT_EXPO_RID=Array.isArray(rows)?rows:[]})
+       .catch(()=>{window.IEAT_EXPO_RID=[]});
+   }}
   catch(e){if(current){render({...current,status:'stale'});set('efResultCount','โหลดรอบใหม่ไม่สำเร็จ · แสดงข้อมูลเดิม')}else{set('efResultCount','โหลดข้อมูลไม่สำเร็จ ยังไม่สามารถสรุปสถานการณ์ได้')}}
   finally{busy=false;if($('efRefresh'))$('efRefresh').disabled=false}
  }
@@ -867,7 +874,7 @@ $('efFilter').onchange=()=>renderEstates();
    expoInitial=true;
    const estates=data.estates.filter(point),water=window.IEAT_EXPO_RID||[];
    const score=e=>water.filter(r=>point(r)&&num(r.wl)!==null&&num(r.bank)!==null&&km(e,r)<=RADIUS).length;
-   const preferred=estates.find(e=>/บางปะอิน/.test(e.name)&&score(e)>0);
+   const preferred=estates.find(e=>/บางปะอิน/.test(e.name));
    const example=preferred||estates.slice().sort((a,b)=>score(b)-score(a)||String(a.name).localeCompare(String(b.name),'th'))[0];
    expoExample=example.name;
    if(!headerEstate&&selected){const requested=estates.find(e=>String(e.id)===selected||estateKey(e.name)===estateKey(selected));if(requested){headerEstate=requested.name;selected=String(requested.id);}}
