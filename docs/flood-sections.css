@@ -110,3 +110,6 @@
  #ieatCurrentReport th,#ieatCurrentReport td{font-size:11px!important;padding:6px!important}
  #ieatCurrentReport tr{break-inside:avoid}#ieatCurrentReport a{color:#52057f;text-decoration:none;overflow-wrap:anywhere}
 }
+
+@layer floodMockupLayout { #ieatCurrentReport .ex-report-map{margin:16px 0;}#ieatCurrentReport .ex-report-map img{width:100%;max-height:360px;object-fit:contain;border-radius:12px;}#ieatCurrentReport figcaption{font-size:11px;color:#806c89;} }
+@media print{#ieatCurrentReport .ex-report-map{break-inside:avoid}#ieatCurrentReport .ex-report-map img{max-height:240px!important;width:100%!important;object-fit:contain}}
