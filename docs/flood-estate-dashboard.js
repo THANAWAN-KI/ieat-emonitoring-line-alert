@@ -779,7 +779,10 @@ $('efFilter').onchange=()=>renderEstates();
    flowPanel.setAttribute('aria-labelledby','efDamFlowHeading');
    flowPanel.innerHTML='<h2 id="efDamFlowHeading">น้ำไหลเข้าและระบายออก</h2><small class="ef-dam-flow-name" aria-live="polite"></small><div class="ef-dam-flow-values"></div>';
   }
-  if(flowPanel.parentElement!==damPanel.parentElement)damPanel.after(flowPanel);
+  const reservoirPanel=damPanel.parentElement.id==='floodDamsSection'
+   ? damPanel.parentElement.querySelector('.ef-reservoir-panel') : null;
+  const flowAnchor=reservoirPanel||damPanel;
+  if(flowAnchor.nextElementSibling!==flowPanel)flowAnchor.after(flowPanel);
   const flowCards=host.querySelector('.dam-flow-compact');
   const releaseConversion=host.querySelector('.dam-release-conversion');
   flowPanel.hidden=!flowCards;
