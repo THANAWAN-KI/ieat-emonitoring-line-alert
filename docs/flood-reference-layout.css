@@ -104,7 +104,7 @@
   }
   #referenceRail button[aria-pressed=true] { color: var(--ref-purple) !important; background: var(--ui-tint) !important; }
   #referenceRail #referencePanelToggle { display: none !important; }
-  #referenceRail .reference-line-icon * { fill: none !important; stroke: currentColor !important; }
+
   #referenceRail svg { width: 26px !important; height: 26px !important; }
   #referenceRail :is(button,a):focus-visible, [data-flood-view-tab]:focus-visible {
     outline: 3px solid var(--ui-water) !important; outline-offset: 3px !important;
@@ -292,4 +292,24 @@
   #preparednessPane .ex-table thead th { background: rgba(5,23,54,.09) !important; color: var(--ui-navy) !important; }
   #preparednessPane .ex-table tbody tr:nth-child(even) { background: var(--ui-tint) !important; }
   #preparednessPane .ex-selected { background: rgba(82,5,127,.13) !important; }
+}
+ft:50%!important;transform:translate(-50%,-50%)!important;
+ align-items:center!important;justify-content:center!important;gap:16px!important;
+ max-height:calc(100dvh - 56px);overflow-y:auto;
+ }
+ html body #referenceRail button {
+ color:#52057f!important;background:linear-gradient(145deg,#faf5ff,#e9d9f6)!important;
+ box-shadow:inset 0 1px 1px #fff,0 4px 9px #52057f26!important;
+ flex-shrink:0;
+ }
+ html body #referenceRail button[data-reference-icon=alerts] {
+ background:linear-gradient(145deg,#fff4f4,#fbd5dc)!important;
+ box-shadow:inset 0 1px 1px #fff,0 4px 9px #bf033b26!important;
+ }
+ html body #referenceRail button[aria-pressed=true] {outline:1px solid #52057f55!important;}
+ html body #referenceRail button[data-reference-icon=alerts] svg {width:42px!important;height:42px!important;}
+ html body #referenceRail button[data-reference-icon=alerts] {padding:2px!important;}
+ html body #referenceRail button.has-alert {animation:railAlertPulse 1.6s ease-in-out infinite!important;}
+ @keyframes railAlertPulse {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.06)}}
+ @media(prefers-reduced-motion:reduce){html body #referenceRail button.has-alert{animation:none!important;outline:2px solid #bf033b!important;}}
 }
