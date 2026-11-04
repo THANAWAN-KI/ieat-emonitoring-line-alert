@@ -692,6 +692,13 @@ function syncStatusKey(){
 }
 
 function syncPinLegend(){
+ for(const option of document.querySelectorAll('[data-layer-option]')){
+  const swatch=option.querySelector('.layer-swatch');
+  if(!swatch||swatch.dataset.modernIcon)continue;
+  const kind=option.dataset.layerOption;
+  swatch.innerHTML=mapSymbol(kind==='rings'?'flow':kind);
+  swatch.dataset.modernIcon='true';
+ }
  for(const [kind,t] of Object.entries(floodPinTypes)){
   const input=document.querySelector('[data-layer="'+kind+'"]'),swatch=input?.parentElement?.querySelector('.layer-swatch');if(!swatch||swatch.dataset.pinReady)continue;
   swatch.dataset.pinReady='true';swatch.classList.add('fd-legend-icon');swatch.style.background='#647887';swatch.innerHTML=kind==='camera'?cameraSvg:kind==='dam'?damSvg:sensorSvg(kind);
@@ -1408,5 +1415,14 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .prep-point-popup .leaflet-popup-close-button,.prep-point-popup .maplibregl-popup-close-button{top:7px!important;right:7px!important;width:25px!important;height:25px!important;border-radius:50%!important;background:#edf3f8!important;color:#52677a!important;z-index:5!important}
  .prep-point-popup .leaflet-popup-content{margin:14px!important}
  .prep-point-popup .flood-card{border:0!important;box-shadow:none!important;border-radius:12px!important;overflow:hidden!important}
+}
+</style><style id="modern-layer-controls">
+@layer modernLayerMenu {
+ #mapLayers .toggles .layer-option .layer-swatch{background:transparent!important;color:#47647b!important;width:26px!important;height:28px!important;border-radius:0!important}
+ #mapLayers .layer-swatch svg{width:23px!important;height:23px!important;stroke-width:1.45!important;stroke:currentColor!important;fill:none!important}
+ #mapLayers .layer-swatch svg *{stroke:currentColor!important;stroke-width:1.45!important;fill:none!important}
+ #mapLayers .toggles .layer-option{border:1px solid #e1e8ef!important;background:#fff!important;border-radius:10px!important}
+ #mapLayers .toggles .layer-option:has(input:checked){border-color:#c7dbea!important;background:#f1f7fb!important}
+ #mapLayers .layer-option input{accent-color:#286c9c!important}
 }
 </style>
