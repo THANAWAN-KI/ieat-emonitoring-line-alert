@@ -12,6 +12,12 @@
    const data=$('#estateFocusDashboard .ef-data-column');
    const map=$('#estateFocusDashboard .ef-map-column');
    if(!data||!map)return false;
+   // The approved reference stylesheet owns geometry. Do not overwrite it on data refresh.
+   if(document.getElementById('flood-reference-canonical-20261104')){
+     for(const el of [data,map])for(const key of ['position','min-width','grid-template-columns','left','width','right','top','height','bottom','overflow-y','overflow-x'])el.style.removeProperty(key);
+     document.body.style.removeProperty('--expo-rail');document.body.style.removeProperty('--expo-panel');
+     return true;
+   }
    const wide=media.matches;
    const presentation=document.body.classList.contains('expo-presentation');
    const closed=document.body.dataset.referencePanel==='closed';
