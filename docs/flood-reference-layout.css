@@ -157,7 +157,8 @@
   #warning #estateFocusDashboard :is(.ef-canal-content,.rp-station-content) { background: transparent !important; padding: 0 !important; border: 0 !important; }
   #warning #estateFocusDashboard :is(.ef-canal-status,.rp-station-top>em)::before,
   #warning #estateFocusDashboard :is(.ef-canal-status,.rp-station-top>em)::after { content: none !important; display: none !important; }
-  #warning #estateFocusDashboard :is(.rp-station-row,.ef-canal-card) { background: transparent !important; }
+  #warning #estateFocusDashboard :is(.rp-station-row,.ef-canal-card,.ef-reservoir-row,.ef-dam-card) { background: var(--ui-surface) !important; color: var(--ui-ink) !important; }
+  #warning #estateFocusDashboard .ef-reservoir-row>div:first-child { color: var(--ui-ink) !important; }
   #warning #estateFocusDashboard .rp-station-row { grid-template-columns: 76px minmax(0,1fr) !important; gap: 8px !important; }
   #warning #estateFocusDashboard .rp-station-row>.rp-gauge { width: 76px !important; height: 124px !important; }
   #warning #estateFocusDashboard .rp-station-content { gap: 6px !important; }
