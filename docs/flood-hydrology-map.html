@@ -365,6 +365,17 @@ if(cleanDashboard){
  zoomTools.lastElementChild.onclick=()=> (vector||raster)?.zoomOut();
  $('mapCompass').after(zoomTools);
 }
+const permanentDashboardLayers=['boundary','estate','flow','rings','radar'];
+function keepDashboardLayersOpen(){
+ if(!cleanDashboard)return;
+ for(const kind of permanentDashboardLayers){
+  flags[kind]=true;
+  const input=document.querySelector('[data-layer="'+kind+'"]');
+  if(input){input.checked=true;input.disabled=true;input.title='เปิดแสดงตลอดเวลา';input.closest('label')?.setAttribute('title','ชั้นข้อมูลนี้เปิดแสดงตลอดเวลา')}
+ }
+}
+keepDashboardLayersOpen();
+function hasDischarge(r){const value=r.discharge??r.flow;return value!=null&&Number.isFinite(Number(value))}
 let historyOnly=false;
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
 function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?48:k==='rain'?24:6)*3600000||Boolean(r.stale)}
@@ -671,11 +682,11 @@ function nearbyEstate(f){
  return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=(estateProvinceScope.radiusKm||30);
 }
 function scoped(){
- if(cleanDashboard&&!estateProvinceScope?.active&&!watchMapData)return [];
+ if(cleanDashboard&&!estateProvinceScope?.active&&!watchMapData)return features.filter(f=>f.properties.kind==='estate'||f.properties.kind==='water'&&hasDischarge(f.properties));
  const province=$('province').value;
- const base=features.filter(f=>flags[f.properties.kind]&&(estateProvinceScope?.active?(f.properties.kind==='estate'?f.properties.name===estateProvinceScope.name:nearbyEstate(f)):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)));
+ const base=features.filter(f=>(flags[f.properties.kind]||f.properties.kind==='water'&&flags.rings&&hasDischarge(f.properties))&&(estateProvinceScope?.active?(f.properties.kind==='estate'?f.properties.name===estateProvinceScope.name:nearbyEstate(f)):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)));
  const visible=watchMapData?base.filter(f=>watchMapData.estates.some(e=>f.properties.kind==='estate'?e.name===f.properties.name:e.stations.some(r=>r.name===f.properties.name||String(r.id)===String(f.properties.code||f.properties.id)))):base;
- return historyOnly?visible.filter(f=>f.properties.kind==='water'&&historyAvailable(f.properties)):visible;
+ return historyOnly?visible.filter(f=>f.properties.kind==='estate'||f.properties.kind==='water'&&(historyAvailable(f.properties)||flags.rings&&hasDischarge(f.properties))):visible;
 }
 
 const suppliedWaterIcons={"water":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><title>water-level</title><g fill=\"none\" stroke=\"currentColor\" stroke-linejoin=\"round\" stroke-width=\"4\"><path stroke-linecap=\"round\" d=\"M24 44c8.284 0 15-6.716 15-15C39 15 24 4 24 4S9 15 9 29c0 8.284 6.716 15 15 15\" clip-rule=\"evenodd\"/><path d=\"M9 29c0 8.284 6.716 15 15 15s15-6.716 15-15c0 0-9 3-15 0S9 29 9 29Z\"/></g></svg>","canal":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><title>canal-lock-48</title><path fill=\"currentColor\" d=\"M44 39a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2z\"/><path fill=\"currentColor\" d=\"M23 14v26h-2V14z\"/><path fill=\"currentColor\" d=\"M28 13a1 1 0 1 1 0 2H16a1 1 0 1 1 0-2zM3.465 19.155c2.426-1.537 5.643-1.537 8.07 0c1.773 1.123 4.156 1.123 5.93 0a1 1 0 0 1 1.07 1.69c-2.427 1.537-5.644 1.537-8.07 0c-1.774-1.123-4.157-1.123-5.93 0a1 1 0 0 1-1.07-1.69m22.093 9.948c2.979-1.467 6.905-1.467 9.883 0c2.422 1.193 5.696 1.193 8.117 0a1 1 0 1 1 .883 1.794c-2.978 1.467-6.904 1.467-9.883 0c-2.421-1.193-5.695-1.193-8.117 0a1 1 0 1 1-.883-1.794\"/></svg>","flow":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><title>water</title><path fill=\"currentColor\" d=\"M2 18v-2q.95 0 1.413-.5T5.35 15t1.938.5t1.362.5q.95 0 1.413-.5T12 15q1.425 0 1.938.5t1.412.5q.95 0 1.388-.5t1.912-.5t1.938.5T22 16v2q-1.425 0-1.937-.5T18.65 17t-1.362.5t-1.938.5q-1.425 0-1.937-.5T12 17q-.95 0-1.412.5T8.65 18t-1.912-.5T5.35 17t-1.412.5T2 18m0-4v-2q.95 0 1.413-.5T5.35 11q1.425 0 1.913.5t1.387.5q.95 0 1.412-.5T12 11q1.425 0 1.925.5t1.375.5q.95 0 1.412-.5t1.938-.5q1.425 0 1.938.5T22 12v2q-1.475 0-1.963-.5T18.65 13t-1.362.5t-1.938.5q-1.425 0-1.937-.5T12 13q-.95 0-1.388.5T8.7 14t-1.962-.5T5.35 13t-1.412.5T2 14m0-4V8q.95 0 1.413-.5T5.35 7q1.425 0 1.913.5T8.65 8q.95 0 1.412-.5T12 7q1.425 0 1.925.5T15.3 8q.95 0 1.412-.5T18.65 7q1.425 0 1.938.5T22 8v2q-1.475 0-1.963-.5T18.65 9t-1.362.5t-1.938.5q-1.425 0-1.937-.5T12 9q-.95 0-1.388.5T8.7 10t-1.962-.5T5.35 9t-1.412.5T2 10\"/></svg>"};
@@ -732,8 +743,9 @@ function syncPinLegend(){
 }
 
 function render(){
+ keepDashboardLayersOpen();
  if(!ready)return;syncPinLegend();publishPreparednessPoints();
- syncRemoteOverlays();syncBoundaries();syncWaterAreas();const list=scoped().filter(f=>!watchMapData||!['estate','water','rain','canal','dam','camera'].includes(f.properties.kind)),overviewPoints=groupOverviewPoints(list),displayPoints=overviewPoints.points;
+ syncRemoteOverlays();syncBoundaries();syncWaterAreas();const list=scoped().filter(f=>!watchMapData||!['estate','water','rain','canal','dam','camera'].includes(f.properties.kind)||f.properties.kind==='water'&&flags.rings&&hasDischarge(f.properties)),overviewPoints=groupOverviewPoints(list),displayPoints=overviewPoints.points;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
   displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin';el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
@@ -1161,7 +1173,7 @@ window.addEventListener('message',async event=>{
  if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
  if(cleanDashboard){
  const active=!!(d.active&&d.estate);
- Object.assign(flags,{estate:active,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:false,radar:true,gistda:false,satellite:active});
+ Object.assign(flags,{estate:true,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:true,radar:true,gistda:false,satellite:active});
  document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);
  $('estateView3d').setAttribute('aria-pressed',String(active));$('estateView3d').textContent=active?'มุมมอง 3D':'มุมมอง 2D';
  if(active)cameras();
@@ -1523,4 +1535,4 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  #mapLayers .layer-option input:focus-visible{outline:2px solid #8abbdc!important;outline-offset:3px!important}
  #mapLayers .flow-unit-note{font-size:9px!important;color:#7b8b99!important}
 }
-</style>
+</style><style>@layer modernLayerMenu{#mapLayers .layer-option input:disabled{opacity:1!important;cursor:default!important}#mapLayers .layer-option:has(input:disabled){cursor:default!important}}</style>
