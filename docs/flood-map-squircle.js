@@ -5,18 +5,8 @@
    IEAT_SQ.cluster(kind, hex, count) -> button with count (centre anchor) */
 (()=>{'use strict';
 /* Status / category hex used by the map -> glyph colour that reads well on white. */
-const INK={
- '#52057f':'#109dc0','#52057f':'#109dc0',
- '#598c14':'#598c14',
- '#ffc719':'#ffc719','#ffc719':'#ffc719',
- '#ff6908':'#ff6908','#ed3b21':'#ff6908',
- '#bf033b':'#ed3b21',
- '#706357':'#706357','#2e1f54':'#109dc0',
- '#109dc0':'#109dc0','#109dc0':'#109dc0',
- '#109dc0':'#109dc0','#109dc0':'#109dc0',
- '#ff6908':'#ffc719','#109dc0':'#109dc0',
- '#109dc0':'#109dc0','#109dc0':'#109dc0'};
-const KIND={estate:'#52057f',water:'#109dc0',canal:'#109dc0',dam:'#ff6908',camera:'#109dc0',rain:'#109dc0',pump:'#109dc0',storage:'#109dc0',protection:'#598c14'};
+const INK={'#52057f':'#2f68f4','#109dc0':'#2f68f4','#2e1f54':'#64748b','#ffc719':'#c28513','#bf033b':'#bf033b'};
+const KIND={estate:'#2f68f4',water:'#2f68f4',canal:'#149fc3',dam:'#2f68f4',camera:'#3867a6',rain:'#2f68f4',pump:'#2f68f4',storage:'#2f68f4',protection:'#53953b'};
 const hexRgb=h=>{h=h.replace('#','');if(h.length===3)h=h.replace(/./g,c=>c+c);const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]};
 const mix=(h,t,a)=>'#'+hexRgb(h).map((v,i)=>Math.round(v+(t[i]-v)*a).toString(16).padStart(2,'0')).join('');
 function ink(hex){
@@ -25,16 +15,18 @@ function ink(hex){
  const [r,g,b]=hexRgb(hex),lum=(.299*r+.587*g+.114*b)/255;
  return lum>.7?mix(hex,[0,0,0],.35):hex;
 }
+const outline=d=>c=>'<g fill="none" stroke="'+c+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+d+'</g>';
 const GL={
- estate:c=>'<path d="M3 21V11.2l5 3v-3l5 3v-3l5 3V3.5h3V21Z" fill="'+c+'"/><rect x="5.3" y="16.5" width="2" height="2" rx=".4" fill="#000000" opacity=".18"/><rect x="10.3" y="16.5" width="2" height="2" rx=".4" fill="#000000" opacity=".18"/><rect x="15.3" y="16.5" width="2" height="2" rx=".4" fill="#000000" opacity=".18"/>',
- water:c=>'<path d="M12 2.2C9.6 5.6 6.8 8.7 6.8 12a5.2 5.2 0 0 0 10.4 0c0-3.3-2.8-6.4-5.2-9.8Z" fill="'+c+'"/><path d="M9.3 12.6a2.8 2.8 0 0 0 2.4 2.6" stroke="#000000" stroke-opacity=".16" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M2.5 20.2c1.6-1.3 3.2 1.3 4.8 0s3.2 1.3 4.8 0 3.2 1.3 4.8 0 3.2 1.3 4.6 0" stroke="'+c+'" stroke-width="1.9" fill="none" stroke-linecap="round"/>',
- dam:c=>'<path d="M2.5 3h7l4.5 18h-11.5Z" fill="'+c+'"/><path d="M5.2 7.5h4.9M5.2 12h6M5.2 16.5h7.1" stroke="#000000" stroke-opacity=".18" stroke-width="1.4" stroke-linecap="round"/><path d="M14.6 8.5c2-1.4 4 1.4 6.4 0M15.7 13c1.8-1.3 3.6 1.3 5.3 0M16.8 17.5c1.5-1.1 3 1.1 4.2 0" stroke="'+c+'" stroke-width="2.3" fill="none" stroke-linecap="round"/>',
- canal:c=>'<path d="M3.5 3.5 6.6 20.5M20.5 3.5l-3.1 17" stroke="'+c+'" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M7.4 8.6c1.5-1.2 3.1 1.2 4.6 0s3.1 1.2 4.6 0M8 13.4c1.3-1.1 2.7 1.1 4 0s2.7 1.1 4 0M8.6 18.2c1.1-.9 2.3.9 3.4 0s2.3.9 3.4 0" stroke="'+c+'" stroke-width="2" fill="none" stroke-linecap="round"/>',
- camera:c=>'<rect x="2.5" y="6.5" width="13" height="11" rx="3" fill="'+c+'"/><path d="m16.5 10.8 5-3v8.4l-5-3Z" fill="'+c+'"/><circle cx="6.6" cy="10.5" r="1.4" fill="#000000" opacity=".2"/>',
- rain:c=>'<path d="M7 14.5a4 4 0 0 1-.6-8A6 6 0 0 1 17.6 7.6a3.5 3.5 0 0 1 .4 6.9Z" fill="'+c+'"/><path d="M8 18l-1 2.5M12.5 18l-1 2.5M17 18l-1 2.5" stroke="'+c+'" stroke-width="1.9" stroke-linecap="round"/>',
- pump:c=>'<rect x="4" y="9" width="11" height="12" rx="2.5" fill="'+c+'"/><path d="M15 13h4.5a1.5 1.5 0 0 1 1.5 1.5V19M9.5 9V4.5h5" stroke="'+c+'" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="15" r="2" fill="#000000" opacity=".18"/>',
- storage:c=>'<path d="M3 10h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" fill="'+c+'"/><path d="M12 2.5S9 5.6 9 7.4a3 3 0 0 0 6 0C15 5.6 12 2.5 12 2.5Z" fill="'+c+'"/><path d="M5 15c2-1.3 4.7 1.3 7 0s4.7 1.3 7 0" stroke="#000000" stroke-opacity=".18" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
- protection:c=>'<path d="m12 2.5 8 3v6c0 4.8-3.6 8-8 10.5-4.4-2.5-8-5.7-8-10.5v-6Z" fill="'+c+'"/><path d="m8.3 12 2.6 2.6 4.8-5" stroke="#000000" stroke-opacity=".22" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'};
+ estate:outline('<path d="M3 21V10l6 3v-3l6 3V4h4v17M3 21h18M6 17v1m4-1v1m7-1v1"/>'),
+ water:outline('<path d="M9 3h7v15H9zM12 7h4m-4 4h4m-4 4h4M3 21q3-2 6 0t6 0t6 0"/>'),
+ canal:outline('<path d="M4 3v18M20 3v18M4 8h16M8 11v5m4-5v5m4-5v5M4 20q4-2 8 0t8 0"/>'),
+ dam:outline('<path d="M4 4h11l3 16H7zM8 4l3 16m1-16 3 16M18 10h4m-3 5h3M2 22q3-2 6 0t6 0t6 0"/>'),
+ camera:outline('<path d="m3 7 13-3 3 9-13 3zM7 17v4h7m-3-5v5M19 8l3-1v5l-2-1"/>'),
+ rain:outline('<path d="M6 14a4 4 0 0 1 0-8 6 6 0 0 1 11-1 4.5 4.5 0 0 1 1 9zM8 17l-1 4m6-4-1 4m6-4-1 4"/>'),
+ pump:outline('<rect x="4" y="9" width="11" height="12" rx="2"/><path d="M9 9V4h6m0 9h5v7"/><circle cx="9" cy="15" r="2"/>'),
+ storage:outline('<path d="M3 10h18v11H3zM3 16q4-2 9 0t9 0M12 2s-3 3-3 5a3 3 0 0 0 6 0c0-2-3-5-3-5z"/>'),
+ protection:outline('<path d="m12 3 8 3v6c0 4-4 7-8 9-4-2-8-5-8-9V6zM8 12l3 3 5-6"/>')
+};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const colour=(kind,hex)=>ink(hex)||ink(KIND[kind]||'#109dc0');
 const glyph=(kind,c,w)=>'<svg class="ieat-nm-glyph" width="'+w+'" height="'+w+'" viewBox="1.5 1.5 21 21" aria-hidden="true" focusable="false">'+(GL[kind]||GL.water)(c)+'</svg>';
@@ -47,10 +39,10 @@ function cluster(kind,hex,count){const c=colour(kind,hex),n=Number(count)||0,txt
 window.IEAT_SQ={tile,pin,cluster,ink};
 /* 85% frosted white; the drop shadow lives on the button itself (not a parent filter) so backdrop blur still sees the map. */
 const BTN='background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.85) 0%,rgba(255,255,255,.85) 38%,rgba(255,255,255,.85) 78%,rgba(255,255,255,.85) 100%)!important;-webkit-backdrop-filter:blur(6px) saturate(1.3);backdrop-filter:blur(6px) saturate(1.3);';
-const SHADOW='4px 6px 9px rgba(46,31,84,.30),1px 2px 3px rgba(46,31,84,.20),';
+const SHADOW='0 2px 7px rgba(35,60,95,.18),';
 const css=document.createElement('style');css.id='ieat-neumorphic-markers';css.textContent=`
-html body .ieat-nm-btn{position:relative!important;display:grid!important;place-items:center!important;box-sizing:border-box!important;border-radius:50%!important;border:0!important;padding:0!important;margin:0!important;${BTN}box-shadow:${SHADOW}inset -3px -3px 5px rgba(74,133,148,.2),inset 2px 2px 4px #ffffff,0 0 0 .5px rgba(74,133,148,.18)!important}
-html body .ieat-nm-glyph{display:block!important;filter:drop-shadow(.8px 1.4px 1px rgba(0,0,0,.2))}
+html body .ieat-nm-btn{position:relative!important;display:grid!important;place-items:center!important;box-sizing:border-box!important;border-radius:50%!important;border:0!important;padding:0!important;margin:0!important;${BTN}box-shadow:${SHADOW}0 0 0 1px #e5ebf5!important}
+html body .ieat-nm-glyph{display:block!important;filter:none!important}
 html body .ieat-nm-glyph *{visibility:visible!important}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html body .ieat-nm-btn{background:radial-gradient(circle at 32% 26%,#ffffff 0%,#ffffff 38%,#ffffff 78%,#ffffff 100%)!important}}
 html body .ieat-sq-pin{position:absolute!important;left:50%!important;bottom:0!important;transform:translateX(-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;width:40px!important;height:48px!important;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;filter:none!important;pointer-events:auto;transition:transform .15s ease}
@@ -61,7 +53,7 @@ html body .ieat-sq-pin:after,html body .ieat-sq-pin:before{content:none!importan
 html body .ieat-sq-pin.is-critical .ieat-nm-btn:before{content:""!important;position:absolute!important;inset:-4px!important;border-radius:50%!important;border:2px solid #ed3b21!important;animation:ieatNmPulse 1.6s ease-in-out infinite}
 @keyframes ieatNmPulse{0%,100%{opacity:.8}50%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){html body .ieat-sq-pin.is-critical .ieat-nm-btn:before{animation:none;opacity:.6}}
-html body .leaflet-marker-icon:hover .ieat-sq-pin,html body .maplibregl-marker:hover .ieat-sq-pin,html body .leaflet-marker-icon:focus-visible .ieat-sq-pin,html body .maplibregl-marker:focus-visible .ieat-sq-pin{transform:translateX(-50%) translateY(-3px) scale(1.06)!important}
+html body .leaflet-marker-icon:hover .ieat-sq-pin,html body .maplibregl-marker:hover .ieat-sq-pin,html body .leaflet-marker-icon:focus-visible .ieat-sq-pin,html body .maplibregl-marker:focus-visible .ieat-sq-pin{transform:translateX(-50%)!important}
 html body #mapStage .estate-pin.has-sq,html body #mapStage .flood-data-pin.has-sq,html body .estate-pin.has-sq,html body .flood-data-pin.has-sq,html body .prep-anchor .has-sq{width:40px!important;height:48px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none!important;overflow:visible!important;padding:0!important}
 html body #mapStage .leaflet-marker-icon.estate-pin.has-sq,html body #mapStage .leaflet-marker-icon.flood-data-pin.has-sq,html body .leaflet-marker-icon.estate-pin.has-sq,html body .leaflet-marker-icon.flood-data-pin.has-sq{margin-left:-20px!important;margin-top:-48px!important}
 html body .estate-pin.has-sq .estate-name{top:50px!important}
