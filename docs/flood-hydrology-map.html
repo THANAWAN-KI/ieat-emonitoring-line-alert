@@ -2238,3 +2238,40 @@ document.addEventListener('ieat-map-ready',sync);
 if(!sync()){let n=0;const t=setInterval(()=>{if(sync()||++n>120)clearInterval(t)},500);}
 })();
 </script>
+
+<style id="flood-glass-map-controls">
+@layer floodGlassControls {
+html body #floodAlertButton,html body #mapLayers > summary,html body #estateView3d,html body #aerialTourButton,html body #mapCompass,html body #dashboardMapZoom,html body #dashboardMapZoom button,html body #ieatInfrastructure {
+border-radius:6px!important;background:rgba(255,255,255,.40)!important;background-image:none!important;backdrop-filter:blur(14px) saturate(125%)!important;-webkit-backdrop-filter:blur(14px) saturate(125%)!important;border:1px solid rgba(255,255,255,.75)!important;box-shadow:0 3px 16px rgba(35,61,74,.14),inset 0 1px 0 rgba(255,255,255,.5)!important;
+}
+html body #dashboardMapZoom {overflow:hidden!important}
+html body #dashboardMapZoom button {border:0!important;box-shadow:none!important;border-radius:0!important;background:transparent!important}
+html body #dashboardMapZoom button + button {border-top:1px solid rgba(255,255,255,.65)!important}
+html body #mapLayers .layer-body,html body #floodAlertPanel {border-radius:6px!important;background:rgba(255,255,255,.78)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+html body #floodAlertButton.has-alert {border-color:rgba(179,7,7,.6)!important}
+html body #ieatAttributionToggle {position:relative;float:right;margin:0 8px 5px 0;z-index:1500;pointer-events:auto}
+html body #ieatAttributionToggle > summary {list-style:none;display:grid;place-items:center;width:26px;height:26px;cursor:pointer;color:#455b67;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.8);border-radius:5px;backdrop-filter:blur(12px);font:700 15px/1 sans-serif}
+html body #ieatAttributionToggle > summary::-webkit-details-marker {display:none}
+}
+@layer floodAttributionRepair {
+html body #mapStage #ieatAttributionToggle .leaflet-control-attribution,html body #mapStage #ieatAttributionToggle .maplibregl-ctrl-attrib {
+position:absolute!important;right:0!important;bottom:32px!important;float:none!important;width:min(440px,calc(100vw - 80px))!important;max-width:min(440px,calc(100vw - 80px))!important;max-height:110px!important;overflow:auto!important;margin:0!important;padding:8px 10px!important;background:rgba(255,255,255,.9)!important;border-radius:6px!important;font-size:10px!important;line-height:1.5!important;
+}
+html body #ieatAttributionToggle:not([open]) .leaflet-control-attribution,html body #ieatAttributionToggle:not([open]) .maplibregl-ctrl-attrib {display:none!important}
+}
+</style>
+<script id="flood-compact-map-credits">
+(()=>{
+function compactCredits(){
+ const stage=document.getElementById('mapStage');if(!stage)return;
+ for(const node of stage.querySelectorAll('.leaflet-control-attribution,.maplibregl-ctrl-attrib')){
+  if(node.closest('#ieatAttributionToggle'))continue;
+  const wrap=document.createElement('details');wrap.id='ieatAttributionToggle';wrap.setAttribute('aria-label','แหล่งข้อมูลแผนที่');
+  const summary=document.createElement('summary');summary.title='แหล่งข้อมูลแผนที่';summary.setAttribute('aria-label','แสดงแหล่งข้อมูลแผนที่');summary.textContent='i';
+  node.parentNode.insertBefore(wrap,node);wrap.append(summary,node);
+ }
+}
+document.addEventListener('ieat-map-ready',compactCredits);
+compactCredits();let tries=0;const t=setInterval(()=>{compactCredits();if(++tries>60)clearInterval(t)},500);
+})();
+</script>
