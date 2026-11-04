@@ -1607,6 +1607,7 @@ window.addEventListener('message',async event=>{
  else if(cleanDashboard){if(vector)vector.flyTo({center:[101,13],zoom:5.5,pitch:0,bearing:0});else raster?.setView([13,101],5.5)}
  return
 }
+ if(d.type==='flood-booth-3d'){const button=$('estateView3d');if(!button)return;const requested=Boolean(d.enabled),on=button.getAttribute('aria-pressed')==='true';if(requested!==on)button.click();return}
  if(d.type==='flood-map-resize'){if(vector)vector.resize();if(raster)raster.invalidateSize();return}
  if(d.type==='flood-map-focus'){focus(d);return}
  if(d.type==='flood-water-feed'&&Array.isArray(d.rows)){
