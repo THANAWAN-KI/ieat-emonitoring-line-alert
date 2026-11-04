@@ -101,3 +101,12 @@
  html body[data-reference-panel=closed] #warning #estateFocusDashboard .ef-map-column{left:0!important}
  }
 }
+
+/* Keep the panel background behind, never above the live overview content. */
+@layer floodReferenceStructure {
+ html body #referencePanelSurface{display:none!important}
+ @media(min-width:901px){
+ html body #referenceRail{background:#fff!important;border-radius:34px 0 0 34px!important}
+ html body #warning #estateFocusDashboard .ef-data-column{background:#fff!important;box-shadow:4px 4px 20px #2635480c!important}
+ }
+}
