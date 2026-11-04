@@ -1,0 +1,69 @@
+/* Borderless exhibition finish; geographic lines and gauge marks remain data. */
+@layer floodBorderless {
+ :root{--ui-accent:#622d89;--ui-primary:#351447;--ui-tint:#f4edf9;--ref-purple:#622d89;--ref-plum:#351447;--ui-border:transparent}
+ html body:has(#warning){background:#fff!important;color:#2d2235!important}
+ html body:has(#warning)::before,html body:has(#warning)::after{display:none!important;border:0!important;box-shadow:none!important}
+ html body #warning #estateFocusDashboard,html body #warning #estateFocusDashboard *{border:0!important;border-image:none!important}
+ html body #referenceRail,html body #referenceRail *,html body #floodSectionPanel,html body #floodSectionPanel *,html body #referenceSettings,html body #ieatDashboardCamera,html body #ieatDashboardCamera *{border:0!important;border-image:none!important}
+ html body #warning #estateFocusDashboard .ef-data-column{background:#fff!important;padding-right:12px!important;scrollbar-color:#ddc9e9 transparent!important}
+ html body #referenceRail{background:#fff!important;box-shadow:none!important}
+ html body #referenceRail .reference-rail-modes{gap:16px!important}
+ html body #referenceRail .reference-rail-modes>[data-section]{border-radius:17px!important;background:linear-gradient(145deg,#fcf9ff,#f0e5f7)!important;box-shadow:0 5px 12px #57227710,inset 0 1px 0 #fff!important;color:#622d89!important;transition:transform .2s ease,box-shadow .2s ease!important}
+ html body #referenceRail .reference-rail-modes>[data-section][aria-pressed=true]{background:linear-gradient(145deg,#f1e3fa,#dfc7ed)!important;box-shadow:0 6px 16px #622d8926!important;outline:0!important}
+ html body #referenceRail .reference-rail-modes>[data-section=alerts]{background:linear-gradient(145deg,#fff4f5,#f9dce5)!important;box-shadow:0 5px 12px #bf033b13!important}
+ html body #referenceRail .section-alert-count{background:#c72355!important;box-shadow:0 3px 8px #c7235522!important}
+ html body #warning #estateFocusDashboard :is(#floodPageTitle,.ex-prep-head h2){color:#351447!important;font-weight:700!important;letter-spacing:-.4px!important}
+ html body #warning #estateFocusDashboard :is(#expoBoothSubtitle,.io-date){color:#8b788e!important}
+ html body #warning #estateFocusDashboard #ieatOverviewFilter{gap:12px!important;margin-bottom:16px!important}
+ html body #warning #estateFocusDashboard :is(#ioEstatePicker,#ieatAllEstates),html body #preparednessPane :is(select,[data-ex-all]){background:#f5eff9!important;border-radius:13px!important;box-shadow:none!important;color:#4a235f!important;min-height:42px!important}
+ html body #warning #estateFocusDashboard #ieatAllEstates{background:#eee0f6!important;color:#622d89!important;font-weight:600!important}
+ html body #warning #estateFocusDashboard .io-mini-stats{gap:12px!important;margin-bottom:8px!important}
+ html body #warning #estateFocusDashboard .io-mini-stats>[role=button]{background:linear-gradient(140deg,#fbf8fe,#f1e8f8)!important;border-radius:21px!important;box-shadow:0 6px 16px #54206d09!important;min-height:100px!important;padding:16px!important}
+ html body #warning #estateFocusDashboard .io-mini-stats>[role=button]:first-child{background:linear-gradient(135deg,#713798,#4e216c)!important;box-shadow:0 8px 20px #622d8924!important}
+ html body #warning #estateFocusDashboard .io-mini-stats :is(b,strong){color:#51236c!important;-webkit-text-fill-color:#51236c!important;font-size:40px!important}
+ html body #warning #estateFocusDashboard .io-mini-stats .io-stat-copy span{color:#7f6889!important;-webkit-text-fill-color:#7f6889!important}
+ html body #warning #estateFocusDashboard .io-mini-stats>[role=button]:first-child :is(b,strong,span){color:white!important;-webkit-text-fill-color:white!important}
+ html body #warning #estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel,#floodDamsSection,#efDamFlowPanel,#floodWaterDiagram,#rpRankingsAfterWarning>section,.ex-card){background:#faf7fd!important;border-radius:22px!important;padding:17px 18px!important;box-shadow:0 5px 18px #42165d09!important}
+ html body #warning #estateFocusDashboard :is(.ef-panel>h2,.rp-stations-title,.ef-canal-panel>h2,#floodDamsSection>h2,#floodWaterDiagram>h3,#rpRankingsAfterWarning h3,.ex-card h3){background:transparent!important;color:#3d234e!important;font-weight:600!important;font-size:21px!important;line-height:1.4!important}
+ html body #warning #estateFocusDashboard :is(.rp-station-row,.ef-canal-card,.ef-dam-card,.ef-reservoir-row){background:transparent!important;box-shadow:none!important;border-radius:15px!important}
+ html body #warning #estateFocusDashboard :is(.rp-station-content>strong,.ef-canal-content>strong){color:#351447!important}
+ html body #warning #estateFocusDashboard :is(.rp-station-top>em,.ef-canal-status,.dam-inline-status,.ef-reservoir-percent span){border-radius:20px!important;padding:5px 11px!important}
+ html body #warning #estateFocusDashboard :is(#ieatWaterStationPager,#ieatCanalPager,#ieatDamPager,#ieatReservoirPager) button{background:#eee3f6!important;color:#622d89!important;border-radius:11px!important;box-shadow:none!important;min-height:31px!important}
+ html body #warning #estateFocusDashboard button:disabled{opacity:.4!important}
+ html body #warning #estateFocusDashboard #floodDamsSection>.ef-panel{background:transparent!important;box-shadow:none!important}
+ html body #warning #estateFocusDashboard .ef-map-column{border-radius:24px!important;box-shadow:none!important}
+ html body #ieatDashboardCamera{background:#fffffff0!important;border-radius:16px!important;box-shadow:0 8px 26px #35144718!important}
+ html body #ieatDashboardCamera button{background:#f2e9f8!important;color:#622d89!important;border-radius:11px!important}
+ html body #ieatDashboardCamera button[aria-pressed=true]{background:#622d89!important;color:white!important}
+ html body #ieatDashboardCamera[data-mode=2d] :is([data-live-camera=left],[data-live-camera=right]){display:none!important}
+ html body #ieatPrepSupplement,html body #ieatCanalSample,html body #floodSectionPanel .ex-demo-card{background:linear-gradient(145deg,#f5edf9,#eee2f5)!important;border-radius:18px!important;box-shadow:none!important}
+ html body .ex-demo-tag{background:#e6d3f0!important;color:#602d7b!important;border-radius:20px!important;box-shadow:none!important}
+ html body #preparednessPane .ex-table th,html body .ex-report-table th{background:#ece1f4!important;color:#4d2761!important}
+ html body #preparednessPane .ex-table tbody tr:nth-child(even),html body .ex-report-table tbody tr:nth-child(even){background:#f3ecf8!important}
+ html body #preparednessPane .ex-table td,html body .ex-report-table td{background:transparent!important;padding:11px 10px!important}
+ html body #preparednessPane .ex-table-wrap,html body .ex-report-table{border-radius:13px!important}
+ html body #preparednessPane .ex-selected{background:#e8d9f1!important}
+ html body #floodSectionPanel{background:#fff!important;padding-right:12px!important}
+ html body #floodSectionPanel h1{color:#351447!important;letter-spacing:-.4px!important}
+ html body #floodSectionPanel .ex-shared-estate{background:#f4edf9!important;border-radius:17px!important;padding:14px 16px!important}
+ html body #floodSectionPanel .section-kpis>div{background:linear-gradient(135deg,#f9f5fc,#eee3f6)!important;border-radius:18px!important;box-shadow:none!important;padding:16px!important}
+ html body #floodSectionPanel .section-kpis b{color:#51236c!important}
+ html body #floodSectionPanel :is(select,input[type=date],textarea){background:#f6f0fa!important;color:#3d234e!important;border-radius:12px!important;padding:10px!important;box-shadow:none!important}
+ html body #floodSectionPanel :is(.section-settings-card,.section-alert-row,#ieatCurrentReport){background:#faf7fd!important;border-radius:19px!important;box-shadow:0 5px 16px #42165d08!important;padding:18px!important}
+ html body #floodSectionPanel .section-alert-row.is-critical{background:#fff2f5!important}
+ html body #floodSectionPanel .section-status{color:#8a5c24!important}
+ html body #floodSectionPanel .is-critical .section-status{color:#b32953!important}
+ html body #floodSectionPanel .section-empty{background:#eef5e8!important;border-radius:16px!important}
+ html body #floodSectionPanel .section-action{background:#ede0f6!important;color:#622d89!important;border-radius:12px!important;box-shadow:none!important}
+ html body #floodSectionPanel [data-section-action=print]{background:linear-gradient(135deg,#713798,#4e216c)!important;color:white!important;text-align:center!important}
+ html body #floodSectionPanel .section-layer-row{background:#f7f2fb!important;border-radius:13px!important}
+ html body #referenceRail .reference-rail-modes>[data-section]:focus-visible{outline:3px solid #b383cd!important;outline-offset:3px!important}
+ html body #warning #estateFocusDashboard :is(button,input,select,a):focus-visible,html body #floodSectionPanel :is(button,input,textarea,select,a):focus-visible,html body #referenceRail button:focus-visible{outline:3px solid #b383cd!important;outline-offset:3px!important}
+ /* Inside the existing map iframe: soften interface chrome, never map geometry. */
+ html body:has(#mapStage) :is(#mapLayers,#mapLayers>summary,.layer-body,#floodAlertButton,#floodAlertPanel,#mapCompass,#dashboardMapZoom,#dashboardMapZoom button,#estateView3d,#aerialTourButton,#ieatInfrastructure,.leaflet-popup-content-wrapper,.maplibregl-popup-content){border:0!important;border-image:none!important;border-radius:13px!important}
+ html body:has(#mapStage) :is(#mapLayers>summary,#mapCompass,#estateView3d,#aerialTourButton){background:#fffffff0!important;box-shadow:0 5px 14px #35144712!important}
+ html body:has(#mapStage) :is(.leaflet-popup-content-wrapper,.maplibregl-popup-content,#floodAlertPanel){background:#fff!important;box-shadow:0 10px 30px #3514471a!important}
+ @media(max-width:760px){html body #warning #estateFocusDashboard .io-mini-stats>[role=button]{padding:12px!important;min-height:98px!important}html body #warning #estateFocusDashboard .io-mini-stats :is(b,strong){font-size:33px!important}}
+ @media(prefers-reduced-motion:reduce){html body #referenceRail .reference-rail-modes>[data-section]{transition:none!important}}
+}
+@media print{#ieatCurrentReport{background:#fff!important;box-shadow:none!important;border:0!important}#ieatCurrentReport th{background:#f1e9f6!important}}
