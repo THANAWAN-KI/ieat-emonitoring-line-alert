@@ -2,6 +2,7 @@
 'use strict';
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bridge=()=>window.IEATPreparednessMap?.();
+const embeddedDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
 const css=document.createElement('style');css.textContent=`
 #mapDetails{position:absolute;right:0;top:0;bottom:0;width:300px;z-index:1100;background:#fff;color:#293d4d;display:flex;flex-direction:column;font:13px/1.6 Sarabun,sans-serif;box-shadow:-3px 0 18px #263a4b18}#mapDetails[hidden]{display:none}
 #mapDetails header{display:flex;gap:8px;align-items:center;padding:13px 15px;border-bottom:1px solid #edf0f3}#mapDetails h2{font-size:16px;margin:0;flex:1}#mapDetailsClose{border:0;background:#f0f3f6;border-radius:50%;width:29px;height:29px;font:20px sans-serif;cursor:pointer;color:#5a6772}
@@ -20,12 +21,13 @@ aside.innerHTML='<header><h2>ข้อมูลสนับสนุน</h2><but
 document.body.appendChild(aside);
 const button=document.createElement('button');button.id='supportMapButton';button.type='button';button.textContent='ข้อมูลสนับสนุนการเตรียมความพร้อม';button.onclick=()=>prep();document.body.appendChild(button);
 let estate='บางปะอิน',tab='prep',selected=null;
-function open(which){tab=which;aside.hidden=false;document.body.classList.add('map-details-open');aside.querySelectorAll('[data-detail-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.detailTab===which)));const map=bridge()?.vector||bridge()?.raster;requestAnimationFrame(()=>{map?.resize?.();map?.invalidateSize?.()})}
+function open(which){if(embeddedDashboard)return;tab=which;aside.hidden=false;document.body.classList.add('map-details-open');aside.querySelectorAll('[data-detail-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.detailTab===which)));const map=bridge()?.vector||bridge()?.raster;requestAnimationFrame(()=>{map?.resize?.();map?.invalidateSize?.()})}
 function close(){aside.hidden=true;document.body.classList.remove('map-details-open');const map=bridge()?.vector||bridge()?.raster;requestAnimationFrame(()=>{map?.resize?.();map?.invalidateSize?.()})}
 $('mapDetailsClose').onclick=close;
 function focus(lon,lat){if(!Number.isFinite(Number(lon))||!Number.isFinite(Number(lat)))return;requestAnimationFrame(()=>bridge()?.focusPoint?.(Number(lon),Number(lat)))}
 function plan(){return (window.IEAT_ESTATE_DIAGRAMS||[]).find(p=>p.match&&estate.includes(p.match))}
 function prep(id=null,move=false){
+ if(embeddedDashboard){const station=window.IEAT_PREPAREDNESS?.stations.find(s=>String(s.id)===String(id));if(station)bridge()?.showAt?.(station.lon,station.lat,'<div class="popup"><h3>สถานีสูบน้ำ '+esc(station.id)+'</h3><p>กำลังสูบตามผัง '+esc(station.capacity.toLocaleString('th-TH'))+' ลบ.ม./ชม.</p><small>ตำแหน่งประมาณ</small></div>',move);return}
  open('prep');selected=id;const p=plan();if(!p){$('mapDetailsBody').innerHTML='<h3>'+esc(estate||'เลือกนิคมฯ')+'</h3><p>ยังไม่มีผังการเตรียมรับมือของพื้นที่นี้ในระบบ</p>';return}
  const pumps=window.IEAT_PREPAREDNESS?.stations||[];
  const selectedPump=p.key==='bang-pa-in'?pumps.find(s=>String(s.id)===String(id)):null;
