@@ -45,14 +45,17 @@ function pin(kind,hex){const crit=isCrit(hex);
 function cluster(kind,hex,count){const c=colour(kind,hex),n=Number(count)||0,txt=n>99?'99+':String(n);
  return '<span class="ieat-sq-cluster" data-type="'+esc(kind)+'"><span class="ieat-nm-btn" style="--nm-ring:'+c+'"><b style="color:'+c+';font-size:'+(txt.length>2?12:15)+'px">'+txt+'</b></span><span class="ieat-sq-cluster-kind">'+tile(kind,hex,20)+'</span></span>'}
 window.IEAT_SQ={tile,pin,cluster,ink};
-const BTN='background:radial-gradient(circle at 32% 26%,#FFFFFF 0%,#FBFBFC 38%,#EBEDF0 78%,#E0E3E8 100%)!important;';
+/* 85% frosted white; the drop shadow lives on the button itself (not a parent filter) so backdrop blur still sees the map. */
+const BTN='background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.85) 0%,rgba(251,251,252,.85) 38%,rgba(235,237,240,.85) 78%,rgba(224,227,232,.85) 100%)!important;-webkit-backdrop-filter:blur(6px) saturate(1.3);backdrop-filter:blur(6px) saturate(1.3);';
+const SHADOW='4px 6px 9px rgba(35,50,65,.30),1px 2px 3px rgba(35,50,65,.20),';
 const css=document.createElement('style');css.id='ieat-neumorphic-markers';css.textContent=`
-html body .ieat-nm-btn{position:relative!important;display:grid!important;place-items:center!important;box-sizing:border-box!important;border-radius:50%!important;border:0!important;padding:0!important;margin:0!important;${BTN}box-shadow:inset -3px -3px 5px rgba(130,140,155,.2),inset 2px 2px 4px #fff,0 0 0 .5px rgba(120,130,145,.18)!important}
+html body .ieat-nm-btn{position:relative!important;display:grid!important;place-items:center!important;box-sizing:border-box!important;border-radius:50%!important;border:0!important;padding:0!important;margin:0!important;${BTN}box-shadow:${SHADOW}inset -3px -3px 5px rgba(130,140,155,.2),inset 2px 2px 4px #fff,0 0 0 .5px rgba(120,130,145,.18)!important}
 html body .ieat-nm-glyph{display:block!important;filter:drop-shadow(.8px 1.4px 1px rgba(0,0,0,.2))}
 html body .ieat-nm-glyph *{visibility:visible!important}
-html body .ieat-sq-pin{position:absolute!important;left:50%!important;bottom:0!important;transform:translateX(-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;width:40px!important;height:48px!important;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;filter:drop-shadow(4px 6px 5px rgba(35,50,65,.30)) drop-shadow(1px 2px 1.5px rgba(35,50,65,.20))!important;pointer-events:auto;transition:transform .15s ease}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html body .ieat-nm-btn{background:radial-gradient(circle at 32% 26%,#FFFFFF 0%,#FBFBFC 38%,#EBEDF0 78%,#E0E3E8 100%)!important}}
+html body .ieat-sq-pin{position:absolute!important;left:50%!important;bottom:0!important;transform:translateX(-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;width:40px!important;height:48px!important;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;filter:none!important;pointer-events:auto;transition:transform .15s ease}
 html body .ieat-sq-pin .ieat-nm-btn{width:40px!important;height:40px!important;flex:none!important}
-html body .ieat-nm-tail{display:block!important;width:0!important;height:0!important;margin-top:-1px!important;border-left:6px solid transparent!important;border-right:6px solid transparent!important;border-top:8px solid #E3E6EA!important;background:none!important}
+html body .ieat-nm-tail{display:block!important;width:0!important;height:0!important;margin-top:-1px!important;border-left:6px solid transparent!important;border-right:6px solid transparent!important;border-top:8px solid rgba(227,230,234,.92)!important;background:none!important;filter:drop-shadow(2px 2px 1.5px rgba(35,50,65,.25))}
 html body .ieat-sq-pin:after,html body .ieat-sq-pin:before{content:none!important;display:none!important}
 html body .ieat-sq-pin.is-critical .ieat-nm-btn:before{content:""!important;position:absolute!important;inset:-4px!important;border-radius:50%!important;border:2px solid #FF4D4D!important;animation:ieatNmPulse 1.6s ease-in-out infinite}
 @keyframes ieatNmPulse{0%,100%{opacity:.8}50%{opacity:.25}}
@@ -62,7 +65,7 @@ html body .estate-pin.has-sq,html body .flood-data-pin.has-sq,html body .prep-an
 html body .leaflet-marker-icon.estate-pin.has-sq,html body .leaflet-marker-icon.flood-data-pin.has-sq{margin-left:-20px!important;margin-top:-48px!important}
 html body .estate-pin.has-sq .estate-name{top:50px!important}
 html body .flood-data-pin.has-sq .fd-pin-name{top:50px!important}
-html body .ieat-sq-cluster{position:relative!important;display:block!important;width:44px!important;height:44px!important;filter:drop-shadow(4px 6px 5px rgba(35,50,65,.30)) drop-shadow(1px 2px 1.5px rgba(35,50,65,.2))}
+html body .ieat-sq-cluster{position:relative!important;display:block!important;width:44px!important;height:44px!important}
 html body .ieat-sq-cluster>.ieat-nm-btn{width:44px!important;height:44px!important}
 html body .ieat-sq-cluster>.ieat-nm-btn:before{content:"";position:absolute;inset:4px;border-radius:50%;border:2.5px solid var(--nm-ring,#8A4FD6);opacity:.85}
 html body .ieat-sq-cluster b{font:800 15px/1 Sarabun,Tahoma,sans-serif!important;background:none!important;border:0!important;padding:0!important;position:static!important;box-shadow:none!important}
