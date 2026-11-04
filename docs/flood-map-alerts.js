@@ -31,3 +31,13 @@
  document.addEventListener('click',e=>{if(!panel.hidden&&!panel.contains(e.target)&&!button.contains(e.target))close();});
  window.addEventListener('resize',position);document.addEventListener('ieat-map-ready',update);update();setInterval(()=>{if(!document.hidden)update();},3000);
 })();
+
+/* GIS projection-safe marker alignment for both WebGL and raster fallback. */
+;(()=>{'use strict';
+ if(document.getElementById('ieatMapAnchorScript'))return;
+ const script=document.createElement('script');
+ script.id='ieatMapAnchorScript';
+ script.src='flood-map-anchor-fix.js?v=20261104-anchor-v1';
+ script.defer=true;
+ document.head.appendChild(script);
+})();
