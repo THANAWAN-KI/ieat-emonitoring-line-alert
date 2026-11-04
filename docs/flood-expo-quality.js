@@ -26,6 +26,8 @@
    set(map,'position','fixed');
    set(data,'min-width','0');
    set(map,'min-width','0');
+   // Keep the left column readable; two compact data tracks need enough physical pixels.
+   set(data,'grid-template-columns',wide&&innerWidth>=1550?'repeat(2,minmax(0,1fr))':'minmax(0,1fr)');
    if(wide){
      set(data,'left','var(--expo-rail)');
      set(data,'width','var(--expo-panel)');
