@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="th">
 <head>
+<style>@layer ieatExhibitionTheme;</style>
+
 <meta charset="utf-8">
 <script id="dashboard-reliable-boot">(function(){
  'use strict';
@@ -217,7 +219,7 @@ html body #warning #estateFocusDashboard .ef-data-column :is(p,small,.ef-scroll-
 </style><style id="standard-water-status-colors">#estateFocusDashboard [data-water-theme^="standard-"]{--water-bg:#fff!important;--water-ink:#263746!important}#estateFocusDashboard #efReservoirList [data-water-theme^="standard-"] .ef-reservoir-percent span{background:var(--water-accent)!important;color:white!important}#waterStatusGuide{padding:6px 10px;color:#435461;font:11px/1.6 Sarabun,sans-serif}#waterStatusGuide summary{cursor:pointer}#waterStatusGuide p{margin:5px 0}#waterStatusGuide i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}</style><style id="overview-three-white-cards">html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpis>.flood-kpi{background:#FFFFFF!important;background-image:none!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpis>.flood-kpi:hover{background:#FFFFFF!important}</style><script defer src="flood-icons.js?v=8f75bcb0"></script>
 <script defer src="flood-water-status.js?v=20261030-warning-yellow"></script>
 <script defer src="flood-rid-source.js?v=20261006-rid-17"></script>
-<script defer src="flood-estate-dashboard.js?v=20261104-frosted-85"></script>
+<script defer src="flood-estate-dashboard.js?v=20261104-coherent-tables2"></script>
 <script defer src="flood-river-panel.js?v=20261104-font-size-971e49"></script>
 <script defer src="flood-weather-overview.js?v=20261006-svg-weather-37"></script>
 <style id="dashboard-refined-responsive">
@@ -1758,13 +1760,15 @@ window.addEventListener('resize',schedule);
 #preparednessPane .prep-table th:first-child{width:42%}
 #preparednessPane .prep-table tr:has(button):hover{background:#f2f7fc;cursor:pointer}
 #preparednessPane .prep-table button{padding:0;border:0;background:none;color:#0d47a1;font:inherit;text-decoration:underline;cursor:pointer;text-align:left}
-</style><script id="flood-two-modes">(()=>{
+</style><script src="flood-exhibition-preparedness.js?v=20261104-tables1"></script><script id="flood-two-modes">(()=>{
 'use strict';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v||'').normalize('NFC').replace(/สำนักงานนิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
 let view='overview',scope=window.IEAT_FLOOD_PROVINCE_SCOPE||{},scroll=0,mounted=false;
 function send(data){document.getElementById('estateFocusMap')?.contentWindow?.postMessage(data,location.origin)}
 function renderPrep(){
+ if(window.IEAT_PREP_TABLES){window.IEAT_PREP_TABLES.render(scope);return;}
+
  const pane=document.getElementById('preparednessPane');if(!pane)return;
  const name=String(scope.name||scope.estate?.name||''),p=(window.IEAT_ESTATE_DIAGRAMS||[]).find(p=>p.match&&name&&norm(name).includes(norm(p.match)));
  document.getElementById('floodModeEstate').textContent=name||'สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม';
@@ -1784,6 +1788,7 @@ let supportSignature='';
 function selectedEstate(){return String(scope.name||scope.estate?.name||'')}
 function refreshPrep(){
  renderPrep();
+ if(window.IEAT_PREP_TABLES)return;
  supportSignature='';
  const pane=document.getElementById('preparednessPane');
  const section=document.createElement('section');
@@ -2180,3 +2185,64 @@ html body #warning #estateFocusDashboard .ef-data-column {border-radius:0 22px 2
 }
 }
 </style>
+
+<style>@layer ieatExhibitionTheme {
+html body #warning #estateFocusDashboard .ef-data-column {font:400 14px/1.65 Sarabun,sans-serif!important;color:#252a32!important;background:#fff!important;border-radius:0 26px 26px 0!important;padding:78px 20px 24px!important;gap:16px!important;scroll-padding-top:78px!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(h1,h2,h3,h4) {color:#252a32!important;-webkit-text-fill-color:#252a32!important;letter-spacing:normal!important}
+html body #warning #estateFocusDashboard #floodPageTitle {font-size:26px!important;font-weight:600!important;line-height:1.4!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(h2,h3,.rp-stations-title) {font-size:20px!important;font-weight:600!important;line-height:1.4!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(p,button,select,td,th) {font-family:Sarabun,sans-serif!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(.ef-panel,#floodStationsSection,#floodWaterDiagram,#rpRankingsAfterWarning>section,.ex-card) {background:#fff!important;background-image:none!important;border:1px solid #e7ebf0!important;border-radius:15px!important;box-shadow:0 3px 9px #1924380d,0 1px 2px #1924380a!important;padding:16px!important}
+html body #warning #estateFocusDashboard .io-mini-stats > :is(div,button,[role=button]) {background:#fff!important;border:1px solid #e7ebf0!important;border-radius:14px!important;box-shadow:0 3px 9px #19243812!important;padding:14px 10px!important;min-height:100px!important}
+html body #warning #estateFocusDashboard .io-mini-stats :is(b,strong) {color:#4b164c!important;-webkit-text-fill-color:#4b164c!important;font-size:40px!important;font-weight:600!important;line-height:1.15!important}
+html body #warning #estateFocusDashboard .io-mini-stats :is(small,span) {font-size:13px!important;color:#343942!important;-webkit-text-fill-color:#343942!important;font-weight:400!important;line-height:1.5!important}
+html body #warning #estateFocusDashboard .io-mini-stats {gap:12px!important}
+html body #warning #estateFocusDashboard #ioEstatePicker {font-size:14px!important;background:#f7f8fa!important;border:1px solid #e2e5eb!important;color:#343942!important}
+html body #warning #estateFocusDashboard #ieatAllEstates {color:#6e288e!important;background:#fff!important;border:1px solid #d8c4e5!important;border-radius:9px!important;font-size:14px!important}
+html body #warning #estateFocusDashboard #expoBoothSubtitle {font-size:14px!important;color:#667085!important;margin-bottom:4px!important}
+html body #warning #estateFocusDashboard :is(.rp-station-top>b,.ef-canal-card>b,.ef-dam-card h3,.ef-reservoir-row>b) {font-size:16px!important;font-weight:600!important;color:#343942!important;line-height:1.5!important;overflow-wrap:anywhere!important}
+html body #warning #estateFocusDashboard :is(.rp-station-content>strong,.ef-canal-content>strong) {font-size:24px!important;font-weight:600!important;line-height:1.4!important;color:#252a32!important;-webkit-text-fill-color:#252a32!important}
+html body #warning #estateFocusDashboard :is(.rp-station-content>small,.rp-location,.rp-row-trend,.ef-canal-content>small,.io-date,.ex-note) {font-size:12px!important;line-height:1.6!important;font-weight:400!important;color:#667085!important;-webkit-text-fill-color:#667085!important}
+html body #warning #estateFocusDashboard .ex-kpi-note {font-size:12px!important;color:#667085!important;margin:8px 0 0!important}
+html body #warning #estateFocusDashboard #expoPaneToggle {display:none!important}
+html body #floodModeBar {position:fixed!important;left:calc(var(--ref-rail,60px) + 20px)!important;right:auto!important;top:12px!important;width:calc(var(--ref-panel,570px) - 40px)!important;max-width:calc(100vw - var(--ref-rail,60px) - 40px)!important;z-index:1800!important;height:48px!important;display:block!important;background:#fff!important;padding:0!important}
+html body #floodModeBar nav {display:flex!important;width:100%!important;border:1px solid #e7ebf0!important;border-radius:10px!important;background:#f7f8fa!important;padding:3px!important;box-shadow:0 2px 5px #19243809!important}
+html body #floodModeBar [data-flood-view-tab] {flex:1!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;border:0!important;border-radius:7px!important;padding:8px 10px!important;background:transparent!important;color:#343942!important;font:500 14px/1.5 Sarabun,sans-serif!important}
+html body #floodModeBar [aria-selected=true] {background:#823bc4!important;color:#fff!important;box-shadow:0 1px 3px #4b164c20!important}
+html body #floodModeEstate {display:none!important}
+html body[data-reference-panel=closed] #floodModeBar {display:none!important}
+html body #preparednessPane {padding:0!important;min-width:0!important}
+html body #preparednessPane .ex-prep-head h2 {font-size:26px!important;margin:0 0 6px!important}
+html body #preparednessPane .ex-prep-head p {font-size:14px!important;color:#667085!important;margin:0 0 16px!important}
+html body #preparednessPane .ex-prep-selector {display:grid!important;gap:8px!important;margin-bottom:16px!important}
+html body #preparednessPane select {font:400 14px Sarabun,sans-serif!important;color:#343942!important;background:#f7f8fa!important;border:1px solid #e2e5eb!important;border-radius:9px!important;padding:11px!important;width:100%!important;min-width:0!important}
+html body #preparednessPane .ex-card {margin:0 0 16px!important}
+html body #preparednessPane .ex-card h3 {margin:0 0 12px!important;font-size:20px!important}
+html body #preparednessPane .ex-table-wrap {overflow-x:auto!important;width:100%!important}
+html body #preparednessPane .ex-table {width:100%!important;border-collapse:collapse!important;table-layout:auto!important;font:400 14px/1.65 Sarabun,sans-serif!important;color:#343942!important;background:#fff!important}
+html body #preparednessPane .ex-table :is(th,td) {padding:10px 9px!important;text-align:left!important;vertical-align:top!important;border:0!important;border-bottom:1px solid #e8ebf0!important;font-size:14px!important;line-height:1.65!important;word-break:normal!important;overflow-wrap:anywhere!important}
+html body #preparednessPane .ex-table thead th {background:#f2f3f5!important;color:#343942!important;font-weight:600!important;white-space:normal!important}
+html body #preparednessPane .ex-table tbody th {font-weight:500!important;min-width:90px!important}
+html body #preparednessPane .ex-table small {display:block!important;font-size:12px!important;color:#667085!important;line-height:1.6!important;margin-top:4px!important}
+html body #preparednessPane .ex-table tr[data-ex-infra] {cursor:pointer!important}
+html body #preparednessPane .ex-table tr[data-ex-infra]:is(:hover,:focus,.ex-selected) {background:#f3edf8!important;outline:0!important}
+html body #preparednessPane .ex-map-action {border:0!important;padding:0!important;background:none!important;color:#823bc4!important;font:500 14px/1.6 Sarabun,sans-serif!important;text-align:left!important;cursor:pointer!important;min-width:78px!important}
+html body #preparednessPane .ex-badge {display:inline-block!important;border-radius:7px!important;padding:3px 7px!important;font-size:12px!important;font-weight:500!important;white-space:normal!important}
+html body #preparednessPane .ex-badge.neutral {background:#f0f2f5!important;color:#596273!important}
+html body #preparednessPane .ex-badge.amber {background:#fff1cf!important;color:#825600!important}
+html body #preparednessPane .ex-badge.red {background:#fde9e9!important;color:#a31c25!important}
+html body #preparednessPane .ex-note {margin:8px 0!important}
+html body #preparednessPane .ex-docs summary {cursor:pointer!important;font-size:16px!important;font-weight:600!important}
+html body #preparednessPane .prep-support {display:none!important}
+html body[data-flood-view=preparedness] #warning #estateFocusDashboard .ef-data-column > :not(#preparednessPane) {display:none!important}
+html body[data-flood-view=preparedness] #preparednessPane {display:block!important;grid-column:1 / -1!important}
+html body[data-flood-view=overview] #preparednessPane {display:none!important}
+html body #warning #estateFocusDashboard :is(.rp-station-row,.ef-canal-card) {min-height:240px!important}
+html body #warning #estateFocusDashboard [data-ex-status=green] {background:#eaf6ee!important;color:#21643c!important;-webkit-text-fill-color:#21643c!important;border:0!important}
+html body #warning #estateFocusDashboard [data-ex-status=red] {background:#fde9e9!important;color:#a31c25!important;-webkit-text-fill-color:#a31c25!important;border:0!important}
+html body #warning #estateFocusDashboard [data-ex-status=amber] {background:#fff1cf!important;color:#825600!important;-webkit-text-fill-color:#825600!important;border:0!important}
+@media(max-width:600px){html body #warning #estateFocusDashboard .ef-data-column {padding:76px 14px 22px!important}html body #warning #estateFocusDashboard #floodPageTitle,html body #preparednessPane .ex-prep-head h2 {font-size:23px!important}html body #preparednessPane .ex-table {min-width:490px!important}html body #warning #estateFocusDashboard .io-mini-stats :is(b,strong){font-size:32px!important}}
+}
+</style>
+<script id="exhibition-status-labels">(()=>{function sync(){const title=document.getElementById("floodPageTitle");if(title&&title.textContent!=="สถานการณ์น้ำในนิคมฯ")title.textContent="สถานการณ์น้ำในนิคมฯ";document.querySelectorAll(".rp-station-top>em,.ef-canal-status,.dam-inline-status,.ef-reservoir-percent span").forEach(e=>{const t=e.textContent;e.dataset.exStatus=/ล้น|วิกฤต|เกินความจุ/.test(t)&&!/น้อย/.test(t)?"red":/เฝ้าระวัง|เตือนภัย|น้ำมาก/.test(t)?"amber":/ปกติ|ต่ำกว่าเกณฑ์เตือน/.test(t)?"green":"neutral"});const h=document.getElementById("ieatOverviewCharts");if(h&&!h.querySelector(".ex-kpi-note")){const p=document.createElement("p");p.className="ex-kpi-note";p.textContent="นิคมฯ อาจเข้าเกณฑ์ได้หลายประเภท · สถานีใกล้เคียงไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ";h.append(p)}const a=document.getElementById("floodTab-overview"),b=document.getElementById("floodTab-preparedness");if(a&&a.textContent.trim()!=="สถานการณ์น้ำ")a.textContent="สถานการณ์น้ำ";if(b&&b.textContent.trim()!=="เตรียมรับมือ")b.textContent="เตรียมรับมือ";}sync();setInterval(()=>{if(!document.hidden)sync()},1500);})();</script>
+
