@@ -181,7 +181,7 @@
   const flowing=local.filter(v=>n(v.flow)!==null&&n(v.flow)>=0).sort((a,b)=>Number(b.flow)-Number(a.flow));
   $('rpFlowRanks').innerHTML=flowing.slice(0,5).map((r,i)=>rankRow(r,r.flow,(r.oldcode||'')+' · '+time(r.measured_at),'data-rp-id="'+esc(r.code)+'"',i+1)).join('')||'<p>ไม่มีอัตราการไหลล่าสุดในพื้นที่ที่เลือก</p>';
   // Compare like with like: dam releases are daily averages, not instantaneous downstream flows.
-  const damDate=r=>{const raw=String(r.measured_at||'').trim();return stamp(/^\\d{4}-\\d{2}-\\d{2}$/.test(raw)?raw+'T00:00:00':raw)};
+  const damDate=r=>{const raw=String(r.measured_at||'').trim();return stamp(/^\d{4}-\d{2}-\d{2}$/.test(raw)?raw+'T00:00:00':raw)};
   const damRows=rankedDams.filter(r=>{const age=Date.now()-damDate(r);return n(r.released)!==null&&n(r.released)>=0&&Number.isFinite(age)&&age>=-300000&&age<=72*3600000}).map(r=>({...r,rate:Number(r.released)*1000000/86400}));
   $('rpDamRanks').innerHTML=damRows.sort((a,b)=>b.rate-a.rate).slice(0,5).map((r,i)=>rankRow(r,r.rate,'อัตราเฉลี่ยรายวัน · '+r.measured_at,'data-related-dam="'+esc(r.id)+'"',i+1)).join('')||'<p class="rp-rank-empty">ยังไม่มีข้อมูลระบายน้ำรายวันที่ตรวจสอบเวลาได้</p>';
   const riverRows=allMainStations();
