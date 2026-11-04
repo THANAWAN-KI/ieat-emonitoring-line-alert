@@ -386,7 +386,7 @@ function apply(){
    set(index,{'grid-column':'1','grid-row':'1','display':'grid','place-items':'center','width':'30px','height':'30px','min-width':'30px','padding':'0','margin':'0','border-radius':'8px','background':'#EAF4FF','color':'#0D47A1','font':'700 14px/1 Sarabun,sans-serif'});
    const copy=card.querySelector('.ieat-rank-copy');
    set(copy,{'grid-column':'2','grid-row':'1','display':'flex','flex-direction':'column','gap':'2px','min-width':'0','width':'100%','padding':'0','margin':'0','background':'transparent','overflow-wrap':'normal','word-break':'normal','white-space':'normal'});
-   set(copy?.querySelector('b'),{'display':'block','width':'100%','font':'700 15px/1.45 Sarabun,sans-serif','color':'#303841','-webkit-text-fill-color':'#303841','overflow-wrap':'break-word','word-break':'normal','white-space':'normal','margin':'0'});
+   set(copy?.querySelector('b'),{'display':'block','width':'100%','font':'400 11px/1.4 Sarabun,sans-serif','color':'#303841','-webkit-text-fill-color':'#303841','overflow-wrap':'break-word','word-break':'normal','white-space':'normal','margin':'0'});
    copy?.querySelectorAll('small').forEach(note=>set(note,{'display':'block','font':'400 11px/1.4 Sarabun,sans-serif','color':'#657383','-webkit-text-fill-color':'#657383','margin':'0','white-space':'normal','overflow-wrap':'break-word'}));
    set(card.querySelector('.ieat-rank-value'),{'grid-column':'3','grid-row':'1','display':'block','width':'auto','min-width':'76px','padding':'0','margin':'0','border':'0','border-radius':'0','background':'transparent','box-shadow':'none','text-align':'right','white-space':'nowrap','color':'#0D47A1','-webkit-text-fill-color':'#0D47A1','font':'800 20px/1.2 Sarabun,sans-serif','font-variant-numeric':'tabular-nums'});
   });
