@@ -1740,7 +1740,21 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 const timer=setInterval(()=>{const host=document.getElementById('rpCards');if(!host)return;const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));if(cards.length!==lastCards.length||cards.some((c,i)=>c!==lastCards[i])||!document.getElementById('ieatWaterStationPager'))schedule()},1200);
 window.addEventListener('resize',schedule);
 })();
-</script><script id="flood-two-modes">(()=>{
+</script><style id="preparedness-table-layout">
+@layer preparednessView {
+ body[data-flood-view="preparedness"] #floodInformationPane > :not(#preparednessPane,.flood-overview),
+ body[data-flood-view="preparedness"] #floodInformationPane > .flood-overview > :not(#ieatOverviewFilter),
+ body[data-flood-view="preparedness"] #ieatOverviewFilter .io-date,
+ body[data-flood-view="preparedness"] #floodModeEstate {display:none!important}
+ body[data-flood-view="preparedness"] #floodInformationPane > .flood-overview {order:-1001!important}
+}
+#preparednessPane .prep-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;line-height:1.5}
+#preparednessPane .prep-table th,#preparednessPane .prep-table td{padding:9px 10px;text-align:left;vertical-align:top;border-bottom:1px solid #e8edf3;overflow-wrap:anywhere}
+#preparednessPane .prep-table thead{background:#f2f7fc}
+#preparednessPane .prep-table th:first-child{width:42%}
+#preparednessPane .prep-table tr:has(button):hover{background:#f2f7fc;cursor:pointer}
+#preparednessPane .prep-table button{padding:0;border:0;background:none;color:#0d47a1;font:inherit;text-decoration:underline;cursor:pointer;text-align:left}
+</style><script id="flood-two-modes">(()=>{
 'use strict';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v||'').normalize('NFC').replace(/สำนักงานนิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
@@ -1752,11 +1766,12 @@ function renderPrep(){
  document.getElementById('floodModeEstate').textContent=name||'สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม';
  if(!p){pane.innerHTML='<div class="prep-page-head"><small>การเตรียมรับมือ</small><h2>'+esc(name||'เลือกนิคมอุตสาหกรรม')+'</h2></div><p class="prep-page-note">'+(name?'ยังไม่มีผังการเตรียมรับมือของพื้นที่นี้ในระบบ':'เลือกนิคมฯ จากแถบค้นหาหลักเพื่อดูข้อมูลเฉพาะพื้นที่')+'</p>';return}
  const stations=p.key==='bang-pa-in'?[1,2,3,4]:[];
- pane.innerHTML='<div class="prep-page-head"><small>การเตรียมรับมือ</small><h2>'+esc(p.name)+'</h2><p>ระบบป้องกันและระบายน้ำตามแผนของพื้นที่</p></div>'+
- (stations.length?'<section class="prep-page-section"><h3>สถานีสูบน้ำ</h3><div class="prep-page-stations">'+stations.map(id=>'<button type="button" data-prep-map-station="'+id+'">'+(window.IEAT_ICONS?.svg('pump')||'')+'<span>สถานีสูบน้ำ '+id+'<small>ดูตำแหน่งและรายละเอียดบนแผนที่</small></span><span aria-hidden="true">↗</span></button>').join('')+'</div></section>':'')+
- '<section class="prep-page-section"><h3>ขีดความสามารถตามแผน</h3><dl class="prep-page-facts">'+(p.rows||[]).map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl></section>'+
+ const stationRows=stations.map(id=>'<tr><th scope="row">สถานีสูบน้ำ '+id+'</th><td><button type="button" data-prep-map-station="'+id+'" aria-label="ซูมไปสถานีสูบน้ำ '+id+'">ดูบนแผนที่ ↗</button></td></tr>').join('');
+ const planRows=(p.rows||[]).map(([k,v])=>'<tr><th scope="row">'+esc(k)+'</th><td>'+esc(v)+'</td></tr>').join('');
+ pane.innerHTML='<div class="prep-page-head"><small>การเตรียมรับมือ</small><h2>'+esc(p.name)+'</h2><p>ระบบป้องกันและระบายน้ำของพื้นที่</p></div>'+
+ '<section class="prep-page-section"><h3 id="prepDataTitle">ข้อมูลที่ใช้ในการเตรียมรับมือ</h3><table class="prep-table" aria-labelledby="prepDataTitle"><thead><tr><th scope="col">รายการ</th><th scope="col">รายละเอียด</th></tr></thead><tbody>'+stationRows+planRows+'</tbody></table></section>'+
  (p.image?'<a class="prep-page-source" href="'+esc(p.image)+'" target="_blank" rel="noopener">เปิดผังต้นฉบับ ↗</a>':'')+
- '<p class="prep-page-note">ที่มา: '+esc(p.source||'ผังนิคมอุตสาหกรรม')+'<br>เป็นขีดความสามารถตามเอกสาร ไม่ใช่สถานะเดินเครื่องสด ตำแหน่งสถานีบนแผนที่เป็นค่าประมาณ</p>';
+ '<p class="prep-page-note">ที่มา '+esc(p.source||'ผังนิคมอุตสาหกรรม')+'<br>ข้อมูลอ้างอิงจากผังของพื้นที่'+(stations.length?' · ตำแหน่งสถานีบนแผนที่เป็นค่าประมาณ':'')+'</p>';
 }
 function select(next){
  const col=document.querySelector('.ef-data-column');if(!col)return;
@@ -1773,7 +1788,7 @@ function mount(){
  document.body.appendChild(bar);const pane=document.createElement('section');pane.id='preparednessPane';pane.hidden=true;col.appendChild(pane);
  bar.addEventListener('click',e=>{const b=e.target.closest('[data-flood-view-tab]');if(b)select(b.dataset.floodViewTab)});
  bar.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)||!e.target.matches('[role="tab"]'))return;e.preventDefault();const next=e.key==='Home'?'overview':e.key==='End'?'preparedness':view==='overview'?'preparedness':'overview';select(next);document.getElementById('floodTab-'+next).focus()});
- pane.addEventListener('click',e=>{const b=e.target.closest('[data-prep-map-station]');if(b)send({type:'flood-support-open',estate:scope.name,station:Number(b.dataset.prepMapStation)})});
+ pane.addEventListener('click',e=>{const b=e.target.closest('tr')?.querySelector('[data-prep-map-station]');if(b)send({type:'flood-support-open',estate:scope.name||scope.estate?.name,station:Number(b.dataset.prepMapStation)})});
  renderPrep();select('overview');return true;
 }
 document.addEventListener('ieat-flood-estate-scope',e=>{scope=e.detail||{};renderPrep()});
