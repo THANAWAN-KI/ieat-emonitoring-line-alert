@@ -2156,3 +2156,27 @@ body[data-reference-panel=closed] #expoPaneToggle {display:none!important}
 html body #warning #estateFocusDashboard #efMapFullscreen,html body #warning #estateFocusDashboard #efMapExitFullscreen {border-radius:6px!important;background:rgba(255,255,255,.4)!important;background-image:none!important;backdrop-filter:blur(14px) saturate(125%)!important;-webkit-backdrop-filter:blur(14px) saturate(125%)!important;border:1px solid rgba(255,255,255,.75)!important;box-shadow:0 3px 16px rgba(35,61,74,.14),inset 0 1px 0 rgba(255,255,255,.5)!important}
 }
 </style>
+
+<style id="flood-white-information-panel">
+@layer floodLayoutRepair {
+html body #warning #estateFocusDashboard .ef-data-column {
+background:#fff!important;background-image:none!important;border:1px solid #edf0f3!important;border-left:0!important;border-radius:0 30px 30px 0!important;box-shadow:7px 0 22px rgba(32,49,66,.07)!important;padding:22px 20px 28px!important;scrollbar-width:thin!important;scrollbar-color:#d9dfe7 transparent!important;isolation:isolate!important;
+}
+html body #warning #estateFocusDashboard .ef-data-column::-webkit-scrollbar{width:6px!important}
+html body #warning #estateFocusDashboard .ef-data-column::-webkit-scrollbar-thumb{background:#d9dfe7!important;border-radius:8px!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(.flood-overview,#ieatOverviewFilter,#ieatOverviewCharts){background:#fff!important;background-image:none!important;box-shadow:none!important;border:0!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(#floodStationsSection,.ef-canal-panel,.ef-related-dams,.ef-reservoir-panel,#efDamFlowPanel,#floodWaterDiagram,#rpRankingsAfterWarning > section) {
+background:#f7f9fc!important;background-image:none!important;box-shadow:none!important;border:1px solid #edf1f6!important;border-radius:16px!important;
+}
+html body #warning #estateFocusDashboard .ef-data-column .io-mini-stats > [role=button] {
+background:#f5f8fd!important;background-image:none!important;border:1px solid #edf2f8!important;border-radius:14px!important;box-shadow:none!important;transition:background .15s ease!important;
+}
+html body #warning #estateFocusDashboard .ef-data-column .io-mini-stats > [role=button]:hover {background:#ecf3ff!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(.rp-station-row,.ef-canal-card,.ef-dam-card,.ef-reservoir-row) {background:transparent!important;background-image:none!important;box-shadow:none!important}
+html body #warning #estateFocusDashboard .ef-data-column :is(.rp-rank-card,.dam-flow-compact > div) {box-shadow:none!important}
+html body #warning #estateFocusDashboard .ef-data-column #ioEstatePicker {background:#f4f6f9!important;border:1px solid #edf0f4!important;border-radius:12px!important}
+@media(max-width:600px){
+html body #warning #estateFocusDashboard .ef-data-column {border-radius:0 22px 22px 0!important;padding:18px 14px 24px!important}
+}
+}
+</style>
