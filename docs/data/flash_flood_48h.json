@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "48h",
   "date": "2026-11-04",
-  "time": "03:00:00",
+  "time": "08:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
   "area_count": 1,
@@ -18,8 +18,8 @@
       "station": "อ่างเก็บน้ำทุ่งม่าน",
       "latitude": 18.25546,
       "longitude": 98.84405,
-      "sum_rainfall_mm": 102.8,
-      "observed_at": "2026-11-04T02:00:00+07:00",
+      "sum_rainfall_mm": 102.80000000000001,
+      "observed_at": "2026-11-04T07:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -504,7 +504,7 @@
       "latitude": 18.310793,
       "longitude": 98.82355,
       "sum_rainfall_mm": 4.2,
-      "observed_at": "2026-11-04T02:00:00+07:00",
+      "observed_at": "2026-11-04T07:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -746,8 +746,8 @@
       "station": "อ่างเก็บน้ำห้วยแทง",
       "latitude": 18.29177,
       "longitude": 98.86272,
-      "sum_rainfall_mm": 23.8,
-      "observed_at": "2026-11-04T02:00:00+07:00",
+      "sum_rainfall_mm": 23.799999999999997,
+      "observed_at": "2026-11-04T07:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1473,7 +1473,7 @@
       "latitude": 18.250709,
       "longitude": 98.901512,
       "sum_rainfall_mm": 1.5,
-      "observed_at": "2026-11-04T01:00:00+07:00",
+      "observed_at": "2026-11-04T06:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1956,7 +1956,7 @@
       "latitude": 18.29841,
       "longitude": 98.69497,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-11-04T02:00:00+07:00",
+      "observed_at": "2026-11-04T07:00:00+07:00",
       "geometry": {
         "rings": [
           [
