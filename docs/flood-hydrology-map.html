@@ -757,6 +757,7 @@ function estateFloodPlan(name){
 }
 
 function showMapDetails(r,k){
+ if(k==='estate')return; // Estate pins do not open the generic location popup.
  stopAerialTour();const lon=Number(r.lng??r.lon),lat=Number(r.lat);
  if(!cleanDashboard){window.IEAT_MAP_DETAILS?.show(r,k);return}
  if(!Number.isFinite(lon)||!Number.isFinite(lat))return;
