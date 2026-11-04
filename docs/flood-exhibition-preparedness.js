@@ -11,13 +11,13 @@
  const alerts={NORMAL:'ปกติ / เตรียมพร้อม',WATCH:'เฝ้าระวัง',WARNING:'เตือนภัย',EMERGENCY:'ฉุกเฉิน'};
  function table(headers,rows){return '<div class="ex-table-wrap"><table class="ex-table"><thead><tr>'+headers.map(h=>'<th scope="col">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'}
  const empty=(n,text='ยังไม่มีข้อมูลในชุดต้นทาง')=>'<tr><td colspan="'+n+'" class="ex-empty">'+text+'</td></tr>';
- const card=(title,body)=>'<section class="ex-card"><h3>'+title+'</h3>'+body+'</section>';
+ const card=(title,body)=>['ระบบรับมือและข้อจำกัดของพื้นที่','ทรัพยากรสำรองและการสนับสนุน','ผู้ประสานงาน'].includes(title)?'<details class="ex-card ex-more"><summary>'+title+'</summary>'+body+'</details>':'<section class="ex-card"><h3>'+title+'</h3>'+body+'</section>';
  let selectedName='';
  window.IEAT_PREP_TABLES={render(scope={}){
   const pane=document.getElementById('preparednessPane');if(!pane)return;
   selectedName=String(scope.name||scope.estate?.name||'');
   const estate=(D.master_estate||[]).find(r=>norm(r.name_th)===norm(selectedName));
-  const select='<div class="ex-prep-selector"><label for="exPrepEstate">นิคมอุตสาหกรรม</label><select id="exPrepEstate"><option value="">เลือกนิคมอุตสาหกรรม</option>'+(D.master_estate||[]).map(e=>'<option value="'+e.id+'" '+(estate?.id===e.id?'selected':'')+'>'+esc(e.name_th)+' · '+esc(e.province_th)+'</option>').join('')+'</select></div>';
+  const select='<div class="ex-prep-selector"><label for="exPrepEstate">เลือกนิคมอุตสาหกรรม</label><select id="exPrepEstate"><option value="">เลือกนิคมอุตสาหกรรม</option>'+(D.master_estate||[]).map(e=>'<option value="'+e.id+'" '+(estate?.id===e.id?'selected':'')+'>'+esc(e.name_th)+' · '+esc(e.province_th)+'</option>').join('')+'</select><button type="button" class="ex-map-action" data-ex-all>ทุกนิคมฯ</button></div>';
   pane.innerHTML='<div class="ex-prep-head"><h2>แผนเตรียมรับมือน้ำท่วม</h2><p>มาตรการและโครงสร้างพื้นฐานรายนิคมฯ</p></div>'+select;
   if(!estate){pane.innerHTML+=card('เลือกพื้นที่เพื่อดูแผนรับมือ','<p>เลือกนิคมฯ ด้านบนเพื่อดูมาตรการ ทรัพยากร และรายการที่ซูมดูบนแผนที่ได้</p>');return;}
   const id=estate.id,profiles=byEstate('flood_estate_profile',id),measures=byEstate('flood_measure',id),docs=byEstate('flood_source_document',id),resources=byEstate('flood_resource',id);
@@ -49,6 +49,6 @@
  }};
  document.addEventListener('change',e=>{if(e.target.id!=='exPrepEstate')return;const estate=D.master_estate.find(r=>String(r.id)===e.target.value);window.dispatchEvent(new CustomEvent('ieat-exhibition-select-estate',{detail:{name:estate?.name_th||''}}));});
  function focus(e){const row=e.target.closest('[data-ex-infra]');if(!row)return;const key=row.dataset.exInfra;document.querySelectorAll('#preparednessPane tr[data-ex-infra]').forEach(r=>r.classList.toggle('ex-selected',r.dataset.exInfra===key));document.getElementById('estateFocusMap')?.contentWindow?.postMessage({type:'flood-infrastructure-focus',key,estate:selectedName},location.origin);}
- document.addEventListener('click',focus);
+ document.addEventListener('click',e=>{if(e.target.closest('[data-ex-all]')){window.dispatchEvent(new CustomEvent('ieat-exhibition-select-estate',{detail:{name:''}}));return;}focus(e);});
  document.addEventListener('keydown',e=>{if(e.target.matches('tr[data-ex-infra]')&&['Enter',' '].includes(e.key)){e.preventDefault();focus(e);}});
 })();
