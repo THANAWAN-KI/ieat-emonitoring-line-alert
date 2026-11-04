@@ -2142,3 +2142,11 @@ body #warning #estateFocusDashboard #efDamFlowPanel .ef-dam-flow-camera {grid-co
 </style>
 
 <style id="remove-data-integrity-card-20261104">@layer floodLayoutRepair {body #warning #estateFocusDashboard #ieatDataIntegrity {display:none!important}}</style>
+
+<style id="flood-dashboard-toggle-repair">
+@layer floodLayoutRepair {
+body[data-reference-panel=closed] #warning #estateFocusDashboard .ef-data-column {display:none!important;visibility:hidden!important;pointer-events:none!important}
+body[data-reference-panel=closed] #warning #estateFocusDashboard .ef-map-column {position:fixed!important;left:var(--ref-rail,60px)!important;right:0!important;width:auto!important;max-width:none!important}
+body[data-reference-panel=closed] #expoPaneToggle {display:none!important}
+}
+</style>
