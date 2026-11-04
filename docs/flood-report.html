@@ -1760,7 +1760,7 @@ window.addEventListener('resize',schedule);
 #preparednessPane .prep-table th:first-child{width:42%}
 #preparednessPane .prep-table tr:has(button):hover{background:#f2f7fc;cursor:pointer}
 #preparednessPane .prep-table button{padding:0;border:0;background:none;color:#0d47a1;font:inherit;text-decoration:underline;cursor:pointer;text-align:left}
-</style><script src="flood-exhibition-preparedness.js?v=20261104-reference3"></script><script id="flood-two-modes">(()=>{
+</style><script src="flood-exhibition-preparedness.js?v=20261104-reference5"></script><script id="flood-two-modes">(()=>{
 'use strict';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v||'').normalize('NFC').replace(/สำนักงานนิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
@@ -2376,5 +2376,13 @@ html body #warning #estateFocusDashboard .rp-stations-title>span{font:inherit!im
 html body #warning #estateFocusDashboard .ef-canal-body{grid-column:auto!important;grid-row:auto!important}
 html body #warning #estateFocusDashboard .rp-station-row:not([hidden]):not(.ieat-page-hidden){grid-template-rows:auto!important}
 
+html body #warning #estateFocusDashboard #floodDamsSection{order:4!important}
+html body #warning #estateFocusDashboard #rpRankingsAfterWarning{order:10!important}
+html body #warning #estateFocusDashboard #floodWaterDiagram{order:11!important}
+html body #preparednessPane .ex-table-wrap{max-height:280px!important;overflow:auto!important;scrollbar-width:thin!important}
+html body #preparednessPane .ex-table thead{position:sticky!important;top:0!important;z-index:1!important}
+html body #preparednessPane .ex-card{margin-bottom:14px!important}
+html body #warning #estateFocusDashboard .io-stat-copy{text-align:left!important}
+html body #preparednessPane [data-ex-all]{border:1px solid #dac0e8!important;border-radius:8px!important;padding:7px 10px!important;background:#fcf8ff!important;white-space:nowrap!important}
 }
 </style>
