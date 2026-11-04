@@ -2246,3 +2246,31 @@ html body #warning #estateFocusDashboard [data-ex-status=amber] {background:#fff
 </style>
 <script id="exhibition-status-labels">(()=>{function sync(){const title=document.getElementById("floodPageTitle");if(title&&title.textContent!=="สถานการณ์น้ำในนิคมฯ")title.textContent="สถานการณ์น้ำในนิคมฯ";document.querySelectorAll(".rp-station-top>em,.ef-canal-status,.dam-inline-status,.ef-reservoir-percent span").forEach(e=>{const t=e.textContent;e.dataset.exStatus=/ล้น|วิกฤต|เกินความจุ/.test(t)&&!/น้อย/.test(t)?"red":/เฝ้าระวัง|เตือนภัย|น้ำมาก/.test(t)?"amber":/ปกติ|ต่ำกว่าเกณฑ์เตือน/.test(t)?"green":"neutral"});const h=document.getElementById("ieatOverviewCharts");if(h&&!h.querySelector(".ex-kpi-note")){const p=document.createElement("p");p.className="ex-kpi-note";p.textContent="นิคมฯ อาจเข้าเกณฑ์ได้หลายประเภท · สถานีใกล้เคียงไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ";h.append(p)}const a=document.getElementById("floodTab-overview"),b=document.getElementById("floodTab-preparedness");if(a&&a.textContent.trim()!=="สถานการณ์น้ำ")a.textContent="สถานการณ์น้ำ";if(b&&b.textContent.trim()!=="เตรียมรับมือ")b.textContent="เตรียมรับมือ";}sync();setInterval(()=>{if(!document.hidden)sync()},1500);})();</script>
 
+
+<style id="exhibition-layout-final">
+@layer ieatExhibitionTheme {
+html body #warning #estateFocusDashboard .ef-data-column {grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html body #floodModeBar :is(#expoIdentity,#expoPresent,#expoBoothActions) {display:none!important}
+html body #floodModeBar nav {margin:0!important}
+html body #floodModeBar [data-flood-view-tab] {color:#343942!important;-webkit-text-fill-color:#343942!important}
+html body #floodModeBar [data-flood-view-tab][aria-selected=true] {color:#fff!important;-webkit-text-fill-color:#fff!important}
+html body #floodModeBar [data-flood-view-tab] svg {display:none!important}
+html body[data-flood-view=overview] #warning #estateFocusDashboard #floodPageTitle {display:block!important}
+html body #warning #estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel) {width:auto!important;max-width:none!important}
+html body #warning #estateFocusDashboard #rpCards {width:100%!important;min-width:0!important}
+html body #warning #estateFocusDashboard .rp-station-row {width:100%!important;max-width:none!important;box-sizing:border-box!important;padding:0!important;grid-template-columns:52px minmax(0,1fr)!important;column-gap:10px!important}
+html body #warning #estateFocusDashboard .rp-station-row>svg.rp-gauge {width:52px!important;max-width:52px!important;height:155px!important}
+html body #warning #estateFocusDashboard .rp-station-content>strong {font-size:22px!important;overflow-wrap:normal!important;word-break:normal!important}
+}
+</style>
+<script id="exhibition-compatibility">
+(()=>{
+function align(){
+ const prep=document.body.dataset.floodView==='preparedness';
+ for(const id of ['expoIdentity','expoPresent','expoBoothActions']){const e=document.getElementById(id);if(e)e.style.setProperty('display','none','important');}
+ const ranks=document.getElementById('rpRankingsAfterWarning');if(ranks)ranks.style.setProperty('display',prep?'none':'grid','important');
+ document.querySelectorAll('[data-ex-status]').forEach(e=>{e.style.removeProperty('color');e.style.removeProperty('-webkit-text-fill-color');});
+}
+align();setInterval(()=>{if(!document.hidden)align()},700);
+})();
+</script>
