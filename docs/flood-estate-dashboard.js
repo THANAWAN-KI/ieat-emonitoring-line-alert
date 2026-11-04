@@ -887,3 +887,80 @@ $('efFilter').onchange=()=>renderEstates();
 
 
 
+
+/* Visual refinement for flood monitoring cards — 4 Nov 2026. */
+;(function(){
+ 'use strict';
+ if(window.__ieatNovCardPolish)return;window.__ieatNovCardPolish=true;
+ const apply=(el,entries)=>{if(!el)return;for(const [name,value] of Object.entries(entries))el.style.setProperty(name,value,'important')};
+ const symbol=kind=>kind==='dam'?
+ '<svg viewBox="0 0 32 32" width="23" height="23" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h20l-4 18H10Z"/><path d="m13 6 1 18m6-18-1 18M2 29q4-3 8 0t8 0t8 0t6 0"/></svg>':
+ '<svg viewBox="0 0 32 32" width="23" height="23" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v19M6 12h12M3 26q4-3 8 0t8 0t8 0t8 0"/></svg>';
+ function refine(){
+  const panel=document.getElementById('efDamFlowPanel');
+  if(panel){
+   apply(panel,{'background':'#FFFFFF','border':'0','box-shadow':'0 5px 17px #0D47A116','border-radius':'19px','padding':'clamp(12px,1.8vw,21px)','overflow':'hidden','min-width':'0'});
+   const header=panel.querySelector('#efDamFlowHeading');
+   apply(header,{'font-size':'clamp(16px,1.8vw,22px)','font-weight':'750','line-height':'1.45','color':'#111111','-webkit-text-fill-color':'#111111','margin':'0 0 6px','padding':'0','background':'transparent','border':'0'});
+   if(header){header.querySelectorAll('svg,.ieat-icon').forEach(item=>apply(item,{'display':'none'}))}
+   apply(panel.querySelector('.ef-dam-flow-name'),{'font-size':'12px','color':'#4F6479','margin':'0 0 10px','display':'block'});
+   const layout=panel.querySelector('.ef-dam-flow-values');
+   if(layout){
+    const hasCamera=!!layout.querySelector('.ef-dam-flow-camera');
+    apply(layout,{'display':'grid','grid-template-columns':hasCamera?'minmax(0,1.7fr) minmax(0,.9fr)':'minmax(0,1fr)','gap':'10px 12px','align-items':'stretch','min-width':'0'});
+    const cards=layout.querySelector('.dam-flow-compact');
+    if(cards){
+     apply(cards,{'display':'grid','grid-template-columns':'repeat(2,minmax(0,1fr))','grid-column':'1','grid-row':'1','gap':'9px','width':'100%','max-width':'none','margin':'0','padding':'0','background':'transparent','border':'0','min-width':'0'});
+     Array.from(cards.children).forEach(card=>{
+      apply(card,{'display':'flex','flex-direction':'column','align-items':'flex-start','justify-content':'center','gap':'6px','position':'relative','min-height':'134px','min-width':'0','padding':'13px 12px','margin':'0','background':'linear-gradient(180deg,#E3F2FD,#FFFFFF 62%)','border':'0','border-radius':'16px','box-shadow':'0 4px 12px #0D47A117','overflow':'hidden'});
+      const icon=card.querySelector('.dam-flow-direction');
+      apply(icon,{'position':'absolute','top':'10px','right':'9px','width':'28px','height':'28px','max-width':'28px','opacity':'.88'});
+      const labels=Array.from(card.querySelectorAll('small'));
+      labels.forEach((label,i)=>apply(label,{'display':'block','width':'auto','max-width':'100%','white-space':'normal','overflow-wrap':'anywhere','font-size':i===0?'clamp(11px,1.2vw,13px)':'clamp(10px,1.1vw,11px)','font-weight':i===0?'650':'550','line-height':'1.45','color':'#111111','-webkit-text-fill-color':'#111111','background':i===0?'transparent':'#E3F2FD','border':'0','border-radius':'9px','padding':i===0?'0':'4px 7px','margin':'0'}));
+      apply(card.querySelector('b'),{'font-size':'clamp(22px,2.3vw,34px)','font-weight':'800','line-height':'1.2','margin':'2px 0','color':'#1265BC','-webkit-text-fill-color':'#1265BC','font-variant-numeric':'tabular-nums'});
+     });
+    }
+    const camera=layout.querySelector('.ef-dam-flow-camera');
+    apply(camera,{'grid-column':'2','grid-row':'1','min-height':'134px','min-width':'0','border-radius':'15px','overflow':'hidden','margin':'0','border':'0'});
+    apply(camera?.querySelector('img'),{'width':'100%','height':'100%','object-fit':'cover','border-radius':'15px'});
+    const conversion=layout.querySelector('.dam-release-conversion');
+    apply(conversion,{'grid-column':hasCamera?'2':'1','grid-row':hasCamera?'2':'auto','background':'#E3F2FD','border':'0','border-radius':'10px','padding':'7px 9px','text-align':'center','margin':'0','color':'#111111','-webkit-text-fill-color':'#111111','line-height':'1.5','font-size':'clamp(10px,1vw,12px)','white-space':'normal'});
+   }
+  }
+  const allRanks=document.getElementById('rpRankingsAfterWarning');
+  if(allRanks){
+   apply(allRanks,{'display':'grid','grid-template-columns':'repeat(auto-fit,minmax(min(100%,310px),1fr))','gap':'12px','align-items':'stretch','min-width':'0','background':'transparent','border':'0','box-shadow':'none'});
+   allRanks.querySelectorAll(':scope > section').forEach(section=>{
+    const green=!!section.querySelector('#rpFlowRanks'),soft=green?'#E7F9E2':'#E3F2FD',medium=green?'#CDF3C4':'#CBEAFF',accent=green?'#146C37':'#0D47A1';
+    apply(section,{'background':green?'#F7FDF5':'#F7FAFE','border':'0','border-radius':'18px','padding':'13px','min-width':'0','box-shadow':'0 4px 15px #0D47A10d'});
+    const heading=section.querySelector('h3');
+    if(heading){
+     if(!heading.querySelector('.ieat-rank-heading-svg'))heading.insertAdjacentHTML('afterbegin','<span class="ieat-rank-heading-svg">'+symbol(green?'flow':'dam')+'</span>');
+     apply(heading,{'display':'flex','align-items':'center','gap':'9px','border':'0','background':soft,'border-radius':'12px','padding':'11px','margin':'0 0 9px','font-size':'clamp(13px,1.3vw,16px)','font-weight':'750','line-height':'1.45','color':'#111111','-webkit-text-fill-color':'#111111'});
+     apply(heading.querySelector('.ieat-rank-heading-svg'),{'display':'inline-flex','color':accent,'flex-shrink':'0'});
+    }
+    const ranks=section.querySelector('#rpDamRanks,#rpFlowRanks');
+    apply(ranks,{'display':'grid','gap':'8px','border':'0','background':'transparent','padding':'0'});
+    ranks?.querySelectorAll('.ieat-new-rank').forEach(button=>{
+     apply(button,{'display':'grid','grid-template-columns':'32px minmax(0,1fr) minmax(57px,auto)','gap':'9px','align-items':'center','width':'100%','min-height':'77px','border':'0','border-radius':'13px','background':'#FFFFFF','padding':'9px','margin':'0','text-align':'left','box-shadow':'0 3px 12px #0D47A112','min-width':'0','cursor':'pointer'});
+     const number=button.querySelector('.ieat-rank-index'),copy=button.querySelector('.ieat-rank-copy'),value=button.querySelector('.ieat-rank-value');
+     apply(number,{'display':'grid','place-items':'center','align-self':'start','width':'31px','height':'31px','border':'0','background':soft,'border-radius':'9px','color':'#111111','-webkit-text-fill-color':'#111111','font-size':'14px','font-weight':'750','box-shadow':'none'});
+     apply(copy,{'display':'flex','flex-direction':'column','gap':'2px','min-width':'0','color':'#111111','-webkit-text-fill-color':'#111111','padding':'0'});
+     copy?.querySelectorAll('b,small').forEach(el=>apply(el,{'display':'block','font-size':el.tagName==='B'?'clamp(11px,1.1vw,14px)':'10px','line-height':'1.45','font-weight':el.tagName==='B'?'700':'400','color':'#111111','-webkit-text-fill-color':'#111111','overflow-wrap':'anywhere','border':'0','padding':'0','margin':'0','background':'transparent'}));
+     apply(value,{'display':'grid','place-items':'center','align-self':'center','min-width':'57px','min-height':'43px','border':'0','border-radius':'11px','background':medium,'color':'#111111','-webkit-text-fill-color':'#111111','padding':'7px 9px','font-size':'clamp(17px,1.65vw,24px)','font-weight':'800','font-variant-numeric':'tabular-nums','box-shadow':'0 2px 8px #0D47A115','white-space':'nowrap','text-shadow':'none'});
+    });
+    const footer=section.querySelector(':scope > small:last-child');
+    apply(footer,{'display':'block','background':soft,'color':'#111111','-webkit-text-fill-color':'#111111','border':'0','border-radius':'9px','margin-top':'10px','padding':'9px','font-size':'10px','line-height':'1.55'});
+   });
+  }
+  // Number-first action cards: borderless surfaces and readable black labels on pale blue.
+  document.querySelectorAll('#estateFocusDashboard .io-mini-stats [data-ef-card]').forEach(card=>{
+   apply(card,{'border':'0','border-radius':'13px','box-shadow':'0 3px 12px #0D47A114','background':'#FFFFFF'});
+  });
+  document.querySelectorAll('#estateFocusDashboard .io-mini-stats .io-stat-copy span').forEach(label=>apply(label,{'color':'#111111','-webkit-text-fill-color':'#111111'}));
+ }
+ let queued=false;
+ function request(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;refine()})}
+ function init(){refine();new MutationObserver(mutations=>{if(mutations.some(m=>m.addedNodes.length||m.removedNodes.length))request()}).observe(document.body,{subtree:true,childList:true});window.addEventListener('resize',request,{passive:true})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
