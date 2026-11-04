@@ -2101,3 +2101,20 @@ let pending=false;new MutationObserver(()=>{if(!pending){pending=true;requestAni
  #preparednessPane .prep-table button{color:#1a5b88!important;text-decoration:none!important;font-weight:500!important}
 }
 </style>
+<style id="flood-layout-repair-20261104">
+@layer floodLayoutRepair {
+ body #warning #estateFocusDashboard .ef-data-column {grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;column-gap:14px!important;min-width:0!important;box-sizing:border-box!important}
+ body #warning #estateFocusDashboard .ef-data-column > :is(#ieatDataIntegrity,.flood-overview,#floodPageTitle,#expoBoothSubtitle,#rpRankingsAfterWarning,#floodWaterDiagram,.ef-warning,#preparednessPane) {grid-column:1 / span 2!important;width:auto!important;max-width:none!important;min-width:0!important;justify-self:stretch!important}
+ body #warning #estateFocusDashboard #floodPageTitle {order:-3!important;font-size:24px!important;line-height:1.4!important;margin:0!important}
+ body #warning #estateFocusDashboard #expoBoothSubtitle {order:-2!important;margin:0 0 8px!important;line-height:1.6!important}
+ body #warning #estateFocusDashboard #ieatDataIntegrity {order:-1!important}
+ body #warning #estateFocusDashboard .flood-overview {order:0!important}
+ body #warning #estateFocusDashboard #ieatOverviewFilter {width:100%!important;min-width:0!important;grid-template-columns:minmax(0,1fr) auto!important}
+ body #warning #estateFocusDashboard #ioEstatePicker {width:100%!important;min-width:0!important}
+ body #warning #estateFocusDashboard #ieatOverviewCharts {width:100%!important;min-width:0!important}
+ body #warning #estateFocusDashboard .io-mini-stats {grid-template-columns:repeat(3,minmax(0,1fr))!important;width:100%!important;gap:10px!important}
+ body #warning #estateFocusDashboard .io-mini-stats > [role=button] {min-width:0!important}
+ body #warning #estateFocusDashboard #floodStationsSection,body #warning #estateFocusDashboard .ef-canal-panel {min-width:0!important;width:auto!important}
+ @media(max-width:600px){body #warning #estateFocusDashboard .ef-data-column {grid-template-columns:minmax(0,1fr)!important}body #warning #estateFocusDashboard .ef-data-column > :is(#ieatDataIntegrity,.flood-overview,#floodPageTitle,#expoBoothSubtitle,#rpRankingsAfterWarning,#floodWaterDiagram,.ef-warning,#preparednessPane){grid-column:1!important}body #warning #estateFocusDashboard #floodStationsSection,body #warning #estateFocusDashboard .ef-canal-panel {grid-column:1!important}}
+}
+</style>
