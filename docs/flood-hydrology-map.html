@@ -688,7 +688,7 @@ function syncPinLegend(){
 }
 
 function render(){
- if(!ready)return;syncPinLegend();
+ if(!ready)return;syncPinLegend();publishPreparednessPoints();
  syncRemoteOverlays();syncBoundaries();syncWaterAreas();const list=scoped().filter(f=>!watchMapData||!['estate','water','rain','canal','dam','camera'].includes(f.properties.kind)),overviewPoints=groupOverviewPoints(list),displayPoints=overviewPoints.points;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
@@ -1031,13 +1031,50 @@ function drawWatchMap(){
  if(vector){const collection={type:'FeatureCollection',features:lines};if(!vector.getSource('watch-estate-links')){vector.addSource('watch-estate-links',{type:'geojson',data:collection});vector.addLayer({id:'watch-estate-distance',type:'line',source:'watch-estate-links',paint:{'line-color':'#713b91','line-width':2.5,'line-dasharray':[2,2]}})}else vector.getSource('watch-estate-links').setData(collection)}
 }
 
+let preparednessSupport=false,preparednessPopup=null;
+const supportKinds=new Set(['water','canal','dam','camera']);
+function preparednessPoints(){
+ return estateProvinceScope?.active?features.filter(f=>supportKinds.has(f.properties.kind)&&nearbyEstate(f)):[];
+}
+function supportKey(f){const r=f.properties;return JSON.stringify([r.kind,r.id??r.code??r.name,...f.geometry.coordinates]);}
+function publishPreparednessPoints(){
+ if(!preparednessSupport)return;
+ parent.postMessage({type:'flood-prep-points',estate:estateProvinceScope?.name||'',ready,rows:preparednessPoints().map(f=>{
+  const r=f.properties;return {key:supportKey(f),kind:r.kind,name:r.name,code:r.code,province:r.province};
+ })},location.origin);
+}
+function openPreparednessPoint(key){
+ const f=preparednessPoints().find(f=>supportKey(f)===key);
+ if(!f||!ready)return;
+ const r=f.properties,k=r.kind,[lon,lat]=f.geometry.coordinates;
+ window.IEAT_MAP_DETAILS?.close();
+ preparednessPopup?.remove();
+ const node=document.createElement('div');
+ node.innerHTML=content(r,k);
+ window.IEATPreparednessMap().focusPoint(lon,lat);
+ preparednessPopup=vector
+  ?new maplibregl.Popup({maxWidth:'290px',offset:16}).setLngLat([lon,lat]).setDOMContent(node).addTo(vector)
+  :L.popup({maxWidth:290,autoPan:false}).setLatLng([lat,lon]).setContent(node).openOn(raster);
+ mountPopupHistory(node);
+ if(k==='camera')loadCameraImage(r);
+}
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
+ if(d.type==='flood-prep-support'){
+  preparednessSupport=!!d.active;
+  const supportButton=$('supportMapButton');if(supportButton)supportButton.hidden=preparednessSupport;
+  if(preparednessSupport)publishPreparednessPoints();else preparednessPopup?.remove();
+  return;
+ }
+ if(d.type==='flood-prep-point'){
+  if(preparednessSupport&&d.estate===estateProvinceScope?.name)openPreparednessPoint(d.key);
+  return;
+ }
  if(d.type==='flood-watch-clear'){clearWatchMap();return}
  if(d.type==='flood-watch-focus'){showWatchMapData(d);return}
  if(d.type==='flood-province-scope'){
  const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
- if(changed)clearWatchMap();estateProvinceScope=d;
+ if(changed){clearWatchMap();preparednessPopup?.remove()}estateProvinceScope=d;
  if(cleanDashboard){
  const active=!!(d.active&&d.estate);
  Object.assign(flags,{estate:active,boundary:active,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:active,rings:false,radar:false,gistda:false,satellite:true});
