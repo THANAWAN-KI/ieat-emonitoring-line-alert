@@ -856,7 +856,7 @@ function vectorStart(){
 const esriWaterTiles='https://basemaps.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/tile/{z}/{y}/{x}.pbf';
 let waterAreaRaster=null;
 function syncWaterAreas(){
- const layers=[['small','Water area small scale',1,5,null],['medium','Water area medium scale',5,7,0],['large','Water area large scale',7,11,0],['detail','Water area',11,24,7]];
+ const layers=[['small','Water area small scale',1,5,null],['medium','Water area medium scale',5,7,null],['large','Water area large scale',7,11,null],['detail','Water area',11,24,null]];
  if(vector&&ready){
  if(!vector.getSource('esri-water-shape'))vector.addSource('esri-water-shape',{type:'vector',tiles:[esriWaterTiles],minzoom:0,maxzoom:16,attribution:'Water areas © Esri'});
  for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#83bace','fill-opacity':.94}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
@@ -873,8 +873,8 @@ function syncWaterAreas(){
 function addFlow(){
  if(!vector||!ready||!waterways||vector.getSource('mapped-flow'))return;
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream')}});
- vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#579db8','line-width':['interpolate',['linear'],['zoom'],4,1.5,10,3,18,6],'line-opacity':.75}},'discharge-ring');
- vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#e5f7fc','line-width':['interpolate',['linear'],['zoom'],4,1,10,1.8,18,3],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
+ vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#579db8','line-width':['interpolate',['linear'],['zoom'],4,2,10,5,14,9,18,14],'line-opacity':.75}},'discharge-ring');
+ vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#e5f7fc','line-width':['interpolate',['linear'],['zoom'],4,1.2,10,2.5,14,4,18,6],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
  {let phase=0;setInterval(()=>{if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion'))return;phase=(phase+.1)%8;vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])},60)}
  const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:0,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':.65,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#F3FBFF" stroke="#2B6697" stroke-width="1.5" stroke-linejoin="round"/></svg>');
@@ -882,8 +882,8 @@ function addFlow(){
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream');
- const flowWidth=raster.getZoom()<9?2.5:raster.getZoom()<13?4:6;
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#579db8',weight:flowWidth+1,opacity:.65,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ const flowWidth=raster.getZoom()<9?3:raster.getZoom()<13?5:raster.getZoom()<16?9:13;
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#579db8',weight:flowWidth+1,opacity:.8,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#e5f7fc',weight:Math.max(1.5,flowWidth*.5),opacity:.95,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  
  const bounds=raster.getBounds().pad(.15);let count=0;
