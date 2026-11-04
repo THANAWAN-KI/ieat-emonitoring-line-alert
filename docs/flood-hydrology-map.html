@@ -1502,4 +1502,25 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 </style><style>
 .watch-data-glyph .map-measure-symbol{position:static!important;width:32px!important;height:42px!important;transform:translateY(-8px)}
 .flood-cluster-symbol>.map-measure-symbol{position:static!important;width:28px!important;height:36px!important}
-</style><style>.map-flow-legend{display:grid;place-items:center;width:24px;height:24px;border:1.5px solid #579db8;border-radius:50%;color:#245e78;font:600 15px/1 Sarabun,sans-serif;background:#edf8fc}.flow-unit-note{display:block;font:400 10px/1.4 Sarabun,sans-serif;color:#64748b}</style>
+</style><style>.map-flow-legend{display:grid;place-items:center;width:24px;height:24px;border:1.5px solid #579db8;border-radius:50%;color:#245e78;font:600 15px/1 Sarabun,sans-serif;background:#edf8fc}.flow-unit-note{display:block;font:400 10px/1.4 Sarabun,sans-serif;color:#64748b}</style><style id="layer-panel-refinement">
+@layer modernLayerMenu {
+ #mapLayers .layer-body{width:min(306px,calc(100vw - 76px))!important;padding:14px!important;border:1px solid #e3eaf0!important;border-radius:16px!important;box-shadow:0 14px 40px #18344d25!important;background:rgba(255,255,255,.97)!important;backdrop-filter:blur(14px);max-height:calc(100dvh - 70px)!important}
+ #mapLayers .layer-panel-heading{padding:1px 4px 11px!important;margin-bottom:10px!important;border-bottom:1px solid #edf1f5!important}
+ #mapLayers .layer-panel-heading strong{font:600 15px/1.4 Sarabun,sans-serif!important;color:#183b56!important}
+ #mapLayers .layer-panel-heading>span{font:400 11px/1.5 Sarabun,sans-serif!important;color:#83919e!important}
+ #mapLayers .basemap-select{padding:0 3px 11px!important;font-size:11px!important;color:#7a8997!important}
+ #mapLayers #basemapChoice{min-height:35px!important;border:1px solid #e1e7ed!important;border-radius:7px!important;background:#f8fafc!important;padding:7px 9px!important;font-size:12px!important;color:#354e63!important}
+ #mapLayers .toggles{gap:2px!important}
+ #mapLayers .toggles .layer-option{display:grid!important;grid-template-columns:26px minmax(0,1fr) 30px!important;min-height:43px!important;padding:7px 8px!important;gap:9px!important;margin:0!important;border:0!important;border-radius:7px!important;background:transparent!important;box-shadow:none!important}
+ #mapLayers .toggles .layer-option:has(input:checked){background:#edf5fb!important;border:0!important}
+ #mapLayers .toggles .layer-option:hover{background:#f1f6fa!important}
+ #mapLayers .layer-option-name{font:400 12px/1.5 Sarabun,sans-serif!important;color:#3c5163!important}
+ #mapLayers .toggles .layer-option .layer-swatch{width:26px!important;height:26px!important;background:transparent!important}
+ #mapLayers .layer-option input{width:29px!important;min-width:29px!important;height:17px!important;background:#d3dce4!important;transition:background .18s!important}
+ #mapLayers .layer-option input:before{width:11px!important;height:11px!important;top:3px!important;left:3px!important;box-shadow:0 1px 3px #17395622!important;transition:left .18s}
+ #mapLayers .layer-option input:checked{background:#2a78af!important}
+ #mapLayers .layer-option input:checked:before{left:15px!important}
+ #mapLayers .layer-option input:focus-visible{outline:2px solid #8abbdc!important;outline-offset:3px!important}
+ #mapLayers .flow-unit-note{font-size:9px!important;color:#7b8b99!important}
+}
+</style>
