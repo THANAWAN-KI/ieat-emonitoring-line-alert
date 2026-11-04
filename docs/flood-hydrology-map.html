@@ -2186,3 +2186,9 @@ html body .flood-data-pin>.ieat-map-symbol[data-type="camera"] .ieat-meaning-svg
 }
 html body #mapLayers .layer-swatch[data-kind="camera"]{color:#C66A0B!important}
 </style>
+<style id="flood-map-attribution-compact">
+@layer floodAttributionRepair {
+html body #mapStage .maplibregl-ctrl-attrib,html body #mapStage .leaflet-control-attribution {max-width:min(560px,calc(100vw - 90px))!important;font-size:9px!important;line-height:1.35!important;max-height:30px!important;overflow:auto!important;white-space:normal!important;padding:2px 5px!important}
+html body #mapStage .maplibregl-ctrl-attrib:focus-within,html body #mapStage .maplibregl-ctrl-attrib:hover,html body #mapStage .leaflet-control-attribution:focus-within,html body #mapStage .leaflet-control-attribution:hover {max-height:100px!important}
+}
+</style>
