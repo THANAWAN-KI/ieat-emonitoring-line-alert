@@ -135,7 +135,7 @@
   return '<button type="button" class="ef-risk ef-warning-location" aria-pressed="false" data-ef-warning="'+hours+'" data-ef-label="'+esc(label)+'" data-ef-rain="'+esc(r.sum_rainfall_mm??'')+'" data-ef-observed="'+esc(time(r.observed_at))+'" data-ef-lat="'+r.lat+'" data-ef-lon="'+r.lon+'"><strong>'+esc(label)+'</strong><span>'+esc(near)+'</span><span>ฝนสะสมตามช่วงประกาศ '+fmt(r.sum_rainfall_mm)+' มม.</span><span>เวลาสถานี '+esc(time(r.observed_at))+'</span><span class="ef-warning-map-action">ดูตำแหน่งบนแผนที่ ↗</span></button>';
  }
 
- function zoom(lat,lon){const f=$('estateFocusMap');if(f?.contentWindow)f.contentWindow.postMessage({type:'flood-map-focus',lat:Number(lat),lon:Number(lon),scale:75000},location.origin)}
+ function zoom(lat,lon,station,kind){const f=$('estateFocusMap');if(f?.contentWindow)f.contentWindow.postMessage({type:'flood-map-focus',lat:Number(lat),lon:Number(lon),scale:75000,station,kind},location.origin)}
  function mount(){
   const warning=$('warning');if(!warning||$('estateFocusDashboard'))return;
   const style=document.createElement('style');style.textContent=`#estateFocusDashboard .ef-map-head h2{font-size:20px!important}#estateFocusDashboard .ef-chart h2{color:#0D47A1!important}
@@ -752,7 +752,7 @@ $('efFilter').onchange=()=>renderEstates();
   finally{reservoirBusy=false;}
  }
  document.addEventListener('change',event=>{if(event.target.id==='efReservoirProvince')renderReservoirs()});
- document.addEventListener('click',event=>{const b=event.target.closest('[data-reservoir-id]');if(!b)return;const r=reservoirs.find(r=>String(r.id)===b.dataset.reservoirId);if(r&&r.lat!=null&&r.lng!=null){zoom(r.lat,r.lng);}});
+ document.addEventListener('click',event=>{const b=event.target.closest('[data-reservoir-id]');if(!b)return;const r=reservoirs.find(r=>String(r.id)===b.dataset.reservoirId);if(r&&r.lat!=null&&r.lng!=null){zoom(r.lat,r.lng,r,'dam');}});
 
 
  let relatedDams=[],relatedDamBusy=false;
@@ -806,7 +806,7 @@ $('efFilter').onchange=()=>renderEstates();
   finally{relatedDamBusy=false}
  }
  document.addEventListener('change',event=>{if(event.target.id==='efReservoirProvince')renderRelatedDams()});
- document.addEventListener('click',event=>{const b=event.target.closest('[data-related-dam]');if(!b)return;const r=relatedDams.find(r=>String(r.id)===b.dataset.relatedDam);if(r&&r.lat!=null&&r.lng!=null)zoom(r.lat,r.lng)});
+ document.addEventListener('click',event=>{const b=event.target.closest('[data-related-dam]');if(!b)return;const r=relatedDams.find(r=>String(r.id)===b.dataset.relatedDam);if(r&&r.lat!=null&&r.lng!=null)zoom(r.lat,r.lng,r,'dam')});
  document.addEventListener('error',event=>{if(event.target.matches?.('[data-dam-camera]')){event.target.hidden=true;const text=document.createElement('small');text.textContent='กล้องต้นทางไม่ส่งภาพในขณะนี้';event.target.after(text)}},true);
 
 
