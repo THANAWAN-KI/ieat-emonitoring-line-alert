@@ -453,7 +453,7 @@ const historyPopups=new WeakSet();function mountPopupHistory(root){const hosts=[
 
 document.addEventListener('click',e=>{const button=e.target.closest('[data-popup-history-year]');if(!button)return;const host=button.closest('.station-history-inline');if(host){e.preventDefault();e.stopPropagation();renderPopupHistory(host,Number(button.dataset.popupHistoryYear))}});
 
-function createMapPopup(options){const popup=new maplibregl.Popup(options);if(cleanDashboard)return popup;popup.on('open',()=>{const node=popup.getElement()?.querySelector('.popup');if(node)window.IEAT_MAP_DETAILS?.showHTML(node.outerHTML);popup.remove()});return popup}
+function createMapPopup(options){const popup=new maplibregl.Popup(cleanDashboard?{...options,className:'prep-point-popup'}:options);if(cleanDashboard)return popup;popup.on('open',()=>{const node=popup.getElement()?.querySelector('.popup');if(node)window.IEAT_MAP_DETAILS?.showHTML(node.outerHTML);popup.remove()});return popup}
 function waterPopup(r){
  const wl=r.wl==null?null:Number(r.wl),bank=r.bank==null?null:Number(r.bank),has=wl!==null&&bank!==null&&Number.isFinite(wl)&&Number.isFinite(bank),diff=has?wl-bank:null;
  const status=has?(diff>=0?'ล้นตลิ่ง '+fmt(diff)+' ม.':'ต่ำกว่าตลิ่ง '+fmt(Math.abs(diff))+' ม.'):'ไม่มีระดับตลิ่งให้เปรียบเทียบ';
@@ -1031,7 +1031,7 @@ function drawWatchMap(){
  function pin(coords,label,html,color,station){
   const glyph=mapSymbol(color==='#0D47A1'?'water':'rain');
   if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35;cursor:pointer';if(station){el.className='watch-data-glyph';el.innerHTML=glyph}else{el.className='estate-pin';el.style.cssText='cursor:pointer';el.innerHTML=estateSvg}const marker=new maplibregl.Marker({element:el,anchor:station?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
-  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:'',iconSize:[34,34],iconAnchor:[17,17],html:'<span class="watch-data-glyph" style="width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35">'+glyph+'</span>'}):L.divIcon({className:'estate-pin',iconSize:[42,56],iconAnchor:[21,54],html:estateSvg})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:420,maxHeight:innerHeight*.7}).addTo(watchMapLayer)}
+  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:'',iconSize:[34,34],iconAnchor:[17,17],html:'<span class="watch-data-glyph" style="width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35">'+glyph+'</span>'}):L.divIcon({className:'estate-pin',iconSize:[42,56],iconAnchor:[21,54],html:estateSvg})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
  }
  estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#713b91',false);e.stations.forEach(s=>{
   const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
