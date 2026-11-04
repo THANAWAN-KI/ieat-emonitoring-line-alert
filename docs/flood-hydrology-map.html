@@ -1097,9 +1097,7 @@ function drawOverviewClusters(clusters){
 
 
 
-function syncStatusKey(){
- let key=$('mapStatusKey');if(!key){key=document.createElement('details');key.id='mapStatusKey';key.innerHTML='<summary>เกณฑ์สีสถานะข้อมูล</summary><div>'+window.IEAT_WATER_STATUS.legendHTML+'</div>';$('mapStage').appendChild(key)}
-}
+function syncStatusKey(){ $('mapStatusKey')?.remove(); }
 
 function syncPinLegend(){
  for(const option of document.querySelectorAll('[data-layer-option]')){
