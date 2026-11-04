@@ -639,19 +639,27 @@ function syncGlobalBuildings(){
  vector.setLayoutProperty('context-buildings','visibility',flags.boundary&&$('estateView3d').getAttribute('aria-pressed')==='true'&&!local?'visible':'none');
 }
 // Only verified zoning attributes are colored; unclassified parcels remain neutral.
-const ieatZoneColors={industrial:'#8D3BB7',green:'#8ACD68',water:'#48B9E8',commercial:'#EC4B64',support:'#F5D85B',utility:'#CDD5DC',unknown:'#D8C7EB'};
-const ieatZoneNames={industrial:'เขตอุตสาหกรรม',green:'พื้นที่สีเขียว',water:'แหล่งน้ำ / บ่อหน่วงน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',utility:'ถนน / สาธารณูปโภค',unknown:'ไม่มีข้อมูลแบ่งเขตประกอบการ'};
+// Indicative classification requested for e_PP. The estate zoning field is primary;
+// unrecognized parcels are treated as general industry, not verified legal zoning.
+const ieatZoneColors={industrial:'#8D3BB7',free:'#66229C',green:'#79C953',water:'#38AEE4',commercial:'#EC4B64',support:'#F5D85B',utility:'#B9C1C9',unknown:'#8D3BB7'};
+const ieatZoneNames={industrial:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)',free:'เขตประกอบอุตสาหกรรมเสรี',green:'พื้นที่สีเขียว',water:'บ่อหน่วงน้ำ / แหล่งน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',utility:'สาธารณูปโภค',unknown:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)'};
 function ieatZoneType(p){
- const keys=Object.keys(p||{}).filter(k=>/^(?:land.?use|zone|zoning|use_type|landtype|land_type|ประเภท(?:การใช้ประโยชน์|พื้นที่|เขต|ที่ดิน)|เขตประกอบการ|การใช้ประโยชน์ที่ดิน|การใช้ที่ดิน|ผังการใช้ที่ดิน|ลักษณะการใช้ที่ดิน|ประเภทการใช้ที่ดิน)/i.test(k));
- const v=keys.map(k=>String(p[k]??'')).filter(x=>x&&!/^(?:null|undefined|ไม่ระบุ|-|\d+)$/i.test(x)).join(' ');
- if(!v)return 'unknown';
- if(/พื้นที่สีเขียว|เขียว|สวนสาธารณะ|green|park|buffer|อนุรักษ์|ป่าไม้/i.test(v))return 'green';
- if(/บ่อหน่วง|อ่างเก็บน้ำ|แหล่งน้ำ|water|pond|reservoir/i.test(v))return 'water';
- if(/พาณิชยกรรม|พาณิชย์|commercial/i.test(v))return 'commercial';
- if(/สาธารณูปโภค|โครงสร้างพื้นฐาน|ถนน|utility|infrastructure|road/i.test(v))return 'utility';
- if(/อุตสาหกรรม|โรงงาน|industrial|industry|factory/i.test(v))return 'industrial';
- if(/บริการสนับสนุน|สำนักงาน|support|service/i.test(v))return 'support';
- return 'unknown';
+ const entries=Object.entries(p||{}),normal=s=>String(s??'').toLowerCase().replace(/[\s_\-.\/()]+/g,'');
+ const zoneKeys=/เขตประกอบการ|ประเภทเขต|ประเภทพื้นที่|การใช้ประโยชน์|การใช้ที่ดิน|ประเภทที่ดิน|ผังการใช้|ลักษณะการใช้|landuse|landtype|usetype|zonetype|zone|zoning|area.?type|ประเภทการใช้/;
+ const ignore=/^(?:objectid|fid|id|shape|geometry|ชื่อ|นิคมอุตสาหกรรม|จังหวัด|อำเภอ|ตำบล|พื้นที่|เนื้อที่|เลข|รหัส)/i;
+ const preferred=entries.filter(([key])=>zoneKeys.test(normal(key)));
+ const generic=entries.filter(([key,val])=>!ignore.test(normal(key))&&typeof val==='string'&&val.length<140);
+ const values=[...preferred,...generic].map(([k,v])=>String(v??'').trim()).filter(v=>v&&!/^(?:null|undefined|ไม่ระบุ|ไม่มีข้อมูล|[-–]|\d+)$/i.test(v));
+ const v=values.join(' ').toLowerCase();
+ // Explicit natural features and infrastructure take priority over industry.
+ if(/พื้นที่สีเขียว|สีเขียว|สวนหย่อม|สวนสาธารณะ|สวนป่า|แนวกันชน|green\s*area|green\s*zone|greenbelt|landscape|forest|park|พื้นที่อนุรักษ์/i.test(v))return 'green';
+ if(/บ่อหน่วงน้ำ|บ่อพักน้ำ|บ่อเก็บน้ำ|บ่อบำบัด|บ่อปรับเสถียร|แก้มลิง|แหล่งน้ำ|อ่างเก็บน้ำ|บึง|retention|detention|reservoir|pond|water\s*body/i.test(v))return 'water';
+ if(/สาธารณูปโภค|ระบบสาธารณูปโภค|โครงสร้างพื้นฐาน|ระบบบำบัด|ระบบประปา|สถานีไฟฟ้า|โรงผลิตน้ำ|ระบบระบายน้ำ|ถนน|ทางสัญจร|utility|utilities|infrastructure|road|treatment\s*plant/i.test(v))return 'utility';
+ if(/อุตสาหกรรมเสรี|เขตปลอดอากร|free\s*zone|freezone|duty\s*free/i.test(v))return 'free';
+ if(/พาณิชยกรรม|พาณิชย์|ศูนย์การค้า|commercial|ค้าปลีก|ค้าส่ง/i.test(v))return 'commercial';
+ if(/พื้นที่บริการ|บริการสนับสนุน|อาคารสำนักงาน|สำนักงานนิคม|support\s*area/i.test(v))return 'support';
+ // Per user's requested interpretation, everything else is general industrial land.
+ return 'industrial';
 }
 function ieatZoningData(){
  const features=boundaryData.features.map(f=>{const zone=ieatZoneType(f.properties);return {...f,properties:{...f.properties,ieat_zone:zone,ieat_color:ieatZoneColors[zone]}}});
@@ -669,6 +677,9 @@ let ieatTreeRaster=null;
 function syncBoundaries(){
  syncEstateOuter();if((vector||raster)?.getZoom()>=10)syncIllustrativeModels();syncGlobalBuildings();
  const data=ieatZoningData();
+ const zoneCount={};for(const f of data.polygons.features){const k=f.properties.ieat_zone;zoneCount[k]=(zoneCount[k]||0)+1}
+ const zoneSummary=Object.entries(zoneCount).map(([k,n])=>ieatZoneNames[k]+': '+n).join(' · ');
+ if($('boundaryInfo')&&data.polygons.features.length)$('boundaryInfo').title='แบ่งสีโดยประมาณจากข้อมูล e_PP · '+zoneSummary;
  if(vector&&ready){
   if(!vector.getSource('estate-boundaries')){
    vector.addSource('estate-boundaries',{type:'geojson',data:data.polygons});
