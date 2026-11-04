@@ -458,6 +458,18 @@ html body .flood-data-pin>.ieat-map-symbol .ieat-meaning-svg{display:block!impor
 html body .flood-data-pin .fd-pin-name{color:#303841!important;background:#fff!important;border-color:#e3e9f1!important}
 html body #mapLayers .layer-swatch[data-kind="estate"] .ieat-estate-location{background:#674188!important;border-color:#493068!important}
 </style>
+<style id="ieat-booth-popup-usability-20261104">
+html body .prep-point-popup{max-width:min(300px,calc(100vw - 42px))!important;z-index:1005!important}
+html body .prep-point-popup :is(.maplibregl-popup-content,.leaflet-popup-content-wrapper){box-sizing:border-box!important;max-width:min(300px,calc(100vw - 42px))!important;border:1px solid #e0e8f1!important;border-radius:12px!important;background:#fff!important;color:#303841!important;box-shadow:0 5px 17px rgba(13,71,161,.15)!important}
+html body .prep-point-popup :is(.maplibregl-popup-content,.leaflet-popup-content){box-sizing:border-box!important;padding:10px 11px!important;margin:0!important;max-height:min(300px,42dvh)!important;width:auto!important;overflow-y:auto!important;overscroll-behavior:contain!important;scrollbar-width:thin!important}
+html body .prep-point-popup .dashboard-popup-body{max-width:100%!important;min-width:0!important;overflow-wrap:anywhere!important}
+html body .prep-point-popup .dashboard-popup-body :is(h3,h4){font-size:14px!important;line-height:1.5!important;margin:0 18px 6px 0!important;color:#111!important}
+html body .prep-point-popup .dashboard-popup-body :is(p,small,td,th){font-size:11px!important;line-height:1.55!important}
+html body .prep-point-popup .dashboard-popup-body :is(img,svg){max-width:100%!important;height:auto}
+html body .prep-point-popup .dashboard-popup-body .fc-preview{max-height:110px!important;overflow:hidden!important}
+html body .prep-point-popup :is(.maplibregl-popup-close-button,.leaflet-popup-close-button){position:absolute!important;right:5px!important;top:5px!important;z-index:10!important;width:25px!important;height:25px!important;line-height:24px!important;border:0!important;border-radius:50%!important;background:#f0f4fa!important;color:#303841!important}
+@media(max-width:650px){html body .prep-point-popup :is(.maplibregl-popup-content,.leaflet-popup-content){max-height:min(240px,34dvh)!important}}
+</style>
 </head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>45</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="45" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#0D47A1"/><path d="M12 2V20L4 25Z" fill="#90CAF9"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="layer-panel-heading"><strong>ชั้นข้อมูลแผนที่</strong><span>เลือกข้อมูลที่ต้องการแสดง</span></div><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
@@ -1456,8 +1468,12 @@ function focusWithEstate(lon,lat){
  stopAerialTour();autoFit=false;
  const e=estateProvinceScope?.active?estateProvinceScope.estate:null;
  if(e){const x=Number(e.lon??e.lng),y=Number(e.lat),west=Math.min(lon,selectedEstateExtent?.xmin??x-.025),east=Math.max(lon,selectedEstateExtent?.xmax??x+.025),south=Math.min(lat,selectedEstateExtent?.ymin??y-.025),north=Math.max(lat,selectedEstateExtent?.ymax??y+.025);
-  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:330,left:175,right:55,bottom:80},maxZoom:13,pitch:0,duration:500});
-  else raster?.fitBounds([[south,west],[north,east]],{paddingTopLeft:[175,330],paddingBottomRight:[55,80],maxZoom:13});
+  const mapHeight=(vector?.getContainer()||raster?.getContainer())?.clientHeight||600;
+  const mapWidth=(vector?.getContainer()||raster?.getContainer())?.clientWidth||900;
+  const pad=Math.max(18,Math.min(70,Math.round(mapHeight*.09)));
+  const side=Math.max(18,Math.min(85,Math.round(mapWidth*.07)));
+  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:pad,left:side,right:side,bottom:pad},maxZoom:13,pitch:0,duration:500});
+  else raster?.fitBounds([[south,west],[north,east]],{paddingTopLeft:[side,pad],paddingBottomRight:[side,pad],maxZoom:13});
   queueBoundaries();
  }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:0});else raster?.setView([lat,lon],13);
 }
@@ -1472,8 +1488,8 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
  if(estate){const d=distanceFromEstate(Number(lon),Number(lat));if(Number.isFinite(d)){const note=document.createElement('div');note.className='popup-estate-distance';note.innerHTML='<strong>ระยะห่างจากนิคมฯ</strong><span>'+esc(estateProvinceScope.name)+' · '+d.toLocaleString('th-TH',{maximumFractionDigits:2})+' กม. (เส้นตรง)</span>';const btn=document.createElement('button');btn.type='button';btn.className='ieat-measure-btn';btn.setAttribute('aria-pressed','false');btn.textContent='วัดระยะทางบนแผนที่';btn.addEventListener('click',()=>toggleIEATMeasuredDistance(Number(lon),Number(lat),btn));note.append(btn);node.append(note)}}
  if(move)window.IEATPreparednessMap().focusPoint(Number(lon),Number(lat));
  preparednessPopup=vector
-  ?new maplibregl.Popup({maxWidth:'380px',offset:16,className:'prep-point-popup'}).setLngLat([lon,lat]).setDOMContent(node).addTo(vector)
-  :L.popup({maxWidth:380,autoPan:true,autoPanPaddingTopLeft:[20,25],autoPanPaddingBottomRight:[20,70],className:'prep-point-popup'}).setLatLng([lat,lon]).setContent(node).openOn(raster);
+  ?new maplibregl.Popup({maxWidth:'300px',offset:14,className:'prep-point-popup',closeButton:true,closeOnClick:false}).setLngLat([lon,lat]).setDOMContent(node).addTo(vector)
+  :L.popup({maxWidth:300,autoPan:true,keepInView:true,autoPanPaddingTopLeft:[18,18],autoPanPaddingBottomRight:[18,45],className:'prep-point-popup'}).setLatLng([lat,lon]).setContent(node).openOn(raster);
  if(preparednessPopup?.on)preparednessPopup.on('close',clearIEATMeasuredDistance);mountPopupHistory(node);
  if(camera)loadCameraImage(camera);
 }
