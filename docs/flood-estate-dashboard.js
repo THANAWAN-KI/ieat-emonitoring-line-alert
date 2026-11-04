@@ -477,7 +477,7 @@
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-canal-panel" hidden><h2>คลอง</h2><div id="efCanalList"></div><small id="efCanalTime"></small></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
 
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวัง 24 ชั่วโมง</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวัง 48 ชั่วโมง</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่ 3 มิติ สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261104-unified-white-pins" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
+   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่ 3 มิติ สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261104-reference-match&layout=reference" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -875,9 +875,10 @@ $('efFilter').onchange=()=>renderEstates();
    expoInitial=true;
    const estates=data.estates.filter(point),water=window.IEAT_EXPO_RID||[];
    const score=e=>water.filter(r=>point(r)&&num(r.wl)!==null&&num(r.bank)!==null&&km(e,r)<=RADIUS).length;
-   const preferred=estates.find(e=>/บางปะอิน/.test(e.name));
+   const preferred=estates.find(e=>/แก่งคอย/.test(e.name));
    const example=preferred||estates.slice().sort((a,b)=>score(b)-score(a)||String(a.name).localeCompare(String(b.name),'th'))[0];
    expoExample=example.name;
+   if(!headerEstate&&!selected)queueMicrotask(()=>applyHeaderEstate(example.name));
    if(!headerEstate&&selected){const requested=estates.find(e=>String(e.id)===selected||estateKey(e.name)===estateKey(selected));if(requested){headerEstate=requested.name;selected=String(requested.id);}}
   }
   expoRender();
@@ -938,11 +939,7 @@ $('efFilter').onchange=()=>renderEstates();
    }
   }
   // Top-five rankings are styled solely by flood-river-panel.js; no inline overrides.
-  // Number-first action cards: borderless surfaces and readable black labels on pale blue.
-  document.querySelectorAll('#estateFocusDashboard .io-mini-stats [data-ef-card]').forEach(card=>{
-   apply(card,{'border':'0','border-radius':'13px','box-shadow':'0 3px 12px #0D47A114','background':'#FFFFFF'});
-  });
-  document.querySelectorAll('#estateFocusDashboard .io-mini-stats .io-stat-copy span').forEach(label=>apply(label,{'color':'#111111','-webkit-text-fill-color':'#111111'}));
+
  }
  let queued=false;
  function request(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;refine()})}

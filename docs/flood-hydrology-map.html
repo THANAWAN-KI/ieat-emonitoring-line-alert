@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่เฝ้าระวังน้ำ | IEAT</title>
+<style>@layer floodReferenceMap;</style>
+<link rel="stylesheet" href="flood-reference-map.css?v=20261104-reference-match">
+<script>if(new URLSearchParams(location.search).get("layout")==="reference")document.documentElement.dataset.referenceMap="true";</script>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1595,6 +1598,7 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
 }
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
+ if(d.type==='flood-reference-map-tools'&&d.action==='layers'){const menu=$('mapLayers');menu.open=!menu.open;return;}
  if(d.type==='flood-prep-support'){
   preparednessSupport=!!d.active;
   const supportButton=$('supportMapButton');if(supportButton)supportButton.hidden=preparednessSupport;

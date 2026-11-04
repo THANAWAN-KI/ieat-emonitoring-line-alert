@@ -26,9 +26,9 @@
    const criterion=hasCriterion?raw.slice(0,pos):'ไม่ได้ระบุเกณฑ์แยก';
    const action=hasCriterion?raw.slice(pos+1).trim():raw;
    const tone=r.alert_code==='EMERGENCY'?'red':r.alert_code==='WARNING'||r.alert_code==='WATCH'?'amber':'neutral';
-   return '<tr><th scope="row"><span class="ex-badge '+tone+'">'+esc(alerts[r.alert_code]||terms[r.measure_term]||r.measure_term)+'</span></th><td>'+esc(criterion)+'</td><td>'+esc(action)+(r.remark?'<small>'+esc(r.remark)+'</small>':'')+'</td><td>'+esc(r.responsible||'ยังไม่มีข้อมูล')+'</td></tr>';
+   return '<tr><th scope="row"><span class="ex-badge '+tone+'">'+esc(alerts[r.alert_code]||terms[r.measure_term]||r.measure_term)+'</span></th><td>'+(hasCriterion?'<b>'+esc(criterion)+'</b><br>':'')+esc(action)+(r.remark?'<small>'+esc(r.remark)+'</small>':'')+'</td><td>'+esc(r.responsible||'ยังไม่มีข้อมูล')+'</td></tr>';
   });
-  pane.innerHTML+=card('เกณฑ์และมาตรการรับมือ',table(['ระดับ / หมวด','เกณฑ์เริ่มดำเนินการ','สิ่งที่ต้องทำ','ผู้รับผิดชอบ'],planRows.length?planRows:[empty(4)])+'<p class="ex-note">เกณฑ์ตามแผนต้นทางของนิคมฯ ไม่ใช่การประกาศสถานะฉุกเฉินปัจจุบัน</p>');
+  pane.innerHTML+=card('แผนและมาตรการรับมือ',table(['หมวด','แนวทางดำเนินการ','ผู้รับผิดชอบ'],planRows.length?planRows:[empty(3)])+'<p class="ex-note">เกณฑ์ตามแผนต้นทางของนิคมฯ ไม่ใช่การประกาศสถานะฉุกเฉินปัจจุบัน</p>');
   const infrastructure=[];
   for(const [key,label,pk,nameField] of types){for(const r of byEstate(key,id)){
    let detail='';
@@ -37,15 +37,20 @@
    if(key==='flood_drainage_channel')detail='ความยาว '+fmt(r.length_m,'ม.')+'<small>การระบาย '+(r.capacity_m3s!=null?fmt(r.capacity_m3s,'ลบ.ม./วินาที'):fmt(r.capacity_m3h,'ลบ.ม./ชม.'))+'</small>';
    if(key==='flood_barrier')detail='ความยาว '+fmt(r.length_m,'ม.')+'<small>ระดับสันคัน '+fmt(r.crest_level_msl,'ม.รทก.')+'</small>';
    const geom=r.geom_geojson,has=geom&&['Point','LineString'].includes(geom.type);
-   infrastructure.push('<tr '+(has?'data-ex-infra="'+key+':'+r[pk]+'" tabindex="0"':'')+'><th scope="row">'+esc(r[nameField]||label)+'<small>'+label+'</small></th><td>'+detail+'</td><td><span class="ex-badge neutral">ยังไม่ยืนยัน</span><small>ไม่ระบุวันที่ตรวจ</small></td><td>'+(has?'<button type="button" class="ex-map-action" data-ex-infra="'+key+':'+r[pk]+'">ดูบนแผนที่ ↗</button>':'ยังไม่มีตำแหน่ง')+'</td></tr>');
+   infrastructure.push('<tr '+(has?'data-ex-infra="'+key+':'+r[pk]+'" tabindex="0"':'')+'><th scope="row">'+esc(r[nameField]||label)+'<small>'+label+'</small></th><td>'+detail+'<small>ความพร้อม: ยังไม่ยืนยัน · ไม่ระบุวันที่ตรวจ</small></td><td>'+(has?'<button type="button" class="ex-map-action" data-ex-infra="'+key+':'+r[pk]+'">ดูบนแผนที่ ↗</button>':'ยังไม่มีตำแหน่ง')+'</td></tr>');
   }}
-  pane.innerHTML+=card('โครงสร้างพื้นฐานจัดการน้ำ','<p class="ex-note">'+infrastructure.length+' รายการ · คลิกแถวเพื่อดูตำแหน่งและรายละเอียด</p>'+table(['รายการ','รายละเอียด','ความพร้อม','แผนที่'],infrastructure.length?infrastructure:[empty(4,'ไม่มีระเบียนโครงสร้างพื้นฐานในชุดต้นทาง ไม่ได้หมายความว่าไม่มีในพื้นที่')])+'<p class="ex-note">จำนวนเป็นจำนวนระเบียน ไม่ใช่จำนวนเครื่องหรือบ่อรวม · มีอุปกรณ์ไม่ได้ยืนยันว่าพร้อมใช้งาน</p>');
+  pane.innerHTML+=card('โครงสร้างพื้นฐานจัดการน้ำ','<p class="ex-note">'+infrastructure.length+' รายการ · คลิกแถวเพื่อดูตำแหน่งและรายละเอียด</p>'+table(['ประเภท / รายการ','รายละเอียด','แผนที่'],infrastructure.length?infrastructure:[empty(3,'ไม่มีระเบียนโครงสร้างพื้นฐานในชุดต้นทาง ไม่ได้หมายความว่าไม่มีในพื้นที่')])+'<p class="ex-note">จำนวนเป็นจำนวนระเบียน ไม่ใช่จำนวนเครื่องหรือบ่อรวม · มีอุปกรณ์ไม่ได้ยืนยันว่าพร้อมใช้งาน</p>');
   const info=[];for(const p of profiles){for(const [k,title] of [['drainage_mode','ระบบระบายน้ำ'],['design_rainfall_mm_hr','ฝนออกแบบ (มม./ชม.)'],['terrain_note','สภาพพื้นที่และระดับอ้างอิง'],['flood_history','ประวัติผลกระทบ'],['remark','ข้อสังเกตตามเอกสาร']])if(p[k]!=null)info.push('<tr><th scope="row">'+title+'</th><td>'+esc(({GRAVITY:'ระบายด้วยแรงโน้มถ่วง',PUMP:'สูบระบายน้ำ',OVERFLOW:'ระบายล้น'})[p[k]]||p[k])+'</td></tr>');}
   pane.innerHTML+=card('ระบบรับมือและข้อจำกัดของพื้นที่',table(['รายการ','ข้อมูลตามเอกสาร'],info.length?info:[empty(2)]));
   pane.innerHTML+=card('ทรัพยากรสำรองและการสนับสนุน',table(['รายการ','จำนวน','ความพร้อมที่บันทึกไว้','ผู้สนับสนุน'],resources.length?resources.map(r=>'<tr><th scope="row">'+esc(r.resource_name)+'</th><td>'+fmt(r.quantity,r.unit||'')+'</td><td>'+esc(r.readiness||'ยังไม่มีข้อมูล')+'</td><td>'+esc(r.provider||'ยังไม่มีข้อมูล')+'</td></tr>'):[empty(4)]));
   pane.innerHTML+=card('ผู้ประสานงาน','<p class="ex-note">ยังไม่มีข้อมูลช่องทางประสานงานที่ยืนยันสำหรับเผยแพร่ในหน้านี้</p>');
   const quality=byEstate('flood_data_quality_issue',id);
   pane.innerHTML+='<details class="ex-card ex-docs"><summary>แหล่งข้อมูลและการทบทวนแผน</summary>'+table(['เอกสาร','วันที่เอกสาร'],docs.length?docs.map(r=>'<tr><td>'+esc(r.doc_title||r.file_name)+'<small>'+esc(r.file_name||'')+'</small></td><td>'+date(r.report_date)+'</td></tr>'):[empty(2)])+'<p class="ex-note">นำเข้าจากไฟล์ที่ส่งมา 4 พ.ย. 2569 · ยังไม่เชื่อมอัปเดตอัตโนมัติ<br>วันที่ทบทวนแผน / ซ้อมแผน / ตรวจความพร้อมล่าสุด: ยังไม่มีข้อมูล · ไม่มีไฟล์เอกสารต้นฉบับแนบในชุดนี้</p>'+(quality.length?'<h4>ข้อสังเกตคุณภาพข้อมูล ('+quality.length+')</h4><ul>'+quality.map(q=>'<li>'+esc(q.issue)+'</li>').join('')+'</ul>':'')+'</details>';
+  const supporting=[...pane.querySelectorAll('.ex-more,.ex-docs')];
+  if(supporting.length){
+   const documents=document.createElement('details');documents.className='ex-reference-documents';
+   const summary=document.createElement('summary');summary.textContent='เอกสารแผนรับมือน้ำท่วมและข้อมูลประกอบ ↗';documents.append(summary,...supporting);pane.append(documents);
+  }
  }};
  document.addEventListener('change',e=>{if(e.target.id!=='exPrepEstate')return;const estate=D.master_estate.find(r=>String(r.id)===e.target.value);const keepPrep=document.body.dataset.floodView==='preparedness';window.dispatchEvent(new CustomEvent('ieat-exhibition-select-estate',{detail:{name:estate?.name_th||''}}));if(keepPrep)queueMicrotask(()=>document.getElementById('floodTab-preparedness')?.click());});
  function focus(e){const row=e.target.closest('[data-ex-infra]');if(!row)return;const key=row.dataset.exInfra;document.querySelectorAll('#preparednessPane tr[data-ex-infra]').forEach(r=>r.classList.toggle('ex-selected',r.dataset.exInfra===key));document.getElementById('estateFocusMap')?.contentWindow?.postMessage({type:'flood-infrastructure-focus',key,estate:selectedName},location.origin);}
