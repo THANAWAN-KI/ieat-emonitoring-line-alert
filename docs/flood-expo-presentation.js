@@ -75,15 +75,15 @@ function install(){
 }
 const style=document.createElement('style');style.id='ieat-booth-compact-20261104';
 style.textContent=`
-#expoBoothSubtitle{font:400 12px/1.5 Sarabun,sans-serif;color:#526477;margin:0 4px 10px}
-#floodPageTitle{font-size:clamp(21px,1.8vw,29px);font-weight:800;line-height:1.3;color:#0D47A1;margin:0}
+#expoBoothSubtitle{display:block;width:100%;max-width:none;font:400 12px/1.35 Sarabun,sans-serif;color:#526477;margin:0 0 5px;padding:0;white-space:nowrap;overflow:visible;word-break:normal}
+#floodPageTitle{font-size:clamp(21px,1.8vw,29px);font-weight:800;line-height:1.25;color:#0D47A1;margin:0 0 2px}
 #expoBoothActions{display:flex;gap:6px;align-items:center;min-width:0}
 #expoBoothActions button{border:1px solid #dbe6f2;background:#fff;color:#0D47A1;border-radius:9px;padding:8px 10px;white-space:nowrap;font:600 12px/1.3 Sarabun,sans-serif;cursor:pointer;min-height:38px}
 #expoBoothActions button[aria-pressed=true]{background:#0D47A1;color:#fff;border-color:#0D47A1}
 #expoBoothActions button:focus-visible{outline:2px solid #2196F3;outline-offset:2px}
 @media(min-width:1100px){html body #estateFocusDashboard .ef-workspace{grid-template-columns:minmax(0,2fr) minmax(0,3fr)!important}}
 @media(max-width:1320px){#expoBoothActions button{font-size:11px;padding:7px}}
-@media(max-width:950px){#expoBoothActions{max-width:45%;overflow-x:auto}#expoBoothActions button{min-height:40px;flex:0 0 auto}}
+@media(max-width:600px){#expoBoothSubtitle{white-space:normal;overflow-wrap:break-word}}\n@media(max-width:950px){#expoBoothActions{max-width:45%;overflow-x:auto}#expoBoothActions button{min-height:40px;flex:0 0 auto}}
 @media(prefers-reduced-motion:reduce){#expoBoothActions button{transition:none}}
 `;
 document.head.append(style);
