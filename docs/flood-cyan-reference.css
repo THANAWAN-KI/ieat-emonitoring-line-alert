@@ -57,3 +57,5 @@
  @media(max-width:600px){html body #referenceRail .reference-rail-modes>[data-section]{width:46px!important;height:46px!important;min-height:46px!important;padding:10px!important}html body #referenceRail #referenceMenuToggle{width:46px!important}html body #floodSectionPanel .ref-bar-row,html body #floodSectionPanel .ref-bar-axis{grid-template-columns:83px minmax(0,1fr) 34px!important;gap:6px!important}html body #floodSectionPanel .ref-donut-layout{grid-template-columns:minmax(110px,1fr) minmax(120px,1fr)!important}html body #floodSectionPanel .ref-chart-legend>div{font-size:14px!important}}
 }
 @media print{.ref-report-segments,.ref-chart-card{display:none!important}}
+
+@layer floodCyanReference { @media print { html body #floodSectionPanel .ref-report-segments,html body #floodSectionPanel .ref-chart-card {display:none!important;} } }
