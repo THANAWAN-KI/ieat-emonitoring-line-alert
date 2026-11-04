@@ -15,7 +15,7 @@
 @media(max-width:500px){.controls{left:8px;top:8px}.toggles label{font-size:12px;padding:6px}.search select,.search input{font-size:13px;padding:8px}.legend{width:245px}.status{left:8px;font-size:11px;max-height:58px}}
 @media(prefers-reduced-motion:no-preference){.water-critical{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{stroke-opacity:.15;fill-opacity:.04}}}
 .water-popup{width:290px;max-width:calc(100vw - 90px);max-height:calc(100vh - 100px);overflow:auto}.water-gauge-layout{display:grid;grid-template-columns:95px minmax(0,1fr);gap:8px;align-items:center}.water-gauge-layout svg{width:95px;height:235px}.water-gap{font-size:25px;font-weight:700;line-height:1.35}.water-level{font-size:22px;font-weight:700;margin-top:12px}.water-gauge-layout p{font-size:12px}.water-popup h3{padding-right:10px}
-.river-motion{animation:riverTravel 2s linear infinite}@keyframes riverTravel{to{stroke-dashoffset:-24}}
+.river-motion{animation:riverTravel 1.45s linear infinite;will-change:stroke-dashoffset}@keyframes riverTravel{to{stroke-dashoffset:-24}}
 
 #mapStage{position:absolute;inset:0}
 body.toolbar-above{display:flex;flex-direction:column;overflow:hidden}
@@ -935,18 +935,31 @@ function syncWaterAreas(){
 function addFlow(){
  if(!vector||!ready||!waterways||vector.getSource('mapped-flow'))return;
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream')}});
- vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#3397d0','line-width':['interpolate',['linear'],['zoom'],4,2,10,5,14,9,18,14],'line-opacity':.75}},'discharge-ring');
- vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#e3f5ff','line-width':['interpolate',['linear'],['zoom'],4,1.2,10,2.5,14,4,18,6],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
- {let phase=0;setInterval(()=>{if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion'))return;phase=(phase+.1)%8;vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])},60)}
+ vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#1686D4','line-width':['interpolate',['linear'],['zoom'],4,4.5,10,9,14,16,18,25],'line-opacity':.94}},'discharge-ring');
+ vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#77C9FF','line-width':['interpolate',['linear'],['zoom'],4,1.6,10,3.2,14,5.8,18,9],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
+ // Single time-based animation loop; the phase is never reset by zoom/pan events.
+  // Throttled paint updates reduce expensive map redraws during camera movement.
+  if(!window.__ieatFlowLoopStarted){
+   window.__ieatFlowLoopStarted=true;
+   const started=performance.now();let last=-1000;
+   function animateRiver(now){
+    requestAnimationFrame(animateRiver);
+    if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion')||now-last<45)return;
+    last=now;
+    const phase=((now-started)*.008)%8;
+    try{vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])}catch(e){}
+   }
+   requestAnimationFrame(animateRiver);
+  }
  const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:0,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':.65,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#F3FBFF" stroke="#2B6697" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream');
- const flowWidth=raster.getZoom()<9?3:raster.getZoom()<13?5:raster.getZoom()<16?9:13;
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#3397d0',weight:flowWidth+1,opacity:.8,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#e3f5ff',weight:Math.max(1.5,flowWidth*.5),opacity:.95,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ const flowWidth=raster.getZoom()<9?5:raster.getZoom()<13?9:raster.getZoom()<16?16:24;
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#1686D4',weight:flowWidth+1,opacity:.94,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#77C9FF',weight:Math.max(2,flowWidth*.38),opacity:.98,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  
  const bounds=raster.getBounds().pad(.15);let count=0;
  for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
@@ -1554,7 +1567,7 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .map-flow-reading{position:absolute;left:29px;top:8px;white-space:nowrap;padding:3px 6px;border:1px solid #7fb7cc;border-radius:6px;background:#f1fbff;color:#15516e;font:600 11px/1.4 Sarabun,sans-serif;box-shadow:0 1px 4px #244b6020}
  .map-flow-reading small{font-size:9px}
  .satellite-flood-mask{filter:hue-rotate(-9deg) saturate(.55) brightness(1.16)!important}
- .river-motion{animation:riverTravel 1.6s linear infinite!important}
+ .river-motion{animation:riverTravel 1.45s linear infinite!important;will-change:stroke-dashoffset}
  #mapLayers .layer-swatch:has(.map-measure-symbol){position:relative!important;height:30px!important}
  #mapLayers .layer-swatch .map-measure-symbol{position:static!important;width:27px!important;height:36px!important;transform:translateY(-6px)!important}
  #mapLayers .requested-cctv-svg,#mapLayers .requested-estate-svg{width:27px!important;height:29px!important;stroke-width:0!important}
