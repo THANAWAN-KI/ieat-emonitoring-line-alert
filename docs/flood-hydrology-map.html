@@ -975,7 +975,7 @@ function groupOverviewPoints(list){
  const map=vector||raster,zoom=map?.getZoom();
  if(!cleanDashboard||!map||zoom>7)return {points:list,clusters:[]};
  const buckets=new Map(),points=[];
- for(const f of list){const r=f.properties;if(r.kind==='estate'){points.push(f);continue}const p=vector?vector.project(f.geometry.coordinates):raster.project([r.lat,r.lng],zoom);
+ for(const f of list){const r=f.properties;const p=vector?vector.project(f.geometry.coordinates):raster.project([r.lat,r.lng],zoom);
  const key=r.kind+':'+Math.floor(p.x/110)+':'+Math.floor(p.y/110);
  if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(f);}
  const clusters=[];
@@ -1020,7 +1020,7 @@ function render(){
   document.body.dataset.mapDetail=presentationZoom>=11?'near':presentationZoom>=9?'mid':'far';
   // Keep all five data sources active, but progressively reveal their symbols.
   // Overview: terrain, waterways and radar only. Mid: estate pins only.
-  const displayPoints=!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<8?[]:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
+  const displayPoints=!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
   displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin';el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
@@ -1043,7 +1043,7 @@ function render(){
   });
   if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#2196F3',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
  }
- if(!cleanDashboard||watchMapData||presentationZoom>=10)drawOverviewClusters(overviewPoints.clusters);drawFlow();queueWaterLabels();drawWatchMap();
+ if(!cleanDashboard||watchMapData||presentationZoom<8||presentationZoom>=10)drawOverviewClusters(overviewPoints.clusters.filter(group=>!cleanDashboard||watchMapData||presentationZoom>=10||group[0]?.properties?.kind==='estate'));drawFlow();queueWaterLabels();drawWatchMap();
  const count=list.filter(f=>f.properties.kind==='water').length;const fresh=list.filter(f=>f.properties.kind==='water'&&!f.properties.stale).length;
  $('status').textContent='ระดับน้ำ '+count+' จุด · ข้อมูลไม่เกิน 6 ชม. '+fresh+' จุด · คลิกจุดเพื่อดูค่าตรวจวัดและเวลา'+(raster?' · แผนที่แบบ 2 มิติ':'');if(autoFit&&features.length&&fit()){autoFit=false}
 }
