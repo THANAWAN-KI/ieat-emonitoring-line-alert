@@ -638,15 +638,65 @@ function syncGlobalBuildings(){
  const local=String(estateProvinceScope?.name||'').includes('บางปะอิน')&&mappedBuildingFootprints.length>0;
  vector.setLayoutProperty('context-buildings','visibility',flags.boundary&&$('estateView3d').getAttribute('aria-pressed')==='true'&&!local?'visible':'none');
 }
+// Only verified zoning attributes are colored; unclassified parcels remain neutral.
+const ieatZoneColors={industrial:'#8D3BB7',green:'#8ACD68',water:'#48B9E8',commercial:'#EC4B64',support:'#F5D85B',utility:'#CDD5DC',unknown:'#E9E2F0'};
+const ieatZoneNames={industrial:'เขตอุตสาหกรรม',green:'พื้นที่สีเขียว',water:'แหล่งน้ำ / บ่อหน่วงน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',utility:'ถนน / สาธารณูปโภค',unknown:'ไม่มีข้อมูลแบ่งเขตประกอบการ'};
+function ieatZoneType(p){
+ const keys=Object.keys(p||{}).filter(k=>/^(?:land.?use|zone|zoning|ประเภท(?:การใช้ประโยชน์|พื้นที่|เขต)|เขตประกอบการ|การใช้ประโยชน์ที่ดิน|ผังการใช้ที่ดิน|ลักษณะการใช้ที่ดิน|ประเภทการใช้ที่ดิน)/i.test(k));
+ const v=keys.map(k=>String(p[k]??'')).filter(x=>x&&!/^(?:null|undefined|ไม่ระบุ|-|\d+)$/i.test(x)).join(' ');
+ if(!v)return 'unknown';
+ if(/พื้นที่สีเขียว|เขียว|สวนสาธารณะ|green|park|buffer|อนุรักษ์|ป่าไม้/i.test(v))return 'green';
+ if(/บ่อหน่วง|อ่างเก็บน้ำ|แหล่งน้ำ|water|pond|reservoir/i.test(v))return 'water';
+ if(/พาณิชยกรรม|พาณิชย์|commercial/i.test(v))return 'commercial';
+ if(/สาธารณูปโภค|โครงสร้างพื้นฐาน|ถนน|utility|infrastructure|road/i.test(v))return 'utility';
+ if(/อุตสาหกรรม|โรงงาน|industrial|industry|factory/i.test(v))return 'industrial';
+ if(/บริการสนับสนุน|สำนักงาน|support|service/i.test(v))return 'support';
+ return 'unknown';
+}
+function ieatZoningData(){
+ const features=boundaryData.features.map(f=>{const zone=ieatZoneType(f.properties);return {...f,properties:{...f.properties,ieat_zone:zone,ieat_color:ieatZoneColors[zone]}}});
+ const trees=[];
+ const contains=(ring,x,y)=>{let v=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])v=!v}return v};
+ for(const f of features){if(f.properties.ieat_zone!=='green'||f.properties.generalized)continue;
+  const polygons=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.type==='MultiPolygon'?f.geometry.coordinates:[];
+  for(const rings of polygons){const ring=rings[0]||[];if(ring.length<4)continue;const xs=ring.map(p=>p[0]),ys=ring.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+   for(const [u,v] of [[.5,.5],[.3,.3],[.7,.7]]){const x=x0+(x1-x0)*u,y=y0+(y1-y0)*v;if(contains(ring,x,y)&&!rings.slice(1).some(h=>contains(h,x,y)))trees.push({type:'Feature',geometry:{type:'Point',coordinates:[x,y]},properties:{}})}
+  }
+ }
+ return {polygons:{type:'FeatureCollection',features},trees:{type:'FeatureCollection',features:trees}};
+}
+let ieatTreeRaster=null;
 function syncBoundaries(){
  syncEstateOuter();if((vector||raster)?.getZoom()>=10)syncIllustrativeModels();syncGlobalBuildings();
- if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#f2f4f6','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':.12,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#a9b3bd','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
- if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#a9b3bd',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.65,fill:true,fillColor:'#f1f3f5',fillOpacity:.34},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
+ const data=ieatZoningData();
+ if(vector&&ready){
+  if(!vector.getSource('estate-boundaries')){
+   vector.addSource('estate-boundaries',{type:'geojson',data:data.polygons});
+   vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':['get','ieat_color'],'fill-extrusion-height':.8,'fill-extrusion-base':0,'fill-extrusion-opacity':['case',['==',['get','ieat_zone'],'unknown'],.22,.64]}},'discharge-ring');
+   vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':['interpolate',['linear'],['zoom'],6,.9,12,1.5,16,2],'line-opacity':.88}},'discharge-ring');
+   vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)});
+  }
+  vector.getSource('estate-boundaries').setData(data.polygons);
+  if(!vector.getSource('estate-zoning-trees')){
+   vector.addSource('estate-zoning-trees',{type:'geojson',data:data.trees});
+   vector.addLayer({id:'estate-zoning-trees',type:'symbol',source:'estate-zoning-trees',minzoom:12,layout:{'text-field':'🌳','text-size':16,'text-allow-overlap':false}},'discharge-ring');
+  }else vector.getSource('estate-zoning-trees').setData(data.trees);
+  ['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));
+  vector.setLayoutProperty('estate-zoning-trees','visibility',flags.boundary&&$('estateTreeVisibility')?.checked?'visible':'none');
+ }
+ if(raster){
+  if(boundaryLayer)raster.removeLayer(boundaryLayer);
+  if(ieatTreeRaster){raster.removeLayer(ieatTreeRaster);ieatTreeRaster=null}
+  if(flags.boundary){
+   boundaryLayer=L.geoJSON(data.polygons,{renderer:L.canvas({padding:.3}),style:f=>{const unknown=f.properties.ieat_zone==='unknown';return {color:'#674188',weight:$('estateParcelVisibility')?.checked?1.3:0,opacity:.86,fill:true,fillColor:f.properties.ieat_color,fillOpacity:unknown?.22:.62}},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();
+   if($('estateTreeVisibility')?.checked&&raster.getZoom()>=12)ieatTreeRaster=L.geoJSON(data.trees,{pointToLayer:(f,p)=>L.marker(p,{interactive:false,icon:L.divIcon({className:'ieat-zoning-tree',html:'🌳',iconSize:[20,20],iconAnchor:[10,10]})})}).addTo(raster);
+  }
+ }
 }
-function boundaryPopup(f){return '<div class="popup"><h3>'+esc(f.properties?.['นิคมอุตสาหกรรม']||'ขอบเขตนิคมอุตสาหกรรม')+'</h3><p>'+(f.properties?.generalized?'ขอบเขตแสดงภาพรวมแบบย่อ · ซูมเข้าเพื่อดูรายละเอียด':'ขอบเขตพื้นที่/แปลงที่ดินจากชั้น e_PP · กนอ.')+'</p><p>ยกขอบเขตเพื่อแสดงผล 3 มิติ ไม่ใช่อาคารหรือความสูงจริง</p><a target="_blank" rel="noopener" href="'+boundaryService+'">เปิดแหล่งข้อมูล</a>'+estateFloodPlan(f.properties?.['นิคมอุตสาหกรรม'])+'</div>';}
+function boundaryPopup(f){return '<div class="popup"><h3>'+esc(f.properties?.['นิคมอุตสาหกรรม']||'ขอบเขตนิคมอุตสาหกรรม')+'</h3><p><strong>ประเภทพื้นที่:</strong> '+esc(ieatZoneNames[f.properties?.ieat_zone]||ieatZoneNames.unknown)+'</p><p>'+(f.properties?.generalized?'ขอบเขตแสดงภาพรวมแบบย่อ · ซูมเข้าเพื่อดูรายละเอียด':'ขอบเขตพื้นที่/แปลงที่ดินจากชั้น e_PP · กนอ.')+'</p><p>ยกขอบเขตเพื่อแสดงผล 3 มิติ ไม่ใช่อาคารหรือความสูงจริง</p><a target="_blank" rel="noopener" href="'+boundaryService+'">เปิดแหล่งข้อมูล</a>'+estateFloodPlan(f.properties?.['นิคมอุตสาหกรรม'])+'</div>';}
 $('estateExample3d').addEventListener('click',showEstateIllustrationExample);
 $('estateParcelVisibility').addEventListener('change',syncBoundaries);
-$('estateTreeVisibility').addEventListener('change',()=>{syncIllustrativeModels();});
+$('estateTreeVisibility').addEventListener('change',()=>{syncIllustrativeModels();syncBoundaries();});
 $('estateDepth').addEventListener('input',()=>{estateDepth=Number($('estateDepth').value);queueRasterIllustrations();if(vector&&ready)updateRoundTreeGL(illustrativeEstateModels(boundaryData.features).features);$('estateDepthValue').textContent=estateDepth;if(vector?.getLayer('estate-illustration')){vector.setPaintProperty('estate-illustration','fill-extrusion-height',['*',['get','height'],estateDepth/45]);vector.setPaintProperty('estate-illustration','fill-extrusion-base',['*',['get','base'],estateDepth/45]);}});
 $('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();syncGlobalBuildings();vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
 function queueBoundaries(){clearTimeout(boundaryTimer);if(flags.boundary&&ready)boundaryTimer=setTimeout(loadBoundaries,350);else if(!flags.boundary){boundaryAbort?.abort();boundaryVersion++;}}
@@ -666,7 +716,7 @@ async function loadBoundaries(){
  if(!flags.boundary||!ready)return;loadMappedFootprints();boundaryAbort?.abort();boundaryAbort=new AbortController();const version=++boundaryVersion,signal=boundaryAbort.signal,b=(vector||raster).getBounds(),zoom=(vector||raster).getZoom();
  const envelope={xmin:b.getWest(),ymin:b.getSouth(),xmax:b.getEast(),ymax:b.getNorth(),spatialReference:{wkid:4326}};const all=[];
  $('boundaryInfo').textContent='ขอบเขตนิคมฯ: กำลังโหลดพื้นที่ในแผนที่…';
- try{let offset=0;while(true){const q=new URLSearchParams({where:'1=1',outFields:'OBJECTID,นิคมอุตสาหกรรม',returnGeometry:'true',outSR:'4326',f:'geojson',geometry:JSON.stringify(envelope),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultOffset:String(offset),resultRecordCount:'1000',orderByFields:'OBJECTID',maxAllowableOffset:String(zoom<9?.001:.00003)});const response=await fetch(boundaryService+'/query?'+q,{signal});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error||!Array.isArray(data.features))throw Error(data.error?.message||'รูปแบบข้อมูลไม่ถูกต้อง');all.push(...data.features);if(data.features.length<1000&&!data.exceededTransferLimit)break;offset+=data.features.length;if(!data.features.length)break;}
+ try{let offset=0;while(true){const q=new URLSearchParams({where:'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',f:'geojson',geometry:JSON.stringify(envelope),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultOffset:String(offset),resultRecordCount:'1000',orderByFields:'OBJECTID',maxAllowableOffset:String(zoom<9?.001:.00003)});const response=await fetch(boundaryService+'/query?'+q,{signal});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error||!Array.isArray(data.features))throw Error(data.error?.message||'รูปแบบข้อมูลไม่ถูกต้อง');all.push(...data.features);if(data.features.length<1000&&!data.exceededTransferLimit)break;offset+=data.features.length;if(!data.features.length)break;}
  if(version!==boundaryVersion)return;boundaryData={type:'FeatureCollection',features:zoom<9?summarizeEstateBoundaries(all):all};syncBoundaries();$('boundaryInfo').textContent='ขอบเขตนิคมฯ: กนอ. · '+all.length.toLocaleString('th-TH')+' พื้นที่/แปลงในมุมมองนี้';
  }catch(e){if(e.name==='AbortError')return;$('boundaryInfo').textContent='โหลดขอบเขตนิคมฯ ไม่สำเร็จ · เลื่อนแผนที่หรือเปิดเลเยอร์เพื่อลองใหม่';}
 }
