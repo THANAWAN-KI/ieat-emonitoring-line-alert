@@ -872,10 +872,12 @@ function syncRoundTreeGL(features){
 }
 let estateOuterData={type:'FeatureCollection',features:[]},estateOuterPromise=null,estateOuterRaster=null,estateSelectionRaster=null;
 function syncEstateOuter(){
- if(cleanDashboard&&!flags.boundary){if(vector?.getLayer('estate-outer-line'))vector.setLayoutProperty('estate-outer-line','visibility','none');if(raster&&estateOuterRaster){raster.removeLayer(estateOuterRaster);estateOuterRaster=null}return}
+ // The local demonstration outline is Bang Pa-in only; never show it as another estate's boundary.
+ const showBangPaInExample=estateProvinceScope?.active&&/บางปะอิน/.test(String(estateProvinceScope.name||''));
+ if(!showBangPaInExample||!flags.boundary){if(vector?.getLayer('estate-outer-line'))vector.setLayoutProperty('estate-outer-line','visibility','none');if(raster&&estateOuterRaster){raster.removeLayer(estateOuterRaster);estateOuterRaster=null}return}
  if(!estateOuterPromise)estateOuterPromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=round-trees1',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{estateOuterData=d;syncEstateOuter()}).catch(()=>{estateOuterPromise=null});
- if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#a9b3bd','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',flags.boundary?'visible':'none')}
- if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#a9b3bd',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
+ if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#a9b3bd','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',showBangPaInExample&&flags.boundary?'visible':'none')}
+ if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(showBangPaInExample&&flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#a9b3bd',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
 }
 function highlightEstateParcel(lon,lat){
  function inRing(r){let inside=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const a=r[i],b=r[j];if((a[1]>lat)!==(b[1]>lat)&&lon<(b[0]-a[0])*(lat-a[1])/(b[1]-a[1])+a[0])inside=!inside}return inside}
@@ -977,14 +979,14 @@ function syncBoundaries(){
    vector.addSource('estate-zoning-trees',{type:'geojson',data:data.trees});
    vector.addLayer({id:'estate-zoning-trees',type:'symbol',source:'estate-zoning-trees',minzoom:12,layout:{'text-field':'🌳','text-size':16,'text-allow-overlap':false}});
   }else vector.getSource('estate-zoning-trees').setData(data.trees);
-  ['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));
+  ['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&($('estateParcelVisibility')?.checked||estateProvinceScope?.active)?'visible':'none'));
   vector.setLayoutProperty('estate-zoning-trees','visibility',flags.boundary&&$('estateTreeVisibility')?.checked?'visible':'none');
  }
  if(raster){
   if(boundaryLayer)raster.removeLayer(boundaryLayer);
   if(ieatTreeRaster){raster.removeLayer(ieatTreeRaster);ieatTreeRaster=null}
   if(flags.boundary){
-   boundaryLayer=L.geoJSON(data.polygons,{renderer:L.canvas({padding:.3}),style:f=>({color:'#674188',weight:$('estateParcelVisibility')?.checked?1.2:0,opacity:.85,fill:true,fillColor:f.properties.ieat_color||'#674188',fillOpacity:.26}),onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);
+   boundaryLayer=L.geoJSON(data.polygons,{renderer:L.canvas({padding:.3}),style:f=>({color:'#674188',weight:($('estateParcelVisibility')?.checked||estateProvinceScope?.active)?1.2:0,opacity:.85,fill:true,fillColor:f.properties.ieat_color||'#674188',fillOpacity:.26}),onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);
    if($('estateTreeVisibility')?.checked&&raster.getZoom()>=12)ieatTreeRaster=L.geoJSON(data.trees,{pointToLayer:(f,p)=>L.marker(p,{interactive:false,icon:L.divIcon({className:'ieat-zoning-tree',html:'🌳',iconSize:[20,20],iconAnchor:[10,10]})})}).addTo(raster);
   }
  }
