@@ -534,7 +534,14 @@ function estateFloodPlan(name){
  const body=window.ieatEstatePlanPopup?.(name)||'';return body?'<details class="estate-plan-popup"><summary>ผังและข้อมูลรับมือน้ำท่วม ↗</summary>'+body+'</details>':'<p class="estate-plan-missing">ยังไม่มีผังรับมือน้ำท่วมของพื้นที่นี้ในระบบ</p>';
 }
 
-function showMapDetails(r,k){stopAerialTour();if(cleanDashboard)openPointPopup(r.lng??r.lon,r.lat,content(r,k),false,k==='camera'?r:null);else window.IEAT_MAP_DETAILS?.show(r,k)}
+function showMapDetails(r,k){
+ stopAerialTour();const lon=Number(r.lng??r.lon),lat=Number(r.lat);
+ if(!cleanDashboard){window.IEAT_MAP_DETAILS?.show(r,k);return}
+ if(!Number.isFinite(lon)||!Number.isFinite(lat))return;
+ // Clicking a station always centers it before showing a details popup.
+ if(k!=='estate'){if(vector)vector.easeTo({center:[lon,lat],zoom:Math.max(vector.getZoom(),11),duration:440});else raster?.setView([lat,lon],Math.max(raster.getZoom(),11),{animate:true})}
+ openPointPopup(lon,lat,content(r,k),false,k==='camera'?r:null);
+}
 function baseContent(r,k){
  if(k==='canal')return canalPopup(r);if(k==='water')return waterPopup(r);
  const fresh=old(r,k)?'ข้อมูลเก่า / เวลาไม่ผ่านเกณฑ์':'เวลาตรวจวัด '+(r.measured_at||'ไม่ระบุ')+' (ไทย)';
@@ -552,16 +559,35 @@ function dataPinHTML(r,k){
  const state=pointCondition(r,k),flow=r.discharge??r.flow,hasFlow=k==='water'&&flags.rings&&flow!=null&&Number.isFinite(Number(flow));
  return measurementShape(k,state.hex)+(hasFlow?'<span class="map-flow-reading" title="ปริมาณน้ำไหลผ่าน '+esc(flow)+' ลบ.ม./วินาที">'+ieatMeaningIcon('rings')+' Q '+fmt(flow)+'<small> ลบ.ม./วินาที</small></span>':'')+'<span class="fd-pin-name">'+esc(r.name||'')+'</span>';
 }
+function ieatStationGauge(r){
+ const wl=Number(r.wl),bank=Number(r.bank),ok=r.wl!=null&&Number.isFinite(wl),hasBank=r.bank!=null&&Number.isFinite(bank);
+ const high=ok?Math.max(wl,hasBank?bank:wl,1):5,low=ok?Math.min(0,wl,hasBank?bank:wl):0,range=Math.max(1,high-low),top=high+range*.22,bottom=low-range*.2,scale=v=>Math.max(8,Math.min(130,8+(top-v)/(top-bottom)*122)),waterY=ok?scale(wl):130,bankY=hasBank?scale(bank):null;
+ return '<svg class="ieat-gauge" viewBox="0 0 80 164" role="img" aria-label="มาตรวัดระดับน้ำปัจจุบัน"><rect x="21" y="8" width="37" height="124" rx="3" fill="#fff" stroke="#33485d" stroke-width="2"/><rect x="23" y="'+waterY.toFixed(1)+'" width="33" height="'+(130-waterY).toFixed(1)+'" fill="#2185D5"/>'+
+ Array.from({length:6},(_,i)=>{const y=12+i*23;return '<path d="M40 '+y+'h16" stroke="#93C5E9" stroke-width="1"/>'}).join('')+
+ (bankY!=null?'<path d="M9 '+bankY+'h60" stroke="#B30707" stroke-width="2.5"/><text x="71" y="'+(bankY-4)+'" fill="#B30707" font-size="8">ตลิ่ง</text>':'')+
+ '<text x="40" y="148" text-anchor="middle" fill="#536577" font-size="9">ม.รทก.</text></svg>';
+}
+function ieatStationTable(r,k){
+ const rows=k==='water'?[['ระดับน้ำ',r.wl==null?'ไม่มีข้อมูล':fmt(r.wl)+' ม.รทก.'],['ระดับตลิ่ง',r.bank==null?'ไม่มีข้อมูล':fmt(r.bank)+' ม.รทก.'],['ปริมาณน้ำไหลผ่าน',r.discharge==null?'ไม่มีข้อมูล':fmt(r.discharge)+' ลบ.ม./วินาที'],['แนวโน้ม',r.trend_text||'ไม่ระบุ'],['เวลาตรวจวัด',r.measured_at||'ไม่ระบุ'],['แหล่งข้อมูล',r.source_name||'RID / ThaiWater']]:[
+ ['ระดับน้ำในคลอง',r.wl==null?'ไม่มีข้อมูล':fmt(r.wl)+' ม.รทก.'],['ระดับน้ำฝั่งนอก',r.outer==null?'ไม่มีข้อมูล':fmt(r.outer)+' ม.รทก.'],['เขต',r.district||'ไม่ระบุ'],['เวลาตรวจวัด',r.measured_at||'ไม่ระบุ']];
+ return '<table class="ieat-station-table"><tbody>'+rows.map(([a,b])=>'<tr><th>'+esc(a)+'</th><td>'+esc(b)+'</td></tr>').join('')+'</tbody></table>';
+}
+function ieatStationContent(r,k){
+ const state=pointCondition(r,k),bank=Number(r.bank),wl=Number(r.wl),has=r.wl!=null&&r.bank!=null&&Number.isFinite(bank)&&Number.isFinite(wl);
+ const desc=has?(wl>=bank?'สูงกว่าตลิ่ง '+fmt(wl-bank)+' ม.':'ต่ำกว่าตลิ่ง '+fmt(bank-wl)+' ม.'):'ไม่สามารถเทียบระดับตลิ่งได้';
+ const history=k==='water'&&historyAvailable(r)?'<details class="station-history-disclosure"><summary>ดูกราฟระดับน้ำย้อนหลัง 2023–2026</summary><section class="station-history-inline" data-history-code="'+esc(whCode(r.oldcode||r.code||''))+'" data-history-bank="'+(Number.isFinite(bank)?esc(bank):'')+'"><div class="popup-history-years"></div><div class="popup-history-body">กำลังโหลดกราฟ…</div></section></details>':'';
+ return '<article class="popup ieat-station-popup"><header><small>'+(k==='water'?'สถานีระดับน้ำ':'คลองกรุงเทพมหานคร')+'</small><h3>'+esc([r.oldcode||r.code,r.name].filter(Boolean).join(' · '))+'</h3></header><div class="ieat-gauge-row">'+ieatStationGauge(r)+'<div class="ieat-station-reading"><span class="ieat-status-chip" style="--status:'+state.hex+'">'+esc(state.label)+'</span><small>'+esc(r.province||r.district||'')+'</small><strong>'+esc(desc)+'</strong><span>ระดับ '+(r.wl==null?'–':fmt(r.wl))+' ม.รทก.</span></div></div>'+ieatStationTable(r,k)+history+'</article>';
+}
 function content(r,k){
+ if(k==='water'||k==='canal')return ieatStationContent(r,k);
  if(!floodPinTypes[k])return baseContent(r,k);
  const t={...floodPinTypes[k],color:pointCondition(r,k).hex},title=esc([r.code,r.name].filter(Boolean).join(' · '));
  if(k==='camera')return '<article class="popup flood-card" style="--fc-color:'+t.color+'"><div data-camera-id="'+esc(r.id)+'"><div class="fc-preview fc-camera"><span class="fc-image-badge">ภาพล่าสุดจากต้นทาง</span><div class="fc-placeholder">'+cameraSvg+'<span>กำลังขอภาพ CCTV</span></div><img data-camera-image alt="ภาพ CCTV '+esc(r.name)+'" style="display:none"></div><div class="fc-title"><div><small>'+t.label+'</small><h3>'+title+'</h3></div><a href="https://telemetry.dwr.go.th/reportCctv" target="_blank" rel="noopener">เปิด ↗</a></div><div class="fc-caption"><p data-camera-time>กำลังโหลดภาพล่าสุด…</p><p data-camera-state></p><p>ภาพนิ่งที่ต้นทางบันทึก · ไม่ใช่วิดีโอสด</p><button type="button" data-camera-refresh="'+esc(r.id)+'">อัปเดตภาพ</button></div></div></article>';
  const value=k==='dam'?fmt(r.percent)+'%':fmt(r.wl)+' <small>ม.รทก.</small>';
- const sub=k==='dam'?'ปริมาณน้ำเทียบระดับเก็บกักปกติ':k==='canal'?'ระดับน้ำในคลอง':'ระดับน้ำตรวจวัด';
+ const sub=k==='dam'?'ปริมาณน้ำเทียบระดับเก็บกักปกติ':'ระดับน้ำตรวจวัด';
  const stamp=Number.isFinite(date(r.measured_at))?new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}):'ไม่ระบุเวลาตรวจวัด';
- return '<article class="popup flood-card" style="--fc-color:'+t.color+'"><div class="fc-preview fc-reading"><span class="fc-image-badge">'+t.label+'</span><div class="fc-reading-icon">'+(k==='dam'?damSvg:sensorSvg(k))+'</div><strong>'+value+'</strong><span>'+sub+'</span><div class="fc-wave"></div></div><div class="fc-title"><div><small>'+t.label+'</small><h3>'+title+'</h3></div></div><div class="fc-caption"><span class="fc-state-dot" style="background:'+color(r,k)+'"></span> '+(old(r,k)?'ข้อมูลเก่าหรือเวลาไม่ครบ · ':'ตรวจวัด ')+esc(stamp)+'</div><details class="fc-details"><summary>เปิดรายละเอียด'+(k==='water'&&historyAvailable(r)?' / กราฟย้อนหลัง':'')+' ▾</summary><div class="fc-detail-body">'+baseContent(r,k)+'</div></details></article>';
+ return '<article class="popup flood-card" style="--fc-color:'+t.color+'"><div class="fc-preview fc-reading"><span class="fc-image-badge">'+t.label+'</span><div class="fc-reading-icon">'+damSvg+'</div><strong>'+value+'</strong><span>'+sub+'</span><div class="fc-wave"></div></div><div class="fc-title"><div><small>'+t.label+'</small><h3>'+title+'</h3></div></div><div class="fc-caption"><span class="fc-state-dot" style="background:'+color(r,k)+'"></span> '+esc(stamp)+'</div><details class="fc-details"><summary>รายละเอียด</summary><div class="fc-detail-body">'+baseContent(r,k)+'</div></details></article>';
 }
-
 function waterLabel(r){const gap=Number(r.diff);return (r.code||r.name||'สถานี')+'\n'+(r.diff==null?'ไม่มีค่าเทียบตลิ่ง':(gap>=0?'สูงกว่าตลิ่ง':'ต่ำกว่าตลิ่ง')+'\n'+fmt(Math.abs(gap))+' ม.');}
 
 let estateDepth=45;
