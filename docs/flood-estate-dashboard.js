@@ -728,7 +728,7 @@ $('efFilter').onchange=()=>renderEstates();
 
  function renderReservoirs(){
   const list=$('efReservoirList');if(!list)return;
-  const latest=reservoirs.filter(r=>num(r.percent)!==null&&Number.isFinite(timestamp(r.measured_at))&&Date.now()-timestamp(r.measured_at)<=172800000&&timestamp(r.measured_at)<=Date.now()+300000);
+  const latest=reservoirs.filter(r=>num(r.capacity)>0&&num(r.percent)!==null&&Number.isFinite(timestamp(r.measured_at))&&Date.now()-timestamp(r.measured_at)<=172800000&&timestamp(r.measured_at)<=Date.now()+300000);
   let rows=filterWaterScope(latest).sort((a,b)=>Number(b.percent)-Number(a.percent));if(!provinceScope.active)rows=rows.slice(0,8);
   const panel=list.closest('.ef-reservoir-panel');if(panel)panel.hidden=rows.length===0;
   list.innerHTML=rows.length?waterPageRows('reservoir',rows).map(r=>{const p=num(r.percent),theme=waterCardTheme(p),color=theme.color,label=theme.label;return '<button type="button" class="ef-reservoir-row" data-water-theme="'+theme.key+'" style="--water-accent:'+color+'" data-high="'+(p>=80)+'" data-reservoir-id="'+esc(r.id)+'" '+(r.lat==null||r.lng==null?'disabled':'')+'><div><b>'+esc(r.name)+'</b><small>จ.'+esc(r.province)+' · อ.'+esc(r.district)+'</small></div><div class="ef-reservoir-percent">'+(p===null?'—':Math.round(p)+'%')+'<span style="background:'+color+'">'+label+'</span></div>'+storageScene(p,'reservoir',r.id)+distanceLabel(r)+'</button>'}).join(''):'<p>'+'ไม่พบข้อมูลอ่างเก็บน้ำในชุดข้อมูลต้นทาง'+'</p>';
