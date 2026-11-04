@@ -52,3 +52,61 @@
  }
  @media(prefers-reduced-motion:reduce) {#referenceRail .has-current-alert{animation:none!important}#referenceRail .reference-rail-modes>[data-section]{transition:none!important}}
 }
+
+/* In-place exhibition refinements. The rail, data column and live map retain their layout. */
+@layer floodMockupLayout {
+ #floodSectionPanel .ex-shared-estate{display:block;margin:0 0 16px;padding:12px;background:#f8f3fb;border-radius:12px;color:#52057f}
+ #floodSectionPanel .ex-shared-estate select{background:white}
+ #floodSectionPanel .ex-report-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;margin:12px 0}
+ #floodSectionPanel .ex-report-controls button{grid-column:1/-1;text-align:center;background:#52057f;color:white}
+ #floodSectionPanel input[type=date],#floodSectionPanel textarea{display:block;width:100%;font:inherit;margin-top:5px;border:1px solid #e1d4e9;border-radius:9px;padding:9px;background:white;color:#23192d;box-sizing:border-box}
+ #floodSectionPanel textarea{min-height:86px;resize:vertical}
+ #floodSectionPanel .ex-report-note{display:block;margin:14px 0}
+ #ieatCurrentReport{padding:18px;border:1px solid #e5d9ec;border-radius:16px;box-shadow:0 4px 16px #52057f0a;background:white}
+ #ieatCurrentReport header{padding-bottom:14px;border-bottom:1px solid #e8deef}
+ #ieatCurrentReport header p{color:#52057f;font-weight:600;margin:5px 0}
+ #ieatPrepSupplement{grid-column:1/-1;margin-top:16px!important;padding:18px!important;background:linear-gradient(145deg,#fff,#faf5fd)!important;border:1px solid #e5d7ee!important;border-radius:16px!important;box-shadow:0 4px 14px #52057f0a!important;color:#23192d}
+ #ieatPrepSupplement header h3{font-size:20px!important;margin:0!important;color:#2e1f54!important}
+ #ieatPrepSupplement header p{font-size:13px!important;margin:6px 0!important}
+ #ieatPrepSupplement section{margin:16px 0!important}
+ #ieatPrepSupplement h4{font-size:16px!important;margin:8px 0!important;color:#52057f!important}
+ #ieatPrepSupplement small{font-size:12px!important;color:#806c89!important}
+ #ieatPrepSupplement details{font-size:12px;padding:10px;background:#f3eaf9;border-radius:10px}
+ #ieatPrepSupplement summary{cursor:pointer;font-weight:600}
+ .ex-report-table{overflow-x:auto;margin:10px 0}
+ .ex-report-table table{border-collapse:collapse;width:100%;font:400 13px/1.6 Sarabun,sans-serif;table-layout:auto}
+ .ex-report-table th,.ex-report-table td{padding:10px 9px!important;vertical-align:top;text-align:left;border-bottom:1px solid #e9e0ef!important;overflow-wrap:anywhere}
+ .ex-report-table th{background:#f4ebf9!important;color:#52057f;font-weight:600}
+ .ex-report-table tbody tr:nth-child(even){background:#fcf9fe}
+ .ex-demo-tag{display:inline-block!important;background:#f3e7fa!important;border:1px solid #dfc8eb!important;color:#702f90!important;border-radius:20px!important;padding:4px 10px!important;font:500 11px/1.5 Sarabun,sans-serif!important;white-space:normal}
+ .ex-demo-card{padding:14px!important;background:linear-gradient(145deg,#fff,#faf5fd)!important;border:1px solid #e4d4ee!important;border-radius:14px!important;box-shadow:0 3px 10px #52057f09!important}
+ .ex-demo-card h2{margin-top:12px!important}.ex-demo-card small{color:#806b8d;font-size:11px!important}
+ #ieatCanalSample{margin-top:10px!important}
+ .ex-canal-sample{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;align-items:center;margin:8px 0}
+ .ex-canal-sample svg{width:62px;height:142px}
+ .ex-canal-sample div{display:flex;flex-direction:column;gap:6px}
+ .ex-canal-sample b{font-size:14px!important;font-weight:500}
+ .ex-canal-sample strong{font-size:27px!important;color:#2e1f54!important}
+ .ex-canal-sample span,.ex-canal-sample small{font-size:12px!important}
+ #ieatDashboardCamera{position:absolute;z-index:1200;bottom:18px;left:64px;right:auto;max-width:calc(100% - 80px);display:flex;align-items:center;gap:5px;padding:6px;background:#ffffffeb;backdrop-filter:blur(14px);border:1px solid #e3d5ec;border-radius:13px;box-shadow:0 4px 20px #32134d1c;font:12px/1.5 Sarabun,sans-serif}
+ #ieatDashboardCamera .ex-camera-label{color:#765787;font-size:11px;padding:0 5px;white-space:nowrap}
+ #ieatDashboardCamera button{font:500 12px/1.5 Sarabun,sans-serif;color:#52057f;background:#f6edf9;padding:7px 10px;border:0;border-radius:9px;cursor:pointer;white-space:nowrap}
+ #ieatDashboardCamera button[aria-pressed=true]{color:white;background:#52057f;box-shadow:0 2px 7px #52057f24}
+ #ieatDashboardCamera button:focus-visible{outline:2px solid #52057f;outline-offset:2px}
+ #ieatDashboardCamera[data-mode=2d] [data-live-camera=left],#ieatDashboardCamera[data-mode=2d] [data-live-camera=right]{display:none}
+ #ieatDashboardCamera button:disabled{opacity:.6;cursor:default}
+ #warning #estateFocusDashboard .io-mini-stats>[role=button]{background:linear-gradient(145deg,#fff,#fdfaff)!important;box-shadow:0 4px 12px #52057f0d!important}
+ @media(max-width:650px){#ieatDashboardCamera{left:56px;bottom:12px;max-width:calc(100% - 66px);flex-wrap:wrap}#ieatDashboardCamera .ex-camera-label{display:none}#ieatDashboardCamera button{font-size:11px;padding:6px 8px}}
+}
+@media print{
+ @page{size:A4 portrait;margin:14mm}
+ body[data-flood-section=report]>:not(#floodSectionPanel){display:none!important}
+ body[data-flood-section=report]::before,body[data-flood-section=report]::after{display:none!important}
+ body[data-flood-section=report],body[data-flood-section=report] #floodSectionPanel{position:static!important;inset:auto!important;width:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;background:white!important;font-size:11px!important}
+ body[data-flood-section=report] #floodSectionPanel{display:block!important;padding:0!important;z-index:auto!important}
+ #floodSectionPanel>[data-report-control],#floodSectionPanel>.ex-shared-estate,#floodSectionPanel>h1,#floodSectionPanel>.section-subtitle{display:none!important}
+ #ieatCurrentReport{border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important}
+ #ieatCurrentReport h2{font-size:20px!important}
+ #ieatCurrentReport th,#ieatCurrentReport td{font-size:11px!important;padding:6px!important}
+ #ieatCurrentReport tr{break-inside:avoid}#ieatCurrentReport a{color:#52057f;text-decoration:none;overflow-wrap:anywhere}
+}

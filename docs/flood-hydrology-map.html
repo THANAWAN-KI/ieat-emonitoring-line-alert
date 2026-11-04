@@ -1598,6 +1598,16 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
 }
 window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
+ if(d.type==='dashboard-camera'){
+ if(!ready)return;
+ if(vector){
+  if(d.action==='init'){autoFit=false;vector.dragRotate.enable();vector.touchZoomRotate.enableRotation();vector.easeTo({pitch:55,duration:650});}
+  if(d.action==='reset'){stopAerialTour();vector.easeTo({pitch:55,bearing:-15,duration:700});}
+  if(d.action==='orbit'){if(d.playing)startAerialTour();else stopAerialTour();}
+  if(d.action==='left'||d.action==='right'){stopAerialTour();vector.easeTo({bearing:vector.getBearing()+(d.action==='left'?-45:45),pitch:55,duration:650});}
+ } 
+ parent.postMessage({type:'dashboard-camera-status',mode:vector?'3d':'2d',playing:aerialPlaying},location.origin);return;
+ }
  if(d.type==='booth-camera'){
  if(!ready)return;
  const reply=()=>parent.postMessage({type:'booth-camera-status',ready:true,mode:vector?'3d':'2d',playing:aerialPlaying},location.origin);
@@ -1666,6 +1676,7 @@ const aerialHint=document.createElement('div');aerialHint.id='aerialTourHint';ae
 let aerialPlaying=false,aerialFrame=null,aerialTimer=null,aerialLaunch=null,aerialMap=null,aerialHintTimer=null;
 function aerialNotice(text){aerialHint.textContent=text;aerialHint.hidden=false;clearTimeout(aerialHintTimer);aerialHintTimer=setTimeout(()=>aerialHint.hidden=true,6500)}
 function stopAerialTour(){
+ parent.postMessage({type:'dashboard-camera-status',mode:vector?'3d':'2d',playing:false},location.origin);
  if(new URLSearchParams(location.search).get('booth')==='1')parent.postMessage({type:'booth-camera-status',ready:true,mode:vector?'3d':'2d',playing:false},location.origin);
  aerialPlaying=false;cancelAnimationFrame(aerialFrame);clearTimeout(aerialTimer);
  if(aerialMap&&aerialLaunch)aerialMap.off('moveend',aerialLaunch);aerialLaunch=null;
@@ -1678,7 +1689,7 @@ function startAerialTour(){
  const estate=estateProvinceScope?.estate,isExample=String(estateProvinceScope?.name||'').includes('บางปะอิน');
  const map=vector||raster;if(!estate&&map.getZoom()<10){aerialNotice('เลือกนิคมฯ หรือซูมเข้าพื้นที่ก่อนเริ่มชมมุมสูง');return}const center=isExample?[100.585786,14.19889]:estate?[Number(estate.lon??estate.lng),Number(estate.lat)]:vector?[map.getCenter().lng,map.getCenter().lat]:[map.getCenter().lng,map.getCenter().lat];
  if(!center.every(Number.isFinite))return;
- aerialPlaying=true;aerialMap=map;aerialButton.setAttribute('aria-pressed','true');aerialButton.innerHTML='<span aria-hidden="true">Ⅱ</span> หยุดชมมุมสูง';
+ aerialPlaying=true;parent.postMessage({type:'dashboard-camera-status',mode:vector?'3d':'2d',playing:true},location.origin);aerialMap=map;aerialButton.setAttribute('aria-pressed','true');aerialButton.innerHTML='<span aria-hidden="true">Ⅱ</span> หยุดชมมุมสูง';
  const manual=event=>{if(event.originalEvent)stopAerialTour()};
  if(!map.__ieatAerialManualBound){map.on('dragstart',stopAerialTour);map.on('zoomstart',manual);map.getContainer().addEventListener('pointerdown',stopAerialTour,{passive:true});map.getContainer().addEventListener('wheel',stopAerialTour,{passive:true});if(vector)map.on('rotatestart',manual);map.__ieatAerialManualBound=true}
  if(vector){
