@@ -356,7 +356,7 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
 const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:true,dam:false,camera:false,estate:false,gistda:false,boundary:true,satellite:false,radar:true,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:true,dam:false,camera:false,estate:false,gistda:false,boundary:true,satellite:false,radar:true,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=true;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
 
 if(cleanDashboard){
  const zoomTools=document.createElement('div');zoomTools.id='dashboardMapZoom';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่');
@@ -639,10 +639,10 @@ function syncGlobalBuildings(){
  vector.setLayoutProperty('context-buildings','visibility',flags.boundary&&$('estateView3d').getAttribute('aria-pressed')==='true'&&!local?'visible':'none');
 }
 // Only verified zoning attributes are colored; unclassified parcels remain neutral.
-const ieatZoneColors={industrial:'#8D3BB7',green:'#8ACD68',water:'#48B9E8',commercial:'#EC4B64',support:'#F5D85B',utility:'#CDD5DC',unknown:'#E9E2F0'};
+const ieatZoneColors={industrial:'#8D3BB7',green:'#8ACD68',water:'#48B9E8',commercial:'#EC4B64',support:'#F5D85B',utility:'#CDD5DC',unknown:'#D8C7EB'};
 const ieatZoneNames={industrial:'เขตอุตสาหกรรม',green:'พื้นที่สีเขียว',water:'แหล่งน้ำ / บ่อหน่วงน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',utility:'ถนน / สาธารณูปโภค',unknown:'ไม่มีข้อมูลแบ่งเขตประกอบการ'};
 function ieatZoneType(p){
- const keys=Object.keys(p||{}).filter(k=>/^(?:land.?use|zone|zoning|ประเภท(?:การใช้ประโยชน์|พื้นที่|เขต)|เขตประกอบการ|การใช้ประโยชน์ที่ดิน|ผังการใช้ที่ดิน|ลักษณะการใช้ที่ดิน|ประเภทการใช้ที่ดิน)/i.test(k));
+ const keys=Object.keys(p||{}).filter(k=>/^(?:land.?use|zone|zoning|use_type|landtype|land_type|ประเภท(?:การใช้ประโยชน์|พื้นที่|เขต|ที่ดิน)|เขตประกอบการ|การใช้ประโยชน์ที่ดิน|การใช้ที่ดิน|ผังการใช้ที่ดิน|ลักษณะการใช้ที่ดิน|ประเภทการใช้ที่ดิน)/i.test(k));
  const v=keys.map(k=>String(p[k]??'')).filter(x=>x&&!/^(?:null|undefined|ไม่ระบุ|-|\d+)$/i.test(x)).join(' ');
  if(!v)return 'unknown';
  if(/พื้นที่สีเขียว|เขียว|สวนสาธารณะ|green|park|buffer|อนุรักษ์|ป่าไม้/i.test(v))return 'green';
@@ -672,7 +672,7 @@ function syncBoundaries(){
  if(vector&&ready){
   if(!vector.getSource('estate-boundaries')){
    vector.addSource('estate-boundaries',{type:'geojson',data:data.polygons});
-   vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':['get','ieat_color'],'fill-extrusion-height':.8,'fill-extrusion-base':0,'fill-extrusion-opacity':['case',['==',['get','ieat_zone'],'unknown'],.22,.64]}},'discharge-ring');
+   vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':['get','ieat_color'],'fill-extrusion-height':.8,'fill-extrusion-base':0,'fill-extrusion-opacity':['case',['==',['get','ieat_zone'],'unknown'],.58,.78]}},'discharge-ring');
    vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':['interpolate',['linear'],['zoom'],6,.9,12,1.5,16,2],'line-opacity':.88}},'discharge-ring');
    vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)});
   }
@@ -688,7 +688,7 @@ function syncBoundaries(){
   if(boundaryLayer)raster.removeLayer(boundaryLayer);
   if(ieatTreeRaster){raster.removeLayer(ieatTreeRaster);ieatTreeRaster=null}
   if(flags.boundary){
-   boundaryLayer=L.geoJSON(data.polygons,{renderer:L.canvas({padding:.3}),style:f=>{const unknown=f.properties.ieat_zone==='unknown';return {color:'#674188',weight:$('estateParcelVisibility')?.checked?1.3:0,opacity:.86,fill:true,fillColor:f.properties.ieat_color,fillOpacity:unknown?.22:.62}},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();
+   boundaryLayer=L.geoJSON(data.polygons,{renderer:L.canvas({padding:.3}),style:f=>{const unknown=f.properties.ieat_zone==='unknown';return {color:'#674188',weight:$('estateParcelVisibility')?.checked?1.3:0,opacity:.86,fill:true,fillColor:f.properties.ieat_color,fillOpacity:unknown?.56:.78}},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();
    if($('estateTreeVisibility')?.checked&&raster.getZoom()>=12)ieatTreeRaster=L.geoJSON(data.trees,{pointToLayer:(f,p)=>L.marker(p,{interactive:false,icon:L.divIcon({className:'ieat-zoning-tree',html:'🌳',iconSize:[20,20],iconAnchor:[10,10]})})}).addTo(raster);
   }
  }
