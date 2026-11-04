@@ -253,7 +253,7 @@
 #estateFocusDashboard .ef-related-dams,#estateFocusDashboard .ef-reservoir-panel{padding:16px;background:#FFFFFF;border:1px solid #FFFFFF;border-radius:18px;box-shadow:0 3px 12px #0D47A108}
 #estateFocusDashboard .ef-related-dams>h2,#estateFocusDashboard .ef-reservoir-panel>h2{background:#FFFFFF;color:#0D47A1!important;border-radius:10px;padding:12px;font-size:18px;margin:0 0 12px}
 #estateFocusDashboard #efRelatedDams,#estateFocusDashboard #efReservoirList{max-height:none;overflow:visible;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-#estateFocusDashboard .ef-dam-flow-panel{grid-column:1/-1;order:1;min-width:0}
+#estateFocusDashboard .ef-dam-flow-panel{grid-column:1/-1;order:5;min-width:0}
  #estateFocusDashboard .ef-dam-flow-panel[hidden]{display:none}
  #estateFocusDashboard .ef-dam-flow-panel .dam-flow-compact{max-width:420px;margin:8px 0 0!important}
  #estateFocusDashboard .ef-dam-flow-panel .dam-flow-compact>div{position:relative;min-width:0}
