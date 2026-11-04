@@ -1455,6 +1455,10 @@ function watchEvidenceReason(s){
  const level=Number(s.level),bank=Number(s.bank),has=s.level!=null&&s.bank!=null&&Number.isFinite(level)&&Number.isFinite(bank);
  return '<span class="ieat-watch-reason-title">สถานีระดับน้ำเข้าเกณฑ์เฝ้าระวัง</span><span>ระดับน้ำ '+esc(s.level??'ไม่ระบุ')+' ม.รทก.'+(has?' · '+(level>=bank?'สูงกว่าตลิ่ง ':'ต่ำกว่าตลิ่ง ')+esc(Math.abs(level-bank).toFixed(2))+' ม.':'')+'</span>';
 }
+function compactWatchIcon(kind){
+ const paths={estate:'<path d="M3 21V9l6 3V9l6 3V4h4v17M3 21h18M7 16v2m4-2v2m6-2v2"/>',station:'<circle cx="12" cy="12" r="3"/><path d="M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8"/>',water:'<path d="M3 8q3-3 6 0t6 0t6 0M3 13q3-3 6 0t6 0t6 0M3 18q3-3 6 0t6 0t6 0"/>'};
+ return '<svg class="compact-watch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[kind]+'</svg>';
+}
 function renderWatchEvidence(){
  let panel=document.getElementById('watchEvidence');if(!watchMapData){panel?.remove();return}
  if(!panel){panel=document.createElement('section');panel.id='watchEvidence';document.body.append(panel)}
@@ -1463,10 +1467,10 @@ function renderWatchEvidence(){
  const water=distinct('water'),rain=distinct('rain');
  const estatetext=estates.length.toLocaleString('th-TH');
  panel.innerHTML='<header class="ieat-watch-head"><div><strong>'+esc(watchMapData.title)+'</strong><small>พื้นที่ที่พบสถานีตรวจวัดเข้าเกณฑ์เฝ้าระวัง · ไม่ใช่การยืนยันน้ำท่วม</small></div><button type="button" data-watch-close aria-label="ปิดผลการเฝ้าระวัง">×</button></header>'+
- '<div class="ieat-watch-overview"><div><span class="ieat-summary-symbol" aria-hidden="true">▥</span><span>นิคมฯ ที่ต้องเฝ้าระวัง</span><strong>'+estatetext+' <small>แห่ง</small></strong></div><div><span class="ieat-summary-symbol" aria-hidden="true">◉</span><span>สถานีที่เกี่ยวข้อง</span><strong>'+new Set(stations.map(s=>s.lat+':'+s.lon+':'+s.name)).size.toLocaleString('th-TH')+' <small>สถานี</small></strong></div></div>'+
+ '<div class="ieat-watch-overview"><div><span class="ieat-summary-symbol" aria-hidden="true">'+compactWatchIcon('estate')+'</span><span>นิคมฯ ที่ต้องเฝ้าระวัง</span><strong>'+estatetext+' <small>แห่ง</small></strong></div><div><span class="ieat-summary-symbol" aria-hidden="true">'+compactWatchIcon('station')+'</span><span>สถานีที่เกี่ยวข้อง</span><strong>'+new Set(stations.map(s=>s.lat+':'+s.lon+':'+s.name)).size.toLocaleString('th-TH')+' <small>สถานี</small></strong></div></div>'+
  '<div class="watch-layer-options">'+(water?'<label><input type="checkbox" data-watch-layer="water" '+(watchMapData.showWater!==false?'checked':'')+'> สถานีน้ำสูง '+water+' จุด</label>':'')+(rain?'<label><input type="checkbox" data-watch-layer="rain" '+(watchMapData.showRain!==false?'checked':'')+'> สถานีฝนตกหนัก '+rain+' จุด</label>':'')+'</div>'+
- '<div class="watch-evidence-list">'+(estates.length?estates.map((e,index)=>'<details class="ieat-watch-estate" '+(index===0?'open':'')+'><summary><span class="ieat-watch-estate-glyph" aria-hidden="true">▥</span><span class="ieat-watch-estate-title"><b>'+esc(e.name)+'</b><small>'+(e.rainCount?'ฝน '+e.rainCount+' สถานี':'')+(e.waterCount?' · น้ำ '+e.waterCount+' สถานี':'')+'</small></span></summary><div class="ieat-watch-estate-body"><button type="button" data-watch-estate="'+esc(e.id)+'">ดูตำแหน่งบนแผนที่ ↗</button>'+
- e.stations.map(st=>'<article class="ieat-watch-station"><div class="ieat-watch-reason">'+(st.kind==='rain'?watchRainSvg():'<span class="ieat-watch-water-icon" aria-hidden="true">≋</span>')+'<span>'+watchEvidenceReason(st)+'</span></div><div class="ieat-watch-station-row"><span><b>'+esc(st.name)+'</b><small>ตรวจวัด '+esc(st.observed)+'</small></span><span class="ieat-watch-distance">'+Number(st.distanceKm).toFixed(2)+' กม.<small>ระยะเส้นตรง</small></span></div></article>').join('')+'</div></details>').join(''):'<p class="ieat-watch-empty">ไม่มีนิคมฯ เข้าเกณฑ์ในข้อมูลที่ตรวจสอบได้</p>')+'</div>'+
+ '<div class="watch-evidence-list">'+(estates.length?estates.map((e,index)=>'<details class="ieat-watch-estate" '+(index===0?'open':'')+'><summary><span class="ieat-watch-estate-glyph" aria-hidden="true">'+compactWatchIcon('estate')+'</span><span class="ieat-watch-estate-title"><b>'+esc(e.name)+'</b><small>'+(e.rainCount?'ฝน '+e.rainCount+' สถานี':'')+(e.waterCount?' · น้ำ '+e.waterCount+' สถานี':'')+'</small></span></summary><div class="ieat-watch-estate-body"><button type="button" data-watch-estate="'+esc(e.id)+'">ดูตำแหน่งบนแผนที่ ↗</button>'+
+ e.stations.map(st=>'<article class="ieat-watch-station"><div class="ieat-watch-reason">'+(st.kind==='rain'?watchRainSvg():compactWatchIcon('water'))+'<span>'+watchEvidenceReason(st)+'</span></div><div class="ieat-watch-station-row"><span><b>'+esc(st.name)+'</b><small>ตรวจวัด '+esc(st.observed)+'</small></span><span class="ieat-watch-distance">'+Number(st.distanceKm).toFixed(2)+' กม.<small>ระยะเส้นตรง</small></span></div></article>').join('')+'</div></details>').join(''):'<p class="ieat-watch-empty">ไม่มีนิคมฯ เข้าเกณฑ์ในข้อมูลที่ตรวจสอบได้</p>')+'</div>'+
  '<footer>ระยะเส้นประเป็นระยะทางตรง ไม่ใช่เส้นทางน้ำไหล · ผลคัดกรองไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ</footer>';
 }
 function showWatchMapData(data){
@@ -2305,3 +2309,39 @@ document.addEventListener('ieat-map-ready',compactCredits);
 compactCredits();let tries=0;const t=setInterval(()=>{compactCredits();if(++tries>60)clearInterval(t)},500);
 })();
 </script>
+
+<style id="compact-watch-evidence-blue">
+html body #watchEvidence{width:min(360px,calc(100vw - 24px))!important;max-height:min(460px,55dvh)!important;top:58px!important;right:14px!important;display:flex!important;flex-direction:column!important;background:#fff!important;backdrop-filter:none!important;border:0!important;border-radius:20px!important;box-shadow:0 6px 24px #22344a26!important;color:#404040!important}
+html body #watchEvidence .ieat-watch-head{flex-shrink:0;padding:12px 14px!important;background:#fff!important;gap:8px!important}
+html body #watchEvidence .ieat-watch-head strong{font-size:16px!important;color:#303841!important;font-weight:600!important}
+html body #watchEvidence .ieat-watch-head small{font-size:10px!important;color:#858585!important;line-height:1.4!important}
+html body #watchEvidence [data-watch-close]{background:#edf2ff!important;color:#2f68f4!important;border:0!important;min-width:28px!important;width:28px!important;min-height:28px!important;height:28px!important}
+html body #watchEvidence .ieat-watch-overview{flex-shrink:0;padding:0 14px 8px!important;gap:8px!important}
+html body #watchEvidence .ieat-watch-overview>div{display:grid!important;grid-template-columns:28px 1fr!important;gap:2px 6px!important;padding:8px!important;border:0!important;border-radius:12px!important;background:#f3f6ff!important;box-shadow:none!important}
+html body #watchEvidence .ieat-summary-symbol{grid-row:1/3!important;display:grid!important;place-items:center!important;width:28px!important;height:30px!important;background:transparent!important;color:#2f68f4!important}
+html body #watchEvidence .ieat-watch-overview span{font-size:10px!important;color:#707782!important}
+html body #watchEvidence .ieat-watch-overview strong{font-size:19px!important;color:#2f68f4!important}
+html body #watchEvidence .compact-watch-icon{width:22px!important;height:22px!important;color:#2f68f4!important}
+html body #watchEvidence .watch-layer-options{flex-shrink:0;padding:0 14px 8px!important;background:#fff!important}
+html body #watchEvidence .watch-layer-options label{padding:4px 8px!important;border:0!important;border-radius:20px!important;background:#edf2ff!important;color:#456397!important;font-size:11px!important}
+html body #watchEvidence input{accent-color:#2f68f4!important}
+html body #watchEvidence .watch-evidence-list{min-height:0!important;overflow-y:auto!important;padding:0 14px!important;scrollbar-color:#bfd3fa transparent!important}
+html body #watchEvidence .ieat-watch-estate{margin:0 0 8px!important;border:0!important;border-radius:12px!important;box-shadow:none!important;background:#f8faff!important}
+html body #watchEvidence .ieat-watch-estate>summary{padding:9px!important;gap:7px!important}
+html body #watchEvidence .ieat-watch-estate-glyph{width:28px!important;height:28px!important;flex-basis:28px!important;background:#edf2ff!important;border-radius:8px!important}
+html body #watchEvidence .ieat-watch-estate-title b{font-size:13px!important;color:#303841!important}
+html body #watchEvidence .ieat-watch-estate-title small{font-size:10px!important;color:#858585!important}
+html body #watchEvidence .ieat-watch-estate-body{padding:0 9px 8px!important}
+html body #watchEvidence [data-watch-estate]{min-height:28px!important;padding:4px 8px!important;border:0!important;background:#edf2ff!important;color:#2f68f4!important;font-size:11px!important;border-radius:8px!important}
+html body #watchEvidence .ieat-watch-station{margin:6px 0 0!important;padding:8px!important;background:#fff!important;border:0!important;border-radius:9px!important;box-shadow:none!important}
+html body #watchEvidence .ieat-watch-reason{grid-template-columns:24px 1fr!important;gap:6px!important;padding:0!important;background:transparent!important}
+html body #watchEvidence .ieat-watch-reason-title{font-size:11px!important;color:#456397!important;font-weight:500!important}
+html body #watchEvidence .ieat-watch-reason>span:last-child{font-size:10px!important;gap:1px!important}
+html body #watchEvidence .ieat-watch-reason .ieat-overcast-rain{width:24px!important;height:24px!important}
+html body #watchEvidence .ieat-watch-station-row{padding-top:6px!important;gap:6px!important}
+html body #watchEvidence .ieat-watch-station-row b{font-size:12px!important;color:#303841!important}
+html body #watchEvidence .ieat-watch-station-row small{font-size:10px!important;color:#858585!important}
+html body #watchEvidence .ieat-watch-distance{padding:0!important;background:transparent!important;font-size:15px!important;color:#2f68f4!important}
+html body #watchEvidence footer{flex-shrink:0;padding:8px 14px!important;font-size:9px!important;line-height:1.4!important;color:#858585!important;background:#fff!important}
+@media(max-width:650px){html body #watchEvidence{top:auto!important;bottom:12px!important;right:8px!important;width:min(360px,calc(100vw - 16px))!important;max-height:48dvh!important}}
+</style>
