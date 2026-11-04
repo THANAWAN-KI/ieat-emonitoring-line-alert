@@ -1783,7 +1783,18 @@ body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,bo
 .station-popup-details dt{color:#6c7b8b;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#25364a;font-size:12px;font-weight:600}
 .station-popup-footer{margin-top:12px;color:#6c7b8b;font-size:11px;line-height:1.7}.station-popup-footer a{color:#245c9d;font-weight:600}.station-popup-stale{color:#b34437;font-weight:600}
 .station-popup .station-history-disclosure{margin-top:10px}
-</style><script src="flood-map-details.js?v=20261104-anchored-details"></script><script src="flood-preparedness-overlay.js?v=20261104-outline-pins"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script></body></html>
+</style><script src="flood-map-details.js?v=20261104-anchored-details"></script><script src="flood-preparedness-overlay.js?v=20261104-outline-pins"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script>
+<style id="ieat-hide-estate-map-labels-20261104">
+/* Hide only persistent estate-name labels; estate pins and click popups remain active. */
+html body #mapStage .estate-pin .estate-name,
+html body #mapStage .clean-estate-point .estate-name,
+html body #mapStage .marker-icon .estate-name,
+html body #mapStage .sensor-marker .estate-name,
+html body #mapStage .estate-label,
+html body #mapStage .watch-estate-pin .estate-name {display:none!important;visibility:hidden!important}
+</style>
+
+</body></html>
 
 
 
@@ -2060,13 +2071,4 @@ html body .flood-data-pin>.ieat-map-symbol[data-type="camera"] .ieat-meaning-svg
  stroke:#FFFFFF!important;color:#FFFFFF!important
 }
 html body #mapLayers .layer-swatch[data-kind="camera"]{color:#C66A0B!important}
-</style>
-<style id="ieat-hide-estate-map-labels-20261104">
-/* Hide only persistent estate-name labels; estate pins and click popups remain active. */
-html body #mapStage .estate-pin .estate-name,
-html body #mapStage .clean-estate-point .estate-name,
-html body #mapStage .marker-icon .estate-name,
-html body #mapStage .sensor-marker .estate-name,
-html body #mapStage .estate-label,
-html body #mapStage .watch-estate-pin .estate-name {display:none!important;visibility:hidden!important}
 </style>
