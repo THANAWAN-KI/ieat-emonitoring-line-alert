@@ -124,3 +124,12 @@ function mount(){
 function boot(){if(mount())return;const o=new MutationObserver(()=>{if(mount())o.disconnect()});o.observe(document.documentElement,{childList:true,subtree:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+/* Transparent water-data quality and booth layout enhancements (kept separate for maintainability). */
+;(()=>{'use strict';
+ if(document.getElementById('ieatExpoQualityScript'))return;
+ const script=document.createElement('script');
+ script.id='ieatExpoQualityScript';
+ script.src='flood-expo-quality.js?v=20261104-quality-v1';
+ script.defer=true;
+ document.head.appendChild(script);
+})();
