@@ -759,8 +759,10 @@ $('efFilter').onchange=()=>renderEstates();
  let damPage=0,damPageSignature='';
  function renderRelatedDams(){
   const host=$('efRelatedDams');if(!host)return;
-  let rows=filterWaterScope(relatedDams);if(!provinceScope.active)rows=rows.slice(0,6);
-  document.dispatchEvent(new CustomEvent('ieat-dam-flow-data',{detail:rows}));
+  const scopedDams=filterWaterScope(relatedDams);
+  // Ranking must use all scoped records; the detail carousel is intentionally capped.
+  document.dispatchEvent(new CustomEvent('ieat-dam-flow-data',{detail:scopedDams}));
+  const rows=provinceScope.active?scopedDams:scopedDams.slice(0,6);
   const signature=(provinceScope.name||'all')+'|'+rows.map(r=>r.id).join('|');if(signature!==damPageSignature){damPage=0;damPageSignature=signature}damPage=Math.max(0,Math.min(damPage,rows.length-1));
 
   host.innerHTML=rows.length?rows.slice(damPage,damPage+1).map(r=>{
