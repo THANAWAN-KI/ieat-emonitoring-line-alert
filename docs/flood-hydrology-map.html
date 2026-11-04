@@ -345,6 +345,11 @@ const faonamBase='https://faonam.com';
 const overlayTime=v=>new Date(v).toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
 function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBase)throw Error('แหล่งภาพไม่ตรงกับ Faonam');return u.href.replace(/%7B/gi,'{').replace(/%7D/gi,'}');}
 
+$('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
+const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
+const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:false,gistda:false,boundary:false,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+
 if(cleanDashboard){
  const zoomTools=document.createElement('div');zoomTools.id='dashboardMapZoom';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่');
  zoomTools.innerHTML='<button type="button" aria-label="ซูมเข้า">+</button><button type="button" aria-label="ซูมออก">−</button>';
@@ -352,11 +357,6 @@ if(cleanDashboard){
  zoomTools.lastElementChild.onclick=()=> (vector||raster)?.zoomOut();
  $('mapCompass').after(zoomTools);
 }
-$('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
-const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
-const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:false,gistda:false,boundary:false,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
-
 let historyOnly=false;
 function date(v){let s=String(v||'').replace(' ','T');if(/^\d{4}-\d{2}-\d{2}$/.test(s))s+='T00:00:00';if(s&&!/(Z|[+-]\d{2}:?\d{2})$/.test(s))s+='+07:00';return Date.parse(s)}
 function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-date(r.measured_at);return !Number.isFinite(a)||a< -300000||a>(k==='dam'?48:k==='rain'?24:6)*3600000||Boolean(r.stale)}
