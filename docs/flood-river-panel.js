@@ -374,7 +374,7 @@ function apply(){
  const root=document.getElementById('rpRankingsAfterWarning');
  if(!root)return;
  const set=(el,values)=>{if(!el)return;for(const [name,value] of Object.entries(values))if(el.style.getPropertyValue(name)!==value||el.style.getPropertyPriority(name)!=='important')el.style.setProperty(name,value,'important')};
- set(root,{'display':'grid','grid-template-columns':'minmax(0,1fr)','gap':'12px','width':'100%','min-width':'0','align-items':'stretch'});
+ set(root,{'display':'grid','grid-template-columns':'repeat(2,minmax(0,1fr))','gap':'12px','width':'100%','min-width':'0','align-items':'stretch'});
  root.querySelectorAll('.rp-new-section').forEach(section=>set(section,{'display':'block','width':'100%','min-width':'0','height':'auto','padding':'14px','background':'#FFFFFF','border':'1px solid #E4EBF3','border-radius':'14px','box-shadow':'none'}));
  for(const id of ['rpDamRanks','rpFlowRanks']){
   const host=document.getElementById(id);
