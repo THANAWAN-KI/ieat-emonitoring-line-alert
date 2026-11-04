@@ -151,7 +151,7 @@
   overlay.addEventListener('click',event=>{const row=event.target.closest('[data-alert-index]');if(row){const r=alertRows[Number(row.dataset.alertIndex)],api=map();if(r&&api)api.showAt(r.lng,r.lat,'<h3>'+esc(r.name)+'</h3>'+api.pointContent(r,r.kind),true);return;}const reportChoice=event.target.closest('[data-report-tab]')?.dataset.reportTab;if(reportChoice){reportTab=reportChoice;lastContent='';render();overlay.scrollTop=0;return;}const page=event.target.closest('[data-chart-page]')?.dataset.chartPage;if(page){chartPage=page==='first'?0:page==='last'?1:chartPage+(page==='next'?1:-1);lastContent='';render();return;}const pointKind=event.target.closest('[data-report-kind]')?.dataset.reportKind;if(pointKind){const api=map(),p=api?.points?.().find(p=>p.kind===pointKind);if(p&&api)api.showAt(p.lng,p.lat,'<h3>'+esc(p.name)+'</h3>'+api.pointContent(p,p.kind),true);return;}const action=event.target.closest('[data-section-action]')?.dataset.sectionAction;if(action==='choose-estate'){show('overview');$('ioEstatePicker')?.click();}if(action==='print'){reportTab='document';lastContent='';render();window.print();}if(action==='layers')$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-reference-map-tools',action:'layers'},location.origin);if(action==='fullscreen')$('efMapFullscreen')?.click();if(action==='overview')show('overview');if(action==='legend'){const legend=mapDoc()?.getElementById('mapLegend');if(legend){legend.open=true;legend.scrollIntoView({block:'nearest'});}}});
   const rail=$('referenceRail');if(rail&&!$('referenceMenuToggle')){const menu=document.createElement('button');menu.id='referenceMenuToggle';menu.type='button';menu.setAttribute('aria-label','เปิดหรือปิดแผงข้อมูล');menu.setAttribute('aria-expanded','true');menu.innerHTML=lineIcon('<path d="M4 6h16M4 12h16M4 18h16"/>');menu.onclick=()=>{const opened=document.body.dataset.referencePanel!=='closed';document.body.dataset.referencePanel=opened?'closed':'open';menu.setAttribute('aria-expanded',String(!opened));const custom=!['overview','preparedness'].includes(active);overlay.hidden=opened||!custom;const pane=$('floodInformationPane');pane.inert=opened||custom;pane.setAttribute('aria-hidden',String(opened||custom));};rail.append(menu);}
   if(!$('referencePanelSurface')){const surface=document.createElement('div');surface.id='referencePanelSurface';surface.setAttribute('aria-hidden','true');document.body.append(surface);}
-  if(!$('referenceViewTabs')){const tabs=document.createElement('nav');tabs.id='referenceViewTabs';tabs.setAttribute('aria-label','ส่วนข้อมูลแดชบอร์ด');tabs.innerHTML=[['overview','ภาพรวม'],['alerts','แจ้งเตือน'],['preparedness','เตรียมรับมือ'],['report','รายงาน']].map(([key,label])=>'<button type="button" data-structure-section="'+key+'" aria-selected="'+(key===active)+'">'+icons[key]+'<span>'+label+'</span></button>').join('');tabs.addEventListener('click',event=>{const button=event.target.closest('[data-structure-section]');if(button)show(button.dataset.structureSection);});document.body.append(tabs);}
+  if(!$('referenceViewTabs')){const tabs=document.createElement('nav');tabs.id='referenceViewTabs';tabs.setAttribute('aria-label','ส่วนข้อมูลแดชบอร์ด');tabs.innerHTML=[['stations','สถานีระดับน้ำ'],['dams','เขื่อนและอ่างเก็บน้ำ'],['canals','คลอง'],['diagram','ผังน้ำและสถานีตามสายน้ำ']].map(([key,label])=>'<button type="button" data-water-category="'+key+'" aria-selected="'+(key==='stations')+'"><span>'+label+'</span></button>').join('');tabs.addEventListener('click',event=>{const button=event.target.closest('[data-water-category]');if(!button)return;show('overview');document.body.dataset.waterCategory=button.dataset.waterCategory;tabs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',String(b===button)));const pane=$('floodInformationPane');if(pane)pane.scrollTop=0;});document.body.dataset.waterCategory='stations';document.body.append(tabs);}
   show('overview');render();supplement();$('estateFocusMap')?.addEventListener('load',()=>{cameraInitialized=false;});setInterval(()=>{if(!document.hidden){render();supplement();}},1800);return true;
  }
  function boot(){if(mount())return;const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.body,{childList:true,subtree:true});}
@@ -160,3 +160,86 @@
 
 
 
+
+/* Approved water-category tabs, geographic search, and an orbit control on the map rail. */
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const style=document.createElement('style');
+style.textContent=`
+@layer floodReferenceStructure {
+html body #referenceViewTabs#referenceViewTabs{grid-template-columns:repeat(2,minmax(0,1fr))!important;border-radius:24px!important;gap:5px!important}
+html body #referenceViewTabs#referenceViewTabs button{font-size:14px!important;white-space:normal!important;line-height:1.35!important;min-height:40px!important;padding:8px!important}
+html body #warning #estateFocusDashboard .ef-data-column{padding-top:150px!important}
+html body:not([data-flood-section=overview]) #referenceViewTabs{display:none!important}
+html body #referencePanelSurface{display:none!important}
+html body[data-flood-section=overview] #floodInformationPane#floodInformationPane>:is(#rpRankingsAfterWarning,.ef-warning){display:none!important}
+html body[data-water-category=stations] #floodInformationPane>:is(#floodDamsSection,.ef-canal-panel,#floodWaterDiagram,#efDamFlowPanel),
+html body[data-water-category=dams] #floodInformationPane>:is(#floodStationsSection,.ef-canal-panel,#floodWaterDiagram),
+html body[data-water-category=canals] #floodInformationPane>:is(#floodStationsSection,#floodDamsSection,#floodWaterDiagram,#efDamFlowPanel),
+html body[data-water-category=diagram] #floodInformationPane>:is(#floodStationsSection,#floodDamsSection,.ef-canal-panel,#efDamFlowPanel){display:none!important}
+}
+#approvedAreaSearch{position:fixed;left:calc(var(--ref-left,108px) + var(--ref-panel,400px) + 20px);top:110px;z-index:2300;width:min(330px,calc(100vw - 100px));padding:20px;border-radius:22px;background:#fff;box-shadow:0 6px 26px #22344a24;font:15px/1.5 Sarabun,sans-serif;color:#404040}
+#approvedAreaSearch[hidden]{display:none!important}
+#approvedAreaSearch label{display:block;margin-bottom:14px}
+#approvedAreaSearch select{display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #e3e6ec;border-radius:12px;background:white;font:inherit;color:#555}
+#approvedAreaSearch .area-actions{display:flex;gap:10px}
+#approvedAreaSearch button{flex:1;padding:11px 14px;border:1px solid #e3e6ec;border-radius:30px;background:#fff;font:inherit;cursor:pointer}
+#approvedAreaSearch button[type=submit]{background:#2f68f4;border:0;color:#fff}
+#approvedAreaSearch output{display:block;margin:8px 0;font-size:12px;color:#667085}
+#approvedAreaSearch .area-close{position:absolute;right:10px;top:6px;border:0;padding:2px 6px}
+#approvedAreaSearch h2{font:500 16px Sarabun,sans-serif;margin:0 0 15px}
+@media(max-width:900px){#approvedAreaSearch{left:auto;right:78px;top:100px}}
+`;
+document.head.append(style);
+let geoPromise,provinces=[],districts=[],subdistricts=[];
+const name=r=>typeof r?.name==='object'?r.name.th:r?.name_th||r?.name||'';
+const setOptions=(el,rows,label)=>{el.replaceChildren(new Option(label,''),...rows.filter(r=>!r.deleted_at).map(r=>new Option(name(r),String(r.id))));el.disabled=rows.length===0;};
+async function loadGeo(){
+ if(!geoPromise)geoPromise=Promise.all(['province','district','sub_district'].map(kind=>fetch('https://cdn.jsdelivr.net/gh/kongvut/thai-province-data@master/api/latest/'+kind+'.json',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error('โหลดรายชื่อพื้นที่ไม่สำเร็จ');return r.json()}))).catch(e=>{geoPromise=null;throw e});
+ [provinces,districts,subdistricts]=await geoPromise;
+}
+function mount(){
+ if(!$('referenceViewTabs'))return;
+ if(!$('approvedAreaSearch')){
+ const form=document.createElement('form');form.id='approvedAreaSearch';form.hidden=true;form.setAttribute('aria-label','ค้นหาพื้นที่');
+ form.innerHTML='<button type="button" class="area-close" aria-label="ปิดค้นหาพื้นที่">×</button><h2>ค้นหาพื้นที่</h2><label>จังหวัด<select id="approvedProvince" required><option value="">กำลังโหลดรายชื่อจังหวัด…</option></select></label><label>อำเภอ<select id="approvedDistrict" disabled><option value="">เลือกอำเภอ</option></select></label><label>ตำบล<select id="approvedSubdistrict" disabled><option value="">เลือกตำบล</option></select></label><output aria-live="polite"></output><div class="area-actions"><button type="reset">รีเซ็ต</button><button type="submit">แสดงข้อมูล</button></div>';
+ document.body.append(form);
+ const p=$('approvedProvince'),d=$('approvedDistrict'),t=$('approvedSubdistrict'),out=form.querySelector('output');
+ form.querySelector('.area-close').onclick=()=>{form.hidden=true};
+ p.onchange=()=>{setOptions(d,districts.filter(r=>String(r.province_id)===p.value),'เลือกอำเภอ');setOptions(t,[],'เลือกตำบล')};
+ d.onchange=()=>setOptions(t,subdistricts.filter(r=>String(r.district_id??r.amphure_id)===d.value),'เลือกตำบล');
+ form.onreset=()=>{setOptions(p,provinces,'เลือกจังหวัด');setOptions(d,[],'เลือกอำเภอ');setOptions(t,[],'เลือกตำบล');out.textContent='';};
+ form.onsubmit=async e=>{
+ e.preventDefault();const submit=form.querySelector('[type=submit]');submit.disabled=true;out.textContent='กำลังค้นหาตำแหน่งพื้นที่…';
+ try{
+ const pn=name(provinces.find(r=>String(r.id)===p.value)),dn=name(districts.find(r=>String(r.id)===d.value)),tn=name(subdistricts.find(r=>String(r.id)===t.value));
+ const address=[tn&&'ตำบล'+tn,dn&&'อำเภอ'+dn,'จังหวัด'+pn,'ประเทศไทย'].filter(Boolean).join(' ');
+ const url=new URL('https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates');url.search=new URLSearchParams({f:'json',SingleLine:address,outFields:'Match_addr',maxLocations:'1',sourceCountry:'THA'}).toString();
+ const response=await fetch(url,{signal:AbortSignal.timeout(15000)});if(!response.ok)throw Error();const data=await response.json(),candidate=data.candidates?.[0];if(!candidate?.location||candidate.score<75)throw Error();
+ const api=$('estateFocusMap')?.contentWindow?.IEATPreparednessMap?.();if(!api?.ready)throw Error();
+ const zoom=tn?13:dn?11:8;
+ if(api.vector)api.vector.flyTo({center:[candidate.location.x,candidate.location.y],zoom,duration:700});
+ else api.raster.setView([candidate.location.y,candidate.location.x],zoom);
+ out.textContent='แผนที่: '+[tn,dn,pn].filter(Boolean).join(' · ')+' · ข้อมูลยังใช้ขอบเขตนิคมฯ ที่เลือก';form.hidden=true;
+ }catch(_){out.textContent='ยังค้นหาตำแหน่งไม่สำเร็จ กรุณาลองอีกครั้ง';}finally{submit.disabled=false}
+ };
+ }
+ const frame=$('estateFocusMap');let doc;try{doc=frame?.contentDocument}catch(_){return}const rail=doc?.getElementById('rightMapToolbar');if(!rail)return;
+ if(!doc.getElementById('approvedRotate360')){
+ const b=doc.createElement('button');b.id='approvedRotate360';b.type='button';b.title='หมุนอัตโนมัติ 360°';b.setAttribute('aria-label','หมุนอัตโนมัติ 360 องศา');b.setAttribute('aria-pressed','false');b.innerHTML='<span style="font:500 15px Sarabun,sans-serif">↻<br>360°</span>';
+ const old=doc.getElementById('aerialTourButton');
+ b.onclick=()=>old?.click();const mapApi=frame?.contentWindow?.IEATPreparednessMap?.();if(mapApi?.raster&&!mapApi?.vector){b.disabled=true;b.title='การหมุน 360° ต้องใช้แผนที่ 3 มิติ';}
+ const sync=()=>{const playing=old?.getAttribute('aria-pressed')==='true';b.setAttribute('aria-pressed',String(playing));b.title=playing?'หยุดหมุน 360°':'หมุนอัตโนมัติ 360°';b.style.setProperty('background',playing?'#2f68f4':'#fff','important');b.style.setProperty('color',playing?'white':'#797979','important')};
+ if(old)new MutationObserver(sync).observe(old,{attributes:true,attributeFilter:['aria-pressed']});sync();
+ const support=rail.querySelector('[data-map-action=support]');rail.insertBefore(b,support);
+ }
+ const search=rail.querySelector('[data-map-action=search]');
+ if(search&&!search.dataset.areaSearch){
+ search.dataset.areaSearch='true';search.title='ค้นหาจังหวัด อำเภอ ตำบล';search.setAttribute('aria-label',search.title);
+ search.addEventListener('click',async event=>{event.stopImmediatePropagation();const form=$('approvedAreaSearch');form.hidden=!form.hidden;if(form.hidden)return;const out=form.querySelector('output');try{if(!provinces.length){out.textContent='กำลังโหลดรายชื่อพื้นที่…';await loadGeo();setOptions($('approvedProvince'),provinces,'เลือกจังหวัด');out.textContent='';}}catch(_){out.textContent='โหลดรายชื่อพื้นที่ไม่สำเร็จ กดปุ่มค้นหาอีกครั้งเพื่อลองใหม่';}},{capture:true});
+ }
+}
+mount();const timer=setInterval(()=>{if(!document.hidden)mount()},1000);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('approvedAreaSearch'))$('approvedAreaSearch').hidden=true});
+})();
