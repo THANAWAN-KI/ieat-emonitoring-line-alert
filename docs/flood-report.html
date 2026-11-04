@@ -2269,8 +2269,18 @@ function align(){
  const prep=document.body.dataset.floodView==='preparedness';
  for(const id of ['expoIdentity','expoPresent','expoBoothActions']){const e=document.getElementById(id);if(e)e.style.setProperty('display','none','important');}
  const ranks=document.getElementById('rpRankingsAfterWarning');if(ranks)ranks.style.setProperty('display',prep?'none':'grid','important');
- document.querySelectorAll('[data-ex-status]').forEach(e=>{e.style.removeProperty('color');e.style.removeProperty('-webkit-text-fill-color');});
+ document.querySelectorAll('[data-ex-status]').forEach(e=>{if(e.dataset.exLabel!==e.textContent)e.dataset.exLabel=e.textContent;});
 }
 align();setInterval(()=>{if(!document.hidden)align()},700);
 })();
 </script>
+<style id="exhibition-badge-contrast">
+@layer ieatExhibitionTheme {
+html body #warning #estateFocusDashboard [data-ex-status][data-ex-label] {font-size:0!important}
+html body #warning #estateFocusDashboard [data-ex-status][data-ex-label]::after {content:attr(data-ex-label)!important;font:500 12px/1.5 Sarabun,sans-serif!important;color:#596273!important;-webkit-text-fill-color:#596273!important;white-space:normal!important}
+html body #warning #estateFocusDashboard [data-ex-status=red][data-ex-label]::after {color:#a31c25!important;-webkit-text-fill-color:#a31c25!important}
+html body #warning #estateFocusDashboard [data-ex-status=green][data-ex-label]::after {color:#21643c!important;-webkit-text-fill-color:#21643c!important}
+html body #warning #estateFocusDashboard [data-ex-status=amber][data-ex-label]::after {color:#825600!important;-webkit-text-fill-color:#825600!important}
+html body #warning #estateFocusDashboard .ef-canal-card>b {white-space:normal!important;overflow:visible!important;text-overflow:clip!important;grid-column:1/-1!important}
+}
+</style>
