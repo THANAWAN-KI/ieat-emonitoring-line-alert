@@ -584,8 +584,8 @@ function syncEstateOuter(){
 function highlightEstateParcel(lon,lat){
  function inRing(r){let inside=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const a=r[i],b=r[j];if((a[1]>lat)!==(b[1]>lat)&&lon<(b[0]-a[0])*(lat-a[1])/(b[1]-a[1])+a[0])inside=!inside}return inside}
  const selected=boundaryData.features.find(f=>{const g=f.geometry;return (g.type==='Polygon'?[g.coordinates]:g.coordinates).some(rings=>inRing(rings[0])&&!rings.slice(1).some(inRing))}),data={type:'FeatureCollection',features:selected?[selected]:[]};
- if(vector){if(!vector.getSource('estate-selection')){vector.addSource('estate-selection',{type:'geojson',data});vector.addLayer({id:'estate-selection-line',type:'line',source:'estate-selection',paint:{'line-color':'#4f88b2','line-width':2}})}else vector.getSource('estate-selection').setData(data)}
- if(raster){if(estateSelectionRaster)raster.removeLayer(estateSelectionRaster);estateSelectionRaster=L.geoJSON(data,{style:{color:'#4f88b2',weight:2,fill:false}}).addTo(raster)}
+ if(vector){if(!vector.getSource('estate-selection')){vector.addSource('estate-selection',{type:'geojson',data});vector.addLayer({id:'estate-selection-line',type:'line',source:'estate-selection',paint:{'line-color':'#8c99a5','line-width':2}})}else vector.getSource('estate-selection').setData(data)}
+ if(raster){if(estateSelectionRaster)raster.removeLayer(estateSelectionRaster);estateSelectionRaster=L.geoJSON(data,{style:{color:'#8c99a5',weight:2,fill:false}}).addTo(raster)}
 }
 
 function drawRasterIllustrations(){
@@ -719,7 +719,8 @@ function syncPinLegend(){
   const swatch=option.querySelector('.layer-swatch');
   if(!swatch||swatch.dataset.modernIcon)continue;
   const kind=option.dataset.layerOption;
-  swatch.innerHTML=kind==='estate'?estateSvg:mapSymbol(kind==='rings'?'flow':kind);
+  swatch.innerHTML=kind==='rings'?'<span class="map-flow-legend" aria-hidden="true">Q</span>':kind==='estate'?estateSvg:mapSymbol(kind);
+  if(kind==='rings'){swatch.title='ปริมาตรน้ำที่ผ่านสถานีต่อวินาที';const title=option.querySelector('.layer-option-name');if(title&&!title.querySelector('small'))title.insertAdjacentHTML('beforeend','<small class="flow-unit-note">ลบ.ม./วินาที</small>')}
   swatch.dataset.modernIcon='true';
  }
  for(const [kind,t] of Object.entries(floodPinTypes)){
@@ -750,7 +751,7 @@ function render(){
   displayPoints.forEach(f=>{const r=f.properties,k=r.kind;
    if(k==='water'&&flags.rings&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#B30707':'#2196F3',weight:2,fillColor:r.diff>=0?'#B30707':'#90CAF9',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
    if(k==='water'&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#B30707',weight:1.5,fillColor:'#B30707',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
-   const marker=floodPinTypes[k]?L.marker([r.lat,r.lng],{zIndexOffset:500,title:floodPinTypes[k].label+' · '+r.name,icon:L.divIcon({className:'flood-data-pin',iconSize:[36,48],iconAnchor:[18,46],tooltipAnchor:[0,-42],popupAnchor:[0,-42],html:dataPinHTML(r,k)})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[42,56],iconAnchor:[21,54],tooltipAnchor:[0,-45],html:estateSvg+'<span class="estate-name">'+esc(r.name)+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:5,color:'#FFFFFF',weight:1.8,fillColor:r.color,fillOpacity:.95});
+   const marker=floodPinTypes[k]?L.marker([r.lat,r.lng],{zIndexOffset:500,title:floodPinTypes[k].label+' · '+r.name,icon:L.divIcon({className:'flood-data-pin',iconSize:[36,48],iconAnchor:[18,46],tooltipAnchor:[0,-42],popupAnchor:[0,-42],html:dataPinHTML(r,k)})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[36,44],iconAnchor:[18,42],tooltipAnchor:[0,-45],html:estateSvg+'<span class="estate-name">'+esc(r.name)+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:5,color:'#FFFFFF',weight:1.8,fillColor:r.color,fillOpacity:.95});
    marker.bindTooltip(esc(r.name||''),{permanent:false,direction:'top',offset:[0,-38]}).addTo(groups.points);marker.on('click',()=>showMapDetails(r,k));
   });
   if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#2196F3',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
@@ -1065,7 +1066,7 @@ function drawWatchMap(){
  function pin(coords,label,html,color,station,kind){
   const glyph=kind==='rain'?mapSymbol('rain'):measurementShape('water',color);
   if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35;cursor:pointer';if(station){el.className='watch-data-glyph';el.innerHTML=glyph}else{el.className='estate-pin';el.style.cssText='cursor:pointer';el.innerHTML=estateSvg+'<span class="estate-name">'+esc(label)+'</span>'}const marker=new maplibregl.Marker({element:el,anchor:station?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
-  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:'',iconSize:[34,34],iconAnchor:[17,17],html:'<span class="watch-data-glyph" style="width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35">'+glyph+'</span>'}):L.divIcon({className:'estate-pin',iconSize:[42,56],iconAnchor:[21,54],html:estateSvg+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
+  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:'',iconSize:[34,34],iconAnchor:[17,17],html:'<span class="watch-data-glyph" style="width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35">'+glyph+'</span>'}):L.divIcon({className:'estate-pin',iconSize:[36,44],iconAnchor:[18,42],html:estateSvg+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
  }
  estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#713b91',false);e.stations.forEach(s=>{
   const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
@@ -1501,4 +1502,4 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 </style><style>
 .watch-data-glyph .map-measure-symbol{position:static!important;width:32px!important;height:42px!important;transform:translateY(-8px)}
 .flood-cluster-symbol>.map-measure-symbol{position:static!important;width:28px!important;height:36px!important}
-</style>
+</style><style>.map-flow-legend{display:grid;place-items:center;width:24px;height:24px;border:1.5px solid #579db8;border-radius:50%;color:#245e78;font:600 15px/1 Sarabun,sans-serif;background:#edf8fc}.flow-unit-note{display:block;font:400 10px/1.4 Sarabun,sans-serif;color:#64748b}</style>
