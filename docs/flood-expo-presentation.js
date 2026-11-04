@@ -5,7 +5,7 @@ function mount(){
  if(document.getElementById('expoIdentity'))return true;
  const brand=document.createElement('div');brand.id='expoIdentity';brand.innerHTML='<span class="expo-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><title>open-flood</title><rect width="37" height="37" x="5.5" y="5.5" fill="none" stroke="#2A75D3" stroke-linecap="round" stroke-linejoin="round" rx="4" ry="4"/><path fill="none" stroke="#2A75D3" stroke-linecap="round" stroke-linejoin="round" d="M14.75 5.5v37M24 5.5v37m9.25-37v37m9.25-27.75h-37m37 9.25h-37m37 9.25h-37"/></svg></span><div><h1>ติดตามสถานการณ์น้ำในนิคมอุตสาหกรรม</h1></div>';bar.prepend(brand);
  const button=document.createElement('button');button.type='button';button.id='expoPresent';button.title='นำเสนอเต็มจอ';button.setAttribute('aria-label','เปิดหรือปิดการนำเสนอเต็มหน้าจอ');button.innerHTML=(window.IEAT_ICONS?.svg('expand')||'')+'<span>นำเสนอเต็มจอ</span>';
- button.onclick=async()=>{if(document.body.classList.contains('expo-presentation')){document.body.classList.remove('expo-presentation');button.querySelector('span').textContent='นำเสนอเต็มจอ';button.setAttribute('aria-pressed','false');return}try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){document.body.classList.add('expo-presentation');button.querySelector('span').textContent='ออกจากโหมดนำเสนอ';button.setAttribute('aria-pressed','true');button.title='โหมดนำเสนอ · ใช้ปุ่มเต็มจอของอุปกรณ์เพื่อซ่อนแถบเบราว์เซอร์'}};bar.append(button);
+ button.onclick=async()=>{if(document.fullscreenElement){await document.exitFullscreen();document.body.classList.remove('expo-presentation');button.querySelector('span').textContent='นำเสนอเต็มจอ';button.setAttribute('aria-pressed','false');return}if(document.body.classList.contains('expo-presentation')){document.body.classList.remove('expo-presentation');button.querySelector('span').textContent='นำเสนอเต็มจอ';button.setAttribute('aria-pressed','false');return}try{await document.documentElement.requestFullscreen();document.body.classList.add('expo-presentation');button.querySelector('span').textContent='ออกจากโหมดนำเสนอ';button.setAttribute('aria-pressed','true')}catch(e){document.body.classList.add('expo-presentation');button.querySelector('span').textContent='ออกจากโหมดนำเสนอ';button.setAttribute('aria-pressed','true')}};bar.append(button);
  document.addEventListener('fullscreenchange',()=>button.setAttribute('aria-pressed',String(Boolean(document.fullscreenElement))));
  const overview=col.querySelector('.flood-overview');if(overview)col.prepend(overview);
  return true;
@@ -44,7 +44,7 @@ function setAttract(on){
 }
 function activity(){
  last=Date.now();if(attract)setAttract(false);
- clearTimeout(idle);idle=setTimeout(()=>{if(!document.hidden&&Date.now()-last>=90000&&document.activeElement?.tagName!=='INPUT')setAttract(true)},90000);
+ clearTimeout(idle);idle=setTimeout(()=>{if(!document.hidden&&Date.now()-last>=90000&&!['INPUT','TEXTAREA','IFRAME'].includes(document.activeElement?.tagName))setAttract(true)},90000);
 }
 function install(){
  const bar=$('floodModeBar'),col=document.querySelector('#estateFocusDashboard .ef-data-column');
