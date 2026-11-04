@@ -1073,6 +1073,12 @@ function openPreparednessPoint(key){
  const r=f.properties,k=r.kind,[lon,lat]=f.geometry.coordinates;
  openPointPopup(lon,lat,content(r,k),true,k==='camera'?r:null);
 }
+let selectedEstateExtent=null;
+async function loadSelectedExtent(name){
+ selectedEstateExtent=null;
+ const label=String(name||'').replace(/^(สำนักงาน)?นิคมอุตสาหกรรม|^ท่าเรืออุตสาหกรรม/g,'').trim();if(!label)return;
+ try{const q=new URLSearchParams({where:"นิคมอุตสาหกรรม LIKE '%"+label.replace(/'/g,"''")+"%'",returnExtentOnly:'true',outSR:'4326',f:'json'});const r=await fetch(boundaryService+'/query?'+q,{signal:AbortSignal.timeout(15000)});const d=await r.json();if(estateProvinceScope?.name!==name||!d.extent||![d.extent.xmin,d.extent.xmax,d.extent.ymin,d.extent.ymax].every(Number.isFinite))return;selectedEstateExtent=d.extent;const e=estateProvinceScope.estate;if(e)focusWithEstate(Number(e.lon??e.lng),Number(e.lat));}catch{}
+}
 function distanceFromEstate(lon,lat){
  const e=estateProvinceScope?.estate;if(!e)return NaN;
  const rad=Math.PI/180,a=Number(e.lat)*rad,b=lat*rad,dy=b-a,dx=(lon-Number(e.lon??e.lng))*rad;
@@ -1081,7 +1087,7 @@ function distanceFromEstate(lon,lat){
 function focusWithEstate(lon,lat){
  stopAerialTour();autoFit=false;
  const e=estateProvinceScope?.active?estateProvinceScope.estate:null;
- if(e){const x=Number(e.lon??e.lng),y=Number(e.lat),west=Math.min(lon,x-.025),east=Math.max(lon,x+.025),south=Math.min(lat,y-.025),north=Math.max(lat,y+.025);
+ if(e){const x=Number(e.lon??e.lng),y=Number(e.lat),west=Math.min(lon,selectedEstateExtent?.xmin??x-.025),east=Math.max(lon,selectedEstateExtent?.xmax??x+.025),south=Math.min(lat,selectedEstateExtent?.ymin??y-.025),north=Math.max(lat,selectedEstateExtent?.ymax??y+.025);
   if(vector)vector.fitBounds([[west,south],[east,north]],{padding:70,maxZoom:13,pitch:0,duration:500});
   else raster?.fitBounds([[south,west],[north,east]],{padding:[60,60],maxZoom:13});
   queueBoundaries();
@@ -1128,6 +1134,7 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-province-scope'){
  const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
  if(changed){clearWatchMap();preparednessPopup?.remove()}estateProvinceScope=d;
+ if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
  if(cleanDashboard){
  const active=!!(d.active&&d.estate);
  Object.assign(flags,{estate:active,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:false,radar:true,gistda:false,satellite:active});
