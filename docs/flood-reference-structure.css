@@ -1,0 +1,77 @@
+/* Reference structure: compact floating panel, persistent tabs, Kanit throughout. */
+@layer floodReferenceStructure {
+ html,html body,html body *,html body *::before,html body *::after{font-family:"Kanit",sans-serif!important;font-synthesis:none!important}
+ html body #warning #estateFocusDashboard :is(h1,h2,h3,h4),html body #floodSectionPanel :is(h1,h2,h3,h4){font-weight:600!important;letter-spacing:0!important}
+ html body #warning #estateFocusDashboard :is(#floodPageTitle,.ex-prep-head h2),html body #floodSectionPanel h1{font-size:24px!important;line-height:1.4!important}
+ html body #warning #estateFocusDashboard :is(.rp-stations-title,.ef-panel>h2,#rpRankingsAfterWarning h3,.ex-card h3),html body #floodSectionPanel h2{font-size:20px!important;line-height:1.5!important;font-weight:600!important}
+ #referencePanelSurface{display:none;pointer-events:none}
+ html body #referenceViewTabs{position:fixed!important;left:calc(var(--ref-left) + 12px)!important;top:44px!important;width:calc(var(--ref-panel) - 24px)!important;min-height:56px!important;z-index:1860!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:stretch!important;gap:2px!important;padding:5px!important;background:#eaf5fa!important;border:0!important;border-radius:32px!important;box-shadow:none!important;box-sizing:border-box!important}
+ html body #referenceViewTabs button{display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;padding:8px 5px!important;border:0!important;border-radius:28px!important;background:transparent!important;color:#109dc0!important;font:400 16px/1.5 "Kanit",sans-serif!important;white-space:nowrap!important;cursor:pointer!important;min-width:0!important;box-shadow:none!important}
+ html body #referenceViewTabs button[aria-selected=true]{background:#109dc0!important;color:white!important}
+ html body #referenceViewTabs button svg{width:21px!important;height:21px!important;flex-shrink:0!important}
+ html body #referenceViewTabs button:focus-visible{outline:3px solid #78cde0!important;outline-offset:3px!important}
+ html body[data-report-format=summary] #floodSectionPanel>.ref-report-segments{display:none!important}
+ html body[data-flood-section=report][data-report-format=summary] #floodSectionPanel>h1{display:none!important}
+ html body #floodSectionPanel .ex-shared-estate{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:0 2px!important;margin:0 0 8px!important;background:transparent!important;border-radius:0!important;font-size:15px!important;color:#777!important}
+ html body #floodSectionPanel .ex-shared-estate strong{font-weight:400!important;line-height:1.5!important}
+ html body #floodSectionPanel .ex-shared-estate .section-action{display:inline-flex!important;width:auto!important;flex-shrink:0!important;align-items:center!important;justify-content:center!important;padding:5px 10px!important;margin:0!important;background:#f1f7fa!important;border-radius:20px!important;font-size:12px!important;line-height:1.5!important;color:#109dc0!important}
+ html body #floodSectionPanel .section-subtitle{font-size:12px!important;line-height:1.6!important;margin:6px 0 20px!important;color:#999!important}
+ html body #floodSectionPanel .ref-chart-card{border-radius:26px!important;padding:25px 26px!important;margin-bottom:22px!important;background:#fff!important;box-shadow:0 2px 7px #0000000d!important}
+ html body #floodSectionPanel .ref-chart-card h2{font-size:20px!important;font-weight:600!important;line-height:1.6!important;gap:5px!important}
+ html body #floodSectionPanel .ref-chart-card h2 strong{font-weight:500!important}
+ html body #floodSectionPanel .ref-chart-caption{font-size:12px!important;line-height:1.65!important;font-weight:300!important;color:#929292!important}
+ html body #floodSectionPanel .ref-chart-card p:not(.ref-chart-caption){font-size:16px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-bar-row{grid-template-columns:92px minmax(0,1fr) 44px!important;gap:10px!important;min-height:53px!important;font-size:14px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-bar-row strong{font-size:13px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-bar-axis{grid-template-columns:92px minmax(0,1fr) 44px!important;gap:10px!important;font-size:12px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-chart-pager{gap:8px!important;margin:22px 0 10px!important}
+ html body #floodSectionPanel .ref-chart-pager button{width:36px!important;height:40px!important;font-size:18px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-chart-pager span{font-size:15px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-donut-layout{grid-template-columns:minmax(120px,1fr) minmax(135px,1fr)!important;gap:22px!important;margin:22px 0!important}
+ html body #floodSectionPanel .ref-chart-legend>div{font-size:15px!important;gap:9px!important;font-weight:300!important}
+ html body #floodSectionPanel .ref-chart-legend b{font-weight:400!important}
+ html body #floodSectionPanel :is(.ref-donut-number,.ref-donut-unit){display:none!important}
+ html body #floodSectionPanel .ref-donut-number{font-family:"Kanit",sans-serif!important;font-weight:500!important}
+ html body #floodSectionPanel .ref-donut-unit{font-family:"Kanit",sans-serif!important;font-weight:300!important}
+ @media(min-width:901px){
+  :root{--ref-left:108px!important;--ref-rail:84px!important;--expo-rail:84px!important;--ref-panel:clamp(360px,calc((100vw - 144px)*.32),580px)!important;--ref-top:24px!important}
+  html body #referencePanelSurface{display:block!important;position:fixed!important;left:24px!important;top:24px!important;bottom:24px!important;width:calc(var(--ref-left) + var(--ref-panel) - 24px)!important;border:0!important;border-radius:34px!important;background:white!important;box-shadow:0 4px 24px #26354815!important;z-index:1100!important}
+  html body #referenceRail{left:24px!important;top:24px!important;bottom:24px!important;width:84px!important;background:transparent!important;z-index:1900!important}
+  html body #referenceRail .reference-rail-modes{left:0!important;width:84px!important;gap:16px!important}
+  html body #referenceRail #referenceMenuToggle{left:16px!important;top:14px!important;width:52px!important}
+  html body #warning #estateFocusDashboard .ef-data-column{position:fixed!important;left:var(--ref-left)!important;top:24px!important;bottom:24px!important;width:var(--ref-panel)!important;height:calc(100dvh - 48px)!important;max-height:calc(100dvh - 48px)!important;padding:100px 12px 24px!important;grid-template-columns:minmax(0,1fr)!important;gap:18px!important;border:0!important;border-radius:0 34px 34px 0!important;background:white!important;z-index:1200!important;box-sizing:border-box!important;overflow-y:auto!important;scrollbar-width:thin!important;scrollbar-color:#c7c7c7 transparent!important}
+  html body #warning #estateFocusDashboard .ef-data-column>*{grid-column:1/-1!important}
+  html body #warning #estateFocusDashboard .ef-map-column{left:calc(var(--ref-left) + var(--ref-panel) + 12px)!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:100dvh!important;border:0!important;border-radius:0!important;z-index:1!important;box-shadow:none!important}
+  html body #floodSectionPanel{left:var(--ref-left)!important;top:24px!important;bottom:24px!important;width:var(--ref-panel)!important;height:calc(100dvh - 48px)!important;padding:100px 12px 24px!important;border:0!important;border-radius:0 34px 34px 0!important;background:white!important;z-index:1800!important;box-sizing:border-box!important;scrollbar-color:#c7c7c7 transparent!important}
+  html body #warning #estateFocusDashboard .io-mini-stats{gap:7px!important}
+  html body #warning #estateFocusDashboard .io-mini-stats>[role=button],html body #warning #estateFocusDashboard .io-mini-stats>[role=button]:first-child{min-height:92px!important;padding:12px 9px!important;background:#f0f8fb!important;box-shadow:none!important;border-radius:17px!important}
+  html body #warning #estateFocusDashboard .io-mini-stats :is(b,strong),html body #warning #estateFocusDashboard .io-mini-stats>[role=button]:first-child :is(b,strong){font-size:31px!important;font-weight:500!important;color:#109dc0!important;-webkit-text-fill-color:#109dc0!important}
+  html body #warning #estateFocusDashboard .io-mini-stats :is(span,.io-stat-copy span),html body #warning #estateFocusDashboard .io-mini-stats>[role=button]:first-child span{font-size:12px!important;font-weight:300!important;color:#7e8790!important;-webkit-text-fill-color:#7e8790!important}
+  html body #warning #estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel,#floodDamsSection,#efDamFlowPanel,#floodWaterDiagram,#rpRankingsAfterWarning>section,.ex-card){padding:22px!important;background:white!important;border-radius:26px!important;box-shadow:0 2px 7px #0000000d!important}
+  html body #warning #estateFocusDashboard #ieatOverviewFilter{grid-template-columns:minmax(0,1fr) auto!important;gap:9px!important}
+  html body #warning #estateFocusDashboard #ieatOverviewFilter .io-area-title{grid-column:1/-1!important;font-size:14px!important;font-weight:400!important}
+  html body #warning #estateFocusDashboard #ioEstatePicker{grid-column:1!important;grid-row:auto!important;font-size:14px!important}
+  html body #warning #estateFocusDashboard #ieatAllEstates{grid-column:2!important;grid-row:auto!important;font-size:12px!important;padding:8px!important}
+  html body #warning #estateFocusDashboard #floodDamsSection{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  html body #warning #estateFocusDashboard #floodDamsSection>.ef-related-dams{grid-column:1!important;grid-row:2!important;padding:0!important}
+  html body #warning #estateFocusDashboard #floodDamsSection>.ef-reservoir-panel{grid-column:2!important;grid-row:2!important;padding:0!important}
+  html body #warning #estateFocusDashboard #floodDamsSection>.ef-panel>h2{font-size:15px!important;font-weight:600!important;min-height:44px!important}
+  html body #warning #estateFocusDashboard #floodDamsSection .reference-dam-art{display:none!important}
+  html body #warning #estateFocusDashboard #floodDamsSection :is(.ef-dam-value,.ef-reservoir-percent){font-size:30px!important;font-weight:500!important}
+  html body #preparednessPane .ex-prep-selector{grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important}
+  html body #preparednessPane .ex-prep-selector label{grid-column:1/-1!important;font-weight:400!important;font-size:14px!important}
+  html body #preparednessPane .ex-table{min-width:0!important;font-size:14px!important;table-layout:fixed!important}
+  html body #preparednessPane .ex-table :is(th,td){font-size:14px!important;line-height:1.65!important;padding:8px 6px!important}
+  html body #ieatDashboardCamera{left:auto!important;right:18px!important;bottom:18px!important;max-width:calc(100% - 36px)!important}
+  html body #ieatDashboardCamera .ex-camera-label{display:none!important}
+  html body[data-reference-panel=closed] :is(#referencePanelSurface,#referenceViewTabs){display:none!important}
+  html body[data-reference-panel=closed] #warning #estateFocusDashboard .ef-data-column{display:none!important}
+  html body[data-reference-panel=closed] #floodSectionPanel{display:none!important}
+  html body[data-reference-panel=closed] #warning #estateFocusDashboard .ef-map-column{left:108px!important}
+ }
+ @media(min-width:1600px){html body #referenceViewTabs button{font-size:18px!important}}
+ @media(min-width:901px) and (max-width:1300px){html body #referenceViewTabs button{font-size:13px!important;gap:4px!important}html body #referenceViewTabs button svg{width:17px!important;height:17px!important}html body #floodSectionPanel .ref-chart-card{padding:22px 18px!important}html body #floodSectionPanel .ref-donut-layout{gap:12px!important}html body #floodSectionPanel .ref-chart-legend>div{font-size:14px!important}}
+ @media(max-width:900px){html body #referenceViewTabs{top:24px!important;min-height:48px!important}html body #referenceViewTabs button{font-size:12px!important;padding:7px 3px!important;gap:3px!important}html body #referenceViewTabs button svg{display:none!important}html body #floodSectionPanel{padding-top:78px!important}html body #warning #estateFocusDashboard .ef-data-column{padding-top:78px!important}}
+ @media(prefers-reduced-motion:reduce){html body #referenceViewTabs button{transition:none!important}}
+ @media print{html body :is(#referencePanelSurface,#referenceViewTabs){display:none!important}html body #floodSectionPanel{padding:0!important;border-radius:0!important}html body #floodSectionPanel :is(h1,h2,h3,h4){font-family:"Kanit",sans-serif!important}}
+}
