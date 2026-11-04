@@ -654,8 +654,8 @@ function syncGlobalBuildings(){
 // Only verified zoning attributes are colored; unclassified parcels remain neutral.
 // Indicative classification requested for e_PP. The estate zoning field is primary;
 // unrecognized parcels are treated as general industry, not verified legal zoning.
-const ieatZoneColors={industrial:'#8400B8',free:'#650093',green:'#3F8E39',water:'#0879E9',commercial:'#F00042',support:'#F5DD00',utility:'#C8C8C8',unknown:'#8400B8'};
-const ieatZoneNames={industrial:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)',free:'เขตประกอบอุตสาหกรรมเสรี',green:'พื้นที่สีเขียว',water:'บ่อหน่วงน้ำ / แหล่งน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',utility:'สาธารณูปโภค',unknown:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)'};
+const ieatZoneColors={industrial:'#8400B8',free:'#650093',green:'#3F8E39',water:'#0879E9',commercial:'#F00042',support:'#F5DD00',unknown:'#8400B8'};
+const ieatZoneNames={industrial:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)',free:'เขตประกอบอุตสาหกรรมเสรี',green:'พื้นที่สีเขียว',water:'บ่อหน่วงน้ำ / แหล่งน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',unknown:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)'};
 function ieatZoneType(p){
  const entries=Object.entries(p||{}),normal=s=>String(s??'').toLowerCase().replace(/[\s_\-.\/()]+/g,'');
  const zoneKeys=/เขตประกอบการ|ประเภทเขต|ประเภทพื้นที่|การใช้ประโยชน์|การใช้ที่ดิน|ประเภทที่ดิน|ผังการใช้|ลักษณะการใช้|landuse|landtype|usetype|zonetype|zone|zoning|area.?type|ประเภทการใช้/;
@@ -664,10 +664,10 @@ function ieatZoneType(p){
  const generic=entries.filter(([key,val])=>!ignore.test(normal(key))&&typeof val==='string'&&val.length<140);
  const values=[...preferred,...generic].map(([k,v])=>String(v??'').trim()).filter(v=>v&&!/^(?:null|undefined|ไม่ระบุ|ไม่มีข้อมูล|[-–]|\d+)$/i.test(v));
  const v=values.join(' ').toLowerCase();
- // Explicit natural features and infrastructure take priority over industry.
+ // Explicit green and water zones take priority; utilities are grouped with general industry for this approximate display.
  if(/พื้นที่สีเขียว|สีเขียว|พื้นที่พักผ่อน|ที่โล่ง|สวนหย่อม|สวนสาธารณะ|สวนป่า|แนวกันชน|green\s*area|green\s*zone|greenbelt|landscape|forest|park|พื้นที่อนุรักษ์/i.test(v))return 'green';
  if(/บ่อหน่วงน้ำ|บ่อหน่วง|บ่อพักน้ำ|บ่อเก็บน้ำ|บ่อบำบัด|บ่อปรับเสถียร|แก้มลิง|แหล่งน้ำ|อ่างเก็บน้ำ|บึง|retention|detention|reservoir|pond|water\s*body/i.test(v))return 'water';
- if(/สาธารณูปโภค|สาธารณูปการ|ระบบสาธารณูปโภค|โครงสร้างพื้นฐาน|ระบบบำบัด|ระบบประปา|สถานีไฟฟ้า|โรงผลิตน้ำ|ระบบระบายน้ำ|ถนน|ทางสัญจร|utility|utilities|infrastructure|road|treatment\s*plant/i.test(v))return 'utility';
+ if(/สาธารณูปโภค|สาธารณูปการ|ระบบสาธารณูปโภค|โครงสร้างพื้นฐาน|ระบบบำบัด|ระบบประปา|สถานีไฟฟ้า|โรงผลิตน้ำ|ระบบระบายน้ำ|ถนน|ทางสัญจร|utility|utilities|infrastructure|road|treatment\s*plant/i.test(v))return 'industrial';
  if(/อุตสาหกรรมเสรี|เขตปลอดอากร|free\s*zone|freezone|duty\s*free/i.test(v))return 'free';
  if(/พาณิชยกรรม|พาณิชย์|ศูนย์การค้า|commercial|ค้าปลีก|ค้าส่ง/i.test(v))return 'commercial';
  if(/พื้นที่บริการ|บริการสนับสนุน|อาคารสำนักงาน|สำนักงานนิคม|support\s*area/i.test(v))return 'support';
