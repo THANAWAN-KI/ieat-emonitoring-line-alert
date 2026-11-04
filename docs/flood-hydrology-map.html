@@ -608,6 +608,7 @@ function chooseBasemap(value){
 let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=[],groups={},selectedMarker=null,pending=null,national=null,extras=[],gistda=null,animation=null,autoFit=true,populated=false;
 window.IEATPreparednessMap=()=>({vector,raster,ready,
  showAt:openPointPopup,
+ alertSnapshot:()=>({loaded:populated,items:features.map(f=>f.properties).filter(r=>['water','canal','rain','dam'].includes(r.kind)&&!old(r,r.kind)).map(r=>({...r,state:pointCondition(r,r.kind),kindLabel:({water:'ระดับน้ำ',canal:'คลอง',rain:'ฝนสะสม',dam:'อ่างเก็บน้ำ'})[r.kind]})).filter(r=>r.kind==='rain'?['rain-2','rain-3'].includes(r.state.key):r.kind==='dam'?['standard-red','standard-blue'].includes(r.state.key):['standard-yellow','standard-red'].includes(r.state.key)).sort((a,b)=>(b.state.hex==='#B30707')-(a.state.hex==='#B30707'))}),
  clearSelectionPopup:()=>{autoFit=false;selectedMarker?.getPopup?.()?.remove();raster?.closePopup()},
  focusPoint:(lon,lat)=>focusWithEstate(Number(lon),Number(lat)),
  pointContent:(r,k)=>{const s=pointCondition(r,k);return '<div class="map-point-status" style="border-left:4px solid '+s.hex+'"><b>'+esc(s.label)+'</b><small>'+esc(s.criterion)+'</small></div>'+(k==='camera'?content(r,k):baseContent(r,k))},loadCamera:r=>loadCameraImage(r),mountHistory:root=>mountPopupHistory(root),points:()=>scoped().map(f=>f.properties)
@@ -1908,6 +1909,7 @@ html body #mapStage .estate-pin>.ieat-estate-location{
 /* The map library assigns the parent transform; do not override it. */
 </style>
 <script src="flood-infrastructure-20261104.js?v=20261104-infrastructure1"></script>
+<script src="flood-map-alerts.js?v=20261104-alerts1"></script>
 </body></html>
 
 
