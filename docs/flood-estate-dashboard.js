@@ -861,6 +861,7 @@ $('efFilter').onchange=()=>renderEstates();
   $('expoSearchForm').onsubmit=e=>{e.preventDefault();const estate=(current?.estates||[]).find(r=>estateKey(r.name)===estateKey($('expoSearch').value));if(!estate){$('expoSelection').textContent='กรุณาเลือกนิคมฯ จากรายการ';return}applyHeaderEstate(estate.name)};
   $('expoSupport').onclick=()=>$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-support-open',estate:headerEstate},location.origin);
  }
+ window.addEventListener('ieat-exhibition-select-estate',e=>{applyHeaderEstate(String(e.detail?.name||''));publishPreparedness();});
  function publishPreparedness(){ const map=$('estateFocusMap')?.contentWindow;map?.postMessage({type:'flood-preparedness-mode',active:document.body.dataset.floodView==='preparedness'&&!!headerEstate,estate:headerEstate},location.origin);if(!headerEstate)map?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin); }
  function expoRender(){
   publishPreparedness();if(!$('expoExplore'))return;
@@ -948,3 +949,4 @@ $('efFilter').onchange=()=>renderEstates();
  function init(){refine();new MutationObserver(mutations=>{if(mutations.some(m=>m.addedNodes.length||m.removedNodes.length))request()}).observe(document.body,{subtree:true,childList:true});window.addEventListener('resize',request,{passive:true})}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
