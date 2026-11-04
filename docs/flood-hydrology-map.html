@@ -1100,8 +1100,8 @@ function focusWithEstate(lon,lat){
  stopAerialTour();autoFit=false;
  const e=estateProvinceScope?.active?estateProvinceScope.estate:null;
  if(e){const x=Number(e.lon??e.lng),y=Number(e.lat),west=Math.min(lon,selectedEstateExtent?.xmin??x-.025),east=Math.max(lon,selectedEstateExtent?.xmax??x+.025),south=Math.min(lat,selectedEstateExtent?.ymin??y-.025),north=Math.max(lat,selectedEstateExtent?.ymax??y+.025);
-  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:70,maxZoom:13,pitch:0,duration:500});
-  else raster?.fitBounds([[south,west],[north,east]],{padding:[60,60],maxZoom:13});
+  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:330,left:175,right:55,bottom:80},maxZoom:13,pitch:0,duration:500});
+  else raster?.fitBounds([[south,west],[north,east]],{paddingTopLeft:[175,330],paddingBottomRight:[55,80],maxZoom:13});
   queueBoundaries();
  }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:0});else raster?.setView([lat,lon],13);
 }
@@ -1117,7 +1117,7 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
  if(move)window.IEATPreparednessMap().focusPoint(Number(lon),Number(lat));
  preparednessPopup=vector
   ?new maplibregl.Popup({maxWidth:'290px',offset:16,className:'prep-point-popup'}).setLngLat([lon,lat]).setDOMContent(node).addTo(vector)
-  :L.popup({maxWidth:290,autoPan:false,className:'prep-point-popup'}).setLatLng([lat,lon]).setContent(node).openOn(raster);
+  :L.popup({maxWidth:290,autoPan:true,autoPanPaddingTopLeft:[20,25],autoPanPaddingBottomRight:[20,70],className:'prep-point-popup'}).setLatLng([lat,lon]).setContent(node).openOn(raster);
  mountPopupHistory(node);
  if(camera)loadCameraImage(camera);
 }
