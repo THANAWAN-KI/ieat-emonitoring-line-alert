@@ -129,7 +129,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(document.getElementById('ieatExpoQualityScript'))return;
  const script=document.createElement('script');
  script.id='ieatExpoQualityScript';
- script.src='flood-expo-quality.js?v=20261104-quality-v1';
+ script.src='flood-expo-quality.js?v=20261104-reference4';
  script.defer=true;
  document.head.appendChild(script);
 })();
