@@ -1047,16 +1047,37 @@ const suppliedWaterIcons={"water":"<svg xmlns=\"http://www.w3.org/2000/svg\" vie
 function sensorSvg(kind){return mapSymbol(kind);}
 
 
+// Declutter actual estate markers by screen distance, never create cluster symbols.
+// Hidden points remain in the source data and all estate locations return at close zoom.
+function thinEstatePins(list){
+ const map=vector||raster,zoom=map?.getZoom()??0;
+ if(!map||zoom>=12)return list;
+ const estates=list.filter(f=>f.properties?.kind==='estate');
+ if(!estates.length)return list;
+ const cell=zoom<7?125:zoom<9?105:zoom<11?85:60;
+ const limit=zoom<8?1:2;
+ const buckets=new Map(),selected=[];
+ const sorted=estates.slice().sort((a,b)=>{
+  const an=String(a.properties?.name||'')+'|'+String(a.properties?.id||'');
+  const bn=String(b.properties?.name||'')+'|'+String(b.properties?.id||'');
+  return an.localeCompare(bn,'th');
+ });
+ for(const f of sorted){
+  const coords=f.geometry?.coordinates;
+  if(!coords||!Number.isFinite(Number(coords[0]))||!Number.isFinite(Number(coords[1])))continue;
+  const p=vector?vector.project(coords):raster.project([coords[1],coords[0]],zoom);
+  if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))continue;
+  const key=Math.floor(p.x/cell)+':'+Math.floor(p.y/cell);
+  const count=buckets.get(key)||0;
+  if(count>=limit)continue;
+  buckets.set(key,count+1);
+  selected.push(f);
+ }
+ // Only estate visibility changes. All water, dam, canal and other data remain intact.
+ return list.filter(f=>f.properties?.kind!=='estate').concat(selected);
+}
 function groupOverviewPoints(list){
- const map=vector||raster,zoom=map?.getZoom();
- if(!cleanDashboard||!map||zoom>=9)return {points:list,clusters:[]};
- const buckets=new Map(),points=[];
- for(const f of list){const r=f.properties;const p=vector?vector.project(f.geometry.coordinates):raster.project([r.lat,r.lng],zoom);
- const cell=r.kind==='estate'?zoom<7?120:90:110;const key=r.kind+':'+Math.floor(p.x/cell)+':'+Math.floor(p.y/cell);
- if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(f);}
- const clusters=[];
- for(const rows of buckets.values()){if(rows.length<3)points.push(...rows);else clusters.push(rows);}
- return {points,clusters};
+ return {points:list,clusters:[]};
 }
 function drawOverviewClusters(clusters){
  const labels={water:'ระดับน้ำ',canal:'คลอง',estate:'นิคมฯ',rain:'ฝน',rainfall:'ฝน',dam:'เขื่อน',camera:'กล้อง'};
@@ -1096,7 +1117,8 @@ function render(){
   document.body.dataset.mapDetail=presentationZoom>=11?'near':presentationZoom>=9?'mid':'far';
   // Keep all five data sources active, but progressively reveal their symbols.
   // Overview: terrain, waterways and radar only. Mid: estate pins only.
-  const displayPoints=!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
+  const baseDisplayPoints=!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
+  const displayPoints=thinEstatePins(baseDisplayPoints);
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
   displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin';el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
