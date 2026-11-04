@@ -620,23 +620,35 @@ function syncGlobalBuildings(){
  vector.setLayoutProperty('context-buildings','visibility',flags.boundary&&$('estateView3d').getAttribute('aria-pressed')==='true'&&!local?'visible':'none');
 }
 function syncBoundaries(){
- syncEstateOuter();syncIllustrativeModels();syncGlobalBuildings();
+ syncEstateOuter();if((vector||raster)?.getZoom()>=10)syncIllustrativeModels();syncGlobalBuildings();
  if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#d6e5ef','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':.12,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
  if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#674188',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.65,fill:true,fillColor:'#C3ACD0',fillOpacity:.12},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
 }
-function boundaryPopup(f){return '<div class="popup"><h3>'+esc(f.properties?.['นิคมอุตสาหกรรม']||'ขอบเขตนิคมอุตสาหกรรม')+'</h3><p>ขอบเขตพื้นที่/แปลงที่ดินจากชั้น e_PP · กนอ.</p><p>ยกขอบเขตเพื่อแสดงผล 3 มิติ ไม่ใช่อาคารหรือความสูงจริง</p><a target="_blank" rel="noopener" href="'+boundaryService+'">เปิดแหล่งข้อมูล</a>'+estateFloodPlan(f.properties?.['นิคมอุตสาหกรรม'])+'</div>';}
+function boundaryPopup(f){return '<div class="popup"><h3>'+esc(f.properties?.['นิคมอุตสาหกรรม']||'ขอบเขตนิคมอุตสาหกรรม')+'</h3><p>'+(f.properties?.generalized?'ขอบเขตแสดงภาพรวมแบบย่อ · ซูมเข้าเพื่อดูรายละเอียด':'ขอบเขตพื้นที่/แปลงที่ดินจากชั้น e_PP · กนอ.')+'</p><p>ยกขอบเขตเพื่อแสดงผล 3 มิติ ไม่ใช่อาคารหรือความสูงจริง</p><a target="_blank" rel="noopener" href="'+boundaryService+'">เปิดแหล่งข้อมูล</a>'+estateFloodPlan(f.properties?.['นิคมอุตสาหกรรม'])+'</div>';}
 $('estateExample3d').addEventListener('click',showEstateIllustrationExample);
 $('estateParcelVisibility').addEventListener('change',syncBoundaries);
 $('estateTreeVisibility').addEventListener('change',()=>{syncIllustrativeModels();});
 $('estateDepth').addEventListener('input',()=>{estateDepth=Number($('estateDepth').value);queueRasterIllustrations();if(vector&&ready)updateRoundTreeGL(illustrativeEstateModels(boundaryData.features).features);$('estateDepthValue').textContent=estateDepth;if(vector?.getLayer('estate-illustration')){vector.setPaintProperty('estate-illustration','fill-extrusion-height',['*',['get','height'],estateDepth/45]);vector.setPaintProperty('estate-illustration','fill-extrusion-base',['*',['get','base'],estateDepth/45]);}});
 $('estateView3d').addEventListener('click',()=>{if(!vector){const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();queueRasterIllustrations();return}const enabled=$('estateView3d').getAttribute('aria-pressed')!=='true';$('estateView3d').setAttribute('aria-pressed',String(enabled));$('estateView3d').textContent=enabled?'มุมมอง 3D':'มุมมอง 2D';loadMappedFootprints();syncIllustrativeModels();syncGlobalBuildings();vector.easeTo({pitch:enabled?55:0,bearing:enabled?-15:0,duration:500});});
 function queueBoundaries(){clearTimeout(boundaryTimer);if(flags.boundary&&ready)boundaryTimer=setTimeout(loadBoundaries,350);else if(!flags.boundary){boundaryAbort?.abort();boundaryVersion++;}}
+function summarizeEstateBoundaries(features){
+ const groups=new Map();
+ for(const f of features){const name=f.properties?.['นิคมอุตสาหกรรม']||'นิคมอุตสาหกรรม';if(!groups.has(name))groups.set(name,[]);const points=groups.get(name);const polygons=f.geometry?.type==='Polygon'?[f.geometry.coordinates]:f.geometry?.coordinates||[];for(const rings of polygons)for(const p of rings[0]||[])points.push(p);}
+ return [...groups].flatMap(([name,points])=>{
+  points.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);if(points.length<3)return [];
+  const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]),lower=[],upper=[];
+  for(const p of points){while(lower.length>1&&cross(lower.at(-2),lower.at(-1),p)<=0)lower.pop();lower.push(p)}
+  for(let i=points.length-1;i>=0;i--){const p=points[i];while(upper.length>1&&cross(upper.at(-2),upper.at(-1),p)<=0)upper.pop();upper.push(p)}
+  const ring=lower.slice(0,-1).concat(upper.slice(0,-1));if(ring.length<3)return [];ring.push(ring[0]);
+  return [{type:'Feature',properties:{'นิคมอุตสาหกรรม':name,generalized:true},geometry:{type:'Polygon',coordinates:[ring]}}];
+ });
+}
 async function loadBoundaries(){
  if(!flags.boundary||!ready)return;loadMappedFootprints();boundaryAbort?.abort();boundaryAbort=new AbortController();const version=++boundaryVersion,signal=boundaryAbort.signal,b=(vector||raster).getBounds(),zoom=(vector||raster).getZoom();
  const envelope={xmin:b.getWest(),ymin:b.getSouth(),xmax:b.getEast(),ymax:b.getNorth(),spatialReference:{wkid:4326}};const all=[];
  $('boundaryInfo').textContent='ขอบเขตนิคมฯ: กำลังโหลดพื้นที่ในแผนที่…';
  try{let offset=0;while(true){const q=new URLSearchParams({where:'1=1',outFields:'OBJECTID,นิคมอุตสาหกรรม',returnGeometry:'true',outSR:'4326',f:'geojson',geometry:JSON.stringify(envelope),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultOffset:String(offset),resultRecordCount:'1000',orderByFields:'OBJECTID',maxAllowableOffset:String(zoom<9?.001:.00003)});const response=await fetch(boundaryService+'/query?'+q,{signal});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();if(data.error||!Array.isArray(data.features))throw Error(data.error?.message||'รูปแบบข้อมูลไม่ถูกต้อง');all.push(...data.features);if(data.features.length<1000&&!data.exceededTransferLimit)break;offset+=data.features.length;if(!data.features.length)break;}
- if(version!==boundaryVersion)return;boundaryData={type:'FeatureCollection',features:all};syncBoundaries();$('boundaryInfo').textContent='ขอบเขตนิคมฯ: กนอ. · '+all.length.toLocaleString('th-TH')+' พื้นที่/แปลงในมุมมองนี้';
+ if(version!==boundaryVersion)return;boundaryData={type:'FeatureCollection',features:zoom<9?summarizeEstateBoundaries(all):all};syncBoundaries();$('boundaryInfo').textContent='ขอบเขตนิคมฯ: กนอ. · '+all.length.toLocaleString('th-TH')+' พื้นที่/แปลงในมุมมองนี้';
  }catch(e){if(e.name==='AbortError')return;$('boundaryInfo').textContent='โหลดขอบเขตนิคมฯ ไม่สำเร็จ · เลื่อนแผนที่หรือเปิดเลเยอร์เพื่อลองใหม่';}
 }
 let waterLabelFrame=null;
