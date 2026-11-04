@@ -2361,3 +2361,51 @@ html body .zoning-reference-key small{font-size:10px;color:#858585}
 html body .ieat-zoning-tree{background:none!important;border:0!important;box-shadow:none!important}
 html body .ieat-zoning-tree svg{width:24px;height:30px}
 </style>
+<style id="map-right-centered-toolbar">
+html body #rightMapToolbar{position:fixed!important;right:18px!important;top:50%!important;transform:translateY(-50%)!important;z-index:2100!important;display:flex!important;flex-direction:column!important;gap:12px!important;width:48px!important;max-height:calc(100dvh - 28px)!important;overflow-y:auto!important;scrollbar-width:none!important}
+html body #rightMapToolbar button{display:grid!important;place-items:center!important;flex:0 0 48px!important;width:48px!important;height:48px!important;min-height:48px!important;padding:0!important;border:0!important;border-radius:50%!important;background:#fff!important;color:#797979!important;box-shadow:0 2px 8px #22344a12!important;cursor:pointer!important}
+html body #rightMapToolbar button:hover,html body #rightMapToolbar button[aria-expanded=true]{color:#2f68f4!important;background:#edf2ff!important}
+html body #rightMapToolbar svg{width:23px!important;height:23px!important;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html body #rightMapToolbar .right-map-zoom{background:#fff!important;border-radius:26px!important;overflow:hidden!important;flex-shrink:0!important}
+html body #rightMapToolbar .right-map-zoom button{border-radius:0!important;box-shadow:none!important;font:300 28px/1 sans-serif!important}
+html body :is(.controls,.ieat-3d-tools,#mapCompass,#aerialTourButton,#supportMapButton,#dashboardMapZoom){visibility:hidden!important}
+html body #mapLayers>summary,html body #mapLegend>summary{display:none!important}
+html body #mapLayers[open],html body #mapLegend[open]{visibility:visible!important;display:block!important;position:fixed!important;top:50%!important;right:80px!important;bottom:auto!important;left:auto!important;transform:translateY(-50%)!important;width:min(310px,calc(100vw - 100px))!important;max-height:75dvh!important;overflow:auto!important;background:#fff!important;border:0!important;border-radius:20px!important;box-shadow:0 5px 24px #22344a22!important;z-index:2200!important}
+html body #mapLayers[open] .layer-body,html body #mapLegend[open] .legend-body{visibility:visible!important;display:block!important;position:static!important;transform:none!important;width:100%!important;max-width:100%!important;max-height:none!important;padding:16px!important;box-sizing:border-box!important;background:#fff!important;box-shadow:none!important}
+html body #watchEvidence{right:80px!important;max-width:calc(100vw - 100px)!important}
+@media(max-height:650px){html body #rightMapToolbar{gap:8px!important;width:42px!important;right:12px!important}html body #rightMapToolbar button{width:42px!important;height:42px!important;min-height:42px!important;flex-basis:42px!important}}
+</style>
+<script id="map-right-centered-toolbar-boot">
+(()=>{
+ const icons={
+ search:'<circle cx="10" cy="10" r="7"/><path d="m15 15 5 5"/>',
+ layers:'<path d="m2 8 10-5 10 5-10 5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+ legend:'<path d="m3 5 6-2 6 3 6-3v16l-6 3-6-3-6 2zM9 3v16M15 6v16"/>',
+ compass:'<path d="m12 2 6 10H6z" fill="#f15b55" stroke="none"/><path d="m12 22 6-10H6z" fill="#555" stroke="none"/>',
+ view:'<path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/>',
+ support:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3"/>'
+ };
+ function boot(){
+ if(document.getElementById('rightMapToolbar'))return;
+ const toolbar=document.createElement('nav');toolbar.id='rightMapToolbar';toolbar.setAttribute('aria-label','เครื่องมือแผนที่');
+ const add=(action,label)=>{const b=document.createElement('button');b.type='button';b.dataset.mapAction=action;b.title=label;b.setAttribute('aria-label',label);if(['layers','legend','search'].includes(action)){b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls',action==='legend'?'mapLegend':'mapLayers')}b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icons[action]+'</svg>';toolbar.append(b)};
+ add('search','ค้นหาสถานี');add('layers','เลเยอร์');add('legend','คำอธิบายสัญลักษณ์');
+ const zoom=document.createElement('div');zoom.className='right-map-zoom';zoom.innerHTML='<button type="button" data-map-action="in" aria-label="ซูมเข้า" title="ซูมเข้า">+</button><button type="button" data-map-action="out" aria-label="ซูมออก" title="ซูมออก">−</button>';toolbar.append(zoom);
+ add('compass','ปรับทิศเหนือ');add('view','สลับมุมมอง 3D');add('support','รายละเอียดพื้นที่และสถานี');
+ const layers=document.getElementById('mapLayers'),legend=document.getElementById('mapLegend');
+ const sync=()=>toolbar.querySelectorAll('[aria-expanded]').forEach(b=>b.setAttribute('aria-expanded',String(b.dataset.mapAction==='legend'?!!legend?.open:!!layers?.open)));
+ layers?.addEventListener('toggle',sync);legend?.addEventListener('toggle',sync);
+ toolbar.onclick=event=>{const action=event.target.closest('button')?.dataset.mapAction;if(!action)return;
+ if(['search','layers','legend'].includes(action)){const target=action==='legend'?legend:layers;const other=action==='legend'?layers:legend;if(other)other.open=false;if(target)target.open=action==='search'?true:!target.open;if(action==='search')document.getElementById('waterStationSearch')?.focus();sync();return}
+ const api=window.IEATPreparednessMap?.(),map=api?.vector||api?.raster;
+ if(action==='in')map?.zoomIn();if(action==='out')map?.zoomOut();
+ if(action==='compass')document.getElementById('mapCompass')?.click();
+ if(action==='view')document.getElementById('estateView3d')?.click();
+ if(action==='support')document.getElementById('supportMapButton')?.click();
+ };
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(layers)layers.open=false;if(legend)legend.open=false;sync()}});
+ document.body.append(toolbar);
+ }
+ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',boot,{once:true}):boot();
+})();
+</script>
