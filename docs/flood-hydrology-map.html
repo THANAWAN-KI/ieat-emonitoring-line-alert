@@ -1794,6 +1794,50 @@ html body #mapStage .estate-label,
 html body #mapStage .watch-estate-pin .estate-name {display:none!important;visibility:hidden!important}
 </style>
 
+
+<style id="ieat-glass-risk-panel-refinement-20261104">
+/* Premium translucent 3D glass for the map's risk/preparedness information panel. */
+html body #mapStage #watchEvidence{
+ background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(235,247,255,.69))!important;
+ border:1px solid rgba(255,255,255,.95)!important;
+ border-radius:20px!important;
+ box-shadow:0 14px 34px rgba(22,59,95,.18),0 3px 9px rgba(22,59,95,.09),inset 0 1px 1px rgba(255,255,255,.98)!important;
+ backdrop-filter:blur(24px) saturate(145%)!important;
+ -webkit-backdrop-filter:blur(24px) saturate(145%)!important;
+}
+html body #mapStage #watchEvidence .ieat-watch-head,
+html body #mapStage #watchEvidence > header{
+ background:linear-gradient(125deg,rgba(255,255,255,.76),rgba(220,240,255,.56))!important;
+ border-bottom:1px solid rgba(175,207,228,.46)!important;
+ padding:13px 16px!important;
+}
+html body #mapStage #watchEvidence .ieat-watch-head strong,
+html body #mapStage #watchEvidence > header strong{color:#173B59!important;font-size:16px!important}
+html body #mapStage #watchEvidence .ieat-watch-head small,
+html body #mapStage #watchEvidence > header small{color:#526477!important}
+html body #mapStage #watchEvidence [data-watch-close]{
+ background:rgba(255,255,255,.68)!important;
+ color:#173B59!important;
+ border:1px solid rgba(147,188,215,.55)!important;
+}
+html body #mapStage #watchEvidence .ieat-watch-overview>div,
+html body #mapStage #watchEvidence .watch-layer-options{
+ background:rgba(255,255,255,.55)!important;
+ border:1px solid rgba(255,255,255,.8)!important;
+ border-radius:13px!important;
+ box-shadow:0 3px 10px rgba(22,59,95,.06),inset 0 1px rgba(255,255,255,.95)!important;
+}
+html body #mapStage #watchEvidence .watch-evidence-list,
+html body #mapStage #watchEvidence .ieat-watch-overview{background:transparent!important}
+html body #mapStage #watchEvidence .watch-evidence-list p{
+ background:rgba(255,255,255,.62)!important;
+ border:1px solid rgba(190,212,229,.53)!important;
+ border-radius:11px!important;
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ html body #mapStage #watchEvidence{background:rgba(248,252,255,.96)!important}
+}
+</style>
 </body></html>
 
 
