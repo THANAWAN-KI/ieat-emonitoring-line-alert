@@ -2091,3 +2091,13 @@ let pending=false;new MutationObserver(()=>{if(!pending){pending=true;requestAni
 #efDamFlowPanel .dam-release-conversion{grid-column:1/-1}
 @media(max-width:570px){#efDamFlowPanel.has-camera .ef-dam-flow-values{grid-template-columns:minmax(0,1fr)}#efDamFlowPanel .ef-dam-flow-camera{min-height:140px}}
 </style>
+<style id="preparedness-bordered-table">
+@layer preparednessTableGrid {
+ #preparednessPane .prep-table{border:1px solid #cbd7e2!important;border-collapse:collapse!important;border-spacing:0!important;background:#fff!important;table-layout:fixed!important}
+ #preparednessPane .prep-table th,#preparednessPane .prep-table td{border:1px solid #cbd7e2!important;padding:12px 14px!important;line-height:1.65!important}
+ #preparednessPane .prep-table thead th{background:#eaf2f9!important;color:#173b59!important;font-weight:600!important}
+ #preparednessPane .prep-table tbody th{background:#f7f9fc!important;font-weight:500!important}
+ #preparednessPane .prep-table tbody tr:hover :is(th,td){background:#eef5fb!important}
+ #preparednessPane .prep-table button{color:#1a5b88!important;text-decoration:none!important;font-weight:500!important}
+}
+</style>
