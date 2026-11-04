@@ -103,12 +103,12 @@
  }
 
  function byCode(c){return rows.find(r=>inEstateScope(r)&&(estateScope.active||r.river===river)&&r.oldcode===c)}
- function node(r,x,y,label){const color=r?status(r)[0]:'#47A992';return `<g ${r?`data-rp-id="${esc(r.code)}" role="button" tabindex="0" aria-label="ดู ${esc(r.name)} บนแผนที่"`:''} class="rp-node"><circle cx="${x}" cy="${y}" r="10" fill="${color}" stroke="white" stroke-width="2"/><text x="${x+17}" y="${y-2}" font-size="15" font-weight="600">${esc(label||r?.oldcode)} ${esc(r?.name||'')}</text><text x="${x+17}" y="${y+22}" font-size="19" font-weight="700">${r&&n(r.flow)!==null?fmt(r.flow,0)+' ลบ.ม./วิ':r?esc(gapText(r)) :'ไม่มีสถานีในชุดข้อมูล'}</text><text x="${x+17}" y="${y+44}" font-size="13">${r&&n(r.flow)!==null?esc(gapText(r)):r?'ระดับ '+fmt(r.wl)+' ม.รทก.':''}</text><text x="${x+17}" y="${y+65}" font-size="13" fill="#0D47A1">${r?esc(time(r.measured_at))+(fresh(r)?'':' · ข้อมูลเกิน 6 ชม.') : ''}</text></g>`}
+ function node(r,x,y,label){const color=r?status(r)[0]:'#47A992';return `<g ${r?`data-rp-id="${esc(r.code)}" role="button" tabindex="0" aria-label="ดู ${esc(r.name)} บนแผนที่"`:''} class="rp-node" style="--river-status:${color}"><circle cx="${x}" cy="${y}" r="10" fill="${color}" stroke="white" stroke-width="2"/><text x="${x+17}" y="${y-2}" font-size="14" font-weight="600">${esc(label||r?.oldcode)} ${esc(r?.name||'')}</text><text class="rp-river-value" x="${x+17}" y="${y+17}" font-size="15" font-weight="700">${r&&n(r.flow)!==null?fmt(r.flow,0)+' ลบ.ม./วิ':r?esc(gapText(r)) :'ไม่มีสถานีในชุดข้อมูล'}</text><text x="${x+17}" y="${y+36}" font-size="12">${r&&n(r.flow)!==null?esc(gapText(r)):r?'ระดับ '+fmt(r.wl)+' ม.รทก.':''}</text><text x="${x+17}" y="${y+53}" font-size="12" fill="#0D47A1">${r?esc(time(r.measured_at))+(fresh(r)?'':' · ข้อมูลเกิน 6 ชม.') : ''}</text></g>`}
  function graph(list){
   const stations=list;
   if(!stations.length)return '<p>ไม่มีสถานีในสายน้ำที่เลือก</p>';
-  const H=100+stations.length*112,last=55+(stations.length-1)*112;
-  return `<svg viewBox="0 0 500 ${H}" class="rp-flow" aria-label="ผังสถานี ${esc(river)}"><text x="20" y="22" font-size="19" font-weight="700">${esc(river)}</text><path d="M30 44 L30 ${last+24}" stroke="#2196F3" stroke-width="10" fill="none"/><path d="M30 44 L30 ${last+24}" class="rp-motion" stroke="white" stroke-width="2" fill="none" stroke-dasharray="2 14"/>${stations.map((r,i)=>node(r,30,55+i*112,r.oldcode)).join('')}</svg>`;
+  const H=64+stations.length*92,last=55+(stations.length-1)*92;
+  return `<svg viewBox="0 0 650 ${H}" class="rp-flow" aria-label="ผังสถานี ${esc(river)}"><text x="20" y="22" font-size="16" font-weight="700">${esc(river)}</text><path d="M30 44 L30 ${last+24}" stroke="#2196F3" stroke-width="10" fill="none"/><path d="M30 44 L30 ${last+24}" class="rp-motion" stroke="white" stroke-width="2" fill="none" stroke-dasharray="2 14"/>${stations.map((r,i)=>node(r,30,55+i*92,r.oldcode)).join('')}</svg>`;
  }
 
  let rankedDams=[],mainRiver='',mainRiverManual=false,mainEstateKey='';
