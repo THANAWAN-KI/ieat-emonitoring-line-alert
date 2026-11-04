@@ -15,9 +15,11 @@
    const wide=media.matches;
    const presentation=document.body.classList.contains('expo-presentation');
    const closed=document.body.dataset.referencePanel==='closed';
+   const rail=$('#referenceRail');
    const signature=[wide,presentation,closed,innerWidth,innerHeight].join('|');
    if(signature===lastLayout)return true;
    lastLayout=signature;
+   if(rail){if(wide)rail.style.removeProperty('display');else set(rail,'display','none')}
    set(document.body,'--expo-rail',wide?(presentation?'0px':'60px'):'0px');
    set(document.body,'--expo-panel',wide?'calc((100vw - var(--expo-rail)) * 0.4)':'100vw');
    set(data,'position','fixed');
