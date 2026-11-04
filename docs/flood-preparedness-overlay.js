@@ -47,9 +47,9 @@ function attach(){
  const next=window.IEATPreparednessMap?.();if(!next?.ready||(!next.vector&&!next.raster))return;
  if(context?.vector===next.vector&&context?.raster===next.raster){refresh();focusEstate();return}
  markers.forEach(x=>x.marker.remove());markers=[];rasterOutline?.remove();rasterOutline=null;context=next;
- stations.forEach(s=>mount(s,'pump','สถานีสูบน้ำ '+s.id,'#397d8f',s.id));
- mount({lon:100.5869,lat:14.1975},'storage','ระบบรับน้ำรวม','#736297',null);
- mount({lon:100.5873,lat:14.2111},'protection','แนวป้องกัน','#4e816e',null);
+ stations.forEach(s=>mount(s,'pump','สถานีสูบน้ำ '+s.id,'#089a9b',s.id));
+ mount({lon:100.5869,lat:14.1975},'storage','ระบบรับน้ำรวม','#8064c6',null);
+ mount({lon:100.5873,lat:14.2111},'protection','แนวป้องกัน','#21ad02',null);
  const map=context.vector||context.raster;map.on('zoomend',refresh);map.on('moveend',refresh);
  if(!outlinePromise)outlinePromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=prep-approx1').then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{outline=d;drawOutline();refresh()}).catch(()=>{outlinePromise=null});
  drawOutline();refresh();focusEstate();

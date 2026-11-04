@@ -20,7 +20,7 @@ const KIND={estate:'#674188',water:'#2677ca',canal:'#089a9b',dam:'#d58b1a',camer
 const hexRgb=h=>{h=h.replace('#','');if(h.length===3)h=h.replace(/./g,c=>c+c);const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]};
 const mix=(h,t,a)=>'#'+hexRgb(h).map((v,i)=>Math.round(v+(t[i]-v)*a).toString(16).padStart(2,'0')).join('');
 function ink(hex){
- hex=String(hex||'').trim().toLowerCase();if(!/^#[0-9a-f]{3,6}$/.test(hex))return null;
+ hex=String(hex||'').trim().toLowerCase();if(!/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/.test(hex))return null;
  if(INK[hex])return INK[hex];
  const [r,g,b]=hexRgb(hex),lum=(.299*r+.587*g+.114*b)/255;
  return lum>.7?mix(hex,[0,0,0],.35):hex;
@@ -38,7 +38,7 @@ const GL={
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const colour=(kind,hex)=>ink(hex)||ink(KIND[kind]||'#2677ca');
 const glyph=(kind,c,w)=>'<svg class="ieat-nm-glyph" width="'+w+'" height="'+w+'" viewBox="1.5 1.5 21 21" aria-hidden="true" focusable="false">'+(GL[kind]||GL.water)(c)+'</svg>';
-const isCrit=hex=>String(hex||'').toLowerCase()==='#b30707';
+const isCrit=hex=>String(hex||'').trim().toLowerCase()==='#b30707';
 function tile(kind,hex,size){size=size||28;return '<span class="ieat-nm-btn" style="width:'+size+'px;height:'+size+'px">'+glyph(kind,colour(kind,hex),Math.round(size*.66))+'</span>'}
 function pin(kind,hex){const crit=isCrit(hex);
  return '<span class="ieat-sq-pin'+(crit?' is-critical':'')+'" data-type="'+esc(kind)+'" aria-hidden="true"><span class="ieat-nm-btn">'+glyph(kind,colour(kind,hex),27)+'</span><span class="ieat-nm-tail"></span></span>'}
@@ -55,24 +55,26 @@ html body .ieat-nm-glyph *{visibility:visible!important}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html body .ieat-nm-btn{background:radial-gradient(circle at 32% 26%,#FFFFFF 0%,#FBFBFC 38%,#EBEDF0 78%,#E0E3E8 100%)!important}}
 html body .ieat-sq-pin{position:absolute!important;left:50%!important;bottom:0!important;transform:translateX(-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;width:40px!important;height:48px!important;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;filter:none!important;pointer-events:auto;transition:transform .15s ease}
 html body .ieat-sq-pin .ieat-nm-btn{width:40px!important;height:40px!important;flex:none!important}
-html body .ieat-nm-tail{display:block!important;width:0!important;height:0!important;margin-top:-1px!important;border-left:6px solid transparent!important;border-right:6px solid transparent!important;border-top:8px solid rgba(227,230,234,.92)!important;background:none!important;filter:drop-shadow(2px 2px 1.5px rgba(35,50,65,.25))}
+html body .ieat-sq-pin .ieat-nm-glyph{width:27px!important;height:27px!important}
+html body .ieat-nm-tail{display:block!important;flex:none!important;width:0!important;height:0!important;margin:0!important;border-left:6px solid transparent!important;border-right:6px solid transparent!important;border-top:8px solid rgba(227,230,234,.92)!important;background:none!important;filter:drop-shadow(2px 2px 1.5px rgba(35,50,65,.25))}
 html body .ieat-sq-pin:after,html body .ieat-sq-pin:before{content:none!important;display:none!important}
 html body .ieat-sq-pin.is-critical .ieat-nm-btn:before{content:""!important;position:absolute!important;inset:-4px!important;border-radius:50%!important;border:2px solid #FF4D4D!important;animation:ieatNmPulse 1.6s ease-in-out infinite}
 @keyframes ieatNmPulse{0%,100%{opacity:.8}50%{opacity:.25}}
 @media (prefers-reduced-motion:reduce){html body .ieat-sq-pin.is-critical .ieat-nm-btn:before{animation:none;opacity:.6}}
 html body .leaflet-marker-icon:hover .ieat-sq-pin,html body .maplibregl-marker:hover .ieat-sq-pin,html body .leaflet-marker-icon:focus-visible .ieat-sq-pin,html body .maplibregl-marker:focus-visible .ieat-sq-pin{transform:translateX(-50%) translateY(-3px) scale(1.06)!important}
-html body .estate-pin.has-sq,html body .flood-data-pin.has-sq,html body .prep-anchor .has-sq{width:40px!important;height:48px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none!important;overflow:visible!important;padding:0!important}
-html body .leaflet-marker-icon.estate-pin.has-sq,html body .leaflet-marker-icon.flood-data-pin.has-sq{margin-left:-20px!important;margin-top:-48px!important}
+html body #mapStage .estate-pin.has-sq,html body #mapStage .flood-data-pin.has-sq,html body .estate-pin.has-sq,html body .flood-data-pin.has-sq,html body .prep-anchor .has-sq{width:40px!important;height:48px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none!important;overflow:visible!important;padding:0!important}
+html body #mapStage .leaflet-marker-icon.estate-pin.has-sq,html body #mapStage .leaflet-marker-icon.flood-data-pin.has-sq,html body .leaflet-marker-icon.estate-pin.has-sq,html body .leaflet-marker-icon.flood-data-pin.has-sq{margin-left:-20px!important;margin-top:-48px!important}
 html body .estate-pin.has-sq .estate-name{top:50px!important}
 html body .flood-data-pin.has-sq .fd-pin-name{top:50px!important}
-html body .ieat-sq-cluster{position:relative!important;display:block!important;width:44px!important;height:44px!important}
+html body .ieat-sq-cluster{position:relative!important;display:block!important;width:44px!important;height:44px!important;background:none!important;box-shadow:none!important;border:0!important;outline:0!important}
 html body .ieat-sq-cluster>.ieat-nm-btn{width:44px!important;height:44px!important}
 html body .ieat-sq-cluster>.ieat-nm-btn:before{content:"";position:absolute;inset:4px;border-radius:50%;border:2.5px solid var(--nm-ring,#8A4FD6);opacity:.85}
 html body .ieat-sq-cluster b{font:800 15px/1 Sarabun,Tahoma,sans-serif!important;background:none!important;border:0!important;padding:0!important;position:static!important;box-shadow:none!important}
 html body .ieat-sq-cluster-kind{position:absolute!important;right:-6px;bottom:-4px}
-html body .flood-point-cluster.has-sq{width:44px!important;height:44px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;cursor:pointer}
+html body .flood-point-cluster.has-sq{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;filter:none!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;cursor:pointer}
 html body .leaflet-marker-icon.flood-point-cluster.has-sq{margin-left:-22px!important;margin-top:-22px!important}
-html body .prep-feature button:has(.ieat-sq-pin){position:relative!important;width:40px!important;height:48px!important;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+html body .prep-anchor:has(.has-sq),html body .prep-feature:has(.has-sq){width:40px!important;height:48px!important}
+html body .prep-feature button:has(.ieat-sq-pin){position:relative!important;width:40px!important;height:48px!important;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important;filter:none!important}
 `;
 (document.head||document.documentElement).appendChild(css);
 /* Inline <style> blocks later in <body> can still win; move ours to the very end once parsed. */

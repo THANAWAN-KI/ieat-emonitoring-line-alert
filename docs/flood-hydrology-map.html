@@ -553,7 +553,7 @@ html body .ieat-estate-location{animation:none!important}
 <p style="font-size:11px;color:#0D47A1;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#FFFFFF;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#D9361E"></i>ล้นตลิ่ง / ระดับสูงสุด</span><span><i class="dot" style="background:#F5B52E"></i>ระดับสูง / ใกล้ตลิ่ง</span><span><i class="dot" style="background:#FFD16A"></i>เฝ้าระวังตามเกณฑ์ต้นทาง</span><span><i class="dot" style="background:#4F7D32"></i>ปกติ / ต่ำกว่าเกณฑ์</span><span><i class="dot" style="background:#C3ACD0"></i>ไม่มีค่าล่าสุด</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#47A992"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#E3F2FD"></i><i style="background:#90CAF9"></i><i style="background:#90CAF9"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#D9361E"></i><i style="background:#90CAF9"></i><i style="background:#E3F2FD"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i><i style="background:#FFFFFF"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
 <div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
 
-<script src="flood-rid-source.js?v=20261006-rid-17"></script><script src="flood-map-squircle.js?v=20261104-frosted-85"></script>
+<script src="flood-rid-source.js?v=20261006-rid-17"></script><script src="flood-map-squircle.js?v=20261104-unified-white-pins"></script>
 <script>
 (function(){
 'use strict';
@@ -1105,7 +1105,7 @@ function syncPinLegend(){
  for(const option of document.querySelectorAll('[data-layer-option]')){
   const kind=option.dataset.layerOption,swatch=option.querySelector('.layer-swatch');
   if(!swatch||!['estate','water','canal','dam','camera','rings'].includes(kind))continue;
-  if(swatch.dataset.ieatIconV2!==kind){swatch.innerHTML=kind==='estate'?estateSvg:ieatMeaningIcon(kind);swatch.dataset.ieatIconV2=kind}
+  if(swatch.dataset.ieatIconV2!==kind){swatch.innerHTML=window.IEAT_SQ&&kind!=='rings'?IEAT_SQ.tile(kind,null,28):kind==='estate'?estateSvg:ieatMeaningIcon(kind);swatch.dataset.ieatIconV2=kind}
   swatch.classList.add('ieat-layer-glyph');swatch.dataset.kind=kind;
  }
  syncStatusKey();
@@ -1491,9 +1491,10 @@ function drawWatchMap(){
  const estates=watchMapData.estates.map(e=>({...e,stations:e.stations.filter(s=>s.kind==='rain'?watchMapData.showRain!==false:watchMapData.showWater!==false)})),lines=[],seen=new Set(),zoom=vector?vector.getZoom():raster?.getZoom();
 
  function pin(coords,label,html,color,station,kind){
-  const glyph=kind==='rain'?watchRainSvg():measurementShape('water',color);
-  if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='cursor:pointer';if(station){el.className='watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker');el.innerHTML=glyph}else{el.className='estate-pin'+(estatePin?' has-sq':'');el.style.cssText='cursor:pointer';el.innerHTML=(estatePin||estateSvg)+'<span class="estate-name">'+esc(label)+'</span>'}const marker=new maplibregl.Marker({element:el,anchor:station?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
-  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:'',iconSize:[50,60],iconAnchor:[25,58],html:'<span class="watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker')+'">'+glyph+'</span>'}):L.divIcon({className:'estate-pin'+(estatePin?' has-sq':''),iconSize:estatePin?[40,48]:[34,42],iconAnchor:estatePin?[20,48]:[17,42],html:(estatePin||estateSvg)+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
+  const sharedPin=station&&!!window.IEAT_SQ;
+  const glyph=sharedPin?IEAT_SQ.pin(kind,color):kind==='rain'?watchRainSvg():measurementShape('water',color);
+  if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='cursor:pointer';if(station){el.className=sharedPin?'flood-data-pin has-sq':'watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker');el.innerHTML=glyph}else{el.className='estate-pin'+(estatePin?' has-sq':'');el.style.cssText='cursor:pointer';el.innerHTML=(estatePin||estateSvg)+'<span class="estate-name">'+esc(label)+'</span>'}const marker=new maplibregl.Marker({element:el,anchor:station&&!sharedPin?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
+  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:sharedPin?'flood-data-pin has-sq':'',iconSize:sharedPin?[40,48]:[50,60],iconAnchor:sharedPin?[20,48]:[25,58],html:sharedPin?glyph:'<span class="watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker')+'">'+glyph+'</span>'}):L.divIcon({className:'estate-pin'+(estatePin?' has-sq':''),iconSize:estatePin?[40,48]:[34,42],iconAnchor:estatePin?[20,48]:[17,42],html:(estatePin||estateSvg)+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
  }
  estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#008EA8',false);e.stations.forEach(s=>{
   const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
@@ -1784,7 +1785,7 @@ body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,bo
 .station-popup-details dt{color:#6c7b8b;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#25364a;font-size:12px;font-weight:600}
 .station-popup-footer{margin-top:12px;color:#6c7b8b;font-size:11px;line-height:1.7}.station-popup-footer a{color:#245c9d;font-weight:600}.station-popup-stale{color:#b34437;font-weight:600}
 .station-popup .station-history-disclosure{margin-top:10px}
-</style><script src="flood-map-details.js?v=20261104-anchored-details"></script><script src="flood-preparedness-overlay.js?v=20261104-neumorphic-3d"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script>
+</style><script src="flood-map-details.js?v=20261104-anchored-details"></script><script src="flood-preparedness-overlay.js?v=20261104-unified-white-pins"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script>
 <style id="ieat-hide-estate-map-labels-20261104">
 /* Hide only persistent estate-name labels; estate pins and click popups remain active. */
 html body #mapStage .estate-pin .estate-name,
@@ -2056,8 +2057,8 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 </style><style id="modern-layer-controls">
 @layer modernLayerMenu {
  #mapLayers .toggles .layer-option .layer-swatch{background:transparent!important;color:#47647b!important;width:26px!important;height:28px!important;border-radius:0!important}
- #mapLayers .layer-swatch svg{width:23px!important;height:23px!important;stroke-width:1.45!important;stroke:currentColor!important;fill:none!important}
- #mapLayers .layer-swatch svg *{stroke:currentColor!important;stroke-width:1.45!important;fill:none!important}
+ #mapLayers .layer-swatch svg:not(.ieat-nm-glyph){width:23px!important;height:23px!important;stroke-width:1.45!important;stroke:currentColor!important;fill:none!important}
+ #mapLayers .layer-swatch svg:not(.ieat-nm-glyph) *{stroke:currentColor!important;stroke-width:1.45!important;fill:none!important}
  #mapLayers .toggles .layer-option{border:1px solid #e1e8ef!important;background:#fff!important;border-radius:10px!important}
  #mapLayers .toggles .layer-option:has(input:checked){border-color:#c7dbea!important;background:#f1f7fb!important}
  #mapLayers .layer-option input{accent-color:#286c9c!important}
@@ -2068,9 +2069,9 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 </style><style>.popup-estate-distance{padding:10px 12px;margin-top:9px;border:1px solid #d8e7f1;border-radius:9px;background:#edf6fc;color:#174c72;font:500 12px/1.6 Sarabun,sans-serif}</style>
 <style id="requested-map-shapes">
 @layer requestedMapShapes {
- .estate-pin,.estate-pin>svg,.clean-estate-point,.clean-estate-point svg{width:36px!important;height:44px!important;filter:drop-shadow(0 2px 3px #30405133)!important}
+ .estate-pin:not(.has-sq),.estate-pin:not(.has-sq)>svg,.clean-estate-point,.clean-estate-point svg{width:36px!important;height:44px!important;filter:drop-shadow(0 2px 3px #30405133)!important}
  .estate-name{display:block!important;position:absolute!important;top:39px!important;left:50%!important;transform:translateX(-50%)!important;max-width:210px!important;white-space:nowrap!important;color:#4d456f!important;background:#fffffff2!important;border:1px solid #e1deeb!important;border-radius:6px!important;padding:3px 6px!important;font:500 11px/1.5 Sarabun,sans-serif!important}
- .flood-data-pin{width:36px!important;height:48px!important;overflow:visible!important}
+ .flood-data-pin:not(.has-sq){width:36px!important;height:48px!important;overflow:visible!important}
  .map-measure-symbol{position:absolute!important;inset:0!important;width:36px!important;height:48px!important;overflow:visible!important;filter:drop-shadow(0 1px 2px #1b354533)}
  .map-measure-symbol g>*{fill:inherit!important;stroke:inherit!important;stroke-width:inherit!important}
  .requested-cctv-pin{position:absolute!important;left:-4px!important;top:6px!important;width:44px!important;height:36px!important;display:block!important}
