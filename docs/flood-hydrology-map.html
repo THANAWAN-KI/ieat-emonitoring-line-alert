@@ -1027,8 +1027,7 @@ function drawWatchMap(){
  if(watchMapLayer&&raster)raster.removeLayer(watchMapLayer);
  if(raster){if(!raster.getPane('watchPoints')){raster.createPane('watchPoints');raster.getPane('watchPoints').style.zIndex='650'}watchMapLayer=L.layerGroup().addTo(raster);}
  const estates=watchMapData.estates.map(e=>({...e,stations:e.stations.filter(s=>s.kind==='rain'?watchMapData.showRain!==false:watchMapData.showWater!==false)})),lines=[],seen=new Set(),zoom=vector?vector.getZoom():raster?.getZoom();
- let legend=document.getElementById('watchMapLegend');if(!legend){legend=document.createElement('div');legend.id='watchMapLegend';legend.style.cssText='position:absolute;z-index:1400;left:12px;right:12px;top:64px;background:#fffffff2;border:1px solid #c8b2d7;border-radius:9px;padding:8px 12px;font:12px/1.7 Sarabun,sans-serif;color:#68418f;pointer-events:none;max-width:calc(100% - 390px)';document.body.append(legend)}
- legend.textContent=watchMapData.title+' '+estates.length+' แห่ง · หมุดม่วง: นิคมฯ · น้ำเงินเข้ม: น้ำสูง · สีตามระดับฝน: สถานีฝน · เส้นประ: ระยะเส้นตรง (กม.)'+(!estates.length?' · ไม่พบรายการที่พร้อมแสดง':' · คลิกหมุดเพื่อดูรายละเอียด');
+
  function pin(coords,label,html,color,station){
   const glyph=mapSymbol(color==='#0D47A1'?'water':'rain');
   if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='width:34px;height:34px;border:2px solid '+color+';border-radius:11px;background:white;color:#183f62;box-shadow:0 2px 8px #18334b35;cursor:pointer';if(station){el.className='watch-data-glyph';el.innerHTML=glyph}else{el.className='estate-pin';el.style.cssText='cursor:pointer';el.innerHTML=estateSvg}const marker=new maplibregl.Marker({element:el,anchor:station?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
@@ -1068,6 +1067,7 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
  window.IEAT_MAP_DETAILS?.close();
  preparednessPopup?.remove();
  const node=document.createElement('div');
+ node.className='dashboard-popup-body';
  node.innerHTML=html;
  if(move)window.IEATPreparednessMap().focusPoint(Number(lon),Number(lat));
  preparednessPopup=vector
@@ -1377,5 +1377,36 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .flood-data-pin .fd-pin-icon svg *,.flood-point-cluster .map-symbol *{stroke:currentColor!important;fill:none!important}
  .flood-point-cluster>span.flood-cluster-symbol{background:#fff!important;color:#183f62!important;border-color:var(--cluster-status,#64748b)!important}
  .estate-pin,.clean-estate-point{color:#674188!important}
+}
+</style><style id="dashboard-glass-popups">
+@layer glassMapDetails {
+ #watchMapLegend{display:none!important}
+ #watchEvidence{background:rgba(255,255,255,.9)!important;backdrop-filter:blur(16px) saturate(1.1);-webkit-backdrop-filter:blur(16px) saturate(1.1);border:1px solid rgba(255,255,255,.95)!important;border-radius:20px!important;box-shadow:0 16px 42px #18365326,0 2px 6px #18365314,inset 0 1px 0 white!important}
+ #watchEvidence header{background:rgba(238,246,253,.7)!important;border-bottom:1px solid #dce7f0!important;padding:15px 17px!important}
+ #watchEvidence strong{font-size:16px!important;color:#183f62!important}
+ #watchEvidence .watch-layer-options{background:rgba(255,255,255,.55)!important}
+ #watchEvidence .watch-evidence-list{padding:0 14px 12px!important}
+ #watchEvidence .watch-evidence-list details{padding:12px 0!important}
+ #watchEvidence .watch-evidence-list summary{font-size:14px!important;line-height:1.6!important}
+ #watchEvidence .watch-evidence-list p{background:rgba(255,255,255,.87)!important;border:1px solid #e1eaf1!important;border-radius:11px!important;box-shadow:0 2px 5px #193c5910!important;padding:11px!important}
+ #watchEvidence button{border-color:#d2e2ee!important;border-radius:9px!important;background:rgba(255,255,255,.9)!important}
+ #watchEvidence [data-watch-close]{width:30px;height:30px;border-radius:50%!important;background:#ffffffb3!important}
+ #watchEvidence footer{background:#ffffff80!important;font-size:10px!important}
+ .prep-point-popup .maplibregl-popup-content,.prep-point-popup .leaflet-popup-content-wrapper,.flood-card-popup .maplibregl-popup-content,.flood-card-popup .leaflet-popup-content-wrapper{background:rgba(255,255,255,.96)!important;border:1px solid #ffffff!important;border-radius:17px!important;box-shadow:0 14px 36px #163b5933,0 2px 7px #163b5914!important;backdrop-filter:blur(12px)}
+ .prep-point-popup .popup{font:13px/1.6 Sarabun,sans-serif!important;min-width:0!important;max-width:100%!important;color:#334155!important}
+ .prep-point-popup h3{font-size:16px!important;line-height:1.45!important;margin:0 22px 8px 0!important;color:#173b59!important}
+ .prep-point-popup .fc-reading{min-height:86px!important;height:86px!important;padding:12px 16px!important;background:#f2f7fb!important;box-sizing:border-box!important;align-items:flex-start!important}
+ .prep-point-popup .fc-reading strong{font-size:27px!important;line-height:1.2!important;color:#173b59!important}
+ .prep-point-popup .fc-reading-icon,.prep-point-popup .fc-wave{display:none!important}
+ .prep-point-popup .fc-image-badge{position:static!important;display:inline-block!important;font-size:11px!important;padding:0!important;background:transparent!important;box-shadow:none!important}
+ .prep-point-popup .fc-title{padding:12px 14px 3px!important;background:transparent!important}
+ .prep-point-popup .fc-title h3{font-size:15px!important}
+ .prep-point-popup .fc-caption{padding:6px 14px 12px!important;font-size:11px!important;color:#64748b!important}
+ .prep-point-popup .fc-details{border-top:1px solid #e2eaf1!important}
+ .prep-point-popup .fc-details>summary{padding:10px 14px!important;font-size:12px!important;color:#245d86!important}
+ .prep-point-popup .fc-detail-body{padding:10px 14px!important}
+ .prep-point-popup .leaflet-popup-close-button,.prep-point-popup .maplibregl-popup-close-button{top:7px!important;right:7px!important;width:25px!important;height:25px!important;border-radius:50%!important;background:#edf3f8!important;color:#52677a!important;z-index:5!important}
+ .prep-point-popup .leaflet-popup-content{margin:14px!important}
+ .prep-point-popup .flood-card{border:0!important;box-shadow:none!important;border-radius:12px!important;overflow:hidden!important}
 }
 </style>
