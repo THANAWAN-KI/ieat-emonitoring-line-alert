@@ -1821,3 +1821,28 @@ body:not(.imagery-basemap) #map,body:not(.imagery-basemap) #raster{background:#F
 @media(max-width:650px){#watchEvidence{right:8px!important;top:auto!important;bottom:12px!important;max-height:54dvh!important;width:calc(100vw - 16px)!important}}
 @media(prefers-reduced-motion:reduce){.ieat-rain-drop,.ieat-rain-front{animation:none!important}}
 </style>
+<style id="ieat-non-purple-icons-20261104">
+/* All IEAT position pins stand apart from purple industrial land-use polygons. */
+html body .estate-pin .ieat-estate-location,
+html body .clean-estate-point .ieat-estate-location,
+html body .watch-estate-pin .ieat-estate-location{
+ background:#0089A7!important;border-color:#10384B!important;
+ box-shadow:0 3px 10px #12566B77,0 0 0 2px #FFFFFF!important
+}
+html body .estate-pin .ieat-estate-emblem,
+html body .clean-estate-point .ieat-estate-emblem{color:#004B63!important}
+html body #mapLayers .layer-swatch[data-kind="estate"] .ieat-estate-location{
+ background:#0089A7!important;border-color:#10384B!important;
+}
+html body .flood-data-pin>.ieat-map-symbol[data-type="camera"]{
+ background:#E58A12!important;border-color:#583709!important;color:#FFFFFF!important
+}
+html body .flood-data-pin>.ieat-map-symbol[data-type="camera"]:after{
+ background:#E58A12!important;border-color:#583709!important
+}
+html body .flood-data-pin>.ieat-map-symbol[data-type="camera"] .ieat-meaning-svg,
+html body .flood-data-pin>.ieat-map-symbol[data-type="camera"] .ieat-meaning-svg *{
+ stroke:#FFFFFF!important;color:#FFFFFF!important
+}
+html body #mapLayers .layer-swatch[data-kind="camera"]{color:#C66A0B!important}
+</style>
