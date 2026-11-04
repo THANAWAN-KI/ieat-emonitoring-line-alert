@@ -837,7 +837,7 @@ function illustrativeEstateModels(features){
  const map=vector||raster;
  if(!map||cleanDashboard&&$('estateView3d').getAttribute('aria-pressed')!=='true')return {type:'FeatureCollection',features:[]};
  const b=map.getBounds();
- return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#A7AAAD'}}:f)};
+ return {type:'FeatureCollection',features:mappedBuildingFootprints.filter(f=>{if(['tree','trunk'].includes(f.properties.kind)&&!$('estateTreeVisibility')?.checked)return false;const r=f.geometry.coordinates[0];return r.some(p=>p[0]>=b.getWest()&&p[0]<=b.getEast()&&p[1]>=b.getSouth()&&p[1]<=b.getNorth())}).map(f=>f.properties.kind==='building'?{...f,properties:{...f.properties,color:'#F5F8FC'}}:f)};
 }
 
 // Software-rendered isometric overlay keeps illustrative volumes visible without WebGL.
@@ -927,7 +927,7 @@ function syncIllustrativeModels(){
 function syncGlobalBuildings(){
  if(!vector||!ready)return;
  if(!vector.getSource('context-buildings'))vector.addSource('context-buildings',{type:'vector',tiles:['https://basemaps.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer/tile/{z}/{y}/{x}.pbf'],minzoom:0,maxzoom:16,attribution:'Buildings © Esri and its data providers; heights approximate where unavailable'});
- if(!vector.getLayer('context-buildings'))vector.addLayer({id:'context-buildings',type:'fill-extrusion',source:'context-buildings','source-layer':'Building',minzoom:14,paint:{'fill-extrusion-color':'#A7AAAD','fill-extrusion-height':['max',3,['to-number',['coalesce',['get','height'],['get','Height'],8],8]],'fill-extrusion-base':0,'fill-extrusion-opacity':.92,'fill-extrusion-vertical-gradient':true}},'discharge-ring');
+ if(!vector.getLayer('context-buildings'))vector.addLayer({id:'context-buildings',type:'fill-extrusion',source:'context-buildings','source-layer':'Building',minzoom:14,paint:{'fill-extrusion-color':'#F4F7FA','fill-extrusion-height':['max',3,['to-number',['coalesce',['get','height'],['get','Height'],8],8]],'fill-extrusion-base':0,'fill-extrusion-opacity':.92,'fill-extrusion-vertical-gradient':true}},'discharge-ring');
  const local=String(estateProvinceScope?.name||'').includes('บางปะอิน')&&mappedBuildingFootprints.length>0;
  vector.setLayoutProperty('context-buildings','visibility',flags.boundary&&$('estateView3d').getAttribute('aria-pressed')==='true'&&!local?'visible':'none');
 }
