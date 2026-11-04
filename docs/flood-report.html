@@ -2118,3 +2118,25 @@ let pending=false;new MutationObserver(()=>{if(!pending){pending=true;requestAni
  @media(max-width:600px){body #warning #estateFocusDashboard .ef-data-column {grid-template-columns:minmax(0,1fr)!important}body #warning #estateFocusDashboard .ef-data-column > :is(#ieatDataIntegrity,.flood-overview,#floodPageTitle,#expoBoothSubtitle,#rpRankingsAfterWarning,#floodWaterDiagram,.ef-warning,#preparednessPane){grid-column:1!important}body #warning #estateFocusDashboard #floodStationsSection,body #warning #estateFocusDashboard .ef-canal-panel {grid-column:1!important}}
 }
 </style>
+
+<style id="flood-flow-card-repair-20261104">
+@layer floodLayoutRepair {
+body #warning #estateFocusDashboard #efDamFlowPanel {grid-column:1 / span 2!important;width:auto!important;min-width:0!important;max-width:none!important;justify-self:stretch!important;box-sizing:border-box!important;padding:16px!important;overflow:visible!important}
+body #warning #estateFocusDashboard #efDamFlowPanel h2 {font-size:20px!important;line-height:1.4!important;margin:0!important;white-space:normal!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .ef-dam-flow-values {display:grid!important;grid-template-columns:minmax(0,2fr) minmax(110px,1fr)!important;align-items:stretch!important;gap:12px!important;margin-top:12px!important;width:100%!important;min-width:0!important}
+body #warning #estateFocusDashboard #efDamFlowPanel:not(.has-camera) .ef-dam-flow-values {grid-template-columns:minmax(0,1fr)!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .dam-flow-compact {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;min-width:0!important;width:100%!important;max-width:none!important;margin:0!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .dam-flow-compact > div {position:relative!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;min-width:0!important;width:auto!important;height:auto!important;min-height:138px!important;padding:14px!important;overflow:visible!important;border-radius:14px!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .dam-flow-compact > div > small {display:block!important;min-height:0!important;width:auto!important;max-width:none!important;padding:0!important;margin:0!important;white-space:nowrap!important;word-break:normal!important;overflow-wrap:normal!important;background:transparent!important;border:0!important;font-size:12px!important;line-height:1.6!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .dam-flow-compact > div > b {display:block!important;max-width:none!important;white-space:nowrap!important;overflow:visible!important;font-size:clamp(24px,2.4vw,34px)!important;line-height:1.3!important;margin:7px 0!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .dam-flow-direction {position:absolute!important;top:12px!important;right:10px!important;width:22px!important;height:22px!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .ef-dam-flow-camera {grid-column:2!important;grid-row:1!important;width:100%!important;min-width:0!important;min-height:138px!important;margin:0!important;overflow:hidden!important;border-radius:14px!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .ef-dam-flow-camera img {width:100%!important;height:100%!important;min-height:138px!important;object-fit:cover!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .dam-release-conversion {grid-column:1 / -1!important;width:auto!important;justify-self:start!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;margin:0!important;padding:0!important;background:transparent!important;font-size:12px!important}
+@media(max-width:600px){
+body #warning #estateFocusDashboard #efDamFlowPanel {grid-column:1!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .ef-dam-flow-values {grid-template-columns:minmax(0,1fr)!important}
+body #warning #estateFocusDashboard #efDamFlowPanel .ef-dam-flow-camera {grid-column:1!important;grid-row:auto!important;min-height:160px!important}
+}
+}
+</style>
