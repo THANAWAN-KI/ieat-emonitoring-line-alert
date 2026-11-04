@@ -28,6 +28,7 @@
  }
  function close(){panel.hidden=true;button.setAttribute('aria-expanded','false');}
  button.onclick=()=>{update();panel.hidden=!panel.hidden;button.setAttribute('aria-expanded',String(!panel.hidden));};
+ window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='flood-alert-toggle')return;button.click();});
  panel.onclick=e=>{if(e.target.closest('[data-close]')){close();button.focus();return}const row=e.target.closest('[data-index]');if(!row)return;const r=records[Number(row.dataset.index)],api=window.IEATPreparednessMap?.();if(!r||!api)return;close();api.showAt(r.lng,r.lat,'<h3>'+esc(r.name)+'</h3>'+api.pointContent(r,r.kind),true);};
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){close();button.focus();}});
  document.addEventListener('click',e=>{if(!panel.hidden&&!panel.contains(e.target)&&!button.contains(e.target))close();});

@@ -9,6 +9,8 @@
     layers: '<path d="m2 8 10-5 10 5-10 5Zm1 5 9 4.5 9-4.5M3 18l9 4.5 9-4.5"/>',
     settings: '<path d="m10 2-.6 2.5-2 .9L5 4.7 2.7 8l1.8 1.8v2.4L2.7 14 5 17.3l2.4-.7 2 .9L10 20h4l.6-2.5 2-.9 2.4.7 2.3-3.3-1.8-1.8V9.8L21.3 8 19 4.7l-2.4.7-2-.9L14 2Z"/><circle cx="12" cy="11" r="3.2"/>'
   };
+  icons.alerts = icons.preparedness;
+  icons.preparedness = icons.report;
   const svg = kind => '<svg class="ieat-icon reference-line-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icons[kind] + '</svg>';
   const post = data => $('estateFocusMap')?.contentWindow?.postMessage(data, location.origin);
   let started = false, queued = false;
@@ -16,6 +18,18 @@
   function decorate() {
     const rail = $('referenceRail'), pane = $('floodInformationPane');
     if (!rail || !pane) return;
+    if (!started) {
+      const alerts = rail.querySelector('[data-reference-mode="preparedness"]');
+      if (alerts) {
+        alerts.removeAttribute('data-reference-mode');
+        alerts.dataset.referenceIcon = 'alerts';
+        alerts.innerHTML = svg('alerts');
+        alerts.title = 'แจ้งเตือนน้ำท่วม';
+        alerts.setAttribute('aria-label', alerts.title);
+        alerts.removeAttribute('aria-pressed');
+        alerts.onclick = () => { const frame = $('estateFocusMap'); try { const button = frame?.contentDocument?.getElementById('floodAlertButton'); if (button) { button.click(); return; } } catch (_) {} post({ type: 'flood-alert-toggle' }); };
+      }
+    }
     for (const button of rail.querySelectorAll('[data-reference-mode]')) {
       if (button.dataset.referenceIcon) continue;
       const kind = button.dataset.referenceMode;
@@ -63,8 +77,11 @@
       started = true;
       const nav = rail.querySelector('.reference-rail-modes');
       if (nav) {
-        const report = document.createElement('a');
-        report.href = 'flood-report-editor.html'; report.title = 'จัดทำรายงานน้ำท่วม'; report.setAttribute('aria-label', report.title); report.innerHTML = svg('report');
+        const report = document.createElement('button');
+        report.type = 'button'; report.dataset.referenceMode = 'preparedness';
+        report.dataset.referenceIcon = 'report'; report.title = 'การเตรียมรับมือ';
+        report.setAttribute('aria-label', report.title); report.setAttribute('aria-pressed', String(document.body.dataset.floodView === 'preparedness'));
+        report.innerHTML = svg('report');
         const layers = document.createElement('button');
         layers.type = 'button'; layers.title = 'เลือกชั้นข้อมูลแผนที่'; layers.setAttribute('aria-label', layers.title); layers.innerHTML = svg('layers');
         layers.onclick = () => post({ type: 'flood-reference-map-tools', action: 'layers' });
@@ -72,7 +89,7 @@
         settings.type = 'button'; settings.title = 'ตั้งค่ามุมมอง'; settings.setAttribute('aria-label', settings.title); settings.setAttribute('aria-expanded', 'false'); settings.setAttribute('aria-controls', 'referenceSettings'); settings.innerHTML = svg('settings');
         const popover = document.createElement('section');
         popover.id = 'referenceSettings'; popover.hidden = true; popover.setAttribute('aria-label', 'ตั้งค่ามุมมอง');
-        popover.innerHTML = '<strong>ตั้งค่ามุมมอง</strong><button type="button" data-reference-action="fullscreen">ขยายแผนที่เต็มจอ</button><button type="button" data-reference-action="panel">เปิด / ปิดแผงข้อมูล</button>';
+        popover.innerHTML = '<strong>ตั้งค่ามุมมอง</strong><a href="flood-report-editor.html">จัดทำรายงานน้ำท่วม ↗</a><button type="button" data-reference-action="fullscreen">ขยายแผนที่เต็มจอ</button><button type="button" data-reference-action="panel">เปิด / ปิดแผงข้อมูล</button>';
         const close = () => { popover.hidden = true; settings.setAttribute('aria-expanded', 'false'); };
         settings.onclick = () => { popover.hidden = !popover.hidden; settings.setAttribute('aria-expanded', String(!popover.hidden)); };
         popover.onclick = event => {
