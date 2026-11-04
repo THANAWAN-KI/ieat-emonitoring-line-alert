@@ -59,6 +59,8 @@
  html body #floodSectionPanel .section-layer-row{background:#f7f2fb!important;border-radius:13px!important}
  html body #referenceRail .reference-rail-modes>[data-section]:focus-visible{outline:3px solid #b383cd!important;outline-offset:3px!important}
  html body #warning #estateFocusDashboard :is(button,input,select,a):focus-visible,html body #floodSectionPanel :is(button,input,textarea,select,a):focus-visible,html body #referenceRail button:focus-visible{outline:3px solid #b383cd!important;outline-offset:3px!important}
+ html body #warning #estateFocusDashboard #floodDamsSection>.ef-panel>h2{font-size:15px!important;line-height:1.5!important;color:#624774!important;font-weight:500!important}
+ html body #warning #estateFocusDashboard #floodDamsSection .ef-reservoir-row :is(b,small){color:#624774!important;-webkit-text-fill-color:#624774!important}
  /* Inside the existing map iframe: soften interface chrome, never map geometry. */
  html body:has(#mapStage) :is(#mapLayers,#mapLayers>summary,.layer-body,#floodAlertButton,#floodAlertPanel,#mapCompass,#dashboardMapZoom,#dashboardMapZoom button,#estateView3d,#aerialTourButton,#ieatInfrastructure,.leaflet-popup-content-wrapper,.maplibregl-popup-content){border:0!important;border-image:none!important;border-radius:13px!important}
  html body:has(#mapStage) :is(#mapLayers>summary,#mapCompass,#estateView3d,#aerialTourButton){background:#fffffff0!important;box-shadow:0 5px 14px #35144712!important}
