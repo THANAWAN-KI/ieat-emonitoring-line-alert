@@ -6,17 +6,17 @@
 (()=>{'use strict';
 /* Status / category hex used by the map -> glyph colour that reads well on white. */
 const INK={
- '#52057f':'#4a8594','#52057f':'#4a8594',
+ '#52057f':'#109dc0','#52057f':'#109dc0',
  '#598c14':'#598c14',
  '#ffc719':'#ffc719','#ffc719':'#ffc719',
  '#ff6908':'#ff6908','#ed3b21':'#ff6908',
  '#bf033b':'#ed3b21',
- '#706357':'#706357','#2e1f54':'#4a8594',
- '#4a8594':'#4a8594','#4a8594':'#4a8594',
- '#4a8594':'#4a8594','#4a8594':'#4a8594',
- '#ff6908':'#ffc719','#4a8594':'#4a8594',
- '#4a8594':'#4a8594','#4a8594':'#4a8594'};
-const KIND={estate:'#52057f',water:'#4a8594',canal:'#4a8594',dam:'#ff6908',camera:'#4a8594',rain:'#4a8594',pump:'#4a8594',storage:'#4a8594',protection:'#598c14'};
+ '#706357':'#706357','#2e1f54':'#109dc0',
+ '#109dc0':'#109dc0','#109dc0':'#109dc0',
+ '#109dc0':'#109dc0','#109dc0':'#109dc0',
+ '#ff6908':'#ffc719','#109dc0':'#109dc0',
+ '#109dc0':'#109dc0','#109dc0':'#109dc0'};
+const KIND={estate:'#52057f',water:'#109dc0',canal:'#109dc0',dam:'#ff6908',camera:'#109dc0',rain:'#109dc0',pump:'#109dc0',storage:'#109dc0',protection:'#598c14'};
 const hexRgb=h=>{h=h.replace('#','');if(h.length===3)h=h.replace(/./g,c=>c+c);const n=parseInt(h,16);return [n>>16&255,n>>8&255,n&255]};
 const mix=(h,t,a)=>'#'+hexRgb(h).map((v,i)=>Math.round(v+(t[i]-v)*a).toString(16).padStart(2,'0')).join('');
 function ink(hex){
@@ -36,7 +36,7 @@ const GL={
  storage:c=>'<path d="M3 10h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" fill="'+c+'"/><path d="M12 2.5S9 5.6 9 7.4a3 3 0 0 0 6 0C15 5.6 12 2.5 12 2.5Z" fill="'+c+'"/><path d="M5 15c2-1.3 4.7 1.3 7 0s4.7 1.3 7 0" stroke="#000000" stroke-opacity=".18" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
  protection:c=>'<path d="m12 2.5 8 3v6c0 4.8-3.6 8-8 10.5-4.4-2.5-8-5.7-8-10.5v-6Z" fill="'+c+'"/><path d="m8.3 12 2.6 2.6 4.8-5" stroke="#000000" stroke-opacity=".22" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
-const colour=(kind,hex)=>ink(hex)||ink(KIND[kind]||'#4a8594');
+const colour=(kind,hex)=>ink(hex)||ink(KIND[kind]||'#109dc0');
 const glyph=(kind,c,w)=>'<svg class="ieat-nm-glyph" width="'+w+'" height="'+w+'" viewBox="1.5 1.5 21 21" aria-hidden="true" focusable="false">'+(GL[kind]||GL.water)(c)+'</svg>';
 const isCrit=hex=>String(hex||'').trim().toLowerCase()==='#bf033b';
 function tile(kind,hex,size){size=size||28;return '<span class="ieat-nm-btn" style="width:'+size+'px;height:'+size+'px">'+glyph(kind,colour(kind,hex),Math.round(size*.66))+'</span>'}
@@ -68,7 +68,7 @@ html body .estate-pin.has-sq .estate-name{top:50px!important}
 html body .flood-data-pin.has-sq .fd-pin-name{top:50px!important}
 html body .ieat-sq-cluster{position:relative!important;display:block!important;width:44px!important;height:44px!important;background:none!important;box-shadow:none!important;border:0!important;outline:0!important}
 html body .ieat-sq-cluster>.ieat-nm-btn{width:44px!important;height:44px!important}
-html body .ieat-sq-cluster>.ieat-nm-btn:before{content:"";position:absolute;inset:4px;border-radius:50%;border:2.5px solid var(--nm-ring,#4a8594);opacity:.85}
+html body .ieat-sq-cluster>.ieat-nm-btn:before{content:"";position:absolute;inset:4px;border-radius:50%;border:2.5px solid var(--nm-ring,#109dc0);opacity:.85}
 html body .ieat-sq-cluster b{font:800 15px/1 Sarabun,Tahoma,sans-serif!important;background:none!important;border:0!important;padding:0!important;position:static!important;box-shadow:none!important}
 html body .ieat-sq-cluster-kind{position:absolute!important;right:-6px;bottom:-4px}
 html body .flood-point-cluster.has-sq{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;filter:none!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;cursor:pointer}

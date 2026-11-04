@@ -2,11 +2,11 @@
 (()=>{'use strict';
 const n=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
 const statusPairs={
- blue:['#4a8594','#000000'],teal:['#335238','#ffffff'],green:['#598c14','#000000'],
+ blue:['#109dc0','#000000'],teal:['#335238','#ffffff'],green:['#598c14','#000000'],
  yellow:['#ffc719','#000000'],orange:['#ff6908','#000000'],brown:['#ed3b21','#000000'],
  red:['#bf033b','#ffffff'],gray:['#706357','#ffffff']
 };
-const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#4a8594',navy:'#051736',lavender:'#2e1f54',purple:'#52057f'};
+const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#109dc0',navy:'#051736',lavender:'#2e1f54',purple:'#52057f'};
 const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],background:statusPairs[key]?.[0]||palette[key],textColor:statusPairs[key]?.[1]||'#000000',label,criterion});
 const unknown=()=>state('gray','ไม่มีค่าหรือเกณฑ์เทียบ','ยังไม่จัดเป็นสถานการณ์ปกติ');
 function water(r){
@@ -36,18 +36,18 @@ function dam(value){
 }
 
 const rainClasses=[
- ['ฝนเล็กน้อย','#4a8594','#335238','0.1–10.0 มม.'],
+ ['ฝนเล็กน้อย','#109dc0','#335238','0.1–10.0 มม.'],
  ['ฝนปานกลาง','#598c14','#335238','10.1–35.0 มม.'],
  ['ฝนหนัก','#ff6908','#706357','35.1–90.0 มม.'],
  ['ฝนหนักมาก','#bf033b','#2e1f54','ตั้งแต่ 90.1 มม.']
 ];
 function rain(value){
  const v=n(value);if(v===null||v<0)return {...unknown(),textColor:'#ffffff'};
- if(v<.1)return {key:'rain-trace',hex:'#4a8594',color:'#4a8594',textColor:'#051736',label:v===0?'ไม่มีฝน':'ฝนวัดจำนวนไม่ได้',criterion:'ปริมาณฝนน้อยกว่า 0.1 มม. ใน 24 ชั่วโมง'};
+ if(v<.1)return {key:'rain-trace',hex:'#109dc0',color:'#109dc0',textColor:'#051736',label:v===0?'ไม่มีฝน':'ฝนวัดจำนวนไม่ได้',criterion:'ปริมาณฝนน้อยกว่า 0.1 มม. ใน 24 ชั่วโมง'};
  const rounded=Math.round(v*10)/10,index=rounded<=10?0:rounded<=35?1:rounded<=90?2:3;
  const [label,fill,ink,range]=rainClasses[index];return {key:'rain-'+index,hex:fill,color:fill,textColor:ink,label,criterion:range+' ใน 24 ชั่วโมง'};
 }
-const rainLegendHTML='<div class="rain-palette-legend">'+[['ไม่มีฝน / ฝนวัดจำนวนไม่ได้','#4a8594','#051736','น้อยกว่า 0.1 มม.'],...rainClasses].map(([label,fill,ink,range])=>'<div style="display:flex;gap:8px;align-items:center;margin:6px 0"><i aria-hidden="true" style="width:24px;height:16px;flex:0 0 24px;border-radius:4px;background:'+fill+';border:1px solid '+ink+'"></i><span style="color:'+ink+'">'+label+' · '+range+'</span></div>').join('')+'</div>';
+const rainLegendHTML='<div class="rain-palette-legend">'+[['ไม่มีฝน / ฝนวัดจำนวนไม่ได้','#109dc0','#051736','น้อยกว่า 0.1 มม.'],...rainClasses].map(([label,fill,ink,range])=>'<div style="display:flex;gap:8px;align-items:center;margin:6px 0"><i aria-hidden="true" style="width:24px;height:16px;flex:0 0 24px;border-radius:4px;background:'+fill+';border:1px solid '+ink+'"></i><span style="color:'+ink+'">'+label+' · '+range+'</span></div>').join('')+'</div>';
 const sourceRoot='https://standard.thaiwater.net/docs/การจัดทำมาตรฐานน้ำ-ระย-2/ข้อมูลและเกณฑ์ของข้อมู/เกณฑ์ของข้อมูลสำหรับกา/';
 const waterClasses=[
  ['brown','น้ำน้อยวิกฤต','ไม่เกิน 10%'],

@@ -3,7 +3,7 @@ function mount(){
  const bar=document.getElementById('floodModeBar'),col=document.getElementById('floodInformationPane');if(!bar||!col)return false;
  if(!document.getElementById('floodPageTitle')){const title=document.createElement('h1');title.id='floodPageTitle';title.textContent='สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม';col.prepend(title);}
  if(document.getElementById('expoIdentity'))return true;
- const brand=document.createElement('div');brand.id='expoIdentity';brand.innerHTML='<span class="expo-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><title>open-flood</title><rect width="37" height="37" x="5.5" y="5.5" fill="none" stroke="#4a8594" stroke-linecap="round" stroke-linejoin="round" rx="4" ry="4"/><path fill="none" stroke="#4a8594" stroke-linecap="round" stroke-linejoin="round" d="M14.75 5.5v37M24 5.5v37m9.25-37v37m9.25-27.75h-37m37 9.25h-37m37 9.25h-37"/></svg></span><div><h1>ติดตามสถานการณ์น้ำในนิคมอุตสาหกรรม</h1></div>';bar.prepend(brand);
+ const brand=document.createElement('div');brand.id='expoIdentity';brand.innerHTML='<span class="expo-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><title>open-flood</title><rect width="37" height="37" x="5.5" y="5.5" fill="none" stroke="#109dc0" stroke-linecap="round" stroke-linejoin="round" rx="4" ry="4"/><path fill="none" stroke="#109dc0" stroke-linecap="round" stroke-linejoin="round" d="M14.75 5.5v37M24 5.5v37m9.25-37v37m9.25-27.75h-37m37 9.25h-37m37 9.25h-37"/></svg></span><div><h1>ติดตามสถานการณ์น้ำในนิคมอุตสาหกรรม</h1></div>';bar.prepend(brand);
  const button=document.createElement('button');button.type='button';button.id='expoPresent';button.title='นำเสนอเต็มจอ';button.setAttribute('aria-label','เปิดหรือปิดการนำเสนอเต็มหน้าจอ');button.innerHTML=(window.IEAT_ICONS?.svg('expand')||'')+'<span>นำเสนอเต็มจอ</span>';
  button.onclick=async()=>{if(document.fullscreenElement){await document.exitFullscreen();document.body.classList.remove('expo-presentation');button.querySelector('span').textContent='นำเสนอเต็มจอ';button.setAttribute('aria-pressed','false');return}if(document.body.classList.contains('expo-presentation')){document.body.classList.remove('expo-presentation');button.querySelector('span').textContent='นำเสนอเต็มจอ';button.setAttribute('aria-pressed','false');return}try{await document.documentElement.requestFullscreen();document.body.classList.add('expo-presentation');button.querySelector('span').textContent='ออกจากโหมดนำเสนอ';button.setAttribute('aria-pressed','true')}catch(e){document.body.classList.add('expo-presentation');button.querySelector('span').textContent='ออกจากโหมดนำเสนอ';button.setAttribute('aria-pressed','true')}};bar.append(button);
  document.addEventListener('fullscreenchange',()=>button.setAttribute('aria-pressed',String(Boolean(document.fullscreenElement))));
@@ -81,7 +81,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  if(document.getElementById('ieatExpoQualityScript'))return;
  const script=document.createElement('script');
  script.id='ieatExpoQualityScript';
- script.src='flood-expo-quality.js?v=20261105-palette13';
+ script.src='flood-expo-quality.js?v=20261105-cyan1';
  script.defer=true;
  document.head.appendChild(script);
 })();

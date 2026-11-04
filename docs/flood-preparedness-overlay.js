@@ -19,7 +19,7 @@ const style=document.createElement('style');style.textContent=`
 .prep-feature button svg{width:34px;height:40px;display:block}
 .prep-feature .prep-name{position:absolute;left:40px;top:5px;white-space:nowrap;padding:4px 7px;background:#fffffff0;border-radius:6px;color:#335238;box-shadow:0 1px 5px #2e1f5418;pointer-events:none;font-weight:600}
 .prep-feature.left .prep-name{left:auto;right:40px}.prep-feature.prep-hidden{display:none}
-.prep-feature button:focus-visible{outline:3px solid #4a8594;outline-offset:2px}
+.prep-feature button:focus-visible{outline:3px solid #109dc0;outline-offset:2px}
 `;document.head.appendChild(style);
 let mode={active:new URLSearchParams(location.search).get('dashboard')!=='clean',estate:'บางปะอิน'},context=null,markers=[],outline=null,rasterOutline=null,outlinePromise=null,parentSeen=false,needsFocus=true,timer=null;
 const active=()=>mode.active&&mode.estate.includes('บางปะอิน');
@@ -47,8 +47,8 @@ function attach(){
  const next=window.IEATPreparednessMap?.();if(!next?.ready||(!next.vector&&!next.raster))return;
  if(context?.vector===next.vector&&context?.raster===next.raster){refresh();focusEstate();return}
  markers.forEach(x=>x.marker.remove());markers=[];rasterOutline?.remove();rasterOutline=null;context=next;
- stations.forEach(s=>mount(s,'pump','สถานีสูบน้ำ '+s.id,'#4a8594',s.id));
- mount({lon:100.5869,lat:14.1975},'storage','ระบบรับน้ำรวม','#4a8594',null);
+ stations.forEach(s=>mount(s,'pump','สถานีสูบน้ำ '+s.id,'#109dc0',s.id));
+ mount({lon:100.5869,lat:14.1975},'storage','ระบบรับน้ำรวม','#109dc0',null);
  mount({lon:100.5873,lat:14.2111},'protection','แนวป้องกัน','#598c14',null);
  const map=context.vector||context.raster;map.on('zoomend',refresh);map.on('moveend',refresh);
  if(!outlinePromise)outlinePromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=prep-approx1').then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{outline=d;drawOutline();refresh()}).catch(()=>{outlinePromise=null});
@@ -56,8 +56,8 @@ function attach(){
 }
 function drawOutline(){
  if(!context||!outline)return;
- if(context.vector){const m=context.vector;if(!m.getSource('prep-approx-outline')){m.addSource('prep-approx-outline',{type:'geojson',data:outline});m.addLayer({id:'prep-approx-outline',type:'line',source:'prep-approx-outline',paint:{'line-color':'#4a8594','line-width':2,'line-opacity':.65,'line-dasharray':[2,2]}})}}
- else if(!rasterOutline)rasterOutline=L.geoJSON(outline,{interactive:false,style:{color:'#4a8594',weight:2,opacity:.65,fill:false,dashArray:'7 6'}}).addTo(context.raster);
+ if(context.vector){const m=context.vector;if(!m.getSource('prep-approx-outline')){m.addSource('prep-approx-outline',{type:'geojson',data:outline});m.addLayer({id:'prep-approx-outline',type:'line',source:'prep-approx-outline',paint:{'line-color':'#109dc0','line-width':2,'line-opacity':.65,'line-dasharray':[2,2]}})}}
+ else if(!rasterOutline)rasterOutline=L.geoJSON(outline,{interactive:false,style:{color:'#109dc0',weight:2,opacity:.65,fill:false,dashArray:'7 6'}}).addTo(context.raster);
 }
 function refresh(){
  if(!context)return;const enabled=active()&&(context.vector||context.raster).getZoom()>=11;

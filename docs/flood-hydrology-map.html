@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="th"><head><style>@layer floodBorderless;</style><link rel="stylesheet" href="flood-borderless.css?v=20261105-design2"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่เฝ้าระวังน้ำ | IEAT</title>
+<html lang="th"><head><link rel="stylesheet" href="flood-cyan-reference.css?v=20261105-reference1"><style>@layer floodCyanReference, floodBorderless;</style><link rel="stylesheet" href="flood-borderless.css?v=20261105-design2"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>แผนที่เฝ้าระวังน้ำ | IEAT</title>
 <style>@layer floodReferenceMap;</style>
-<link rel="stylesheet" href="flood-reference-map.css?v=20261105-palette13">
+<link rel="stylesheet" href="flood-reference-map.css?v=20261105-cyan1">
 <script>if(new URLSearchParams(location.search).get("layout")==="reference")document.documentElement.dataset.referenceMap="true";</script>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -9,12 +9,12 @@
 <style>
 *{box-sizing:border-box}html,body,#map,#raster{height:100%;width:100%;margin:0}body{font:14px Sarabun,sans-serif;background:#ffffff;color:#051736}#map,#raster{position:absolute;inset:0}#raster{display:none}
 .controls{position:absolute;left:12px;top:12px;right:58px;z-index:1000;pointer-events:none}.controls>*{pointer-events:auto}
-.search{display:flex;gap:6px;max-width:450px;margin-bottom:8px}.search select,.search input,.search button{min-width:0;font:inherit;background:#fffffff5;border:1px solid #4a8594;border-radius:9px;padding:9px;color:#051736}.search select{width:45%}.search input{width:55%}
+.search{display:flex;gap:6px;max-width:450px;margin-bottom:8px}.search select,.search input,.search button{min-width:0;font:inherit;background:#fffffff5;border:1px solid #109dc0;border-radius:9px;padding:9px;color:#051736}.search select{width:45%}.search input{width:55%}
 .toggles{display:flex;flex-wrap:wrap;gap:5px;max-width:510px}.toggles label,.toggles summary{background:#fffffff5;border:1px solid #ffffff;box-shadow:0 2px 6px #05173610;border-radius:8px;padding:7px 9px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:4px}.toggles input{accent-color:#051736;margin:0}
 .legend{margin-top:8px;width:270px;max-width:100%;background:#fffffff5;border:1px solid #ffffff;border-radius:9px;padding:9px 12px;box-shadow:0 3px 10px #05173618;font-size:13px}.legend summary{cursor:pointer;font-weight:700}.keys{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.legend p{line-height:1.65;margin:8px 0 0}
 .status{display:none;position:absolute;bottom:25px;left:12px;right:55px;z-index:1000;background:#fffffff0;border:1px solid #ffffff;border-radius:8px;padding:8px 11px;font-size:12px;max-width:460px;max-height:75px;overflow:auto}
-.popup{font:14px Sarabun,sans-serif;color:#051736;min-width:225px;max-width:300px;line-height:1.6}.popup h3{font-size:18px;margin:0 22px 5px 0}.popup small{color:#051736}.value{font-size:27px;font-weight:700;margin:12px 0 4px}.badge{padding:5px 9px;border-radius:7px;background:#ffffff;font-weight:600;display:inline-block}.popup p{margin:8px 0}.popup a{color:#051736}.popup img{max-width:100%;border-radius:7px}.meter{height:8px;background:#ffffff;border-radius:99px;overflow:hidden;margin-top:8px}.meter i{height:100%;display:block;background:#4a8594}.maplibregl-popup-content,.leaflet-popup-content-wrapper{border-radius:15px!important;box-shadow:0 6px 24px #05173630!important}.leaflet-popup-content{margin:15px!important}.maplibregl-popup-content{padding:17px!important}
-.dam-name{color:#051736!important;border-color:#4a8594!important}.dam-select{margin-top:8px;width:270px;max-width:100%;font:inherit;background:#fffffff2;border:1px solid #4a8594;border-radius:9px;padding:8px;color:#051736}.estate-pin{position:absolute;width:28px;height:36px}.estate-pin svg{width:28px;height:36px;filter:drop-shadow(0 1px 2px #ffffff)}.estate-name{position:absolute;top:38px;left:50%;transform:translateX(-50%);white-space:nowrap;font:600 12px Sarabun,sans-serif;color:#051736;background:#ffffffed;border:1px solid #ffffff;border-radius:5px;padding:2px 5px}.estate-label{color:#051736;font:600 12px Sarabun,sans-serif;border-color:#ffffff;background:#fffffff2;box-shadow:none}.marker-icon{display:grid;place-items:center;background:#051736;color:white;border:2px solid white;border-radius:8px;width:26px;height:26px;box-shadow:0 2px 5px #05173638}.marker-icon svg{width:17px;height:17px}
+.popup{font:14px Sarabun,sans-serif;color:#051736;min-width:225px;max-width:300px;line-height:1.6}.popup h3{font-size:18px;margin:0 22px 5px 0}.popup small{color:#051736}.value{font-size:27px;font-weight:700;margin:12px 0 4px}.badge{padding:5px 9px;border-radius:7px;background:#ffffff;font-weight:600;display:inline-block}.popup p{margin:8px 0}.popup a{color:#051736}.popup img{max-width:100%;border-radius:7px}.meter{height:8px;background:#ffffff;border-radius:99px;overflow:hidden;margin-top:8px}.meter i{height:100%;display:block;background:#109dc0}.maplibregl-popup-content,.leaflet-popup-content-wrapper{border-radius:15px!important;box-shadow:0 6px 24px #05173630!important}.leaflet-popup-content{margin:15px!important}.maplibregl-popup-content{padding:17px!important}
+.dam-name{color:#051736!important;border-color:#109dc0!important}.dam-select{margin-top:8px;width:270px;max-width:100%;font:inherit;background:#fffffff2;border:1px solid #109dc0;border-radius:9px;padding:8px;color:#051736}.estate-pin{position:absolute;width:28px;height:36px}.estate-pin svg{width:28px;height:36px;filter:drop-shadow(0 1px 2px #ffffff)}.estate-name{position:absolute;top:38px;left:50%;transform:translateX(-50%);white-space:nowrap;font:600 12px Sarabun,sans-serif;color:#051736;background:#ffffffed;border:1px solid #ffffff;border-radius:5px;padding:2px 5px}.estate-label{color:#051736;font:600 12px Sarabun,sans-serif;border-color:#ffffff;background:#fffffff2;box-shadow:none}.marker-icon{display:grid;place-items:center;background:#051736;color:white;border:2px solid white;border-radius:8px;width:26px;height:26px;box-shadow:0 2px 5px #05173638}.marker-icon svg{width:17px;height:17px}
 @media(max-width:500px){.controls{left:8px;top:8px}.toggles label{font-size:12px;padding:6px}.search select,.search input{font-size:13px;padding:8px}.legend{width:245px}.status{left:8px;font-size:11px;max-height:58px}}
 @media(prefers-reduced-motion:no-preference){.water-critical{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{stroke-opacity:.15;fill-opacity:.04}}}
 .water-popup{width:290px;max-width:calc(100vw - 90px);max-height:calc(100vh - 100px);overflow:auto}.water-gauge-layout{display:grid;grid-template-columns:95px minmax(0,1fr);gap:8px;align-items:center}.water-gauge-layout svg{width:95px;height:235px}.water-gap{font-size:25px;font-weight:700;line-height:1.35}.water-level{font-size:22px;font-weight:700;margin-top:12px}.water-gauge-layout p{font-size:12px}.water-popup h3{padding-right:10px}
@@ -57,19 +57,19 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 .estate-pin:hover .estate-name,.estate-pin:focus-visible .estate-name,.marker-icon:hover .estate-name,.marker-icon:focus-visible .estate-name{display:block}
 .marker-icon{width:22px;height:22px;border-radius:7px;border-width:1.5px}.marker-icon svg{width:14px;height:14px}
 .estate-label{font-size:11px;border-radius:7px;padding:5px 8px;max-width:235px;white-space:normal}
-.controls summary:hover{background:#ffffff}.controls .toggles label{border-color:#ffffff;border-radius:9px;padding:9px;gap:8px}.controls .toggles label:has(input:checked){background:#ffffff;border-color:#4a8594}
+.controls summary:hover{background:#ffffff}.controls .toggles label{border-color:#ffffff;border-radius:9px;padding:9px;gap:8px}.controls .toggles label:has(input:checked){background:#ffffff;border-color:#109dc0}
 .layer-swatch{display:inline-block;width:10px;height:10px;border-radius:3px;margin-left:auto;flex:none}
 #mapCompass{position:absolute;right:10px;bottom:115px;z-index:1001;width:38px;height:48px;border:1px solid #ffffff;border-radius:10px;background:#ffffff;color:#051736;box-shadow:0 3px 12px #05173624;cursor:pointer;font:700 10px Sarabun,sans-serif;display:grid;place-content:center;gap:1px}
 #mapCompass svg{width:22px;height:24px;transition:transform .15s}#mapCompass:hover{background:#ffffff}#mapCompass:focus-visible{outline:3px solid #051736}
 .water-map-label{background:transparent;border:0;box-shadow:none;color:#051736;text-shadow:-1px -1px 0 white,1px -1px 0 white,-1px 1px 0 white,1px 1px 0 white,0 0 4px white;font:700 11px/1.15 Sarabun,sans-serif;text-align:center;padding:0}.water-map-label:before{display:none}
-.sensor-marker{width:24px;height:24px;border:2px solid white;border-radius:50%;box-shadow:0 1px 5px #05173655;display:grid;place-items:center}.sensor-marker svg{width:17px;height:17px;display:block}.sensor-marker:focus-visible{outline:3px solid #4a8594}.sensor-marker .estate-name{top:27px}.sensor-marker:hover .estate-name,.sensor-marker:focus-visible .estate-name{display:block}
-.history-only-label{background:#ffffff!important;border-color:#4a8594!important;color:#051736!important;font-weight:700!important}.history-only-label:has(input:checked){background:#4a8594!important;color:#ffffff!important;border-color:#4a8594!important}.history-only-label input{accent-color:#ffffff}
-.water-history-open{width:100%;margin:10px 0 12px;border:0;border-radius:11px;background:#4a8594;color:#ffffff;padding:11px 12px;font:700 14px Sarabun,sans-serif;cursor:pointer;box-shadow:0 3px 10px #4a859433}.water-history-open:hover{background:#ffffff}.water-history-open:focus-visible{outline:3px solid #4a8594;outline-offset:2px}
+.sensor-marker{width:24px;height:24px;border:2px solid white;border-radius:50%;box-shadow:0 1px 5px #05173655;display:grid;place-items:center}.sensor-marker svg{width:17px;height:17px;display:block}.sensor-marker:focus-visible{outline:3px solid #109dc0}.sensor-marker .estate-name{top:27px}.sensor-marker:hover .estate-name,.sensor-marker:focus-visible .estate-name{display:block}
+.history-only-label{background:#ffffff!important;border-color:#109dc0!important;color:#051736!important;font-weight:700!important}.history-only-label:has(input:checked){background:#109dc0!important;color:#ffffff!important;border-color:#109dc0!important}.history-only-label input{accent-color:#ffffff}
+.water-history-open{width:100%;margin:10px 0 12px;border:0;border-radius:11px;background:#109dc0;color:#ffffff;padding:11px 12px;font:700 14px Sarabun,sans-serif;cursor:pointer;box-shadow:0 3px 10px #109dc033}.water-history-open:hover{background:#ffffff}.water-history-open:focus-visible{outline:3px solid #109dc0;outline-offset:2px}
 #waterHistoryPanel{position:absolute;right:12px;bottom:12px;z-index:1600;width:min(540px,calc(100vw - 24px));max-height:min(78vh,720px);overflow:auto;background:#ffffff;border:1px solid #ffffff;border-radius:18px;box-shadow:0 12px 40px #05173640;padding:16px;color:#051736}#waterHistoryPanel[hidden]{display:none}
-.wh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:sticky;top:-16px;background:#ffffff;padding:2px 0 10px;z-index:2}.wh-head h3{font-size:18px;margin:0;color:#051736}.wh-head small{display:block;margin-top:3px;color:#4a8594}.wh-close{border:0;background:#ffffff;border-radius:50%;width:38px;height:38px;cursor:pointer;font:700 20px Sarabun,sans-serif;flex:none}
-.wh-years{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0 12px}.wh-years button{border:1px solid #ffffff;background:#ffffff;border-radius:9px;padding:9px 4px;font:600 13px Sarabun,sans-serif;cursor:pointer}.wh-years button[aria-pressed="true"]{background:#4a8594;color:#ffffff;border-color:#4a8594}
-.wh-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px 0}.wh-stat{background:#ffffff;border-radius:10px;padding:9px;min-width:0}.wh-stat small{display:block;font-size:10px;color:#4a8594}.wh-stat b{display:block;font-size:16px;margin-top:3px;overflow-wrap:anywhere}
-.wh-chart{border:1px solid #ffffff;border-radius:12px;background:#ffffff;padding:8px;overflow:hidden}.wh-chart svg{width:100%;height:auto;display:block}.wh-chart text{font-family:Sarabun,sans-serif;fill:#4a8594;font-size:10px}.wh-note{font-size:11px;line-height:1.65;color:#4a8594;margin:10px 0}.wh-actions{display:flex;gap:8px;flex-wrap:wrap}.wh-actions button{border:1px solid #4a8594;background:#ffffff;border-radius:9px;padding:9px 11px;font:600 12px Sarabun,sans-serif;cursor:pointer}.wh-empty{padding:28px 12px;text-align:center;line-height:1.7;color:#4a8594}
+.wh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:sticky;top:-16px;background:#ffffff;padding:2px 0 10px;z-index:2}.wh-head h3{font-size:18px;margin:0;color:#051736}.wh-head small{display:block;margin-top:3px;color:#109dc0}.wh-close{border:0;background:#ffffff;border-radius:50%;width:38px;height:38px;cursor:pointer;font:700 20px Sarabun,sans-serif;flex:none}
+.wh-years{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0 12px}.wh-years button{border:1px solid #ffffff;background:#ffffff;border-radius:9px;padding:9px 4px;font:600 13px Sarabun,sans-serif;cursor:pointer}.wh-years button[aria-pressed="true"]{background:#109dc0;color:#ffffff;border-color:#109dc0}
+.wh-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px 0}.wh-stat{background:#ffffff;border-radius:10px;padding:9px;min-width:0}.wh-stat small{display:block;font-size:10px;color:#109dc0}.wh-stat b{display:block;font-size:16px;margin-top:3px;overflow-wrap:anywhere}
+.wh-chart{border:1px solid #ffffff;border-radius:12px;background:#ffffff;padding:8px;overflow:hidden}.wh-chart svg{width:100%;height:auto;display:block}.wh-chart text{font-family:Sarabun,sans-serif;fill:#109dc0;font-size:10px}.wh-note{font-size:11px;line-height:1.65;color:#109dc0;margin:10px 0}.wh-actions{display:flex;gap:8px;flex-wrap:wrap}.wh-actions button{border:1px solid #109dc0;background:#ffffff;border-radius:9px;padding:9px 11px;font:600 12px Sarabun,sans-serif;cursor:pointer}.wh-empty{padding:28px 12px;text-align:center;line-height:1.7;color:#109dc0}
 @media(max-width:600px){#waterHistoryPanel{left:6px;right:6px;bottom:6px;width:auto;max-height:72vh;border-radius:15px;padding:12px}.wh-head{top:-12px}.wh-years{gap:4px}.wh-years button{font-size:12px;padding:8px 2px}.wh-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.wh-stat b{font-size:15px}}
 /* Larger pictograms remain legible over water routes and satellite imagery. */
 .estate-pin,.estate-pin svg{width:30px;height:39px}
@@ -103,12 +103,12 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 .estate-flood-plan .plan-card h4{margin:0;font-size:15px;line-height:1.4;color:#051736}
 .estate-flood-plan .plan-facts{padding-left:18px;margin:9px 0 0}
 .estate-flood-plan .plan-facts li{margin:5px 0;padding-left:2px}
-.plan-facts li::marker{color:#4a8594}
+.plan-facts li::marker{color:#109dc0}
 .plan-facts strong{font-weight:700;color:#051736}
-.plan-reference{margin-top:9px;padding-top:7px;border-top:1px solid #ffffff;font-size:11px;color:#4a8594}
+.plan-reference{margin-top:9px;padding-top:7px;border-top:1px solid #ffffff;font-size:11px;color:#109dc0}
 .plan-assembly{background:#ffffff;border-color:#ffffff}
-.plan-assembly .plan-card-icon{background:#ffffff;color:#4a8594}
-.estate-flood-plan .plan-assembly-place{font-weight:600;color:#4a8594;margin:9px 0 0;font-size:15px}
+.plan-assembly .plan-card-icon{background:#ffffff;color:#109dc0}
+.estate-flood-plan .plan-assembly-place{font-weight:600;color:#109dc0;margin:9px 0 0;font-size:15px}
 .estate-flood-plan .plan-location-note{background:#ffffff;border:1px solid #ffffff;color:#051736;padding:10px 12px;border-radius:10px;font-size:12px;line-height:1.6;margin:12px 0}
 .plan-empty{padding:12px;background:#ffffff;border-radius:10px;color:#051736}
 .plan-sources{font-size:12px;color:#051736;border-top:1px solid #ffffff;padding-top:10px}
@@ -123,11 +123,11 @@ body.toolbar-above:has(.leaflet-popup) .controls,body.toolbar-above:has(.maplibr
 .station-search-result{display:block!important;width:100%;text-align:left;padding:9px!important;border:1px solid #ffffff!important;background:white!important;border-radius:8px!important;font:13px Sarabun,sans-serif!important;color:#051736!important}
 .station-search-result b,.station-search-result small{display:block}
 .station-search-result small{color:#051736;font-size:11px;line-height:1.5}
-.station-search-result:hover,.station-search-result:focus-visible{background:#ffffff!important;outline:2px solid #4a8594}
-.station-search-status{font-size:11px;color:#4a8594;line-height:1.5}
+.station-search-result:hover,.station-search-result:focus-visible{background:#ffffff!important;outline:2px solid #109dc0}
+.station-search-status{font-size:11px;color:#109dc0;line-height:1.5}
 </style>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-diagrams.js?v=20261105-palette13"></script><script src="flood-estate-plans-2569.js?v=20261105-palette13"></script><style>.maplibregl-popup-content:has(.fp-estate),.leaflet-popup-content:has(.fp-estate){max-height:min(70vh,600px);overflow-y:auto;overscroll-behavior:contain}</style><link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
+<script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="flood-estate-diagrams.js?v=20261105-cyan1"></script><script src="flood-estate-plans-2569.js?v=20261105-cyan1"></script><style>.maplibregl-popup-content:has(.fp-estate),.leaflet-popup-content:has(.fp-estate){max-height:min(70vh,600px);overflow-y:auto;overscroll-behavior:contain}</style><link rel="stylesheet" href="./disaster-mobile.css?v=20261007-plans54-mobile3">
 
 <style id="clean-dashboard-map-style">
 body.dashboard-clean .sensor-marker,body.dashboard-clean .marker-icon,body.dashboard-clean .estate-pin{width:8px!important;height:8px!important;border:1px solid #ffffff!important;border-radius:50%!important;box-shadow:none!important;padding:0!important;min-width:0!important;min-height:0!important}
@@ -152,7 +152,7 @@ html body,html body button,html body select,html body .popup,html body .popup *{
 .popup-history-years{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px}
 .popup-history-years button{border:0!important;padding:8px 4px;border-radius:8px;background:white;color:#051736;cursor:pointer;font:13px Sarabun,sans-serif}
 .popup-history-years button[aria-pressed=true]{background:#051736;color:#ffffff}
-.popup-history-years button:focus-visible{outline:3px solid #4a8594;outline-offset:2px}
+.popup-history-years button:focus-visible{outline:3px solid #109dc0;outline-offset:2px}
 .popup-history-body .wh-chart{border:0!important;width:100%;overflow:hidden;background:#ffffff;border-radius:10px}.popup-history-body .wh-chart svg{width:100%!important;min-width:0!important;height:auto;display:block}.popup-history-body svg text{font:18px Sarabun,sans-serif;fill:#051736}
 .popup-history-source,.popup-no-history{font-size:11px!important;line-height:1.7;color:#051736!important;margin:10px 0 0!important}
 html body .layers-panel,html body .layer-group,html body .leaflet-control-layers{border:0!important;box-shadow:0 8px 24px #0517361c!important}
@@ -163,30 +163,30 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 .maplibregl-popup-content .popup,.leaflet-popup-content .popup{color:#2e1f54!important;line-height:1.55}
 .maplibregl-popup-content .popup h3,.leaflet-popup-content .popup h3{color:#2e1f54!important;font-weight:700!important}
 .popup img[data-camera-image],.popup img[src]{max-width:100%;border-radius:12px;object-fit:cover}
-.toggles label:has([data-layer="canal"]) .layer-swatch{background:#4a8594!important}
-.toggles label:has([data-layer="water"]) .layer-swatch{background:#4a8594!important}
+.toggles label:has([data-layer="canal"]) .layer-swatch{background:#109dc0!important}
+.toggles label:has([data-layer="water"]) .layer-swatch{background:#109dc0!important}
 .toggles label:has([data-layer="dam"]) .layer-swatch{background:#ffc719!important}
-.toggles label:has([data-layer="camera"]) .layer-swatch{background:#4a8594!important}
+.toggles label:has([data-layer="camera"]) .layer-swatch{background:#109dc0!important}
 </style>
 <style id="flood-pin-cards-20261029">
 .flood-data-pin{width:36px!important;height:48px!important;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;cursor:pointer;overflow:visible!important}
 .fd-pin-shape{position:absolute;left:2px;top:2px;width:32px;height:32px;border:2px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px #2e1f5455}
 .fd-pin-icon{display:grid;width:28px;height:28px;place-items:center;transform:rotate(45deg)}.fd-pin-icon svg{width:21px;height:21px}
 .fd-status{position:absolute;right:-1px;top:0;width:10px;height:10px;border:2px solid white;border-radius:50%;box-shadow:0 1px 3px #2e1f5444}
-.flood-data-pin:focus-visible{outline:3px solid #4a8594;outline-offset:3px}
+.flood-data-pin:focus-visible{outline:3px solid #109dc0;outline-offset:3px}
 .fd-legend-icon{width:23px!important;height:23px!important;display:inline-grid!important;place-items:center;border-radius:50%!important}.fd-legend-icon svg{width:17px;height:17px}
 .fd-cluster-label{display:block;position:absolute;top:40px;left:50%;transform:translateX(-50%);white-space:nowrap;background:white;border-radius:5px;padding:1px 4px;font:10px Sarabun,sans-serif;color:#335238}
 .satellite-flood-mask{filter:hue-rotate(15deg) saturate(1.5) brightness(.86) contrast(1.1)}
 #satelliteKey{position:absolute;bottom:95px;left:12px;z-index:620;max-width:230px;display:flex;gap:8px;align-items:flex-start;padding:9px 11px;background:#fffffff0;border-radius:11px;box-shadow:0 3px 13px #2e1f5420;color:#706357;font:11px/1.5 Sarabun,sans-serif;pointer-events:none}
 #satelliteKey[hidden]{display:none}#satelliteKey small{display:block;color:#706357;margin-top:3px;font-size:10px}
-.fd-flood-swatch{flex:none;display:inline-block;width:13px;height:13px;border-radius:3px;background:#4a8594;margin-top:3px}
+.fd-flood-swatch{flex:none;display:inline-block;width:13px;height:13px;border-radius:3px;background:#109dc0;margin-top:3px}
 .flood-card-popup .leaflet-popup-content-wrapper,.flood-card-popup .maplibregl-popup-content{border-radius:18px!important;padding:0!important;overflow:hidden}
 .flood-card-popup .leaflet-popup-content{margin:0!important;width:auto!important}.flood-card-popup .leaflet-popup-close-button,.flood-card-popup .maplibregl-popup-close-button{z-index:5;right:8px!important;top:8px!important;width:25px!important;height:25px!important;border-radius:50%;background:#fffffff0!important;color:#706357!important;font:20px/25px sans-serif!important}
 .popup.flood-card{width:320px;min-width:0;max-width:calc(100vw - 85px);padding:0;background:white;border-radius:18px;overflow:hidden;color:#2e1f54;font:13px/1.55 Sarabun,sans-serif}
 .fc-preview{position:relative;min-height:180px;background:#ffffff;overflow:hidden}
 .fc-camera img{display:block;width:100%;height:180px;object-fit:cover;border-radius:0!important;margin:0!important}
 .fc-image-badge{position:absolute;left:12px;top:12px;z-index:2;padding:3px 9px;border-radius:20px;background:#051736b8;color:white;font-size:11px}
-.fc-placeholder{height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#706357}.fc-placeholder svg{width:42px;height:42px;stroke:#4a8594}
+.fc-placeholder{height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#706357}.fc-placeholder svg{width:42px;height:42px;stroke:#109dc0}
 .fc-camera:has(img[style*="display: block"]) .fc-placeholder{display:none}
 .fc-reading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--fc-color);background:linear-gradient(140deg,#ffffff,#ffffff);padding-top:25px}
 .fc-reading strong{font-size:36px;line-height:1.3;z-index:1}.fc-reading strong small{font-size:16px}.fc-reading>span:not(.fc-image-badge){font-size:12px;z-index:1}
@@ -195,7 +195,7 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 .fc-title{display:flex;align-items:center;gap:12px;padding:13px 16px 7px}.fc-title>div{flex:1;min-width:0}.fc-title small{font-size:10px;color:var(--fc-color)}
 .flood-card .fc-title h3{color:#2e1f54!important;font-size:15px!important;margin:2px 0!important;line-height:1.5;overflow-wrap:anywhere}
 .fc-title>a{flex:none;color:#706357!important;font-size:12px;text-decoration:none}
-.fc-caption{padding:0 16px 12px;color:#4a8594;font-size:11px}.fc-caption p{margin:5px 0}.fc-caption button{font:inherit;color:#52057f;border:0;background:#ffffff;border-radius:7px;padding:6px 10px;cursor:pointer}
+.fc-caption{padding:0 16px 12px;color:#109dc0;font-size:11px}.fc-caption p{margin:5px 0}.fc-caption button{font:inherit;color:#52057f;border:0;background:#ffffff;border-radius:7px;padding:6px 10px;cursor:pointer}
 .fc-state-dot{display:inline-block;width:7px;height:7px;border-radius:50%}
 .fc-details>summary{cursor:pointer;color:var(--fc-color);padding:10px 16px;background:#ffffff;font-weight:600}.fc-detail-body{padding:12px 16px;max-height:44vh;overflow:auto}
 .fc-detail-body .popup{width:auto!important;min-width:0!important;max-width:100%!important}.fc-detail-body .station-popup-head{display:none}
@@ -203,38 +203,38 @@ html body .layers-panel,html body .layer-group,html body .leaflet-control-layers
 </style>
 <style id="names-only-map-pins">.fd-pin-name{position:absolute;top:5px;left:40px;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fffffff0;color:#335238;border-radius:5px;padding:3px 6px;font:11px Sarabun,sans-serif;pointer-events:none;box-shadow:0 1px 4px #2e1f5414}.estate-name{display:block!important;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.leaflet-popup-pane{display:none!important}.maplibregl-popup{visibility:hidden!important}#flood-layer-guide{bottom:30px!important}#satelliteKey{max-width:210px}#status{display:none!important}</style>
 <style id="status-pin-imagery-theme">
-.map-point-status{padding:9px 10px;background:#ffffff;border-radius:6px;margin-bottom:12px;font:12px/1.5 Sarabun,sans-serif;color:#335238}.map-point-status small{display:block;color:#4a8594;font-size:10px;margin-top:4px}.fd-pin-icon{color:white}.fd-pin-icon svg{stroke:none}.fd-pin-name{border-left:2px solid #ffffff}
+.map-point-status{padding:9px 10px;background:#ffffff;border-radius:6px;margin-bottom:12px;font:12px/1.5 Sarabun,sans-serif;color:#335238}.map-point-status small{display:block;color:#109dc0;font-size:10px;margin-top:4px}.fd-pin-icon{color:white}.fd-pin-icon svg{stroke:none}.fd-pin-name{border-left:2px solid #ffffff}
 .fd-legend-icon{color:white}.fd-legend-icon svg{stroke:none}
-.fd-flow-mini{position:absolute;right:-9px;bottom:0;width:19px;height:19px;background:#4a8594;color:white;border:1.5px solid white;border-radius:50%;display:grid;place-items:center}.fd-flow-mini svg{width:13px;height:13px}
+.fd-flow-mini{position:absolute;right:-9px;bottom:0;width:19px;height:19px;background:#109dc0;color:white;border:1.5px solid white;border-radius:50%;display:grid;place-items:center}.fd-flow-mini svg{width:13px;height:13px}
 .basemap-select{display:block;padding:8px 0;font:12px Sarabun,sans-serif;color:#706357}.basemap-select select{display:block;width:100%;margin-top:5px;padding:8px;border:1px solid #ffffff;border-radius:7px;background:white;color:#335238;font:inherit}
 #mapStatusKey{position:absolute;left:12px;bottom:27px;z-index:700;background:#fffffff2;color:#335238;border-radius:9px;box-shadow:0 2px 9px #2e1f5426;max-width:255px;font:11px/1.5 Sarabun,sans-serif}
-#mapStatusKey summary{padding:7px 10px;cursor:pointer;font-weight:600}#mapStatusKey>div{padding:0 11px 10px}#mapStatusKey p{margin:5px 0}#mapStatusKey i{width:9px;height:9px;display:inline-block;border-radius:50%;margin-right:5px}#mapStatusKey small{font-size:10px;color:#4a8594}
+#mapStatusKey summary{padding:7px 10px;cursor:pointer;font-weight:600}#mapStatusKey>div{padding:0 11px 10px}#mapStatusKey p{margin:5px 0}#mapStatusKey i{width:9px;height:9px;display:inline-block;border-radius:50%;margin-right:5px}#mapStatusKey small{font-size:10px;color:#109dc0}
 #flood-layer-guide{display:none}
 .imagery-basemap .estate-name,.imagery-basemap .fd-pin-name,.imagery-basemap .prep-name{background:#fffffff2!important;color:#335238!important}
-</style><style id="aerial-camera-controls">#aerialTourButton{position:absolute;top:12px;left:112px;z-index:1050;border:0;border-radius:10px;padding:10px 12px;background:#ffffff;color:#4a8594;box-shadow:0 3px 12px #2e1f5420;font:12px Sarabun,sans-serif;cursor:pointer}#aerialTourButton span{margin-right:4px;font-size:15px}#aerialTourButton[aria-pressed=true]{background:#ffffff}#aerialTourHint{position:absolute;left:12px;top:65px;z-index:1050;max-width:min(360px,calc(100vw - 30px));background:#fffffff2;border-radius:10px;padding:9px 12px;color:#706357;box-shadow:0 3px 14px #2e1f5420;font:11px/1.6 Sarabun,sans-serif;pointer-events:none}#aerialTourHint[hidden]{display:none}@media(max-width:650px){#aerialTourButton{left:110px;font-size:11px;padding:10px 8px}}</style><script src="flood-icons.js?v=20261105-palette13"></script><script src="flood-water-status.js?v=20261105-palette13"></script><style>#mapStatusKey{max-height:65vh;overflow:auto}#mapLegend .keys{display:none}</style><style id="ocean-white-controls">
-#aerialTourButton,#supportMapButton{background:#ffffff!important;color:#4a8594!important;box-shadow:0 3px 14px #3352381b!important}
-#aerialTourButton[aria-pressed=true]{background:#ffffff!important;color:#4a8594!important;box-shadow:inset 0 -2px #4a8594,0 3px 14px #3352381b!important}
+</style><style id="aerial-camera-controls">#aerialTourButton{position:absolute;top:12px;left:112px;z-index:1050;border:0;border-radius:10px;padding:10px 12px;background:#ffffff;color:#109dc0;box-shadow:0 3px 12px #2e1f5420;font:12px Sarabun,sans-serif;cursor:pointer}#aerialTourButton span{margin-right:4px;font-size:15px}#aerialTourButton[aria-pressed=true]{background:#ffffff}#aerialTourHint{position:absolute;left:12px;top:65px;z-index:1050;max-width:min(360px,calc(100vw - 30px));background:#fffffff2;border-radius:10px;padding:9px 12px;color:#706357;box-shadow:0 3px 14px #2e1f5420;font:11px/1.6 Sarabun,sans-serif;pointer-events:none}#aerialTourHint[hidden]{display:none}@media(max-width:650px){#aerialTourButton{left:110px;font-size:11px;padding:10px 8px}}</style><script src="flood-icons.js?v=20261105-cyan1"></script><script src="flood-water-status.js?v=20261105-cyan1"></script><style>#mapStatusKey{max-height:65vh;overflow:auto}#mapLegend .keys{display:none}</style><style id="ocean-white-controls">
+#aerialTourButton,#supportMapButton{background:#ffffff!important;color:#109dc0!important;box-shadow:0 3px 14px #3352381b!important}
+#aerialTourButton[aria-pressed=true]{background:#ffffff!important;color:#109dc0!important;box-shadow:inset 0 -2px #109dc0,0 3px 14px #3352381b!important}
 .ieat-3d-tools,.ieat-3d-tools button,#mapDetails,#mapDetails header,#mapDetails nav,#mapDetails nav button,#mapDetailsBody,.map-support-point,.map-selected-station{background:#ffffff!important}
-.ieat-3d-tools button{color:#4a8594!important}
-#mapDetails nav button{color:#4a8594!important}
-#mapDetails nav button[aria-pressed=true]{background:#ffffff!important;color:#4a8594!important;box-shadow:inset 0 -2px #4a8594!important}
+.ieat-3d-tools button{color:#109dc0!important}
+#mapDetails nav button{color:#109dc0!important}
+#mapDetails nav button[aria-pressed=true]{background:#ffffff!important;color:#109dc0!important;box-shadow:inset 0 -2px #109dc0!important}
 #mapDetails h2,#mapDetailsBody h3{color:#335238!important}
-.map-support-point{color:#4a8594!important;box-shadow:0 2px 9px #3352380c}
-.map-support-point[aria-pressed=true]{background:#ffffff!important;box-shadow:inset 3px 0 #4a8594,0 2px 9px #3352380c!important}
+.map-support-point{color:#109dc0!important;box-shadow:0 2px 9px #3352380c}
+.map-support-point[aria-pressed=true]{background:#ffffff!important;box-shadow:inset 3px 0 #109dc0,0 2px 9px #3352380c!important}
 #mapDetailsBody th,#mapDetailsBody td,.water-criteria-table th,.water-criteria-table td{background:#ffffff!important}
 #mapStatusKey,#satelliteKey,.fd-pin-name,.prep-name{background:#ffffff!important}
 </style><style id="reference-round-map-tools">
 .controls{right:14px!important;top:calc(50% - 174px)!important;width:44px!important}
 #mapLayers>summary{display:grid!important;place-items:center!important;width:44px!important;height:44px!important;padding:0!important;font-size:0!important;border-radius:50%!important;background:white!important;box-shadow:0 2px 12px #2e1f541c!important}
 #mapLayers>summary::marker,#mapLayers>summary::after{display:none!important;content:none!important}
-#mapLayers>summary .ieat-icon{width:22px!important;height:22px!important;color:#4a8594}
+#mapLayers>summary .ieat-icon{width:22px!important;height:22px!important;color:#109dc0}
 #mapLayers .layer-body{position:absolute!important;top:0!important;right:56px!important;width:min(285px,calc(100vw - 85px))!important;max-height:70vh!important;overflow:auto!important;background:white!important;border-radius:15px!important;box-shadow:0 4px 22px #2e1f5422!important}
 .ieat-3d-tools{left:auto!important;right:14px!important;top:calc(50% - 122px)!important;padding:0!important;border-radius:50%!important;box-shadow:0 2px 12px #2e1f541c!important}
 #estateView3d{display:grid!important;place-items:center!important;width:44px!important;height:44px!important;padding:0!important;font-size:0!important;border:0!important;border-radius:50%!important;background:white!important}
-#estateView3d .ieat-icon{width:21px!important;height:21px!important;margin:0!important;color:#4a8594}
+#estateView3d .ieat-icon{width:21px!important;height:21px!important;margin:0!important;color:#109dc0}
 #aerialTourButton,#supportMapButton{left:auto!important;right:14px!important;width:44px!important;height:44px!important;max-width:44px!important;padding:0!important;font-size:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:white!important;box-shadow:0 2px 12px #2e1f541c!important}
 #aerialTourButton{top:calc(50% - 70px)!important}#supportMapButton{top:calc(50% - 18px)!important}
-#aerialTourButton .ieat-icon,#supportMapButton .ieat-icon{width:21px!important;height:21px!important;margin:0!important;color:#4a8594}
+#aerialTourButton .ieat-icon,#supportMapButton .ieat-icon{width:21px!important;height:21px!important;margin:0!important;color:#109dc0}
 #aerialTourButton span{margin:0!important}
 #mapCompass{right:14px!important;width:44px!important;height:44px!important;border-radius:50%!important;bottom:126px!important;box-shadow:0 2px 12px #2e1f541c!important}
 #satelliteKey{left:auto!important;right:70px!important;bottom:22px!important;max-width:min(270px,calc(100vw - 90px))!important;border-radius:15px!important;padding:12px!important;background:white!important;box-shadow:0 3px 18px #2e1f5415!important}
@@ -247,21 +247,21 @@ body{font-family:Sarabun,system-ui,sans-serif!important;color:#000000}
 #mapDetails,#mapDetailsBody{background:#ffffff!important;color:#000000!important}
 #mapDetails h2,#mapDetailsBody h3{font:400 20px/32px Sarabun,sans-serif!important;color:#000000!important}
 #mapDetails nav button{font:400 14px/20px Sarabun,sans-serif!important;color:#706357!important}
-#mapDetails nav button[aria-pressed=true]{color:#4a8594!important;box-shadow:inset 0 -2px #4a8594!important;background:#ffffff!important}
+#mapDetails nav button[aria-pressed=true]{color:#109dc0!important;box-shadow:inset 0 -2px #109dc0!important;background:#ffffff!important}
 #mapDetailsBody th,#mapDetailsBody td{font:400 14px/20px Sarabun,sans-serif!important;color:#000000!important;background:#ffffff!important}
 .map-support-point{font:400 14px/20px Sarabun,sans-serif!important;color:#000000!important;background:#ffffff!important}
-.map-support-point[aria-pressed=true]{box-shadow:inset 3px 0 #4a8594,0 2px 9px #0000000c!important}
+.map-support-point[aria-pressed=true]{box-shadow:inset 3px 0 #109dc0,0 2px 9px #0000000c!important}
 .map-details-note,.map-support-point small{color:#706357!important;font-family:Sarabun,sans-serif!important}
 #estateView3d .ieat-icon,#aerialTourButton .ieat-icon,#supportMapButton .ieat-icon,#mapLayers>summary .ieat-icon{color:#706357!important}
-#aerialTourButton[aria-pressed=true] .ieat-icon,#estateView3d[aria-pressed=true] .ieat-icon{color:#4a8594!important}
+#aerialTourButton[aria-pressed=true] .ieat-icon,#estateView3d[aria-pressed=true] .ieat-icon{color:#109dc0!important}
 #mapCompass{color:#706357!important}
 #mapStatusKey,#satelliteKey{background:#ffffff!important;color:#000000!important;font-family:Sarabun,sans-serif!important}
 #satelliteKey small,#mapStatusKey small{color:#706357!important}
 </style><style id="watch-evidence-style">
 #watchEvidence{position:absolute;z-index:1500;right:16px;top:116px;width:340px;max-width:calc(100vw - 32px);max-height:calc(100dvh - 150px);display:flex;flex-direction:column;background:#ffffff;border:1px solid #ffffff;border-radius:18px;box-shadow:0 8px 28px #05173626;color:#335238;font:13px/1.65 Sarabun,sans-serif;overflow:hidden}
 #watchEvidence header{display:flex;justify-content:space-between;gap:8px;padding:14px 16px;background:#ffffff}#watchEvidence strong{color:#051736;font-size:15px}#watchEvidence small{display:block;color:#706357;font-size:11px}
-#watchEvidence button{border:1px solid #4a8594;background:#ffffff;color:#051736;border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}#watchEvidence [data-watch-close]{border:0;background:transparent;font-size:24px;padding:0 5px}
-.watch-layer-options{display:flex;gap:10px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid #ffffff}.watch-layer-options label{display:flex;align-items:center;gap:4px;font-size:12px}.watch-layer-options input{accent-color:#4a8594}
+#watchEvidence button{border:1px solid #109dc0;background:#ffffff;color:#051736;border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}#watchEvidence [data-watch-close]{border:0;background:transparent;font-size:24px;padding:0 5px}
+.watch-layer-options{display:flex;gap:10px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid #ffffff}.watch-layer-options label{display:flex;align-items:center;gap:4px;font-size:12px}.watch-layer-options input{accent-color:#109dc0}
 .watch-evidence-list{overflow:auto;min-height:0;padding:0 14px}.watch-evidence-list details{border-bottom:1px solid #ffffff;padding:10px 0}.watch-evidence-list summary{cursor:pointer;color:#051736;font-weight:600}.watch-evidence-list p{background:#ffffff;border-radius:8px;padding:8px;margin:8px 0}.watch-evidence-list button{margin-top:8px}
 #watchEvidence footer{font-size:10px;color:#706357;padding:10px 14px;border-top:1px solid #ffffff}
 @media(max-width:650px){#watchEvidence{top:auto;bottom:20px;max-height:42dvh;width:calc(100% - 32px)}#watchMapLegend{max-width:none!important}}
@@ -308,29 +308,29 @@ html body .estate-pin .ieat-estate-location,html body .clean-estate-point .ieat-
 html body .ieat-estate-emblem{position:absolute;inset:5px;display:grid;place-items:center;transform:rotate(45deg);border-radius:50%;background:#ffffff;color:#52057f;font:700 9px Sarabun,sans-serif;overflow:hidden}
 html body .ieat-estate-emblem img{width:90%!important;height:90%!important;object-fit:contain!important}
 html body .flood-data-pin{width:44px!important;height:49px!important;background:none!important;border:0!important;overflow:visible!important}
-html body .flood-data-pin>.ieat-map-symbol{position:relative!important;inset:auto!important;display:grid!important;place-items:center!important;width:40px!important;height:40px!important;border:2.5px solid #2e1f54!important;border-radius:13px!important;background:#ffffff!important;color:var(--ieat-symbol-color,#4a8594)!important;filter:none!important;box-shadow:0 3px 9px #2e1f5460!important}
+html body .flood-data-pin>.ieat-map-symbol{position:relative!important;inset:auto!important;display:grid!important;place-items:center!important;width:40px!important;height:40px!important;border:2.5px solid #2e1f54!important;border-radius:13px!important;background:#ffffff!important;color:var(--ieat-symbol-color,#109dc0)!important;filter:none!important;box-shadow:0 3px 9px #2e1f5460!important}
 html body .flood-data-pin>.ieat-map-symbol:after{content:"";position:absolute;bottom:-7px;left:15px;width:10px;height:10px;background:#ffffff;border-right:2.5px solid #2e1f54;border-bottom:2.5px solid #2e1f54;transform:rotate(45deg)}
 html body .flood-data-pin>.ieat-map-symbol[data-type="camera"]{background:#52057f!important;color:#ffffff!important;border-color:#2e1f54!important}
 html body .flood-data-pin>.ieat-map-symbol[data-type="camera"]:after{background:#52057f;border-color:#2e1f54}
 html body .flood-data-pin>.ieat-map-symbol[data-type="dam"]{color:#ff6908!important}
-html body .flood-data-pin>.ieat-map-symbol[data-type="water"]{color:#4a8594!important}
-html body .flood-data-pin>.ieat-map-symbol[data-type="canal"]{color:#4a8594!important}
+html body .flood-data-pin>.ieat-map-symbol[data-type="water"]{color:#109dc0!important}
+html body .flood-data-pin>.ieat-map-symbol[data-type="canal"]{color:#109dc0!important}
 html body .ieat-meaning-svg{display:block!important;width:29px!important;height:29px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.5!important}
 html body .ieat-meaning-svg *{fill:none!important;stroke:currentColor!important}
 html body #mapLayers .layer-swatch.ieat-layer-glyph{width:30px!important;height:32px!important;display:grid!important;place-items:center!important;background:transparent!important;border:0!important;overflow:visible!important}
 html body #mapLayers .layer-swatch.ieat-layer-glyph .ieat-meaning-svg{width:25px!important;height:25px!important}
 html body #mapLayers .layer-swatch[data-kind="camera"]{color:#52057f!important}
 html body #mapLayers .layer-swatch[data-kind="dam"]{color:#ff6908!important}
-html body #mapLayers .layer-swatch[data-kind="water"],html body #mapLayers .layer-swatch[data-kind="rings"]{color:#4a8594!important}
-html body #mapLayers .layer-swatch[data-kind="canal"]{color:#4a8594!important}
+html body #mapLayers .layer-swatch[data-kind="water"],html body #mapLayers .layer-swatch[data-kind="rings"]{color:#109dc0!important}
+html body #mapLayers .layer-swatch[data-kind="canal"]{color:#109dc0!important}
 html body #mapLayers .layer-swatch[data-kind="estate"] .ieat-estate-location{display:block;position:relative;width:24px;height:24px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#52057f;border:1.5px solid #2e1f54}
 html body #mapLayers .layer-swatch[data-kind="estate"] .ieat-estate-emblem{inset:3px;font-size:6px}
 html body .map-flow-reading{display:flex!important;align-items:center!important;gap:3px!important;left:34px!important;top:0!important}
-html body .map-flow-reading .ieat-meaning-svg{width:14px!important;height:14px!important;color:#4a8594!important}
+html body .map-flow-reading .ieat-meaning-svg{width:14px!important;height:14px!important;color:#109dc0!important}
 </style><style id="ieat-popup-marker-polish-20261104">
 /* Status-filled map pins with white pictograms; estate location stays purple. */
-html body .flood-data-pin>.ieat-map-symbol{background:var(--ieat-symbol-color,#4a8594)!important;color:#ffffff!important;border-color:#2e1f54!important}
-html body .flood-data-pin>.ieat-map-symbol:after{background:var(--ieat-symbol-color,#4a8594)!important;border-color:#2e1f54!important}
+html body .flood-data-pin>.ieat-map-symbol{background:var(--ieat-symbol-color,#109dc0)!important;color:#ffffff!important;border-color:#2e1f54!important}
+html body .flood-data-pin>.ieat-map-symbol:after{background:var(--ieat-symbol-color,#109dc0)!important;border-color:#2e1f54!important}
 html body .flood-data-pin>.ieat-map-symbol .ieat-meaning-svg,
 html body .flood-data-pin>.ieat-map-symbol .ieat-meaning-svg *{color:#ffffff!important;stroke:#ffffff!important;fill:none!important}
 html body .flood-data-pin>.ieat-map-symbol[data-type="camera"]{background:var(--ieat-symbol-color,#52057f)!important}
@@ -341,21 +341,21 @@ html body.dashboard-clean[data-map-detail="near"] .estate-pin:hover .estate-name
 html body.dashboard-clean[data-map-detail="near"] .estate-pin:focus-visible .estate-name{display:block!important;position:absolute!important;top:-36px!important;left:45px!important;transform:none!important;max-width:145px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;padding:5px 9px!important;border:1px solid rgba(255,255,255,.78)!important;border-radius:10px!important;background:rgba(255,255,255,.68)!important;backdrop-filter:blur(13px) saturate(1.45)!important;-webkit-backdrop-filter:blur(13px) saturate(1.45)!important;box-shadow:0 3px 12px #05173622!important;color:#2e1f54!important;pointer-events:none!important;z-index:2}
 html body .ieat-station-popup{max-width:355px;font:13px/1.5 Sarabun,sans-serif;color:#2e1f54}
 html body .ieat-station-popup header h3{font:700 16px/1.4 Sarabun,sans-serif;margin:3px 0 9px;color:#051736}
-html body .ieat-station-popup header small{color:#4a8594;font-size:11px}
+html body .ieat-station-popup header small{color:#109dc0;font-size:11px}
 html body .ieat-gauge-row{display:flex;gap:13px;align-items:center;padding:7px 3px 13px}
 html body .ieat-gauge{width:76px;min-width:76px;height:155px}
 html body .ieat-station-reading{display:flex;flex-direction:column;gap:7px;min-width:0}
 html body .ieat-station-reading strong{font:700 19px/1.35 Sarabun,sans-serif;color:#051736}
-html body .ieat-station-reading small{font-size:11px;color:#4a8594}
+html body .ieat-station-reading small{font-size:11px;color:#109dc0}
 html body .ieat-status-chip{align-self:flex-start;border-radius:9px;background:var(--status);color:#ffffff;font:600 11px Sarabun,sans-serif;padding:5px 9px}
 html body .ieat-station-table{width:100%;border-collapse:collapse;border:1px solid #ffffff}
 html body .ieat-station-table th,html body .ieat-station-table td{padding:7px 9px;border-bottom:1px solid #ffffff;text-align:left;font:12px/1.4 Sarabun,sans-serif}
 html body .ieat-station-table th{width:43%;background:#ffffff;font-weight:600;color:#335238}
-html body .popup-estate-distance{display:grid;gap:7px;background:#ffffff;border:1px solid #4a8594;border-radius:11px;padding:10px 12px;margin-top:10px;font:12px Sarabun,sans-serif}
+html body .popup-estate-distance{display:grid;gap:7px;background:#ffffff;border:1px solid #109dc0;border-radius:11px;padding:10px 12px;margin-top:10px;font:12px Sarabun,sans-serif}
 html body .popup-estate-distance strong{font-weight:700}
 html body .ieat-measure-btn{padding:8px 10px;border:1px solid #051736;border-radius:9px;color:white;background:#051736;font:600 12px Sarabun,sans-serif;cursor:pointer}
 html body .ieat-measure-btn[aria-pressed="true"]{background:white;color:#051736}
-html body .ieat-distance-map-label{min-width:90px;text-align:center;white-space:nowrap;border:1px solid #4a8594;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);padding:5px 8px;border-radius:9px;box-shadow:0 2px 6px #2e1f5430;color:#051736;font:700 12px Sarabun,sans-serif;pointer-events:none}
+html body .ieat-distance-map-label{min-width:90px;text-align:center;white-space:nowrap;border:1px solid #109dc0;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);padding:5px 8px;border-radius:9px;box-shadow:0 2px 6px #2e1f5430;color:#051736;font:700 12px Sarabun,sans-serif;pointer-events:none}
 html body .prep-point-popup .maplibregl-popup-content,html body .prep-point-popup .leaflet-popup-content-wrapper{max-height:min(78vh,650px);overflow:auto}
 html body .maplibregl-popup.prep-point-popup{visibility:visible!important}
 html body .leaflet-popup-pane:has(.prep-point-popup){display:block!important}
@@ -380,7 +380,7 @@ html body .ieat-station-popup .station-history-disclosure{margin-top:10px;border
  flex-shrink:0!important;
  display:flex!important;align-items:center!important;
  padding:17px 18px!important;
- background:linear-gradient(115deg,#051736 0%,#4a8594 58%,#4a8594 100%)!important;
+ background:linear-gradient(115deg,#051736 0%,#109dc0 58%,#109dc0 100%)!important;
  border-bottom:1px solid rgba(255,255,255,.45)!important;
 }
 #watchEvidence .ieat-watch-head strong{display:block!important;color:#ffffff!important;font-size:18px!important;font-weight:750!important;line-height:1.4!important}
@@ -394,22 +394,22 @@ html body .ieat-station-popup .station-history-disclosure{margin-top:10px;border
  box-shadow:inset 0 1px rgba(255,255,255,.95),0 4px 12px rgba(74,133,148,.10)!important;
 }
 #watchEvidence .ieat-watch-overview>div:nth-child(2){background:rgba(255,255,255,.75)!important}
-#watchEvidence .ieat-summary-symbol{grid-row:1/3;align-self:center;display:grid;place-items:center;width:30px;height:30px;background:#4a8594;border-radius:10px;color:#051736!important;font-size:23px!important}
-#watchEvidence .ieat-watch-overview>div:nth-child(2) .ieat-summary-symbol{background:#4a8594;color:#4a8594!important}
+#watchEvidence .ieat-summary-symbol{grid-row:1/3;align-self:center;display:grid;place-items:center;width:30px;height:30px;background:#109dc0;border-radius:10px;color:#051736!important;font-size:23px!important}
+#watchEvidence .ieat-watch-overview>div:nth-child(2) .ieat-summary-symbol{background:#109dc0;color:#109dc0!important}
 #watchEvidence .ieat-watch-overview span:not(.ieat-summary-symbol){color:#000000!important;font-size:11px!important}
 #watchEvidence .ieat-watch-overview strong{grid-column:2;font-size:22px!important;color:#051736!important;line-height:1.2!important}
 #watchEvidence .ieat-watch-overview strong small{display:inline!important;font-size:11px!important;color:#000000!important;font-weight:500!important}
 #watchEvidence .watch-layer-options{border:0!important;padding:10px 14px!important;gap:7px!important}
-#watchEvidence .watch-layer-options label{background:rgba(255,255,255,.78)!important;border:1px solid #4a8594!important;border-radius:12px!important;color:#000000!important;padding:6px 9px!important;font-size:11px!important}
-#watchEvidence .watch-evidence-list{min-height:0;overflow-y:auto;padding:0 12px 8px!important;scrollbar-width:thin;scrollbar-color:#4a8594 transparent}
+#watchEvidence .watch-layer-options label{background:rgba(255,255,255,.78)!important;border:1px solid #109dc0!important;border-radius:12px!important;color:#000000!important;padding:6px 9px!important;font-size:11px!important}
+#watchEvidence .watch-evidence-list{min-height:0;overflow-y:auto;padding:0 12px 8px!important;scrollbar-width:thin;scrollbar-color:#109dc0 transparent}
 #watchEvidence .ieat-watch-estate{padding:0!important;margin:0 0 10px!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:17px!important;background:rgba(255,255,255,.78)!important;box-shadow:0 4px 16px rgba(74,133,148,.11),inset 0 1px white!important;overflow:hidden}
 #watchEvidence .ieat-watch-estate>summary{display:flex!important;align-items:center!important;gap:9px;padding:12px 13px!important;background:rgba(255,255,255,.67)!important}
 #watchEvidence .ieat-watch-estate-glyph{flex:0 0 38px!important;display:grid;place-items:center;border-radius:12px;background:#ffffff!important;color:#051736!important;font-size:25px!important}
 #watchEvidence .ieat-watch-estate-title{flex:1;min-width:0}
 #watchEvidence .ieat-watch-estate-title b{color:#051736!important;font-size:13px!important}
-#watchEvidence .ieat-watch-estate-title small{color:#4a8594!important;font-size:11px!important}
+#watchEvidence .ieat-watch-estate-title small{color:#109dc0!important;font-size:11px!important}
 #watchEvidence .ieat-watch-estate-body{padding:0 11px 10px!important}
-#watchEvidence [data-watch-estate]{display:block;background:#ffffff!important;border:1px solid #4a8594!important;border-radius:10px!important;color:#000000!important;font-size:12px!important;padding:8px 12px!important;margin:9px 0!important}
+#watchEvidence [data-watch-estate]{display:block;background:#ffffff!important;border:1px solid #109dc0!important;border-radius:10px!important;color:#000000!important;font-size:12px!important;padding:8px 12px!important;margin:9px 0!important}
 #watchEvidence .ieat-watch-station{padding:11px!important;margin:8px 0!important;border:1px solid #ffffff!important;background:rgba(255,255,255,.87)!important;border-radius:14px!important;box-shadow:0 3px 9px rgba(74,133,148,.06)!important}
 #watchEvidence .ieat-watch-reason{display:flex!important;gap:10px!important;align-items:center!important;background:#ffffff!important;border:0!important;border-radius:11px!important;padding:10px!important;color:#000000!important}
 #watchEvidence .ieat-watch-reason .ieat-watch-reason-title{display:block!important;color:#ed3b21!important;font-size:12px!important;font-weight:750!important}
@@ -456,7 +456,7 @@ html body .estate-pin .estate-name{
   background:#ffffff!important;border:1px solid #ffffff!important;border-radius:5px!important
 }
 html body .flood-data-pin{position:relative!important;box-sizing:border-box!important;width:36px!important;height:48px!important;min-width:36px!important;min-height:48px!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;overflow:visible!important}
-html body .flood-data-pin>.ieat-map-symbol{position:absolute!important;left:1px!important;top:3px!important;box-sizing:border-box!important;width:34px!important;height:34px!important;display:grid!important;place-items:center!important;border-radius:10px!important;border:2px solid #ffffff!important;background:#ffffff!important;color:var(--ieat-symbol-color,#4a8594)!important;box-shadow:0 2px 6px rgba(5,23,54,.17)!important}
+html body .flood-data-pin>.ieat-map-symbol{position:absolute!important;left:1px!important;top:3px!important;box-sizing:border-box!important;width:34px!important;height:34px!important;display:grid!important;place-items:center!important;border-radius:10px!important;border:2px solid #ffffff!important;background:#ffffff!important;color:var(--ieat-symbol-color,#109dc0)!important;box-shadow:0 2px 6px rgba(5,23,54,.17)!important}
 html body .flood-data-pin>.ieat-map-symbol .ieat-meaning-svg{display:block!important;width:23px!important;height:23px!important;color:inherit!important}
 html body .flood-data-pin .fd-pin-name{color:#000000!important;background:#ffffff!important;border-color:#ffffff!important}
 html body #mapLayers .layer-swatch[data-kind="estate"] .ieat-estate-location{background:#52057f!important;border-color:#2e1f54!important}
@@ -533,7 +533,7 @@ html body .flood-data-pin {width:36px!important;height:48px!important;filter:non
 html body .flood-data-pin>.ieat-map-symbol{
  width:34px!important;height:34px!important;left:1px!important;top:3px!important;transform:none!important;
  border:1.5px solid #ffffff!important;border-radius:10px!important;background:#ffffff!important;
- box-shadow:0 2px 5px rgba(46,31,84,.14)!important;color:var(--ieat-symbol-color,#4a8594)!important
+ box-shadow:0 2px 5px rgba(46,31,84,.14)!important;color:var(--ieat-symbol-color,#109dc0)!important
 }
 html body .flood-data-pin .ieat-meaning-svg{width:23px!important;height:23px!important}
 html body .flood-data-pin .fd-pin-name,html body .flood-data-pin .map-flow-reading{display:none!important}
@@ -549,14 +549,14 @@ html body .ieat-estate-location{animation:none!important}
 </style>
 </head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
-<div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>45</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="45" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#051736"/><path d="M12 2V20L4 25Z" fill="#4a8594"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="layer-panel-heading"><strong>ชั้นข้อมูลแผนที่</strong><span>เลือกข้อมูลที่ต้องการแสดง</span></div><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
+<div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>45</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="45" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#051736"/><path d="M12 2V20L4 25Z" fill="#109dc0"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="layer-panel-heading"><strong>ชั้นข้อมูลแผนที่</strong><span>เลือกข้อมูลที่ต้องการแสดง</span></div><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
 <label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="streets">แผนที่ถนนโทนสว่าง</option><option value="topo" selected>แผนที่ภูมิประเทศ</option><option value="gray">แผนที่เรียบโทนสว่าง</option><option value="satellite">ภาพถ่ายดาวเทียม</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
-<label class="layer-option" data-layer-option="canal"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v17m16-17v17M7 5h10M9 5v10m6-10v10M7 10h10M2 19c3-3 5 3 9 0s6 3 11 0"/></svg></span><span class="layer-option-name">คลองกรุงเทพมหานคร</span><input aria-label="คลองกรุงเทพมหานคร" data-layer="canal" type="checkbox" checked></label><label class="layer-option" data-layer-option="water"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="13" rx="2"/><path d="M12 6h3m-3 3h3m-3 3h3M3 19c3-3 5 3 9 0s5 3 9 0"/></svg></span><span class="layer-option-name">สถานีระดับน้ำ</span><input aria-label="สถานีระดับน้ำ" data-layer="water" type="checkbox" checked></label><label class="history-only-label"><input id="historyOnly" type="checkbox">แสดงเฉพาะสถานีที่มีข้อมูลย้อนหลัง 2023–2026<span class="layer-swatch" style="background:#4a8594" aria-hidden="true"></span></label><label class="layer-option" data-layer-option="rings"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6c3-3 5 3 9 0h9m-3-3 3 3-3 3M3 12c3-3 5 3 9 0h6M3 18c3-3 5 3 9 0h9m-3-3 3 3-3 3"/></svg></span><span class="layer-option-name">ปริมาณน้ำไหลผ่าน</span><input aria-label="ปริมาณน้ำไหลผ่าน" data-layer="rings" type="checkbox" checked></label><label class="layer-option" data-layer-option="flow"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h15m-4-4 4 4-4 4M21 17H6m4-4-4 4 4 4"/></svg></span><span class="layer-option-name">ทิศทางสายน้ำ</span><input aria-label="ทิศทางสายน้ำ" data-layer="flow" type="checkbox" checked></label>
+<label class="layer-option" data-layer-option="canal"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v17m16-17v17M7 5h10M9 5v10m6-10v10M7 10h10M2 19c3-3 5 3 9 0s6 3 11 0"/></svg></span><span class="layer-option-name">คลองกรุงเทพมหานคร</span><input aria-label="คลองกรุงเทพมหานคร" data-layer="canal" type="checkbox" checked></label><label class="layer-option" data-layer-option="water"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="13" rx="2"/><path d="M12 6h3m-3 3h3m-3 3h3M3 19c3-3 5 3 9 0s5 3 9 0"/></svg></span><span class="layer-option-name">สถานีระดับน้ำ</span><input aria-label="สถานีระดับน้ำ" data-layer="water" type="checkbox" checked></label><label class="history-only-label"><input id="historyOnly" type="checkbox">แสดงเฉพาะสถานีที่มีข้อมูลย้อนหลัง 2023–2026<span class="layer-swatch" style="background:#109dc0" aria-hidden="true"></span></label><label class="layer-option" data-layer-option="rings"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6c3-3 5 3 9 0h9m-3-3 3 3-3 3M3 12c3-3 5 3 9 0h6M3 18c3-3 5 3 9 0h9m-3-3 3 3-3 3"/></svg></span><span class="layer-option-name">ปริมาณน้ำไหลผ่าน</span><input aria-label="ปริมาณน้ำไหลผ่าน" data-layer="rings" type="checkbox" checked></label><label class="layer-option" data-layer-option="flow"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h15m-4-4 4 4-4 4M21 17H6m4-4-4 4 4 4"/></svg></span><span class="layer-option-name">ทิศทางสายน้ำ</span><input aria-label="ทิศทางสายน้ำ" data-layer="flow" type="checkbox" checked></label>
 <label class="layer-option" data-layer-option="dam"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h9l3 17H3zM6 8h6m-6 5h7m-7 5h8M16 10h5m-4 5h4m-3 5h3"/></svg></span><span class="layer-option-name">เขื่อนและอ่างเก็บน้ำ</span><input aria-label="เขื่อนและอ่างเก็บน้ำ" data-layer="dam" type="checkbox" checked></label><label class="layer-option" data-layer-option="camera"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="11" rx="3"/><path d="m17 8 4-2v9l-4-2M10 16v5M6 21h8"/><circle cx="10" cy="10.5" r="2.5"/></svg></span><span class="layer-option-name">กล้อง CCTV ริมน้ำ</span><input aria-label="กล้อง CCTV ริมน้ำ" data-layer="camera" type="checkbox" checked></label><label class="layer-option" data-layer-option="boundary"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5M4 12h0m8-8h0m8 8h0m-8 8h0"/></svg></span><span class="layer-option-name">ขอบเขตนิคมอุตสาหกรรม</span><input aria-label="ขอบเขตนิคมอุตสาหกรรม" data-layer="boundary" type="checkbox" checked></label><label class="layer-option" data-layer-option="estate"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V9l7 4V7l7 4V3h3v17zM8 17h1m5 0h1m4 0h1"/></svg></span><span class="layer-option-name">ตำแหน่งนิคมอุตสาหกรรม</span><input aria-label="ตำแหน่งนิคมอุตสาหกรรม" data-layer="estate" type="checkbox" checked></label><label class="layer-option" data-layer-option="satellite"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 10 10-5 5L4 10zM2 6l4-4 3 3-4 4m10 10 4-4 3 3-4 4M2 16a6 6 0 0 1 6 6M2 20a2 2 0 0 1 2 2"/></svg></span><span class="layer-option-name">พื้นที่น้ำท่วมจากดาวเทียม</span><input aria-label="พื้นที่น้ำท่วมจากดาวเทียม" data-layer="satellite" type="checkbox" checked></label><label class="layer-option" data-layer-option="radar"><span class="layer-swatch" data-pin-ready="true" aria-hidden="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="m12 12 6-7M3 12h9v9"/></svg></span><span class="layer-option-name">ฝนจากเรดาร์ กรมอุตุฯ</span><input aria-label="ฝนจากเรดาร์ กรมอุตุฯ" data-layer="radar" type="checkbox" checked></label>
-<p style="font-size:11px;color:#051736;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#ffffff;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#f00a36"></i>ล้นตลิ่ง / ระดับสูงสุด</span><span><i class="dot" style="background:#ffc719"></i>ระดับสูง / ใกล้ตลิ่ง</span><span><i class="dot" style="background:#ffc719"></i>เฝ้าระวังตามเกณฑ์ต้นทาง</span><span><i class="dot" style="background:#598c14"></i>ปกติ / ต่ำกว่าเกณฑ์</span><span><i class="dot" style="background:#2e1f54"></i>ไม่มีค่าล่าสุด</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#4a8594"></i><i style="background:#4a8594"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#4a8594"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
+<p style="font-size:11px;color:#051736;margin:10px 0 0">ระดับน้ำมีป้ายรหัสสถานีและระยะเทียบตลิ่ง · ซูมเข้าเพื่อแยกจุดที่อยู่ใกล้กัน</p></div></div></details><details class="legend" id="mapLegend"><summary>คำอธิบายสัญลักษณ์</summary><div class="legend-body"><p id="boundaryInfo" aria-live="polite">ขอบเขตนิคมฯ: กนอ. · กำลังโหลด</p><div id="mapDataAudit" style="font-size:12px;line-height:1.7;margin:6px 0" aria-live="polite">กำลังตรวจรอบข้อมูล…</div><div id="remoteOverlayInfo" style="font-size:12px;background:#ffffff;padding:6px;border-radius:6px;max-width:510px" aria-live="polite"></div><div class="keys"><span><i class="dot" style="background:#f00a36"></i>ล้นตลิ่ง / ระดับสูงสุด</span><span><i class="dot" style="background:#ffc719"></i>ระดับสูง / ใกล้ตลิ่ง</span><span><i class="dot" style="background:#ffc719"></i>เฝ้าระวังตามเกณฑ์ต้นทาง</span><span><i class="dot" style="background:#598c14"></i>ปกติ / ต่ำกว่าเกณฑ์</span><span><i class="dot" style="background:#2e1f54"></i>ไม่มีค่าล่าสุด</span></div><div id="tmdRadarKey" class="radar-key" hidden>ความเข้มฝนจากเรดาร์คอมโพสิท (มม./ชม.)<div class="radar-key-bar"><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#109dc0"></i><i style="background:#109dc0"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#f00a36"></i><i style="background:#109dc0"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i><i style="background:#ffffff"></i></div><div class="radar-key-labels"><span>0.2</span><span>2.1</span><span>12.5</span><span>52.2</span><span>218</span><span>&gt;636</span></div></div><p>วงแดงกระพริบ: สถานีล้นตลิ่ง (ข้อมูลล่าสุด)<br>วงสีน้ำเงิน: ปริมาณน้ำไหลผ่านของสถานีอื่น<br>พื้นที่สีฟ้า: น้ำท่วมจากดาวเทียม GISTDA ตามวันที่ภาพ ไม่ใช่สถานการณ์สดทุกจุด<br>เรดาร์: ความเข้มฝนขณะตรวจวัด (มม./ชม.) ไม่ใช่ฝนสะสม · <a href="https://weather.tmd.go.th/composite/index_composite.html" target="_blank" rel="noopener">กรมอุตุฯ</a><br>หมุดม่วง: นิคมฯ · ไอคอนกล้องสีเทา: CCTV<br>ไอคอนเขื่อน: สีแสดงสัดส่วนน้ำเก็บกัก<br>ชี้หรือคลิกหมุดเพื่อดูชื่อและรายละเอียด<br>สีสถานีใช้ค่าจุดวัด ไม่ใช่ขอบเขตน้ำท่วม</p><p>ลูกศร → แสดงทิศปลายน้ำตามแนวแม่น้ำที่บันทึกใน OpenStreetMap ไม่ใช่กระแสสดหรือความเร็วที่ตรวจวัด ครอบคลุมแม่น้ำหลักที่มีข้อมูล · เส้นที่ระบุว่าไหลกลับได้ไม่แสดงลูกศร<br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a></p></div></details></div>
 <div class="status" id="status" role="status">กำลังโหลดแผนที่และสถานี…</div>
 
-<script src="flood-rid-source.js?v=20261105-palette13"></script><script src="flood-map-squircle.js?v=20261105-palette13"></script>
+<script src="flood-rid-source.js?v=20261105-cyan1"></script><script src="flood-map-squircle.js?v=20261105-cyan1"></script>
 <script>
 (function(){
 'use strict';
@@ -577,7 +577,7 @@ function ieatMeaningIcon(kind){
  return d?'<svg class="ieat-meaning-svg" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>':'';
 }
 function mapSymbol(kind){if(kind==='estate')return estateSvg;if(['water','canal','dam','camera','rings','flow'].includes(kind))return ieatMeaningIcon(kind);
- if(kind==='camera')return "<svg class=\"requested-cctv-svg\" style=\"fill:none!important;stroke:none!important\" xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\"><title>cctv</title><g fill=\"none\"><defs><linearGradient id=\"SVGnGF63brm\" x1=\"0\" x2=\"1\" y1=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffffff\" stop-opacity=\".34\"/><stop offset=\".42\" stop-color=\"#ffffff\" stop-opacity=\"0\"/><stop offset=\".62\" stop-color=\"#000000\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#000000\" stop-opacity=\".2\"/></linearGradient></defs><path fill=\"#000000\" fill-opacity=\".06\" d=\"M3.78 18.1a8.82 4.3 0 1 0 17.65 0a8.82 4.3 0 1 0-17.65 0\" class=\"wm-shadow\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".08\" d=\"M5.55 18.1a7.06 3.44 0 1 0 14.12 0a7.06 3.44 0 1 0-14.12 0\" class=\"wm-shadow\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".11\" d=\"M7.49 18.1a5.12 2.5 0 1 0 10.23 0a5.12 2.5 0 1 0-10.23 0\" class=\"wm-shadow\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#4a8594\" d=\"m6.79 16.77l.17.45l4.41-3.16l-.14-.39zm.16.45c.07.41.1.43-.12.77c1.46-1.09 2.93-2.17 4.39-3.26c.25-.18.18-.41.15-.67zM3.2 9.05L3.34 9c2.07.37.21.1 5.32-1.87l-.29-.04zm.45.01l.29.23l4.98-1.97l-.26-.19zm.29.23l.21.36L9.1 7.62l-.18-.3zm.21.36l.17.46l4.91-2.1l-.13-.38zm.45.32c6.67-1.96 4.27-1.6 7-1.98c1.93.2.27.1 4.58-1.96l-.76.05C7.8 8.4 11.39 7.08 4.6 9.97m7.39-1.94l.51.17l4.12-2.04l-.44-.13zm.51.17l.48.3l4.05-2.11l-.41-.23zm.48.3l.55.56l3.96-2.21l-.46-.46zm.55.56l.35.62l3.9-2.33l-.29-.5zm.35.62c.5 1.47 2.2 4.12.82 5.75c1.21-1.09 2.43-2.18 3.65-3.28c.45-.41.62-1.13.45-1.71l-1.02-3.09z\" class=\"wm-k\" style=\"fill:#4a8594!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".32\" d=\"m6.79 16.77l.17.45l4.41-3.16l-.14-.39zm.16.45c.07.41.1.43-.12.77c1.46-1.09 2.93-2.17 4.39-3.26c.25-.18.18-.41.15-.67zm-2.8-7.57l.17.46l4.91-2.1l-.13-.38zm9.73.03c.5 1.47 2.2 4.12.82 5.75c1.21-1.09 2.43-2.18 3.65-3.28c.45-.41.62-1.13.45-1.71l-1.02-3.09z\" class=\"wm-k\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".22\" d=\"m3.94 9.29l.21.36L9.1 7.62l-.18-.3zm9.59-.23l.35.62l3.9-2.33l-.29-.5z\" class=\"wm-k\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".14\" d=\"m3.65 9.06l.29.23l4.98-1.97l-.26-.19zm8.85-.86l.48.3l4.05-2.11l-.41-.23z\" class=\"wm-k\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".28\" d=\"m11.99 8.03l.51.17l4.12-2.04l-.44-.13z\" class=\"wm-k\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".42\" d=\"M3.2 9.05L3.34 9c2.07.37.21.1 5.32-1.87l-.29-.04zm1.4.92c6.67-1.96 4.27-1.6 7-1.98c1.93.2.27.1 4.58-1.96l-.76.05C7.8 8.4 11.39 7.08 4.6 9.97\" class=\"wm-k\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#4a8594\" fill-rule=\"evenodd\" d=\"M6.79 16.77c.18.48.34.78.04 1.22c-.49.14-.89-.12-1.08-.61L2.99 10c-.16-.44.02-1.24.66-.94c.41.19.53.66.67 1.05c2.28-1.16.49-.27 6.8-2.05c.26-.07.6-.09.87-.03c2.22.52 2.68 3.8 3.17 5.38c.2.66.08 1.54-.46 2.02c-.27.23-.52.36-.88.41c-6.38.96-4.47.99-7.03.93\" class=\"wm-k\" style=\"fill:#4a8594!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"url(#SVGnGF63brm)\" fill-rule=\"evenodd\" d=\"M6.79 16.77c.18.48.34.78.04 1.22c-.49.14-.89-.12-1.08-.61L2.99 10c-.16-.44.02-1.24.66-.94c.41.19.53.66.67 1.05c2.28-1.16.49-.27 6.8-2.05c.26-.07.6-.09.87-.03c2.22.52 2.68 3.8 3.17 5.38c.2.66.08 1.54-.46 2.02c-.27.23-.52.36-.88.41c-6.38.96-4.47.99-7.03.93\" class=\"wm-k\" style=\"fill:url(#SVGnGF63brm)!important;stroke:none!important;stroke-width:0!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".19\" stroke-width=\".56\" d=\"m13.06 8.94l.25.3\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".38\" stroke-width=\".56\" d=\"m3.47 9.28l.3.23m8.58-1.07l.73.53\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".57\" stroke-width=\".56\" d=\"m3.19 9.55l.14-.29l.04.01m-.08.01l.31.05m.85 1.03l.27-.14m6.85-1.95l.84.2\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".76\" stroke-width=\".56\" d=\"M4.67 10.24c6.67-1.95 4.28-1.62 6.97-1.97\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".41\" stroke-width=\".56\" d=\"M14.9 14.58c-.26.54-.52.9-1.16.99c-6.48.95-4.43 1.01-6.94.92m-.06 1.05l-.15.29c-.45-.27-.28-.1-.53-.46m8.91-3.28l-.1.57\" class=\"wm-k\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.56!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".14\" stroke-width=\".56\" d=\"m6.53 16.87l.16.45m-.67-.04L3.25 9.9m.64-.15l.17.46m9.55-.44l1.29 3.74\" class=\"wm-k\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.56!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".27\" stroke-width=\".56\" d=\"m6.68 17.27l.06.36m8.14-4.18l.09.72\" class=\"wm-k\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.56!important\"/><path fill=\"#ed3b21\" d=\"m12.16 5.98l.25 1.38l.86-.39l-.23-1.34zm-.65-1.72l6.83.66l.71-.34l-6.63-.6zm8.08-2.33l.44.21l.67-.23l-.42-.2zm.44.21l.3.41l.66-.25l-.29-.39zm.3.41c.65 2.23.27 4.72-.45 6.92c.21-.17.43-.34.64-.52c.04-.13.09-.27.14-.41c.48-5.81.95-4.09.33-6.24z\" class=\"wm-a\" style=\"fill:#ed3b21!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".32\" d=\"m12.16 5.98l.25 1.38l.86-.39l-.23-1.34zm8.17-3.43c.65 2.23.27 4.72-.45 6.92c.21-.17.43-.34.64-.52c.04-.13.09-.27.14-.41c.48-5.81.95-4.09.33-6.24z\" class=\"wm-a\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".11\" d=\"m20.03 2.14l.3.41l.66-.25l-.29-.39z\" class=\"wm-a\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".28\" d=\"m19.59 1.93l.44.21l.67-.23l-.42-.2z\" class=\"wm-a\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".42\" d=\"m11.51 4.26l6.83.66l.71-.34l-6.63-.6z\" class=\"wm-a\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ed3b21\" fill-rule=\"evenodd\" d=\"m18.25 6.85l-6.09-.87l.25 1.38l-1.25.38l.35-3.48l6.83.66c.01-.26-.28-3.49 1.25-2.99c.15.07.29.14.44.21c.1.09.38.45.37.65c-.11 2.23.7 4.81-.52 6.68c-.43.67-1.73.34-1.72-.49z\" class=\"wm-a\" style=\"fill:#ed3b21!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"url(#SVGnGF63brm)\" fill-rule=\"evenodd\" d=\"m18.25 6.85l-6.09-.87l.25 1.38l-1.25.38l.35-3.48l6.83.66c.01-.26-.28-3.49 1.25-2.99c.15.07.29.14.44.21c.1.09.38.45.37.65c-.11 2.23.7 4.81-.52 6.68c-.43.67-1.73.34-1.72-.49z\" class=\"wm-a\" style=\"fill:url(#SVGnGF63brm)!important;stroke:none!important;stroke-width:0!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".19\" stroke-width=\".36\" d=\"m18.34 8.99l.09-2.13m-7.09.89l.35-3.47m6.83.65l.09-2.03m1.28-.65l.29.41\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".38\" stroke-width=\".36\" d=\"m18.61 2.94l.13-.47m.77-.37l.44.21\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".57\" stroke-width=\".36\" d=\"m11.5 4.44l6.82.66m.38-2.56l.33-.35\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".76\" stroke-width=\".36\" d=\"m18.95 2.24l.46-.15\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".41\" stroke-width=\".36\" d=\"M19.76 9.34c-.11.09-.22.19-.32.28c-.47.23-.85-.19-1.07-.52m-.09-2.43l-6.09-.87m.17 1.39l-1.26.37m9.12-4.78c-.39 6.39.3 4.28-.51 6.64\" class=\"wm-a\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.36!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".27\" stroke-width=\".36\" d=\"m11.98 6.01l.25 1.38\" class=\"wm-a\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.36!important\"/></g></svg>";
+ if(kind==='camera')return "<svg class=\"requested-cctv-svg\" style=\"fill:none!important;stroke:none!important\" xmlns=\"http://www.w3.org/2000/svg\" width=\"1em\" height=\"1em\" viewBox=\"0 0 24 24\"><title>cctv</title><g fill=\"none\"><defs><linearGradient id=\"SVGnGF63brm\" x1=\"0\" x2=\"1\" y1=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffffff\" stop-opacity=\".34\"/><stop offset=\".42\" stop-color=\"#ffffff\" stop-opacity=\"0\"/><stop offset=\".62\" stop-color=\"#000000\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#000000\" stop-opacity=\".2\"/></linearGradient></defs><path fill=\"#000000\" fill-opacity=\".06\" d=\"M3.78 18.1a8.82 4.3 0 1 0 17.65 0a8.82 4.3 0 1 0-17.65 0\" class=\"wm-shadow\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".08\" d=\"M5.55 18.1a7.06 3.44 0 1 0 14.12 0a7.06 3.44 0 1 0-14.12 0\" class=\"wm-shadow\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".11\" d=\"M7.49 18.1a5.12 2.5 0 1 0 10.23 0a5.12 2.5 0 1 0-10.23 0\" class=\"wm-shadow\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#109dc0\" d=\"m6.79 16.77l.17.45l4.41-3.16l-.14-.39zm.16.45c.07.41.1.43-.12.77c1.46-1.09 2.93-2.17 4.39-3.26c.25-.18.18-.41.15-.67zM3.2 9.05L3.34 9c2.07.37.21.1 5.32-1.87l-.29-.04zm.45.01l.29.23l4.98-1.97l-.26-.19zm.29.23l.21.36L9.1 7.62l-.18-.3zm.21.36l.17.46l4.91-2.1l-.13-.38zm.45.32c6.67-1.96 4.27-1.6 7-1.98c1.93.2.27.1 4.58-1.96l-.76.05C7.8 8.4 11.39 7.08 4.6 9.97m7.39-1.94l.51.17l4.12-2.04l-.44-.13zm.51.17l.48.3l4.05-2.11l-.41-.23zm.48.3l.55.56l3.96-2.21l-.46-.46zm.55.56l.35.62l3.9-2.33l-.29-.5zm.35.62c.5 1.47 2.2 4.12.82 5.75c1.21-1.09 2.43-2.18 3.65-3.28c.45-.41.62-1.13.45-1.71l-1.02-3.09z\" class=\"wm-k\" style=\"fill:#109dc0!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".32\" d=\"m6.79 16.77l.17.45l4.41-3.16l-.14-.39zm.16.45c.07.41.1.43-.12.77c1.46-1.09 2.93-2.17 4.39-3.26c.25-.18.18-.41.15-.67zm-2.8-7.57l.17.46l4.91-2.1l-.13-.38zm9.73.03c.5 1.47 2.2 4.12.82 5.75c1.21-1.09 2.43-2.18 3.65-3.28c.45-.41.62-1.13.45-1.71l-1.02-3.09z\" class=\"wm-k\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".22\" d=\"m3.94 9.29l.21.36L9.1 7.62l-.18-.3zm9.59-.23l.35.62l3.9-2.33l-.29-.5z\" class=\"wm-k\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".14\" d=\"m3.65 9.06l.29.23l4.98-1.97l-.26-.19zm8.85-.86l.48.3l4.05-2.11l-.41-.23z\" class=\"wm-k\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".28\" d=\"m11.99 8.03l.51.17l4.12-2.04l-.44-.13z\" class=\"wm-k\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".42\" d=\"M3.2 9.05L3.34 9c2.07.37.21.1 5.32-1.87l-.29-.04zm1.4.92c6.67-1.96 4.27-1.6 7-1.98c1.93.2.27.1 4.58-1.96l-.76.05C7.8 8.4 11.39 7.08 4.6 9.97\" class=\"wm-k\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#109dc0\" fill-rule=\"evenodd\" d=\"M6.79 16.77c.18.48.34.78.04 1.22c-.49.14-.89-.12-1.08-.61L2.99 10c-.16-.44.02-1.24.66-.94c.41.19.53.66.67 1.05c2.28-1.16.49-.27 6.8-2.05c.26-.07.6-.09.87-.03c2.22.52 2.68 3.8 3.17 5.38c.2.66.08 1.54-.46 2.02c-.27.23-.52.36-.88.41c-6.38.96-4.47.99-7.03.93\" class=\"wm-k\" style=\"fill:#109dc0!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"url(#SVGnGF63brm)\" fill-rule=\"evenodd\" d=\"M6.79 16.77c.18.48.34.78.04 1.22c-.49.14-.89-.12-1.08-.61L2.99 10c-.16-.44.02-1.24.66-.94c.41.19.53.66.67 1.05c2.28-1.16.49-.27 6.8-2.05c.26-.07.6-.09.87-.03c2.22.52 2.68 3.8 3.17 5.38c.2.66.08 1.54-.46 2.02c-.27.23-.52.36-.88.41c-6.38.96-4.47.99-7.03.93\" class=\"wm-k\" style=\"fill:url(#SVGnGF63brm)!important;stroke:none!important;stroke-width:0!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".19\" stroke-width=\".56\" d=\"m13.06 8.94l.25.3\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".38\" stroke-width=\".56\" d=\"m3.47 9.28l.3.23m8.58-1.07l.73.53\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".57\" stroke-width=\".56\" d=\"m3.19 9.55l.14-.29l.04.01m-.08.01l.31.05m.85 1.03l.27-.14m6.85-1.95l.84.2\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".76\" stroke-width=\".56\" d=\"M4.67 10.24c6.67-1.95 4.28-1.62 6.97-1.97\" class=\"wm-shine\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.56!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".41\" stroke-width=\".56\" d=\"M14.9 14.58c-.26.54-.52.9-1.16.99c-6.48.95-4.43 1.01-6.94.92m-.06 1.05l-.15.29c-.45-.27-.28-.1-.53-.46m8.91-3.28l-.1.57\" class=\"wm-k\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.56!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".14\" stroke-width=\".56\" d=\"m6.53 16.87l.16.45m-.67-.04L3.25 9.9m.64-.15l.17.46m9.55-.44l1.29 3.74\" class=\"wm-k\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.56!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".27\" stroke-width=\".56\" d=\"m6.68 17.27l.06.36m8.14-4.18l.09.72\" class=\"wm-k\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.56!important\"/><path fill=\"#ed3b21\" d=\"m12.16 5.98l.25 1.38l.86-.39l-.23-1.34zm-.65-1.72l6.83.66l.71-.34l-6.63-.6zm8.08-2.33l.44.21l.67-.23l-.42-.2zm.44.21l.3.41l.66-.25l-.29-.39zm.3.41c.65 2.23.27 4.72-.45 6.92c.21-.17.43-.34.64-.52c.04-.13.09-.27.14-.41c.48-5.81.95-4.09.33-6.24z\" class=\"wm-a\" style=\"fill:#ed3b21!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".32\" d=\"m12.16 5.98l.25 1.38l.86-.39l-.23-1.34zm8.17-3.43c.65 2.23.27 4.72-.45 6.92c.21-.17.43-.34.64-.52c.04-.13.09-.27.14-.41c.48-5.81.95-4.09.33-6.24z\" class=\"wm-a\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#000000\" fill-opacity=\".11\" d=\"m20.03 2.14l.3.41l.66-.25l-.29-.39z\" class=\"wm-a\" style=\"fill:#000000!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".28\" d=\"m19.59 1.93l.44.21l.67-.23l-.42-.2z\" class=\"wm-a\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ffffff\" fill-opacity=\".42\" d=\"m11.51 4.26l6.83.66l.71-.34l-6.63-.6z\" class=\"wm-a\" style=\"fill:#ffffff!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"#ed3b21\" fill-rule=\"evenodd\" d=\"m18.25 6.85l-6.09-.87l.25 1.38l-1.25.38l.35-3.48l6.83.66c.01-.26-.28-3.49 1.25-2.99c.15.07.29.14.44.21c.1.09.38.45.37.65c-.11 2.23.7 4.81-.52 6.68c-.43.67-1.73.34-1.72-.49z\" class=\"wm-a\" style=\"fill:#ed3b21!important;stroke:none!important;stroke-width:0!important\"/><path fill=\"url(#SVGnGF63brm)\" fill-rule=\"evenodd\" d=\"m18.25 6.85l-6.09-.87l.25 1.38l-1.25.38l.35-3.48l6.83.66c.01-.26-.28-3.49 1.25-2.99c.15.07.29.14.44.21c.1.09.38.45.37.65c-.11 2.23.7 4.81-.52 6.68c-.43.67-1.73.34-1.72-.49z\" class=\"wm-a\" style=\"fill:url(#SVGnGF63brm)!important;stroke:none!important;stroke-width:0!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".19\" stroke-width=\".36\" d=\"m18.34 8.99l.09-2.13m-7.09.89l.35-3.47m6.83.65l.09-2.03m1.28-.65l.29.41\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".38\" stroke-width=\".36\" d=\"m18.61 2.94l.13-.47m.77-.37l.44.21\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".57\" stroke-width=\".36\" d=\"m11.5 4.44l6.82.66m.38-2.56l.33-.35\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#ffffff\" stroke-linejoin=\"round\" stroke-opacity=\".76\" stroke-width=\".36\" d=\"m18.95 2.24l.46-.15\" class=\"wm-a\" style=\"fill:none!important;stroke:#ffffff!important;stroke-width:.36!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".41\" stroke-width=\".36\" d=\"M19.76 9.34c-.11.09-.22.19-.32.28c-.47.23-.85-.19-1.07-.52m-.09-2.43l-6.09-.87m.17 1.39l-1.26.37m9.12-4.78c-.39 6.39.3 4.28-.51 6.64\" class=\"wm-a\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.36!important\"/><path stroke=\"#000000\" stroke-linejoin=\"round\" stroke-opacity=\".27\" stroke-width=\".36\" d=\"m11.98 6.01l.25 1.38\" class=\"wm-a\" style=\"fill:none!important;stroke:#000000!important;stroke-width:.36!important\"/></g></svg>";
  if(kind==='estate')return estateSvg;
  if(['water','canal','dam'].includes(kind))return measurementShape(kind,'#598c14');
  const paths={
@@ -656,14 +656,14 @@ function old(r,k){if(k==='estate'||k==='camera')return false;const a=Date.now()-
 
 function pointCondition(r,k){
  const state=(hex,label,criterion)=>({hex,textColor:hex==='#706357'?'#ffffff':hex==='#52057f'?'#52057f':'#051736',label,criterion});
- if(k==='camera')return r.reported_online===true?state('#4a8594','กล้องต้นทางแจ้งพร้อมใช้งาน','เป็นสถานะกล้อง ไม่ใช่เกณฑ์น้ำท่วม; ตรวจเวลาภาพในรายละเอียด'):state('#2e1f54','กล้องไม่พร้อม / ไม่ระบุสถานะ','ไม่ใช้สถานะกล้องแทนความเสี่ยงน้ำท่วม');
+ if(k==='camera')return r.reported_online===true?state('#109dc0','กล้องต้นทางแจ้งพร้อมใช้งาน','เป็นสถานะกล้อง ไม่ใช่เกณฑ์น้ำท่วม; ตรวจเวลาภาพในรายละเอียด'):state('#2e1f54','กล้องไม่พร้อม / ไม่ระบุสถานะ','ไม่ใช้สถานะกล้องแทนความเสี่ยงน้ำท่วม');
  if(k==='estate')return state('#52057f','นิคมอุตสาหกรรม','ตำแหน่งอ้างอิง กนอ.');
  if(old(r,k))return state('#706357','ข้อมูลเก่าหรือเวลาไม่ครบ','ตรวจเวลาตรวจวัดก่อนใช้ข้อมูล');
  if(k==='water')return window.IEAT_WATER_STATUS.water(r);
  if(k==='canal')return window.IEAT_WATER_STATUS.canal(r);
  if(k==='dam')return window.IEAT_WATER_STATUS.dam(r.percent);
  if(k==='rain')return window.IEAT_WATER_STATUS.rain(r.rain);
- return state('#4a8594','ข้อมูลประกอบ','ยังไม่มีเกณฑ์เฉพาะ');
+ return state('#109dc0','ข้อมูลประกอบ','ยังไม่มีเกณฑ์เฉพาะ');
 }
 function color(r,k){return pointCondition(r,k).hex}
 
@@ -707,8 +707,8 @@ function whChart(station,year,bank){
  const monthTicks=Array.from({length:12},(_,i)=>({x:L+i/11*(R-L),label:['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'][i]}));
  const groups=[];let group=[];let previous=null;
  days.forEach(d=>{const at=Date.parse(d[0]+'T12:00:00+07:00');if(previous!==null&&at-previous>4*86400000){if(group.length)groups.push(group);group=[]}group.push(d);previous=at});if(group.length)groups.push(group);
- const bands=groups.map(g=>{const top=g.map((d,i)=>(i?'L':'M')+x(d[0]).toFixed(1)+' '+y(Number(d[2])).toFixed(1)).join(' '),bottom=g.slice().reverse().map(d=>'L'+x(d[0]).toFixed(1)+' '+y(Number(d[1])).toFixed(1)).join(' ');return '<path d="'+top+' '+bottom+' Z" fill="#4a8594" opacity=".34"/>'}).join('');
- const lines=groups.map(g=>'<path d="'+g.map((d,i)=>(i?'L':'M')+x(d[0]).toFixed(1)+' '+y(Number(d[3])).toFixed(1)).join(' ')+'" fill="none" stroke="#4a8594" stroke-width="2"/>').join('');
+ const bands=groups.map(g=>{const top=g.map((d,i)=>(i?'L':'M')+x(d[0]).toFixed(1)+' '+y(Number(d[2])).toFixed(1)).join(' '),bottom=g.slice().reverse().map(d=>'L'+x(d[0]).toFixed(1)+' '+y(Number(d[1])).toFixed(1)).join(' ');return '<path d="'+top+' '+bottom+' Z" fill="#109dc0" opacity=".34"/>'}).join('');
+ const lines=groups.map(g=>'<path d="'+g.map((d,i)=>(i?'L':'M')+x(d[0]).toFixed(1)+' '+y(Number(d[3])).toFixed(1)).join(' ')+'" fill="none" stroke="#109dc0" stroke-width="2"/>').join('');
  const bankLine=hasBank?'<path d="M'+L+' '+y(bankValue).toFixed(1)+'H'+R+'" stroke="#f00a36" stroke-width="2.5" stroke-dasharray="9 6"/><rect x="'+(R-128)+'" y="'+(y(bankValue)-18).toFixed(1)+'" width="128" height="17" rx="5" fill="#ffffff" opacity=".92"/><text x="'+(R-5)+'" y="'+(y(bankValue)-6).toFixed(1)+'" text-anchor="end" style="fill:#f00a36;font-weight:700">ตลิ่ง '+whFmt(bankValue)+' ม.รทก.</text>':'';
  return '<div class="wh-chart"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="กราฟระดับน้ำรายวัน '+year+(hasBank?' พร้อมเส้นระดับตลิ่ง':'')+'">'+ticks.map(v=>'<path d="M'+L+' '+y(v)+'H'+R+'" stroke="#ffffff"/><text x="'+(L-6)+'" y="'+(y(v)+4)+'" text-anchor="end">'+whFmt(v,1)+'</text>').join('')+monthTicks.map(m=>'<text x="'+m.x+'" y="276" text-anchor="middle">'+m.label+'</text>').join('')+bands+lines+bankLine+'<text x="8" y="12">ม.รทก.</text></svg></div>';
 }
@@ -779,7 +779,7 @@ function baseContent(r,k){
  return '<div class="popup"><h3>'+esc(r.code?r.code+' · '+r.name:r.name)+'</h3><small>'+esc([...new Set([r.province,r.district,r.river].filter(Boolean).map(v=>String(v).replace(/^จังหวัด/,'')))].join(' · '))+'</small><div class="value">'+esc(v)+'</div>'+detail+(k==='estate'?estateFloodPlan(r.name):'')+(r.image&&/^https:\/\//.test(r.image)?'<img src="'+esc(r.image)+'" alt="ภาพจากกล้อง" loading="lazy">':'')+(k==='camera'?'<div data-camera-id="'+esc(r.id)+'"><p data-camera-time>กำลังโหลดภาพล่าสุด…</p><img data-camera-image alt="ภาพ CCTV '+esc(r.name)+'" style="display:none"><p data-camera-state></p><button type="button" data-camera-refresh="'+esc(r.id)+'">อัปเดตภาพ</button></div>':'')+'<p>'+esc(k==='camera'?'ภาพนิ่งล่าสุดที่ต้นทางบันทึก ไม่ใช่วิดีโอสด':k==='estate'?'ตำแหน่งจากชุดข้อมูล กนอ.':fresh)+'</p><small>ข้อมูล: '+esc(source)+' · <a href="'+link+'" target="_blank" rel="noopener">เปิดต้นทาง</a></small></div>';
 }
 
-const floodPinTypes={water:{label:'ระดับน้ำ',color:'#4a8594'},canal:{label:'คลอง กทม.',color:'#4a8594'},dam:{label:'เขื่อน / อ่างเก็บน้ำ',color:'#ff6908'},camera:{label:'CCTV ริมน้ำ',color:'#4a8594'}};
+const floodPinTypes={water:{label:'ระดับน้ำ',color:'#109dc0'},canal:{label:'คลอง กทม.',color:'#109dc0'},dam:{label:'เขื่อน / อ่างเก็บน้ำ',color:'#ff6908'},camera:{label:'CCTV ริมน้ำ',color:'#109dc0'}};
 function measurementShape(kind,color){return '<span class="ieat-map-symbol" data-type="'+kind+'" style="--ieat-symbol-color:'+color+'">'+ieatMeaningIcon(kind)+'</span>';}
 function dataPinHTML(r,k){
  const state=pointCondition(r,k),flow=r.discharge??r.flow,hasFlow=k==='water'&&flags.rings&&flow!=null&&Number.isFinite(Number(flow));
@@ -788,8 +788,8 @@ function dataPinHTML(r,k){
 function ieatStationGauge(r){
  const wl=Number(r.wl),bank=Number(r.bank),ok=r.wl!=null&&Number.isFinite(wl),hasBank=r.bank!=null&&Number.isFinite(bank);
  const high=ok?Math.max(wl,hasBank?bank:wl,1):5,low=ok?Math.min(0,wl,hasBank?bank:wl):0,range=Math.max(1,high-low),top=high+range*.22,bottom=low-range*.2,scale=v=>Math.max(8,Math.min(130,8+(top-v)/(top-bottom)*122)),waterY=ok?scale(wl):130,bankY=hasBank?scale(bank):null;
- return '<svg class="ieat-gauge" viewBox="0 0 80 164" role="img" aria-label="มาตรวัดระดับน้ำปัจจุบัน"><rect x="21" y="8" width="37" height="124" rx="3" fill="#ffffff" stroke="#335238" stroke-width="2"/><rect x="23" y="'+waterY.toFixed(1)+'" width="33" height="'+(130-waterY).toFixed(1)+'" fill="#4a8594"/>'+
- Array.from({length:6},(_,i)=>{const y=12+i*23;return '<path d="M40 '+y+'h16" stroke="#4a8594" stroke-width="1"/>'}).join('')+
+ return '<svg class="ieat-gauge" viewBox="0 0 80 164" role="img" aria-label="มาตรวัดระดับน้ำปัจจุบัน"><rect x="21" y="8" width="37" height="124" rx="3" fill="#ffffff" stroke="#335238" stroke-width="2"/><rect x="23" y="'+waterY.toFixed(1)+'" width="33" height="'+(130-waterY).toFixed(1)+'" fill="#109dc0"/>'+
+ Array.from({length:6},(_,i)=>{const y=12+i*23;return '<path d="M40 '+y+'h16" stroke="#109dc0" stroke-width="1"/>'}).join('')+
  (bankY!=null?'<path d="M9 '+bankY+'h60" stroke="#bf033b" stroke-width="2.5"/><text x="71" y="'+(bankY-4)+'" fill="#bf033b" font-size="8">ตลิ่ง</text>':'')+
  '<text x="40" y="148" text-anchor="middle" fill="#706357" font-size="9">ม.รทก.</text></svg>';
 }
@@ -888,14 +888,14 @@ function syncEstateOuter(){
  const showBangPaInExample=estateProvinceScope?.active&&/บางปะอิน/.test(String(estateProvinceScope.name||''));
  if(!showBangPaInExample||!flags.boundary){if(vector?.getLayer('estate-outer-line'))vector.setLayoutProperty('estate-outer-line','visibility','none');if(raster&&estateOuterRaster){raster.removeLayer(estateOuterRaster);estateOuterRaster=null}return}
  if(!estateOuterPromise)estateOuterPromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=round-trees1',{signal:AbortSignal.timeout(20000)}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{estateOuterData=d;syncEstateOuter()}).catch(()=>{estateOuterPromise=null});
- if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#4a8594','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',showBangPaInExample&&flags.boundary?'visible':'none')}
- if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(showBangPaInExample&&flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#4a8594',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
+ if(vector&&ready){if(!vector.getSource('estate-outer')){vector.addSource('estate-outer',{type:'geojson',data:estateOuterData});vector.addLayer({id:'estate-outer-line',type:'line',source:'estate-outer',paint:{'line-color':'#109dc0','line-width':1.2,'line-opacity':.8}},'discharge-ring')}else vector.getSource('estate-outer').setData(estateOuterData);vector.setLayoutProperty('estate-outer-line','visibility',showBangPaInExample&&flags.boundary?'visible':'none')}
+ if(raster){if(estateOuterRaster)raster.removeLayer(estateOuterRaster);if(showBangPaInExample&&flags.boundary){estateOuterRaster=L.geoJSON(estateOuterData,{interactive:false,style:{color:'#109dc0',weight:1.2,opacity:.8,fill:false}}).addTo(raster);estateOuterRaster.bringToBack()}}
 }
 function highlightEstateParcel(lon,lat){
  function inRing(r){let inside=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const a=r[i],b=r[j];if((a[1]>lat)!==(b[1]>lat)&&lon<(b[0]-a[0])*(lat-a[1])/(b[1]-a[1])+a[0])inside=!inside}return inside}
  const selected=boundaryData.features.find(f=>{const g=f.geometry;return (g.type==='Polygon'?[g.coordinates]:g.coordinates).some(rings=>inRing(rings[0])&&!rings.slice(1).some(inRing))}),data={type:'FeatureCollection',features:selected?[selected]:[]};
- if(vector){if(!vector.getSource('estate-selection')){vector.addSource('estate-selection',{type:'geojson',data});vector.addLayer({id:'estate-selection-line',type:'line',source:'estate-selection',paint:{'line-color':'#4a8594','line-width':2}})}else vector.getSource('estate-selection').setData(data)}
- if(raster){if(estateSelectionRaster)raster.removeLayer(estateSelectionRaster);estateSelectionRaster=L.geoJSON(data,{style:{color:'#4a8594',weight:2,fill:false}}).addTo(raster)}
+ if(vector){if(!vector.getSource('estate-selection')){vector.addSource('estate-selection',{type:'geojson',data});vector.addLayer({id:'estate-selection-line',type:'line',source:'estate-selection',paint:{'line-color':'#109dc0','line-width':2}})}else vector.getSource('estate-selection').setData(data)}
+ if(raster){if(estateSelectionRaster)raster.removeLayer(estateSelectionRaster);estateSelectionRaster=L.geoJSON(data,{style:{color:'#109dc0',weight:2,fill:false}}).addTo(raster)}
 }
 
 function drawRasterIllustrations(){
@@ -906,10 +906,10 @@ function drawRasterIllustrations(){
  if(!enabled)return;
  if(raster.getZoom()<11){$('estate3dState').textContent=' · ซูมเข้าเพื่อดูอาคาร 3 มิติจากแนวอาคาร';return}
  const data=illustrativeEstateModels(boundaryData.features),scale=estateDepth/45;
- const shape=(points,color,interactive=false,holes=[])=>{const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',points.map((p,i)=>(i?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ')+'Z');if(holes.length){const extra=holes.map(r=>r.map((p,i)=>(i?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ')+'Z').join(' ');path.setAttribute('d',path.getAttribute('d')+' '+extra);path.setAttribute('fill-rule','evenodd')}path.setAttribute('fill',color);path.setAttribute('stroke','#4a8594');path.setAttribute('stroke-width','.45');if(interactive){path.style.pointerEvents='auto';path.style.cursor='pointer';path.onclick=e=>{L.DomEvent.stopPropagation(e);const selected=raster.layerPointToLatLng(points[0]);highlightEstateParcel(selected.lng,selected.lat);}}estateIllustrationSvg.appendChild(path)};
+ const shape=(points,color,interactive=false,holes=[])=>{const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',points.map((p,i)=>(i?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ')+'Z');if(holes.length){const extra=holes.map(r=>r.map((p,i)=>(i?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ')+'Z').join(' ');path.setAttribute('d',path.getAttribute('d')+' '+extra);path.setAttribute('fill-rule','evenodd')}path.setAttribute('fill',color);path.setAttribute('stroke','#109dc0');path.setAttribute('stroke-width','.45');if(interactive){path.style.pointerEvents='auto';path.style.cursor='pointer';path.onclick=e=>{L.DomEvent.stopPropagation(e);const selected=raster.layerPointToLatLng(points[0]);highlightEstateParcel(selected.lng,selected.lat);}}estateIllustrationSvg.appendChild(path)};
  const metersPerPixel=40075016.686*Math.cos(raster.getCenter().lat*Math.PI/180)/Math.pow(2,raster.getZoom()+8);
  const models=data.features.filter(f=>f.properties.kind==='building').map(f=>({...f,points:f.geometry.coordinates[0].map(p=>raster.latLngToLayerPoint([p[1],p[0]])),holes:f.geometry.coordinates.slice(1).map(r=>r.map(p=>raster.latLngToLayerPoint([p[1],p[0]])))})).sort((a,b)=>Math.max(...a.points.map(p=>p.y))-Math.max(...b.points.map(p=>p.y)));
- for(const f of models){const p=f.properties,h=p.height*scale/metersPerPixel,b=p.base*scale/metersPerPixel,top=f.points.map(q=>({x:q.x-h*.35,y:q.y-h*1.6})),bottom=f.points.map(q=>({x:q.x-b*.35,y:q.y-b*1.6}));for(let i=1;i<top.length;i++){if(f.points[i].x>=f.points[i-1].x)shape([bottom[i-1],bottom[i],top[i],top[i-1]],p.kind==='tree'?'#706357':p.kind==='trunk'?'#706357':'#4a8594')}shape(top,p.color,true,f.holes.map(r=>r.map(q=>({x:q.x-h*.35,y:q.y-h*1.6}))))}
+ for(const f of models){const p=f.properties,h=p.height*scale/metersPerPixel,b=p.base*scale/metersPerPixel,top=f.points.map(q=>({x:q.x-h*.35,y:q.y-h*1.6})),bottom=f.points.map(q=>({x:q.x-b*.35,y:q.y-b*1.6}));for(let i=1;i<top.length;i++){if(f.points[i].x>=f.points[i-1].x)shape([bottom[i-1],bottom[i],top[i],top[i-1]],p.kind==='tree'?'#706357':p.kind==='trunk'?'#706357':'#109dc0')}shape(top,p.color,true,f.holes.map(r=>r.map(q=>({x:q.x-h*.35,y:q.y-h*1.6}))))}
  drawRoundTreesSvg(data.features,estateIllustrationSvg,metersPerPixel);
  $('estate3dState').textContent=' · แนวอาคารจากภาพถ่าย '+data.features.filter(f=>f.properties.kind==='building').length+' ชิ้นส่วนอาคาร · ต้นไม้จำลอง '+new Set(data.features.filter(f=>f.properties.kind==='tree').map(f=>f.properties.tree_id)).size+' ตำแหน่ง';
 }
@@ -940,7 +940,7 @@ function syncGlobalBuildings(){
 // Only verified zoning attributes are colored; unclassified parcels remain neutral.
 // Indicative classification requested for e_PP. The estate zoning field is primary;
 // unrecognized parcels are treated as general industry, not verified legal zoning.
-const ieatZoneColors={industrial:'#52057f',free:'#52057f',green:'#598c14',water:'#4a8594',commercial:'#f00a36',support:'#ffc719',unknown:'#52057f'};
+const ieatZoneColors={industrial:'#52057f',free:'#52057f',green:'#598c14',water:'#109dc0',commercial:'#f00a36',support:'#ffc719',unknown:'#52057f'};
 const ieatZoneNames={industrial:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)',free:'เขตประกอบอุตสาหกรรมเสรี',green:'พื้นที่สีเขียว',water:'บ่อหน่วงน้ำ / แหล่งน้ำ',commercial:'พาณิชยกรรม',support:'บริการสนับสนุน',unknown:'อุตสาหกรรมทั่วไป (จัดกลุ่มโดยประมาณ)'};
 function ieatZoneType(p){
  const entries=Object.entries(p||{}),normal=s=>String(s??'').toLowerCase().replace(/[\s_\-.\/()]+/g,'');
@@ -1090,7 +1090,7 @@ function drawOverviewClusters(clusters){
  for(const rows of clusters){
  const r=rows[0].properties,lat=rows.reduce((s,f)=>s+f.geometry.coordinates[1],0)/rows.length,lng=rows.reduce((s,f)=>s+f.geometry.coordinates[0],0)/rows.length;
 
- const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#52057f':(['#bf033b','#ffc719','#ffc719','#52057f','#4a8594','#598c14','#2e1f54'].find(c=>colors.includes(c))||'#4a8594');
+ const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#52057f':(['#bf033b','#ffc719','#ffc719','#52057f','#109dc0','#598c14','#2e1f54'].find(c=>colors.includes(c))||'#109dc0');
  const clusterIcon=r.kind==='estate'?'<span class="ieat-cluster-glyph" aria-hidden="true">นิคมฯ</span>':r.kind==='camera'?cameraSvg:measurementShape(r.kind,clusterColor);
  const html=window.IEAT_SQ?IEAT_SQ.cluster(r.kind,clusterColor,rows.length):'<span class="flood-cluster-symbol" style="--cluster-status:'+clusterColor+'">'+clusterIcon+'<b>'+rows.length+'</b></span>';
  const title=rows.length+' '+(labels[r.kind]||'สถานี')+' · คลิกเพื่อซูม';
@@ -1138,12 +1138,12 @@ function render(){
  }else if(raster){
   Object.values(groups).forEach(g=>g.clearLayers());
   displayPoints.forEach(f=>{const r=f.properties,k=r.kind;
-   if(k==='water'&&flags.rings&&(!cleanDashboard||presentationZoom>=10)&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#bf033b':'#4a8594',weight:2,fillColor:r.diff>=0?'#bf033b':'#4a8594',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
+   if(k==='water'&&flags.rings&&(!cleanDashboard||presentationZoom>=10)&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#bf033b':'#109dc0',weight:2,fillColor:r.diff>=0?'#bf033b':'#109dc0',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
    if(k==='water'&&(!cleanDashboard||presentationZoom>=10)&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#bf033b',weight:1.5,fillColor:'#bf033b',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
    const marker=floodPinTypes[k]?L.marker([r.lat,r.lng],{zIndexOffset:500,title:floodPinTypes[k].label+' · '+r.name,icon:L.divIcon({className:'flood-data-pin'+(window.IEAT_SQ?' has-sq':''),iconSize:window.IEAT_SQ?[40,48]:[36,48],iconAnchor:window.IEAT_SQ?[20,48]:[18,46],tooltipAnchor:[0,-44],popupAnchor:[0,-44],html:dataPinHTML(r,k)})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin'+(estatePin?' has-sq':''),iconSize:estatePin?[40,48]:[34,42],iconAnchor:estatePin?[20,48]:[17,42],tooltipAnchor:[0,-44],html:(estatePin||estateSvg)+'<span class="estate-name">'+esc(r.name)+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:5,color:'#ffffff',weight:1.8,fillColor:r.color,fillOpacity:.95});
    if(k!=='estate')marker.bindTooltip(esc(r.name||''),{permanent:false,direction:'top',offset:[0,-38]});marker.addTo(groups.points);marker.on('click',()=>showMapDetails(r,k));
   });
-  if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#4a8594',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
+  if(gistda&&flags.gistda)L.geoJSON(gistda,{style:{color:'#109dc0',weight:1,fillOpacity:.16},onEachFeature:(f,l)=>l.bindPopup('GISTDA · '+esc(f.properties?.file_name)+'<br>ตรวจสอบวันที่ภาพที่ต้นทาง')}).addTo(groups.gistda);
  }
  if(!cleanDashboard||watchMapData||presentationZoom<9)drawOverviewClusters(overviewPoints.clusters.filter(group=>!cleanDashboard||watchMapData||group[0]?.properties?.kind==='estate'));drawFlow();queueWaterLabels();drawWatchMap();
  const count=list.filter(f=>f.properties.kind==='water').length;const fresh=list.filter(f=>f.properties.kind==='water'&&!f.properties.stale).length;
@@ -1168,12 +1168,12 @@ function showExecutiveFocus(d){
   if(!vector.getSource('executive-links')){
    vector.addSource('executive-links',{type:'geojson',data:collection});
    vector.addLayer({id:'executive-distance',type:'line',source:'executive-links',filter:['==',['get','kind'],'distance'],paint:{'line-color':'#bf033b','line-width':2.5,'line-dasharray':[2,2]}});
-   vector.addLayer({id:'executive-river',type:'line',source:'executive-links',filter:['==',['get','kind'],'river'],paint:{'line-color':'#4a8594','line-width':8}});
+   vector.addLayer({id:'executive-river',type:'line',source:'executive-links',filter:['==',['get','kind'],'river'],paint:{'line-color':'#109dc0','line-width':8}});
   }else vector.getSource('executive-links').setData(collection);
-  targets.slice(1).forEach(p=>{const el=document.createElement('div');el.className='marker-icon';el.style.background='#051736';el.style.position='absolute';el.innerHTML=(p.kind==='dam'?damSvg:sensorSvg('water'))+'<span class="estate-name" style="color:#051736;border-color:#4a8594">'+esc(p.label||'จุดที่เกี่ยวข้อง')+'</span>';executiveMarkers.push(new maplibregl.Marker({element:el}).setLngLat([Number(p.lon),Number(p.lat)]).addTo(vector));});
+  targets.slice(1).forEach(p=>{const el=document.createElement('div');el.className='marker-icon';el.style.background='#051736';el.style.position='absolute';el.innerHTML=(p.kind==='dam'?damSvg:sensorSvg('water'))+'<span class="estate-name" style="color:#051736;border-color:#109dc0">'+esc(p.label||'จุดที่เกี่ยวข้อง')+'</span>';executiveMarkers.push(new maplibregl.Marker({element:el}).setLngLat([Number(p.lon),Number(p.lat)]).addTo(vector));});
   const bounds=new maplibregl.LngLatBounds();bounds.extend(origin);targets.forEach(p=>bounds.extend([Number(p.lon),Number(p.lat)]));if(!d.estateZoom)vector.fitBounds(bounds,{padding:{top:180,bottom:80,left:65,right:65},maxZoom:13,duration:800});
  }else if(raster){
-  executiveRasterLayer=L.layerGroup().addTo(raster);L.geoJSON(collection,{style:f=>f.properties.kind==='river'?{color:'#4a8594',weight:8}:{color:'#bf033b',weight:3,dashArray:'6 6'}}).addTo(executiveRasterLayer);
+  executiveRasterLayer=L.layerGroup().addTo(raster);L.geoJSON(collection,{style:f=>f.properties.kind==='river'?{color:'#109dc0',weight:8}:{color:'#bf033b',weight:3,dashArray:'6 6'}}).addTo(executiveRasterLayer);
   targets.slice(1).forEach(p=>L.circleMarker([p.lat,p.lon],{radius:9,color:'#ffffff',weight:2,fillColor:'#051736',fillOpacity:1}).bindTooltip(esc(p.label||'จุดที่เกี่ยวข้อง'),{permanent:true,direction:'top'}).addTo(executiveRasterLayer));
   if(!d.estateZoom)raster.fitBounds([origin.slice().reverse(),...targets.map(p=>[p.lat,p.lon])],{paddingTopLeft:[60,180],paddingBottomRight:[60,80],maxZoom:13});
  }
@@ -1220,11 +1220,11 @@ function vectorStart(){
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
-  if(vector.getLayer('water'))vector.setPaintProperty('water','fill-color','#4a8594');
-  if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#4a8594');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,2.5,9,4.5,13,8])}
+  if(vector.getLayer('water'))vector.setPaintProperty('water','fill-color','#109dc0');
+  if(vector.getLayer('waterway')){vector.setPaintProperty('waterway','line-color','#109dc0');vector.setPaintProperty('waterway','line-width',['interpolate',['linear'],['zoom'],5,2.5,9,4.5,13,8])}
 
   vector.addSource('sensors',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-  vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,22],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#bf033b','#4a8594'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#bf033b','#4a8594'],'circle-stroke-width':1.4}});
+  vector.addLayer({id:'discharge-ring',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>', ['coalesce',['get','discharge'],0],0],['==',['get','stale'],false]],paint:{'circle-radius':['interpolate',['linear'],['sqrt',['get','discharge']],0,4,60,22],'circle-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#bf033b','#109dc0'],'circle-opacity':.13,'circle-stroke-color':['case',['>=',['coalesce',['get','diff'],-999],0],'#bf033b','#109dc0'],'circle-stroke-width':1.4}});
   vector.addLayer({id:'overflow-alert',type:'circle',source:'sensors',filter:['all',['==',['get','kind'],'water'],['>=',['coalesce',['get','diff'],-999],0],['==',['get','stale'],false]],paint:{'circle-radius':11,'circle-color':'#bf033b','circle-opacity':.1,'circle-stroke-color':'#bf033b','circle-stroke-width':1.5,'circle-stroke-opacity':1}});
   vector.addLayer({id:'points',type:'circle',source:'sensors',filter:['!', ['in',['get','kind'],['literal',['estate','dam','camera','water','canal']]]],paint:{'circle-radius':['match',['get','kind'],'dam',8,'estate',5,5],'circle-color':['get','color'],'circle-stroke-color':'#ffffff','circle-stroke-width':1.8}});
   vector.addLayer({id:'water-stations',type:'circle',source:'sensors',filter:['in',['get','kind'],['literal',['water','canal']]],paint:{'circle-radius':['match',['get','kind'],'water',11,10],'circle-color':['get','color'],'circle-stroke-color':'#ffffff','circle-stroke-width':2,'circle-opacity':.98}});
@@ -1248,11 +1248,11 @@ function syncWaterAreas(){
  const layers=[['small','Water area small scale',1,5,null],['medium','Water area medium scale',5,7,null],['large','Water area large scale',7,11,null],['detail','Water area',11,24,null]];
  if(vector&&ready){
  if(!vector.getSource('esri-water-shape'))vector.addSource('esri-water-shape',{type:'vector',tiles:[esriWaterTiles],minzoom:0,maxzoom:16,attribution:'Water areas © Esri'});
- for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#4a8594','fill-opacity':.94}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
+ for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#109dc0','fill-opacity':.94}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
  }else if(raster&&L.vectorGrid){
  if(!waterAreaRaster){
   if(!raster.getPane('waterArea')){const pane=raster.createPane('waterArea');pane.style.zIndex='350';pane.style.pointerEvents='none';pane.classList.add('river-water-surface')}
-  const styles=new Proxy({}, {get:(_t,name)=>{const match=layers.find(l=>l[1]===name);if(!match)return [];return (p,z)=>z>=match[2]&&z<match[3]&&(match[4]===null||p._symbol===match[4])?{fill:true,fillColor:'#4a8594',fillOpacity:.94,stroke:false,weight:0}:[]}});
+  const styles=new Proxy({}, {get:(_t,name)=>{const match=layers.find(l=>l[1]===name);if(!match)return [];return (p,z)=>z>=match[2]&&z<match[3]&&(match[4]===null||p._symbol===match[4])?{fill:true,fillColor:'#109dc0',fillOpacity:.94,stroke:false,weight:0}:[]}});
   waterAreaRaster=L.vectorGrid.protobuf(esriWaterTiles,{rendererFactory:L.canvas.tile,vectorTileLayerStyles:styles,interactive:false,pane:'waterArea',maxNativeZoom:16,maxZoom:19,attribution:'Water areas © Esri'});
  }
  if(flags.flow&&!raster.hasLayer(waterAreaRaster))waterAreaRaster.addTo(raster);else if(!flags.flow&&raster.hasLayer(waterAreaRaster))waterAreaRaster.remove();
@@ -1272,8 +1272,8 @@ function excludeCambodiaLowerMekong(f){
 function addFlow(){
  if(!vector||!ready||!waterways||vector.getSource('mapped-flow'))return;
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f))}});
- vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#4a8594','line-width':['interpolate',['linear'],['zoom'],4,4.5,10,9,14,16,18,25],'line-opacity':.94}},'discharge-ring');
- vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#4a8594','line-width':['interpolate',['linear'],['zoom'],4,1.6,10,3.2,14,5.8,18,9],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
+ vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#109dc0','line-width':['interpolate',['linear'],['zoom'],4,4.5,10,9,14,16,18,25],'line-opacity':.94}},'discharge-ring');
+ vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#109dc0','line-width':['interpolate',['linear'],['zoom'],4,1.6,10,3.2,14,5.8,18,9],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
  // Single time-based animation loop; the phase is never reset by zoom/pan events.
   // Throttled paint updates reduce expensive map redraws during camera movement.
   if(!window.__ieatFlowLoopStarted){
@@ -1289,22 +1289,22 @@ function addFlow(){
    requestAnimationFrame(animateRiver);
   }
  const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:0,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':.65,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
- img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#4a8594" stroke-width="1.5" stroke-linejoin="round"/></svg>');
+ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f));
  const flowWidth=raster.getZoom()<9?5:raster.getZoom()<13?9:raster.getZoom()<16?16:24;
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#4a8594',weight:flowWidth+1,opacity:.94,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#4a8594',weight:Math.max(2,flowWidth*.38),opacity:.98,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#109dc0',weight:flowWidth+1,opacity:.94,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#109dc0',weight:Math.max(2,flowWidth*.38),opacity:.98,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  
  const bounds=raster.getBounds().pad(.15);let count=0;
  for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
  for(let i=1;i<cs.length;i++){const a=L.latLng(cs[i-1][1],cs[i-1][0]),b=L.latLng(cs[i][1],cs[i][0]);const p=raster.latLngToLayerPoint(a),q=raster.latLngToLayerPoint(b),len=p.distanceTo(q);if(!len)continue;
- let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[18,12],iconAnchor:[9,6],html:'<svg width="18" height="12" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#4a8594" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
+ let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[18,12],iconAnchor:[9,6],html:'<svg width="18" height="12" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
  }}}
 
-function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#4a8594','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#4a8594','circle-radius':5}},'discharge-ring')}
+function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#109dc0','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#109dc0','circle-radius':5}},'discharge-ring')}
 async function feed(name){
  const file=name+'.json',token=Math.floor(Date.now()/3600000);
  const urls=['./data/'+file+'?v='+token,'https://raw.githubusercontent.com/THANAWAN-KI/ieat-emonitoring-line-alert/main/docs/data/'+file+'?v='+token];
@@ -1319,7 +1319,7 @@ function normalizeCanals(data){
 }
 function canalPopup(r){
  const levels=[r.wl,r.outer,r.bank,r.warning,r.critical].map(numeric).filter(v=>v!==null),lo=Math.min(...levels)-.5,hi=Math.max(...levels)+.5,y=v=>100-(v-lo)/(hi-lo)*85,c=color(r,'canal');
- const gauge='<svg viewBox="0 0 40 115" width="40" height="115" aria-label="มาตรวัดระดับน้ำ"><rect x="17" y="15" width="16" height="85" fill="#ffffff"/><rect x="17" y="'+y(r.wl)+'" width="16" height="'+(100-y(r.wl))+'" fill="'+c+'"/>'+Array.from({length:18},(_,i)=>'<path d="M'+(i%3?11:4)+' '+(15+i*5)+'H33" stroke="'+(i%3?'#4a8594':'#bf033b')+'" stroke-width="1"/>').join('')+(r.bank!=null?'<path d="M0 '+y(r.bank)+'H39" stroke="#f00a36" stroke-width="2"/>':'')+'</svg>';
+ const gauge='<svg viewBox="0 0 40 115" width="40" height="115" aria-label="มาตรวัดระดับน้ำ"><rect x="17" y="15" width="16" height="85" fill="#ffffff"/><rect x="17" y="'+y(r.wl)+'" width="16" height="'+(100-y(r.wl))+'" fill="'+c+'"/>'+Array.from({length:18},(_,i)=>'<path d="M'+(i%3?11:4)+' '+(15+i*5)+'H33" stroke="'+(i%3?'#109dc0':'#bf033b')+'" stroke-width="1"/>').join('')+(r.bank!=null?'<path d="M0 '+y(r.bank)+'H39" stroke="#f00a36" stroke-width="2"/>':'')+'</svg>';
  return '<div class="popup canal-popup" style="display:flex;gap:10px;min-width:235px">'+gauge+'<div><b>'+esc((r.code||'')+' · '+r.name)+'</b><br>ในคลอง '+fmt(r.wl)+' ม. รทก.<br>ฝั่งนอก '+fmt(r.outer)+' ม. รทก.<br>'+esc('เขต'+r.district)+' · '+(old(r,'canal')?'ข้อมูลย้อนหลัง':'อัปเดต')+' '+esc(new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}))+'<br><small>ตลิ่ง '+fmt(r.bank)+' ม. รทก.</small><br><a href="'+esc(r.source_url)+'" target="_blank" rel="noopener">ดูข้อมูลสถานีคลอง ↗</a></div></div>';
 }
 async function loadCanals(){
@@ -1445,7 +1445,7 @@ function watchStationReason(s){
 function watchEstatePopup(e){return '<div class="popup"><h3>'+esc(e.name)+'</h3><p>เหตุที่ต้องเฝ้าระวัง: '+e.waterCount+' สถานีน้ำ · '+e.rainCount+' สถานีฝน</p>'+e.stations.map(s=>'<p style="border-top:1px solid #ffffff;padding-top:8px"><b>'+esc(s.name)+'</b><br>'+watchStationReason(s)+'<br>ห่างนิคมฯ '+s.distanceKm.toFixed(2)+' กม.<br>ตรวจวัด '+esc(s.observed)+'</p>').join('')+'<small>ใช้สถานีภายใน 30 กม. ไม่ใช่การยืนยันน้ำท่วมในนิคมฯ</small></div>'}
 function watchRainSvg(){
  // Filled overcast day rain icon: sun, layered clouds, and animated rain.
- return '<svg class="ieat-overcast-rain" viewBox="0 0 100 100" role="img" aria-label="สถานีฝน"><g class="ieat-rain-sun"><circle cx="35" cy="32" r="16" fill="#ffc719" stroke="#ffc719" stroke-width="2"/><path d="M35 8v7M35 49v7M11 32h7M52 32h7M18 15l6 6M52 15l-6 6" stroke="#ffc719" stroke-width="4" stroke-linecap="round"/></g><path class="ieat-rain-back" d="M39 55c-12 0-20-8-20-19s9-20 20-20c9 0 16 5 18 12 11-3 20 5 20 16 0 7-4 11-10 13Z" fill="#4a8594" stroke="#4a8594" stroke-width="2"/><path class="ieat-rain-front" d="M28 70c-10 0-18-8-18-17 0-8 5-14 12-17 1-15 12-24 25-24 12 0 20 7 24 17 12 0 20 9 20 21 0 11-8 20-20 20Z" fill="#ffffff" stroke="#4a8594" stroke-width="2.5"/><g fill="#4a8594"><path class="ieat-rain-drop a" d="M31 72c4 0 6 3 4 7l-6 14c-2 4-9 1-7-4l6-13c1-3 2-4 3-4Z"/><path class="ieat-rain-drop b" d="M54 72c4 0 6 3 4 7l-6 14c-2 4-9 1-7-4l6-13c1-3 2-4 3-4Z"/><path class="ieat-rain-drop c" d="M77 72c4 0 6 3 4 7l-6 14c-2 4-9 1-7-4l6-13c1-3 2-4 3-4Z"/></g></svg>';
+ return '<svg class="ieat-overcast-rain" viewBox="0 0 100 100" role="img" aria-label="สถานีฝน"><g class="ieat-rain-sun"><circle cx="35" cy="32" r="16" fill="#ffc719" stroke="#ffc719" stroke-width="2"/><path d="M35 8v7M35 49v7M11 32h7M52 32h7M18 15l6 6M52 15l-6 6" stroke="#ffc719" stroke-width="4" stroke-linecap="round"/></g><path class="ieat-rain-back" d="M39 55c-12 0-20-8-20-19s9-20 20-20c9 0 16 5 18 12 11-3 20 5 20 16 0 7-4 11-10 13Z" fill="#109dc0" stroke="#109dc0" stroke-width="2"/><path class="ieat-rain-front" d="M28 70c-10 0-18-8-18-17 0-8 5-14 12-17 1-15 12-24 25-24 12 0 20 7 24 17 12 0 20 9 20 21 0 11-8 20-20 20Z" fill="#ffffff" stroke="#109dc0" stroke-width="2.5"/><g fill="#109dc0"><path class="ieat-rain-drop a" d="M31 72c4 0 6 3 4 7l-6 14c-2 4-9 1-7-4l6-13c1-3 2-4 3-4Z"/><path class="ieat-rain-drop b" d="M54 72c4 0 6 3 4 7l-6 14c-2 4-9 1-7-4l6-13c1-3 2-4 3-4Z"/><path class="ieat-rain-drop c" d="M77 72c4 0 6 3 4 7l-6 14c-2 4-9 1-7-4l6-13c1-3 2-4 3-4Z"/></g></svg>';
 }
 function watchEvidenceReason(s){
  if(s.kind==='rain'){
@@ -1499,7 +1499,7 @@ function drawWatchMap(){
   if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='cursor:pointer';if(station){el.className=sharedPin?'flood-data-pin has-sq':'watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker');el.innerHTML=glyph}else{el.className='estate-pin'+(estatePin?' has-sq':'');el.style.cssText='cursor:pointer';el.innerHTML=(estatePin||estateSvg)+'<span class="estate-name">'+esc(label)+'</span>'}const marker=new maplibregl.Marker({element:el,anchor:station&&!sharedPin?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
   else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:sharedPin?'flood-data-pin has-sq':'',iconSize:sharedPin?[40,48]:[50,60],iconAnchor:sharedPin?[20,48]:[25,58],html:sharedPin?glyph:'<span class="watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker')+'">'+glyph+'</span>'}):L.divIcon({className:'estate-pin'+(estatePin?' has-sq':''),iconSize:estatePin?[40,48]:[34,42],iconAnchor:estatePin?[20,48]:[17,42],html:(estatePin||estateSvg)+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
  }
- estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#4a8594',false);e.stations.forEach(s=>{
+ estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#109dc0',false);e.stations.forEach(s=>{
   const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
   lines.push({type:'Feature',geometry:{type:'LineString',coordinates:coords},properties:{}});
   const stationKey=s.lat+':'+s.lon+':'+s.name;if(!seen.has(stationKey)){seen.add(stationKey);const html='<div class="popup"><h3>'+esc(s.name)+'</h3><p>'+(s.kind==='rain'?'ฝนสะสม '+esc(s.rainfall??'–')+' มม.':'ระดับน้ำ '+esc(s.level??'–')+' ม.รทก.<br>ตลิ่ง '+esc(s.bank??'–')+' ม.รทก.')+'<br>'+watchStationReason(s)+'<br>เวลาตรวจวัด '+esc(s.observed)+'</p><p>'+estates.flatMap(other=>other.stations.filter(t=>t.name===s.name&&t.lat===s.lat&&t.lon===s.lon).map(t=>esc(other.name)+' · '+t.distanceKm.toFixed(2)+' กม.')).join('<br>')+'</p><small>ระยะเส้นตรงจากพิกัดสถานีถึงพิกัดอ้างอิงนิคมฯ</small></div>';pin(coords[1],s.name,html,s.kind==='rain'?window.IEAT_WATER_STATUS.rain(s.rainfall).hex:window.IEAT_WATER_STATUS.water({wl:s.level,bank:s.bank}).hex,true,s.kind)}
@@ -1801,18 +1801,18 @@ body.dashboard-clean .sensor-marker svg,body.dashboard-clean .marker-icon svg,bo
 </style><style id="station-popup-redesign-20261027">
 .station-popup{box-sizing:border-box;width:270px;max-width:calc(100vw - 85px);color:#2e1f54!important;font-family:Sarabun,sans-serif!important;line-height:1.5}
 .station-popup-head{padding:0 23px 12px 0;border-bottom:1px solid #ffffff}
-.station-popup .station-popup-kicker{display:block;color:#4a8594;font-size:11px;font-weight:600;letter-spacing:.02em}
+.station-popup .station-popup-kicker{display:block;color:#109dc0;font-size:11px;font-weight:600;letter-spacing:.02em}
 .station-popup h3{margin:3px 0 2px!important;color:#2e1f54!important;font-size:17px!important;line-height:1.4!important;overflow-wrap:anywhere}
-.station-popup-location{font-size:12px;color:#4a8594}
-.station-popup-reading{padding:13px 0 11px}.station-popup-reading>span{display:block;font-size:12px;color:#4a8594}.station-popup-reading>strong{display:block;font-size:29px;line-height:1.3;color:#2e1f54}.station-popup-reading>strong small{font-size:15px;font-weight:600}
+.station-popup-location{font-size:12px;color:#109dc0}
+.station-popup-reading{padding:13px 0 11px}.station-popup-reading>span{display:block;font-size:12px;color:#109dc0}.station-popup-reading>strong{display:block;font-size:29px;line-height:1.3;color:#2e1f54}.station-popup-reading>strong small{font-size:15px;font-weight:600}
 .station-popup-status{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;background:#ffffff;color:#335238}
 .station-popup-status.high{background:#ffffff;color:#bf033b}.station-popup-status.unknown{background:#ffffff;color:#706357}.station-popup-status i{width:7px;height:7px;border-radius:50%;background:currentColor}
 .station-popup-details{margin:0!important;padding:4px 12px!important;background:#ffffff;border-radius:10px}
 .station-popup-details div{display:flex;justify-content:space-between;gap:12px;padding:7px 0}.station-popup-details div+div{border-top:1px solid #ffffff}
-.station-popup-details dt{color:#4a8594;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#2e1f54;font-size:12px;font-weight:600}
-.station-popup-footer{margin-top:12px;color:#4a8594;font-size:11px;line-height:1.7}.station-popup-footer a{color:#4a8594;font-weight:600}.station-popup-stale{color:#ed3b21;font-weight:600}
+.station-popup-details dt{color:#109dc0;font-size:12px}.station-popup-details dd{margin:0;text-align:right;color:#2e1f54;font-size:12px;font-weight:600}
+.station-popup-footer{margin-top:12px;color:#109dc0;font-size:11px;line-height:1.7}.station-popup-footer a{color:#109dc0;font-weight:600}.station-popup-stale{color:#ed3b21;font-weight:600}
 .station-popup .station-history-disclosure{margin-top:10px}
-</style><script src="flood-map-details.js?v=20261105-palette13"></script><script src="flood-preparedness-overlay.js?v=20261105-palette13"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script>
+</style><script src="flood-map-details.js?v=20261105-cyan1"></script><script src="flood-preparedness-overlay.js?v=20261105-cyan1"></script><script>document.addEventListener('DOMContentLoaded',()=>{for(const [id,label]of [['estateView3d','มุมมอง 3 มิติ'],['aerialTourButton','เริ่มหรือหยุดชมมุมสูง'],['supportMapButton','ข้อมูลสนับสนุนการเตรียมความพร้อม']]){const b=document.getElementById(id);if(b){b.setAttribute('aria-label',label);b.title=label}}});</script>
 <style id="ieat-hide-estate-map-labels-20261104">
 /* Hide only persistent estate-name labels; estate pins and click popups remain active. */
 html body #mapStage .estate-pin .estate-name,
@@ -1900,7 +1900,7 @@ html body #mapStage #mapCompass{border:0!important;box-shadow:0 8px 20px rgba(46
 html body #mapStage .estate-name{display:none!important}
 html body #mapStage .estate-pin .estate-name{display:none!important}
 html body #mapStage #watchEvidence button:focus-visible,
-html body #mapStage .ieat-3d-tools button:focus-visible{outline:2px solid #4a8594!important;outline-offset:2px!important}
+html body #mapStage .ieat-3d-tools button:focus-visible{outline:2px solid #109dc0!important;outline-offset:2px!important}
 @media(prefers-reduced-motion:reduce){html body #mapStage *{scroll-behavior:auto!important}}
 </style>
 
@@ -1936,8 +1936,8 @@ html body #mapStage .estate-pin>.ieat-estate-location{
 }
 /* The map library assigns the parent transform; do not override it. */
 </style>
-<script src="flood-infrastructure-20261104.js?v=20261105-palette13"></script>
-<script src="flood-map-alerts.js?v=20261105-palette13"></script>
+<script src="flood-infrastructure-20261104.js?v=20261105-cyan1"></script>
+<script src="flood-map-alerts.js?v=20261105-cyan1"></script>
 </body></html>
 
 
@@ -1967,7 +1967,7 @@ body.dashboard-clean .status{bottom:28px!important;max-height:36px!important;pad
 .popup{color:#2e1f54!important;line-height:1.6!important}
 .popup h3{font-size:18px!important;color:#2e1f54!important}
 .popup img[data-camera-image]{width:100%;max-height:240px;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
-.popup [data-camera-refresh]{border:1px solid #4a8594;border-radius:10px;background:#ffffff;color:#4a8594;padding:8px 12px;font-family:Sarabun,sans-serif}
+.popup [data-camera-refresh]{border:1px solid #109dc0;border-radius:10px;background:#ffffff;color:#109dc0;padding:8px 12px;font-family:Sarabun,sans-serif}
 </style>
 
 
@@ -1978,22 +1978,22 @@ html body .flood-data-pin[data-kind="canal"]{--symbol-ink:#335238;--symbol-tint:
 html body .flood-data-pin[data-kind="camera"]{--symbol-ink:#52057f;--symbol-tint:#ffffff}
 html body .flood-data-pin .fd-pin-shape{box-sizing:border-box!important;position:absolute!important;left:0!important;top:1px!important;width:36px!important;height:36px!important;margin:0!important;border:2px solid white!important;border-radius:13px!important;background:var(--symbol-tint)!important;transform:none!important;box-shadow:0 3px 9px #2e1f542b,0 0 0 1px #ffffff!important}
 html body .flood-data-pin .fd-pin-shape:before{content:"";position:absolute;left:13px;bottom:-8px;width:6px;height:6px;background:white;transform:rotate(45deg);box-shadow:2px 2px 3px #2e1f541c}
-html body .flood-data-pin .fd-pin-shape:after{content:"";position:absolute;right:-4px;bottom:-3px;width:10px;height:10px;border:2px solid white;border-radius:50%;background:var(--pin-status,#4a8594);box-shadow:0 1px 4px #2e1f5433}
+html body .flood-data-pin .fd-pin-shape:after{content:"";position:absolute;right:-4px;bottom:-3px;width:10px;height:10px;border:2px solid white;border-radius:50%;background:var(--pin-status,#109dc0);box-shadow:0 1px 4px #2e1f5433}
 html body .flood-data-pin .fd-pin-icon{box-sizing:border-box!important;display:grid!important;place-items:center!important;width:32px!important;height:32px!important;margin:0!important;border:0!important;border-radius:11px!important;background:transparent!important;color:var(--symbol-ink)!important;transform:none!important}
 html body .flood-data-pin .fd-pin-icon svg{display:block!important;width:25px!important;height:25px!important;color:inherit!important;opacity:1!important;visibility:visible!important}
-html body .flood-data-pin:hover .fd-pin-shape,html body .flood-data-pin:focus-visible .fd-pin-shape{box-shadow:0 5px 16px #05173647,0 0 0 3px #4a8594!important}
-html body .flood-data-pin:focus-visible{outline:2px solid #4a8594;outline-offset:4px;border-radius:13px}
+html body .flood-data-pin:hover .fd-pin-shape,html body .flood-data-pin:focus-visible .fd-pin-shape{box-shadow:0 5px 16px #05173647,0 0 0 3px #109dc0!important}
+html body .flood-data-pin:focus-visible{outline:2px solid #109dc0;outline-offset:4px;border-radius:13px}
 html body .flood-data-pin .fd-pin-name{top:3px!important;left:44px!important;background:#ffffff!important;color:#000000!important;padding:6px 9px!important;border:1px solid #ffffff!important;border-radius:9px!important;box-shadow:0 3px 12px #2e1f5418!important}
 html body .flood-point-cluster>span.flood-cluster-symbol{background:#051736!important;border:2px solid white!important;border-radius:13px!important;box-shadow:0 3px 10px #05173638!important;color:#ffffff!important}
 html body .flood-point-cluster .flood-cluster-symbol b{background:#ffffff!important;color:#051736!important;border:1px solid #ffffff!important}
 </style>
 
 <style id="layer-menu-redesign-20261103">
-html body #mapLayers .layer-body{box-sizing:border-box!important;width:min(328px,calc(100vw - 80px))!important;max-height:calc(100dvh - 140px)!important;padding:16px!important;border:1px solid #ffffff!important;border-radius:18px!important;box-shadow:0 10px 36px #2e1f5424!important;scrollbar-width:thin;scrollbar-color:#4a8594 transparent}
+html body #mapLayers .layer-body{box-sizing:border-box!important;width:min(328px,calc(100vw - 80px))!important;max-height:calc(100dvh - 140px)!important;padding:16px!important;border:1px solid #ffffff!important;border-radius:18px!important;box-shadow:0 10px 36px #2e1f5424!important;scrollbar-width:thin;scrollbar-color:#109dc0 transparent}
 #mapLayers .layer-panel-heading{padding:2px 2px 13px;border-bottom:1px solid #ffffff;margin-bottom:13px}
 #mapLayers .layer-panel-heading strong{display:block;font:700 16px/1.5 Sarabun,sans-serif;color:#051736}
-#mapLayers .layer-panel-heading>span{font:400 11px/1.6 Sarabun,sans-serif;color:#4a8594}
-html body #mapLayers .basemap-select{padding:0 0 14px!important;color:#4a8594!important;font:600 12px/1.6 Sarabun,sans-serif}
+#mapLayers .layer-panel-heading>span{font:400 11px/1.6 Sarabun,sans-serif;color:#109dc0}
+html body #mapLayers .basemap-select{padding:0 0 14px!important;color:#109dc0!important;font:600 12px/1.6 Sarabun,sans-serif}
 html body #mapLayers #basemapChoice{box-sizing:border-box;width:100%;min-height:42px;padding:9px 12px;border:1px solid #ffffff;border-radius:10px;background:#ffffff;color:#000000;font:400 13px Sarabun,sans-serif}
 html body #mapLayers .toggles{display:grid!important;gap:5px!important}
 html body #mapLayers .toggles .layer-option{display:grid!important;grid-template-columns:34px minmax(0,1fr) 34px!important;align-items:center!important;gap:10px!important;min-height:52px!important;box-sizing:border-box!important;padding:8px!important;border:1px solid transparent!important;border-radius:11px!important;background:#ffffff!important;box-shadow:none!important;cursor:pointer}
@@ -2002,24 +2002,24 @@ html body #mapLayers .toggles .layer-option:has(input:checked){background:#fffff
 html body #mapLayers .layer-option-name{font:500 12px/1.5 Sarabun,sans-serif;color:#000000;white-space:normal;overflow-wrap:anywhere}
 html body #mapLayers .toggles .layer-option .layer-swatch{display:grid!important;place-items:center!important;order:0!important;width:32px!important;height:32px!important;margin:0!important;background:#ffffff!important;border:0!important;border-radius:9px!important;color:#051736!important;box-shadow:none!important}
 html body #mapLayers .layer-swatch svg{width:21px!important;height:21px!important;display:block!important;fill:none!important;stroke:currentColor!important}
-html body #mapLayers .layer-option input{appearance:none!important;-webkit-appearance:none!important;position:relative!important;width:32px!important;height:19px!important;min-width:32px!important;margin:0!important;border:0!important;border-radius:20px!important;background:#4a8594!important;cursor:pointer;box-shadow:none!important}
+html body #mapLayers .layer-option input{appearance:none!important;-webkit-appearance:none!important;position:relative!important;width:32px!important;height:19px!important;min-width:32px!important;margin:0!important;border:0!important;border-radius:20px!important;background:#109dc0!important;cursor:pointer;box-shadow:none!important}
 html body #mapLayers .layer-option input:before{content:"";position:absolute;left:3px;top:3px;width:13px;height:13px;border-radius:50%;background:#ffffff;box-shadow:0 1px 3px #2e1f5426}
-html body #mapLayers .layer-option input:checked{background:#4a8594!important}
+html body #mapLayers .layer-option input:checked{background:#109dc0!important}
 html body #mapLayers .layer-option input:checked:before{left:16px}
 html body #mapLayers .layer-option input:focus-visible{outline:3px solid #051736!important;outline-offset:3px}
 </style>
 <style id="purple-dashboard-map-controls">
-html body #mapLayers .layer-panel-heading strong{color:#4a8594!important}
-html body #mapLayers .toggles .layer-option .layer-swatch{background:#ffffff!important;color:#4a8594!important}
+html body #mapLayers .layer-panel-heading strong{color:#109dc0!important}
+html body #mapLayers .toggles .layer-option .layer-swatch{background:#ffffff!important;color:#109dc0!important}
 html body #mapLayers .toggles .layer-option:has(input:checked){background:#ffffff!important;border-color:#ffffff!important}
-html body #mapLayers .layer-option input:checked{background:#4a8594!important}
-html body #mapLayers .layer-option input:focus-visible{outline-color:#4a8594!important}
+html body #mapLayers .layer-option input:checked{background:#109dc0!important}
+html body #mapLayers .layer-option input:focus-visible{outline-color:#109dc0!important}
 html body #mapLayers .layer-option-name{color:#706357!important}
 html body #mapLayers #basemapChoice{background:#ffffff!important;border-color:#ffffff!important;color:#706357!important}
-html body #mapLayers .layer-body{scrollbar-color:#4a8594 transparent!important}
-html body .flood-data-pin{--symbol-ink:#4a8594;--symbol-tint:#ffffff}
-html body .flood-data-pin[data-kind="camera"]{--symbol-ink:#4a8594;--symbol-tint:#ffffff}
-html body .flood-point-cluster>span.flood-cluster-symbol{background:#4a8594!important}
+html body #mapLayers .layer-body{scrollbar-color:#109dc0 transparent!important}
+html body .flood-data-pin{--symbol-ink:#109dc0;--symbol-tint:#ffffff}
+html body .flood-data-pin[data-kind="camera"]{--symbol-ink:#109dc0;--symbol-tint:#ffffff}
+html body .flood-point-cluster>span.flood-cluster-symbol{background:#109dc0!important}
 </style><style id="black-map-text">
 /* Text is black; semantic graphic colors and supplied SVG fills stay intact. */
 :is(#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme,html) body,:is(#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme#blackTextTheme,html) body *:not(svg):not(svg *){color:#000000!important;-webkit-text-fill-color:#000000!important}
@@ -2041,13 +2041,13 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 <style>
 .watch-data-glyph{display:grid;place-items:center;box-sizing:border-box}.watch-data-glyph svg{width:22px;height:22px}
 @layer refreshedMapPins {
- .flood-data-pin .fd-pin-shape{background:#ffffff!important;border:2px solid var(--pin-status,#4a8594)!important;border-radius:11px!important;transform:none!important;box-shadow:0 2px 8px #2e1f5435!important}
+ .flood-data-pin .fd-pin-shape{background:#ffffff!important;border:2px solid var(--pin-status,#109dc0)!important;border-radius:11px!important;transform:none!important;box-shadow:0 2px 8px #2e1f5435!important}
  .flood-data-pin .fd-pin-shape::before{background:#ffffff!important;bottom:-5px!important;width:7px!important;height:7px!important}
- .flood-data-pin .fd-pin-shape::after{background:var(--pin-status,#4a8594)!important;right:-5px!important;bottom:-3px!important}
+ .flood-data-pin .fd-pin-shape::after{background:var(--pin-status,#109dc0)!important;right:-5px!important;bottom:-3px!important}
  .flood-data-pin .fd-pin-icon{transform:none!important;color:#2e1f54!important;background:transparent!important}
  .flood-data-pin .fd-pin-icon svg,.flood-point-cluster .map-symbol{stroke:currentColor!important}
  .flood-data-pin .fd-pin-icon svg *,.flood-point-cluster .map-symbol *{stroke:currentColor!important;fill:none!important}
- .flood-point-cluster>span.flood-cluster-symbol{background:#ffffff!important;color:#2e1f54!important;border-color:var(--cluster-status,#4a8594)!important}
+ .flood-point-cluster>span.flood-cluster-symbol{background:#ffffff!important;color:#2e1f54!important;border-color:var(--cluster-status,#109dc0)!important}
  .estate-pin,.clean-estate-point{color:#52057f!important}
 }
 </style><style id="dashboard-glass-popups">
@@ -2061,7 +2061,7 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  #watchEvidence .watch-evidence-list details{padding:12px 0!important}
  #watchEvidence .watch-evidence-list summary{font-size:14px!important;line-height:1.6!important}
  #watchEvidence .watch-evidence-list p{background:rgba(255,255,255,.87)!important;border:1px solid #ffffff!important;border-radius:11px!important;box-shadow:0 2px 5px #2e1f5410!important;padding:11px!important}
- #watchEvidence button{border-color:#4a8594!important;border-radius:9px!important;background:rgba(255,255,255,.9)!important}
+ #watchEvidence button{border-color:#109dc0!important;border-radius:9px!important;background:rgba(255,255,255,.9)!important}
  #watchEvidence [data-watch-close]{width:30px;height:30px;border-radius:50%!important;background:#ffffffb3!important}
  #watchEvidence footer{background:#ffffff80!important;font-size:10px!important}
  .prep-point-popup .maplibregl-popup-content,.prep-point-popup .leaflet-popup-content-wrapper,.flood-card-popup .maplibregl-popup-content,.flood-card-popup .leaflet-popup-content-wrapper{background:rgba(255,255,255,.96)!important;border:1px solid #ffffff!important;border-radius:17px!important;box-shadow:0 14px 36px #2e1f5433,0 2px 7px #2e1f5414!important;backdrop-filter:blur(12px)}
@@ -2073,22 +2073,22 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .prep-point-popup .fc-image-badge{position:static!important;display:inline-block!important;font-size:11px!important;padding:0!important;background:transparent!important;box-shadow:none!important}
  .prep-point-popup .fc-title{padding:12px 14px 3px!important;background:transparent!important}
  .prep-point-popup .fc-title h3{font-size:15px!important}
- .prep-point-popup .fc-caption{padding:6px 14px 12px!important;font-size:11px!important;color:#4a8594!important}
+ .prep-point-popup .fc-caption{padding:6px 14px 12px!important;font-size:11px!important;color:#109dc0!important}
  .prep-point-popup .fc-details{border-top:1px solid #ffffff!important}
- .prep-point-popup .fc-details>summary{padding:10px 14px!important;font-size:12px!important;color:#4a8594!important}
+ .prep-point-popup .fc-details>summary{padding:10px 14px!important;font-size:12px!important;color:#109dc0!important}
  .prep-point-popup .fc-detail-body{padding:10px 14px!important}
- .prep-point-popup .leaflet-popup-close-button,.prep-point-popup .maplibregl-popup-close-button{top:7px!important;right:7px!important;width:25px!important;height:25px!important;border-radius:50%!important;background:#ffffff!important;color:#4a8594!important;z-index:5!important}
+ .prep-point-popup .leaflet-popup-close-button,.prep-point-popup .maplibregl-popup-close-button{top:7px!important;right:7px!important;width:25px!important;height:25px!important;border-radius:50%!important;background:#ffffff!important;color:#109dc0!important;z-index:5!important}
  .prep-point-popup .leaflet-popup-content{margin:14px!important}
  .prep-point-popup .flood-card{border:0!important;box-shadow:none!important;border-radius:12px!important;overflow:hidden!important}
 }
 </style><style id="modern-layer-controls">
 @layer modernLayerMenu {
- #mapLayers .toggles .layer-option .layer-swatch{background:transparent!important;color:#4a8594!important;width:26px!important;height:28px!important;border-radius:0!important}
+ #mapLayers .toggles .layer-option .layer-swatch{background:transparent!important;color:#109dc0!important;width:26px!important;height:28px!important;border-radius:0!important}
  #mapLayers .layer-swatch svg:not(.ieat-nm-glyph){width:23px!important;height:23px!important;stroke-width:1.45!important;stroke:currentColor!important;fill:none!important}
  #mapLayers .layer-swatch svg:not(.ieat-nm-glyph) *{stroke:currentColor!important;stroke-width:1.45!important;fill:none!important}
  #mapLayers .toggles .layer-option{border:1px solid #ffffff!important;background:#ffffff!important;border-radius:10px!important}
- #mapLayers .toggles .layer-option:has(input:checked){border-color:#4a8594!important;background:#ffffff!important}
- #mapLayers .layer-option input{accent-color:#4a8594!important}
+ #mapLayers .toggles .layer-option:has(input:checked){border-color:#109dc0!important;background:#ffffff!important}
+ #mapLayers .layer-option input{accent-color:#109dc0!important}
 }
 </style><style id="modern-street-basemap">
 .street-basemap .dashboard-base-tiles{filter:saturate(.28) brightness(1.04)}
@@ -2103,7 +2103,7 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .map-measure-symbol g>*{fill:inherit!important;stroke:inherit!important;stroke-width:inherit!important}
  .requested-cctv-pin{position:absolute!important;left:-4px!important;top:6px!important;width:44px!important;height:36px!important;display:block!important}
  .requested-cctv-pin>svg{width:44px!important;height:36px!important}
- .map-flow-reading{position:absolute;left:29px;top:8px;white-space:nowrap;padding:3px 6px;border:1px solid #4a8594;border-radius:6px;background:#ffffff;color:#2e1f54;font:600 11px/1.4 Sarabun,sans-serif;box-shadow:0 1px 4px #33523820}
+ .map-flow-reading{position:absolute;left:29px;top:8px;white-space:nowrap;padding:3px 6px;border:1px solid #109dc0;border-radius:6px;background:#ffffff;color:#2e1f54;font:600 11px/1.4 Sarabun,sans-serif;box-shadow:0 1px 4px #33523820}
  .map-flow-reading small{font-size:9px}
  .satellite-flood-mask{filter:hue-rotate(-9deg) saturate(.55) brightness(1.16)!important}
  .river-motion{animation:riverTravel 1.45s linear infinite!important;will-change:stroke-dashoffset}
@@ -2116,13 +2116,13 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 </style><style>
 .watch-data-glyph .map-measure-symbol{position:static!important;width:32px!important;height:42px!important;transform:translateY(-8px)}
 .flood-cluster-symbol>.map-measure-symbol{position:static!important;width:28px!important;height:36px!important}
-</style><style>.map-flow-legend{display:grid;place-items:center;width:24px;height:24px;border:1.5px solid #4a8594;border-radius:50%;color:#4a8594;font:600 15px/1 Sarabun,sans-serif;background:#ffffff}.flow-unit-note{display:block;font:400 10px/1.4 Sarabun,sans-serif;color:#4a8594}</style><style id="layer-panel-refinement">
+</style><style>.map-flow-legend{display:grid;place-items:center;width:24px;height:24px;border:1.5px solid #109dc0;border-radius:50%;color:#109dc0;font:600 15px/1 Sarabun,sans-serif;background:#ffffff}.flow-unit-note{display:block;font:400 10px/1.4 Sarabun,sans-serif;color:#109dc0}</style><style id="layer-panel-refinement">
 @layer modernLayerMenu {
  #mapLayers .layer-body{width:min(306px,calc(100vw - 76px))!important;padding:14px!important;border:1px solid #ffffff!important;border-radius:16px!important;box-shadow:0 14px 40px #2e1f5425!important;background:rgba(255,255,255,.97)!important;backdrop-filter:blur(14px);max-height:calc(100dvh - 70px)!important}
  #mapLayers .layer-panel-heading{padding:1px 4px 11px!important;margin-bottom:10px!important;border-bottom:1px solid #ffffff!important}
  #mapLayers .layer-panel-heading strong{font:600 15px/1.4 Sarabun,sans-serif!important;color:#2e1f54!important}
- #mapLayers .layer-panel-heading>span{font:400 11px/1.5 Sarabun,sans-serif!important;color:#4a8594!important}
- #mapLayers .basemap-select{padding:0 3px 11px!important;font-size:11px!important;color:#4a8594!important}
+ #mapLayers .layer-panel-heading>span{font:400 11px/1.5 Sarabun,sans-serif!important;color:#109dc0!important}
+ #mapLayers .basemap-select{padding:0 3px 11px!important;font-size:11px!important;color:#109dc0!important}
  #mapLayers #basemapChoice{min-height:35px!important;border:1px solid #ffffff!important;border-radius:7px!important;background:#ffffff!important;padding:7px 9px!important;font-size:12px!important;color:#335238!important}
  #mapLayers .toggles{gap:2px!important}
  #mapLayers .toggles .layer-option{display:grid!important;grid-template-columns:26px minmax(0,1fr) 30px!important;min-height:43px!important;padding:7px 8px!important;gap:9px!important;margin:0!important;border:0!important;border-radius:7px!important;background:transparent!important;box-shadow:none!important}
@@ -2132,37 +2132,37 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  #mapLayers .toggles .layer-option .layer-swatch{width:26px!important;height:26px!important;background:transparent!important}
  #mapLayers .layer-option input{width:29px!important;min-width:29px!important;height:17px!important;background:#ffffff!important;transition:background .18s!important}
  #mapLayers .layer-option input:before{width:11px!important;height:11px!important;top:3px!important;left:3px!important;box-shadow:0 1px 3px #2e1f5422!important;transition:left .18s}
- #mapLayers .layer-option input:checked{background:#4a8594!important}
+ #mapLayers .layer-option input:checked{background:#109dc0!important}
  #mapLayers .layer-option input:checked:before{left:15px!important}
- #mapLayers .layer-option input:focus-visible{outline:2px solid #4a8594!important;outline-offset:3px!important}
- #mapLayers .flow-unit-note{font-size:9px!important;color:#4a8594!important}
+ #mapLayers .layer-option input:focus-visible{outline:2px solid #109dc0!important;outline-offset:3px!important}
+ #mapLayers .flow-unit-note{font-size:9px!important;color:#109dc0!important}
 }
 </style><style>@layer modernLayerMenu{#mapLayers .layer-option input:disabled{opacity:1!important;cursor:default!important}#mapLayers .layer-option:has(input:disabled){cursor:default!important}}</style>
 <style id="ieat-watch-glass-20261104">
 /* Blue/teal three-dimensional glass UI, always legible over radar colors. */
-#watchEvidence{width:min(425px,calc(100vw - 30px))!important;max-height:calc(100dvh - 85px)!important;top:58px!important;right:14px!important;background:linear-gradient(155deg,rgba(255,255,255,.9),rgba(255,255,255,.80))!important;border:1.5px solid rgba(255,255,255,.93)!important;border-radius:23px!important;box-shadow:0 18px 48px #2e1f544d,inset 0 1.5px 1px #ffffff,0 0 0 2px #4a859421!important;backdrop-filter:blur(20px) saturate(145%)!important;-webkit-backdrop-filter:blur(20px) saturate(145%)!important;color:#051736!important;overflow:hidden}
-#watchEvidence .ieat-watch-head{padding:15px 17px 17px!important;background:linear-gradient(115deg,#051736,#4a8594 68%,#4a8594)!important;border:0!important}
+#watchEvidence{width:min(425px,calc(100vw - 30px))!important;max-height:calc(100dvh - 85px)!important;top:58px!important;right:14px!important;background:linear-gradient(155deg,rgba(255,255,255,.9),rgba(255,255,255,.80))!important;border:1.5px solid rgba(255,255,255,.93)!important;border-radius:23px!important;box-shadow:0 18px 48px #2e1f544d,inset 0 1.5px 1px #ffffff,0 0 0 2px #109dc021!important;backdrop-filter:blur(20px) saturate(145%)!important;-webkit-backdrop-filter:blur(20px) saturate(145%)!important;color:#051736!important;overflow:hidden}
+#watchEvidence .ieat-watch-head{padding:15px 17px 17px!important;background:linear-gradient(115deg,#051736,#109dc0 68%,#109dc0)!important;border:0!important}
 #watchEvidence .ieat-watch-head strong{color:#ffffff!important;font-size:17px!important;font-weight:750!important;line-height:1.4!important}
 #watchEvidence .ieat-watch-head small{color:#ffffff!important;line-height:1.5!important;font-size:11px!important}
 #watchEvidence [data-watch-close]{background:rgba(255,255,255,.15)!important;border:1px solid #ffffff8a!important;border-radius:50%!important;min-width:32px!important;min-height:32px!important;color:#ffffff!important;font-size:21px!important}
 #watchEvidence .ieat-watch-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:12px 13px 5px}
-#watchEvidence .ieat-watch-overview>div{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:10px 11px;min-width:0;border-radius:15px;border:1px solid #ffffffd9;background:linear-gradient(135deg,#ffffff,#ffffff);box-shadow:0 4px 12px #4a859416,inset 0 1px 1px white}
+#watchEvidence .ieat-watch-overview>div{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:10px 11px;min-width:0;border-radius:15px;border:1px solid #ffffffd9;background:linear-gradient(135deg,#ffffff,#ffffff);box-shadow:0 4px 12px #109dc016,inset 0 1px 1px white}
 #watchEvidence .ieat-watch-overview>div:nth-child(2){background:linear-gradient(135deg,#ffffff,#ffffff)}
 #watchEvidence .ieat-watch-overview span{font-size:11px;color:#2e1f54!important}
 #watchEvidence .ieat-watch-overview strong{font-size:22px!important;color:#051736!important;line-height:1.15}
 #watchEvidence .ieat-watch-overview strong small{display:inline;font-size:11px;color:#2e1f54!important}
 #watchEvidence .watch-layer-options{padding:9px 13px!important;border:0!important;gap:7px!important}
-#watchEvidence .watch-layer-options label{background:#ffffffbb;border:1px solid #4a8594;border-radius:9px;padding:4px 8px;color:#2e1f54;font-size:11px}
+#watchEvidence .watch-layer-options label{background:#ffffffbb;border:1px solid #109dc0;border-radius:9px;padding:4px 8px;color:#2e1f54;font-size:11px}
 #watchEvidence .watch-evidence-list{padding:0 13px 8px!important;scrollbar-width:thin}
 #watchEvidence .ieat-watch-estate{border:1px solid #ffffff!important;border-radius:15px;background:#ffffffb8;margin:3px 0 9px;padding:0!important;box-shadow:0 4px 13px #2e1f5416}
 #watchEvidence .ieat-watch-estate>summary{display:flex;align-items:center;gap:9px;padding:12px 11px;list-style:none;cursor:pointer}
 #watchEvidence .ieat-watch-estate>summary::-webkit-details-marker{display:none}
-#watchEvidence .ieat-watch-estate-glyph{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:11px;background:#4a8594;color:#4a8594;font-size:23px}
+#watchEvidence .ieat-watch-estate-glyph{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:11px;background:#109dc0;color:#109dc0;font-size:23px}
 #watchEvidence .ieat-watch-estate-title{min-width:0}
 #watchEvidence .ieat-watch-estate-title b{display:block;color:#2e1f54;font-size:13px;line-height:1.45}
-#watchEvidence .ieat-watch-estate-title small{color:#4a8594!important;font-size:11px}
+#watchEvidence .ieat-watch-estate-title small{color:#109dc0!important;font-size:11px}
 #watchEvidence .ieat-watch-estate-body{padding:0 10px 9px}
-#watchEvidence [data-watch-estate]{background:#ffffff!important;color:#051736!important;border:1px solid #4a8594!important;width:100%;text-align:center;font-weight:600}
+#watchEvidence [data-watch-estate]{background:#ffffff!important;color:#051736!important;border:1px solid #109dc0!important;width:100%;text-align:center;font-weight:600}
 #watchEvidence .ieat-watch-station{border-radius:12px;background:#ffffffdf;border:1px solid #ffffff;margin-top:9px;padding:10px 9px;box-shadow:0 2px 6px #2e1f540d}
 #watchEvidence .ieat-watch-reason{display:grid;grid-template-columns:38px 1fr;align-items:center;gap:8px;background:#ffffff;border-radius:10px;padding:8px;color:#2e1f54!important}
 #watchEvidence .ieat-watch-reason .ieat-overcast-rain{width:35px;height:35px}
@@ -2171,14 +2171,14 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 #watchEvidence .ieat-watch-station-row{display:flex;justify-content:space-between;gap:8px;align-items:center;padding-top:8px}
 #watchEvidence .ieat-watch-station-row>span:first-child{min-width:0;flex:1}
 #watchEvidence .ieat-watch-station-row b{display:block;font-size:12px;color:#2e1f54}
-#watchEvidence .ieat-watch-station-row small{font-size:10px;color:#4a8594!important}
+#watchEvidence .ieat-watch-station-row small{font-size:10px;color:#109dc0!important}
 #watchEvidence .ieat-watch-distance{flex:0 0 auto;background:#ffffff;border-radius:9px;padding:5px 7px;text-align:center;font-size:14px;font-weight:700;color:#000000!important}
 #watchEvidence .ieat-watch-distance small{display:block;color:#000000!important}
-#watchEvidence .ieat-watch-water-icon{color:#4a8594;font:bold 29px sans-serif}
+#watchEvidence .ieat-watch-water-icon{color:#109dc0;font:bold 29px sans-serif}
 #watchEvidence footer{color:#2e1f54!important;padding:11px 13px!important;font-size:10px!important;background:#ffffff78!important;line-height:1.6!important;border-color:#ffffff!important}
 .watch-data-glyph.ieat-watch-rain-marker{position:relative;display:grid!important;place-items:center!important;width:54px!important;height:64px!important;padding:0!important;border:3px solid #ffffff!important;border-radius:47% 47% 47% 0!important;transform:rotate(-45deg);background:linear-gradient(135deg,#ff6908,#ffc719)!important;box-shadow:0 4px 16px #ed3b219c,0 0 0 2px #ff6908!important;overflow:visible!important;cursor:pointer}
 .watch-data-glyph.ieat-watch-rain-marker .ieat-overcast-rain{width:48px!important;height:48px!important;transform:rotate(45deg)}
-.watch-data-glyph.ieat-watch-water-marker{display:grid;place-items:center;width:42px;height:42px;border:2px solid #ffffff;background:#4a8594;border-radius:15px;box-shadow:0 2px 8px #2e1f5470}
+.watch-data-glyph.ieat-watch-water-marker{display:grid;place-items:center;width:42px;height:42px;border:2px solid #ffffff;background:#109dc0;border-radius:15px;box-shadow:0 2px 8px #2e1f5470}
 .watch-data-glyph.ieat-watch-water-marker .ieat-map-symbol{color:#ffffff!important;background:transparent!important;border:0!important}
 .watch-data-glyph.ieat-watch-water-marker .ieat-meaning-svg *{stroke:white!important}
 .ieat-rain-drop{animation:ieatRainDrop 1.1s ease-in infinite}.ieat-rain-drop.b{animation-delay:.33s}.ieat-rain-drop.c{animation-delay:.66s}
@@ -2196,13 +2196,13 @@ body:not(.imagery-basemap) #map,body:not(.imagery-basemap) #raster{background:#f
 html body .estate-pin .ieat-estate-location,
 html body .clean-estate-point .ieat-estate-location,
 html body .watch-estate-pin .ieat-estate-location{
- background:#4a8594!important;border-color:#2e1f54!important;
+ background:#109dc0!important;border-color:#2e1f54!important;
  box-shadow:0 3px 10px #33523877,0 0 0 2px #ffffff!important
 }
 html body .estate-pin .ieat-estate-emblem,
 html body .clean-estate-point .ieat-estate-emblem{color:#2e1f54!important}
 html body #mapLayers .layer-swatch[data-kind="estate"] .ieat-estate-location{
- background:#4a8594!important;border-color:#2e1f54!important;
+ background:#109dc0!important;border-color:#2e1f54!important;
 }
 html body .flood-data-pin>.ieat-map-symbol[data-type="camera"]{
  background:#ff6908!important;border-color:#335238!important;color:#ffffff!important
