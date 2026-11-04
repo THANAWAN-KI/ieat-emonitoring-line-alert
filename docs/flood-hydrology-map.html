@@ -337,7 +337,7 @@ let ridRows=[],ridFailed=false;let vector=null,raster=null,ready=false,features=
 window.IEATPreparednessMap=()=>({vector,raster,ready,
  showAt:openPointPopup,
  clearSelectionPopup:()=>{autoFit=false;selectedMarker?.getPopup?.()?.remove();raster?.closePopup()},
- focusPoint:(lon,lat)=>{stopAerialTour();autoFit=false;if(vector)vector.flyTo({center:[lon,lat],zoom:15,pitch:55,bearing:-15});else raster?.setView([lat,lon],15)},
+ focusPoint:(lon,lat)=>focusWithEstate(Number(lon),Number(lat)),
  pointContent:(r,k)=>{const s=pointCondition(r,k);return '<div class="map-point-status" style="border-left:4px solid '+s.hex+'"><b>'+esc(s.label)+'</b><small>'+esc(s.criterion)+'</small></div>'+(k==='camera'?content(r,k):baseContent(r,k))},loadCamera:r=>loadCameraImage(r),mountHistory:root=>mountPopupHistory(root),points:()=>scoped().map(f=>f.properties)
 });
 
@@ -353,7 +353,7 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
 const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:false,dam:false,camera:false,estate:false,gistda:false,boundary:false,satellite:true,radar:false,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:true,dam:false,camera:false,estate:false,gistda:false,boundary:true,satellite:false,radar:true,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=false;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
 
 if(cleanDashboard){
  const zoomTools=document.createElement('div');zoomTools.id='dashboardMapZoom';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่');
@@ -621,8 +621,8 @@ function syncGlobalBuildings(){
 }
 function syncBoundaries(){
  syncEstateOuter();syncIllustrativeModels();syncGlobalBuildings();
- if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#d6e5ef','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':0,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
- if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#674188',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.55,fill:false,fillOpacity:0},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
+ if(vector&&ready){if(!vector.getSource('estate-boundaries')){vector.addSource('estate-boundaries',{type:'geojson',data:boundaryData});vector.addLayer({id:'estate-boundary-fill',type:'fill-extrusion',source:'estate-boundaries',paint:{'fill-extrusion-color':'#d6e5ef','fill-extrusion-height':2,'fill-extrusion-base':0,'fill-extrusion-opacity':.12,'fill-extrusion-vertical-gradient':true}},'discharge-ring');vector.addLayer({id:'estate-boundary-line',type:'line',source:'estate-boundaries',paint:{'line-color':'#674188','line-width':.7,'line-opacity':.55}},'discharge-ring');vector.on('click','estate-boundary-fill',e=>{if(e.features?.[0])createMapPopup().setLngLat(e.lngLat).setHTML(boundaryPopup(e.features[0])).addTo(vector)})}vector.getSource('estate-boundaries').setData(boundaryData);['estate-boundary-fill','estate-boundary-line'].forEach(id=>vector.setLayoutProperty(id,'visibility',flags.boundary&&$('estateParcelVisibility')?.checked?'visible':'none'));}
+ if(raster){if(boundaryLayer)raster.removeLayer(boundaryLayer);if(flags.boundary){boundaryLayer=L.geoJSON(boundaryData,{renderer:L.canvas({padding:.3}),style:{color:'#674188',weight:($('estateParcelVisibility')?.checked ? .7 : 0),opacity:.65,fill:true,fillColor:'#C3ACD0',fillOpacity:.12},onEachFeature:(f,l)=>l.bindPopup(boundaryPopup(f))}).addTo(raster);boundaryLayer.bringToBack();}}
 }
 function boundaryPopup(f){return '<div class="popup"><h3>'+esc(f.properties?.['นิคมอุตสาหกรรม']||'ขอบเขตนิคมอุตสาหกรรม')+'</h3><p>ขอบเขตพื้นที่/แปลงที่ดินจากชั้น e_PP · กนอ.</p><p>ยกขอบเขตเพื่อแสดงผล 3 มิติ ไม่ใช่อาคารหรือความสูงจริง</p><a target="_blank" rel="noopener" href="'+boundaryService+'">เปิดแหล่งข้อมูล</a>'+estateFloodPlan(f.properties?.['นิคมอุตสาหกรรม'])+'</div>';}
 $('estateExample3d').addEventListener('click',showEstateIllustrationExample);
@@ -778,8 +778,10 @@ function focus(d){
  if(d.lat==null||d.lon==null||!Number.isFinite(Number(d.lat))||!Number.isFinite(Number(d.lon)))return;
  autoFit=false;$('province').value='';render();
  const zoom=d.scale?Math.max(5,Math.min(15,Math.log2(591657527/Number(d.scale)))):12;
- if(vector)vector.flyTo({center:[Number(d.lon),Number(d.lat)],zoom,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:$('estateView3d').getAttribute('aria-pressed')==='true'?-15:0});else raster.setView([d.lat,d.lon],zoom,{animate:false});
- if(d.station)showMapDetails({...d.station,lat:Number(d.lat),lng:Number(d.lon)},d.kind==='canal'?'canal':'water');
+ if(estateProvinceScope?.active)focusWithEstate(Number(d.lon),Number(d.lat));else if(vector)vector.flyTo({center:[Number(d.lon),Number(d.lat)],zoom,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:$('estateView3d').getAttribute('aria-pressed')==='true'?-15:0});else raster.setView([d.lat,d.lon],zoom,{animate:false});
+ if(d.station)showMapDetails({...d.station,lat:Number(d.lat),lng:Number(d.lon)},d.kind||'water');
+ else {const nearby=features.find(f=>Math.abs(f.geometry.coordinates[0]-Number(d.lon))<.0005&&Math.abs(f.geometry.coordinates[1]-Number(d.lat))<.0005);if(nearby)showMapDetails(nearby.properties,nearby.properties.kind);}
+
  if(d.executive)showExecutiveFocus(d);
 }
 
@@ -859,7 +861,7 @@ function drawFlow(){
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream');
  const flowWidth=raster.getZoom()<9?4:raster.getZoom()<13?7:11;
  L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#E4F5FF',weight:1.3,opacity:.85,lineCap:'butt',dashArray:'3 21',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
- if(raster.getZoom()<7)return;
+ if(raster.getZoom()<5)return;
  const bounds=raster.getBounds().pad(.15);let count=0;
  for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
  for(let i=1;i<cs.length;i++){const a=L.latLng(cs[i-1][1],cs[i-1][0]),b=L.latLng(cs[i][1],cs[i][0]);const p=raster.latLngToLayerPoint(a),q=raster.latLngToLayerPoint(b),len=p.distanceTo(q);if(!len)continue;
@@ -1071,6 +1073,20 @@ function openPreparednessPoint(key){
  const r=f.properties,k=r.kind,[lon,lat]=f.geometry.coordinates;
  openPointPopup(lon,lat,content(r,k),true,k==='camera'?r:null);
 }
+function distanceFromEstate(lon,lat){
+ const e=estateProvinceScope?.estate;if(!e)return NaN;
+ const rad=Math.PI/180,a=Number(e.lat)*rad,b=lat*rad,dy=b-a,dx=(lon-Number(e.lon??e.lng))*rad;
+ return 12742*Math.asin(Math.sqrt(Math.min(1,Math.sin(dy/2)**2+Math.cos(a)*Math.cos(b)*Math.sin(dx/2)**2)));
+}
+function focusWithEstate(lon,lat){
+ stopAerialTour();autoFit=false;
+ const e=estateProvinceScope?.active?estateProvinceScope.estate:null;
+ if(e){const x=Number(e.lon??e.lng),y=Number(e.lat),west=Math.min(lon,x-.025),east=Math.max(lon,x+.025),south=Math.min(lat,y-.025),north=Math.max(lat,y+.025);
+  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:70,maxZoom:13,pitch:0,duration:500});
+  else raster?.fitBounds([[south,west],[north,east]],{padding:[60,60],maxZoom:13});
+  queueBoundaries();
+ }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:0});else raster?.setView([lat,lon],13);
+}
 function openPointPopup(lon,lat,html,move=false,camera=null){
  if(lon==null||lat==null||!Number.isFinite(Number(lon))||!Number.isFinite(Number(lat))||(!vector&&!raster))return;
  window.IEAT_MAP_DETAILS?.close();
@@ -1078,6 +1094,8 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
  const node=document.createElement('div');
  node.className='dashboard-popup-body';
  node.innerHTML=html;
+ const estate=estateProvinceScope?.active?estateProvinceScope.estate:null;
+ if(estate){const d=distanceFromEstate(Number(lon),Number(lat));if(Number.isFinite(d)){const note=document.createElement('div');note.className='popup-estate-distance';note.textContent='ห่างจาก '+estateProvinceScope.name+' '+d.toLocaleString('th-TH',{maximumFractionDigits:2})+' กม. (ระยะเส้นตรง)';node.append(note)}}
  if(move)window.IEATPreparednessMap().focusPoint(Number(lon),Number(lat));
  preparednessPopup=vector
   ?new maplibregl.Popup({maxWidth:'290px',offset:16,className:'prep-point-popup'}).setLngLat([lon,lat]).setDOMContent(node).addTo(vector)
@@ -1112,7 +1130,7 @@ window.addEventListener('message',async event=>{
  if(changed){clearWatchMap();preparednessPopup?.remove()}estateProvinceScope=d;
  if(cleanDashboard){
  const active=!!(d.active&&d.estate);
- Object.assign(flags,{estate:active,boundary:active,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:active,rings:false,radar:false,gistda:false,satellite:true});
+ Object.assign(flags,{estate:active,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:false,radar:true,gistda:false,satellite:active});
  document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);
  $('estateView3d').setAttribute('aria-pressed',String(active));$('estateView3d').textContent=active?'มุมมอง 3D':'มุมมอง 2D';
  if(active)cameras();
@@ -1430,4 +1448,4 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
 </style><style id="modern-street-basemap">
 .street-basemap .dashboard-base-tiles{filter:saturate(.28) brightness(1.04)}
 .street-basemap #map,.street-basemap #raster{background:#eff4f7}
-</style>
+</style><style>.popup-estate-distance{padding:10px 12px;margin-top:9px;border:1px solid #d8e7f1;border-radius:9px;background:#edf6fc;color:#174c72;font:500 12px/1.6 Sarabun,sans-serif}</style>
