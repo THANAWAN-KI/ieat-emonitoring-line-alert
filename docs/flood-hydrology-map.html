@@ -625,7 +625,7 @@ function safeOverlayUrl(v){const u=new URL(v,faonamBase);if(u.origin!==faonamBas
 $('mapCompass').onclick=()=>{if(vector)vector.resetNorthPitch({duration:450});else if(raster){raster.invalidateSize();$('mapCompass').title='แผนที่ 2 มิติแสดงทิศเหนือด้านบนอยู่แล้ว';}};
 const flags={canal:true,water:true,rings:true,flow:true,dam:true,camera:true,estate:true,gistda:false,boundary:true,satellite:true,radar:true};
 const cleanDashboard=new URLSearchParams(location.search).get('dashboard')==='clean';
-if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:true,dam:false,camera:false,estate:false,gistda:false,boundary:true,satellite:false,radar:true,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','false');$('estateView3d').textContent='มุมมอง 2D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=true;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
+if(cleanDashboard){Object.assign(flags,{canal:false,water:false,rings:false,flow:true,dam:false,camera:false,estate:false,gistda:false,boundary:true,satellite:false,radar:true,rain:false,rainfall:false});document.body.classList.add('dashboard-clean');$('estateView3d').setAttribute('aria-pressed','true');$('estateView3d').textContent='มุมมอง 3D';$('estateParcelVisibility').checked=true;$('estateTreeVisibility').checked=true;document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);}
 
 if(cleanDashboard){
  const zoomTools=document.createElement('div');zoomTools.id='dashboardMapZoom';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่');
@@ -1208,7 +1208,7 @@ function rasterStart(){
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
  try{
- vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray',paint:{'raster-saturation':selectedBasemap==='streets'?-.72:selectedBasemap==='topo'?-.5:0}}]},center:[101,14],zoom:6,pitch:cleanDashboard?0:55,bearing:cleanDashboard?0:-15,preserveDrawingBuffer:true,attributionControl:true});
+ vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray',paint:{'raster-saturation':selectedBasemap==='streets'?-.72:selectedBasemap==='topo'?-.5:0}}]},center:[101,14],zoom:6,pitch:55,bearing:-15,preserveDrawingBuffer:true,attributionControl:true});
  if(!cleanDashboard)vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
@@ -1570,10 +1570,10 @@ function focusWithEstate(lon,lat){
   const mapWidth=(vector?.getContainer()||raster?.getContainer())?.clientWidth||900;
   const pad=Math.max(18,Math.min(70,Math.round(mapHeight*.09)));
   const side=Math.max(18,Math.min(85,Math.round(mapWidth*.07)));
-  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:pad,left:side,right:side,bottom:pad},maxZoom:13,pitch:0,duration:500});
+  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:pad,left:side,right:side,bottom:pad},maxZoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,duration:650});
   else raster?.fitBounds([[south,west],[north,east]],{paddingTopLeft:[side,pad],paddingBottomRight:[side,pad],maxZoom:13});
   queueBoundaries();
- }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:0});else raster?.setView([lat,lon],13);
+ }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:-15});else raster?.setView([lat,lon],13);
 }
 function openPointPopup(lon,lat,html,move=false,camera=null){
  if(lon==null||lat==null||!Number.isFinite(Number(lon))||!Number.isFinite(Number(lat))||(!vector&&!raster))return;
@@ -1837,6 +1837,42 @@ html body #mapStage #watchEvidence .watch-evidence-list p{
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
  html body #mapStage #watchEvidence{background:rgba(248,252,255,.96)!important}
 }
+</style>
+
+<style id="ieat-exhibition-3d-white-surfaces-20261104">
+/* White dimensional controls: elevation comes from light/shadow, never black outlines. */
+html body #mapStage #watchEvidence,
+html body #mapStage #mapLayers,
+html body #mapStage #mapStatusKey,
+html body #mapStage #satelliteKey,
+html body #mapStage #watchEvidence .ieat-watch-overview>div,
+html body #mapStage #watchEvidence .watch-evidence-list details,
+html body #mapStage #watchEvidence .watch-evidence-list p,
+html body #mapStage #watchEvidence .watch-layer-options,
+html body #mapStage #watchEvidence .watch-layer-options label,
+html body #mapStage #watchEvidence button,
+html body #mapStage .maplibregl-popup-content,
+html body #mapStage .leaflet-popup-content-wrapper{
+ border:0!important;
+ outline:0!important;
+ background-color:rgba(255,255,255,.83)!important;
+ box-shadow:0 14px 34px rgba(35,71,103,.13),0 2px 7px rgba(35,71,103,.07),inset 0 1px rgba(255,255,255,.92)!important;
+ backdrop-filter:blur(18px) saturate(130%)!important;
+ -webkit-backdrop-filter:blur(18px) saturate(130%)!important;
+}
+html body #mapStage #watchEvidence{border-radius:22px!important;background:linear-gradient(142deg,rgba(255,255,255,.88),rgba(244,249,254,.75))!important}
+html body #mapStage #watchEvidence .ieat-watch-head,
+html body #mapStage #watchEvidence >header{border:0!important;background:rgba(255,255,255,.54)!important;color:#173b59!important}
+html body #mapStage #watchEvidence .ieat-watch-overview>div{border-radius:15px!important}
+html body #mapStage #watchEvidence .ieat-watch-overview>div:nth-child(2){background:rgba(241,253,248,.83)!important}
+html body #mapStage .ieat-3d-tools button,
+html body #mapStage #dashboardMapZoom button,
+html body #mapStage #mapCompass{border:0!important;box-shadow:0 8px 20px rgba(35,71,103,.14),inset 0 1px rgba(255,255,255,.95)!important;background:#fff!important}
+html body #mapStage .estate-name{display:none!important}
+html body #mapStage .estate-pin .estate-name{display:none!important}
+html body #mapStage #watchEvidence button:focus-visible,
+html body #mapStage .ieat-3d-tools button:focus-visible{outline:2px solid #2196F3!important;outline-offset:2px!important}
+@media(prefers-reduced-motion:reduce){html body #mapStage *{scroll-behavior:auto!important}}
 </style>
 </body></html>
 
