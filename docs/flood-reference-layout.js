@@ -51,7 +51,7 @@
       art.setAttribute('viewBox', '0 0 180 86');
       art.setAttribute('aria-hidden', 'true');
       art.classList.add('reference-dam-art');
-      art.innerHTML = '<defs><linearGradient id="referenceDamConcrete" x2="1" y2="0"><stop stop-color="#969eaa"/><stop offset=".6" stop-color="#d8dce1"/><stop offset="1" stop-color="#b7bec7"/></linearGradient></defs><path d="M69 42q14-13 28-5t28 0 26 0 25 0v39H63Z" fill="#87dcff"/><path d="M66 53q15-12 30-4t30 0 25 0 25 0v27H62Z" fill="#32b9f7"/><path d="M29 13h61v63H8q16-22 21-63Z" fill="url(#referenceDamConcrete)"/><path d="M36 13h8v63H21q11-27 15-63Z" fill="#f1f3f5"/><path d="M53 19h28v57h-9V30H62v46h-9Z" fill="#f1f3f5"/>';
+      art.innerHTML = '<defs><linearGradient id="referenceDamConcrete" x2="1" y2="0"><stop stop-color="#4a8594"/><stop offset=".6" stop-color="#ffffff"/><stop offset="1" stop-color="#706357"/></linearGradient></defs><path d="M69 42q14-13 28-5t28 0 26 0 25 0v39H63Z" fill="#4a8594"/><path d="M66 53q15-12 30-4t30 0 25 0 25 0v27H62Z" fill="#4a8594"/><path d="M29 13h61v63H8q16-22 21-63Z" fill="url(#referenceDamConcrete)"/><path d="M36 13h8v63H21q11-27 15-63Z" fill="#ffffff"/><path d="M53 19h28v57h-9V30H62v46h-9Z" fill="#ffffff"/>';
       dams.querySelector('h2')?.after(art);
     }
     const flows = $('efDamFlowPanel');

@@ -26,11 +26,11 @@ const svg=kind=>'<svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="
 window.IEAT_ICONS={svg,paths};
 const style=document.createElement('style');style.textContent=`
 .ieat-icon{display:inline-block;width:20px;height:20px;vertical-align:middle;flex-shrink:0;fill:none!important;stroke:currentColor!important}
-.fd-pin-shape{border:2px solid white!important;box-shadow:0 3px 8px #20344338!important}
-.fd-pin-icon{width:24px!important;height:24px!important;margin:2px;border-radius:50%;background:white;color:var(--pin-ink,#37576b)!important}
+.fd-pin-shape{border:2px solid white!important;box-shadow:0 3px 8px #2e1f5438!important}
+.fd-pin-icon{width:24px!important;height:24px!important;margin:2px;border-radius:50%;background:white;color:var(--pin-ink,#335238)!important}
 .fd-pin-icon .ieat-icon{width:19px!important;height:19px!important;stroke-width:1.8}
-.fd-pin-name,.prep-name{border:1px solid #dfe5e9!important;border-radius:7px!important;box-shadow:0 2px 7px #20344312!important;font-weight:600!important}
-.fd-legend-icon{background:#edf1f5!important;color:#526677!important;border:1px solid #d8e1e8;border-radius:7px!important}
+.fd-pin-name,.prep-name{border:1px solid #ffffff!important;border-radius:7px!important;box-shadow:0 2px 7px #2e1f5412!important;font-weight:600!important}
+.fd-legend-icon{background:#ffffff!important;color:#4a8594!important;border:1px solid #ffffff;border-radius:7px!important}
 .fd-legend-icon .ieat-icon{width:17px;height:17px}
 #mapDetails nav button{display:inline-flex;align-items:center;gap:4px}#mapDetails nav .ieat-icon{width:15px;height:15px}
 #supportMapButton .ieat-icon{width:18px;height:18px;margin-right:5px}#estateView3d .ieat-icon{width:17px;height:17px;margin-right:5px}
@@ -38,8 +38,8 @@ const style=document.createElement('style');style.textContent=`
 .ieat-3d-tools{left:58px!important}#aerialTourButton{left:178px!important}
 @media(max-width:650px){#aerialTourButton{left:12px!important;top:66px!important}#supportMapButton{top:66px!important;right:12px!important}}
 #mapDetailsClose{display:grid;place-items:center}#mapDetailsClose .ieat-icon{width:16px;height:16px}
-#estateFocusDashboard .ef-kpi-icon{box-shadow:inset 0 0 0 1px #8459aa15!important;border-radius:14px!important}#estateFocusDashboard .ef-kpi-icon .ieat-icon{stroke-width:1.65}
-button:focus-visible{outline:3px solid #9879bb;outline-offset:3px}
+#estateFocusDashboard .ef-kpi-icon{box-shadow:inset 0 0 0 1px #4a859415!important;border-radius:14px!important}#estateFocusDashboard .ef-kpi-icon .ieat-icon{stroke-width:1.65}
+button:focus-visible{outline:3px solid #4a8594;outline-offset:3px}
 `;document.head.appendChild(style);
 function decorate(el,kind){if(!el||el.querySelector('.ieat-icon'))return;el.insertAdjacentHTML('afterbegin',svg(kind)+' ')}
 function sync(){

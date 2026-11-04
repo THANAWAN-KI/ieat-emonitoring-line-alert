@@ -14,18 +14,18 @@ const icons={
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const style=document.createElement('style');style.textContent=`
 .prep-anchor{background:none!important;border:0!important;overflow:visible!important;z-index:640!important}
-.prep-feature{position:relative;width:34px;height:44px;overflow:visible;font:11px/1.4 Sarabun,sans-serif;color:#36525f}
-.prep-feature button{position:absolute;left:0;top:0;width:34px;height:40px;border:0;background:none;padding:0;cursor:pointer;filter:drop-shadow(0 2px 3px #233c4b44)}
+.prep-feature{position:relative;width:34px;height:44px;overflow:visible;font:11px/1.4 Sarabun,sans-serif;color:#335238}
+.prep-feature button{position:absolute;left:0;top:0;width:34px;height:40px;border:0;background:none;padding:0;cursor:pointer;filter:drop-shadow(0 2px 3px #2e1f5444)}
 .prep-feature button svg{width:34px;height:40px;display:block}
-.prep-feature .prep-name{position:absolute;left:40px;top:5px;white-space:nowrap;padding:4px 7px;background:#fffffff0;border-radius:6px;color:#36525f;box-shadow:0 1px 5px #21384c18;pointer-events:none;font-weight:600}
+.prep-feature .prep-name{position:absolute;left:40px;top:5px;white-space:nowrap;padding:4px 7px;background:#fffffff0;border-radius:6px;color:#335238;box-shadow:0 1px 5px #2e1f5418;pointer-events:none;font-weight:600}
 .prep-feature.left .prep-name{left:auto;right:40px}.prep-feature.prep-hidden{display:none}
-.prep-feature button:focus-visible{outline:3px solid #9072b8;outline-offset:2px}
+.prep-feature button:focus-visible{outline:3px solid #4a8594;outline-offset:2px}
 `;document.head.appendChild(style);
 let mode={active:new URLSearchParams(location.search).get('dashboard')!=='clean',estate:'บางปะอิน'},context=null,markers=[],outline=null,rasterOutline=null,outlinePromise=null,parentSeen=false,needsFocus=true,timer=null;
 const active=()=>mode.active&&mode.estate.includes('บางปะอิน');
 function svg(kind,color){
  if(window.IEAT_SQ)return IEAT_SQ.pin(kind,color);
- return '<svg viewBox="0 0 36 44" aria-hidden="true"><path d="M18 42l-6-8H7q-4 0-4-4V9q0-5 5-5h20q5 0 5 5v21q0 4-4 4h-5Z" fill="white" stroke="'+color+'" stroke-width="2"/><g transform="translate(7 8) scale(.9)" fill="none" stroke="#183f62" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+icons[kind]+'</g></svg>';
+ return '<svg viewBox="0 0 36 44" aria-hidden="true"><path d="M18 42l-6-8H7q-4 0-4-4V9q0-5 5-5h20q5 0 5 5v21q0 4-4 4h-5Z" fill="white" stroke="'+color+'" stroke-width="2"/><g transform="translate(7 8) scale(.9)" fill="none" stroke="#2e1f54" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+icons[kind]+'</g></svg>';
 }
 function mount(item,kind,name,color,id){
  const el=document.createElement('div');el.className='prep-feature '+(item.side||'right');el.innerHTML='<button type="button"'+(window.IEAT_SQ?' class="has-sq"':'')+' aria-label="'+esc(name)+'">'+svg(kind,color)+'</button><span class="prep-name">'+esc(name)+'</span>';
@@ -47,17 +47,17 @@ function attach(){
  const next=window.IEATPreparednessMap?.();if(!next?.ready||(!next.vector&&!next.raster))return;
  if(context?.vector===next.vector&&context?.raster===next.raster){refresh();focusEstate();return}
  markers.forEach(x=>x.marker.remove());markers=[];rasterOutline?.remove();rasterOutline=null;context=next;
- stations.forEach(s=>mount(s,'pump','สถานีสูบน้ำ '+s.id,'#089a9b',s.id));
- mount({lon:100.5869,lat:14.1975},'storage','ระบบรับน้ำรวม','#8064c6',null);
- mount({lon:100.5873,lat:14.2111},'protection','แนวป้องกัน','#21ad02',null);
+ stations.forEach(s=>mount(s,'pump','สถานีสูบน้ำ '+s.id,'#4a8594',s.id));
+ mount({lon:100.5869,lat:14.1975},'storage','ระบบรับน้ำรวม','#4a8594',null);
+ mount({lon:100.5873,lat:14.2111},'protection','แนวป้องกัน','#598c14',null);
  const map=context.vector||context.raster;map.on('zoomend',refresh);map.on('moveend',refresh);
  if(!outlinePromise)outlinePromise=fetch('./data/ieat-building-footprints/bangpain-outline.geojson?v=prep-approx1').then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{outline=d;drawOutline();refresh()}).catch(()=>{outlinePromise=null});
  drawOutline();refresh();focusEstate();
 }
 function drawOutline(){
  if(!context||!outline)return;
- if(context.vector){const m=context.vector;if(!m.getSource('prep-approx-outline')){m.addSource('prep-approx-outline',{type:'geojson',data:outline});m.addLayer({id:'prep-approx-outline',type:'line',source:'prep-approx-outline',paint:{'line-color':'#5c9182','line-width':2,'line-opacity':.65,'line-dasharray':[2,2]}})}}
- else if(!rasterOutline)rasterOutline=L.geoJSON(outline,{interactive:false,style:{color:'#5c9182',weight:2,opacity:.65,fill:false,dashArray:'7 6'}}).addTo(context.raster);
+ if(context.vector){const m=context.vector;if(!m.getSource('prep-approx-outline')){m.addSource('prep-approx-outline',{type:'geojson',data:outline});m.addLayer({id:'prep-approx-outline',type:'line',source:'prep-approx-outline',paint:{'line-color':'#4a8594','line-width':2,'line-opacity':.65,'line-dasharray':[2,2]}})}}
+ else if(!rasterOutline)rasterOutline=L.geoJSON(outline,{interactive:false,style:{color:'#4a8594',weight:2,opacity:.65,fill:false,dashArray:'7 6'}}).addTo(context.raster);
 }
 function refresh(){
  if(!context)return;const enabled=active()&&(context.vector||context.raster).getZoom()>=11;

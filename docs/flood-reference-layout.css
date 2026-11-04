@@ -3,18 +3,36 @@
    earlier exhibition themes without escalating selector specificity. */
 @layer floodMockupLayout {
   :root {
+    /* Approved palette: update only these tokens for future theme changes. */
+    --ui-ink: #000000;
+    --ui-primary: #2e1f54;
+    --ui-accent: #52057f;
+    --ui-critical: #bf033b;
+    --ui-danger: #f00a36;
+    --ui-severe: #ed3b21;
+    --ui-warning: #ff6908;
+    --ui-watch: #ffc719;
+    --ui-normal: #598c14;
+    --ui-forest: #335238;
+    --ui-water: #4a8594;
+    --ui-navy: #051736;
+    --ui-muted: #706357;
+    --ui-surface: #ffffff;
+    --ui-border: rgba(5,23,54,.16);
+    --ui-tint: rgba(82,5,127,.06);
+
     --ref-rail: 70px !important;
     --ref-panel: calc((100vw - 104px) * .50) !important;
     --ref-left: 82px;
     --ref-top: 28px;
-    --ref-purple: #8732a4;
-    --ref-plum: #4d124e;
+    --ref-purple: var(--ui-accent);
+    --ref-plum: var(--ui-primary);
   }
-  html, body { margin: 0 !important; background: #fff !important; }
+  html, body { color: var(--ui-ink) !important; margin: 0 !important; background: var(--ui-surface) !important; }
   body::before {
     content: '' !important; display: block !important; position: fixed; inset: 12px; z-index: 1200; pointer-events: none;
-    border: 1px solid #cdd1dc; border-radius: 16px;
-    box-shadow: 0 4px 10px #27354b1c; background: transparent;
+    border: 1px solid var(--ui-border); border-radius: 16px;
+    box-shadow: 0 4px 10px #2e1f541c; background: transparent;
   }
   #warning #estateFocusDashboard .ef-data-column {
     position: fixed !important; left: var(--ref-left) !important; top: var(--ref-top) !important;
@@ -23,14 +41,14 @@
     display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)) !important;
     gap: 8px 10px !important; align-content: start !important; overflow-y: auto !important;
     overflow-x: hidden !important; border: 0 !important; box-shadow: none !important;
-    background: #fff !important; scrollbar-width: thin; scrollbar-color: #ded5e5 transparent;
+    background: var(--ui-surface) !important; scrollbar-width: thin; scrollbar-color: var(--ui-surface) transparent;
   }
   #warning #estateFocusDashboard .ef-map-column {
     position: fixed !important; top: var(--ref-top) !important; bottom: 20px !important;
     left: calc(var(--ref-left) + var(--ref-panel) + 10px) !important; right: 20px !important;
     width: auto !important; height: auto !important; min-height: 0 !important;
     border: 0 !important; border-radius: 16px !important; overflow: hidden !important;
-    background: #edf3ee !important; box-shadow: none !important;
+    background: var(--ui-surface) !important; box-shadow: none !important;
   }
   #estateFocusDashboard .ef-map-frame, #estateFocusMap { height: 100% !important; min-height: 0 !important; }
   #estateFocusDashboard .ef-map-foot { display: none !important; }
@@ -41,36 +59,36 @@
   #estateFocusDashboard #efMapFullscreen {
     top: auto !important; bottom: 12px !important; left: 12px !important; right: auto !important;
     width: 32px !important; height: 32px !important; min-height: 0 !important; padding: 7px !important;
-    border: 1px solid #d9dfdb !important; border-radius: 7px !important; color: #56566a !important;
-    background: #fffffff0 !important; box-shadow: 0 1px 4px #24334422 !important;
+    border: 1px solid var(--ui-border) !important; border-radius: 7px !important; color: var(--ui-muted) !important;
+    background: #fffffff0 !important; box-shadow: 0 1px 4px #2e1f5422 !important;
   }
   #floodModeBar {
     display: none !important;
     position: fixed !important; left: var(--ref-left) !important; top: 28px !important;
     width: calc(100vw - var(--ref-left) - 25px) !important; height: 44px !important;
-    padding: 0 0 8px !important; border: 0 !important; border-bottom: 1px solid #e5e6ec !important;
+    padding: 0 0 8px !important; border: 0 !important; border-bottom: 1px solid var(--ui-surface) !important;
     box-shadow: none !important; background: transparent !important;
   }
   #floodModeBar nav {
     width: 344px !important; height: 40px !important; max-width: 100% !important;
     display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)) !important;
-    padding: 0 !important; border: 1px solid #d9dbe4 !important; border-radius: 9px !important;
-    background: #fafafd !important; box-shadow: 0 2px 3px #24304422 !important;
+    padding: 0 !important; border: 1px solid var(--ui-border) !important; border-radius: 9px !important;
+    background: var(--ui-surface) !important; box-shadow: 0 2px 3px #2e1f5422 !important;
   }
   #floodModeBar [data-flood-view-tab] {
     min-width: 0 !important; height: 40px !important; margin: -1px !important; padding: 7px 14px !important;
-    font: 600 17px/1.5 Sarabun,sans-serif !important; color: #30303e !important;
+    font: 600 17px/1.5 Sarabun,sans-serif !important; color: var(--ui-ink) !important;
     border: 0 !important; border-radius: 9px !important; background: transparent !important;
     box-shadow: none !important; text-align: center !important;
   }
   #floodModeBar [aria-selected=true] {
-    color: white !important; background: linear-gradient(135deg,#8c35ac,#812e9e) !important;
-    box-shadow: 0 2px 3px #48214c30 !important;
+    color: white !important; background: linear-gradient(135deg,var(--ui-accent),var(--ui-accent)) !important;
+    box-shadow: 0 2px 3px #2e1f5430 !important;
   }
   #floodModeBar nav svg, #referencePanelToggle { display: none !important; }
   #referenceRail {
     position: fixed !important; inset: 20px auto 20px 16px !important;
-    width: 54px !important; border: 0 !important; border-right: 1px solid #d8dbe4 !important;
+    width: 54px !important; border: 0 !important; border-right: 1px solid var(--ui-border) !important;
     background: transparent !important; box-shadow: none !important;
   }
   #referenceRail .reference-rail-modes {
@@ -81,22 +99,22 @@
   #referenceRail :is(button,a) {
     box-sizing: border-box !important; display: grid !important; place-items: center !important;
     width: 48px !important; height: 46px !important; padding: 10px !important;
-    border: 0 !important; border-radius: 11px !important; color: #505167 !important;
+    border: 0 !important; border-radius: 11px !important; color: var(--ui-muted) !important;
     background: transparent !important; box-shadow: none !important; cursor: pointer;
   }
-  #referenceRail button[aria-pressed=true] { color: var(--ref-purple) !important; background: #f1e2fa !important; }
+  #referenceRail button[aria-pressed=true] { color: var(--ref-purple) !important; background: var(--ui-tint) !important; }
   #referenceRail #referencePanelToggle { display: none !important; }
   #referenceRail .reference-line-icon * { fill: none !important; stroke: currentColor !important; }
   #referenceRail svg { width: 26px !important; height: 26px !important; }
   #referenceRail :is(button,a):focus-visible, [data-flood-view-tab]:focus-visible {
-    outline: 3px solid #b77ad1 !important; outline-offset: 3px !important;
+    outline: 3px solid var(--ui-water) !important; outline-offset: 3px !important;
   }
   #warning #estateFocusDashboard :is(#floodPageTitle,.ex-prep-head h2) {
     margin: 0 !important; font: 700 28px/1.3 Sarabun,sans-serif !important;
-    color: #20202b !important; -webkit-text-fill-color: #20202b !important;
+    color: var(--ui-ink) !important; -webkit-text-fill-color: var(--ui-ink) !important;
   }
   #warning #estateFocusDashboard #expoBoothSubtitle {
-    margin: -5px 0 0 !important; font: 500 15px/1.5 Sarabun,sans-serif !important; color: #666477 !important;
+    margin: -5px 0 0 !important; font: 500 15px/1.5 Sarabun,sans-serif !important; color: var(--ui-muted) !important;
   }
   #warning #estateFocusDashboard #ieatOverviewFilter {
     display: grid !important; grid-template-columns: auto minmax(0,1fr) auto !important;
@@ -105,43 +123,40 @@
   #warning #estateFocusDashboard :is(.io-area-text,.io-area-title) { font: 600 15px/1.5 Sarabun,sans-serif !important; }
   #warning #estateFocusDashboard :is(#ioEstatePicker,#ieatAllEstates), #preparednessPane :is(select,[data-ex-all]) {
     height: 38px !important; min-height: 38px !important; padding: 6px 12px !important;
-    font: 500 15px/1.5 Sarabun,sans-serif !important; border: 1px solid #d5d7e0 !important;
-    border-radius: 8px !important; background: #fff !important; color: #292938 !important;
-    box-shadow: 0 1px 3px #27334820 !important;
+    font: 500 15px/1.5 Sarabun,sans-serif !important; border: 1px solid var(--ui-border) !important;
+    border-radius: 8px !important; background: var(--ui-surface) !important; color: var(--ui-ink) !important;
+    box-shadow: 0 1px 3px #2e1f5420 !important;
   }
   #warning #estateFocusDashboard #ieatAllEstates, #preparednessPane [data-ex-all] {
     color: var(--ref-purple) !important; -webkit-text-fill-color: var(--ref-purple) !important;
-    background: #fcf8ff !important; border-color: #d9bce8 !important; white-space: nowrap !important;
+    background: var(--ui-surface) !important; border-color: var(--ui-water) !important; white-space: nowrap !important;
   }
   #warning #estateFocusDashboard .io-date { display: none !important; }
   #warning #estateFocusDashboard .io-mini-stats { gap: 10px !important; }
   #warning #estateFocusDashboard .io-mini-stats > [role=button] {
     height: 88px !important; min-height: 88px !important; padding: 10px 12px !important;
-    border: 1px solid #e0e2e9 !important; border-radius: 15px !important; background: #fff !important;
-    box-shadow: 0 3px 7px #30394b1c !important; text-align: left !important;
+    border: 1px solid var(--ui-border) !important; border-radius: 15px !important; background: var(--ui-surface) !important;
+    box-shadow: 0 3px 7px #2e1f541c !important; text-align: left !important;
   }
   #warning #estateFocusDashboard .io-stat-copy { align-items: flex-start !important; text-align: left !important; }
-  #warning #estateFocusDashboard .io-mini-stats b { font: 700 38px/1.12 Sarabun,sans-serif !important; color: var(--ref-plum) !important; }
+  #warning #estateFocusDashboard .io-mini-stats b { -webkit-text-fill-color: var(--ui-primary) !important; font: 700 38px/1.12 Sarabun,sans-serif !important; color: var(--ref-plum) !important; }
   #warning #estateFocusDashboard .io-stat-copy span {
-    font: 500 15px/1.5 Sarabun,sans-serif !important; color: #535164 !important;
-    -webkit-text-fill-color: #535164 !important; text-align: left !important;
+    font: 500 15px/1.5 Sarabun,sans-serif !important; color: var(--ui-muted) !important;
+    -webkit-text-fill-color: var(--ui-muted) !important; text-align: left !important;
   }
-  #warning #estateFocusDashboard .ex-kpi-note { margin: 5px 0 0 !important; font-size: 10px !important; line-height: 1.4 !important; color: #777182 !important; }
+  #warning #estateFocusDashboard .ex-kpi-note { margin: 5px 0 0 !important; font-size: 10px !important; line-height: 1.4 !important; color: var(--ui-muted) !important; }
   #warning #estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel,#floodDamsSection,.ex-card) {
-    padding: 10px 12px !important; border: 1px solid #dfe1e8 !important;
-    border-radius: 15px !important; background: #fff !important; box-shadow: 0 3px 7px #30394b1c !important;
+    padding: 10px 12px !important; border: 1px solid var(--ui-border) !important;
+    border-radius: 15px !important; background: var(--ui-surface) !important; box-shadow: 0 3px 7px #2e1f541c !important;
   }
   #warning #estateFocusDashboard :is(.rp-stations-title,.ef-canal-panel>h2,#floodDamsSection>h2,.ex-card h3) {
-    font: 600 20px/1.35 Sarabun,sans-serif !important; color: #20202b !important;
-    -webkit-text-fill-color: #20202b !important; margin: 0 0 5px !important;
+    font: 600 20px/1.35 Sarabun,sans-serif !important; color: var(--ui-ink) !important;
+    -webkit-text-fill-color: var(--ui-ink) !important; margin: 0 0 5px !important;
   }
   #warning #estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel) { min-height: 0 !important; gap: 4px !important; }
   #warning #estateFocusDashboard :is(.ef-canal-content,.rp-station-content) { background: transparent !important; padding: 0 !important; border: 0 !important; }
   #warning #estateFocusDashboard :is(.ef-canal-status,.rp-station-top>em)::before,
   #warning #estateFocusDashboard :is(.ef-canal-status,.rp-station-top>em)::after { content: none !important; display: none !important; }
-  #warning #estateFocusDashboard [data-ex-status=green] { background: #def5d9 !important; color: #215b2a !important; -webkit-text-fill-color: #215b2a !important; }
-  #warning #estateFocusDashboard [data-ex-status=amber] { background: #fff0bc !important; color: #805000 !important; -webkit-text-fill-color: #805000 !important; }
-  #warning #estateFocusDashboard [data-ex-status=red] { background: #ffd4d5 !important; color: #9e292c !important; -webkit-text-fill-color: #9e292c !important; }
   #warning #estateFocusDashboard :is(.rp-station-row,.ef-canal-card) { background: transparent !important; }
   #warning #estateFocusDashboard .rp-station-row { grid-template-columns: 76px minmax(0,1fr) !important; gap: 8px !important; }
   #warning #estateFocusDashboard .rp-station-row>.rp-gauge { width: 76px !important; height: 124px !important; }
@@ -152,7 +167,7 @@
   }
   #warning #estateFocusDashboard :is(.rp-station-content>strong,.ef-canal-content>strong) {
     font: 600 20px/1.5 Sarabun,sans-serif !important; white-space: normal !important;
-    color: #252332 !important; -webkit-text-fill-color: #252332 !important;
+    color: var(--ui-ink) !important; -webkit-text-fill-color: var(--ui-ink) !important;
   }
   #warning #estateFocusDashboard .ef-canal-card>b { font-size: 12px !important; margin: 0 0 4px !important; }
   #warning #estateFocusDashboard .ef-canal-body { grid-template-columns: 80px minmax(0,1fr) !important; gap: 6px !important; }
@@ -169,14 +184,14 @@
   #warning #estateFocusDashboard #floodDamsSection :is(.ef-dam-card,.ef-reservoir-row) { min-height: 0 !important; height: auto !important; max-height: none !important; }
   #floodDamsSection .dam-map-icon { display: none !important; }
   #floodDamsSection :is(.ef-dam-card>p,#efReservoirTime) { font-size: 10px !important; line-height: 1.4 !important; }
-  #floodDamsSection .reference-dam-details { margin-top: 4px; font: 10px/1.4 Sarabun,sans-serif; color: #716a7c; }
-  #floodDamsSection .reference-dam-details summary { cursor: pointer; font: 400 10px/1.4 Sarabun,sans-serif !important; padding: 0 !important; margin: 0 !important; color: #72677b !important; }
+  #floodDamsSection .reference-dam-details { margin-top: 4px; font: 10px/1.4 Sarabun,sans-serif; color: var(--ui-muted); }
+  #floodDamsSection .reference-dam-details summary { cursor: pointer; font: 400 10px/1.4 Sarabun,sans-serif !important; padding: 0 !important; margin: 0 !important; color: var(--ui-muted) !important; }
   #floodDamsSection .dam-value-line { min-height: 0 !important; height: auto !important; margin: 4px 0 !important; gap: 7px !important; }
   #warning #estateFocusDashboard #floodDamsSection>.ef-panel { gap: 0 !important; }
   #floodDamsSection :is(.ef-reservoir-row,.ef-dam-card) { gap: 0 !important; margin: 0 !important; }
   #floodDamsSection :is(.dam-inline-status,.ef-reservoir-percent span) { font: 400 10px/1.4 Sarabun,sans-serif !important; padding: 2px 6px !important; margin: 2px 0 !important; }
   #warning #estateFocusDashboard #efDamFlowPanel { grid-column: 1/-1 !important; order: 6 !important; }
-  #warning #estateFocusDashboard #floodDamsSection>.ef-panel { padding: 0 14px !important; border: 0 !important; border-left: 1px solid #d7d6e1 !important; border-radius: 0 !important; }
+  #warning #estateFocusDashboard #floodDamsSection>.ef-panel { padding: 0 14px !important; border: 0 !important; border-left: 1px solid var(--ui-border) !important; border-radius: 0 !important; }
   #warning #estateFocusDashboard #floodDamsSection>.ef-panel>h2 { font: 500 15px/1.4 Sarabun,sans-serif !important; margin: 0 0 4px !important; }
   #floodDamsSection :is(.storage-scene,.dam-source-line,.ef-reservoir-row>span,.ef-reservoir-bar) { display: none !important; }
   #floodDamsSection .reference-dam-details .dam-compact-head { display: block !important; }
@@ -190,33 +205,30 @@
   #floodDamsSection :is(.dam-status,.dam-meta,.ef-reservoir-row>small) { font-size: 10px !important; }
   #warning #estateFocusDashboard #floodDamsSection>#efDamFlowPanel { grid-column: 1/-1 !important; margin-top: 12px !important; }
   #preparednessPane { grid-column: 1/-1 !important; }
-  #preparednessPane .ex-prep-head p { font: 500 15px/1.5 Sarabun,sans-serif !important; margin: 2px 0 10px !important; color: #666477 !important; }
+  #preparednessPane .ex-prep-head p { font: 500 15px/1.5 Sarabun,sans-serif !important; margin: 2px 0 10px !important; color: var(--ui-muted) !important; }
   #preparednessPane .ex-prep-selector { grid-template-columns: auto minmax(0,1fr) auto !important; gap: 10px !important; margin-bottom: 12px !important; }
-  #preparednessPane .ex-prep-selector label { font: 600 15px/1.5 Sarabun,sans-serif !important; color: #292938 !important; }
+  #preparednessPane .ex-prep-selector label { font: 600 15px/1.5 Sarabun,sans-serif !important; color: var(--ui-ink) !important; }
   #preparednessPane .ex-card { margin: 0 0 12px !important; padding: 10px 16px !important; }
   #preparednessPane .ex-card h3 { font-size: 20px !important; margin-bottom: 6px !important; }
   #preparednessPane .ex-table { width: 100% !important; min-width: 0 !important; table-layout: fixed !important; border-collapse: separate !important; border-spacing: 0 !important; font: 400 13px/1.5 Sarabun,sans-serif !important; }
   #preparednessPane .ex-table :is(th,td) { padding: 5px 8px !important; font-size: 13px !important; line-height: 1.5 !important; vertical-align: top !important; overflow-wrap: anywhere !important; }
-  #preparednessPane .ex-table thead th { background: #e8e9ed !important; color: #22212c !important; font-weight: 600 !important; }
+  #preparednessPane .ex-table thead th { background: var(--ui-surface) !important; color: var(--ui-ink) !important; font-weight: 600 !important; }
   #preparednessPane .ex-table thead th:first-child { border-radius: 6px 0 0 6px !important; width: 25% !important; }
   #preparednessPane .ex-table thead th:last-child { border-radius: 0 6px 6px 0 !important; width: 23% !important; }
-  #preparednessPane .ex-table tbody tr:nth-child(even) { background: #f5ecfb !important; }
+  #preparednessPane .ex-table tbody tr:nth-child(even) { background: var(--ui-surface) !important; }
   #preparednessPane .ex-table-wrap { max-height: 160px !important; overflow: auto !important; }
-  #preparednessPane .ex-table small { display: block !important; font-size: 10px !important; line-height: 1.4 !important; color: #737080 !important; }
+  #preparednessPane .ex-table small { display: block !important; font-size: 10px !important; line-height: 1.4 !important; color: var(--ui-muted) !important; }
   #preparednessPane .ex-badge { display: inline-block !important; padding: 3px 9px !important; border: 0 !important; border-radius: 99px !important; font-size: 12px !important; white-space: normal !important; }
-  #preparednessPane .ex-badge.neutral { color: #215e2c !important; background: #dcf6d8 !important; }
-  #preparednessPane .ex-badge.amber { color: #795000 !important; background: #fff0bc !important; }
-  #preparednessPane .ex-badge.red { color: #9c292e !important; background: #ffd3d5 !important; }
-  #preparednessPane .ex-note { margin: 6px 0 0 !important; font-size: 10px !important; line-height: 1.5 !important; color: #726b7a !important; }
+  #preparednessPane .ex-note { margin: 6px 0 0 !important; font-size: 10px !important; line-height: 1.5 !important; color: var(--ui-muted) !important; }
   #preparednessPane .ex-map-action { color: var(--ref-purple) !important; font: 600 12px/1.5 Sarabun,sans-serif !important; padding: 0 !important; white-space: nowrap !important; }
-  #preparednessPane .ex-selected { background: #efdaf8 !important; }
+  #preparednessPane .ex-selected { background: var(--ui-surface) !important; }
   #preparednessPane .ex-more { padding: 7px 12px !important; box-shadow: none !important; border-radius: 8px !important; }
   #preparednessPane .ex-more summary, #preparednessPane .ex-docs summary { font: 500 13px/1.5 Sarabun,sans-serif !important; }
   #preparednessPane .ex-docs { border: 0 !important; padding: 2px 8px !important; box-shadow: none !important; color: var(--ref-purple) !important; }
   #preparednessPane .ex-reference-documents { margin: 0 4px; color: var(--ref-purple); font: 600 13px/1.6 Sarabun,sans-serif; }
   #preparednessPane .ex-reference-documents>summary { cursor: pointer; text-decoration: underline; padding: 3px 0 !important; color: var(--ref-purple) !important; -webkit-text-fill-color: var(--ref-purple) !important; font: 600 13px/1.6 Sarabun,sans-serif !important; }
-  #referenceSettings { position: fixed; z-index: 3000; bottom: 24px; left: 90px; width: 220px; padding: 14px; border: 1px solid #ded4e5; border-radius: 12px; background: #fff; box-shadow: 0 4px 18px #2d234822; font: 14px/1.6 Sarabun,sans-serif; }
-  #referenceSettings button { display: block; width: 100%; margin-top: 8px; padding: 8px; border: 1px solid #ded4e5; border-radius: 7px; background: #fcf8ff; color: #71308b; font: inherit; cursor: pointer; }
+  #referenceSettings { position: fixed; z-index: 3000; bottom: 24px; left: 90px; width: 220px; padding: 14px; border: 1px solid var(--ui-border); border-radius: 12px; background: var(--ui-surface); box-shadow: 0 4px 18px #2e1f5422; font: 14px/1.6 Sarabun,sans-serif; }
+  #referenceSettings button { display: block; width: 100%; margin-top: 8px; padding: 8px; border: 1px solid var(--ui-border); border-radius: 7px; background: var(--ui-surface); color: var(--ui-accent); font: inherit; cursor: pointer; }
   #referenceSettings[hidden] { display: none !important; }
   body[data-reference-panel=closed] #warning #estateFocusDashboard .ef-map-column { left: var(--ref-left) !important; }
   @media (min-width: 1500px) {
@@ -243,7 +255,7 @@
     html, body { overflow-y: auto !important; height: auto !important; min-height: 100% !important; }
     body::before { display: none !important; }
     #referenceRail { left: 8px !important; width: 54px !important; top: 16px !important; }
-    #floodModeBar { position: fixed !important; top: 0 !important; left: var(--ref-left) !important; margin: 0 !important; width: var(--ref-panel) !important; padding: 14px 0 12px !important; height: 42px !important; background: #fff !important; z-index: 2200 !important; }
+    #floodModeBar { position: fixed !important; top: 0 !important; left: var(--ref-left) !important; margin: 0 !important; width: var(--ref-panel) !important; padding: 14px 0 12px !important; height: 42px !important; background: var(--ui-surface) !important; z-index: 2200 !important; }
     #floodModeBar nav { width: 100% !important; }
     #floodModeBar [data-flood-view-tab] { font-size: 15px !important; padding: 7px !important; }
     #warning #estateFocusDashboard .ef-workspace { height: auto !important; display: block !important; padding: 0 !important; }
@@ -252,7 +264,7 @@
     #warning #estateFocusDashboard .ef-data-column { grid-template-columns: 1fr !important; }
     #warning #estateFocusDashboard .ef-data-column>* { grid-column: 1/-1 !important; }
     #warning #estateFocusDashboard .io-mini-stats { gap: 7px !important; }
-    #warning #estateFocusDashboard .io-mini-stats b { font-size: 34px !important; }
+    #warning #estateFocusDashboard .io-mini-stats b { -webkit-text-fill-color: var(--ui-primary) !important; font-size: 34px !important; }
     #warning #estateFocusDashboard .io-mini-stats>[role=button] { min-height: 100px !important; height: auto !important; padding: 10px 8px !important; }
     #warning #estateFocusDashboard :is(#floodPageTitle,.ex-prep-head h2) { font-size: 25px !important; }
     #preparednessPane .ex-table { min-width: 420px !important; }
@@ -265,4 +277,18 @@
   #warning #estateFocusDashboard #floodInformationPane .ieat-page-hidden,
   #warning #estateFocusDashboard #floodDamsSection>.ef-panel[hidden] { display: none !important; }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+
+  #warning #estateFocusDashboard :is(input,select,button,table,th,td,h1,h2,h3,h4,p,strong,b,small) { -webkit-text-fill-color: currentColor !important; }
+  #warning #estateFocusDashboard :is(h1,h2,h3,h4) { color: var(--ui-primary) !important; }
+  #warning #estateFocusDashboard :is(.rp-station-content>strong,.ef-canal-content>strong) { color: var(--ui-navy) !important; }
+  #warning #estateFocusDashboard :is(.ef-panel,.ex-card,.flood-overview) { background-color: var(--ui-surface) !important; }
+  #warning #estateFocusDashboard :is(.rp-station-top>em,.ef-canal-status,.dam-inline-status,.ef-reservoir-percent span)[data-ex-status] { font-size: 12px !important; -webkit-text-fill-color: currentColor !important; }
+  #warning #estateFocusDashboard [data-ex-status=green], #preparednessPane .ex-badge.neutral { color: var(--ui-forest) !important; background: rgba(89,140,20,.14) !important; }
+  #warning #estateFocusDashboard [data-ex-status=amber], #preparednessPane .ex-badge.amber { color: var(--ui-navy) !important; background: var(--ui-watch) !important; }
+  #warning #estateFocusDashboard [data-ex-status=red], #preparednessPane .ex-badge.red { color: var(--ui-critical) !important; background: rgba(191,3,59,.10) !important; }
+  #warning #estateFocusDashboard [data-ex-status][data-ex-label]::after { content: none !important; }
+  #referenceRail button[aria-pressed=true] { background: var(--ui-tint) !important; color: var(--ui-accent) !important; }
+  #preparednessPane .ex-table thead th { background: rgba(5,23,54,.09) !important; color: var(--ui-navy) !important; }
+  #preparednessPane .ex-table tbody tr:nth-child(even) { background: var(--ui-tint) !important; }
+  #preparednessPane .ex-selected { background: rgba(82,5,127,.13) !important; }
 }

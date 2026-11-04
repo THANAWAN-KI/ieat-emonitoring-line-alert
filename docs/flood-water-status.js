@@ -2,12 +2,12 @@
 (()=>{'use strict';
 const n=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
 const statusPairs={
- blue:['#99D3F0','#000000'],teal:['#99F0E7','#148C80'],green:['#21AD02','#FFFFFF'],
- yellow:['#EBE700','#000000'],orange:['#F09B4D','#000000'],brown:['#CF6B08','#FFFFFF'],
- red:['#B30707','#FFFFFF'],gray:['#E5E7EB','#667085']
+ blue:['#4a8594','#000000'],teal:['#335238','#ffffff'],green:['#598c14','#000000'],
+ yellow:['#ffc719','#000000'],orange:['#ff6908','#000000'],brown:['#ed3b21','#000000'],
+ red:['#bf033b','#ffffff'],gray:['#706357','#ffffff']
 };
-const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#99D3F0',navy:'#0A5378',lavender:'#C3ACD0',purple:'#674188'};
-const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],background:statusPairs[key]?.[0]||palette[key],textColor:statusPairs[key]?.[1]||'#303841',label,criterion});
+const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#4a8594',navy:'#051736',lavender:'#2e1f54',purple:'#52057f'};
+const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],background:statusPairs[key]?.[0]||palette[key],textColor:statusPairs[key]?.[1]||'#000000',label,criterion});
 const unknown=()=>state('gray','ไม่มีค่าหรือเกณฑ์เทียบ','ยังไม่จัดเป็นสถานการณ์ปกติ');
 function water(r){
  const wl=n(r.wl??r.waterlevel_msl),bank=n(r.bank??r.bankfull_msl);if(wl===null)return unknown();
@@ -36,18 +36,18 @@ function dam(value){
 }
 
 const rainClasses=[
- ['ฝนเล็กน้อย','#99F0E7','#148C80','0.1–10.0 มม.'],
- ['ฝนปานกลาง','#21AD02','#165708','10.1–35.0 มม.'],
- ['ฝนหนัก','#F09B4D','#7A4310','35.1–90.0 มม.'],
- ['ฝนหนักมาก','#B30707','#520707','ตั้งแต่ 90.1 มม.']
+ ['ฝนเล็กน้อย','#4a8594','#335238','0.1–10.0 มม.'],
+ ['ฝนปานกลาง','#598c14','#335238','10.1–35.0 มม.'],
+ ['ฝนหนัก','#ff6908','#706357','35.1–90.0 มม.'],
+ ['ฝนหนักมาก','#bf033b','#2e1f54','ตั้งแต่ 90.1 มม.']
 ];
 function rain(value){
- const v=n(value);if(v===null||v<0)return {...unknown(),textColor:'#667085'};
- if(v<.1)return {key:'rain-trace',hex:'#99D3F0',color:'#99D3F0',textColor:'#0A5378',label:v===0?'ไม่มีฝน':'ฝนวัดจำนวนไม่ได้',criterion:'ปริมาณฝนน้อยกว่า 0.1 มม. ใน 24 ชั่วโมง'};
+ const v=n(value);if(v===null||v<0)return {...unknown(),textColor:'#ffffff'};
+ if(v<.1)return {key:'rain-trace',hex:'#4a8594',color:'#4a8594',textColor:'#051736',label:v===0?'ไม่มีฝน':'ฝนวัดจำนวนไม่ได้',criterion:'ปริมาณฝนน้อยกว่า 0.1 มม. ใน 24 ชั่วโมง'};
  const rounded=Math.round(v*10)/10,index=rounded<=10?0:rounded<=35?1:rounded<=90?2:3;
  const [label,fill,ink,range]=rainClasses[index];return {key:'rain-'+index,hex:fill,color:fill,textColor:ink,label,criterion:range+' ใน 24 ชั่วโมง'};
 }
-const rainLegendHTML='<div class="rain-palette-legend">'+[['ไม่มีฝน / ฝนวัดจำนวนไม่ได้','#99D3F0','#0A5378','น้อยกว่า 0.1 มม.'],...rainClasses].map(([label,fill,ink,range])=>'<div style="display:flex;gap:8px;align-items:center;margin:6px 0"><i aria-hidden="true" style="width:24px;height:16px;flex:0 0 24px;border-radius:4px;background:'+fill+';border:1px solid '+ink+'"></i><span style="color:'+ink+'">'+label+' · '+range+'</span></div>').join('')+'</div>';
+const rainLegendHTML='<div class="rain-palette-legend">'+[['ไม่มีฝน / ฝนวัดจำนวนไม่ได้','#4a8594','#051736','น้อยกว่า 0.1 มม.'],...rainClasses].map(([label,fill,ink,range])=>'<div style="display:flex;gap:8px;align-items:center;margin:6px 0"><i aria-hidden="true" style="width:24px;height:16px;flex:0 0 24px;border-radius:4px;background:'+fill+';border:1px solid '+ink+'"></i><span style="color:'+ink+'">'+label+' · '+range+'</span></div>').join('')+'</div>';
 const sourceRoot='https://standard.thaiwater.net/docs/การจัดทำมาตรฐานน้ำ-ระย-2/ข้อมูลและเกณฑ์ของข้อมู/เกณฑ์ของข้อมูลสำหรับกา/';
 const waterClasses=[
  ['brown','น้ำน้อยวิกฤต','ไม่เกิน 10%'],
@@ -89,7 +89,7 @@ pairStyle.textContent=Object.values(statusPairs).map(([fill,ink])=>{
  water+' .ef-dam-value,'+water+' .ef-reservoir-percent,'+water+' .ef-canal-content strong{color:'+ink+'!important}';
 }).join('');
 document.head.appendChild(pairStyle);
-const criteriaStyle=document.createElement('style');criteriaStyle.textContent='.water-criteria-table{width:100%;border-collapse:collapse;font-size:11px;margin:7px 0}.water-criteria-table th,.water-criteria-table td{text-align:left;padding:5px 6px;vertical-align:top}.water-criteria-table th{background:#f3f5f7}.water-criteria-table i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}#waterStatusGuide>details,#mapStatusKey details{padding:7px 0;border-bottom:1px solid #e8edf1}#waterStatusGuide>details>summary,#mapStatusKey details>summary{font-weight:600;cursor:pointer}#waterStatusGuide small,#mapStatusKey small{line-height:1.7}';document.head.appendChild(criteriaStyle);
+const criteriaStyle=document.createElement('style');criteriaStyle.textContent='.water-criteria-table{width:100%;border-collapse:collapse;font-size:11px;margin:7px 0}.water-criteria-table th,.water-criteria-table td{text-align:left;padding:5px 6px;vertical-align:top}.water-criteria-table th{background:#ffffff}.water-criteria-table i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}#waterStatusGuide>details,#mapStatusKey details{padding:7px 0;border-bottom:1px solid #ffffff}#waterStatusGuide>details>summary,#mapStatusKey details>summary{font-weight:600;cursor:pointer}#waterStatusGuide small,#mapStatusKey small{line-height:1.7}';document.head.appendChild(criteriaStyle);
 function guide(){const overview=document.querySelector('.flood-overview');if(!overview||document.getElementById('waterStatusGuide'))return;const el=document.createElement('details');el.id='waterStatusGuide';el.innerHTML='<summary>เกณฑ์สีสถานะ · ใช้ตรงกับหมุดแผนที่</summary>'+legendHTML;overview.appendChild(el)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',guide);else guide();
 if(location.pathname.endsWith('flood-report.html')){const observer=new MutationObserver(()=>{guide();if(document.getElementById('waterStatusGuide'))observer.disconnect()});observer.observe(document.documentElement,{childList:true,subtree:true});}
