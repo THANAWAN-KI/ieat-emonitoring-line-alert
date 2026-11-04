@@ -50,4 +50,33 @@
  document.addEventListener('ieat-map-ready',mount);
  if(!mount()){let tries=0;const timer=setInterval(()=>{if(mount()||++tries>=120)clearInterval(timer);},500);}
  window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='flood-province-scope')return;scope=e.data.active?e.data.name||'':'';popup?.remove();render();});
+
+ let selectedOutline=null;
+ window.addEventListener('message',e=>{
+  if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='flood-infrastructure-focus')return;
+  const keys={flood_pump_station:'station_id',flood_water_storage:'storage_id',flood_drainage_channel:'channel_id',flood_barrier:'barrier_id'};
+  const feature=data.features.find(f=>f.properties.source_table+':'+f.properties[keys[f.properties.source_table]]===e.data.key);
+  if(!feature||!mount())return;
+  const p=feature.properties;enabled[p.source_table]=true;scope=p.estate_name_th||'';
+  const check=panel.querySelector('[data-infra="'+p.source_table+'"]');if(check)check.checked=true;
+  render();
+  const coords=feature.geometry.type==='Point'?[feature.geometry.coordinates]:feature.geometry.coordinates;
+  const first=coords[Math.floor(coords.length/2)];popup?.remove();
+  if(vector){
+   const collection={type:'FeatureCollection',features:[feature]};
+   if(!vector.getSource('infra-selected')){
+    vector.addSource('infra-selected',{type:'geojson',data:collection});
+    vector.addLayer({id:'infra-selected-line',type:'line',source:'infra-selected',filter:['==',['geometry-type'],'LineString'],paint:{'line-color':'#823bc4','line-width':8,'line-opacity':.5}});
+    vector.addLayer({id:'infra-selected-point',type:'circle',source:'infra-selected',filter:['==',['geometry-type'],'Point'],paint:{'circle-color':'#823bc4','circle-radius':13,'circle-opacity':.35,'circle-stroke-color':'#823bc4','circle-stroke-width':2}});
+   }else vector.getSource('infra-selected').setData(collection);
+   if(coords.length===1)vector.flyTo({center:first,zoom:15,duration:600});else{const bounds=new maplibregl.LngLatBounds();coords.forEach(c=>bounds.extend(c));vector.fitBounds(bounds,{padding:80,maxZoom:15,duration:600});}
+   popup=new maplibregl.Popup({maxWidth:'340px',className:'prep-point-popup'}).setLngLat(first).setHTML(content(p)).addTo(vector);
+  }else if(raster){
+   if(selectedOutline)raster.removeLayer(selectedOutline);
+   selectedOutline=L.geoJSON(feature,{style:{color:'#823bc4',weight:8,opacity:.5},pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:13,color:'#823bc4',weight:2,fillOpacity:.25})}).addTo(raster);
+   if(coords.length===1)raster.setView([first[1],first[0]],15);else raster.fitBounds(coords.map(c=>[c[1],c[0]]),{padding:[60,60],maxZoom:15});
+   popup=L.popup({maxWidth:340,className:'prep-point-popup'}).setLatLng([first[1],first[0]]).setContent(content(p)).openOn(raster);
+  }
+ });
 })();
+
