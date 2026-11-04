@@ -5,10 +5,12 @@
  #floodAlertButton{position:fixed;z-index:1200;width:44px;height:44px;border:1px solid #e9e0ee;border-radius:50%;background:white;color:#674188;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 12px #243e5026}
  #floodAlertButton svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7}
  #floodAlertButton .alert-count{position:absolute;top:-4px;right:-5px;min-width:19px;padding:0 4px;border-radius:10px;background:#674188;color:white;font:700 10px/19px Sarabun,sans-serif}
- #floodAlertButton.has-alert{color:#b30707;border-color:#b30707;animation:floodAlertPulse 1.8s ease-in-out infinite}
- #floodAlertButton.has-alert .alert-count{background:#b30707}
+ #floodAlertButton.has-alert{color:var(--alert-tone,#b30707);border-color:#b30707;animation:floodAlertPulse 1.8s ease-in-out infinite}
+ #floodAlertButton.has-alert .alert-count{background:var(--alert-tone,#b30707)}
+ #floodAlertButton[data-severity=amber]{--alert-tone:#a96b00;--alert-ring:#d9910040}
+ #floodAlertButton[data-severity=red]{--alert-tone:#b30707;--alert-ring:#b3070740}
  #floodAlertButton.has-alert svg{animation:floodAlertBell 2.5s ease-in-out infinite;transform-origin:50% 15%}
- @keyframes floodAlertPulse{0%,100%{box-shadow:0 0 0 0 #b3070740}60%{box-shadow:0 0 0 10px #b3070700}}
+ @keyframes floodAlertPulse{0%,100%{box-shadow:0 0 0 0 var(--alert-ring,#b3070740)}60%{box-shadow:0 0 0 10px #b3070700}}
  @keyframes floodAlertBell{0%,25%,100%{transform:rotate(0)}5%,15%{transform:rotate(12deg)}10%,20%{transform:rotate(-12deg)}}
  #floodAlertPanel{position:fixed;z-index:1201;width:min(370px,calc(100vw - 24px));max-height:65vh;background:#fff;border:1px solid #eadfed;border-radius:15px;box-shadow:0 8px 30px #30203930;padding:14px;color:#302438;font:13px/1.6 Sarabun,sans-serif;overflow:auto}
  #floodAlertPanel[hidden]{display:none}#floodAlertPanel h3{margin:0;font-size:16px}#floodAlertPanel small{color:#766c7e}#floodAlertPanel header{display:flex;justify-content:space-between;align-items:center;gap:12px}#floodAlertPanel button{font:inherit;cursor:pointer}
@@ -21,7 +23,7 @@
  document.body.append(button,panel);let snapshot=null,records=[];
  function position(){const anchor=document.querySelector('#mapLayers>summary');if(!anchor){button.hidden=true;return}button.hidden=false;const r=anchor.getBoundingClientRect();const left=Math.max(8,r.left-52),top=Math.max(8,Math.min(innerHeight-52,r.top));button.style.left=left+'px';button.style.top=top+'px';panel.style.left=Math.max(12,Math.min(innerWidth-Math.min(370,innerWidth-24)-12,left-320))+'px';panel.style.top=Math.max(8,Math.min(innerHeight-200,top+54))+'px';panel.style.maxHeight=Math.max(140,innerHeight-parseFloat(panel.style.top)-16)+'px';}
  function update(){position();const api=window.IEATPreparednessMap?.();if(!api?.alertSnapshot)return;const next=api.alertSnapshot();const key=JSON.stringify(next);if(key===snapshot)return;snapshot=key;records=next.items;
-  button.classList.toggle('has-alert',records.length>0);button.querySelector('.alert-count').textContent=records.length>99?'99+':records.length||(!next.loaded?'…':'0');button.setAttribute('aria-label','แจ้งเตือนน้ำท่วม '+records.length+' รายการ');
+  button.dataset.severity=records.some(r=>String(r.state?.hex).toLowerCase()==='#b30707')?'red':records.length?'amber':'none';button.classList.toggle('has-alert',records.length>0);button.querySelector('.alert-count').textContent=records.length>99?'99+':records.length||(!next.loaded?'…':'0');button.setAttribute('aria-label','แจ้งเตือนน้ำท่วม '+records.length+' รายการ');
   panel.innerHTML='<header><h3>แจ้งเตือนน้ำท่วม <span>('+records.length+')</span></h3><button type="button" data-close aria-label="ปิดรายการแจ้งเตือน">×</button></header><small>ทุกพื้นที่ในข้อมูลที่โหลด · รวมรายการแม้ปิดเลเยอร์</small><div>'+records.map((r,i)=>'<button type="button" class="alert-row" data-index="'+i+'" style="--alert-color:'+esc(r.state.hex)+'"><strong>'+esc(r.name)+'</strong><span>'+esc(r.kindLabel)+' · '+esc(r.state.label)+'</span><small>'+esc(r.province||'')+' · ตรวจวัด '+esc(r.measured_at||'ไม่ระบุ')+'</small></button>').join('')+(!records.length?'<p>'+(!next.loaded?'กำลังโหลดข้อมูลแจ้งเตือน…':'ไม่พบรายการถึงเกณฑ์เตือนในข้อมูลล่าสุดที่โหลดได้')+'</p>':'')+'</div><small>รวมน้ำใกล้/ล้นตลิ่ง คลองถึงเกณฑ์เตือน ฝนหนัก และอ่างน้ำมาก · ข้อมูลเก่าหรือเวลาไม่ครบไม่นับเป็นแจ้งเตือนปัจจุบัน · ไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ</small>';
  }
  function close(){panel.hidden=true;button.setAttribute('aria-expanded','false');}
