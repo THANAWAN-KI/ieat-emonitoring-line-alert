@@ -91,3 +91,36 @@ document.head.append(style);
 function boot(){if(install())return;const observer=new MutationObserver(()=>{if(install())observer.disconnect()});observer.observe(document.documentElement,{childList:true,subtree:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+;(()=>{'use strict';
+const id='ieat-exhibition-full-map-v1',css="\n@media(min-width:960px){\nhtml body #estateFocusDashboard{position:relative!important;min-height:0!important;overflow:hidden!important}\nhtml body #estateFocusDashboard .ef-workspace{position:relative!important;display:block!important;grid-template-columns:none!important;width:100%!important;height:calc(100dvh - 88px)!important;min-height:560px!important;overflow:hidden!important;gap:0!important;padding:0!important;margin:0!important;background:#edf4fa!important}\nhtml body #estateFocusDashboard .ef-map-column{position:absolute!important;inset:0!important;z-index:1!important;grid-column:auto!important;grid-row:auto!important;width:100%!important;height:100%!important;min-height:0!important;margin:0!important;border:0!important;border-radius:0!important;padding:0!important;overflow:hidden!important}\nhtml body #estateFocusDashboard .ef-map-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important}\nhtml body #estateFocusDashboard #estateFocusMap{width:100%!important;height:100%!important;border:0!important}\nhtml body #estateFocusDashboard .ef-map-foot{display:none!important}\nhtml body #estateFocusDashboard .ef-data-column{position:absolute!important;z-index:15!important;left:16px!important;top:14px!important;bottom:14px!important;grid-column:auto!important;grid-row:auto!important;width:clamp(310px,30vw,430px)!important;height:auto!important;min-height:0!important;max-width:calc(100% - 32px)!important;overflow-y:auto!important;overflow-x:hidden!important;margin:0!important;padding:16px!important;border:0!important;border-radius:22px!important;background:rgba(255,255,255,.91)!important;box-shadow:0 20px 56px rgba(24,59,93,.22),0 2px 9px rgba(24,59,93,.08)!important;backdrop-filter:blur(22px) saturate(135%)!important;-webkit-backdrop-filter:blur(22px) saturate(135%)!important}\nhtml body #estateFocusDashboard .ef-data-column .ef-panel,html body #estateFocusDashboard .ef-data-column .ef-chart,html body #estateFocusDashboard .ef-data-column .flood-kpi{border:0!important;border-radius:14px!important;background:#fff!important;box-shadow:0 3px 12px rgba(24,59,93,.07)!important}\nhtml body #estateFocusDashboard .ef-data-column .flood-kpis{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}\nhtml body #estateFocusDashboard .ef-data-column .flood-kpi{min-width:0!important;padding:9px!important}\nhtml body #estateFocusDashboard .ef-map-column #efMapFullscreen{position:absolute!important;right:18px!important;bottom:20px!important;z-index:5!important;border:0!important;border-radius:14px!important;background:#fff!important;box-shadow:0 9px 25px rgba(24,59,93,.19)!important}\n#expoFloatingMetrics{position:absolute;z-index:11;top:16px;left:calc(clamp(310px,30vw,430px) + 32px);right:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}\n#expoFloatingMetrics button{min-width:0;border:0;border-radius:17px;background:rgba(255,255,255,.91);box-shadow:0 9px 25px rgba(24,59,93,.15);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);padding:12px;text-align:left;display:flex;flex-direction:column;gap:4px;cursor:pointer}\n#expoFloatingMetrics strong{font:800 clamp(16px,1.8vw,26px)/1.2 Sarabun,sans-serif;color:#0D47A1;overflow-wrap:anywhere}\n#expoFloatingMetrics span{font:600 12px/1.3 Sarabun,sans-serif;color:#526477}\n#expoPaneToggle{position:absolute;z-index:19;left:calc(clamp(310px,30vw,430px) + 26px);bottom:20px;border:0;border-radius:12px;background:#fff;color:#0D47A1;box-shadow:0 8px 22px rgba(24,59,93,.17);padding:10px 13px;font:700 12px Sarabun,sans-serif;cursor:pointer}\nhtml body #estateFocusDashboard .ef-workspace.expo-hide-data .ef-data-column{transform:translateX(calc(-100% - 26px))!important;pointer-events:none!important}\n.expo-hide-data #expoPaneToggle{left:18px}\n}\n@media(min-width:960px) and (max-width:1240px){#expoFloatingMetrics{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:959px){#expoFloatingMetrics,#expoPaneToggle{display:none!important}}\n";
+function mount(){
+ const space=document.querySelector('#estateFocusDashboard .ef-workspace'),pane=space?.querySelector('.ef-data-column'),map=space?.querySelector('.ef-map-column');
+ if(!space||!pane||!map)return false;
+ if(!document.getElementById(id)){const style=document.createElement('style');style.id=id;style.textContent=css;document.head.append(style)}
+ if(space.dataset.expoFullMap==='true')return true;
+ space.dataset.expoFullMap='true';
+ const metrics=document.createElement('div');metrics.id='expoFloatingMetrics';metrics.setAttribute('aria-label','สรุปข้อมูลจริง');space.append(metrics);
+ const toggle=document.createElement('button');toggle.id='expoPaneToggle';toggle.type='button';toggle.textContent='ซ่อนรายละเอียด';toggle.setAttribute('aria-expanded','true');space.append(toggle);
+ const resize=()=>document.getElementById('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-resize'},location.origin);
+ toggle.onclick=()=>{const hidden=space.classList.toggle('expo-hide-data');toggle.textContent=hidden?'แสดงรายละเอียด':'ซ่อนรายละเอียด';toggle.setAttribute('aria-expanded',String(!hidden));setTimeout(resize,60)};
+ function sync(){
+  const src=[...pane.querySelectorAll('.flood-kpis .flood-kpi')].slice(0,4);
+  metrics.hidden=!src.length;
+  while(metrics.children.length<src.length){
+   const b=document.createElement('button');b.type='button';const value=document.createElement('strong'),label=document.createElement('span');b.append(value,label);
+   b.onclick=()=>pane.querySelectorAll('.flood-kpis .flood-kpi')[Number(b.dataset.index)]?.click();metrics.append(b);
+  }
+  while(metrics.children.length>src.length)metrics.lastChild.remove();
+  src.forEach((item,i)=>{const b=metrics.children[i],value=item.querySelector('.ef-kpi-copy strong')?.textContent||'กำลังโหลด',label=item.querySelector('.ef-kpi-label')?.textContent||'ข้อมูลสถานการณ์';b.dataset.index=i;
+   if(b.children[0].textContent!==value)b.children[0].textContent=value;
+   if(b.children[1].textContent!==label)b.children[1].textContent=label;
+   b.setAttribute('aria-label',label+' '+value)});
+ }
+ sync();
+ const target=pane.querySelector('.flood-kpis');if(target){let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;sync()})}).observe(target,{childList:true,subtree:true,characterData:true})}
+ window.addEventListener('resize',resize,{passive:true});setTimeout(resize,250);
+ return true;
+}
+function boot(){if(mount())return;const o=new MutationObserver(()=>{if(mount())o.disconnect()});o.observe(document.documentElement,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
