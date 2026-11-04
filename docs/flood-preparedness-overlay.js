@@ -24,12 +24,13 @@ const style=document.createElement('style');style.textContent=`
 let mode={active:new URLSearchParams(location.search).get('dashboard')!=='clean',estate:'บางปะอิน'},context=null,markers=[],outline=null,rasterOutline=null,outlinePromise=null,parentSeen=false,needsFocus=true,timer=null;
 const active=()=>mode.active&&mode.estate.includes('บางปะอิน');
 function svg(kind,color){
+ if(window.IEAT_SQ)return IEAT_SQ.pin(kind,color);
  return '<svg viewBox="0 0 36 44" aria-hidden="true"><path d="M18 42l-6-8H7q-4 0-4-4V9q0-5 5-5h20q5 0 5 5v21q0 4-4 4h-5Z" fill="white" stroke="'+color+'" stroke-width="2"/><g transform="translate(7 8) scale(.9)" fill="none" stroke="#183f62" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+icons[kind]+'</g></svg>';
 }
 function mount(item,kind,name,color,id){
- const el=document.createElement('div');el.className='prep-feature '+(item.side||'right');el.innerHTML='<button type="button" aria-label="'+esc(name)+'">'+svg(kind,color)+'</button><span class="prep-name">'+esc(name)+'</span>';
+ const el=document.createElement('div');el.className='prep-feature '+(item.side||'right');el.innerHTML='<button type="button"'+(window.IEAT_SQ?' class="has-sq"':'')+' aria-label="'+esc(name)+'">'+svg(kind,color)+'</button><span class="prep-name">'+esc(name)+'</span>';
  let marker;if(context.vector){const wrap=document.createElement('div');wrap.className='prep-anchor';wrap.appendChild(el);marker=new maplibregl.Marker({element:wrap,anchor:'bottom'}).setLngLat([item.lon,item.lat]).addTo(context.vector)}
- else marker=L.marker([item.lat,item.lon],{icon:L.divIcon({className:'prep-anchor',html:el,iconSize:[34,44],iconAnchor:[17,44]}),keyboard:false,zIndexOffset:850}).addTo(context.raster);
+ else marker=L.marker([item.lat,item.lon],{icon:L.divIcon({className:'prep-anchor',html:el,iconSize:window.IEAT_SQ?[40,48]:[34,44],iconAnchor:window.IEAT_SQ?[20,48]:[17,44]}),keyboard:false,zIndexOffset:850}).addTo(context.raster);
  el.querySelector('button').onclick=e=>{e.stopPropagation();window.IEAT_MAP_DETAILS?.prep(id,false)};
  markers.push({el,marker});
 }
