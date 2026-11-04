@@ -1,6 +1,6 @@
 /* Unified flood dashboard typography and restrained glass cards. */
 @font-face{font-family:"TH Sarabun New";src:local("TH Sarabun New"),url("https://cdn.jsdelivr.net/gh/LynxelSins/Before-the-catastrophe@9c745b8f926b958bc585dd2aba89def0d0f8532e/fonts/THSarabunNew/THSarabunNew.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
-@layer floodReferenceStructure {
+@layer floodUnifiedTypography {
 html,html body,html body *,html body *::before,html body *::after{font-family:"TH Sarabun New",Sarabun,Tahoma,sans-serif!important}
 html body{font-size:22px!important;line-height:1.35!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard,
