@@ -217,8 +217,8 @@ html body #warning #estateFocusDashboard .ef-data-column :is(p,small,.ef-scroll-
 </style><style id="standard-water-status-colors">#estateFocusDashboard [data-water-theme^="standard-"]{--water-bg:#fff!important;--water-ink:#263746!important}#estateFocusDashboard #efReservoirList [data-water-theme^="standard-"] .ef-reservoir-percent span{background:var(--water-accent)!important;color:white!important}#waterStatusGuide{padding:6px 10px;color:#435461;font:11px/1.6 Sarabun,sans-serif}#waterStatusGuide summary{cursor:pointer}#waterStatusGuide p{margin:5px 0}#waterStatusGuide i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}</style><style id="overview-three-white-cards">html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpis>.flood-kpi{background:#FFFFFF!important;background-image:none!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .flood-kpis>.flood-kpi:hover{background:#FFFFFF!important}</style><script defer src="flood-icons.js?v=8f75bcb0"></script>
 <script defer src="flood-water-status.js?v=20261030-warning-yellow"></script>
 <script defer src="flood-rid-source.js?v=20261006-rid-17"></script>
-<script defer src="flood-estate-dashboard.js?v=20261104-preparedness-popup"></script>
-<script defer src="flood-river-panel.js?v=20261103-status-contrast"></script>
+<script defer src="flood-estate-dashboard.js?v=20261104-flow-camera"></script>
+<script defer src="flood-river-panel.js?v=20261104-river-typography"></script>
 <script defer src="flood-weather-overview.js?v=20261006-svg-weather-37"></script>
 <style id="dashboard-refined-responsive">
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard{--dashboard-h:100vh;font-family:Sarabun,system-ui,sans-serif;color:#293442}
@@ -2059,3 +2059,33 @@ let pending=false;new MutationObserver(()=>{if(!pending){pending=true;requestAni
 
 
 
+
+<style id="water-rank-camera-layout">
+@layer waterRankLayout {
+ #rpRankingsAfterWarning {align-items:stretch!important}
+ #rpRankingsAfterWarning > section {height:auto!important;box-sizing:border-box}
+ #rpRankingsAfterWarning > section > small:last-child {margin-top:auto!important;padding-top:5px!important}
+ #rpRankingsAfterWarning .rp-rank-card > div:first-child {background:linear-gradient(180deg,var(--rank-from),var(--rank-to))!important}
+ #rpRankingsAfterWarning .rp-rank-card strong {color:#173454!important;-webkit-text-fill-color:#173454!important}
+ #rpMainGraph .rp-node .rp-river-value {fill:color-mix(in srgb,var(--river-status,#E5E7EB) 52%,#172435)!important}
+ #efDamFlowPanel .dam-flow-compact {max-width:none!important;margin:0!important}
+ #efDamFlowPanel .ef-dam-flow-camera img[hidden] {display:none!important}
+}
+#rpDamRanks{--rank-from:#90bff1;--rank-to:#c8e3ff}
+#rpFlowRanks{--rank-from:#87cfc6;--rank-to:#c3ece5}
+#rpDamRanks .rp-rank-card:nth-child(2){--rank-from:#a1caf4;--rank-to:#d1e8ff}
+#rpDamRanks .rp-rank-card:nth-child(3){--rank-from:#b3d5f7;--rank-to:#daedff}
+#rpDamRanks .rp-rank-card:nth-child(4){--rank-from:#c5e0fa;--rank-to:#e4f2ff}
+#rpDamRanks .rp-rank-card:nth-child(5){--rank-from:#d7eafc;--rank-to:#edf6ff}
+#rpFlowRanks .rp-rank-card:nth-child(2){--rank-from:#9bd9d0;--rank-to:#cef0ea}
+#rpFlowRanks .rp-rank-card:nth-child(3){--rank-from:#afe2da;--rank-to:#d9f4ef}
+#rpFlowRanks .rp-rank-card:nth-child(4){--rank-from:#c3ebe4;--rank-to:#e3f7f3}
+#rpFlowRanks .rp-rank-card:nth-child(5){--rank-from:#d7f3ee;--rank-to:#edf9f6}
+#efDamFlowPanel .ef-dam-flow-values{display:grid;gap:8px 14px;margin-top:10px}
+#efDamFlowPanel.has-camera .ef-dam-flow-values{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+#efDamFlowPanel .ef-dam-flow-camera{position:relative;margin:0;min-width:0;min-height:100px;border-radius:12px;overflow:hidden;background:#f4f7fa}
+#efDamFlowPanel .ef-dam-flow-camera img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#efDamFlowPanel .ef-dam-flow-camera small{display:block;padding:10px}
+#efDamFlowPanel .dam-release-conversion{grid-column:1/-1}
+@media(max-width:570px){#efDamFlowPanel.has-camera .ef-dam-flow-values{grid-template-columns:minmax(0,1fr)}#efDamFlowPanel .ef-dam-flow-camera{min-height:140px}}
+</style>
