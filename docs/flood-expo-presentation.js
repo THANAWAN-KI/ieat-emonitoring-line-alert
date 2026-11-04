@@ -74,7 +74,7 @@ function install(){
  return true;
 }
 const style=document.createElement('style');style.id='ieat-booth-compact-20261104';
-style.textContent=String.raw\`
+style.textContent=`
 #expoBoothSubtitle{font:400 12px/1.5 Sarabun,sans-serif;color:#526477;margin:0 4px 10px}
 #floodPageTitle{font-size:clamp(21px,1.8vw,29px);font-weight:800;line-height:1.3;color:#0D47A1;margin:0}
 #expoBoothActions{display:flex;gap:6px;align-items:center;min-width:0}
@@ -85,7 +85,7 @@ style.textContent=String.raw\`
 @media(max-width:1320px){#expoBoothActions button{font-size:11px;padding:7px}}
 @media(max-width:950px){#expoBoothActions{max-width:45%;overflow-x:auto}#expoBoothActions button{min-height:40px;flex:0 0 auto}}
 @media(prefers-reduced-motion:reduce){#expoBoothActions button{transition:none}}
-\`;
+`;
 document.head.append(style);
 function boot(){if(install())return;const observer=new MutationObserver(()=>{if(install())observer.disconnect()});observer.observe(document.documentElement,{childList:true,subtree:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
