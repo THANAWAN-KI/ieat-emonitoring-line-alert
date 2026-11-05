@@ -1125,7 +1125,7 @@ function syncPinLegend(){
 function render(){
  keepDashboardLayersOpen();
  if(!ready)return;syncPinLegend();publishPreparednessPoints();
- syncRemoteOverlays();syncBoundaries();syncWaterAreas();const list=scoped().filter(f=>!watchMapData||!['estate','water','rain','canal','dam','camera'].includes(f.properties.kind)||f.properties.kind==='water'&&flags.rings&&hasDischarge(f.properties)),overviewPoints=groupOverviewPoints(list);
+ syncRemoteOverlays();syncBoundaries();syncWaterAreas();const list=watchMapData?.cardFocus?[]:scoped().filter(f=>!watchMapData||!['estate','water','rain','canal','dam','camera'].includes(f.properties.kind)||f.properties.kind==='water'&&flags.rings&&hasDischarge(f.properties)),overviewPoints=groupOverviewPoints(list);
   const presentationZoom=(vector||raster)?.getZoom()||0;
   document.body.dataset.mapDetail=presentationZoom>=11?'near':presentationZoom>=9?'mid':'far';
   // Keep all five data sources active, but progressively reveal their symbols.
@@ -1480,10 +1480,10 @@ function renderWatchEvidence(){
  '<div class="watch-layer-options">'+(water?'<label><input type="checkbox" data-watch-layer="water" '+(watchMapData.showWater!==false?'checked':'')+'> สถานีน้ำสูง '+water+' จุด</label>':'')+(rain?'<label><input type="checkbox" data-watch-layer="rain" '+(watchMapData.showRain!==false?'checked':'')+'> สถานีฝนตกหนัก '+rain+' จุด</label>':'')+'</div>'+
  '<div class="watch-evidence-list">'+(estates.length?estates.map((e,index)=>'<details class="ieat-watch-estate" '+(index===0?'open':'')+'><summary><span class="ieat-watch-estate-glyph" aria-hidden="true">'+compactWatchIcon('estate')+'</span><span class="ieat-watch-estate-title"><b>'+esc(e.name)+'</b><small>'+(e.rainCount?'ฝน '+e.rainCount+' สถานี':'')+(e.waterCount?' · น้ำ '+e.waterCount+' สถานี':'')+'</small></span></summary><div class="ieat-watch-estate-body"><button type="button" data-watch-estate="'+esc(e.id)+'">ดูตำแหน่งบนแผนที่ ↗</button>'+
  e.stations.map(st=>'<article class="ieat-watch-station"><div class="ieat-watch-reason">'+(st.kind==='rain'?watchRainSvg():compactWatchIcon('water'))+'<span>'+watchEvidenceReason(st)+'</span></div><div class="ieat-watch-station-row"><span><b>'+esc(st.name)+'</b><small>ตรวจวัด '+esc(st.observed)+'</small></span><span class="ieat-watch-distance">'+Number(st.distanceKm).toFixed(2)+' กม.<small>ระยะเส้นตรง</small></span></div></article>').join('')+'</div></details>').join(''):'<p class="ieat-watch-empty">ไม่มีนิคมฯ เข้าเกณฑ์ในข้อมูลที่ตรวจสอบได้</p>')+'</div>'+
- '<footer>ระยะเส้นประเป็นระยะทางตรง ไม่ใช่เส้นทางน้ำไหล · ผลคัดกรองไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ</footer>';
+ '<footer>'+(watchMapData.cardFocus?'':'ระยะเส้นประเป็นระยะทางตรง ไม่ใช่เส้นทางน้ำไหล · ')+'ผลคัดกรองไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ</footer>';
 }
 function showWatchMapData(data){
- clearWatchMap();clearExecutiveFocus();watchMapData={...data,estates:(data.estates||[]).filter(e=>valid({lat:e.lat,lng:e.lon})).map(e=>({...e,stations:(e.stations||[]).filter(s=>valid({lat:s.lat,lng:s.lon})&&Number.isFinite(s.distanceKm))}))};
+ clearWatchMap();clearExecutiveFocus();if(data.cardFocus)clearIEATMeasuredDistance();watchMapData={...data,estates:(data.estates||[]).filter(e=>valid({lat:e.lat,lng:e.lon})).map(e=>({...e,stations:(e.stations||[]).filter(s=>valid({lat:s.lat,lng:s.lon})&&Number.isFinite(s.distanceKm))}))};
  autoFit=false;estateProvinceScope=null;$('province').value='';renderWatchEvidence();render();
  const coords=watchMapData.estates.flatMap(e=>[[e.lon,e.lat],...e.stations.map(s=>[s.lon,s.lat])]);
  if(!ready||!coords.length)return;
@@ -1514,8 +1514,9 @@ function drawWatchMap(){
  }
  estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#109dc0',false);e.stations.forEach(s=>{
   const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
-  lines.push({type:'Feature',geometry:{type:'LineString',coordinates:coords},properties:{}});
+  if(!watchMapData.cardFocus)lines.push({type:'Feature',geometry:{type:'LineString',coordinates:coords},properties:{}});
   const stationKey=s.lat+':'+s.lon+':'+s.name;if(!seen.has(stationKey)){seen.add(stationKey);const html='<div class="popup"><h3>'+esc(s.name)+'</h3><p>'+(s.kind==='rain'?'ฝนสะสม '+esc(s.rainfall??'–')+' มม.':'ระดับน้ำ '+esc(s.level??'–')+' ม.รทก.<br>ตลิ่ง '+esc(s.bank??'–')+' ม.รทก.')+'<br>'+watchStationReason(s)+'<br>เวลาตรวจวัด '+esc(s.observed)+'</p><p>'+estates.flatMap(other=>other.stations.filter(t=>t.name===s.name&&t.lat===s.lat&&t.lon===s.lon).map(t=>esc(other.name)+' · '+t.distanceKm.toFixed(2)+' กม.')).join('<br>')+'</p><small>ระยะเส้นตรงจากพิกัดสถานีถึงพิกัดอ้างอิงนิคมฯ</small></div>';pin(coords[1],s.name,html,s.kind==='rain'?window.IEAT_WATER_STATUS.rain(s.rainfall).hex:window.IEAT_WATER_STATUS.water({wl:s.level,bank:s.bank}).hex,true,s.kind)}
+  if(watchMapData.cardFocus)return;
   const middle=[(e.lon+s.lon)/2,(e.lat+s.lat)/2];
   if(vector&&((zoom||0)>=9||estates.length===1)){const el=document.createElement('span');el.className='ieat-watch-distance-label';el.style.cssText='pointer-events:none';el.textContent=label;watchMapMarkers.push(new maplibregl.Marker({element:el}).setLngLat(middle).addTo(vector))}
   else if(raster){const line=L.polyline(coords.map(p=>[p[1],p[0]]),{color:'#ed3b21',weight:3,dashArray:'8 6'}).bindTooltip(esc(e.name)+' ↔ '+esc(s.name)+' · '+label+' (ระยะเส้นตรง)',{sticky:true});line.addTo(watchMapLayer);if((zoom||0)>=9||estates.length===1)L.marker([middle[1],middle[0]],{pane:'watchPoints',interactive:false,icon:L.divIcon({className:'',iconSize:[88,22],iconAnchor:[44,11],html:'<span class="ieat-watch-distance-label">'+label+'</span>'})}).addTo(watchMapLayer)}
@@ -1651,7 +1652,7 @@ window.addEventListener('message',async event=>{
   if(preparednessSupport&&d.estate===estateProvinceScope?.name)openPreparednessPoint(d.key);
   return;
  }
- if(d.type==='flood-watch-clear'){clearWatchMap();return}
+ if(d.type==='flood-watch-clear'){clearWatchMap();render();return}
  if(d.type==='flood-watch-focus'){showWatchMapData(d);return}
  if(d.type==='flood-province-scope'){
  const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
