@@ -94,6 +94,25 @@
 @keyframes coverage-flag{0%,100%{opacity:.83;transform:scale(.94)}25%{opacity:1;transform:scale(1.1)}52%{opacity:.92;transform:scale(1)}}
 @media(max-width:720px){.coverage-map{min-height:clamp(400px,76svh,700px)}}
 @media(prefers-reduced-motion:reduce){.coverage-thailand{transition:none}}
+</style><style>
+.coverage-map .coverage-thailand{transition:none}
+#coverage-estate-flags .coverage-flag{opacity:1}
+@media(prefers-reduced-motion:no-preference){
+ .coverage-map.is-visible.is-revealing .coverage-land path{animation:coverage-ink 2.3s ease-out both}
+ .coverage-map.is-visible.is-revealing .coverage-dot{animation-delay:calc(1.7s + var(--point-delay))}
+ .coverage-map.is-visible.is-revealing #coverage-estate-flags .coverage-flag{animation:coverage-flag-pop 7.1s ease-in-out both;animation-delay:var(--point-delay)}
+}
+@keyframes coverage-ink{
+ 0%,15%{fill:#f8f2e6;stroke:#c9a97a}
+ 54%{fill:#e7bd76;stroke:#fffaf0}
+}
+@keyframes coverage-flag-pop{
+ 0%,29%{opacity:0;transform:translateY(20px) scale(.28)}
+ 39%{opacity:1;transform:translateY(-10px) scale(1.2)}
+ 46%,72%{opacity:1;transform:translateY(0) scale(1)}
+ 79%{opacity:.65;transform:scale(.92)}
+ 88%,100%{opacity:1;transform:scale(1)}
+}
 </style></head>
 <body>
 <header class="bar">
@@ -190,6 +209,7 @@
    </g>
    <rect x="-6500" y="-4800" width="11500" height="8800" fill="url(#coverage-grain)" opacity=".45"/>
    <g id="coverage-points"></g>
+   <g id="coverage-estate-flags"></g>
   </svg>
   <p class="caption">ขอบเขตประเทศแบบย่อจาก Natural Earth · จุดข้อมูลจาก IEAT e-Monitoring</p>
  </div>
@@ -281,31 +301,38 @@
   document.getElementById('coverage-play').disabled=true;
   return;
  }
+ const svgNS=graphic.namespaceURI, flags=document.getElementById('coverage-estate-flags');
+ const locate=rows=>rows.filter(row=>row.lon!=null&&row.lat!=null&&Number(row.lon)>=96&&Number(row.lon)<=104.88&&Number(row.lat)>=4.73&&Number(row.lat)<=21)
+  .map(row=>({x:(Number(row.lon)-96)*45,y:(21-Number(row.lat))*43}));
+ const estates=locate(data.estates);
+ const flagPoints=[];
+ for(const point of estates.slice().sort((a,b)=>a.y-b.y)){
+  if(flagPoints.every(other=>Math.hypot(point.x-other.x,point.y-other.y)>105))flagPoints.push(point);
+ }
+ flags.replaceChildren(...flagPoints.map(({x,y},index)=>{
+  const flag=document.createElementNS(svgNS,'path');
+  flag.setAttribute('d',`M${x},${y}v-70q18 10 36 0v31q-18 10 -36 0Z`);
+  flag.setAttribute('fill','#9e4634');
+  flag.setAttribute('stroke','#fffaf0');
+  flag.setAttribute('stroke-width','3.5');
+  flag.classList.add('coverage-flag');
+  flag.style.setProperty('--point-delay',Math.min(index,5)*100+'ms');
+  return flag;
+ }));
  function draw(kind){
   map.dataset.kind=kind;
-  const rows=(kind==='estate'?data.estates:data.stations.filter(row=>row.kind===kind))
-   .filter(row=>row.lon!=null&&row.lat!=null&&Number(row.lon)>=96&&Number(row.lon)<=104.88&&Number(row.lat)>=4.73&&Number(row.lat)<=21);
-  group.replaceChildren(...rows.flatMap((row,index)=>{
-   const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-   dot.setAttribute('cx',(Number(row.lon)-96)*45);dot.setAttribute('cy',(21-Number(row.lat))*43);
+  const rows=kind==='estate'?estates:locate(data.stations.filter(row=>row.kind===kind));
+  group.replaceChildren(...rows.map(({x,y})=>{
+   const dot=document.createElementNS(svgNS,'circle');
+   dot.setAttribute('cx',x);dot.setAttribute('cy',y);
    dot.setAttribute('r',kind==='estate'?7:5);dot.setAttribute('fill',colors[kind]);dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','1.2');
    dot.classList.add('coverage-dot');
-   dot.style.setProperty('--point-delay',Math.round(Number(dot.getAttribute('cy'))*.85)+'ms');
-   if(index%Math.max(1,Math.ceil(rows.length/3))!==0)return [dot];
-   const ring=dot.cloneNode();
-   ring.classList.replace('coverage-dot','coverage-pulse');
-   ring.setAttribute('stroke',colors[kind]);
-   ring.style.setProperty('--point-delay',(index%7)*230+'ms');
-   const flag=document.createElementNS(dot.namespaceURI,'path');
-   const x=Number(dot.getAttribute('cx')),y=Number(dot.getAttribute('cy'));
-   flag.setAttribute('d',`M${x},${y}v-60q15 8 30 0v27q-15 8 -30 0Z`);
-   flag.setAttribute('fill',colors[kind]);
-   flag.setAttribute('stroke','#fffaf0');
-   flag.setAttribute('stroke-width','3');
-   flag.classList.add('coverage-flag');
-   flag.style.setProperty('--point-delay',(index%7)*230+'ms');
-   return [ring,dot,flag];
+   dot.style.setProperty('--point-delay',Math.round(y*.85)+'ms');
+   return dot;
   }));
+  map.classList.remove('is-revealing');
+  void graphic.getBoundingClientRect();
+  map.classList.add('is-revealing');
   buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.coverage===kind)));
   status.textContent='แสดง '+rows.length.toLocaleString('th-TH')+' ตำแหน่งจากชุดข้อมูลแดชบอร์ด';
  }
