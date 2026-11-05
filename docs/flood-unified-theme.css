@@ -1,7 +1,7 @@
 /* Unified flood dashboard typography and restrained glass cards. */
 @font-face{font-family:"TH Sarabun New";src:local("TH Sarabun New"),url("https://cdn.jsdelivr.net/gh/LynxelSins/Before-the-catastrophe@9c745b8f926b958bc585dd2aba89def0d0f8532e/fonts/THSarabunNew/THSarabunNew.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
-@layer floodUnifiedTypography {
-html,html body,html body *,html body *::before,html body *::after{font-family:"TH Sarabun New",Sarabun,Tahoma,sans-serif!important}
+@layer floodReferenceStructure {
+html:root,html:root body,html:root body *,html:root body *::before,html:root body *::after{font-family:"TH Sarabun New",Sarabun,Tahoma,sans-serif!important}
 html body{font-size:22px!important;line-height:1.35!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard,
 html body #floodSectionPanel#floodSectionPanel,html body #approvedAreaSearch,
@@ -32,4 +32,30 @@ html body #approvedAreaSearch#approvedAreaSearch output{font-size:18px!important
 html body #rightMapToolbar#rightMapToolbar button{font-family:"TH Sarabun New",Sarabun,sans-serif!important;font-size:22px!important}
 html body #rightMapToolbar#rightMapToolbar #approvedRotate360 span{font:700 18px/1 "TH Sarabun New",Sarabun,sans-serif!important}
 @supports not (backdrop-filter:blur(12px)){html body :is(#watchEvidence,#mapDetails,#approvedAreaSearch),html body #floodSectionPanel .ref-chart-card{background:#ffffff!important}}
+}
+
+/* Approved compact rows, darker text, and independent water categories. */
+@layer floodReferenceStructure {
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column{display:flex!important;flex-direction:column!important;gap:12px!important;padding-top:94px!important;overflow-y:auto!important;overflow-x:hidden!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #approvedDashboardHeading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;order:-25!important;flex-shrink:0!important;width:100%!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodPageTitle{font-size:22px!important;line-height:1.25!important;margin:0!important;white-space:nowrap!important;color:#20252b!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #expoBoothSubtitle{font-size:18px!important;line-height:1.25!important;margin:0!important;white-space:nowrap!important;color:#49515b!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatOverviewFilter{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:6px!important;padding:0!important;margin:0 0 10px!important;min-height:0!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatOverviewFilter .io-area{display:contents!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatOverviewFilter :is(.io-area-title,.io-date){display:none!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ioEstatePicker{grid-column:1!important;grid-row:1!important;min-width:0!important;width:100%!important;height:40px!important;margin:0!important;padding:6px 10px!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatAllEstates{grid-column:2!important;grid-row:1!important;height:40px!important;margin:0!important;padding:6px 10px!important;white-space:nowrap!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ioEstatePicker .io-picker-label{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column :is(p,span,label,td,th,small,summary){color:#20252b!important;-webkit-text-fill-color:#20252b!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column :is(small,.ex-kpi-note,.rp-row-time,.rp-row-trend){color:#49515b!important;-webkit-text-fill-color:#49515b!important}
+html body #referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;min-height:48px!important}
+html body #referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs button{white-space:nowrap!important;font-size:22px!important;padding:7px 3px!important;min-height:40px!important}
+html body #ieatDashboardCamera#ieatDashboardCamera,html body #efMapFullscreen#efMapFullscreen,html body #efMapExitFullscreen#efMapExitFullscreen{display:none!important}
+html body[data-flood-section=overview] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#rpRankingsAfterWarning,.ef-warning){display:none!important}
+html body[data-water-category=stations] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#floodDamsSection,.ef-canal-panel,#floodWaterDiagram,#efDamFlowPanel),
+html body[data-water-category=dams] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel,#floodWaterDiagram),
+html body[data-water-category=canals] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#floodStationsSection,#floodDamsSection,#floodWaterDiagram,#efDamFlowPanel),
+html body[data-water-category=diagram] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#floodStationsSection,#floodDamsSection,.ef-canal-panel,#efDamFlowPanel){display:none!important}
+html body #watchEvidence :is(span,b,strong,p),html body #mapDetails :is(span,b,strong,p){color:#20252b!important}
+@media(max-width:600px){html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #approvedDashboardHeading{gap:5px!important}html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #expoBoothSubtitle{white-space:normal!important;text-align:right!important}}
 }
