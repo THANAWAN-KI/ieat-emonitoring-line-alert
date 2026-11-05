@@ -549,7 +549,11 @@ html body .estate-pin .ieat-estate-emblem>img,html body .clean-estate-point .iea
 html body .estate-pin .ieat-estate-plain-glyph,html body .clean-estate-point .ieat-estate-plain-glyph,html body .watch-estate-pin .ieat-estate-plain-glyph{display:block!important;width:18px!important;height:18px!important;transform:none!important;filter:none!important;animation:none!important}
 html body .ieat-estate-location{animation:none!important}
 </style>
-</head>
+<style>
+.aerial-callouts{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.aerial-callouts svg{position:absolute;inset:0;width:100%;height:100%;stroke:#263639;stroke-width:1.5;filter:drop-shadow(0 0 1px #fff)}
+.aerial-callouts span{position:absolute;left:0;top:0;box-sizing:border-box;width:max-content;max-width:190px;padding:4px 8px;background:#fffdf7;color:#202c2e;border:1px solid #39494a;box-shadow:0 2px 5px #16222526;font:500 13px/1.35 Kanit,Sarabun,sans-serif;overflow-wrap:anywhere}
+</style></head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>45</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="45" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" checked hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#051736"/><path d="M12 2V20L4 25Z" fill="#109dc0"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="layer-panel-heading"><strong>ชั้นข้อมูลแผนที่</strong><span>เลือกข้อมูลที่ต้องการแสดง</span></div><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
 <label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="streets">แผนที่ถนนโทนสว่าง</option><option value="topo" selected>แผนที่ภูมิประเทศ</option><option value="gray">แผนที่เรียบโทนสว่าง</option><option value="satellite">ภาพถ่ายดาวเทียม</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
@@ -1738,7 +1742,84 @@ const aerialButton=document.createElement('button');aerialButton.id='aerialTourB
 const aerialHint=document.createElement('div');aerialHint.id='aerialTourHint';aerialHint.hidden=true;aerialHint.setAttribute('role','status');document.body.appendChild(aerialHint);
 let aerialPlaying=false,aerialFrame=null,aerialTimer=null,aerialLaunch=null,aerialMap=null,aerialHintTimer=null;
 function aerialNotice(text){aerialHint.textContent=text;aerialHint.hidden=false;clearTimeout(aerialHintTimer);aerialHintTimer=setTimeout(()=>aerialHint.hidden=true,6500)}
+let aerialLabels, aerialLabelTick=-Infinity;
+function clearAerialLabels(){
+ aerialLabels?.remove();
+ aerialLabels=null;
+ aerialLabelTick=-Infinity;
+}
+function drawAerialLabels(map, elapsed){
+ if(!estateProvinceScope?.estate||elapsed-aerialLabelTick<110)return;
+ aerialLabelTick=elapsed;
+ const host=map.getContainer(), bounds=host.getBoundingClientRect();
+ if(!aerialLabels){
+  aerialLabels=document.createElement('div');
+  aerialLabels.className='aerial-callouts';
+  aerialLabels.setAttribute('aria-hidden','true');
+  host.append(aerialLabels);
+ }
+ const relative=element=>{
+  const r=element.getBoundingClientRect();
+  return {left:r.left-bounds.left,top:r.top-bounds.top,right:r.right-bounds.left,bottom:r.bottom-bounds.top};
+ };
+ const intersects=(a,b)=>a.left<b.right+5&&a.right>b.left-5&&a.top<b.bottom+5&&a.bottom>b.top-5;
+ const points=[];
+ for(const marker of host.querySelectorAll('.maplibregl-marker')){
+  if(getComputedStyle(marker).opacity==='0'||getComputedStyle(marker).visibility==='hidden')continue;
+  const icon=marker.querySelector('.ieat-nm-btn,.prep-feature button')||marker;
+  const rect=relative(icon);
+  if(rect.right<=0||rect.left>=bounds.width||rect.bottom<=0||rect.top>=bounds.height||rect.right===rect.left)continue;
+  const label=marker.getAttribute('aria-label')||icon.getAttribute('aria-label')||marker.getAttribute('title');
+  if(!label||marker.classList.contains('flood-point-cluster'))continue;
+  const x=(rect.left+rect.right)/2,y=(rect.top+rect.bottom)/2;
+  if(!points.some(p=>p.label===label&&Math.hypot(x-p.x,y-p.y)<12))points.push({label,rect,x,y});
+ }
+ const occupied=points.map(p=>p.rect);
+ for(const item of document.querySelectorAll('.maplibregl-popup,.maplibregl-ctrl,.map-tool-btn,#aerialTourHint')){
+  if(item.getClientRects().length)occupied.push(relative(item));
+ }
+ points.sort((a,b)=>a.label.localeCompare(b.label,'th')||a.x-b.x);
+ const batchSize=bounds.width<600?3:5;
+ const batches=Math.ceil(points.length/batchSize);
+ const start=batches?Math.floor(elapsed/4200)%batches*batchSize:0;
+ const labels=document.createDocumentFragment(), previous=aerialLabels;
+ const layer=previous.cloneNode(false);
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ layer.append(svg);
+ previous.replaceWith(layer);
+ aerialLabels=layer;
+ for(const point of points.slice(start,start+batchSize)){
+  const tag=document.createElement('span');
+  tag.textContent=point.label;
+  layer.append(tag);
+  const w=tag.offsetWidth,h=tag.offsetHeight,{x,y,rect}=point;
+  const candidates=[
+   [rect.right+22,y-h/2],[rect.left-w-22,y-h/2],
+   [x-w/2,rect.top-h-20],[x-w/2,rect.bottom+20],
+   [rect.right+18,rect.top-h-12],[rect.left-w-18,rect.top-h-12]
+  ];
+  for(const [left,top] of candidates){
+   const box={left,top,right:left+w,bottom:top+h};
+   if(left<12||top<52||box.right>bounds.width-62||box.bottom>bounds.height-48||occupied.some(r=>intersects(box,r)))continue;
+   const endX=Math.max(left,Math.min(x,box.right)),endY=Math.max(top,Math.min(y,box.bottom));
+   const startX=Math.max(rect.left,Math.min(endX,rect.right)),startY=Math.max(rect.top,Math.min(endY,rect.bottom));
+   const connector={left:Math.min(startX,endX),right:Math.max(startX,endX),top:Math.min(startY,endY),bottom:Math.max(startY,endY)};
+   if(occupied.some(r=>r!==rect&&intersects(connector,r)))continue;
+   const line=document.createElementNS(svg.namespaceURI,'line');
+   for(const [key,value] of Object.entries({x1:startX,y1:startY,x2:endX,y2:endY}))line.setAttribute(key,value);
+   svg.append(line);
+   occupied.push(box,connector);
+   tag.style.left=left+'px';
+   tag.style.top=top+'px';
+   labels.append(tag);
+   break;
+  }
+  tag.remove();
+ }
+ layer.append(labels);
+}
 function stopAerialTour(){
+ clearAerialLabels();
  parent.postMessage({type:'dashboard-camera-status',mode:vector?'3d':'2d',playing:false},location.origin);
  if(new URLSearchParams(location.search).get('booth')==='1')parent.postMessage({type:'booth-camera-status',ready:true,mode:vector?'3d':'2d',playing:false},location.origin);
  aerialPlaying=false;cancelAnimationFrame(aerialFrame);clearTimeout(aerialTimer);
@@ -1761,7 +1842,7 @@ function startAerialTour(){
   const frame=now=>{
    if(!aerialPlaying||aerialMap!==map||document.hidden)return;
    if(!started)started=now;
-   if(now-last>=33){last=now;map.jumpTo({bearing:-25+(now-started)*.006});}
+   if(now-last>=33){last=now;map.jumpTo({bearing:-25+(now-started)*.006});drawAerialLabels(map,now-started);}
    aerialFrame=requestAnimationFrame(frame);
   };
   aerialLaunch=()=>{aerialLaunch=null;if(aerialPlaying)aerialFrame=requestAnimationFrame(frame)};
