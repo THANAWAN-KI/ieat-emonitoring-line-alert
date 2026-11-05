@@ -651,6 +651,7 @@ async function syncPaperBasemap(){
     vector.addLayer({id:'paper-roads',type:'line',source:'paper-details','source-layer':'Road',minzoom:9,layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#f9f9f7','line-width':['interpolate',['linear'],['zoom'],9,.45,13,1.2,17,3.2],'line-opacity':.92}},'esri-gray');
     vector.addLayer({id:'paper-buildings',type:'fill',source:'paper-details','source-layer':'Building',minzoom:13,paint:{'fill-color':'#fbfbf9','fill-opacity':.92}},'esri-gray');
    }
+   if(vector.getLayer('ieat-dem-hillshade'))vector.moveLayer('ieat-dem-hillshade','paper-roads');
    for(const id of ['paper-sea','paper-land','paper-borders','paper-roads','paper-buildings'])vector.setLayoutProperty(id,'visibility','visible');
    vector.setLayoutProperty('esri-gray','visibility','none');
   }else if(raster){
@@ -2631,13 +2632,14 @@ let enabled=true,hillshade=null,bound=false,activeMap=null;
 const demURL='https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
 function sync(){
  const api=window.IEATPreparednessMap?.();if(!api?.ready)return false;
- const choice=document.getElementById('basemapChoice'),active=enabled&&choice?.value==='topo';
+ const choice=document.getElementById('basemapChoice'),paper=choice?.value==='paper';
+ const active=enabled&&(paper||choice?.value==='topo');
  const host=document.querySelector('#mapLayers .layer-body')||document.getElementById('mapLayers');
  if(host&&!document.getElementById('ieatDemToggle')){
   const label=document.createElement('label');label.style.cssText='display:flex;align-items:center;gap:7px;padding:9px 4px;font:12px Sarabun,sans-serif';
   label.innerHTML='<input type="checkbox" id="ieatDemToggle" checked><span>ความสูงภูมิประเทศ (DEM)</span>';host.appendChild(label);
   label.querySelector('input').addEventListener('change',e=>{enabled=e.target.checked;sync()});
-  const note=document.createElement('small');note.id='ieatDemNote';note.style.cssText='display:block;font:10px/1.5 Sarabun,sans-serif;color:#706357;padding:0 4px 8px';note.textContent='DEM สำหรับแสดงภูมิประเทศ · พื้นที่พืชพรรณใช้สีจากแผนที่ฐาน';host.appendChild(note);
+  const note=document.createElement('small');note.id='ieatDemNote';note.style.cssText='display:block;font:10px/1.5 Sarabun,sans-serif;color:#706357;padding:0 4px 8px';note.textContent='เปิดเงาภูมิประเทศและความสูง 3 มิติบนพื้นแผนที่ภูมิประเทศหรือลายกระดาษสีเทา';host.appendChild(note);
  }
  if(choice&&!bound){bound=true;choice.addEventListener('change',sync);}
  const note=document.getElementById('ieatDemNote');
@@ -2645,9 +2647,14 @@ function sync(){
   const map=api.vector;
   if(!map.getSource('ieat-terrain-dem')){
    map.addSource('ieat-terrain-dem',{type:'raster-dem',tiles:[demURL],tileSize:256,maxzoom:15,encoding:'terrarium',attribution:'Terrain © Mapzen / AWS Open Data'});
-   map.addLayer({id:'ieat-dem-hillshade',type:'hillshade',source:'ieat-terrain-dem',paint:{'hillshade-exaggeration':0.25,'hillshade-shadow-color':'#706357','hillshade-highlight-color':'#ffffff','hillshade-accent-color':'#706357'}},map.getLayer('discharge-ring')?'discharge-ring':undefined);
+   map.addLayer({id:'ieat-dem-hillshade',type:'hillshade',source:'ieat-terrain-dem',paint:{'hillshade-exaggeration':0.25,'hillshade-shadow-color':'#706357','hillshade-highlight-color':'#ffffff','hillshade-accent-color':'#706357'}},map.getLayer('paper-roads')?'paper-roads':map.getLayer('discharge-ring')?'discharge-ring':undefined);
    map.on('error',e=>{if(e.sourceId==='ieat-terrain-dem'&&note)note.textContent='โหลด DEM ไม่สำเร็จ · แผนที่ภูมิประเทศยังใช้งานได้'});
   }
+  if(map.getLayer('paper-roads')){
+   map.moveLayer('ieat-dem-hillshade',paper?'paper-roads':'discharge-ring');
+  }
+  map.setPaintProperty('ieat-dem-hillshade','hillshade-shadow-color',paper?'#3b3b3b':'#706357');
+  map.setPaintProperty('ieat-dem-hillshade','hillshade-accent-color',paper?'#606060':'#706357');
   map.setLayoutProperty('ieat-dem-hillshade','visibility',active?'visible':'none');
   map.setTerrain(active?{source:'ieat-terrain-dem',exaggeration:1}:null);
  }else if(api.raster){
@@ -2658,7 +2665,7 @@ function sync(){
    hillshade.on('tileerror',()=>{if(note)note.textContent='โหลดเงาภูมิประเทศไม่สำเร็จ · แผนที่ฐานยังใช้งานได้'});
   }
   if(hillshade){if(active&&!map.hasLayer(hillshade))hillshade.addTo(map);if(!active&&map.hasLayer(hillshade))map.removeLayer(hillshade);}
-  if(note&&!note.textContent.includes('ไม่สำเร็จ'))note.textContent='โหมด 2D: เงาภูมิประเทศจากข้อมูลความสูง · พื้นที่พืชพรรณแสดงสีเขียวตามแผนที่ฐาน';
+  if(note&&!note.textContent.includes('ไม่สำเร็จ'))note.textContent='โหมด 2D: แสดงเงาภูมิประเทศจากข้อมูลความสูง';
  }
  return true;
 }
