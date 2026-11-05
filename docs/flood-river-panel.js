@@ -376,12 +376,12 @@ function apply(){
  const root=document.getElementById('rpRankingsAfterWarning');
  if(!root)return;
  const set=(el,values)=>{if(!el)return;for(const [name,value] of Object.entries(values))if(el.style.getPropertyValue(name)!==value||el.style.getPropertyPriority(name)!=='important')el.style.setProperty(name,value,'important')};
- set(root,{'display':'grid','grid-template-columns':'minmax(0,1fr)','gap':'12px','width':'100%','min-width':'0','align-items':'stretch'});
- root.querySelectorAll('.rp-new-section').forEach(section=>set(section,{'display':'block','width':'100%','min-width':'0','height':'auto','padding':'14px','background':'#ffffff','border':'1px solid #ffffff','border-radius':'14px','box-shadow':'none'}));
+ set(root,{'display':'grid','grid-template-columns':'minmax(0,1fr)','gap':'8px','width':'100%','min-width':'0','align-items':'stretch'});
+ root.querySelectorAll('.rp-new-section').forEach(section=>set(section,{'display':'block','width':'100%','min-width':'0','height':'auto','padding':'10px 12px','background':'#ffffff','border':'0','border-radius':'12px','box-shadow':'inset 0 1px 0 #dceaf7'}));
  for(const id of ['rpDamRanks','rpFlowRanks']){
   const host=document.getElementById(id);
   if(!host)continue;
-  set(host,{'display':'grid','grid-template-columns':'minmax(0,1fr)','gap':'8px','width':'100%','min-width':'0','padding':'0','background':'transparent'});
+  set(host,{'display':'grid','grid-template-columns':'minmax(0,1fr)','gap':'3px','width':'100%','min-width':'0','padding':'0','background':'transparent'});
   host.querySelectorAll('.rp-rank-card').forEach(card=>{
    if(card.classList.contains('ieat-rank-bar-row'))return;
    set(card,{'display':'grid','grid-template-columns':'32px minmax(0,1fr) minmax(76px,auto)','grid-template-rows':'auto','gap':'10px','align-items':'center','width':'100%','min-width':'0','min-height':'64px','height':'auto','margin':'0','padding':'10px 12px','border':'1px solid #ffffff','border-radius':'10px','background':'#ffffff','box-shadow':'none','text-align':'left','overflow':'visible'});
