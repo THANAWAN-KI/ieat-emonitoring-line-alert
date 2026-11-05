@@ -347,15 +347,17 @@
 }
 </style>
 <style>
-html.story-dashboard body #ioEstatePanel{background:#fffdf7!important;color:#223132!important;border:1px solid #7a7468!important;border-radius:0!important;box-shadow:4px 5px 0 #26363926!important;font-family:Kanit,Sarabun,sans-serif}
+@layer floodDashboard {
+html.story-dashboard body #ioEstatePanel{background:#fffdf7!important;color:#223132!important;border:1px solid #223132!important;border-radius:0!important;box-shadow:4px 5px 0 #26363926!important;font-family:Kanit,Sarabun,sans-serif}
 html.story-dashboard #ioEstatePanel .io-picker-head{border-bottom:2px solid #efb14d;padding-bottom:8px}
-html.story-dashboard #ioEstatePanel :is(input,button){border-radius:0!important;font-family:inherit}
+html.story-dashboard #ioEstatePanel :is(input,button){border-radius:0!important;font-family:inherit!important}
 html.story-dashboard #ioEstatePanel #ioEstatePanelSearch{background:#fff!important;border:1px solid #8d8678!important;color:#223132!important}
-html.story-dashboard #ioEstatePanel [data-picker-estate]{background:#f8f5ed!important;color:#223132!important;border:1px solid #ded6c8!important;display:flex;justify-content:space-between;text-align:left}
+html.story-dashboard #ioEstatePanel [data-picker-estate]{background:#f5f2eb!important;color:#223132!important;border:1px solid #ded6c8!important;display:flex;justify-content:space-between;text-align:left}
 html.story-dashboard #ioEstatePanel [data-picker-estate][aria-pressed=true]{background:#ffedc4!important;border-color:#9b6619!important;color:#4b330e!important}
-html.story-dashboard #ioEstatePanel #ioEstatePickerApply{background:#efb14d!important;border:1px solid #806024!important;color:#2b230e!important}
-html.story-dashboard #ioEstatePanel :is(#ioEstatePickerReset,#ioEstatePickerClose){background:#edf6f7!important;border:1px solid #a3bec4!important;color:#234e60!important}
+html.story-dashboard #ioEstatePanel #ioEstatePickerApply{background:#ffbd2c!important;border:1px solid #223132!important;color:#2b230e!important}
+html.story-dashboard #ioEstatePanel :is(#ioEstatePickerReset,#ioEstatePickerClose){background:#e5f4f7!important;border:1px solid #8eb8c2!important;color:#234e60!important}
 html.story-dashboard #ioEstatePanel :is(input,button):focus-visible{outline:2px solid #24688a;outline-offset:2px}
+}
 </style></head>
 <body>
 
