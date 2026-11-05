@@ -22,7 +22,7 @@
  report:lineIcon('<path d="M4 21V4m0 17h17M8 17v-5h3v5m3 0V7h3v10m3 0v-7h2v7"/><circle cx="10" cy="6" r="2"/>'),
  settings:lineIcon('<path d="m12 2 9 5v10l-9 5-9-5V7Z M3 7l9 5 9-5m-9 5v10"/>')
  });
- let active='overview',overlay,buttons={},alertRows=[],scope='selected',kind='all',lastContent='';
+ let active='overview',overlay,buttons={},alertRows=[],kind='all',lastContent='';
  const map=()=>{try{return $('estateFocusMap')?.contentWindow?.IEATPreparednessMap?.()}catch(_){return null}};
  const mapDoc=()=>{try{return $('estateFocusMap')?.contentDocument}catch(_){return null}};
  const pointKey=r=>[r.kind,r.name,Number(r.lat),Number(r.lng)].join('|');
@@ -38,14 +38,31 @@
   document.querySelectorAll('[data-structure-section]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.structureSection===section)));
   if(custom){lastContent='';render();overlay.scrollTop=0;}
  }
+
+ function scopedAlertItems(snap){
+  const shared=window.IEAT_FLOOD_PROVINCE_SCOPE;
+  if(!shared?.active)return snap.items||[];
+  const estate=shared.estate;if(!estate)return [];
+  const lat=Number(estate.lat),lon=Number(estate.lon??estate.lng),radius=Number(shared.radiusKm)||30;
+  return (snap.items||[]).filter(r=>{
+   if(r.lat==null||(r.lng??r.lon)==null)return false;
+   const a=Number(r.lat),b=Number(r.lng??r.lon);if(![lat,lon,a,b].every(Number.isFinite))return false;
+   const rad=Math.PI/180,dy=(a-lat)*rad,dx=(b-lon)*rad,h=Math.sin(dy/2)**2+Math.cos(lat*rad)*Math.cos(a*rad)*Math.sin(dx/2)**2;
+   return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=radius;
+  });
+ }
+ const criticalAlert=r=>/^(#f00a36|#bf033b|#b30707)$/i.test(r.state?.hex||'')||/ล้น|วิกฤต|เกินความจุ/.test(r.state?.label||'')&&!/น้อย/.test(r.state?.label||'');
  function alertView(snap){
-  const api=map(),points=api?.points?.()||[],keys=new Set(points.map(pointKey));
-  const scoped=scope==='all'?snap.items:snap.items.filter(r=>keys.has(pointKey(r)));
-  const rows=scoped.filter(r=>kind==='all'||r.kind===kind).sort((a,b)=>(b.state?.hex?.toLowerCase()==='#bf033b')-(a.state?.hex?.toLowerCase()==='#bf033b'));
+  const scoped=scopedAlertItems(snap);
+  const rows=scoped.filter(r=>kind==='all'||r.kind===kind).sort((a,b)=>Number(criticalAlert(b))-Number(criticalAlert(a)));
   alertRows=rows;
-  const red=scoped.filter(r=>r.state?.hex?.toLowerCase()==='#bf033b').length;
+  const red=scoped.filter(criticalAlert).length;
+  const number=value=>snap.loaded?String(value):'–';
   const select=(value,label)=>'<option value="'+value+'"'+(kind===value?' selected':'')+'>'+label+'</option>';
-  return '<h1>แจ้งเตือนน้ำท่วม</h1><p class="section-subtitle">'+esc(scope==='all'?'ทุกพื้นที่ในชุดข้อมูล':selected())+' · จากข้อมูลที่โหลดได้</p><div class="section-kpis"><div><b>'+red+'</b><span>วิกฤต / ถึงตลิ่ง</span></div><div><b>'+(scoped.length-red)+'</b><span>เฝ้าระวัง</span></div><div><b>'+scoped.length+'</b><span>รายการทั้งหมด</span></div></div><div class="section-filters"><label>พื้นที่<select data-alert-scope><option value="selected"'+(scope==='selected'?' selected':'')+'>พื้นที่ที่เลือกบนแผนที่</option><option value="all"'+(scope==='all'?' selected':'')+'>ทุกพื้นที่</option></select></label><label>ประเภท<select data-alert-kind>'+select('all','ทุกประเภท')+select('water','สถานีระดับน้ำ')+select('canal','คลอง')+select('rain','ฝนหนัก')+select('dam','เขื่อน / อ่างเก็บน้ำ')+'</select></label></div><p class="section-note">สถานีเกินเกณฑ์ใกล้นิคมฯ ไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ · ไม่นับข้อมูลเก่าหรือเวลาไม่ครบเป็นการเตือนปัจจุบัน</p><div class="section-alert-list">'+(!snap.loaded?'<p role="status">กำลังโหลดข้อมูลแจ้งเตือน…</p>':!rows.length?'<p class="section-empty">ไม่พบรายการถึงเกณฑ์ในข้อมูลล่าสุดที่โหลดได้สำหรับพื้นที่และประเภทนี้</p>':rows.map((r,i)=>'<button type="button" data-alert-index="'+i+'" class="section-alert-row '+(r.state?.hex?.toLowerCase()==='#bf033b'?'is-critical':'')+'"><span class="section-status">'+esc(r.kindLabel)+' · '+esc(r.state?.label)+'</span><strong>'+esc(r.name)+'</strong><span>'+esc(r.province||'')+'</span><small>'+esc(r.state?.criterion||'')+'</small><small>ตรวจวัด '+esc(when(r.measured_at))+'</small><span class="section-map-link">ดูตำแหน่งและค่าตรวจวัดบนแผนที่ ↗</span></button>').join(''))+'</div>';
+  return '<h1>แจ้งเตือนน้ำท่วม</h1><p class="section-subtitle">'+esc(selected())+'</p><div class="io-mini-stats alert-summary" aria-label="สรุปแจ้งเตือน"><div role="group"><b style="color:#f00a36">'+number(red)+'</b><span>วิกฤต / ถึงตลิ่ง</span></div><div role="group"><b style="color:#ff6908">'+number(scoped.length-red)+'</b><span>เฝ้าระวัง</span></div><div role="group"><b>'+number(scoped.length)+'</b><span>รายการทั้งหมด</span></div></div><div class="section-filters alert-type-filter"><label>ประเภทข้อมูล<select data-alert-kind>'+select('all','ทุกประเภท')+select('water','สถานีระดับน้ำ')+select('canal','คลอง')+select('rain','ฝนหนัก')+select('dam','เขื่อน / อ่างเก็บน้ำ')+'</select></label></div><div class="section-alert-list">'+(!snap.loaded?'<p role="status">กำลังโหลดข้อมูลแจ้งเตือน…</p>':!rows.length?'<p class="section-empty">ไม่พบรายการถึงเกณฑ์ในข้อมูลล่าสุดสำหรับพื้นที่และประเภทนี้</p>':rows.map((r,i)=>{
+   const color=criticalAlert(r)?'#f00a36':'#ff6908';
+   return '<button type="button" data-alert-index="'+i+'" class="section-alert-row" style="--alert-color:'+color+'"><span class="section-status">'+esc(r.kindLabel)+' · '+esc(r.state?.label)+'</span><strong>'+esc(r.name)+'</strong><span>'+esc(r.province||'')+'</span><small>'+esc(r.state?.criterion||'')+'</small><small>ตรวจวัด '+esc(when(r.measured_at))+'</small><span class="section-map-link">ดูตำแหน่งและค่าตรวจวัด ↗</span></button>';
+  }).join(''))+'</div>';
  }
  function layerView(){
   const doc=mapDoc(),api=map(),points=api?.points?.()||[],inputs=[...(doc?.querySelectorAll('input[data-layer]')||[])];
@@ -56,8 +73,6 @@
  /* Enrich the established dashboard in place; keep the live map and estate scope. */
  let reportFrom='',reportTo='',reportNotes='',reportMapImage='',reportMapError='',snapshotId='',cameraPlaying=false,cameraInitialized=false;
  const estateNotes=new Map();
- let samples=true;try{samples=sessionStorage.getItem('ieat-exhibition-samples')!=='off';}catch(_){}
- const demoTag='<span class="ex-demo-tag">ข้อมูลจำลองเพื่อการสาธิต</span>';
  const table=(head,rows)=>'<div class="ex-report-table"><table><thead><tr>'+head.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(x=>'<td>'+esc(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
  const plain=(selector,fallback='ยังไม่มีข้อมูลในชุดที่โหลดได้')=>{
  const element=document.querySelector(selector);if(!element)return fallback;
@@ -98,21 +113,7 @@
    '<section class="ref-chart-card"><h2>'+svg('<path d="M5 3h10l4 4v14H5Zm10 0v5h4M8 12h8M8 16h8" fill="none" stroke="currentColor" stroke-width="1.5"/>')+'สรุปและจัดทำรายงาน</h2><p>รวมค่าระดับน้ำ ฝน คลอง เขื่อน อ่างเก็บน้ำ แผนรับมือ บันทึกการดำเนินงาน และภาพแผนที่ไว้ในรายงานเดียว</p><button type="button" class="section-action" data-report-tab="document">ดูรายงานฉบับพิมพ์ A4 →</button><p class="ref-chart-caption">กราฟใช้ข้อมูลจากระบบ · ตัวอย่างสาธิตในส่วนอื่นยังมีป้ายกำกับแยกชัดเจน</p></section>';
  }
 
- function sampleAlert(){return '<section class="section-settings-card ex-demo-card">'+demoTag+'<h2>ตัวอย่างขั้นตอนเมื่อได้รับแจ้งเตือน</h2><p>สถานีสาธิต DEMO-W01 · ระดับน้ำห่างตลิ่ง 0.35 ม. · แนวโน้มเพิ่มขึ้น 0.08 ม./ชั่วโมง</p><ol><li>ตรวจเวลาและยืนยันค่าจากสถานีต้นทาง</li><li>ตรวจจุดต่ำ ประตูน้ำ และความพร้อมเครื่องสูบ</li><li>ประสานหัวหน้าเวรและบันทึกผลการตรวจสอบ</li></ol><small>สถานการณ์ตัวอย่าง ไม่รวมในยอดแจ้งเตือนจริง และไม่ส่งการแจ้งเตือนไปภายนอก</small></section>';}
  function supplement(){
-  const pane=$('preparednessPane');
-  if(pane){
-   const original=pane.cloneNode(true);original.querySelector('#ieatPrepSupplement')?.remove();
-   const text=original.textContent||'';
-   let extra=$('ieatPrepSupplement');
-   const content=samples?'<header><h3>แนวทางปฏิบัติและความพร้อมเพิ่มเติม</h3><p>พื้นที่ที่เลือก: '+esc(selected())+'</p>'+demoTag+'</header>'+
-    (!/เกณฑ์เริ่ม|เกณฑ์สั่ง|ขั้นตอนตามระดับ/.test(text)?'<section><h4>เกณฑ์และขั้นตอนตัวอย่าง</h4>'+table(['ระดับ','เงื่อนไขตัวอย่าง','การดำเนินการ'],[['ติดตาม','ระดับน้ำยังห่างตลิ่งมากกว่า 0.50 ม.','ตรวจตามรอบและตรวจทางระบายน้ำ'],['เฝ้าระวัง','ห่างตลิ่งไม่เกิน 0.50 ม.','ตรวจทุก 30 นาที เตรียมเครื่องสูบและประตูน้ำ'],['เร่งรับมือ','ระดับน้ำถึงตลิ่ง','ประสานศูนย์ ตรวจทุก 15 นาที เตรียมแนวกั้นและเส้นทางสำรอง']])+'<small>เกณฑ์สาธิต ไม่ใช่เกณฑ์อนุมัติของนิคมฯ ที่เลือก</small></section>':'')+
-    (!/กำลังสูบ.*(?:ลบ|ลูกบาศก์)|ลบ.*ชั่วโมง/.test(text)?'<section><h4>ตัวอย่างการแสดงทรัพยากร</h4>'+table(['รายการ','ข้อมูลสาธิต'],[['เครื่องสูบน้ำ','พร้อมใช้ 3 จาก 4 เครื่อง'],['กำลังสูบติดตั้ง','12,000 ลบ.ม./ชั่วโมง'],['พื้นที่หน่วงน้ำว่าง','25,000 ลบ.ม.'],['อุปกรณ์สนับสนุน','เครื่องสูบเคลื่อนที่ 1 ชุด / แนวกั้นน้ำชั่วคราว 200 ม.']])+'</section>':'')+
-    '<section><h4>ผู้รับผิดชอบและการประสานงานตัวอย่าง</h4>'+table(['บทบาท','ภารกิจ'],[['หัวหน้าเวร','ยืนยันข้อมูลและกำหนดรอบติดตาม'],['ทีมระบบระบายน้ำ','ตรวจเครื่องสูบ ประตูน้ำ และคลอง'],['ทีมประสานผู้ประกอบการ','แจ้งเตรียมอุปกรณ์และสำรวจผู้ต้องการความช่วยเหลือ'],['ทีมความปลอดภัย','ตรวจเส้นทางสำรองและจุดรวมพลตามแผนที่รับรอง']])+'<small>ใช้ชื่อบทบาทสาธิต ไม่ใช่รายชื่อผู้รับผิดชอบที่ยืนยันแล้ว</small></section><details><summary>รายการตรวจสอบก่อนใช้งานจริง</summary><p>แผนฉบับอนุมัติ · ระดับสำรวจ · กำลังสูบและผลทดสอบ · ผู้ประสานงาน · เส้นทางปลอดภัย · วันที่ทบทวน 18 พ.ย. 2569</p></details>':'';
-   if(content){if(!extra){extra=document.createElement('section');extra.id='ieatPrepSupplement';pane.append(extra);}if(extra.innerHTML!==content)extra.innerHTML=content;}else extra?.remove();
-  }
-  const canal=document.querySelector('#estateFocusDashboard .ef-canal-panel');
-  if(canal){const hasLive=!!canal.querySelector('.ef-canal-card'),existing=$('ieatCanalSample');if(samples&&!hasLive){if(!existing){const el=document.createElement('section');el.id='ieatCanalSample';el.className='ex-demo-card';el.innerHTML=demoTag+'<div class="ex-canal-sample"><svg viewBox="0 0 70 150" aria-hidden="true"><rect x="22" y="10" width="24" height="125" rx="6" fill="#f5eef9" stroke="#52057f"/><path d="M24 95h20v35H24Z" fill="#79aeb8"/><path d="M15 43h40" stroke="#bf033b" stroke-dasharray="3 2"/><path d="M45 30h10m-10 30h10m-10 30h10m-10 30h10" stroke="#b7a4c1"/></svg><div><b>คลองสาธิต DEMO-C01</b><strong>0.72 ม.</strong><span>จากหมุดอ้างอิงสาธิต</span><small>ต่ำกว่าเกณฑ์ตัวอย่าง 0.48 ม. · คงที่</small></div></div><small>ค่าตัวอย่างสำหรับแสดงรูปแบบข้อมูลคลอง ไม่ผูกกับตำแหน่งจริงบนแผนที่</small>';canal.append(el);}}else existing?.remove();}
   const mapColumn=document.querySelector('#estateFocusDashboard .ef-map-column');
   if(mapColumn&&!$('ieatDashboardCamera')){
    const toolbar=document.createElement('div');toolbar.id='ieatDashboardCamera';toolbar.setAttribute('aria-label','ควบคุมแผนที่ 3 มิติ');toolbar.innerHTML='<span class="ex-camera-label">มุมมอง 3D</span><button type="button" data-live-camera="orbit" aria-pressed="false">หมุน 360°</button><button type="button" data-live-camera="left" aria-label="หมุนซ้าย 45 องศา">↶</button><button type="button" data-live-camera="right" aria-label="หมุนขวา 45 องศา">↷</button><button type="button" data-live-camera="reset">มุมเริ่มต้น</button>';
@@ -128,14 +129,14 @@
  });
  document.addEventListener('ieat-flood-estate-scope',()=>{cameraInitialized=false;lastContent='';setTimeout(supplement,500);});
 
- function settingsView(){return '<h1>ตั้งค่า</h1><p class="section-subtitle">มุมมองและการใช้งานแดชบอร์ด</p><section class="section-settings-card"><h2>พื้นที่ปัจจุบัน</h2><p>'+esc(selected())+'</p><p class="section-note">'+esc($('expoBoothSubtitle')?.textContent||'กำลังโหลดเวลาอัปเดต')+'</p></section><section class="section-settings-card"><h2>มุมมองแผนที่</h2><button type="button" class="section-action" data-section-action="layers">เปิด–ปิดชั้นข้อมูลบนแผนที่</button><label><input type="checkbox" data-exhibition-samples '+(samples?'checked':'')+'> แสดงข้อมูลจำลองประกอบการสาธิต</label><button type="button" class="section-action" data-section-action="fullscreen">ขยายแผนที่เต็มหน้าจอ</button><button type="button" class="section-action" data-section-action="overview">กลับหน้าภาพรวม</button></section><section class="section-settings-card"><h2>รายงาน</h2><p>ใช้ข้อมูลและตำแหน่งจากแดชบอร์ดประกอบการจัดทำรายงาน</p><a class="section-action" href="flood-report-editor.html">จัดทำรายงานน้ำท่วม ↗</a></section>';}
+ function settingsView(){return '<h1>ตั้งค่า</h1><p class="section-subtitle">มุมมองและการใช้งานแดชบอร์ด</p><section class="section-settings-card"><h2>พื้นที่ปัจจุบัน</h2><p>'+esc(selected())+'</p><p class="section-note">'+esc($('expoBoothSubtitle')?.textContent||'กำลังโหลดเวลาอัปเดต')+'</p></section><section class="section-settings-card"><h2>มุมมองแผนที่</h2><button type="button" class="section-action" data-section-action="layers">เปิด–ปิดชั้นข้อมูลบนแผนที่</button><button type="button" class="section-action" data-section-action="fullscreen">ขยายแผนที่เต็มหน้าจอ</button><button type="button" class="section-action" data-section-action="overview">กลับหน้าภาพรวม</button></section><section class="section-settings-card"><h2>รายงาน</h2><p>ใช้ข้อมูลและตำแหน่งจากแดชบอร์ดประกอบการจัดทำรายงาน</p><a class="section-action" href="flood-report-editor.html">จัดทำรายงานน้ำท่วม ↗</a></section>';}
  function render(){
-  const snap=alerts(),pointKeys=new Set((map()?.points?.()||[]).map(pointKey)),count=snap.loaded?(selected()!=='ทุกพื้นที่'?snap.items.filter(r=>pointKeys.has(pointKey(r))).length:snap.items.length):0,button=buttons.alerts;
+  const snap=alerts(),count=snap.loaded?scopedAlertItems(snap).length:0,button=buttons.alerts;
   if(button){button.classList.toggle('has-current-alert',count>0);const badge=button.querySelector('.section-alert-count');badge.hidden=!count;const value=count>99?'99+':String(count);if(badge.textContent!==value)badge.textContent=value;const label='แจ้งเตือนน้ำท่วม'+(snap.loaded?' '+count+' รายการ':' กำลังโหลดข้อมูล');if(button.getAttribute('aria-label')!==label)button.setAttribute('aria-label',label);}
   if(overlay.hidden)return;
   if(overlay.contains(document.activeElement)&&document.activeElement.matches('input,textarea,select'))return;
   const picker='<div class="ex-shared-estate"><strong>'+esc(selected())+'</strong><button type="button" class="section-action" data-section-action="choose-estate">เปลี่ยนนิคมอุตสาหกรรม</button></div>';
-  const html=picker+(active==='alerts'?alertView(snap)+(samples?sampleAlert():''):active==='report'?reportView():settingsView());
+  const html=(active==='report'?picker:'')+(active==='alerts'?alertView(snap):active==='report'?reportView():settingsView());
   if(html!==lastContent){const top=overlay.scrollTop;overlay.innerHTML=html;overlay.scrollTop=top;lastContent=html;}
  }
  function mount(){
@@ -145,7 +146,7 @@
   const keys=Object.keys(names);
   [...nav.children].slice(0,5).forEach((button,i)=>{const key=keys[i];button.removeAttribute('data-reference-mode');button.removeAttribute('aria-expanded');button.setAttribute('aria-controls',['overview','preparedness'].includes(key)?'floodInformationPane':'floodSectionPanel');button.dataset.referenceIcon=key;button.dataset.section=key;button.setAttribute('aria-label',names[key]);button.title=names[key];button.innerHTML=icons[key]+(key==='alerts'?'<span class="section-alert-count" hidden></span>':'');buttons[key]=button;});
   nav.addEventListener('click',event=>{const button=event.target.closest('[data-section]');if(!button)return;event.preventDefault();event.stopImmediatePropagation();show(button.dataset.section);},{capture:true});
-  overlay.addEventListener('change',event=>{const e=event.target;if(e.matches('[data-section-estate]')){estateNotes.set(selected(),reportNotes);const picker=$('ioEstatePicker');if(picker){picker.value=e.value;picker.dispatchEvent(new Event('change',{bubbles:true}));reportNotes=estateNotes.get(selected())||'';reportMapImage='';snapshotId='report-'+Date.now();$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-snapshot',id:snapshotId},location.origin);}}else if(e.matches('[data-report-from]'))reportFrom=e.value;else if(e.matches('[data-report-to]'))reportTo=e.value;else if(e.matches('[data-exhibition-samples]')){samples=e.checked;try{sessionStorage.setItem('ieat-exhibition-samples',samples?'on':'off')}catch(_){}supplement();}else if(e.matches('[data-alert-scope]'))scope=e.value;else if(e.matches('[data-alert-kind]'))kind=e.value;else if(e.matches('[data-section-layer]')){const source=[...(mapDoc()?.querySelectorAll('input[data-layer]')||[])].find(x=>x.dataset.layer===e.dataset.sectionLayer);if(source&&source.checked!==e.checked)source.click();}lastContent='';render();});
+  overlay.addEventListener('change',event=>{const e=event.target;if(e.matches('[data-section-estate]')){estateNotes.set(selected(),reportNotes);const picker=$('ioEstatePicker');if(picker){picker.value=e.value;picker.dispatchEvent(new Event('change',{bubbles:true}));reportNotes=estateNotes.get(selected())||'';reportMapImage='';snapshotId='report-'+Date.now();$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-snapshot',id:snapshotId},location.origin);}}else if(e.matches('[data-report-from]'))reportFrom=e.value;else if(e.matches('[data-report-to]'))reportTo=e.value;else if(e.matches('[data-alert-kind]'))kind=e.value;else if(e.matches('[data-section-layer]')){const source=[...(mapDoc()?.querySelectorAll('input[data-layer]')||[])].find(x=>x.dataset.layer===e.dataset.sectionLayer);if(source&&source.checked!==e.checked)source.click();}lastContent='';render();});
   overlay.addEventListener('input',event=>{if(event.target.matches('[data-report-notes]')){reportNotes=event.target.value;estateNotes.set(selected(),reportNotes);}});
   overlay.addEventListener('focusout',event=>{if(event.target.matches('[data-report-notes]')){lastContent='';render();}});
   overlay.addEventListener('click',event=>{const row=event.target.closest('[data-alert-index]');if(row){const r=alertRows[Number(row.dataset.alertIndex)],api=map();if(r&&api)api.showAt(r.lng,r.lat,'<h3>'+esc(r.name)+'</h3>'+api.pointContent(r,r.kind),true);return;}const reportChoice=event.target.closest('[data-report-tab]')?.dataset.reportTab;if(reportChoice){reportTab=reportChoice;lastContent='';render();overlay.scrollTop=0;return;}const page=event.target.closest('[data-chart-page]')?.dataset.chartPage;if(page){chartPage=page==='first'?0:page==='last'?1:chartPage+(page==='next'?1:-1);lastContent='';render();return;}const pointKind=event.target.closest('[data-report-kind]')?.dataset.reportKind;if(pointKind){const api=map(),p=api?.points?.().find(p=>p.kind===pointKind);if(p&&api)api.showAt(p.lng,p.lat,'<h3>'+esc(p.name)+'</h3>'+api.pointContent(p,p.kind),true);return;}const action=event.target.closest('[data-section-action]')?.dataset.sectionAction;if(action==='choose-estate'){show('overview');$('ioEstatePicker')?.click();}if(action==='print'){reportTab='document';lastContent='';render();window.print();}if(action==='layers')$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-reference-map-tools',action:'layers'},location.origin);if(action==='fullscreen')$('efMapFullscreen')?.click();if(action==='overview')show('overview');if(action==='legend'){const legend=mapDoc()?.getElementById('mapLegend');if(legend){legend.open=true;legend.scrollIntoView({block:'nearest'});}}});
