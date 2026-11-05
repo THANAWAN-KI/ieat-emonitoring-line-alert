@@ -129,3 +129,13 @@ html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboa
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-canal-content small{font-size:14px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-canal-content strong{font-size:16px!important;font-weight:600!important}
 }
+
+/* Match dam and reservoir card padding to the other dashboard sections. */
+@layer floodReferenceStructure {
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection{padding:20px!important;gap:18px!important;box-sizing:border-box!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection>:is(.ef-related-dams,.ef-reservoir-panel){padding:20px!important;box-sizing:border-box!important;border-radius:20px!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection>.ef-panel>h2{padding:0!important;margin:0 0 14px!important;min-height:0!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection :is(.ef-dam-card,.ef-reservoir-row){box-sizing:border-box!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection :is(#ieatDamPager,#ieatReservoirPager){padding-top:12px!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection :is(.ef-related-dams,.ef-reservoir-panel)>details{margin-top:12px!important}
+}
