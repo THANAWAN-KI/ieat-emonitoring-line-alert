@@ -405,8 +405,8 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   color: var(--overview-blue) !important;
 }
 #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
-  min-height: 76px !important;
-  padding: 9px !important;
+  min-height: 108px !important;
+  padding: 11px 7px !important;
   border-radius: 12px !important;
 }
 #estateFocusDashboard #floodInformationPane .ef-kpi-copy {
@@ -561,11 +561,14 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
 
 @layer floodDashboard {
   #estateFocusDashboard #floodInformationPane .ef-kpi-copy { align-items:center !important; text-align:center; }
-  .ef-kpi-gauge { position:relative; display:grid; place-items:end center; width:76px; max-width:100%; aspect-ratio:76/41; }
+  .ef-kpi-gauge { position:relative; display:grid; place-items:end center; width:96px; max-width:100%; aspect-ratio:76/41; }
   .ef-kpi-gauge svg { position:absolute; inset:0; width:100%; height:100%; fill:none; stroke-width:5; }
-  .ef-kpi-track { stroke:#c5def2; }
-  .ef-kpi-fill { stroke:#2166a5; }
-  #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:23px !important; line-height:1.1 !important; }
+  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#865219; --kpi-track:#f4e4ce; }
+  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#2166a5; --kpi-track:#c5def2; }
+  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#13776e; --kpi-track:#cde9e4; }
+  .ef-kpi-track { stroke:var(--kpi-track,#c5def2); }
+  .ef-kpi-fill { stroke:var(--kpi-color,#2166a5); }
+  #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:26px !important; line-height:1.1 !important; color:var(--kpi-color,#2166a5) !important; }
   #estateFocusDashboard #floodInformationPane .ef-kpi-gauge.is-unavailable strong { font-size:11px !important; }
   .ef-kpi-gauge.is-unavailable .ef-kpi-fill { visibility:hidden; }
 }
