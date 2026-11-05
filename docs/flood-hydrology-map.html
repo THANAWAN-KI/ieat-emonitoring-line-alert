@@ -2433,7 +2433,15 @@ html body.story-map-mode .story-station-popup .maplibregl-popup-content{padding:
  html body.story-map-mode .maplibregl-popup.story-station-popup .maplibregl-popup-tip{display:none}
  html body.story-map-mode .story-station-popup .maplibregl-popup-content{max-height:34dvh}
 }
-</style></body></html>
+</style><style>
+@media(max-width:650px){
+ html body.story-map-mode #rightMapToolbar{right:6px!important;gap:4px!important;width:44px!important;max-height:calc(100dvh - 16px)!important}
+ html body.story-map-mode #rightMapToolbar button{width:44px!important;height:44px!important;min-height:44px!important;flex-basis:44px!important}
+ html body.story-map-mode #waterStationSearch{font-size:16px!important}
+ html body.story-map-mode .aerial-callouts span{max-width:135px;font-size:12px}
+}
+</style>
+</body></html>
 
 
 
