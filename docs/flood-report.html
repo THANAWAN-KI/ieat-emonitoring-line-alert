@@ -37,7 +37,7 @@
 <script defer src="flood-icons.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-water-status.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-rid-source.js?v=20261105-clean-source-1"></script>
-<script defer src="flood-estate-dashboard.js?v=20261105-story-north-up"></script>
+<script defer src="flood-estate-dashboard.js?v=20261105-story-square"></script>
 <script defer src="flood-river-panel.js?v=20261105-radar-palette"></script>
 <script defer src="flood-weather-overview.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-estate-diagrams.js?v=20261105-clean-source-1"></script>
@@ -126,6 +126,27 @@
   html.story-dashboard #floodSectionPanel :is(.water-report-sources b,.flood-alert-map) { color:var(--chapter-blue)!important; }
   html.story-dashboard #preparednessPane .ex-table thead th,
   html.story-dashboard #floodSectionPanel .ex-report-table thead th { background:#eef2ff!important; color:var(--chapter-ink)!important; }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel,#referenceMenuToggle),
+  html.story-dashboard #estateFocusDashboard #floodInformationPane,
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates,#referenceViewTabs,button,select,details,.rp-status-legend li,.rp-station-row,.ex-card),
+  html.story-dashboard #floodSectionPanel :is(button,select,.ref-report-segments,.flood-alert-item,.water-report-stats>div) {
+   border-radius:0!important;
+  }
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates),
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button {
+   background:#f3f3f3!important;border:1px solid #c5c5c5!important;color:#414141!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs {gap:5px!important;border:0!important}
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true],
+  html.story-dashboard body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+   background:#c5cbd7!important;color:#263956!important;border:1px solid #9ba7bb!important;box-shadow:none!important;
+  }
  }
 }
 </style>
