@@ -44,7 +44,7 @@
     visible.push(point);
     const button=document.createElement('button');
     button.type='button';
-    button.classList.add('infra-data-pin');
+    button.classList.add('infra-data-pin','infra-kind-'+f.properties.source_table);
     button.setAttribute('aria-label',pointName(f.properties));
     button.style.cssText='background:none;border:0;padding:0;cursor:pointer';
     button.innerHTML=window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32);
@@ -66,7 +66,7 @@
    groups.forEach(([key])=>vector.setLayoutProperty('infra-'+key,'visibility',enabled[key]?'visible':'none'));
   }else if(raster){
    if(leafletGroup)raster.removeLayer(leafletGroup);
-   leafletGroup=L.geoJSON({type:'FeatureCollection',features:selected.filter(f=>enabled[f.properties.source_table])},{style:f=>({color:groups.find(g=>g[0]===f.properties.source_table)[2],weight:4}),pointToLayer:(f,latlng)=>storySymbols&&window.IEAT_SQ?L.marker(latlng,{title:pointName(f.properties),icon:L.divIcon({className:'infra-data-pin',html:window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32),iconSize:[32,32]})}):L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:groups.find(g=>g[0]===f.properties.source_table)[2],fillOpacity:1}),onEachFeature:(f,l)=>l.bindPopup(content(f.properties),{maxWidth:340,className:'prep-point-popup'})}).addTo(raster);
+   leafletGroup=L.geoJSON({type:'FeatureCollection',features:selected.filter(f=>enabled[f.properties.source_table])},{style:f=>({color:groups.find(g=>g[0]===f.properties.source_table)[2],weight:4}),pointToLayer:(f,latlng)=>storySymbols&&window.IEAT_SQ?L.marker(latlng,{title:pointName(f.properties),icon:L.divIcon({className:'infra-data-pin infra-kind-'+f.properties.source_table,html:window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32),iconSize:[32,32]})}):L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:groups.find(g=>g[0]===f.properties.source_table)[2],fillOpacity:1}),onEachFeature:(f,l)=>l.bindPopup(content(f.properties),{maxWidth:340,className:'prep-point-popup'})}).addTo(raster);
   }
   document.dispatchEvent(new Event('ieat-infrastructure-rendered'));
  }
