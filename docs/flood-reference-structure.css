@@ -631,3 +631,50 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     -webkit-text-fill-color:currentColor !important;
   }
 }
+
+/* Radar-inspired interface colors. Status chips retain their own palette. */
+@layer floodDashboard {
+  :root {
+    --radar-surface:#edf8ff;
+    --radar-edge:#d5e9f7;
+    --radar-accent:#5654a7;
+    --radar-active:#5a56b0;
+    --radar-heading:linear-gradient(110deg,#e2f4ff,#eeebff);
+  }
+  body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+    color:var(--radar-active) !important;
+  }
+  body[data-flood-section=overview][data-water-category=stations] #referenceViewTabs {
+    background:var(--radar-heading) !important;
+  }
+  body[data-flood-section=overview][data-water-category=stations] #referenceViewTabs button[aria-selected=true] {
+    background:var(--radar-active) !important;
+  }
+  #floodInformationPane :is(.rp-stations-title,#floodDamsSection>h2,.ef-canal-panel>h2,#floodWaterDiagram>h3),
+  #estateFocusDashboard #preparednessPane .ex-card>h3,
+  #floodSectionPanel :is(.ref-chart-card>h2,.flood-alert-results>h2) {
+    background:var(--radar-heading) !important;
+    border-radius:8px !important;
+    box-shadow:inset 3px 0 #8380cf !important;
+    padding:6px 10px !important;
+  }
+  #floodSectionPanel :is(.flood-alert-filters select,.water-report-sources button,.ref-report-segments),
+  #estateFocusDashboard #preparednessPane .ex-prep-selector .ex-map-action {
+    background:var(--radar-surface) !important;
+    border-color:var(--radar-edge) !important;
+  }
+  #floodSectionPanel :is(.flood-alert-stats>div:first-child,.water-report-stats>div:first-child) {
+    background:var(--radar-heading);
+  }
+  #floodSectionPanel :is(.flood-alert-stats>div:first-child b,.water-report-stats>div:first-child b,.water-report-sources b,.flood-alert-map) {
+    color:var(--radar-accent) !important;
+  }
+  #floodSectionPanel .ref-report-segments button[aria-pressed=true] {
+    background:var(--radar-active) !important;
+    color:#fff !important;
+  }
+  #estateFocusDashboard #preparednessPane .ex-table thead th,
+  #floodSectionPanel .ex-report-table thead th {
+    background:var(--radar-surface) !important;
+  }
+}
