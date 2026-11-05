@@ -1263,7 +1263,7 @@ function vectorStart(){
  if(!cleanDashboard)vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
- vector.on('moveend',queueBoundaries);vector.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
+ vector.on('moveend',()=>{if(!aerialPlaying)queueBoundaries()});vector.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
@@ -1758,7 +1758,7 @@ function clearAerialLabels(){
  aerialLabelTick=-Infinity;
 }
 function drawAerialLabels(map, elapsed){
- if(elapsed-aerialLabelTick<110)return;
+ if(elapsed-aerialLabelTick<180)return;
  aerialLabelTick=elapsed;
  const host=map.getContainer(), bounds=host.getBoundingClientRect();
  if(!aerialLabels){
@@ -1837,12 +1837,14 @@ function drawAerialLabels(map, elapsed){
  layer.append(labels);
 }
 function stopAerialTour(){
+ const wasPlaying=aerialPlaying;
  clearAerialLabels();
  parent.postMessage({type:'dashboard-camera-status',mode:vector?'3d':'2d',playing:false},location.origin);
  if(new URLSearchParams(location.search).get('booth')==='1')parent.postMessage({type:'booth-camera-status',ready:true,mode:vector?'3d':'2d',playing:false},location.origin);
  aerialPlaying=false;cancelAnimationFrame(aerialFrame);clearTimeout(aerialTimer);
  if(aerialMap&&aerialLaunch)aerialMap.off('moveend',aerialLaunch);aerialLaunch=null;
  aerialMap?.stop?.();aerialMap=null;
+ if(wasPlaying&&ready)queueBoundaries();
  aerialButton.setAttribute('aria-pressed','false');aerialButton.innerHTML='<span aria-hidden="true">▷</span> ชมมุมสูง';
 }
 function startAerialTour(){
@@ -1863,7 +1865,7 @@ function startAerialTour(){
    if(now-last>=33){last=now;map.jumpTo({bearing:-25+(now-started)*.006});drawAerialLabels(map,now-started);}
    aerialFrame=requestAnimationFrame(frame);
   };
-  aerialLaunch=()=>{aerialLaunch=null;if(aerialPlaying)aerialFrame=requestAnimationFrame(frame)};
+  aerialLaunch=()=>{aerialLaunch=null;if(aerialPlaying){queueBoundaries();aerialFrame=requestAnimationFrame(frame)}};
   map.once('moveend',aerialLaunch);
   map.flyTo({center,zoom:Math.min(14.8,Math.max(14,map.getZoom())),pitch:62,bearing:-25,duration:2600,essential:false});
   aerialNotice('ชมมุมสูง 3 มิติ · กล้องจะหมุนช้า ๆ รอบพื้นที่ · กดหยุดหรือลากแผนที่เพื่อควบคุมเอง');
@@ -2101,7 +2103,7 @@ html body #mapStage .estate-pin>.ieat-estate-location{
 }
 /* The map library assigns the parent transform; do not override it. */
 </style>
-<script src="flood-infrastructure-20261104.js?v=20261105-all-story-icons"></script>
+<script src="flood-infrastructure-20261104.js?v=20261105-map-polish"></script>
 <script src="flood-map-alerts.js?v=20261105-cyan1"></script>
 <style>
 html body.story-map-mode:not(.imagery-basemap) .dashboard-base-tiles{filter:grayscale(1) contrast(.92)!important}
@@ -2229,7 +2231,12 @@ html body.story-map-mode #ieatInfrastructure>div{
  padding:10px;background:#fffdf7;border:1px solid #8b8172;box-shadow:3px 4px 0 #26363926;
 }
 </style>
-</body></html>
+<style>
+html body.story-map-mode #ieatInfrastructure .infra-control-name{
+ position:absolute!important;width:1px!important;height:1px!important;
+ overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;
+}
+</style></body></html>
 
 
 
