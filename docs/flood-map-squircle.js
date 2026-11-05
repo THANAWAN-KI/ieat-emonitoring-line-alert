@@ -30,13 +30,14 @@ const GL={
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const colour=(kind,hex)=>ink(hex)||ink(KIND[kind]||'#109dc0');
 const glyph=(kind,c,w)=>'<svg class="ieat-nm-glyph" width="'+w+'" height="'+w+'" viewBox="1.5 1.5 21 21" aria-hidden="true" focusable="false">'+(GL[kind]||GL.water)(c)+'</svg>';
+const storySymbols=new URLSearchParams(location.search).get('story')==='1';
 const isCrit=hex=>String(hex||'').trim().toLowerCase()==='#bf033b';
 function waterCircle(hex,marker){
  const c=/^#[0-9a-f]{6}$/i.test(String(hex))?hex:'#99d3f0';
  return '<span class="ieat-water-circle'+(marker?' is-map-point':'')+'" data-type="water" style="--water-dot:'+c+'" aria-hidden="true"></span>';
 }
 function tile(kind,hex,size){if(kind==='water')return waterCircle(hex,false);size=size||28;return '<span class="ieat-nm-btn" style="width:'+size+'px;height:'+size+'px">'+glyph(kind,colour(kind,hex),Math.round(size*.66))+'</span>'}
-function pin(kind,hex){if(kind==='camera')return '<span class="ieat-sq-pin ieat-cctv-pin" data-type="camera" aria-hidden="true"><span class="ieat-nm-btn">'+glyph('camera','#ffffff',27)+'</span><span class="ieat-nm-tail"></span></span>';if(kind==='water')return waterCircle(hex,true);const crit=isCrit(hex);
+function pin(kind,hex){if(kind==='camera'&&!storySymbols)return '<span class="ieat-sq-pin ieat-cctv-pin" data-type="camera" aria-hidden="true"><span class="ieat-nm-btn">'+glyph('camera','#ffffff',27)+'</span><span class="ieat-nm-tail"></span></span>';if(kind==='water'&&!storySymbols)return waterCircle(hex,true);const crit=isCrit(hex);
  return '<span class="ieat-sq-pin'+(crit?' is-critical':'')+'" data-type="'+esc(kind)+'" aria-hidden="true"><span class="ieat-nm-btn">'+glyph(kind,colour(kind,hex),27)+'</span><span class="ieat-nm-tail"></span></span>'}
 function cluster(kind,hex,count){const c=colour(kind,hex),n=Number(count)||0,txt=n>99?'99+':String(n);
  return '<span class="ieat-sq-cluster" data-type="'+esc(kind)+'"><span class="ieat-nm-btn" style="--nm-ring:'+c+'"><b style="color:'+c+';font-size:'+(txt.length>2?12:15)+'px">'+txt+'</b></span><span class="ieat-sq-cluster-kind">'+tile(kind,hex,20)+'</span></span>'}
