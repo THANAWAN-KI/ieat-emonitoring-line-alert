@@ -542,3 +542,19 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   .flood-alert-item[data-severity=critical] .flood-alert-title>span { background:#fce9ee; color:#af193d; }
   .flood-alert-map { color:#2166a5; font-size:12px; justify-self:end; }
 }
+
+@layer floodDashboard {
+  .water-report-heading h1, .water-report-heading p { margin:0 0 4px !important; }
+  .water-report-heading p { color:#526579; }
+  #floodSectionPanel .ref-report-segments { display:flex; gap:4px; padding:4px; background:#eef6fd; border-radius:10px; }
+  #floodSectionPanel .ref-report-segments button { flex:1; padding:6px; border:0; border-radius:7px; background:transparent; color:#2166a5; }
+  #floodSectionPanel .ref-report-segments button[aria-pressed=true] { background:#2166a5; color:#fff; }
+  .water-report-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+  .water-report-stats>div { padding:8px; border-radius:10px; background:#eef6fd; color:#163550; }
+  .water-report-stats b { display:block; font-size:24px; color:#2166a5; }
+  .water-report-stats>div:nth-child(2) b { color:#af193d; }
+  .water-report-stats>div:nth-child(3) b { color:#98500a; }
+  .water-report-sources { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+  .water-report-sources button { display:flex; align-items:center; justify-content:space-between; gap:4px; padding:7px; text-align:left; border:1px solid #e1edf7; border-radius:8px; background:#f8fbfe; color:#163550; }
+  .water-report-sources b { color:#2166a5; font-variant-numeric:tabular-nums; }
+}
