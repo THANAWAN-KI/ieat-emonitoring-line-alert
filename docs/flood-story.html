@@ -6,7 +6,7 @@
 <title>เฝ้าระวังน้ำในนิคมอุตสาหกรรม | IEAT e-Monitoring</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap">
 <style>
-:root{--paper:#fffdf8;--ink:#202b2b;--yellow:#ffbd28;--blue:#3157bd;--water:#82d2e5;--green:#16734d;--rule:#dbe5ec}
+:root{--paper:#fff;--ink:#202b2b;--yellow:#ffbd28;--blue:#315783;--water:#82d2e5;--green:#16734d;--rule:#dbe5ec}
 *{box-sizing:border-box}html{scroll-padding-top:78px}body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.75 Sarabun,Tahoma,sans-serif}h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.2}a{color:var(--blue)}:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
 .bar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px clamp(16px,5vw,76px);background:#fffdf8;border-bottom:1px solid var(--rule);font-size:14px}.bar a{font-weight:700;text-decoration:none}
 .cover{display:grid;place-items:center;min-height:calc(83svh - 55px);padding:48px 20px 30px;text-align:center}.cover-art{display:block;width:min(100%,880px);height:auto}.cover-copy{max-width:680px;margin:-8px auto 0}.cover h1{font-size:clamp(34px,6.6vw,86px);letter-spacing:-.035em}.cover p{margin-top:12px;font-size:clamp(17px,2vw,23px)}.cover a{display:inline-block;margin-top:22px;font-weight:700}
@@ -17,7 +17,7 @@
 .story-map{min-height:calc(100svh - 52px);background:#fff}
 .story-map iframe{display:block;width:100%;height:calc(100svh - 52px);min-height:560px;border:0;background:#fff}
 
-.bar{min-height:56px;background:#fff}
+.bar{min-height:56px;background:var(--paper)}
 .bar .story-brand{color:var(--ink);font-weight:600}
 .story-slide-nav{display:flex;align-items:center;gap:6px;white-space:nowrap}
 .story-slide-nav button{width:36px;height:34px;background:#fff;border:1px solid #ccc;color:var(--ink);cursor:pointer;font:600 19px/1 Sarabun,sans-serif}
@@ -34,7 +34,7 @@
 @keyframes cover-rain{0%,100%{transform:translateY(0);opacity:.85}50%{transform:translateY(6px);opacity:1}}
 @media(max-width:650px){.cover-copy{margin:0 auto}.bar .story-brand{font-size:12px}.story-slide-nav button{width:30px}}
 @media(prefers-reduced-motion:reduce){.cover-art,.cover-copy,.cover-rain{animation:none}}
-.cover-system{display:block;font-size:clamp(15px,1.5vw,21px);font-weight:700;color:#3157bd;margin:0 0 8px}
+.cover-system{display:block;font-size:clamp(15px,1.5vw,21px);font-weight:700;color:var(--blue);margin:0 0 8px}
 .cover .cover-next{display:inline-flex;width:auto;min-height:44px;gap:10px;padding:6px 15px;align-items:center;font-size:16px;font-weight:700}
 .cover .cover-next span{font-size:20px}
 .booth-map-guide{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding:9px clamp(16px,5vw,76px);background:#fff;border-block:1px solid var(--rule);font-size:14px}
@@ -88,7 +88,7 @@
 <section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>ดูป้ายปกติ เฝ้าระวัง หรือถึงตลิ่ง / ล้นตลิ่ง ผลคัดกรองจากสถานีใกล้นิคมฯ ใช้บอกว่าควรติดตามพื้นที่ใดต่อ การยืนยันสภาพในนิคมฯ ต้องอาศัยข้อมูลจากพื้นที่</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ ในบทสุดท้าย เปิดเมนูเตรียมรับมือเพื่อดูเกณฑ์เริ่มดำเนินการ มาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
 <section id="map" class="story-map" aria-label="บทสุดท้าย: ข้อมูลเฝ้าระวังน้ำและแผนที่นิคมฯ">
   <p class="booth-map-guide"><strong>ลองสำรวจแผนที่</strong><span>เลือกนิคมฯ ทางซ้าย แล้วกดตัวเลขสรุปเพื่อดูจุดบนแผนที่ กดหมุดเพื่อดูรายละเอียด</span></p>
-  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-kpi-number-colors" loading="lazy" allowfullscreen></iframe>
+  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-map-palette" loading="lazy" allowfullscreen></iframe>
 </section>
 </main>
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
