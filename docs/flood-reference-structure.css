@@ -558,3 +558,14 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   .water-report-sources button { display:flex; align-items:center; justify-content:space-between; gap:4px; padding:7px; text-align:left; border:1px solid #e1edf7; border-radius:8px; background:#f8fbfe; color:#163550; }
   .water-report-sources b { color:#2166a5; font-variant-numeric:tabular-nums; }
 }
+
+@layer floodDashboard {
+  #estateFocusDashboard #floodInformationPane .ef-kpi-copy { align-items:center !important; text-align:center; }
+  .ef-kpi-gauge { position:relative; display:grid; place-items:end center; width:76px; max-width:100%; aspect-ratio:76/41; }
+  .ef-kpi-gauge svg { position:absolute; inset:0; width:100%; height:100%; fill:none; stroke-width:5; }
+  .ef-kpi-track { stroke:#c5def2; }
+  .ef-kpi-fill { stroke:#2166a5; }
+  #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:23px !important; line-height:1.1 !important; }
+  #estateFocusDashboard #floodInformationPane .ef-kpi-gauge.is-unavailable strong { font-size:11px !important; }
+  .ef-kpi-gauge.is-unavailable .ef-kpi-fill { visibility:hidden; }
+}
