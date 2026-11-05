@@ -152,6 +152,8 @@ body[data-reference-panel=closed] :is(#floodInformationPane,#referenceViewTabs,#
 #referencePanelSurface,#referencePanelToggle,#floodModeBar,.ef-map-head,#ieatDashboardCamera,#efMapFullscreen,#efMapExitFullscreen,#ieatDataIntegrity,.ex-kpi-note,#waterStatusGuide,.reference-dam-art,.rp-heading-icon,[data-water-heading-icon],#referenceSettings,.rp-area-picker,.flood-row-caption,#ieatCanalSample{display:none!important}
 #estateFocusDashboard .ieat-page-hidden,body [hidden]{display:none!important}
 
+#floodSectionPanel>h1,#floodSectionPanel>.section-subtitle{display:block!important}
+body[data-flood-section=alerts] #floodSectionPanel,body[data-flood-section=settings] #floodSectionPanel{padding-top:24px!important}
 #floodSectionPanel .alert-summary{margin:0 0 16px!important;gap:8px!important}
 #floodSectionPanel .alert-summary>[role=group]{min-height:90px!important}
 #floodSectionPanel .alert-summary>[role=group]:first-child b{color:#f00a36!important}
