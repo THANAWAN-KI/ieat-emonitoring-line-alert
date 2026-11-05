@@ -84,9 +84,9 @@ pairStyle.textContent=Object.values(statusPairs).map(([fill,ink])=>{
  const card=root+' [style*="--rp-status-color:'+fill+'"]';
  const water=root+' [style*="--water-accent:'+fill+'"]';
  return card+' .rp-station-top em{background:'+fill+'!important;color:'+ink+'!important;border:1px solid '+ink+'!important}'+
- card+' .rp-station-content strong{color:'+ink+'!important}'+
+ card+' .rp-station-content strong{color:'+fill+'!important;-webkit-text-fill-color:'+fill+'!important}'+
  water+' .dam-inline-status,'+water+' .ef-canal-status,'+water+' .ef-reservoir-percent span{background:'+fill+'!important;color:'+ink+'!important;border:1px solid '+ink+'!important}'+
- water+' .ef-dam-value,'+water+' .ef-reservoir-percent,'+water+' .ef-canal-content strong{color:'+ink+'!important}';
+ water+' .ef-dam-value,'+water+' .ef-reservoir-percent{color:#000000!important}'+water+' .ef-canal-content strong{color:'+fill+'!important}';
 }).join('');
 document.head.appendChild(pairStyle);
 const criteriaStyle=document.createElement('style');criteriaStyle.textContent='.water-criteria-table{width:100%;border-collapse:collapse;font-size:11px;margin:7px 0}.water-criteria-table th,.water-criteria-table td{text-align:left;padding:5px 6px;vertical-align:top}.water-criteria-table th{background:#ffffff}.water-criteria-table i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}#waterStatusGuide>details,#mapStatusKey details{padding:7px 0;border-bottom:1px solid #ffffff}#waterStatusGuide>details>summary,#mapStatusKey details>summary{font-weight:600;cursor:pointer}#waterStatusGuide small,#mapStatusKey small{line-height:1.7}';document.head.appendChild(criteriaStyle);
