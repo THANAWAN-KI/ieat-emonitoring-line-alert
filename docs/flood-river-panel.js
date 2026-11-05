@@ -174,7 +174,7 @@
   const daily=note.startsWith('อัตราเฉลี่ยรายวัน'),kind=daily?'ค่าเฉลี่ยรายวัน':'ค่าตรวจวัดล่าสุด';
   const detail=daily?note.replace('อัตราเฉลี่ยรายวัน · ','').replace(/(\d{4})-(\d{2})-(\d{2})/,(_,y,m,d)=>Number(d)+'/'+Number(m)+'/'+String(Number(y)+543).slice(-2)):note;
   const name=String(r.name||'').replace(/^\s*\d+[.)]\s*/,''),number=Number(value),max=Number(maximum),percent=Number.isFinite(number)&&max>0?Math.max(0,Math.min(100,number/max*100)):0;
-  const tone=['#7437a8','#9254be','#ad7acc','#c5a0de','#dfc9ed'][position-1]||'#9dc5fa';
+  const tone='#2e9df7';
   return '<button type="button" class="rp-rank-card ieat-new-rank ieat-rank-bar-row" '+attribute+' aria-label="'+esc(name+' '+fmt(number,1)+' ลบ.ม./วินาที · '+kind+' · '+detail)+'" title="'+esc(kind+' · '+detail)+'"><span class="ieat-rank-copy"><b>'+esc(name)+'</b></span><span class="ieat-rank-bar-track" aria-hidden="true"><span class="ieat-rank-bar-fill" style="width:'+percent.toFixed(3)+'%;background:'+tone+'"></span></span><span class="ieat-rank-value">'+fmt(number,1)+'</span></button>';
  }
  function renderWaterExtras(){
