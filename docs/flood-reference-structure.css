@@ -563,9 +563,9 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   #estateFocusDashboard #floodInformationPane .ef-kpi-copy { align-items:center !important; text-align:center; }
   .ef-kpi-gauge { position:relative; display:grid; place-items:end center; width:96px; max-width:100%; aspect-ratio:76/41; }
   .ef-kpi-gauge svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; fill:none; }
-  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#6962be; --kpi-track:#e6e2f8; }
-  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#3268b4; --kpi-track:#dfecfc; }
-  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#217faf; --kpi-track:#ddf2fb; }
+  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#4721d6; --kpi-track:#ddd6fa; }
+  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#4749fd; --kpi-track:#d8d9ff; }
+  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#67b8f6; --kpi-track:#deefff; }
   .ef-kpi-track { stroke:var(--kpi-track,#c5def2); stroke-width:10; }
   .ef-kpi-fill { stroke:var(--kpi-color,#2166a5); stroke-width:6; }
   #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:26px !important; line-height:1.1 !important; color:var(--kpi-color,#2166a5) !important; }
@@ -635,17 +635,17 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
 /* Radar-inspired interface colors. Status chips retain their own palette. */
 @layer floodDashboard {
   :root {
-    --radar-surface:#edf8ff;
-    --radar-edge:#d5e9f7;
-    --radar-accent:#5654a7;
-    --radar-active:#5a56b0;
-    --radar-heading:linear-gradient(110deg,#e2f4ff,#eeebff);
+    --radar-surface:#67b8f6;
+    --radar-edge:#5badfd;
+    --radar-accent:#4721d6;
+    --radar-active:#4721d6;
+    --radar-heading:#4749fd;
   }
   body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
     color:var(--radar-active) !important;
   }
   body[data-flood-section=overview][data-water-category=stations] #referenceViewTabs {
-    background:var(--radar-heading) !important;
+    background:var(--radar-surface) !important;
   }
   body[data-flood-section=overview][data-water-category=stations] #referenceViewTabs button[aria-selected=true] {
     background:var(--radar-active) !important;
@@ -654,8 +654,9 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   #estateFocusDashboard #preparednessPane .ex-card>h3,
   #floodSectionPanel :is(.ref-chart-card>h2,.flood-alert-results>h2) {
     background:var(--radar-heading) !important;
+    color:#fff !important;
     border-radius:8px !important;
-    box-shadow:inset 3px 0 #8380cf !important;
+    box-shadow:inset 3px 0 var(--radar-active) !important;
     padding:6px 10px !important;
   }
   #floodSectionPanel :is(.flood-alert-filters select,.water-report-sources button,.ref-report-segments),
@@ -664,7 +665,7 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     border-color:var(--radar-edge) !important;
   }
   #floodSectionPanel :is(.flood-alert-stats>div:first-child,.water-report-stats>div:first-child) {
-    background:var(--radar-heading);
+    background:var(--radar-surface);
   }
   #floodSectionPanel :is(.flood-alert-stats>div:first-child b,.water-report-stats>div:first-child b,.water-report-sources b,.flood-alert-map) {
     color:var(--radar-accent) !important;
@@ -677,4 +678,9 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   #floodSectionPanel .ex-report-table thead th {
     background:var(--radar-surface) !important;
   }
+}
+
+@layer floodDashboard {
+ #estateFocusDashboard #floodInformationPane [data-ef-card="efRainWatch"] .ef-kpi-gauge strong { color:#1d5687 !important; }
+ #floodSectionPanel .ref-report-segments button:not([aria-pressed=true]) { color:#163550 !important; }
 }
