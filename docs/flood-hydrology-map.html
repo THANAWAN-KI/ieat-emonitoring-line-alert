@@ -1624,7 +1624,7 @@ let selectedEstateExtent=null;
 async function loadSelectedExtent(name){
  selectedEstateExtent=null;
  const label=String(name||'').replace(/^(สำนักงาน)?นิคมอุตสาหกรรม|^ท่าเรืออุตสาหกรรม/g,'').trim();if(!label)return;
- try{const q=new URLSearchParams({where:"นิคมอุตสาหกรรม LIKE '%"+label.replace(/'/g,"''")+"%'",returnExtentOnly:'true',outSR:'4326',f:'json'});const r=await fetch(boundaryService+'/query?'+q,{signal:AbortSignal.timeout(15000)});const d=await r.json();if(estateProvinceScope?.name!==name||!d.extent||![d.extent.xmin,d.extent.xmax,d.extent.ymin,d.extent.ymax].every(Number.isFinite))return;selectedEstateExtent=d.extent;const e=estateProvinceScope.estate;if(e)focusWithEstate(Number(e.lon??e.lng),Number(e.lat));}catch{}
+ try{const q=new URLSearchParams({where:"นิคมอุตสาหกรรม LIKE '%"+label.replace(/'/g,"''")+"%'",returnExtentOnly:'true',outSR:'4326',f:'json'});const r=await fetch(boundaryService+'/query?'+q,{signal:AbortSignal.timeout(15000)});const d=await r.json();if(estateProvinceScope?.name!==name||!d.extent||![d.extent.xmin,d.extent.xmax,d.extent.ymin,d.extent.ymax].every(Number.isFinite))return;selectedEstateExtent=d.extent;const e=estateProvinceScope.estate;if(e&&!aerialPlaying)focusWithEstate(Number(e.lon??e.lng),Number(e.lat));}catch{}
 }
 function distanceFromEstate(lon,lat){
  const e=estateProvinceScope?.estate;if(!e)return NaN;
@@ -1676,10 +1676,10 @@ window.addEventListener('message',async event=>{
  if(event.origin!==location.origin||event.source!==parent||!event.data)return;const d=event.data;
  if(d.type==='dashboard-camera'){
  if(!ready)return;
+ if(d.action==='orbit'){if(d.playing)startAerialTour();else stopAerialTour();return}
  if(vector){
   if(d.action==='init'){autoFit=false;vector.dragRotate.enable();vector.touchZoomRotate.enableRotation();if(!storyMap)vector.easeTo({pitch:55,duration:650});}
   if(d.action==='reset'){stopAerialTour();vector.easeTo({pitch:55,bearing:-15,duration:700});}
-  if(d.action==='orbit'){if(d.playing)startAerialTour();else stopAerialTour();}
   if(d.action==='left'||d.action==='right'){stopAerialTour();vector.easeTo({bearing:vector.getBearing()+(d.action==='left'?-45:45),pitch:55,duration:650});}
  } 
  parent.postMessage({type:'dashboard-camera-status',mode:vector?'3d':'2d',playing:aerialPlaying},location.origin);return;
