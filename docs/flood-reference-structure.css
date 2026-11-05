@@ -810,3 +810,75 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#51418f; --kpi-band:#8d83cf; --kpi-track:#eae5fb; }
   }
 }
+
+/* Presentation labels and readable controls on wide displays. */
+@layer floodDashboard {
+  @media screen and (min-width:1440px) and (min-aspect-ratio:16/10) {
+    :root { --ref-left:116px; --ref-rail:92px; }
+    #referenceRail,
+    #referenceRail .reference-rail-modes { width:var(--ref-rail) !important; }
+    body[data-flood-section] #referenceRail .reference-rail-modes>button {
+      flex-direction:column !important;
+      gap:3px;
+      width:80px !important;
+      height:66px !important;
+      padding:4px !important;
+      border-radius:12px !important;
+    }
+    body[data-flood-section] #referenceRail .reference-rail-modes>button::after {
+      font-size:13px;
+      font-weight:600;
+      line-height:1.2;
+    }
+    #referenceRail [data-section=overview]::after { content:"สถานการณ์น้ำ"; }
+    #referenceRail [data-section=alerts]::after { content:"แจ้งเตือน"; }
+    #referenceRail [data-section=preparedness]::after { content:"เตรียมรับมือ"; }
+    #referenceRail [data-section=report]::after { content:"รายงาน"; }
+    body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+      background:#eaf4ff !important;
+      color:#215f9d !important;
+    }
+    body:not([data-reference-panel=closed]) #referenceMenuToggle {
+      display:flex !important;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      width:68px !important;
+      height:55px !important;
+      border-radius:10px;
+      background:#edf5fd !important;
+      color:#215f9d !important;
+    }
+    body:not([data-reference-panel=closed]) #referenceMenuToggle::after {
+      content:"แผนที่เต็มจอ";
+      font-size:12px;
+      font-weight:600;
+    }
+    #estateFocusDashboard #floodInformationPane #approvedDashboardHeading {
+      flex-wrap:wrap !important;
+      gap:3px 12px !important;
+    }
+    #estateFocusDashboard #floodInformationPane #floodPageTitle {
+      flex-basis:100%;
+      font-size:25px !important;
+    }
+    #estateFocusDashboard #floodInformationPane #expoBoothSubtitle {
+      font-size:14px !important;
+      color:#526579 !important;
+    }
+    #floodSectionPanel :is(.flood-alert-title strong,.water-report-sources button),
+    #estateFocusDashboard #preparednessPane .ex-card>h3,
+    #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-stations-title {
+      font-size:17px !important;
+      font-weight:600 !important;
+    }
+    #floodSectionPanel :is(.flood-alert-stats,.water-report-stats) b {
+      font-size:30px !important;
+      font-variant-numeric:tabular-nums;
+    }
+    #floodSectionPanel :is(.ref-report-segments button,.flood-alert-filters select),
+    #estateFocusDashboard #ioEstatePicker {
+      min-height:44px !important;
+    }
+  }
+}
