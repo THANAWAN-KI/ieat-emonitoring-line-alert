@@ -645,7 +645,7 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     color:var(--radar-active) !important;
   }
   body[data-flood-section=overview][data-water-category=stations] #referenceViewTabs {
-    background:var(--radar-surface) !important;
+    background:#eef7ff !important;
   }
   body[data-flood-section=overview][data-water-category=stations] #referenceViewTabs button[aria-selected=true] {
     background:var(--radar-active) !important;
@@ -658,6 +658,10 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     border-radius:8px !important;
     box-shadow:inset 3px 0 var(--radar-active) !important;
     padding:6px 10px !important;
+  }
+  #floodInformationPane .rp-stations-title {
+    background:#eeedff !important;
+    color:#29266f !important;
   }
   #floodSectionPanel :is(.flood-alert-filters select,.water-report-sources button,.ref-report-segments),
   #estateFocusDashboard #preparednessPane .ex-prep-selector .ex-map-action {
