@@ -1693,13 +1693,13 @@ function drawWatchMap(){
  function pin(coords,label,html,color,station,kind){
   const sharedPin=station&&!!window.IEAT_SQ;
   const glyph=sharedPin?IEAT_SQ.pin(kind,color):kind==='rain'?watchRainSvg():measurementShape('water',color);
-  if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='cursor:pointer';if(station){el.className=sharedPin?'flood-data-pin has-sq':'watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker');el.innerHTML=glyph}else{el.className='estate-pin';el.style.cssText='cursor:pointer';el.innerHTML=estateSvg+'<span class="estate-name">'+esc(label)+'</span>'}const marker=new maplibregl.Marker({element:el,anchor:station&&!sharedPin?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px'}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
-  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:sharedPin?'flood-data-pin has-sq':'',iconSize:sharedPin?[40,48]:[50,60],iconAnchor:sharedPin?[20,48]:[25,58],html:sharedPin?glyph:'<span class="watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker')+'">'+glyph+'</span>'}):L.divIcon({className:'estate-pin',iconSize:[36,44],iconAnchor:[18,44],html:estateSvg+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.7,className:'prep-point-popup'}).addTo(watchMapLayer)}
+  if(vector){const el=document.createElement('button');el.type='button';el.setAttribute('aria-label',label);el.style.cssText='cursor:pointer';if(station){el.className=sharedPin?'flood-data-pin has-sq':'watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker');el.innerHTML=glyph}else{el.className='estate-pin';el.style.cssText='cursor:pointer';el.innerHTML=estateSvg+'<span class="estate-name">'+esc(label)+'</span>'}const marker=new maplibregl.Marker({element:el,anchor:station&&!sharedPin?'center':'bottom'}).setLngLat(coords).setPopup(createMapPopup({maxWidth:'420px',className:storyMap&&station?'story-station-popup':''}).setHTML(html)).addTo(vector);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();marker.togglePopup()}});watchMapMarkers.push(marker)}
+  else if(raster){L.marker([coords[1],coords[0]],{pane:'watchPoints',title:label,alt:label,icon:station?L.divIcon({className:sharedPin?'flood-data-pin has-sq':'',iconSize:sharedPin?[40,48]:[50,60],iconAnchor:sharedPin?[20,48]:[25,58],html:sharedPin?glyph:'<span class="watch-data-glyph '+(kind==='rain'?'ieat-watch-rain-marker':'ieat-watch-water-marker')+'">'+glyph+'</span>'}):L.divIcon({className:'estate-pin',iconSize:[36,44],iconAnchor:[18,44],html:estateSvg+'<span class="estate-name">'+esc(label)+'</span>'})}).bindTooltip(esc(label)).bindPopup(html,{maxWidth:320,maxHeight:innerHeight*.4,className:storyMap&&station?'prep-point-popup story-station-popup':'prep-point-popup'}).addTo(watchMapLayer)}
  }
  estates.forEach(e=>{pin([e.lon,e.lat],e.name,watchEstatePopup(e),'#109dc0',false);e.stations.forEach(s=>{
   const coords=[[e.lon,e.lat],[s.lon,s.lat]],label=s.distanceKm.toFixed(2)+' กม.';
   if(!watchMapData.cardFocus)lines.push({type:'Feature',geometry:{type:'LineString',coordinates:coords},properties:{}});
-  const stationKey=s.lat+':'+s.lon+':'+s.name;if(!seen.has(stationKey)){seen.add(stationKey);const html='<div class="popup"><h3>'+esc(s.name)+'</h3><p>'+(s.kind==='rain'?'ฝนสะสม '+esc(s.rainfall??'–')+' มม.':'ระดับน้ำ '+esc(s.level??'–')+' ม.รทก.<br>ตลิ่ง '+esc(s.bank??'–')+' ม.รทก.')+'<br>'+watchStationReason(s)+'<br>เวลาตรวจวัด '+esc(s.observed)+'</p><p>'+estates.flatMap(other=>other.stations.filter(t=>t.name===s.name&&t.lat===s.lat&&t.lon===s.lon).map(t=>esc(other.name)+' · '+t.distanceKm.toFixed(2)+' กม.')).join('<br>')+'</p><small>ระยะเส้นตรงจากพิกัดสถานีถึงพิกัดอ้างอิงนิคมฯ</small></div>';pin(coords[1],s.name,html,s.kind==='rain'?window.IEAT_WATER_STATUS.rain(s.rainfall).hex:window.IEAT_WATER_STATUS.water({wl:s.level,bank:s.bank}).hex,true,s.kind)}
+  const stationKey=s.lat+':'+s.lon+':'+s.name;if(!seen.has(stationKey)){seen.add(stationKey);const html='<div class="popup story-station-card"><h3>'+esc(s.name)+'</h3><p class="story-station-reading">'+(s.kind==='rain'?'ฝนสะสม '+esc(s.rainfall??'–')+' มม.':'ระดับน้ำ '+esc(s.level??'–')+' ม.รทก.<br>ตลิ่ง '+esc(s.bank??'–')+' ม.รทก.')+'<br>'+watchStationReason(s)+'<br>เวลาตรวจวัด '+esc(s.observed)+'</p><p class="story-station-distance">'+estates.flatMap(other=>other.stations.filter(t=>t.name===s.name&&t.lat===s.lat&&t.lon===s.lon).map(t=>esc(other.name)+' · '+t.distanceKm.toFixed(2)+' กม.')).join('<br>')+'</p><small>ระยะเส้นตรงจากพิกัดสถานีถึงพิกัดอ้างอิงนิคมฯ</small></div>';pin(coords[1],s.name,html,s.kind==='rain'?window.IEAT_WATER_STATUS.rain(s.rainfall).hex:window.IEAT_WATER_STATUS.water({wl:s.level,bank:s.bank}).hex,true,s.kind)}
   if(watchMapData.cardFocus)return;
   const middle=[(e.lon+s.lon)/2,(e.lat+s.lat)/2];
   if(vector&&((zoom||0)>=9||estates.length===1)){const el=document.createElement('span');el.className='ieat-watch-distance-label';el.style.cssText='pointer-events:none';el.textContent=label;watchMapMarkers.push(new maplibregl.Marker({element:el}).setLngLat(middle).addTo(vector))}
@@ -2395,6 +2395,33 @@ html body.story-map-mode #ieatInfrastructure .infra-control-name{
 .readiness-estate-label{display:block;white-space:nowrap;background:#fffdf7;border:1px solid #544934;padding:5px 9px;color:#20292a;font:600 13px/1.4 Kanit,Sarabun,sans-serif;pointer-events:none;z-index:675}
 .readiness-estate-label::after{content:"";position:absolute;left:50%;top:100%;height:13px;border-left:1px solid #544934}
 .readiness-label-anchor .readiness-estate-label{position:absolute;bottom:0;left:0;transform:translateX(-50%)}
+</style><style>
+html body.story-map-mode #watchEvidence:has(.story-watch-result),
+html body.story-map-mode .story-station-popup :is(.maplibregl-popup-content,.leaflet-popup-content-wrapper){
+ background:#fffdf7!important;border:1px solid #8b8172!important;border-radius:0!important;box-shadow:4px 5px 0 #26363926!important;color:#223132;
+}
+html body.story-map-mode #watchEvidence:has(.story-watch-result) .ieat-watch-head{border-bottom:2px solid #efb14d!important}
+html body.story-map-mode #watchEvidence .story-watch-result>strong{display:flex;align-items:baseline;gap:5px;color:#67430f;font-size:26px}
+html body.story-map-mode #watchEvidence .story-watch-result>strong small{display:inline;font-size:13px}
+html body.story-map-mode #watchEvidence .story-watch-body{overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+html body.story-map-mode .story-station-popup{max-width:min(380px,calc(100vw - 24px))!important}
+html body.story-map-mode .story-station-popup .maplibregl-popup-content{padding:12px!important;max-height:42dvh;overflow:auto;overscroll-behavior:contain}
+.story-station-card{font:400 14px/1.5 Kanit,Sarabun,sans-serif;overflow-wrap:anywhere}
+.story-station-card h3{padding:0 28px 7px 0;margin:0 0 8px;border-bottom:2px solid #efb14d;color:#223132;font:600 17px/1.4 Kanit,Sarabun,sans-serif}
+.story-station-card .story-station-reading{padding:7px 9px;margin:0 0 7px;background:#e5f4f7;border-left:3px solid #559eb4}
+.story-station-card .story-station-distance{margin:0;padding:6px 0;border-top:1px solid #ddd4c5}
+.story-station-card small{color:#615b51}
+@media(max-width:650px){
+ html body.story-map-mode #watchEvidence:has(.story-watch-result){
+  top:8px!important;bottom:auto!important;left:8px!important;right:auto!important;
+  width:min(350px,calc(100vw - 68px))!important;max-width:none!important;max-height:36dvh!important;
+ }
+ html body.story-map-mode #watchEvidence:has(.story-watch-result) [data-watch-close],
+ html body.story-map-mode .story-station-popup :is(.maplibregl-popup-close-button,.leaflet-popup-close-button){width:36px!important;height:36px!important;min-width:36px!important}
+ html body.story-map-mode .maplibregl-popup.story-station-popup{left:8px!important;right:60px!important;top:auto!important;bottom:12px!important;width:auto;max-width:none!important;transform:none!important}
+ html body.story-map-mode .maplibregl-popup.story-station-popup .maplibregl-popup-tip{display:none}
+ html body.story-map-mode .story-station-popup .maplibregl-popup-content{max-height:34dvh}
+}
 </style></body></html>
 
 
