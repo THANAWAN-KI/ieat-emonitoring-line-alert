@@ -563,9 +563,9 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   #estateFocusDashboard #floodInformationPane .ef-kpi-copy { align-items:center !important; text-align:center; }
   .ef-kpi-gauge { position:relative; display:grid; place-items:end center; width:96px; max-width:100%; aspect-ratio:76/41; }
   .ef-kpi-gauge svg { position:absolute; inset:0; width:100%; height:100%; fill:none; stroke-width:5; }
-  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#7437a8; --kpi-track:#eadcf5; }
-  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#2166a5; --kpi-track:#d5e7f7; }
-  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#0b7285; --kpi-track:#d5ebf0; }
+  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#6962be; --kpi-track:#e6e2f8; }
+  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#3268b4; --kpi-track:#dfecfc; }
+  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#217faf; --kpi-track:#ddf2fb; }
   .ef-kpi-track { stroke:var(--kpi-track,#c5def2); }
   .ef-kpi-fill { stroke:var(--kpi-color,#2166a5); }
   #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:26px !important; line-height:1.1 !important; color:var(--kpi-color,#2166a5) !important; }
@@ -601,4 +601,33 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     font-weight:600 !important;
   }
   #estateFocusDashboard #floodInformationPane .ef-warning summary::marker { color:#2166a5; }
+}
+
+@layer floodDashboard {
+  #floodStationsSection .rp-status-legend {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:5px;
+    list-style:none;
+    padding:0;
+    margin:0 0 8px;
+  }
+  #floodStationsSection .rp-status-legend li {
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:5px 3px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:13px;
+    line-height:1.35;
+  }
+  #floodStationsSection .rp-status-normal { --station-chip-bg:#edf6ef; --station-chip-ink:#24633f; }
+  #floodStationsSection .rp-status-watch { --station-chip-bg:#fff4cc; --station-chip-ink:#735500; }
+  #floodStationsSection .rp-status-critical { --station-chip-bg:#b91c36; --station-chip-ink:#fff; }
+  #estateFocusDashboard #floodStationsSection :is(.rp-status-normal,.rp-status-watch,.rp-status-critical) {
+    background:var(--station-chip-bg) !important;
+    color:var(--station-chip-ink) !important;
+    -webkit-text-fill-color:currentColor !important;
+  }
 }
