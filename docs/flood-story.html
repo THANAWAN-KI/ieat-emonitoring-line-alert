@@ -114,8 +114,14 @@
  88%,100%{opacity:1;transform:scale(1)}
 }
 </style><style>
-#readiness .readiness-layout{max-width:1440px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(22px,4vw,60px);align-items:start}
-.readiness-map{position:sticky;top:78px;margin:0;background:#fffdf7;border:1px solid #8b8172;box-shadow:4px 5px 0 #26363926}
+#readiness.chapter{padding:0}
+#readiness .readiness-layout{max-width:none;width:100%;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:0;align-items:start}
+.readiness-copy{padding:clamp(24px,4vw,64px);min-width:0}
+#readiness .steps{grid-template-columns:1fr;gap:10px}
+#readiness .steps h3{margin-top:0}
+@media(min-width:881px){#readiness .readiness-map{height:calc(100svh - 58px);min-height:480px;display:flex;flex-direction:column}
+#readiness .readiness-map iframe{flex:1;min-height:0;height:auto}}
+.readiness-map{position:sticky;top:58px;margin:0;background:#fffdf7;border-inline-start:1px solid var(--rule)}
 .readiness-map figcaption{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;border-bottom:2px solid #efb14d}
 .readiness-map button{padding:4px 8px;border:1px solid #a3957d;background:#fff0c9;color:#493616;font:inherit;cursor:pointer}
 .readiness-map iframe{display:block;width:100%;height:clamp(380px,61svh,650px);border:0;background:#f2ede3}
@@ -228,18 +234,18 @@
 <dl><div><dt>เมื่อถึงเกณฑ์ในแผน</dt><dd>ระดับเฝ้าระวัง</dd></div><div><dt>ทำอะไร</dt><dd>ตรวจระดับน้ำเป็นระยะ และเตรียมเครื่องสูบน้ำ</dd></div><div><dt>ใครรับผิดชอบ</dt><dd>ฝ่ายบริหารจัดการนิคมอุตสาหกรรม</dd></div></dl>
 <p><strong>ทำไมยกตัวอย่างซีพีจีซี?</strong> แผนของนิคมฯ นี้มีตัวอย่างที่อธิบายได้ครบในเหตุการณ์เดียวว่า เมื่อเข้าสู่ระดับเฝ้าระวัง ต้องทำอะไร และฝ่ายใดรับผิดชอบ ส่วนสถานะน้ำปัจจุบันให้ดูจากข้อมูลตรวจวัดล่าสุด</p>
 </aside>
-<div class="actions"><a class="action primary" id="open-cpgc-plan" href="flood-report.html?story=1&amp;estate=%E0%B8%99%E0%B8%B4%E0%B8%84%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%95%E0%B8%AA%E0%B8%B2%E0%B8%AB%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%8B%E0%B8%B5%E0%B8%9E%E0%B8%B5%E0%B8%88%E0%B8%B5%E0%B8%8B%E0%B8%B5&amp;view=preparedness&amp;v=20261105-cpgc-picker-theme">ดูแผนเตรียมรับมือของนิคมฯ ซีพีจีซี ↗</a></div>
+<div class="actions"><a class="action primary" id="open-cpgc-plan" href="flood-report.html?story=1&amp;estate=%E0%B8%99%E0%B8%B4%E0%B8%84%E0%B8%A1%E0%B8%AD%E0%B8%B8%E0%B8%95%E0%B8%AA%E0%B8%B2%E0%B8%AB%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%8B%E0%B8%B5%E0%B8%9E%E0%B8%B5%E0%B8%88%E0%B8%B5%E0%B8%8B%E0%B8%B5&amp;view=preparedness&amp;v=20261105-cpgc-fullwidth-controls">ดูแผนเตรียมรับมือของนิคมฯ ซีพีจีซี ↗</a></div>
 </div>
 <figure id="readiness-map" class="readiness-map" aria-labelledby="readiness-map-title">
  <figcaption><strong id="readiness-map-title">นิคมอุตสาหกรรมซีพีจีซี · ระยอง</strong><button id="readiness-orbit" type="button" disabled>เล่นมุมสูง 360°</button></figcaption>
- <iframe id="readiness-map-frame" title="แผนที่ประกอบแผนเตรียมรับมือนิคมฯ ซีพีจีซี" data-src="flood-hydrology-map.html?story=1&amp;layout=reference&amp;v=20261105-readiness-map"></iframe>
+ <iframe id="readiness-map-frame" title="แผนที่ประกอบแผนเตรียมรับมือนิคมฯ ซีพีจีซี" data-src="flood-hydrology-map.html?story=1&amp;layout=reference&amp;v=20261105-readiness-fullwidth"></iframe>
  <p id="readiness-map-caption">แผนที่จะซูมไปยังนิคมฯ และเริ่มชมมุมสูงเมื่อเลื่อนมาถึง</p>
  <a id="readiness-full-plan" hidden>เปิดข้อมูลแผนเตรียมรับมือฉบับเต็ม ↗</a>
 </figure>
 </div></section>
 <section id="map" class="story-map" aria-label="บทสุดท้าย: ข้อมูลเฝ้าระวังน้ำและแผนที่นิคมฯ">
   <p class="booth-map-guide"><strong>ลองสำรวจแผนที่</strong><span>เลือกนิคมฯ ทางซ้าย แล้วกดตัวเลขสรุปเพื่อดูจุดบนแผนที่ กดหมุดเพื่อดูรายละเอียด</span></p>
-  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-picker-theme" loading="lazy" allowfullscreen></iframe>
+  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-fullwidth-controls" loading="lazy" allowfullscreen></iframe>
 </section>
 </main>
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
