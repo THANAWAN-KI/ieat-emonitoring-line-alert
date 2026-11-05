@@ -251,3 +251,17 @@ html body #referenceViewTabs#referenceViewTabs#referenceViewTabs button{white-sp
 html body #warning #estateFocusDashboard#estateFocusDashboard .ef-data-column{padding-top:100px!important}
 }
 `;document.head.append(e)})();
+
+/* Keep the existing live title and update timestamp together without copying data. */
+(()=>{
+ function alignHeading(){
+ const pane=document.getElementById('floodInformationPane'),title=document.getElementById('floodPageTitle'),date=document.getElementById('expoBoothSubtitle');
+ if(!pane||!title||!date)return;
+ let row=document.getElementById('approvedDashboardHeading');
+ if(!row){row=document.createElement('header');row.id='approvedDashboardHeading';pane.prepend(row)}
+ if(title.parentElement!==row)row.append(title);
+ if(date.parentElement!==row)row.append(date);
+ }
+ alignHeading();document.readyState==='loading'&&document.addEventListener('DOMContentLoaded',alignHeading,{once:true});
+ setInterval(()=>{if(!document.hidden)alignHeading()},1000);
+})();
