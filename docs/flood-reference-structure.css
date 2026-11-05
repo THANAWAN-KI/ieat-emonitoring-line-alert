@@ -563,12 +563,42 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   #estateFocusDashboard #floodInformationPane .ef-kpi-copy { align-items:center !important; text-align:center; }
   .ef-kpi-gauge { position:relative; display:grid; place-items:end center; width:96px; max-width:100%; aspect-ratio:76/41; }
   .ef-kpi-gauge svg { position:absolute; inset:0; width:100%; height:100%; fill:none; stroke-width:5; }
-  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#865219; --kpi-track:#f4e4ce; }
-  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#2166a5; --kpi-track:#c5def2; }
-  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#13776e; --kpi-track:#cde9e4; }
+  .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#7437a8; --kpi-track:#eadcf5; }
+  .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#2166a5; --kpi-track:#d5e7f7; }
+  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#13776e; --kpi-track:#d4ebe7; }
   .ef-kpi-track { stroke:var(--kpi-track,#c5def2); }
   .ef-kpi-fill { stroke:var(--kpi-color,#2166a5); }
   #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:26px !important; line-height:1.1 !important; color:var(--kpi-color,#2166a5) !important; }
   #estateFocusDashboard #floodInformationPane .ef-kpi-gauge.is-unavailable strong { font-size:11px !important; }
   .ef-kpi-gauge.is-unavailable .ef-kpi-fill { visibility:hidden; }
+}
+
+@layer floodDashboard {
+  #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
+    box-shadow:inset 0 3px var(--kpi-track),0 2px 8px #183b5c0e !important;
+  }
+  #estateFocusDashboard #floodInformationPane .flood-kpi:hover {
+    box-shadow:inset 0 3px var(--kpi-color),0 3px 10px #183b5c18 !important;
+  }
+  #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-station-row[aria-pressed=true] {
+    outline:1px solid #9dc6e6 !important;
+    border-color:#d9e9f7 !important;
+    background:#f8fbff !important;
+  }
+  #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-station-row:focus-visible {
+    outline:3px solid #2166a5 !important;
+    outline-offset:2px;
+  }
+  #estateFocusDashboard #floodInformationPane .ef-warning { gap:8px !important; }
+  #estateFocusDashboard #floodInformationPane .ef-warning>details {
+    padding:10px 12px !important;
+    border-radius:12px !important;
+    box-shadow:inset 0 1px #dceaf7,0 2px 7px #183b5c0d !important;
+  }
+  #estateFocusDashboard #floodInformationPane .ef-warning summary {
+    color:#163550 !important;
+    font-size:16px !important;
+    font-weight:600 !important;
+  }
+  #estateFocusDashboard #floodInformationPane .ef-warning summary::marker { color:#2166a5; }
 }
