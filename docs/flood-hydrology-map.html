@@ -625,7 +625,7 @@ async function syncPaperBasemap(){
  const active=selectedBasemap==='paper';
  if(!active){
   if(vector?.getLayer('paper-land')){
-   for(const id of ['paper-sea','paper-land','paper-borders'])vector.setLayoutProperty(id,'visibility','none');
+   for(const id of ['paper-sea','paper-land','paper-borders','paper-roads','paper-buildings'])vector.setLayoutProperty(id,'visibility','none');
    vector.setLayoutProperty('esri-gray','visibility','visible');
   }
   if(raster&&paperRasterLayer&&raster.hasLayer(paperRasterLayer)){
@@ -647,8 +647,11 @@ async function syncPaperBasemap(){
     vector.addLayer({id:'paper-sea',type:'background',paint:{'background-color':'#f5f5f3'}},'esri-gray');
     vector.addLayer({id:'paper-land',type:'fill',source:'paper-countries',paint:{'fill-pattern':'paper-grain'}},'esri-gray');
     vector.addLayer({id:'paper-borders',type:'line',source:'paper-countries',layout:{'line-join':'round'},paint:{'line-color':'#fff','line-width':['interpolate',['linear'],['zoom'],3,.8,7,2.1,12,3]}},'esri-gray');
+    vector.addSource('paper-details',{type:'vector',tiles:[esriWaterTiles],maxzoom:16,attribution:'ถนนและอาคาร © Esri และผู้ให้ข้อมูล'});
+    vector.addLayer({id:'paper-roads',type:'line',source:'paper-details','source-layer':'Road',minzoom:9,layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#f9f9f7','line-width':['interpolate',['linear'],['zoom'],9,.45,13,1.2,17,3.2],'line-opacity':.92}},'esri-gray');
+    vector.addLayer({id:'paper-buildings',type:'fill',source:'paper-details','source-layer':'Building',minzoom:13,paint:{'fill-color':'#fbfbf9','fill-opacity':.92}},'esri-gray');
    }
-   for(const id of ['paper-sea','paper-land','paper-borders'])vector.setLayoutProperty(id,'visibility','visible');
+   for(const id of ['paper-sea','paper-land','paper-borders','paper-roads','paper-buildings'])vector.setLayoutProperty(id,'visibility','visible');
    vector.setLayoutProperty('esri-gray','visibility','none');
   }else if(raster){
    if(!raster.getPane('paper-base'))raster.createPane('paper-base').style.zIndex='190';
@@ -1353,11 +1356,11 @@ function syncWaterAreas(){
  const layers=[['small','Water area small scale',1,5,null],['medium','Water area medium scale',5,7,null],['large','Water area large scale',7,11,null],['detail','Water area',11,24,null]];
  if(vector&&ready){
  if(!vector.getSource('esri-water-shape'))vector.addSource('esri-water-shape',{type:'vector',tiles:[esriWaterTiles],minzoom:0,maxzoom:16,attribution:'Water areas © Esri'});
- for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#109dc0','fill-opacity':.94}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
+ for(const [id,sourceLayer,min,max,symbol] of layers){const key='esri-water-'+id;if(!vector.getLayer(key))vector.addLayer({id:key,type:'fill',source:'esri-water-shape','source-layer':sourceLayer,minzoom:min,maxzoom:max,...(symbol===null?{}:{filter:['==',['get','_symbol'],symbol]}),paint:{'fill-color':'#109dc0','fill-opacity':['interpolate',['linear'],['zoom'],4,.32,9,.55,13,.82]}},'discharge-ring');vector.setLayoutProperty(key,'visibility',flags.flow?'visible':'none')}
  }else if(raster&&L.vectorGrid){
  if(!waterAreaRaster){
   if(!raster.getPane('waterArea')){const pane=raster.createPane('waterArea');pane.style.zIndex='350';pane.style.pointerEvents='none';pane.classList.add('river-water-surface')}
-  const styles=new Proxy({}, {get:(_t,name)=>{const match=layers.find(l=>l[1]===name);if(!match)return [];return (p,z)=>z>=match[2]&&z<match[3]&&(match[4]===null||p._symbol===match[4])?{fill:true,fillColor:'#109dc0',fillOpacity:.94,stroke:false,weight:0}:[]}});
+  const styles=new Proxy({}, {get:(_t,name)=>{const match=layers.find(l=>l[1]===name);if(!match)return [];return (p,z)=>z>=match[2]&&z<match[3]&&(match[4]===null||p._symbol===match[4])?{fill:true,fillColor:'#109dc0',fillOpacity:z<9?.35:z<13?.55:.82,stroke:false,weight:0}:[]}});
   waterAreaRaster=L.vectorGrid.protobuf(esriWaterTiles,{rendererFactory:L.canvas.tile,vectorTileLayerStyles:styles,interactive:false,pane:'waterArea',maxNativeZoom:16,maxZoom:19,attribution:'Water areas © Esri'});
  }
  if(flags.flow&&!raster.hasLayer(waterAreaRaster))waterAreaRaster.addTo(raster);else if(!flags.flow&&raster.hasLayer(waterAreaRaster))waterAreaRaster.remove();
@@ -1377,8 +1380,8 @@ function excludeCambodiaLowerMekong(f){
 function addFlow(){
  if(!vector||!ready||!waterways||vector.getSource('mapped-flow'))return;
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f))}});
- vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#109dc0','line-width':['interpolate',['linear'],['zoom'],4,4.5,10,9,14,16,18,25],'line-opacity':.94}},'discharge-ring');
- vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#109dc0','line-width':['interpolate',['linear'],['zoom'],4,1.6,10,3.2,14,5.8,18,9],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
+ vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#109dc0','line-width':['interpolate',['linear'],['zoom'],4,.65,8,1.35,10,2.6,14,6,18,12],'line-opacity':.94}},'discharge-ring');
+ vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#c6f1fa','line-width':['interpolate',['linear'],['zoom'],4,.55,8,.85,10,1.4,14,2.7,18,5],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
  // Single time-based animation loop; the phase is never reset by zoom/pan events.
   // Throttled paint updates reduce expensive map redraws during camera movement.
   if(!window.__ieatFlowLoopStarted){
@@ -1393,20 +1396,57 @@ function addFlow(){
    }
    requestAnimationFrame(animateRiver);
   }
- const img=new Image(28,18);img.onload=()=>{if(!vector)return;vector.addImage('flow-arrow',img);vector.addLayer({id:'flow-arrows',type:'symbol',source:'mapped-flow',minzoom:0,layout:{visibility:flags.flow?'visible':'none','symbol-placement':'line','symbol-spacing':140,'icon-image':'flow-arrow','icon-size':.65,'icon-keep-upright':false,'icon-allow-overlap':true,'icon-ignore-placement':true}})};
+ const paths=waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f)).map(f=>{
+  let distance=0;
+  const coords=f.geometry.coordinates;
+  const segments=coords.slice(1).flatMap((b,i)=>{
+   const a=coords[i],dx=b[0]-a[0],dy=b[1]-a[1],length=Math.hypot(dx,dy);
+   if(!length)return [];
+   const segment={a,dx,dy,length,start:distance,angle:Math.atan2(dx,dy)*180/Math.PI};
+   distance+=length;return [segment];
+  });
+  return {segments,distance};
+ });
+ const img=new Image(28,18);img.onload=()=>{
+  if(!vector)return;
+  vector.addImage('flow-arrow',img);
+  vector.addSource('flow-arrow-motion',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+  vector.addLayer({id:'flow-arrows',type:'symbol',source:'flow-arrow-motion',minzoom:6,layout:{visibility:flags.flow?'visible':'none','icon-image':'flow-arrow','icon-size':.52,'icon-rotate':['get','angle'],'icon-rotation-alignment':'map','icon-allow-overlap':false,'icon-ignore-placement':true}});
+  let last=0;
+  function animateArrows(now){
+   if(!vector?.getSource('flow-arrow-motion'))return;
+   requestAnimationFrame(animateArrows);
+   if(document.hidden||!flags.flow||vector.getZoom()<6||now-last<105)return;
+   last=now;
+   const bounds=vector.getBounds(),spacing=Math.max(.012,70/2**vector.getZoom()),features=[];
+   for(const {segments,distance} of paths){
+    if(!distance)continue;
+    const step=distance/Math.max(1,Math.min(28,Math.floor(distance/spacing)));
+    let segment=0;
+    for(let d=(now*.000025)%step;d<distance&&features.length<150;d+=step){
+     while(segment<segments.length-1&&segments[segment].start+segments[segment].length<=d)segment++;
+     const {a,dx,dy,length,start,angle}=segments[segment],t=(d-start)/length;
+     const coordinates=[a[0]+dx*t,a[1]+dy*t];
+     if(bounds.contains(coordinates))features.push({type:'Feature',geometry:{type:'Point',coordinates},properties:{angle:angle-90}});
+    }
+   }
+   vector.getSource('flow-arrow-motion').setData({type:'FeatureCollection',features});
+  }
+  requestAnimationFrame(animateArrows);
+ };
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
 function drawFlow(){
  if(!raster||!groups.flow)return;groups.flow.clearLayers();if(!flags.flow||!waterways)return;
  const fs=waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f));
- const flowWidth=raster.getZoom()<9?5:raster.getZoom()<13?9:raster.getZoom()<16?16:24;
+ const flowWidth=raster.getZoom()<9?1:raster.getZoom()<13?3:raster.getZoom()<16?6:11;
  L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#109dc0',weight:flowWidth+1,opacity:.94,lineCap:'round',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
- L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#109dc0',weight:Math.max(2,flowWidth*.38),opacity:.98,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
+ L.geoJSON({type:'FeatureCollection',features:fs},{style:{color:'#c6f1fa',weight:Math.max(.65,flowWidth*.38),opacity:.98,lineCap:'round',dashArray:'6 18',className:'river-motion',renderer:riverSvgRenderer},interactive:false}).addTo(groups.flow);
  
  const bounds=raster.getBounds().pad(.15);let count=0;
- for(const f of fs){const cs=f.geometry.coordinates;let remaining=90;
+ for(const f of fs){const cs=f.geometry.coordinates;let remaining=165;
  for(let i=1;i<cs.length;i++){const a=L.latLng(cs[i-1][1],cs[i-1][0]),b=L.latLng(cs[i][1],cs[i][0]);const p=raster.latLngToLayerPoint(a),q=raster.latLngToLayerPoint(b),len=p.distanceTo(q);if(!len)continue;
- let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<700){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[18,12],iconAnchor:[9,6],html:'<svg width="18" height="12" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
+ let d=remaining;while(d<len){const t=d/len,lat=a.lat+(b.lat-a.lat)*t,lng=a.lng+(b.lng-a.lng)*t;if(bounds.contains([lat,lng])&&count<150){const angle=Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI;L.marker([lat,lng],{interactive:false,keyboard:false,icon:L.divIcon({className:'flow-arrow',iconSize:[18,12],iconAnchor:[9,6],html:'<svg width="18" height="12" viewBox="0 0 28 18" style="transform:rotate('+angle+'deg)"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>'})}).addTo(groups.flow);count++}d+=140}remaining=d-len;
  }}}
 
 function addGistda(){if(!vector||!ready||vector.getSource('gistda'))return;vector.addSource('gistda',{type:'geojson',data:gistda});vector.addLayer({id:'gistda',type:'fill',source:'gistda',filter:['==',['geometry-type'],'Polygon'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'fill-color':'#109dc0','fill-opacity':.2}},'discharge-ring');vector.addLayer({id:'gistda-points',type:'circle',source:'gistda',filter:['==',['geometry-type'],'Point'],layout:{visibility:flags.gistda?'visible':'none'},paint:{'circle-color':'#109dc0','circle-radius':5}},'discharge-ring')}
@@ -1527,7 +1567,7 @@ async function loadCameraImage(r,force=false){
  }catch(e){img.style.display='none';time.textContent='โหลดภาพล่าสุดไม่สำเร็จ';state.textContent='ต้นทางอาจไม่มีภาพหรือไม่ตอบสนอง · เปิดต้นทางด้านล่างเพื่อตรวจสอบ'}
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-camera-refresh]');if(!b)return;const r=features.find(f=>f.properties.kind==='camera'&&String(f.properties.id)===b.dataset.cameraRefresh)?.properties;if(r)loadCameraImage(r,true)});
-$('basemapChoice').addEventListener('change',e=>chooseBasemap(e.target.value));chooseBasemap('topo');
+$('basemapChoice').addEventListener('change',e=>chooseBasemap(e.target.value));$('basemapChoice').value=storyMap&&cleanDashboard?'paper':'topo';chooseBasemap($('basemapChoice').value);
 $('province').addEventListener('change',()=>{render();fit();parent.postMessage({type:'flood-map-province',province:$('province').value},location.origin)});
 document.querySelectorAll('.controls details').forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)document.querySelectorAll('.controls details').forEach(other=>{if(other!==menu)other.open=false;});}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape')document.querySelectorAll('.controls details').forEach(menu=>{menu.open=false;});});
