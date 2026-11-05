@@ -878,7 +878,6 @@ $('efFilter').onchange=()=>renderEstates();
    const preferred=estates.find(e=>/แก่งคอย/.test(e.name));
    const example=preferred||estates.slice().sort((a,b)=>score(b)-score(a)||String(a.name).localeCompare(String(b.name),'th'))[0];
    expoExample=example.name;
-   if(!headerEstate&&!selected)queueMicrotask(()=>applyHeaderEstate(example.name));
    if(!headerEstate&&selected){const requested=estates.find(e=>String(e.id)===selected||estateKey(e.name)===estateKey(selected));if(requested){headerEstate=requested.name;selected=String(requested.id);}}
   }
   expoRender();
