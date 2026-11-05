@@ -52,10 +52,10 @@
   html.story-dashboard body:not([data-reference-panel=closed]) #estateFocusDashboard .ef-map-column { top:0!important; right:0!important; bottom:0!important; border-radius:0!important; }
  }
  html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel),
- html.story-dashboard body[data-flood-section] #estateFocusDashboard #floodInformationPane { background:#fffdf8!important; }
+ html.story-dashboard body[data-flood-section] #estateFocusDashboard #floodInformationPane { background:#fff!important; }
  @media screen {
   html.story-dashboard {
-   --chapter-paper:#fffdf8;
+   --chapter-paper:#fff;
    --chapter-ink:#202b2b;
    --chapter-gold:#ffbd28;
    --chapter-blue:#3157bd;
@@ -102,6 +102,30 @@
   html.story-dashboard #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-station-row[aria-pressed=true] {
    outline-color:var(--chapter-rule)!important;
   }
+  html.story-dashboard #floodSectionPanel,
+  html.story-dashboard #preparednessPane {
+   --report-paper:#fff;
+   --report-ink:var(--chapter-ink);
+   --report-accent:var(--chapter-blue);
+   --report-rule:var(--chapter-rule);
+   --radar-surface:#eef2ff;
+   --radar-heading:#eef2ff;
+   --radar-edge:#dce4f8;
+  }
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-results>h2,.ref-chart-card>h2),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-card>h3,
+  html.story-dashboard #floodInformationPane :is(#floodDamsSection>h2,.ef-canal-panel>h2,#floodWaterDiagram>h3) {
+   background:#fff5d9!important;
+   color:var(--chapter-ink)!important;
+   box-shadow:none!important;
+  }
+  html.story-dashboard #floodSectionPanel :is(.section-action,.water-report-stats>div:first-child) {
+   background:var(--chapter-blue)!important;
+   color:#fff!important;
+  }
+  html.story-dashboard #floodSectionPanel :is(.water-report-sources b,.flood-alert-map) { color:var(--chapter-blue)!important; }
+  html.story-dashboard #preparednessPane .ex-table thead th,
+  html.story-dashboard #floodSectionPanel .ex-report-table thead th { background:#eef2ff!important; color:var(--chapter-ink)!important; }
  }
 }
 </style>
