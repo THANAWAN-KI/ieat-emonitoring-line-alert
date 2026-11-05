@@ -328,7 +328,7 @@ body[data-flood-section=overview][data-water-category=stations] #estateFocusDash
 
 /* Overview summaries: one count, one short label, shared scope and on-demand criteria. */
 @layer floodDashboard {
-#estateFocusDashboard .flood-kpis{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;padding:4px 0!important;background:#fff!important}
+#estateFocusDashboard .flood-kpis{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:4px 0!important;background:#fff!important}
 #estateFocusDashboard .flood-kpis>.flood-kpi{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:1fr!important;align-items:center!important;min-height:126px!important;padding:16px 12px!important;text-align:left!important;border:0!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(241,249,255,.86),rgba(206,232,253,.66))!important;backdrop-filter:blur(10px);color:#303841!important;box-shadow:inset 0 1px 0 #ffffffd9,0 5px 18px #2674ad16!important}
 #estateFocusDashboard .flood-kpi::before,#estateFocusDashboard .flood-kpi::after{content:none!important;display:none!important}
 #estateFocusDashboard .flood-kpi .ef-kpi-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:6px!important;grid-area:auto!important;min-width:0!important}
@@ -339,7 +339,7 @@ body[data-flood-section=overview][data-water-category=stations] #estateFocusDash
 #estateFocusDashboard #overviewKpiCriteria summary{font-size:14px!important;font-weight:400!important;cursor:pointer!important}
 #estateFocusDashboard #overviewKpiCriteria p{font-size:14px!important;font-weight:400!important;line-height:1.6!important;margin:8px 0 0!important}
 @media(max-width:1100px){
-#estateFocusDashboard .flood-kpis{gap:8px!important}
+#estateFocusDashboard .flood-kpis{gap:4px!important}
 #estateFocusDashboard .flood-kpis>.flood-kpi{padding:13px 9px!important;min-height:138px!important}
 #estateFocusDashboard .flood-kpi .ef-kpi-copy strong{font-size:26px!important}
 }
