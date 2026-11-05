@@ -11,9 +11,15 @@
 .bar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px clamp(16px,5vw,76px);background:#fffdf8;border-bottom:1px solid var(--rule);font-size:14px}.bar a{font-weight:700;text-decoration:none}
 .cover{display:grid;place-items:center;min-height:calc(83svh - 55px);padding:48px 20px 30px;text-align:center}.cover-art{display:block;width:min(100%,880px);height:auto}.cover-copy{max-width:680px;margin:-8px auto 0}.cover h1{font-size:clamp(34px,6.6vw,86px);letter-spacing:-.035em}.cover p{margin-top:12px;font-size:clamp(17px,2vw,23px)}.cover a{display:inline-block;margin-top:22px;font-weight:700}
 .chapter{padding:clamp(46px,8vw,100px) 20px}.notebook{background:repeating-linear-gradient(to bottom,#fff 0,#fff 31px,#e2edf4 31px,#e2edf4 32px)}.inner{max-width:1050px;margin:auto}.split{display:grid;grid-template-columns:1fr .9fr;align-items:center;gap:clamp(22px,6vw,84px)}.label{display:inline-block;margin-bottom:12px;padding:1px 10px;background:var(--yellow);color:#27231b;font-size:14px;font-weight:700}.chapter h2{font-size:clamp(28px,4.5vw,52px);margin-bottom:16px;letter-spacing:-.025em}.chapter p+p{margin-top:12px}.art{width:100%;height:auto;display:block}.caption{margin-top:8px;font-size:13px;color:#53656b}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 8px}.stats div{border-top:3px solid var(--blue);padding:8px 0}.stats dt{font-size:14px}.stats dd{margin:0;font-size:clamp(25px,5vw,46px);line-height:1.15;font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}.map-section{background:#eaf5f8}.map-section iframe{display:block;width:100%;height:clamp(420px,68vh,760px);margin-top:22px;border:1px solid #b8d5df;background:#fff;border-radius:12px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}.action{display:inline-block;padding:7px 13px;background:#fff;color:#244b82;border:1px solid #b8cce0;border-radius:5px;font-weight:700;text-decoration:none}.action.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 8px}.stats div{border-top:3px solid var(--blue);padding:8px 0}.stats dt{font-size:14px}.stats dd{margin:0;font-size:clamp(25px,5vw,46px);line-height:1.15;font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}.action{display:inline-block;padding:7px 13px;background:#fff;color:#244b82;border:1px solid #b8cce0;border-radius:5px;font-weight:700;text-decoration:none}.action.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0}.steps section{border-top:3px solid var(--blue);padding-top:12px}.steps h3{font-size:21px;margin-bottom:8px}.steps section:nth-child(2){border-color:#c78a15}.steps section:nth-child(3){border-color:#ad2541}footer{padding:28px 20px;border-top:1px solid var(--rule);color:#53656b;font-size:14px}
-@media(max-width:650px){.split,.steps{grid-template-columns:1fr}.cover{min-height:65svh}.cover-copy{margin:8px auto 0}.map-section iframe{height:62vh}}
+@media(max-width:650px){.split,.steps{grid-template-columns:1fr}.cover{min-height:65svh}.cover-copy{margin:8px auto 0}}
+.story-map{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);min-height:calc(100svh - 52px);background:#fff}
+.story-map-data{align-self:center;padding:clamp(24px,4.5vw,86px);min-width:0}
+.story-map h2{font-size:clamp(28px,3.4vw,58px);margin-bottom:16px;letter-spacing:-.025em}
+.story-map iframe{display:block;width:100%;height:100%;min-height:calc(100svh - 52px);border:0;background:#eaf5f8}
+.story-map .stats dd{font-size:clamp(25px,3vw,46px)}
+@media(max-width:800px){.story-map{grid-template-columns:minmax(0,1fr)}.story-map iframe{height:65svh;min-height:400px}}
 </style>
 </head>
 <body>
@@ -40,7 +46,6 @@
 <section id="signals" class="chapter notebook">
 <div class="inner split">
 <div><span class="label">บทที่ 01</span><h2>เมื่อฝนตก เราดูอะไร?</h2><p>ระบบติดตามสถานีฝนและสถานีระดับน้ำรอบนิคมฯ ภายใน 30 กม. เพื่อคัดกรองพื้นที่ที่ควรตรวจสอบต่อ และเปิดดูตำแหน่งสถานีประกอบบนแผนที่ได้</p>
-<dl class="stats" aria-label="จำนวนระเบียนในชุดข้อมูล"><div><dt>นิคมฯ ในชุดข้อมูล</dt><dd id="estate-count">—</dd></div><div><dt>จุดวัดระดับน้ำ</dt><dd id="water-count">—</dd></div><div><dt>จุดวัดฝน</dt><dd id="rain-count">—</dd></div></dl><p id="feed-time" class="caption" role="status">กำลังโหลดชุดข้อมูลจากแดชบอร์ด</p>
 </div>
 <svg class="art" viewBox="0 0 450 340" role="img" aria-label="ภาพวาดสถานีระดับน้ำและสายฝน">
 <path d="m44 34 356 20-18 250-339-4z" fill="#ffe18a"/>
@@ -48,8 +53,17 @@
 </svg>
 </div>
 </section>
-<section id="map" class="chapter map-section"><div class="inner"><span class="label">บทที่ 02</span><h2>จากจุดตรวจวัดสู่แผนที่จริง</h2><p>สำรวจตำแหน่งนิคมฯ และชั้นข้อมูลน้ำบนแผนที่ของโครงการ เลือกเครื่องมือชั้นข้อมูลเพื่อเปิดดูข้อมูลที่ต้องการ</p><iframe title="แผนที่เฝ้าระวังน้ำของนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261105-purple-estate-pin&amp;layout=reference" loading="lazy" allowfullscreen></iframe><div class="actions"><a class="action primary" href="flood-report.html">เปิดแดชบอร์ดและเครื่องมือ 360° ↗</a></div></div></section>
-<section class="chapter notebook"><div class="inner"><span class="label">บทที่ 03</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>แดชบอร์ดคัดกรองสถานีฝนสะสมมากกว่า 35 มม. และสถานีระดับน้ำที่เข้าเกณฑ์เฝ้าระวัง ผลคัดกรองใช้ชี้พื้นที่ที่ควรติดตามต่อ</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ บนหน้าสถานการณ์น้ำ จากนั้นเปิดเมนูเตรียมรับมือเพื่อดูมาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
+<section class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>แดชบอร์ดคัดกรองสถานีฝนสะสมมากกว่า 35 มม. และสถานีระดับน้ำที่เข้าเกณฑ์เฝ้าระวัง ผลคัดกรองใช้ชี้พื้นที่ที่ควรติดตามต่อ</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ บนหน้าสถานการณ์น้ำ จากนั้นเปิดเมนูเตรียมรับมือเพื่อดูมาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
+<section id="map" class="story-map" aria-labelledby="story-map-title">
+  <div class="story-map-data">
+    <span class="label">บทที่ 03 · สำรวจพื้นที่</span>
+    <h2 id="story-map-title">เฝ้าระวังน้ำรอบนิคมฯ</h2>
+    <p>ดูตำแหน่งนิคมอุตสาหกรรมและสถานีตรวจวัดบนแผนที่ด้านข้าง เปิดชั้นข้อมูลเพื่อดูฝน ระดับน้ำ และข้อมูลประกอบในพื้นที่ที่สนใจ</p>
+    <dl class="stats" aria-label="จำนวนระเบียนในชุดข้อมูล"><div><dt>นิคมฯ ในชุดข้อมูล</dt><dd id="estate-count">—</dd></div><div><dt>จุดวัดระดับน้ำ</dt><dd id="water-count">—</dd></div><div><dt>จุดวัดฝน</dt><dd id="rain-count">—</dd></div></dl><p id="feed-time" class="caption" role="status">กำลังโหลดชุดข้อมูลจากแดชบอร์ด</p>
+    <div class="actions"><a class="action primary" href="flood-report.html">เปิดแดชบอร์ดและมุมมอง 360° ↗</a></div>
+  </div>
+  <iframe title="แผนที่เฝ้าระวังน้ำของนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261105-purple-estate-pin&amp;layout=reference" loading="lazy" allowfullscreen></iframe>
+</section>
 </main>
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
 <script>
