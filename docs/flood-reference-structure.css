@@ -5,7 +5,7 @@
 @layer floodDashboard, floodReports;
 @layer floodDashboard {
 
-:root{--ref-left:96px;--ref-rail:72px;--ref-panel:clamp(360px,40vw,620px);--ref-top:20px;--text:#303841;--muted:#59616b;--blue:#774aa4;--water:#2e9df7;--purple:#7437a8;--normal:#598c14;--watch:#ff6908;--danger:#f00a36}
+:root{--ref-left:96px;--ref-rail:72px;--ref-panel:clamp(360px,40vw,620px);--ref-top:20px;--text:#163550;--muted:#59616b;--blue:#2166a5;--water:#2e9df7;--purple:#7437a8;--normal:#598c14;--watch:#ff6908;--danger:#f00a36}
 *{box-sizing:border-box}
 html,body{margin:0!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#fff!important}
 body,body *,body *::before,body *::after{font-family:Sarabun,Tahoma,sans-serif!important;-webkit-text-fill-color:currentColor!important}
@@ -302,13 +302,13 @@ body[data-flood-section=alerts] #floodSectionPanel,body[data-flood-section=setti
 /* Part 1: overview data only. Map iframe and all other sections are unchanged. */
 @layer floodDashboard {
 .part-one-rail-icon{display:none!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceViewTabs{background:#EEF3FF!important}
+body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceViewTabs{background:#eef6fd!important}
 body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceViewTabs button{color:#303841!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceViewTabs button[aria-selected=true]{background:#3168F4!important;color:#fff!important}
+body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceViewTabs button[aria-selected=true]{background:#2166a5!important;color:#fff!important}
 body[data-flood-section=overview][data-water-category=stations] #ieatAllEstates{background:#f3f4f6!important;color:#388ed1!important;border-color:#e3e5e9!important;box-shadow:inset 0 1px 0 #fff,0 2px 6px #26364a12!important}
 body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #estateFocusDashboard :is(#ieatWaterStationPager,#ieatCanalPager,#ieatDamPager,#ieatReservoirPager) button{background:#f3f4f6!important;color:#303841!important;border-color:#e3e5e9!important;box-shadow:inset 0 1px 0 #fff,0 2px 6px #26364a12!important}
 body[data-flood-section] #referenceRail .reference-rail-modes>button{background:transparent!important;border:0!important;box-shadow:none!important;color:#6B7280!important}
-body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true]{color:#3168F4!important}
+body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true]{color:#2166a5!important}
 body[data-flood-section] #referenceRail .reference-rail-modes>button>svg{display:none!important}
 body[data-flood-section] #referenceRail .part-one-rail-icon{display:flex!important;align-items:center!important;justify-content:center!important;width:32px!important;height:32px!important}
 body[data-flood-section] #referenceRail .part-one-rail-icon svg{display:block!important;width:32px!important;height:32px!important;max-width:none!important}
@@ -329,7 +329,7 @@ body[data-flood-section=overview][data-water-category=stations] #estateFocusDash
 #estateFocusDashboard .flood-kpis>.flood-kpi{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:1fr!important;align-items:center!important;min-height:126px!important;padding:16px 12px!important;text-align:left!important;border:0!important;border-radius:20px!important;background:#fff!important;color:#303841!important;box-shadow:inset 0 1px 0 #ffffffd9,0 5px 18px #2674ad16!important}
 #estateFocusDashboard .flood-kpi::before,#estateFocusDashboard .flood-kpi::after{content:none!important;display:none!important}
 #estateFocusDashboard .flood-kpi .ef-kpi-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:6px!important;grid-area:auto!important;min-width:0!important}
-#estateFocusDashboard .flood-kpi .ef-kpi-copy strong{display:block!important;font-size:28px!important;font-weight:500!important;line-height:1.15!important;color:#3168F4!important;letter-spacing:0!important;margin:0!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-copy strong{display:block!important;font-size:28px!important;font-weight:500!important;line-height:1.15!important;color:#2166a5!important;letter-spacing:0!important;margin:0!important}
 #estateFocusDashboard .flood-kpi .ef-kpi-label{display:block!important;font-size:14px!important;font-weight:400!important;line-height:1.45!important;color:#303841!important;margin:0!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
 #estateFocusDashboard #overviewKpiScope{font-size:13px!important;font-weight:400!important;line-height:1.5!important;color:#59616b!important;margin:10px 0 0!important}
 #estateFocusDashboard #overviewKpiCriteria{margin:10px 0 0!important;padding:12px 14px!important;border:1px solid #e8ebef!important;border-radius:12px!important;background:#f8f9fb!important;color:#303841!important}
@@ -565,7 +565,7 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   .ef-kpi-gauge svg { position:absolute; inset:0; width:100%; height:100%; fill:none; stroke-width:5; }
   .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#7437a8; --kpi-track:#eadcf5; }
   .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#2166a5; --kpi-track:#d5e7f7; }
-  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#13776e; --kpi-track:#d4ebe7; }
+  .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#0b7285; --kpi-track:#d5ebf0; }
   .ef-kpi-track { stroke:var(--kpi-track,#c5def2); }
   .ef-kpi-fill { stroke:var(--kpi-color,#2166a5); }
   #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { position:relative; font-size:26px !important; line-height:1.1 !important; color:var(--kpi-color,#2166a5) !important; }
