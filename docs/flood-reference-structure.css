@@ -4,7 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600&display=swap");
 @layer floodDashboard, floodReports;
 @layer floodDashboard {
-:root{--ref-left:96px;--ref-rail:72px;--ref-panel:clamp(360px,40vw,620px);--ref-top:20px;--text:#303841;--muted:#59616b;--blue:#2f68f4;--water:#2e9df7;--purple:#7437a8;--normal:#598c14;--watch:#ff6908;--danger:#f00a36}
+:root{--ref-left:96px;--ref-rail:72px;--ref-panel:clamp(360px,40vw,620px);--ref-top:20px;--text:#303841;--muted:#59616b;--blue:#774aa4;--water:#2e9df7;--purple:#7437a8;--normal:#598c14;--watch:#ff6908;--danger:#f00a36}
 *{box-sizing:border-box}
 html,body{margin:0!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#fff!important}
 body,body *,body *::before,body *::after{font-family:Sarabun,Tahoma,sans-serif!important;-webkit-text-fill-color:currentColor!important}
@@ -12,7 +12,7 @@ body{font-size:14px!important;line-height:1.55!important;color:var(--text)!impor
 button,input,select,textarea{font:inherit!important}
 button{cursor:pointer}button:disabled{cursor:default;opacity:.4}
 button:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid #9cbafc!important;outline-offset:3px}
-h1,h2,h3,h4{font-size:18px!important;font-weight:500!important;line-height:1.5!important;margin:0 0 12px!important}
+h1,h2,h3,h4{font-size:18px!important;font-weight:400!important;line-height:1.5!important;margin:0 0 12px!important;color:#303841!important}
 p,small,summary,button,label,li,td,th{font-size:14px!important;line-height:1.55!important}
 small{color:var(--muted)}
 main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspace{margin:0!important;padding:0!important;width:100%!important;height:100dvh!important;max-width:none!important;overflow:hidden!important}
@@ -24,19 +24,19 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #estateFocusDashboard .ef-data-column>*{flex-shrink:0!important;min-width:0!important;width:100%!important;grid-column:auto!important}
 #referenceRail{position:fixed!important;left:24px!important;top:20px!important;bottom:20px!important;width:72px!important;background:#fff!important;border:0!important;border-radius:28px 0 0 28px!important;z-index:1900!important;box-shadow:none!important}
 #referenceRail .reference-rail-modes{position:absolute!important;left:0!important;top:50%!important;transform:translateY(-50%)!important;width:72px!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:18px!important}
-#referenceRail .reference-rail-modes>button{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;width:54px!important;height:54px!important;min-height:54px!important;padding:14px!important;border:0!important;border-radius:50%!important;background:#fff!important;color:#81858a!important;box-shadow:none!important}
-#referenceRail .reference-rail-modes>button[aria-pressed=true]{background:var(--blue)!important;color:#fff!important;box-shadow:0 4px 10px #2f68f435!important}
+ #referenceRail .reference-rail-modes>button{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;width:54px!important;height:54px!important;min-height:54px!important;padding:14px!important;border:0!important;border-radius:50%!important;background:#fff!important;color:#81858a!important;box-shadow:0 5px 12px #25364a16!important}
+#referenceRail .reference-rail-modes>button[aria-pressed=true]{background:var(--blue)!important;color:#fff!important;box-shadow:0 4px 10px #774aa435!important}
 #referenceRail .reference-rail-modes>button svg{width:27px!important;height:27px!important;margin:0!important}
 #referenceMenuToggle{position:absolute!important;left:12px!important;top:14px!important;border:0!important;background:#fff!important;width:48px!important;height:44px!important;color:#81858a!important}
 #referenceMenuToggle svg{width:25px!important;height:25px!important}
 #referenceRail .section-alert-count{position:absolute;top:1px;right:0;border:2px solid #fff;border-radius:14px;background:#d74e73;color:#fff;padding:0 4px;font-size:11px!important;line-height:18px!important}
 #referenceViewTabs{position:fixed!important;left:calc(var(--ref-left) + 16px)!important;top:40px!important;width:calc(var(--ref-panel) - 32px)!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;min-height:52px!important;padding:5px!important;border:0!important;border-radius:30px!important;background:#edf2ff!important;z-index:1860!important}
-#referenceViewTabs button{padding:7px 3px!important;border:0!important;border-radius:26px!important;background:transparent!important;color:var(--blue)!important;font-size:18px!important;font-weight:500!important;white-space:nowrap!important;min-width:0!important;min-height:40px!important;box-shadow:none!important}
+#referenceViewTabs button{padding:7px 3px!important;border:0!important;border-radius:26px!important;background:transparent!important;color:var(--blue)!important;font-size:18px!important;font-weight:400!important;white-space:nowrap!important;min-width:0!important;min-height:40px!important;box-shadow:none!important}
 #referenceViewTabs button[aria-selected=true]{background:var(--blue)!important;color:#fff!important}
 #approvedDashboardHeading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;order:-25!important}
-#floodPageTitle{font-size:18px!important;margin:0!important;color:#171b20!important}
+#floodPageTitle{font-size:18px!important;margin:0!important;color:#303841!important;font-weight:400!important;}
 #expoBoothSubtitle{font-size:13px!important;margin:0!important;white-space:nowrap!important;color:#424b55!important}
-#expoBoothSubtitle::before{content:"☀";display:inline-block;color:#fbbf24;margin-right:6px;font-size:25px;line-height:1;vertical-align:middle}
+#expoBoothSubtitle::before{content:none!important;display:none!important}
 .flood-overview{order:-20!important;padding:0!important;margin:0!important;background:#fff!important;border:0!important;box-shadow:none!important}
 #ieatOverviewFilter{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;margin:0 0 12px!important;padding:0!important;border:0!important;box-shadow:none!important}
 #ieatOverviewFilter .io-area{display:contents!important}
@@ -45,8 +45,8 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 .io-picker-label{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
 #ieatAllEstates{grid-area:1/2!important;min-height:44px!important;padding:8px 12px!important;border:1px solid #dfcdea!important;border-radius:14px!important;background:#eee1f6!important;color:#620b8b!important;box-shadow:inset 0 1px 0 #fff,0 3px 7px #59226d26!important;white-space:nowrap!important}
 .io-mini-stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;padding:0!important}
-.io-mini-stats>[role=button]{padding:14px 10px!important;min-height:90px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:3px!important;background:#fff!important;border:0!important;border-radius:16px!important;box-shadow:0 4px 12px #243b5710!important;text-align:left!important}
-.io-mini-stats :is(b,strong){font-size:20px!important;font-weight:600!important;color:#2f68f4!important}
+.io-mini-stats>:is([role=button],[role=group]){padding:14px 10px!important;min-height:90px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:3px!important;background:#fff!important;border:0!important;border-radius:16px!important;box-shadow:0 4px 12px #243b5710!important;text-align:left!important}
+.io-mini-stats :is(b,strong){font-size:20px!important;font-weight:600!important;color:#774aa4!important}
 .io-mini-stats span{font-size:13px!important;color:#303841!important}
 #estateFocusDashboard :is(#floodStationsSection,.ef-canal-panel,#floodDamsSection,#efDamFlowPanel,#floodWaterDiagram,#rpRankingsAfterWarning>section,.ex-card){padding:20px!important;margin:0!important;background:#fff!important;border:0!important;border-radius:22px!important;box-shadow:0 5px 18px #253c5610!important}
 #floodStationsSection{order:0!important}
@@ -66,10 +66,10 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #estateFocusDashboard :is(#ieatWaterStationPager,#ieatCanalPager,#ieatDamPager,#ieatReservoirPager) button{border:0!important;border-radius:12px!important;background:#eee1f6!important;color:#620b8b!important;padding:6px 10px!important;white-space:nowrap!important;box-shadow:none!important}
 #floodDamsSection{display:flex!important;flex-direction:column!important;gap:18px!important;order:2!important}
 #floodDamsSection>.ef-panel{padding:18px!important;margin:0!important;background:#fff!important;border:0!important;border-radius:18px!important;box-shadow:0 4px 14px #253c560c!important}
-#floodDamsSection .ef-panel>h2{padding:0!important;margin:0 0 12px!important;min-height:0!important;color:#388ed1!important}
+#floodDamsSection .ef-panel>h2{padding:0!important;margin:0 0 12px!important;min-height:0!important;color:#303841!important;font-weight:400!important;}
 #estateFocusDashboard :is(#efRelatedDams,#efReservoirList){display:block!important;max-height:none!important;overflow:visible!important;margin:0!important}
 #estateFocusDashboard .dam-compact-head{display:flex!important;align-items:center!important;gap:8px!important;justify-content:space-between!important;margin:0!important}
-#estateFocusDashboard .dam-title-line h3{color:#d74e26!important;font-size:16px!important;margin:0!important}
+#estateFocusDashboard .dam-title-line h3{color:#303841!important;font-size:18px!important;margin:0!important;font-weight:400!important;}
 #estateFocusDashboard .dam-map-icon{display:none!important}
 #estateFocusDashboard .dam-value-line{display:flex!important;align-items:center!important;gap:8px!important;margin:10px 0!important}
 #estateFocusDashboard .ef-dam-value{font-size:18px!important;font-weight:600!important;color:#000!important;margin:0!important}
@@ -105,7 +105,7 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #estateFocusDashboard .ef-canal-content strong{font-size:16px!important;color:var(--water-accent)!important}
 #rpRankingsAfterWarning{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;order:1!important;box-shadow:none!important}
 #rpRankingsAfterWarning>section{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:10px 8px!important;align-items:center!important}
-#rpRankingsAfterWarning h3{font-size:18px!important;color:#388ed1!important;margin:0!important}
+#rpRankingsAfterWarning h3{font-size:18px!important;color:#303841!important;margin:0!important;font-weight:400!important;}
 #rpRankingsAfterWarning .rank-unit{font-size:12px!important;color:#59616b!important;margin:0!important}
 #rpRankingsAfterWarning section>div{grid-column:1/-1!important}
 #rpRankingsAfterWarning>section>small:not(.rank-unit){display:none!important}
@@ -117,14 +117,14 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #estateFocusDashboard .ieat-rank-bar-fill{display:block!important;height:100%!important;border-radius:0 18px 18px 0!important}
 #estateFocusDashboard .ieat-rank-value{font-size:16px!important;font-weight:600!important;color:#20252b!important}
 #floodWaterDiagram{order:0!important}
-#floodWaterDiagram :is(h2,h3){color:#388ed1!important}
+#floodWaterDiagram :is(h2,h3){color:#303841!important;font-weight:400!important;}
 #rpMainRiver{width:100%!important;padding:12px!important;background:#f0f1f3!important;border:1px solid #e2e5e9!important;border-radius:12px!important;color:#303841!important;box-shadow:inset 0 1px 0 #fff,0 3px 7px #26364a18!important}
 #rpMainGraph{width:100%!important;max-width:none!important;max-height:70vh!important;overflow:auto!important;padding:10px 0!important}
 #rpMainGraph .rp-flow{width:100%!important;min-width:380px!important;height:auto!important;max-height:none!important;display:block!important}
 #rpMainGraph svg text{font-size:15px!important;fill:#303841}
 .ef-warning{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:14px!important;order:1!important}
 .ef-warning>details{padding:18px!important;border:0!important;background:#fff!important;border-radius:20px!important;box-shadow:0 5px 18px #253c5610!important}
-.ef-warning summary{font-size:18px!important;font-weight:500!important}
+.ef-warning summary{font-size:18px!important;font-weight:400!important;color:#303841!important}
 #ioEstatePanel{position:fixed!important;left:calc(var(--ref-left) + var(--ref-panel) + 16px)!important;top:120px!important;width:min(400px,calc(100vw - var(--ref-left) - var(--ref-panel) - 100px))!important;max-height:calc(100dvh - 150px)!important;padding:20px!important;overflow:auto!important;background:#fff!important;color:#303841!important;border:1px solid #e7e9ef!important;border-radius:20px!important;box-shadow:0 10px 32px #20354c2b!important;z-index:2300!important}
 #ioEstatePanel.io-picker-inline{position:static!important;width:100%!important;max-height:55vh!important}
 .io-picker-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important}
@@ -132,8 +132,8 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #ioEstatePickerOptions{max-height:40vh!important;overflow:auto!important}
 #ioEstatePickerOptions button{display:block!important;width:100%!important;padding:11px!important;text-align:left!important;border:0!important;border-radius:10px!important;background:#f1f2f4!important;color:#303841!important;margin:3px 0!important}
 .io-picker-actions{display:flex!important;gap:10px!important;margin-top:12px!important}
-.io-picker-actions button{flex:1!important;padding:9px!important;border:0!important;border-radius:14px!important;background:#edf2ff!important;color:#2f68f4!important}
-#ioEstatePickerApply{background:#2f68f4!important;color:#fff!important}
+.io-picker-actions button{flex:1!important;padding:9px!important;border:0!important;border-radius:14px!important;background:#edf2ff!important;color:#774aa4!important}
+#ioEstatePickerApply{background:#774aa4!important;color:#fff!important}
 #floodSectionPanel{z-index:1800!important}
 #preparednessPane .ex-table{width:100%!important;border-collapse:collapse!important}
 #preparednessPane :is(td,th){padding:8px!important;vertical-align:top!important;text-align:left!important;border-bottom:1px solid #eee!important}
@@ -151,6 +151,21 @@ body:not([data-flood-section=overview]) .ef-data-column{padding-top:24px!importa
 body[data-reference-panel=closed] :is(#floodInformationPane,#referenceViewTabs,#floodSectionPanel){display:none!important}
 #referencePanelSurface,#referencePanelToggle,#floodModeBar,.ef-map-head,#ieatDashboardCamera,#efMapFullscreen,#efMapExitFullscreen,#ieatDataIntegrity,.ex-kpi-note,#waterStatusGuide,.reference-dam-art,.rp-heading-icon,[data-water-heading-icon],#referenceSettings,.rp-area-picker,.flood-row-caption,#ieatCanalSample{display:none!important}
 #estateFocusDashboard .ieat-page-hidden,body [hidden]{display:none!important}
+
+#floodSectionPanel .alert-summary{margin:0 0 16px!important;gap:8px!important}
+#floodSectionPanel .alert-summary>[role=group]{min-height:90px!important}
+#floodSectionPanel .alert-summary>[role=group]:first-child b{color:#f00a36!important}
+#floodSectionPanel .alert-summary>[role=group]:nth-child(2) b{color:#ff6908!important}
+#floodSectionPanel .alert-type-filter{display:block!important;margin:10px 0 16px!important}
+#floodSectionPanel .alert-type-filter select{background:#f0f1f3!important;border:1px solid #e2e5e9!important;border-radius:12px!important;padding:9px 12px!important;box-shadow:inset 0 1px 0 #fff,0 3px 7px #26364a18!important}
+#floodSectionPanel .section-alert-list{display:grid!important;gap:14px!important}
+#floodSectionPanel .section-alert-row{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:7px!important;padding:18px!important;margin:0!important;border:1px solid #edf0f3!important;border-left:5px solid var(--alert-color)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 5px 16px #253c5612,inset 0 1px 0 #fff!important;text-align:left!important;color:#303841!important}
+#floodSectionPanel .section-alert-row .section-status{display:inline-flex!important;width:fit-content!important;padding:4px 10px!important;background:var(--alert-color)!important;border-radius:16px!important;color:#fff!important;-webkit-text-fill-color:#fff!important;font-size:13px!important}
+#floodSectionPanel .section-alert-row strong{font-size:16px!important;font-weight:400!important;color:#303841!important}
+#floodSectionPanel .section-alert-row .section-map-link{color:#774aa4!important}
+#floodSectionPanel .section-alert-row small{color:#59616b!important}
+#preparednessPane .ex-prep-selector{display:none!important}
+
 @media(max-width:900px){
 :root{--ref-left:72px;--ref-panel:calc(100vw - 96px)}
 #referenceRail{left:12px!important;width:60px!important}
