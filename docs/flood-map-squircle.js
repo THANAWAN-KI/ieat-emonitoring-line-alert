@@ -31,15 +31,36 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const colour=(kind,hex)=>ink(hex)||ink(KIND[kind]||'#109dc0');
 const glyph=(kind,c,w)=>'<svg class="ieat-nm-glyph" width="'+w+'" height="'+w+'" viewBox="1.5 1.5 21 21" aria-hidden="true" focusable="false">'+(GL[kind]||GL.water)(c)+'</svg>';
 const storySymbols=new URLSearchParams(location.search).get('story')==='1';
+
+const storyArt={
+ estate:['#e9a44f','<path d="M3 26V13l9 5v-6l9 5V6h6l2 20Z"/><path d="M7 21h4v3H7zm8 0h4v3h-4z" fill="#fff2cf"/>'],
+ water:['#67b9e5','<path d="M3 23q4-4 8 0t8 0t10 0v5H3Z"/><path d="M11 23V4h9v19m-5-14h5m-5 5h5m-5 5h5" fill="#fff7df"/>'],
+ rain:['#83bddb','<path d="M7 19a5 5 0 0 1-1-10 8 8 0 0 1 14-3 7 7 0 0 1 5 13Z"/><path d="m10 22-2 5m9-5-2 5m9-5-2 5" fill="none" stroke="#315783"/>'],
+ canal:['#68c4d7','<path d="m3 7 9 16h8l9-16v19H3Z"/><path d="M11 24q3-4 6 0t6 0" fill="none" stroke="#fff"/>'],
+ dam:['#c8a77d','<path d="M3 8h16l7 18H8Z"/><path d="m9 8 5 18m1-18 6 18" fill="none"/><path d="M3 27q4-3 8 0t8 0t10 0" fill="none" stroke="#247ca8"/>'],
+ camera:['#a0b7e8','<path d="m4 7 19 5-3 10-18-5zm19 6 6 2-2 7-6-2z"/><path d="m13 21-2 6h8m-4-3v4" fill="none"/>'],
+ pump:['#82b7e3','<path d="M9 12V5h13v5m-5 7h11v8" fill="none"/><rect x="4" y="12" width="16" height="15" rx="3"/><circle cx="12" cy="19.5" r="3" fill="#fff"/>'],
+ storage:['#74c9bc','<path d="M3 14h26l-5 13H8Z"/><path d="M7 18q4-3 8 0t10 0" fill="none"/><path d="M16 4q-7 8 0 9 7-1 0-9Z" fill="#81d8ed"/>'],
+ protection:['#87bd69','<path d="m16 3 10 4v10q-2 7-10 12Q8 24 6 17V7Z"/><path d="m11 15 4 4 7-8" fill="none" stroke="#fff"/>']
+};
+function storyIcon(kind,hex,size,count){
+ const [fill,shape]=storyArt[kind]||storyArt.water;
+ const status=/^#[0-9a-f]{6}$/i.test(String(hex))?hex:null;
+ return '<span class="ieat-story-symbol" style="--story-icon-size:'+size+'px" aria-hidden="true">'+
+  '<svg viewBox="0 0 32 32"><g fill="'+fill+'" stroke="#27313a" stroke-width="1.45" stroke-linejoin="round" stroke-linecap="round">'+shape+'</g>'+
+  (kind==='water'&&status?'<circle cx="25" cy="9" r="3" fill="'+status+'" stroke="#27313a" stroke-width="1"/>':'')+'</svg>'+
+  (count?'<b>'+count+'</b>':'')+'</span>';
+}
 const isCrit=hex=>String(hex||'').trim().toLowerCase()==='#bf033b';
 function waterCircle(hex,marker){
  const c=/^#[0-9a-f]{6}$/i.test(String(hex))?hex:'#99d3f0';
  return '<span class="ieat-water-circle'+(marker?' is-map-point':'')+'" data-type="water" style="--water-dot:'+c+'" aria-hidden="true"></span>';
 }
-function tile(kind,hex,size){if(kind==='water')return waterCircle(hex,false);size=size||28;return '<span class="ieat-nm-btn" style="width:'+size+'px;height:'+size+'px">'+glyph(kind,colour(kind,hex),Math.round(size*.66))+'</span>'}
-function pin(kind,hex){if(kind==='camera'&&!storySymbols)return '<span class="ieat-sq-pin ieat-cctv-pin" data-type="camera" aria-hidden="true"><span class="ieat-nm-btn">'+glyph('camera','#ffffff',27)+'</span><span class="ieat-nm-tail"></span></span>';if(kind==='water'&&!storySymbols)return waterCircle(hex,true);const crit=isCrit(hex);
+function tile(kind,hex,size){if(storySymbols)return storyIcon(kind,hex,size||28);if(kind==='water')return waterCircle(hex,false);size=size||28;return '<span class="ieat-nm-btn" style="width:'+size+'px;height:'+size+'px">'+glyph(kind,colour(kind,hex),Math.round(size*.66))+'</span>'}
+function pin(kind,hex){if(storySymbols)return '<span class="ieat-story-pin">'+storyIcon(kind,hex,32)+'</span>';if(kind==='camera'&&!storySymbols)return '<span class="ieat-sq-pin ieat-cctv-pin" data-type="camera" aria-hidden="true"><span class="ieat-nm-btn">'+glyph('camera','#ffffff',27)+'</span><span class="ieat-nm-tail"></span></span>';if(kind==='water'&&!storySymbols)return waterCircle(hex,true);const crit=isCrit(hex);
  return '<span class="ieat-sq-pin'+(crit?' is-critical':'')+'" data-type="'+esc(kind)+'" aria-hidden="true"><span class="ieat-nm-btn">'+glyph(kind,colour(kind,hex),27)+'</span><span class="ieat-nm-tail"></span></span>'}
 function cluster(kind,hex,count){const c=colour(kind,hex),n=Number(count)||0,txt=n>99?'99+':String(n);
+ if(storySymbols)return storyIcon(kind,hex,43,txt);
  return '<span class="ieat-sq-cluster" data-type="'+esc(kind)+'"><span class="ieat-nm-btn" style="--nm-ring:'+c+'"><b style="color:'+c+';font-size:'+(txt.length>2?12:15)+'px">'+txt+'</b></span><span class="ieat-sq-cluster-kind">'+tile(kind,hex,20)+'</span></span>'}
 window.IEAT_SQ={tile,pin,cluster,ink};
 /* 85% frosted white; the drop shadow lives on the button itself (not a parent filter) so backdrop blur still sees the map. */
@@ -85,6 +106,14 @@ css.textContent+=`
 html body .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-btn{background:#2f68f4!important;border:2px solid #fff!important;box-shadow:0 3px 9px #173b7040!important}
 html body .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-tail{border-top-color:#2f68f4!important}
 html body .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-glyph{width:27px!important;height:27px!important}
+`;
+if(storySymbols)css.textContent+=`
+html body .ieat-story-symbol{display:inline-block!important;position:relative;width:var(--story-icon-size);height:var(--story-icon-size);line-height:1;vertical-align:middle}
+html body .ieat-story-symbol svg{display:block!important;width:100%!important;height:100%!important;filter:drop-shadow(0 1px 1px #15202e45)!important}
+html body .ieat-story-symbol b{position:absolute;right:-2px;bottom:1px;padding:1px 3px;border:1px solid #fff;border-radius:5px;background:#29333b;color:#fff;font:700 11px/1 Sarabun,sans-serif}
+html body .ieat-story-pin,html body .estate-pin>.ieat-story-symbol{position:absolute;bottom:0;left:50%;transform:translateX(-50%)}
+html body #mapLayers .layer-swatch[data-kind="water"] .ieat-story-symbol{display:inline-block!important}
+html body #mapLayers .layer-swatch[data-kind="water"]:after{content:none!important}
 `;
 (document.head||document.documentElement).appendChild(css);
 /* Inline <style> blocks later in <body> can still win; move ours to the very end once parsed. */
