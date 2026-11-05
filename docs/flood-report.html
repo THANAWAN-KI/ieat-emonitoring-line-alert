@@ -52,7 +52,57 @@
   html.story-dashboard body:not([data-reference-panel=closed]) #estateFocusDashboard .ef-map-column { top:0!important; right:0!important; bottom:0!important; border-radius:0!important; }
  }
  html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel),
- html.story-dashboard body[data-flood-section] #estateFocusDashboard #floodInformationPane { background:#fff!important; }
+ html.story-dashboard body[data-flood-section] #estateFocusDashboard #floodInformationPane { background:#fffdf8!important; }
+ @media screen {
+  html.story-dashboard {
+   --chapter-paper:#fffdf8;
+   --chapter-ink:#202b2b;
+   --chapter-gold:#ffbd28;
+   --chapter-blue:#3157bd;
+   --chapter-rule:#e6dfd3;
+  }
+  html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel) { background:var(--chapter-paper)!important; }
+  html.story-dashboard #floodInformationPane #approvedDashboardHeading {
+   border-inline-start:4px solid var(--chapter-gold);
+   padding:2px 0 2px 12px;
+   margin:3px 0 6px;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane #floodPageTitle,
+  html.story-dashboard #floodSectionPanel h1 { color:var(--chapter-ink)!important; }
+  html.story-dashboard body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+   background:#fff0c7!important;
+   color:var(--chapter-ink)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs {
+   border-bottom-color:var(--chapter-rule)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true] {
+   color:var(--chapter-ink)!important;
+   box-shadow:inset 0 -3px var(--chapter-gold)!important;
+  }
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates) {
+   background:#fff!important;
+   border-color:var(--chapter-rule)!important;
+   color:var(--chapter-blue)!important;
+   border-radius:8px!important;
+  }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#3157bd; --kpi-band:#849be1; --kpi-track:#e6ecff; }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#28728e; --kpi-band:#82d2e5; --kpi-track:#e0f3f8; }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#665597; --kpi-band:#ac9bcd; --kpi-track:#eee8f6; }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis,
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi+.flood-kpi {
+   border-color:var(--chapter-rule)!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { color:var(--chapter-ink)!important; }
+  html.story-dashboard #floodInformationPane #floodStationsSection .rp-stations-title {
+   color:var(--chapter-ink)!important;
+   padding-bottom:5px!important;
+   border-bottom:1px solid var(--chapter-rule);
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-station-row[aria-pressed=true] {
+   outline-color:var(--chapter-rule)!important;
+  }
+ }
 }
 </style>
 </head>
