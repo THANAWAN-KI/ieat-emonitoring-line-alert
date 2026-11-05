@@ -750,7 +750,7 @@ const historyPopups=new WeakSet();function mountPopupHistory(root){const hosts=[
 
 document.addEventListener('click',e=>{const button=e.target.closest('[data-popup-history-year]');if(!button)return;const host=button.closest('.station-history-inline');if(host){e.preventDefault();e.stopPropagation();renderPopupHistory(host,Number(button.dataset.popupHistoryYear))}});
 
-function createMapPopup(options){const popup=new maplibregl.Popup(cleanDashboard?{...options,className:'prep-point-popup'}:options);if(cleanDashboard)return popup;popup.on('open',()=>{const node=popup.getElement()?.querySelector('.popup');if(node)window.IEAT_MAP_DETAILS?.showHTML(node.outerHTML);popup.remove()});return popup}
+function createMapPopup(options){const popup=new maplibregl.Popup((cleanDashboard||storyMap)?{...options,className:'prep-point-popup'}:options);if(cleanDashboard||storyMap)return popup;popup.on('open',()=>{const node=popup.getElement()?.querySelector('.popup');if(node)window.IEAT_MAP_DETAILS?.showHTML(node.outerHTML);popup.remove()});return popup}
 function waterPopup(r){
  const wl=r.wl==null?null:Number(r.wl),bank=r.bank==null?null:Number(r.bank),has=wl!==null&&bank!==null&&Number.isFinite(wl)&&Number.isFinite(bank),diff=has?wl-bank:null;
  const status=has?(diff>=0?'ล้นตลิ่ง '+fmt(diff)+' ม.':'ต่ำกว่าตลิ่ง '+fmt(Math.abs(diff))+' ม.'):'ไม่มีระดับตลิ่งให้เปรียบเทียบ';
@@ -769,10 +769,10 @@ function estateFloodPlan(name){
 function showMapDetails(r,k){
  if(k==='estate')return; // Estate pins do not open the generic location popup.
  stopAerialTour();const lon=Number(r.lng??r.lon),lat=Number(r.lat);
- if(!cleanDashboard){window.IEAT_MAP_DETAILS?.show(r,k);return}
+ if(!cleanDashboard&&!storyMap){window.IEAT_MAP_DETAILS?.show(r,k);return}
  if(!Number.isFinite(lon)||!Number.isFinite(lat))return;
  // Clicking a station always centers it before showing a details popup.
- if(k!=='estate'){if(vector)vector.easeTo({center:[lon,lat],zoom:Math.max(vector.getZoom(),11),duration:440});else raster?.setView([lat,lon],Math.max(raster.getZoom(),11),{animate:true})}
+ if(k!=='estate'&&!storyMap){if(vector)vector.easeTo({center:[lon,lat],zoom:Math.max(vector.getZoom(),11),duration:440});else raster?.setView([lat,lon],Math.max(raster.getZoom(),11),{animate:true})}
  openPointPopup(lon,lat,content(r,k),false,k==='camera'?r:null);
 }
 function baseContent(r,k){
@@ -813,7 +813,7 @@ function ieatStationContent(r,k){
 }
 function content(r,k){
  if(k==='water'||k==='canal')return ieatStationContent(r,k);
- if(!floodPinTypes[k])return baseContent(r,k);
+ if(k==='rain'||!floodPinTypes[k])return baseContent(r,k);
  const t={...floodPinTypes[k],color:pointCondition(r,k).hex},title=esc([r.code,r.name].filter(Boolean).join(' · '));
  if(k==='camera')return '<article class="popup flood-card" style="--fc-color:'+t.color+'"><div data-camera-id="'+esc(r.id)+'"><div class="fc-preview fc-camera"><span class="fc-image-badge">ภาพล่าสุดจากต้นทาง</span><div class="fc-placeholder">'+cameraSvg+'<span>กำลังขอภาพ CCTV</span></div><img data-camera-image alt="ภาพ CCTV '+esc(r.name)+'" style="display:none"></div><div class="fc-title"><div><small>'+t.label+'</small><h3>'+title+'</h3></div><a href="https://telemetry.dwr.go.th/reportCctv" target="_blank" rel="noopener">เปิด ↗</a></div><div class="fc-caption"><p data-camera-time>กำลังโหลดภาพล่าสุด…</p><p data-camera-state></p><p>ภาพนิ่งที่ต้นทางบันทึก · ไม่ใช่วิดีโอสด</p><button type="button" data-camera-refresh="'+esc(r.id)+'">อัปเดตภาพ</button></div></div></article>';
  const value=k==='dam'?fmt(r.percent)+'%':fmt(r.wl)+' <small>ม.รทก.</small>';
@@ -1216,7 +1216,7 @@ function rasterStart(){
  if(!window.L){$('status').textContent='โหลดแผนที่ไม่สำเร็จ กรุณาเปิดใหม่';return}
  raster=L.map('raster',{preferCanvas:true,zoomControl:false}).setView([14,101],6);
  raster.on('zoomend moveend',queueRasterIllustrations);raster.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
- raster.on('popupopen',event=>{if(cleanDashboard||event.popup.getElement()?.classList.contains('prep-point-popup'))return;const html=event.popup.getContent();raster.closePopup(event.popup);window.IEAT_MAP_DETAILS?.showHTML(typeof html==='string'?html:html?.outerHTML||'')});
+ raster.on('popupopen',event=>{if(cleanDashboard||storyMap||event.popup.getElement()?.classList.contains('prep-point-popup'))return;const html=event.popup.getContent();raster.closePopup(event.popup);window.IEAT_MAP_DETAILS?.showHTML(typeof html==='string'?html:html?.outerHTML||'')});
  riverSvgRenderer=L.svg({padding:.5});
  rasterBaseLayer=L.tileLayer(basemapUrls[selectedBasemap],{attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true,className:'dashboard-base-tiles'}).addTo(raster);
  if(!cleanDashboard)L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
@@ -1606,6 +1606,18 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
  const node=document.createElement('div');
  node.className='dashboard-popup-body';
  node.innerHTML=html;
+ if(storyMap){
+  const zoomButton=document.createElement('button');
+  zoomButton.type='button';
+  zoomButton.className='story-popup-zoom';
+  zoomButton.textContent='ซูมไปยังตำแหน่ง';
+  zoomButton.onclick=()=>{
+   if(vector)vector.easeTo({center:[Number(lon),Number(lat)],zoom:Math.max(vector.getZoom(),12),duration:400});
+   else raster?.setView([Number(lat),Number(lon)],Math.max(raster.getZoom(),12),{animate:true});
+  };
+  const header=node.querySelector('.popup>header');
+  if(header)header.after(zoomButton);else node.prepend(zoomButton);
+ }
  const estate=estateProvinceScope?.active?estateProvinceScope.estate:null;
  if(estate){const d=distanceFromEstate(Number(lon),Number(lat));if(Number.isFinite(d)){const note=document.createElement('div');note.className='popup-estate-distance';note.innerHTML='<strong>ระยะห่างจากนิคมฯ</strong><span>'+esc(estateProvinceScope.name)+' · '+d.toLocaleString('th-TH',{maximumFractionDigits:2})+' กม. (เส้นตรง)</span>';const btn=document.createElement('button');btn.type='button';btn.className='ieat-measure-btn';btn.setAttribute('aria-pressed','false');btn.textContent='วัดระยะทางบนแผนที่';btn.addEventListener('click',()=>toggleIEATMeasuredDistance(Number(lon),Number(lat),btn));note.append(btn);node.append(note)}}
  if(move)window.IEATPreparednessMap().focusPoint(Number(lon),Number(lat));
@@ -1964,6 +1976,28 @@ html body.story-map-mode .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-btn{background:#f
 html body.story-map-mode .ieat-sq-pin .ieat-nm-btn{width:29px!important;height:29px!important}
 html body.story-map-mode .ieat-sq-pin .ieat-nm-glyph{width:21px!important;height:21px!important}
 html body.story-map-mode .estate-pin>.ieat-nm-btn{position:absolute!important;bottom:0;left:50%;transform:translateX(-50%)}
+</style>
+<style>
+html body.story-map-mode #rightMapToolbar{gap:6px!important}
+html body.story-map-mode #rightMapToolbar button,
+html body.story-map-mode #rightMapToolbar .right-map-zoom{
+ border-radius:0!important;background:#fff!important;box-shadow:none!important;
+}
+html body.story-map-mode #rightMapToolbar button{border:1px solid #c5c5c5!important;color:#454545!important}
+html body.story-map-mode #rightMapToolbar .right-map-zoom button+button{border-top:0!important}
+html body.story-map-mode #rightMapToolbar button:hover{background:#eee!important}
+html body.story-map-mode :is(.maplibregl-popup-content,.leaflet-popup-content-wrapper,#mapDetails){
+ border:1px solid #bcbcbc!important;border-radius:0!important;background:#fff!important;color:#383838!important;box-shadow:0 2px 7px #0003!important;
+}
+html body.story-map-mode .maplibregl-popup-content{padding:12px!important}
+html body.story-map-mode .leaflet-popup-content{margin:12px!important}
+html body.story-map-mode :is(.maplibregl-popup-close-button,.leaflet-popup-close-button){color:#4b4b4b!important;background:#fff!important;border-radius:0!important}
+html body.story-map-mode .ieat-station-popup>header{border-bottom:1px solid #dedede;padding-bottom:6px}
+html body.story-map-mode .ieat-station-popup .ieat-gauge-row{display:none!important}
+html body.story-map-mode :is(.maplibregl-popup,.leaflet-popup,#mapDetails) table{width:100%;border-collapse:collapse}
+html body.story-map-mode :is(.maplibregl-popup,.leaflet-popup,#mapDetails) table :is(th,td){text-align:left;padding:6px 8px!important;border:1px solid #fff!important;background:#f7f7f7!important}
+html body.story-map-mode :is(.maplibregl-popup,.leaflet-popup,#mapDetails) table tr:nth-child(odd)>*{background:#ebebeb!important}
+html body.story-map-mode .story-popup-zoom{margin:6px 0;padding:4px 8px;background:#f3f3f3;border:1px solid #ccc;border-radius:0;color:#333;cursor:pointer}
 </style>
 </body></html>
 
