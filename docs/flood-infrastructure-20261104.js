@@ -7,7 +7,9 @@
   ['flood_drainage_channel','คลองระบายน้ำ','#168bd2'],
   ['flood_barrier','แนวคันกั้นน้ำ / ป้องกันน้ำท่วม','#c77a19']
  ];
- const enabled = Object.fromEntries(groups.map(g=>[g[0],true]));
+ const params=new URLSearchParams(location.search);
+ const showInfrastructure=!(params.get('story')==='1'&&params.get('dashboard')==='clean');
+ const enabled = Object.fromEntries(groups.map(g=>[g[0],showInfrastructure]));
  const escape = v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const normalize = v=>String(v||'').replace(/นิคมอุตสาหกรรม|นิคมฯ|\s/g,'');
  const storySymbols=new URLSearchParams(location.search).get('story')==='1';
@@ -22,7 +24,7 @@
  }
  const panel=document.createElement('details');panel.id='ieatInfrastructure';panel.open=false;
  panel.style.cssText='position:absolute;left:12px;bottom:45px;z-index:1100;max-width:min(330px,calc(100vw - 70px));padding:9px 12px;background:#fffffff5;border:1px solid #e4d8ef;border-radius:12px;box-shadow:0 3px 14px #39214b20;color:#34213f;font:12px/1.6 Sarabun,sans-serif';
- panel.innerHTML='<summary style="cursor:pointer;font-weight:700" title="โครงสร้างพื้นฐานจัดการน้ำ"><span class="infra-control-name">โครงสร้างพื้นฐานจัดการน้ำ</span></summary><div style="max-height:30vh;overflow:auto">'+groups.map(([key,label,color])=>'<label style="display:flex;align-items:center;gap:7px;margin-top:6px;cursor:pointer"><input type="checkbox" checked data-infra="'+key+'" style="accent-color:'+color+'"><i style="display:inline-block;width:12px;height:12px;border-radius:50%;background:'+color+'"></i><span>'+label+' <b data-count="'+key+'"></b></span></label>').join('')+'<small id="infraScope" style="display:block;margin-top:6px"></small><small style="color:#77677f">ข้อมูลตามไฟล์นำเข้า · คลิกจุดหรือเส้นเพื่อดูรายละเอียด</small></div>';
+ panel.innerHTML='<summary style="cursor:pointer;font-weight:700" title="โครงสร้างพื้นฐานจัดการน้ำ"><span class="infra-control-name">โครงสร้างพื้นฐานจัดการน้ำ</span></summary><div style="max-height:30vh;overflow:auto">'+groups.map(([key,label,color])=>'<label style="display:flex;align-items:center;gap:7px;margin-top:6px;cursor:pointer"><input type="checkbox" '+(enabled[key]?'checked ':'')+'data-infra="'+key+'" style="accent-color:'+color+'"><i style="display:inline-block;width:12px;height:12px;border-radius:50%;background:'+color+'"></i><span>'+label+' <b data-count="'+key+'"></b></span></label>').join('')+'<small id="infraScope" style="display:block;margin-top:6px"></small><small style="color:#77677f">ข้อมูลตามไฟล์นำเข้า · คลิกจุดหรือเส้นเพื่อดูรายละเอียด</small></div>';
  (document.getElementById('mapStage')||document.body).appendChild(panel);
  panel.addEventListener('change',e=>{const k=e.target.dataset.infra;if(k){enabled[k]=e.target.checked;render();}});
  function render(){
