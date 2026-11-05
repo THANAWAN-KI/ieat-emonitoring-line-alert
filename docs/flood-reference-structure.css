@@ -323,3 +323,25 @@ body[data-flood-section=overview][data-water-category=stations] #estateFocusDash
 @keyframes partOneTrendBlink{0%,100%{opacity:1}50%{opacity:.25}}
 @media(prefers-reduced-motion:reduce){body[data-flood-section=overview][data-water-category=stations] #estateFocusDashboard .rp-trend-arrow{animation:none!important}}
 }
+
+/* Overview summaries: one count, one short label, shared scope and on-demand criteria. */
+@layer floodDashboard {
+#estateFocusDashboard .flood-kpis{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;padding:4px 0!important;background:#fff!important}
+#estateFocusDashboard .flood-kpis>.flood-kpi{display:grid!important;grid-template-columns:32px minmax(0,1fr)!important;grid-template-rows:1fr!important;align-items:center!important;gap:10px!important;min-height:126px!important;padding:16px 12px!important;text-align:left!important;border:0!important;border-radius:20px!important;background:#fff!important;color:#303841!important;box-shadow:0 5px 18px #253c5610!important}
+#estateFocusDashboard .flood-kpi::before,#estateFocusDashboard .flood-kpi::after{content:none!important;display:none!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-icon{display:flex!important;align-items:center!important;justify-content:center!important;grid-area:auto!important;width:32px!important;height:32px!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#59616b!important;align-self:center!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-icon svg{display:block!important;width:26px!important;height:26px!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:6px!important;grid-area:auto!important;min-width:0!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-copy strong{display:block!important;font-size:28px!important;font-weight:500!important;line-height:1.15!important;color:#303841!important;letter-spacing:0!important;margin:0!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-label{display:block!important;font-size:14px!important;font-weight:400!important;line-height:1.45!important;color:#303841!important;margin:0!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
+#estateFocusDashboard #overviewKpiScope{font-size:13px!important;font-weight:400!important;line-height:1.5!important;color:#59616b!important;margin:10px 0 0!important}
+#estateFocusDashboard #overviewKpiCriteria{margin:10px 0 0!important;padding:12px 14px!important;border:1px solid #e8ebef!important;border-radius:12px!important;background:#f8f9fb!important;color:#303841!important}
+#estateFocusDashboard #overviewKpiCriteria summary{font-size:14px!important;font-weight:400!important;cursor:pointer!important}
+#estateFocusDashboard #overviewKpiCriteria p{font-size:14px!important;font-weight:400!important;line-height:1.6!important;margin:8px 0 0!important}
+@media(max-width:1100px){
+#estateFocusDashboard .flood-kpis{gap:8px!important}
+#estateFocusDashboard .flood-kpis>.flood-kpi{grid-template-columns:minmax(0,1fr)!important;gap:8px!important;padding:13px 9px!important;align-content:start!important;min-height:138px!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-icon{width:26px!important;height:26px!important}
+#estateFocusDashboard .flood-kpi .ef-kpi-copy strong{font-size:26px!important}
+}
+}
