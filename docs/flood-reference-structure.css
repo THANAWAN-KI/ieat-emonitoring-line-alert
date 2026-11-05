@@ -307,15 +307,15 @@ body[data-flood-section=overview]:is([data-water-category=stations],[data-water-
 body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceViewTabs button[aria-selected=true]{background:#3168F4!important;color:#fff!important}
 body[data-flood-section=overview][data-water-category=stations] #ieatAllEstates{background:#f3f4f6!important;color:#388ed1!important;border-color:#e3e5e9!important;box-shadow:inset 0 1px 0 #fff,0 2px 6px #26364a12!important}
 body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #estateFocusDashboard :is(#ieatWaterStationPager,#ieatCanalPager,#ieatDamPager,#ieatReservoirPager) button{background:#f3f4f6!important;color:#303841!important;border-color:#e3e5e9!important;box-shadow:inset 0 1px 0 #fff,0 2px 6px #26364a12!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail .reference-rail-modes>button{background:transparent!important;border:0!important;box-shadow:none!important;color:#6B7280!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail .reference-rail-modes>button[aria-pressed=true]{color:#3168F4!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail .reference-rail-modes>button>svg{display:none!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail .part-one-rail-icon{display:flex!important;align-items:center!important;justify-content:center!important;width:32px!important;height:32px!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail .part-one-rail-icon svg{display:block!important;width:32px!important;height:32px!important;max-width:none!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail :is([data-section=alerts],[data-section=preparedness]) .part-one-rail-icon{width:52px!important;height:52px!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail :is([data-section=alerts],[data-section=preparedness]) .part-one-rail-icon svg{width:52px!important;height:52px!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail [data-section=settings]{display:none!important}
-body[data-flood-section=overview]:is([data-water-category=stations],[data-water-category=dams]) #referenceRail .has-current-alert{animation:none!important}
+body[data-flood-section] #referenceRail .reference-rail-modes>button{background:transparent!important;border:0!important;box-shadow:none!important;color:#6B7280!important}
+body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true]{color:#3168F4!important}
+body[data-flood-section] #referenceRail .reference-rail-modes>button>svg{display:none!important}
+body[data-flood-section] #referenceRail .part-one-rail-icon{display:flex!important;align-items:center!important;justify-content:center!important;width:32px!important;height:32px!important}
+body[data-flood-section] #referenceRail .part-one-rail-icon svg{display:block!important;width:32px!important;height:32px!important;max-width:none!important}
+body[data-flood-section] #referenceRail :is([data-section=alerts],[data-section=preparedness]) .part-one-rail-icon{width:52px!important;height:52px!important}
+body[data-flood-section] #referenceRail :is([data-section=alerts],[data-section=preparedness]) .part-one-rail-icon svg{width:52px!important;height:52px!important}
+body[data-flood-section] #referenceRail [data-section=settings]{display:none!important}
+body[data-flood-section] #referenceRail .has-current-alert{animation:none!important}
 body[data-flood-section=overview][data-water-category=stations] #estateFocusDashboard .rp-row-trend{display:flex!important;align-items:center!important;gap:7px!important;color:var(--rp-status-color,#706357)!important;font-weight:400!important}
 body[data-flood-section=overview][data-water-category=stations] #estateFocusDashboard .rp-row-trend span{color:var(--rp-status-color,#706357)!important;-webkit-text-fill-color:var(--rp-status-color,#706357)!important}
 body[data-flood-section=overview][data-water-category=stations] #estateFocusDashboard .rp-trend-arrow{animation:partOneTrendBlink 1.1s ease-in-out infinite!important}
@@ -424,4 +424,99 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
 #estateFocusDashboard #floodInformationPane .ef-canal-gauge svg {
   height: 188px !important;
 }
+}
+
+/* Shared styling for the other pages in the water dashboard. */
+@layer floodDashboard {
+  body[data-flood-section] #referenceRail .reference-rail-modes>[data-section]:focus-visible {
+    outline-color: #3168f4 !important;
+  }
+  body:is([data-flood-section=alerts],[data-flood-section=report]) #floodSectionPanel {
+    padding-top: 24px !important;
+    gap: 8px !important;
+  }
+  :is(#floodSectionPanel,#preparednessPane) :is(h1,h2) {
+    color: #163550 !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 6px !important;
+  }
+  #floodSectionPanel>.section-subtitle,
+  #preparednessPane .ex-prep-head p {
+    margin: 0 0 6px !important;
+    color: #59616b !important;
+  }
+  #floodSectionPanel .alert-summary {
+    margin: 0 !important;
+    gap: 6px !important;
+  }
+  #floodSectionPanel .alert-summary>[role=group] {
+    min-height: 76px !important;
+    padding: 9px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: linear-gradient(145deg,#f1f9ff,#deeffb) !important;
+  }
+  #floodSectionPanel .alert-summary>[role=group]:last-child b,
+  #floodSectionPanel .section-alert-row .section-map-link {
+    color: #2166a5 !important;
+  }
+  #floodSectionPanel .alert-type-filter {
+    margin: 2px 0 4px !important;
+  }
+  #floodSectionPanel .section-alert-list {
+    gap: 6px !important;
+  }
+  #floodSectionPanel .section-alert-list .section-alert-row {
+    gap: 4px !important;
+    padding: 10px 12px !important;
+    border: 0 !important;
+    border-left: 3px solid var(--alert-color) !important;
+    border-radius: 12px !important;
+    box-shadow: inset 0 1px 0 #dceaf7, 0 2px 7px #183b5c0d !important;
+  }
+  #floodSectionPanel .section-alert-row strong {
+    font-weight: 600 !important;
+    color: #163550 !important;
+  }
+  #preparednessPane .ex-prep-selector {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: 6px;
+    margin: 8px 0 !important;
+  }
+  #preparednessPane .ex-prep-selector label {
+    grid-column: 1/-1;
+  }
+  #preparednessPane .ex-prep-selector select {
+    min-width: 0;
+    width: 100%;
+  }
+  #estateFocusDashboard #preparednessPane .ex-card,
+  #floodSectionPanel .ref-chart-card {
+    padding: 10px 12px !important;
+    margin: 0 0 8px !important;
+    background: #fff !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    box-shadow: inset 0 1px 0 #dceaf7, 0 2px 7px #183b5c0d !important;
+  }
+  :is(#preparednessPane .ex-card,#floodSectionPanel .ref-chart-card)>h2 {
+    background: #eef6fd !important;
+    box-shadow: inset 3px 0 0 #4597d1 !important;
+    border-radius: 6px !important;
+    padding: 6px 10px !important;
+  }
+  #preparednessPane .ex-table thead th,
+  #floodSectionPanel .ex-report-table thead th {
+    background: #eef6fd !important;
+    color: #163550 !important;
+  }
+  #floodSectionPanel .section-action,
+  #preparednessPane .ex-prep-selector .ex-map-action {
+    background: #eef6fd !important;
+    color: #2166a5 !important;
+    border: 0 !important;
+    border-radius: 8px !important;
+  }
 }
