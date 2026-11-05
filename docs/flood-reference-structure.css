@@ -141,7 +141,7 @@ body[data-flood-section=overview] #floodInformationPane>:not(#approvedDashboardH
 body[data-flood-section=overview][data-water-category=stations] #floodInformationPane>:is(#floodDamsSection,#efDamFlowPanel,.ef-canal-panel,#floodWaterDiagram,.ef-warning){display:none!important}
 body[data-flood-section=overview] #riverSidePanel{padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
 body[data-flood-section=overview] #riverSidePanel>:not(#floodStationsSection){display:none!important}
-body[data-flood-section=overview][data-water-category=dams] #floodInformationPane>:not(#approvedDashboardHeading):not(#floodDamsSection):not(#efDamFlowPanel){display:none!important}
+body[data-flood-section=overview][data-water-category=dams] #floodInformationPane>:not(#floodDamsSection):not(#efDamFlowPanel){display:none!important}
 body[data-flood-section=overview][data-water-category=canals] #floodInformationPane>:not(.ef-canal-panel){display:none!important}
 body[data-flood-section=overview][data-water-category=diagram] #floodInformationPane>:not(#floodWaterDiagram):not(.ef-warning){display:none!important}
 body[data-flood-section=preparedness] #floodInformationPane>:not(#preparednessPane){display:none!important}
