@@ -10,6 +10,8 @@
  const params=new URLSearchParams(location.search);
  const showInfrastructure=!(params.get('story')==='1'&&params.get('dashboard')==='clean');
  const enabled = Object.fromEntries(groups.map(g=>[g[0],showInfrastructure]));
+ const manualLayers=new Set();
+ const pointName=p=>p.station_name||p.storage_name||p.channel_name||p.barrier_name||groups.find(g=>g[0]===p.source_table)[1];
  const escape = v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const normalize = v=>String(v||'').replace(/นิคมอุตสาหกรรม|นิคมฯ|\s/g,'');
  const storySymbols=new URLSearchParams(location.search).get('story')==='1';
@@ -26,7 +28,7 @@
  panel.style.cssText='position:absolute;left:12px;bottom:45px;z-index:1100;max-width:min(330px,calc(100vw - 70px));padding:9px 12px;background:#fffffff5;border:1px solid #e4d8ef;border-radius:12px;box-shadow:0 3px 14px #39214b20;color:#34213f;font:12px/1.6 Sarabun,sans-serif';
  panel.innerHTML='<summary style="cursor:pointer;font-weight:700" title="โครงสร้างพื้นฐานจัดการน้ำ"><span class="infra-control-name">โครงสร้างพื้นฐานจัดการน้ำ</span></summary><div style="max-height:30vh;overflow:auto">'+groups.map(([key,label,color])=>'<label style="display:flex;align-items:center;gap:7px;margin-top:6px;cursor:pointer"><input type="checkbox" '+(enabled[key]?'checked ':'')+'data-infra="'+key+'" style="accent-color:'+color+'"><i style="display:inline-block;width:12px;height:12px;border-radius:50%;background:'+color+'"></i><span>'+label+' <b data-count="'+key+'"></b></span></label>').join('')+'<small id="infraScope" style="display:block;margin-top:6px"></small><small style="color:#77677f">ข้อมูลตามไฟล์นำเข้า · คลิกจุดหรือเส้นเพื่อดูรายละเอียด</small></div>';
  (document.getElementById('mapStage')||document.body).appendChild(panel);
- panel.addEventListener('change',e=>{const k=e.target.dataset.infra;if(k){enabled[k]=e.target.checked;render();}});
+ panel.addEventListener('change',e=>{const k=e.target.dataset.infra;if(k){manualLayers.add(k);enabled[k]=e.target.checked;render();}});
  function render(){
   if(!api?.ready)return;
   const selected=rows();
@@ -42,7 +44,8 @@
     visible.push(point);
     const button=document.createElement('button');
     button.type='button';
-    button.setAttribute('aria-label',groups.find(g=>g[0]===f.properties.source_table)[1]);
+    button.classList.add('infra-data-pin');
+    button.setAttribute('aria-label',pointName(f.properties));
     button.style.cssText='background:none;border:0;padding:0;cursor:pointer';
     button.innerHTML=window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32);
     storyMarkers.push(new maplibregl.Marker({element:button}).setLngLat(f.geometry.coordinates).setPopup(new maplibregl.Popup({maxWidth:'340px',className:'prep-point-popup'}).setHTML(content(f.properties))).addTo(vector));
@@ -63,13 +66,14 @@
    groups.forEach(([key])=>vector.setLayoutProperty('infra-'+key,'visibility',enabled[key]?'visible':'none'));
   }else if(raster){
    if(leafletGroup)raster.removeLayer(leafletGroup);
-   leafletGroup=L.geoJSON({type:'FeatureCollection',features:selected.filter(f=>enabled[f.properties.source_table])},{style:f=>({color:groups.find(g=>g[0]===f.properties.source_table)[2],weight:4}),pointToLayer:(f,latlng)=>storySymbols&&window.IEAT_SQ?L.marker(latlng,{icon:L.divIcon({className:'',html:window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32),iconSize:[32,32]})}):L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:groups.find(g=>g[0]===f.properties.source_table)[2],fillOpacity:1}),onEachFeature:(f,l)=>l.bindPopup(content(f.properties),{maxWidth:340,className:'prep-point-popup'})}).addTo(raster);
+   leafletGroup=L.geoJSON({type:'FeatureCollection',features:selected.filter(f=>enabled[f.properties.source_table])},{style:f=>({color:groups.find(g=>g[0]===f.properties.source_table)[2],weight:4}),pointToLayer:(f,latlng)=>storySymbols&&window.IEAT_SQ?L.marker(latlng,{title:pointName(f.properties),icon:L.divIcon({className:'infra-data-pin',html:window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32),iconSize:[32,32]})}):L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:groups.find(g=>g[0]===f.properties.source_table)[2],fillOpacity:1}),onEachFeature:(f,l)=>l.bindPopup(content(f.properties),{maxWidth:340,className:'prep-point-popup'})}).addTo(raster);
   }
+  document.dispatchEvent(new Event('ieat-infrastructure-rendered'));
  }
  function mount(){api=window.IEATPreparednessMap?.();if(!api?.ready)return false;vector=api.vector;raster=api.raster;render();return true;}
  document.addEventListener('ieat-map-ready',mount);
  if(!mount()){let tries=0;const timer=setInterval(()=>{if(mount()||++tries>=120)clearInterval(timer);},500);}
- window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='flood-province-scope')return;const next=e.data.active?e.data.name||'':'';if(next===scope)return;scope=next;popup?.remove();render();});
+ window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='flood-province-scope')return;const next=e.data.active?e.data.name||'':'';if(next===scope)return;scope=next;if(!showInfrastructure){for(const [key] of groups){if(manualLayers.has(key))continue;enabled[key]=Boolean(scope);panel.querySelector('[data-infra="'+key+'"]').checked=enabled[key];}}popup?.remove();render();});
 
  let selectedOutline=null;
  window.addEventListener('message',e=>{
