@@ -265,3 +265,24 @@ html body #warning #estateFocusDashboard#estateFocusDashboard .ef-data-column{pa
  alignHeading();document.readyState==='loading'&&document.addEventListener('DOMContentLoaded',alignHeading,{once:true});
  setInterval(()=>{if(!document.hidden)alignHeading()},1000);
 })();
+
+/* Preserve the source disclosures and pager handlers in one compact footer. */
+(()=>{
+let pending=false;
+function arrange(){
+ pending=false;
+for(const [hostId,pagerId] of [['efRelatedDams','ieatDamPager'],['efReservoirList','ieatReservoirPager']]){
+ const host=document.getElementById(hostId),pager=document.getElementById(pagerId);
+ if(!host||!pager)continue;
+ const panel=host.closest('.ef-related-dams,.ef-reservoir-panel');
+ if(!panel)continue;
+ let footer=panel.querySelector('.compact-water-footer');
+ if(!footer){footer=document.createElement('div');footer.className='compact-water-footer';panel.append(footer)}
+ const detail=panel.querySelector('details');
+ if(detail&&detail.parentElement!==footer){footer.prepend(detail);const summary=detail.querySelector('summary');if(summary)summary.textContent='รายละเอียด / แหล่งข้อมูล'}
+ if(pager.parentElement!==footer)footer.append(pager);
+}
+}
+const observer=new MutationObserver(()=>{if(!pending){pending=true;requestAnimationFrame(arrange)}});
+observer.observe(document.body,{childList:true,subtree:true});arrange();
+})();
