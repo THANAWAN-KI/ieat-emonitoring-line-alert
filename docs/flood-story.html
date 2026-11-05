@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>บันทึกเฝ้าระวังน้ำรอบนิคมฯ | IEAT e-Monitoring</title>
+<title>เฝ้าระวังน้ำในนิคมอุตสาหกรรม | IEAT e-Monitoring</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap">
 <style>
 :root{--paper:#fffdf8;--ink:#202b2b;--yellow:#ffbd28;--blue:#3157bd;--water:#82d2e5;--green:#16734d;--rule:#dbe5ec}
@@ -34,11 +34,17 @@
 @keyframes cover-rain{0%,100%{transform:translateY(0);opacity:.85}50%{transform:translateY(6px);opacity:1}}
 @media(max-width:650px){.cover-copy{margin:0 auto}.bar .story-brand{font-size:12px}.story-slide-nav button{width:30px}}
 @media(prefers-reduced-motion:reduce){.cover-art,.cover-copy,.cover-rain{animation:none}}
+.cover-system{display:block;font-size:clamp(15px,1.5vw,21px);font-weight:700;color:#3157bd;margin:0 0 8px}
+.cover .cover-next{display:inline-flex;width:auto;min-height:44px;gap:10px;padding:6px 15px;align-items:center;font-size:16px;font-weight:700}
+.cover .cover-next span{font-size:20px}
+.booth-map-guide{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;padding:9px clamp(16px,5vw,76px);background:#fff;border-block:1px solid var(--rule);font-size:14px}
+.booth-map-guide strong{color:var(--blue)}
+.story-map iframe{height:calc(100svh - 100px)}
 </style>
 </head>
 <body>
 <header class="bar">
- <a class="story-brand" href="#cover">บันทึกเฝ้าระวังน้ำรอบนิคมฯ</a>
+ <a class="story-brand" href="#cover">เฝ้าระวังน้ำในนิคมอุตสาหกรรม</a>
  <nav class="story-slide-nav" aria-label="เลื่อนบท">
   <button type="button" id="story-prev" aria-label="บทก่อนหน้า">←</button>
   <span id="story-position" aria-live="polite">1 / 4</span>
@@ -61,12 +67,17 @@
 <path d="M98 240v-37m0 11c-30 2-33-22-15-24 5-16 25-17 31 0 17 7 13 27-16 24zm660 8v-37m0 12c-26 0-30-20-14-25 4-16 22-16 27 0 17 6 12 25-13 25z" fill="#67b98b"/>
 </g>
 </svg>
-<div class="cover-copy"><h1 id="story-title">บันทึกเฝ้าระวังน้ำ<br>รอบนิคมฯ</h1><p>จากฝนที่ตกเหนือพื้นที่ ถึงระดับน้ำที่สถานี และการเตรียมรับมือของนิคมอุตสาหกรรม</p><a class="cover-next" href="#signals" aria-label="เริ่มสำรวจบทแรก">↓</a></div>
+<div class="cover-copy">
+<span class="cover-system">IEAT e-Monitoring</span>
+<h1 id="story-title">เฝ้าระวังน้ำ<br>ในนิคมอุตสาหกรรม</h1>
+<p>สำรวจฝน ระดับน้ำ และแผนรับมือของนิคมฯ บนแผนที่</p>
+<a class="cover-next" href="#signals">เริ่มสำรวจ <span aria-hidden="true">↓</span></a>
+</div>
 </div>
 </section>
 <section id="signals" class="chapter notebook">
 <div class="inner split">
-<div><span class="label">บทที่ 01</span><h2>เมื่อฝนตก เราดูอะไร?</h2><p>ระบบติดตามสถานีฝนและสถานีระดับน้ำรอบนิคมฯ ภายใน 30 กม. เพื่อคัดกรองพื้นที่ที่ควรตรวจสอบต่อ และเปิดดูตำแหน่งสถานีประกอบบนแผนที่ได้</p>
+<div><span class="label">บทที่ 01</span><h2>เมื่อฝนตก เราดูอะไร?</h2><p>เมื่อฝนตกหนักหรือระดับน้ำสูงขึ้น ระบบใช้ข้อมูลจากสถานีภายใน 30 กม. รอบนิคมฯ เพื่อชี้พื้นที่ที่ควรติดตาม จากนั้นเปิดแผนที่เพื่อดูว่าสถานีอยู่ตรงไหนและตรวจวัดเมื่อไร</p>
 </div>
 <svg class="art" viewBox="0 0 450 340" role="img" aria-label="ภาพวาดสถานีระดับน้ำและสายฝน">
 <path d="m44 34 356 20-18 250-339-4z" fill="#ffe18a"/>
@@ -74,8 +85,9 @@
 </svg>
 </div>
 </section>
-<section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>แดชบอร์ดคัดกรองสถานีฝนสะสมมากกว่า 35 มม. และสถานีระดับน้ำที่เข้าเกณฑ์เฝ้าระวัง ผลคัดกรองใช้ชี้พื้นที่ที่ควรติดตามต่อ</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ บนหน้าสถานการณ์น้ำ จากนั้นเปิดเมนูเตรียมรับมือเพื่อดูมาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
+<section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>ดูป้ายปกติ เฝ้าระวัง หรือถึงตลิ่ง / ล้นตลิ่ง ผลคัดกรองจากสถานีใกล้นิคมฯ ใช้บอกว่าควรติดตามพื้นที่ใดต่อ การยืนยันสภาพในนิคมฯ ต้องอาศัยข้อมูลจากพื้นที่</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ ในบทสุดท้าย เปิดเมนูเตรียมรับมือเพื่อดูเกณฑ์เริ่มดำเนินการ มาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
 <section id="map" class="story-map" aria-label="บทสุดท้าย: ข้อมูลเฝ้าระวังน้ำและแผนที่นิคมฯ">
+  <p class="booth-map-guide"><strong>ลองสำรวจแผนที่</strong><span>เลือกนิคมฯ → กดการ์ดหรือหมุด → ดูค่าตรวจวัดและเวลา</span></p>
   <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-black-gauge-border" loading="lazy" allowfullscreen></iframe>
 </section>
 </main>
