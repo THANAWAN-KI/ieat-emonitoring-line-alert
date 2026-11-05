@@ -45,7 +45,7 @@
   const wl=n(r.wl),bank=n(r.bank),levels=[wl,bank].filter(v=>v!==null),center=bank??wl??0;
   const lo=Math.floor(Math.min(center-2,...levels)),hi=Math.ceil(Math.max(center+2,...levels)),span=hi-lo||1,y=v=>260-(v-lo)/span*232,step=span>8?Math.ceil(span/8):.5,ticks=[];
   for(let value=lo;value<=hi+.001;value+=step)ticks.push(value);
-  return `<svg class="rp-gauge" viewBox="0 0 142 290" role="img" aria-label="มาตรวัดระดับ ${fmt(wl)} ม.รทก. ตลิ่ง ${fmt(bank)} ม.รทก."><rect x="46" y="28" width="48" height="232" rx="3" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>${wl===null?'':`<rect x="47" y="${y(wl)}" width="46" height="${260-y(wl)}" fill="#109dc0"/>`}${ticks.map((v,i)=>`<path d="M${i%2?75:62} ${y(v)}H93" stroke="#109dc0" stroke-width="1"/>${i%2?'':`<text x="38" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#000000">${fmt(v,1)}</text>`}`).join('')}${bank===null?'':`<path d="M28 ${y(bank)}H111" stroke="#bf033b" stroke-width="3"/><text x="112" y="${y(bank)-5}" font-size="10" fill="#000000">ตลิ่ง</text>`}<rect x="46" y="28" width="48" height="232" rx="3" fill="none" stroke="#000000" stroke-width="1.6"/><text x="70" y="282" text-anchor="middle" font-size="11" fill="#000000">ม.รทก.</text></svg>`;
+  return `<svg class="rp-gauge" viewBox="0 0 142 290" role="img" aria-label="มาตรวัดระดับ ${fmt(wl)} ม.รทก. ตลิ่ง ${fmt(bank)} ม.รทก."><rect x="46" y="28" width="48" height="232" rx="3" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>${wl===null?'':`<rect x="47" y="${y(wl)}" width="46" height="${260-y(wl)}" fill="#2e9df7"/>`}${ticks.map((v,i)=>`<path d="M${i%2?75:62} ${y(v)}H93" stroke="#109dc0" stroke-width="1"/>${i%2?'':`<text x="38" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#000000">${fmt(v,1)}</text>`}`).join('')}${bank===null?'':`<path d="M28 ${y(bank)}H111" stroke="#bf033b" stroke-width="3"/><text x="112" y="${y(bank)-5}" font-size="10" fill="#000000">ตลิ่ง</text>`}<rect x="46" y="28" width="48" height="232" rx="3" fill="none" stroke="#000000" stroke-width="1.6"/><text x="70" y="282" text-anchor="middle" font-size="11" fill="#000000">ม.รทก.</text></svg>`;
  }
  function stationCard(r){
   const [color,label]=status(r),location=[r.amphoe,r.province].filter(Boolean).join(' · ');
@@ -108,7 +108,7 @@
   const stations=list;
   if(!stations.length)return '<p>ไม่มีสถานีในสายน้ำที่เลือก</p>';
   const H=64+stations.length*92,last=55+(stations.length-1)*92;
-  return `<svg viewBox="0 0 650 ${H}" class="rp-flow" aria-label="ผังสถานี ${esc(river)}"><text x="20" y="22" font-size="16" font-weight="700">${esc(river)}</text><path d="M30 44 L30 ${last+24}" stroke="#109dc0" stroke-width="10" fill="none"/><path d="M30 44 L30 ${last+24}" class="rp-motion" stroke="white" stroke-width="2" fill="none" stroke-dasharray="2 14"/>${stations.map((r,i)=>node(r,30,55+i*92,r.oldcode)).join('')}</svg>`;
+  return `<svg viewBox="0 0 480 ${H}" class="rp-flow" aria-label="ผังสถานี ${esc(river)}"><text x="20" y="22" font-size="16" font-weight="700">${esc(river)}</text><path d="M30 44 L30 ${last+24}" stroke="#109dc0" stroke-width="10" fill="none"/><path d="M30 44 L30 ${last+24}" class="rp-motion" stroke="white" stroke-width="2" fill="none" stroke-dasharray="2 14"/>${stations.map((r,i)=>node(r,30,55+i*92,r.oldcode)).join('')}</svg>`;
  }
 
  let rankedDams=[],mainRiver='',mainRiverManual=false,mainEstateKey='';
@@ -174,7 +174,7 @@
   const daily=note.startsWith('อัตราเฉลี่ยรายวัน'),kind=daily?'ค่าเฉลี่ยรายวัน':'ค่าตรวจวัดล่าสุด';
   const detail=daily?note.replace('อัตราเฉลี่ยรายวัน · ','').replace(/(\d{4})-(\d{2})-(\d{2})/,(_,y,m,d)=>Number(d)+'/'+Number(m)+'/'+String(Number(y)+543).slice(-2)):note;
   const name=String(r.name||'').replace(/^\s*\d+[.)]\s*/,''),number=Number(value),max=Number(maximum),percent=Number.isFinite(number)&&max>0?Math.max(0,Math.min(100,number/max*100)):0;
-  const tone=['#2f68f4','#5a9bf6','#9dc5fa','#b9d6fc','#dbe9fc'][position-1]||'#9dc5fa';
+  const tone=['#7437a8','#9254be','#ad7acc','#c5a0de','#dfc9ed'][position-1]||'#9dc5fa';
   return '<button type="button" class="rp-rank-card ieat-new-rank ieat-rank-bar-row" '+attribute+' aria-label="'+esc(name+' '+fmt(number,1)+' ลบ.ม./วินาที · '+kind+' · '+detail)+'" title="'+esc(kind+' · '+detail)+'"><span class="ieat-rank-copy"><b>'+esc(name)+'</b></span><span class="ieat-rank-bar-track" aria-hidden="true"><span class="ieat-rank-bar-fill" style="width:'+percent.toFixed(3)+'%;background:'+tone+'"></span></span><span class="ieat-rank-value">'+fmt(number,1)+'</span></button>';
  }
  function renderWaterExtras(){
