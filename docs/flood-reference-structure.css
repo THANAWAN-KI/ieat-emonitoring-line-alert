@@ -520,3 +520,25 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     border-radius: 8px !important;
   }
 }
+
+@layer floodDashboard {
+  .flood-alert-head { display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+  #floodSectionPanel .flood-alert-head h1, .flood-alert-head p { margin:0 !important; }
+  .flood-alert-head p, .flood-alert-meta { color:#526579; }
+  .flood-alert-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+  .flood-alert-stats>div { padding:8px 10px; border-radius:10px; background:#eef6fd; color:#163550; }
+  .flood-alert-stats b { display:block; font-size:24px; line-height:1.15; color:#2166a5; }
+  .flood-alert-stats>div:nth-child(2) b { color:#af193d; }
+  .flood-alert-stats>div:nth-child(3) b { color:#98500a; }
+  .flood-alert-filters { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .flood-alert-filters select { display:block; width:100%; min-width:0; padding:6px; border:1px solid #d9e6f1; border-radius:8px; background:#f8fbfe; color:#163550; }
+  #floodSectionPanel .flood-alert-results h2 { display:flex; justify-content:space-between; align-items:baseline; gap:6px; padding:6px 9px; background:#eef6fd; border-radius:8px; }
+  .flood-alert-results h2 small { color:#526579; font-weight:400; }
+  .flood-alert-item { display:grid; gap:3px; width:100%; padding:9px 10px; margin:0 0 6px; text-align:left; color:#163550; background:#fff; border:1px solid #e2edf6; border-radius:9px; }
+  .flood-alert-meta, .flood-alert-title { display:flex; align-items:baseline; justify-content:space-between; gap:4px 8px; flex-wrap:wrap; }
+  .flood-alert-meta { font-size:12px; }
+  .flood-alert-title strong { font-weight:600; }
+  .flood-alert-title>span { padding:1px 7px; border-radius:8px; background:#fff2df; color:#98500a; }
+  .flood-alert-item[data-severity=critical] .flood-alert-title>span { background:#fce9ee; color:#af193d; }
+  .flood-alert-map { color:#2166a5; font-size:12px; justify-self:end; }
+}
