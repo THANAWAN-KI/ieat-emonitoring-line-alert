@@ -194,7 +194,9 @@
     }
     if(key==='diagram')pane.querySelectorAll('#efDetails24,#efDetails48').forEach(detail=>detail.open=true);
     tabs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',String(b===button)));
-    const inset=parseFloat(getComputedStyle(pane).paddingTop)||0;
+    const inset=document.documentElement.classList.contains('story-dashboard')
+      ? tabs.offsetHeight+8
+      : parseFloat(getComputedStyle(pane).paddingTop)||0;
     const top=key==='stations'?0:pane.scrollTop+target.getBoundingClientRect().top-pane.getBoundingClientRect().top-inset;
     pane.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
    });
