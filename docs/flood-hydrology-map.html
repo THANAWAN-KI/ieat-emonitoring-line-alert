@@ -2211,7 +2211,25 @@ html body.story-map-mode #mapLayers[open] .layer-option input[type=checkbox]{
  background:transparent!important;pointer-events:auto!important;visibility:visible!important;
 }
 html body.story-map-mode #mapLayers[open] .layer-option input[type=checkbox]::before{content:none!important}
-</style></body></html>
+</style><style>
+html body.story-map-mode #ieatInfrastructure{
+ padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;
+}
+html body.story-map-mode #ieatInfrastructure>summary{
+ box-sizing:border-box;display:grid;place-items:center;width:44px;height:44px;list-style:none;
+ font-size:0!important;margin:0;padding:0!important;background:#fff;border:1px solid #b9b9b9!important;color:#222;
+}
+html body.story-map-mode #ieatInfrastructure>summary::-webkit-details-marker{display:none}
+html body.story-map-mode #ieatInfrastructure>summary::before{
+ content:"";width:24px;height:24px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 14h18M5 14l3-8h8l3 8M10 14V9h4v5M3 18q2.25-2 4.5 0t4.5 0 4.5 0 4.5 0'/%3E%3C/svg%3E");
+}
+html body.story-map-mode #ieatInfrastructure[open]>summary{background:#ffedc4;border-color:#9b6619!important}
+html body.story-map-mode #ieatInfrastructure>div{
+ position:absolute;bottom:calc(100% + 6px);left:0;box-sizing:border-box;width:min(290px,calc(100vw - 74px));
+ padding:10px;background:#fffdf7;border:1px solid #8b8172;box-shadow:3px 4px 0 #26363926;
+}
+</style>
+</body></html>
 
 
 
