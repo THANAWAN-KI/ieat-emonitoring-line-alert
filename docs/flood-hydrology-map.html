@@ -661,7 +661,7 @@ function keepDashboardLayersOpen(){
  }
 }
 if(cleanDashboard&&storyMap){
- for(const kind of permanentDashboardLayers){
+ for(const kind of ['boundary','estate','flow','radar']){
   flags[kind]=true;
   const input=document.querySelector('[data-layer="'+kind+'"]');
   if(input)input.checked=true;
@@ -1081,18 +1081,18 @@ function sensorSvg(kind){return mapSymbol(kind);}
 
 // Declutter actual estate markers by screen distance, never create cluster symbols.
 // Hidden points remain in the source data and all estate locations return at close zoom.
-function thinEstatePins(list){
+function thinEstatePins(list,allKinds=false){
  const map=vector||raster,zoom=map?.getZoom()??0;
  if(!map||zoom>=12)return list;
- const estates=list.filter(f=>f.properties?.kind==='estate');
+ const estates=allKinds?list:list.filter(f=>f.properties?.kind==='estate');
  if(!estates.length)return list;
  const cell=zoom<7?125:zoom<9?105:zoom<11?85:60;
- const limit=zoom<8?1:2;
+ const limit=allKinds||zoom<8?1:2;
  const buckets=new Map(),selected=[];
  const sorted=estates.slice().sort((a,b)=>{
   const an=String(a.properties?.name||'')+'|'+String(a.properties?.id||'');
   const bn=String(b.properties?.name||'')+'|'+String(b.properties?.id||'');
-  return an.localeCompare(bn,'th');
+  return Number(b.properties?.kind==='estate')-Number(a.properties?.kind==='estate')||an.localeCompare(bn,'th');
  });
  for(const f of sorted){
   const coords=f.geometry?.coordinates;
@@ -1106,7 +1106,7 @@ function thinEstatePins(list){
   selected.push(f);
  }
  // Only estate visibility changes. All water, dam, canal and other data remain intact.
- return list.filter(f=>f.properties?.kind!=='estate').concat(selected);
+ return allKinds?selected:list.filter(f=>f.properties?.kind!=='estate').concat(selected);
 }
 function groupOverviewPoints(list){
  return {points:list,clusters:[]};
@@ -1168,9 +1168,9 @@ function render(){
   document.body.dataset.mapDetail=presentationZoom>=11?'near':presentationZoom>=9?'mid':'far';
   // Keep all five data sources active, but progressively reveal their symbols.
   // Overview: terrain, waterways and radar only. Mid: estate pins only.
-  const baseDisplayPoints=!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
+  const baseDisplayPoints=storyMap||!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
   const displayPoints=thinEstatePins(baseDisplayPoints);
- const pinPoints=storyMap?displayPoints.filter(f=>flags[f.properties.kind]):displayPoints;
+ const pinPoints=storyMap?thinEstatePins(baseDisplayPoints.filter(f=>flags[f.properties.kind]),cleanDashboard&&!watchMapData):displayPoints;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
   pinPoints.filter(f=>['water','canal'].includes(f.properties.kind)||storyMap&&f.properties.kind==='rain').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin'+(window.IEAT_SQ?' has-sq':'');el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
@@ -1185,9 +1185,12 @@ function render(){
   if(vector.getLayer('gistda'))vector.setLayoutProperty('gistda','visibility',flags.gistda?'visible':'none');if(vector.getLayer('gistda-points'))vector.setLayoutProperty('gistda-points','visibility',flags.gistda?'visible':'none');
  }else if(raster){
   Object.values(groups).forEach(g=>g.clearLayers());
-  displayPoints.forEach(f=>{const r=f.properties,k=r.kind;
+  const visiblePins=new Set(pinPoints);
+  const rasterPoints=storyMap?[...new Set([...displayPoints,...pinPoints])]:displayPoints;
+  rasterPoints.forEach(f=>{const r=f.properties,k=r.kind;
    if(k==='water'&&flags.rings&&(!cleanDashboard||presentationZoom>=10)&&r.discharge!=null&&r.discharge>0&&!r.stale)L.circleMarker([r.lat,r.lng],{radius:Math.min(22,4+Math.sqrt(r.discharge)*.25),color:r.diff>=0?'#bf033b':'#109dc0',weight:2,fillColor:r.diff>=0?'#bf033b':'#109dc0',className:r.diff>=0?'water-critical':'',fillOpacity:.12,interactive:false}).addTo(groups.rings);
    if(k==='water'&&(!cleanDashboard||presentationZoom>=10)&&r.diff>=0&&!r.stale&&(!flags.rings||!(r.discharge>0)))L.circleMarker([r.lat,r.lng],{radius:11,color:'#bf033b',weight:1.5,fillColor:'#bf033b',fillOpacity:.1,interactive:false,className:'water-critical'}).addTo(groups.rings);
+   if(storyMap&&!visiblePins.has(f))return;
    const marker=floodPinTypes[k]?L.marker([r.lat,r.lng],{zIndexOffset:500,title:floodPinTypes[k].label+' · '+r.name,icon:L.divIcon({className:'flood-data-pin'+(window.IEAT_SQ?' has-sq':''),iconSize:window.IEAT_SQ?[40,48]:[36,48],iconAnchor:window.IEAT_SQ?[20,48]:[18,46],tooltipAnchor:[0,-44],popupAnchor:[0,-44],html:dataPinHTML(r,k)})}):k==='estate'?L.marker([r.lat,r.lng],{icon:L.divIcon({className:'estate-pin',iconSize:[36,44],iconAnchor:[18,44],tooltipAnchor:[0,-44],html:estateSvg+'<span class="estate-name">'+esc(r.name)+'</span>'})}):L.circleMarker([r.lat,r.lng],{radius:5,color:'#ffffff',weight:1.8,fillColor:r.color,fillOpacity:.95});
    if(k!=='estate')marker.bindTooltip(esc(r.name||''),{permanent:false,direction:'top',offset:[0,-38]});marker.addTo(groups.points);marker.on('click',()=>showMapDetails(r,k));
   });
@@ -1723,7 +1726,7 @@ window.addEventListener('message',async event=>{
  if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
  if(cleanDashboard&&(!storyMap||changed)){
  const active=!!(d.active&&d.estate);
- Object.assign(flags,{estate:true,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:true,radar:true,gistda:false,satellite:active});
+ if(!storyMap)Object.assign(flags,{estate:true,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:true,radar:true,gistda:false,satellite:active});
  document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);
  $('estateView3d').setAttribute('aria-pressed',String(active));$('estateView3d').textContent=active?'มุมมอง 3D':'มุมมอง 2D';
  if(active)cameras();
@@ -2104,7 +2107,7 @@ html body #mapStage .estate-pin>.ieat-estate-location{
 }
 /* The map library assigns the parent transform; do not override it. */
 </style>
-<script src="flood-infrastructure-20261104.js?v=20261105-map-polish"></script>
+<script src="flood-infrastructure-20261104.js?v=20261105-selective-pins"></script>
 <script src="flood-map-alerts.js?v=20261105-cyan1"></script>
 <style>
 html body.story-map-mode:not(.imagery-basemap) .dashboard-base-tiles{filter:grayscale(1) contrast(.92)!important}
