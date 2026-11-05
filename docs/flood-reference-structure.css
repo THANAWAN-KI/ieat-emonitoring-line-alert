@@ -341,3 +341,77 @@ body[data-flood-section=overview][data-water-category=stations] #estateFocusDash
 #estateFocusDashboard .flood-kpi .ef-kpi-copy strong{font-size:26px!important}
 }
 }
+
+/* Compact overview spacing and a shared blue palette for neutral water metrics. */
+@layer floodDashboard {
+body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
+  --overview-ink: #163550;
+  --overview-blue: #2166a5;
+  --overview-tint: #eef6fd;
+  gap: 8px !important;
+  padding-bottom: 12px !important;
+}
+#floodInformationPane :is(#floodStationsSection,.ef-canal-panel,#floodDamsSection,#efDamFlowPanel,#floodWaterDiagram,#rpRankingsAfterWarning>section) {
+  padding: 12px !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 #dceaf7, 0 2px 7px #183b5c0d !important;
+}
+#floodInformationPane :is(#floodPageTitle,#floodDamsSection>h2,.rp-stations-title,.ef-canal-panel>h2,#floodWaterDiagram>h3,#rpRankingsAfterWarning h3) {
+  color: var(--overview-ink) !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+#floodInformationPane :is(#floodDamsSection>h2,.rp-stations-title,.ef-canal-panel>h2,#floodWaterDiagram>h3) {
+  background: var(--overview-tint) !important;
+  border-radius: 8px !important;
+  padding: 6px 9px !important;
+  margin: 0 0 8px !important;
+}
+#floodInformationPane #floodDamsSection,
+#floodInformationPane #rpRankingsAfterWarning {
+  gap: 8px !important;
+}
+#floodInformationPane #floodDamsSection>.ef-panel {
+  padding: 9px !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  background: #f8fbfe !important;
+}
+#floodInformationPane #floodDamsSection .ef-panel>h2 {
+  margin-bottom: 6px !important;
+  font-weight: 600 !important;
+  color: var(--overview-ink) !important;
+}
+#floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-row {
+  min-height: 34px !important;
+  padding: 3px 0 !important;
+}
+#floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-track {
+  height: 14px !important;
+  background: var(--overview-tint) !important;
+}
+#floodInformationPane :is(.ieat-rank-value,.ef-dam-value,.ef-reservoir-row b,.ef-canal-card>b,#expoBoothSubtitle) {
+  color: var(--overview-blue) !important;
+}
+#estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
+  min-height: 76px !important;
+  padding: 9px !important;
+  border-radius: 12px !important;
+}
+#estateFocusDashboard #floodInformationPane .ef-kpi-copy {
+  gap: 2px !important;
+}
+#estateFocusDashboard #floodInformationPane .ef-kpi-copy strong {
+  color: var(--overview-blue) !important;
+}
+#estateFocusDashboard #floodInformationPane #overviewKpiScope {
+  margin-top: 4px !important;
+}
+#estateFocusDashboard #floodInformationPane :is(.rp-station-content,.rp-station-top,.ef-canal-content) {
+  gap: 4px !important;
+}
+#estateFocusDashboard #floodInformationPane .ef-canal-gauge svg {
+  height: 188px !important;
+}
+}
