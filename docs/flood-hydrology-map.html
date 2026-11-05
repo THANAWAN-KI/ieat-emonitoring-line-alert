@@ -1325,7 +1325,7 @@ function vectorStart(){
  if(!cleanDashboard)vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
- vector.on('moveend',()=>{if(!aerialPlaying)queueBoundaries()});vector.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
+ vector.on('moveend',()=>{if(!aerialPlaying)queueBoundaries()});vector.on('zoomend',()=>{if(cleanDashboard&&ready)queueRender()});
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
@@ -1390,7 +1390,7 @@ function addFlow(){
    const started=performance.now();let last=-1000;
    function animateRiver(now){
     requestAnimationFrame(animateRiver);
-    if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion')||now-last<45)return;
+    if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion')||now-last<(aerialPlaying||vector.isMoving()?140:65))return;
     last=now;
     const phase=((now-started)*.008)%8;
     try{vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])}catch(e){}
@@ -1417,7 +1417,7 @@ function addFlow(){
   function animateArrows(now){
    if(!vector?.getSource('flow-arrow-motion'))return;
    requestAnimationFrame(animateArrows);
-   if(document.hidden||!flags.flow||vector.getZoom()<6||now-last<105)return;
+   if(document.hidden||!flags.flow||vector.getZoom()<6||now-last<(aerialPlaying||vector.isMoving()?450:180))return;
    last=now;
    const bounds=vector.getBounds(),spacing=Math.max(.012,70/2**vector.getZoom()),features=[];
    for(const {segments,distance} of paths){
@@ -1817,6 +1817,8 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-watch-focus'){showWatchMapData(d);return}
  if(d.type==='flood-province-scope'){
  const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
+ const locationChanged=estateProvinceScope?.estate?.lat!==d.estate?.lat||estateProvinceScope?.estate?.lon!==d.estate?.lon;
+ if(storyMap&&!changed&&!locationChanged){estateProvinceScope=d;return}
  if(changed){clearWatchMap();clearIEATMeasuredDistance();preparednessPopup?.remove()}estateProvinceScope=d;
  if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
  if(cleanDashboard&&(!storyMap||changed)){
@@ -1826,9 +1828,9 @@ window.addEventListener('message',async event=>{
  $('estateView3d').setAttribute('aria-pressed',String(active));$('estateView3d').textContent=active?'มุมมอง 3D':'มุมมอง 2D';
  if(active)cameras();
  }
- render();queueBoundaries();
  if(d.active&&d.estate)focus({lat:d.estate.lat,lon:d.estate.lon,label:d.name,scale:75000});
- else if(cleanDashboard){if(vector)vector.flyTo({center:[101,13],zoom:5.5,pitch:0,bearing:0});else raster?.setView([13,101],5.5)}
+ else {render();if(cleanDashboard){stopAerialTour();if(vector)vector.flyTo({center:[101,13],zoom:5.5,pitch:0,bearing:0});else raster?.setView([13,101],5.5)}}
+ queueBoundaries();
  return
 }
  if(d.type==='flood-booth-3d'){const button=$('estateView3d');if(!button)return;const requested=Boolean(d.enabled),on=button.getAttribute('aria-pressed')==='true';if(requested!==on)button.click();return}
@@ -1981,7 +1983,7 @@ function startAerialTour(){
 aerialButton.onclick=()=>aerialPlaying?stopAerialTour():startAerialTour();
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAerialTour()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape')stopAerialTour()});
-window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent)return;if(['flood-map-focus','flood-province-scope','flood-support-open'].includes(event.data?.type))stopAerialTour()});
+window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent)return;if(['flood-map-focus','flood-support-open'].includes(event.data?.type))stopAerialTour()});
 
 vectorStart();load();loadCanals();cameras();loadHistoryIndex().then(()=>queueRender()).catch(()=>{});setInterval(()=>{if(!document.hidden)loadCanals()},3600000);setInterval(()=>{if(!document.hidden)load()},3600000);
 function remoteInfo(){
