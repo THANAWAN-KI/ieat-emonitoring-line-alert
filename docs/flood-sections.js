@@ -142,7 +142,7 @@
   if(event.origin===location.origin&&event.source===$('estateFocusMap')?.contentWindow&&event.data?.type==='flood-map-snapshot-result'&&event.data.id===snapshotId){const image=event.data.dataUrl;reportMapImage=typeof image==='string'&&/^data:image\/(png|jpeg);base64,/.test(image)?image:'';reportMapError=reportMapImage?'':'ยังเตรียมภาพแผนที่ไม่สำเร็จ สามารถใช้ข้อความสรุปและเปิดแผนที่จากแดชบอร์ดต้นทางได้';lastContent='';render();return;}
   if(event.origin!==location.origin||event.source!==$('estateFocusMap')?.contentWindow||event.data?.type!=='dashboard-camera-status')return;
   const d=event.data;cameraPlaying=!!d.playing;
-  if(cameraPlaying&&d.mode==='3d'&&document.body.dataset.referencePanel!=='closed')$('referenceMenuToggle')?.click();
+  if(cameraPlaying&&d.mode==='3d'&&!document.documentElement.classList.contains('story-dashboard')&&document.body.dataset.referencePanel!=='closed')$('referenceMenuToggle')?.click();
   const toolbar=$('ieatDashboardCamera');if(!toolbar)return;
   toolbar.dataset.mode=d.mode;const b=toolbar.querySelector('[data-live-camera=orbit]');b.textContent=d.mode==='2d'?'มุมมอง 2D':cameraPlaying?'หยุดหมุน':'หมุน 360°';b.setAttribute('aria-pressed',String(cameraPlaying));b.disabled=d.mode==='2d';toolbar.querySelector('.ex-camera-label').textContent=d.mode==='2d'?'แผนที่ 2D':'มุมมอง 3D';
  });
