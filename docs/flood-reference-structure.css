@@ -721,3 +721,53 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     color:#163550 !important;
   }
 }
+
+/* Separate the data and map viewports. Map-only mode uses the entire viewport. */
+@layer floodDashboard {
+  @media screen {
+    #estateFocusDashboard .ef-map-column {
+      min-height:0 !important;
+      width:auto !important;
+      height:auto !important;
+    }
+    body:not([data-reference-panel=closed]) #estateFocusDashboard .ef-map-column {
+      left:calc(var(--ref-left) + var(--ref-panel) + 12px) !important;
+    }
+    body[data-reference-panel=closed] #referenceRail {
+      bottom:auto !important;
+      width:98px !important;
+      height:44px !important;
+      border-radius:12px !important;
+      box-shadow:0 2px 10px #183b5c25 !important;
+    }
+    body[data-reference-panel=closed] #referenceRail .reference-rail-modes,
+    body[data-reference-panel=closed] #ioEstatePanel {
+      display:none !important;
+    }
+    body[data-reference-panel=closed] #referenceMenuToggle {
+      inset:0 !important;
+      width:100% !important;
+      border-radius:inherit !important;
+      color:#215f9d !important;
+      display:flex !important;
+      align-items:center;
+      justify-content:center;
+      gap:5px;
+    }
+    body[data-reference-panel=closed] #referenceMenuToggle::after {
+      content:"ข้อมูล";
+      font-weight:600;
+    }
+  }
+  @media screen and (max-width:900px) {
+    body:not([data-reference-panel=closed]) #estateFocusDashboard .ef-map-column {
+      inset:62dvh 0 0 !important;
+    }
+    body:not([data-reference-panel=closed]) :is(#referenceRail,#floodInformationPane,#floodSectionPanel) {
+      bottom:calc(38dvh + 8px) !important;
+    }
+    body:not([data-reference-panel=closed]) :is(#floodInformationPane,#floodSectionPanel) {
+      height:auto !important;
+    }
+  }
+}
