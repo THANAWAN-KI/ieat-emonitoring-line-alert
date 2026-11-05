@@ -59,6 +59,17 @@
 .story-sequence section::before{content:"0" counter(story-step);position:absolute;left:0;top:12px;color:var(--blue);font-weight:700}
 .story-sequence h3{margin-bottom:4px}
 @media(prefers-reduced-motion:reduce){.cover-wave,.cover-ripple{animation:none}}
+.coverage-slide{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);min-height:calc(100svh - 56px);background:#faf8f3}
+.coverage-copy{align-self:center;padding:clamp(24px,6vw,100px)}
+.coverage-copy h2{font-size:clamp(30px,4vw,56px);margin:8px 0 15px}
+.coverage-layers{display:flex;gap:6px;flex-wrap:wrap;margin-top:17px}
+.coverage-layers button{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--ink);border:1px solid #bdb6aa;padding:7px 10px;font:600 14px Sarabun,sans-serif;cursor:pointer}
+.coverage-layers button[aria-pressed=true]{background:#fff0c9;border-color:#8a632e}
+.coverage-layers i{width:10px;height:10px;border-radius:50%;background:#9e5b20}
+.coverage-layers [data-coverage=rainfall] i{background:#315783}.coverage-layers [data-coverage=waterlevel] i{background:#157768}
+.coverage-map{display:grid;place-content:center;justify-items:center;padding:16px;background:#f5f3ed}
+.coverage-map svg{width:min(100%,440px);height:min(76svh,700px);min-height:320px}
+@media(max-width:720px){.coverage-slide{grid-template-columns:1fr}.coverage-map svg{height:54svh}}
 </style>
 </head>
 <body>
@@ -66,7 +77,7 @@
  <a class="story-brand" href="#cover">เฝ้าระวังน้ำในนิคมอุตสาหกรรม</a>
  <nav class="story-slide-nav" aria-label="เลื่อนบท">
   <button type="button" id="story-prev" aria-label="บทก่อนหน้า">←</button>
-  <span id="story-position" aria-live="polite">1 / 4</span>
+  <span id="story-position" aria-live="polite">1 / 5</span>
   <button type="button" id="story-next" aria-label="บทถัดไป">→</button>
  </nav>
 </header>
@@ -105,6 +116,29 @@
 </svg>
 </div>
 </section>
+<section id="coverage" class="coverage-slide" aria-labelledby="coverage-title">
+ <div class="coverage-copy">
+  <span class="label">อ่านแผนที่</span>
+  <h2 id="coverage-title">จากนิคมฯ<br>ไปถึงสถานีรอบพื้นที่</h2>
+  <p>เริ่มจากตำแหน่งนิคมฯ แล้วเปิดดูสถานีฝนและสถานีระดับน้ำ เราใช้ข้อมูลสถานีในระยะ <strong>30 กม.</strong> รอบนิคมฯ เพื่อคัดกรองพื้นที่ที่ควรติดตามต่อ</p>
+  <div class="coverage-layers" role="group" aria-label="เลือกจุดที่แสดงบนแผนที่">
+   <button type="button" data-coverage="estate" aria-pressed="true"><i></i>นิคมฯ</button>
+   <button type="button" data-coverage="rainfall" aria-pressed="false"><i></i>สถานีฝน</button>
+   <button type="button" data-coverage="waterlevel" aria-pressed="false"><i></i>สถานีระดับน้ำ</button>
+  </div>
+  <p class="caption">เลือกประเภทเพื่อสลับจุดบนแผนที่ สีของจุดบอกประเภทข้อมูล</p>
+  <p id="coverage-count" class="caption" aria-live="polite">กำลังโหลดตำแหน่งจากชุดข้อมูลแดชบอร์ด</p>
+ </div>
+ <div class="coverage-map">
+  <svg viewBox="0 0 400 700" role="img" aria-label="แผนที่ประเทศไทยและจุดข้อมูลจากแดชบอร์ด">
+   <defs><pattern id="coverage-grain" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".8" fill="#fff" opacity=".55"/><circle cx="9" cy="10" r=".65" fill="#fff" opacity=".62"/><circle cx="8" cy="4" r=".42" fill="#b47425" opacity=".28"/></pattern></defs>
+   <path d="M296.3,379.0 L255.9,359.2 L217.4,360.0 L224.0,326.3 L184.4,326.5 L180.8,373.8 L156.6,436.6 L141.9,474.6 L145.0,505.7 L174.3,507.1 L192.6,546.3 L200.7,583.5 L225.8,608.2 L253.0,613.2 L276.4,635.5 L261.6,653.1 L231.9,658.3 L228.4,636.2 L191.7,617.4 L183.9,625.0 L166.1,608.5 L158.4,587.2 L134.5,563.0 L112.7,542.6 L105.3,567.8 L96.8,543.9 L101.7,517.1 L114.9,475.9 L136.7,431.7 L161.4,391.6 L143.8,352.4 L144.5,332.4 L139.4,308.4 L109.4,274.3 L98.6,252.7 L114.2,244.7 L130.7,207.4 L112.2,179.0 L83.7,147.6 L61.9,109.8 L80.9,102.0 L101.4,55.5 L133.2,53.6 L159.4,35.0 L185.2,25.0 L204.7,38.3 L207.3,64.1 L237.7,66.1 L226.6,111.4 L227.7,150.0 L275.1,124.3 L288.6,131.9 L314.9,130.6 L324.0,115.7 L358.0,118.6 L392.3,153.6 L395.1,196.0 L431.5,233.5 L429.5,269.9 L414.8,289.3 L372.7,283.1 L314.5,291.3 L285.7,327.0 L296.3,379.0 Z" fill="#efb454" stroke="#fff" stroke-width="2"/>
+   <path d="M296.3,379.0 L255.9,359.2 L217.4,360.0 L224.0,326.3 L184.4,326.5 L180.8,373.8 L156.6,436.6 L141.9,474.6 L145.0,505.7 L174.3,507.1 L192.6,546.3 L200.7,583.5 L225.8,608.2 L253.0,613.2 L276.4,635.5 L261.6,653.1 L231.9,658.3 L228.4,636.2 L191.7,617.4 L183.9,625.0 L166.1,608.5 L158.4,587.2 L134.5,563.0 L112.7,542.6 L105.3,567.8 L96.8,543.9 L101.7,517.1 L114.9,475.9 L136.7,431.7 L161.4,391.6 L143.8,352.4 L144.5,332.4 L139.4,308.4 L109.4,274.3 L98.6,252.7 L114.2,244.7 L130.7,207.4 L112.2,179.0 L83.7,147.6 L61.9,109.8 L80.9,102.0 L101.4,55.5 L133.2,53.6 L159.4,35.0 L185.2,25.0 L204.7,38.3 L207.3,64.1 L237.7,66.1 L226.6,111.4 L227.7,150.0 L275.1,124.3 L288.6,131.9 L314.9,130.6 L324.0,115.7 L358.0,118.6 L392.3,153.6 L395.1,196.0 L431.5,233.5 L429.5,269.9 L414.8,289.3 L372.7,283.1 L314.5,291.3 L285.7,327.0 L296.3,379.0 Z" fill="url(#coverage-grain)"/>
+   <g id="coverage-points"></g>
+  </svg>
+  <p class="caption">ขอบเขตประเทศไทยแบบย่อจาก Natural Earth · จุดข้อมูลจาก IEAT e-Monitoring</p>
+ </div>
+</section>
 <section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>จากสัญญาณบนแผนที่<br>สู่การเตรียมรับมือ</h2><p class="readiness-lead">สมมติว่าคุณเห็นนิคมฯ หนึ่งแห่งอยู่ในรายการที่ควรติดตาม ลองอ่านข้อมูลตามลำดับนี้ก่อนเปิดแผนของพื้นที่</p><div class="steps story-sequence"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>ดูป้ายปกติ เฝ้าระวัง หรือถึงตลิ่ง / ล้นตลิ่ง ผลคัดกรองจากสถานีใกล้นิคมฯ ใช้บอกว่าควรติดตามพื้นที่ใดต่อ การยืนยันสภาพในนิคมฯ ต้องอาศัยข้อมูลจากพื้นที่</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ ในบทสุดท้าย เปิดเมนูเตรียมรับมือเพื่อดูเกณฑ์เริ่มดำเนินการ มาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><aside class="plan-example" aria-labelledby="plan-example-title">
 <h3 id="plan-example-title">ตัวอย่างจากแผนของนิคมฯ ซีพีจีซี</h3>
 <dl><div><dt>เมื่อถึงเกณฑ์ในแผน</dt><dd>ระดับเฝ้าระวัง</dd></div><div><dt>ทำอะไร</dt><dd>ตรวจระดับน้ำเป็นระยะ และเตรียมเครื่องสูบน้ำ</dd></div><div><dt>ใครรับผิดชอบ</dt><dd>ฝ่ายบริหารจัดการนิคมอุตสาหกรรม</dd></div></dl>
@@ -120,7 +154,7 @@
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
 <script>
 (() => {
- const slides=['cover','signals','readiness','map'].map(id=>document.getElementById(id));
+ const slides=['cover','signals','coverage','readiness','map'].map(id=>document.getElementById(id));
  const prev=document.getElementById('story-prev'), next=document.getElementById('story-next');
  const position=document.getElementById('story-position');
  let current=0, frame=0, target=null;
@@ -149,6 +183,38 @@
  window.addEventListener('resize',schedule);
  window.addEventListener('load',schedule);
  update();
+})();
+</script>
+<script>
+(async()=>{
+ const group=document.getElementById('coverage-points'), status=document.getElementById('coverage-count');
+ const buttons=[...document.querySelectorAll('[data-coverage]')];
+ const colors={estate:'#9e5b20',rainfall:'#315783',waterlevel:'#157768'};
+ let data;
+ try{
+  const response=await fetch('./data/thaiwater_latest.json');
+  if(!response.ok)throw Error('coverage data');
+  data=await response.json();
+  if(!Array.isArray(data.estates)||!Array.isArray(data.stations))throw Error('coverage format');
+ }catch{
+  status.textContent='โหลดตำแหน่งจุดข้อมูลไม่ได้ในขณะนี้';
+  buttons.forEach(button=>button.disabled=true);
+  return;
+ }
+ function draw(kind){
+  const rows=(kind==='estate'?data.estates:data.stations.filter(row=>row.kind===kind))
+   .filter(row=>row.lon!=null&&row.lat!=null&&Number(row.lon)>=96&&Number(row.lon)<=104.88&&Number(row.lat)>=4.73&&Number(row.lat)<=21);
+  group.replaceChildren(...rows.map(row=>{
+   const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+   dot.setAttribute('cx',(Number(row.lon)-96)*45);dot.setAttribute('cy',(21-Number(row.lat))*43);
+   dot.setAttribute('r',kind==='estate'?3:2.4);dot.setAttribute('fill',colors[kind]);dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','.6');
+   return dot;
+  }));
+  buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.coverage===kind)));
+  status.textContent='แสดง '+rows.length.toLocaleString('th-TH')+' ตำแหน่งจากชุดข้อมูลแดชบอร์ด';
+ }
+ buttons.forEach(button=>button.onclick=()=>draw(button.dataset.coverage));
+ draw('estate');
 })();
 </script>
 </body>
