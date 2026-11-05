@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="th">
+<head>
+<link rel="stylesheet" id="flood-reference-canonical-20261104" href="flood-reference-structure.css?v=20261105-report-colors-only">
+
+<script defer src="flood-reference-layout.js?v=20261105-clean-source-1"></script>
+
+<script defer src="flood-sections.js?v=20261105-sticky-story-tabs"></script>
+
+<meta charset="utf-8">
+<script id="dashboard-reliable-boot">(function(){
+ 'use strict';
+ // Run before deferred app scripts, even if a later script cannot initialize.
+ if(window.AbortSignal&&window.AbortController&&!AbortSignal.timeout){
+  AbortSignal.timeout=function(ms){var controller=new AbortController();setTimeout(function(){controller.abort();},ms);return controller.signal;};
+ }
+ var attempts=0,timer;
+ function check(){
+  var mounted=document.querySelector('#estateFocusDashboard .ef-workspace');
+  if(mounted){clearInterval(timer);return;}
+  var loading=document.getElementById('dashboardLoading');if(!loading)return;
+  loading.style.cssText='display:block!important;position:fixed;top:24px;left:24px;right:24px;max-width:480px;margin:auto;padding:24px;background:white;color:#335238;border:1px solid #ffffff;border-radius:18px;box-shadow:0 8px 28px #2e1f5414;z-index:9999;font:16px/1.7 sans-serif';
+  attempts++;
+  if(attempts>=12&&!document.getElementById('dashboardRetry')){
+   loading.innerHTML='<strong>ยังเปิดข้อมูลไม่สำเร็จ</strong><p>การโหลดอาจติดขัด กรุณาลองอีกครั้ง</p><button type="button" id="dashboardRetry" style="font:inherit;border:0;border-radius:10px;background:#109dc0;color:white;padding:10px 18px;cursor:pointer">โหลดหน้าใหม่</button>';
+   document.getElementById('dashboardRetry').onclick=function(){var url=new URL(location.href);url.searchParams.set('reload',Date.now());location.replace(url.href);};
+  }
+ }
+ timer=setInterval(check,1000);
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',check);else check();
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม | IEAT e-Monitoring</title>
+
+<script defer src="flood-icons.js?v=20261105-clean-source-1"></script>
+<script defer src="flood-water-status.js?v=20261105-clean-source-1"></script>
+<script defer src="flood-rid-source.js?v=20261105-clean-source-1"></script>
+<script defer src="flood-estate-dashboard.js?v=20261105-map-single-load"></script>
+<script defer src="flood-river-panel.js?v=20261105-radar-palette"></script>
+<script defer src="flood-weather-overview.js?v=20261105-clean-source-1"></script>
+<script defer src="flood-estate-diagrams.js?v=20261105-clean-source-1"></script>
+
+<script defer src="flood-expo-presentation.js?v=20261105-clean-source-1"></script>
+
+<script>if(new URLSearchParams(location.search).get('story')==='1')document.documentElement.classList.add('story-dashboard');</script>
+<style>
+@layer floodDashboard {
+ @media screen and (min-width:901px) {
+  html.story-dashboard { --ref-panel:calc(40vw - var(--ref-left) - 12px); }
+  html.story-dashboard body:not([data-reference-panel=closed]) #estateFocusDashboard .ef-map-column { top:0!important; right:0!important; bottom:0!important; border-radius:0!important; }
+ }
+ html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel),
+ html.story-dashboard body[data-flood-section] #estateFocusDashboard #floodInformationPane { background:#fff!important; }
+ @media screen {
+  html.story-dashboard {
+   --chapter-paper:#fff;
+   --chapter-ink:#202b2b;
+   --chapter-gold:#ffbd28;
+   --chapter-blue:#315783;
+   --chapter-rule:#dbe5ec;
+  }
+  html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel) { background:var(--chapter-paper)!important; }
+  html.story-dashboard #floodInformationPane #approvedDashboardHeading {
+   border-inline-start:4px solid var(--chapter-gold);
+   padding:2px 0 2px 12px;
+   margin:3px 0 6px;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane #floodPageTitle,
+  html.story-dashboard #floodSectionPanel h1 { color:var(--chapter-ink)!important; }
+  html.story-dashboard body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+   background:#fff0c7!important;
+   color:var(--chapter-ink)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs {
+   border-bottom-color:var(--chapter-rule)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true] {
+   color:var(--chapter-ink)!important;
+   box-shadow:inset 0 -3px var(--chapter-gold)!important;
+  }
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates) {
+   background:#fff!important;
+   border-color:var(--chapter-rule)!important;
+   color:var(--chapter-blue)!important;
+   border-radius:8px!important;
+  }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#8a520d; --kpi-band:#e9a44f; --kpi-track:#faecd9; }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#24688a; --kpi-band:#67b9e5; --kpi-track:#e2f3fc; }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#315783; --kpi-band:#83bddb; --kpi-track:#e7f1f8; }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis,
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi+.flood-kpi {
+   border-color:var(--chapter-rule)!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong { color:var(--kpi-color,var(--chapter-ink))!important; }
+  html.story-dashboard #floodInformationPane #floodStationsSection .rp-stations-title {
+   color:var(--chapter-ink)!important;
+   padding-bottom:5px!important;
+   border-bottom:1px solid var(--chapter-rule);
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-station-row[aria-pressed=true] {
+   outline-color:var(--chapter-rule)!important;
+  }
+  html.story-dashboard #floodSectionPanel,
+  html.story-dashboard #preparednessPane {
+   --report-paper:#fff;
+   --report-ink:var(--chapter-ink);
+   --report-accent:var(--chapter-blue);
+   --report-rule:var(--chapter-rule);
+   --radar-surface:#eef2ff;
+   --radar-heading:#eef2ff;
+   --radar-edge:#dce4f8;
+  }
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-results>h2,.ref-chart-card>h2),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-card>h3,
+  html.story-dashboard #floodInformationPane :is(#floodDamsSection>h2,.ef-canal-panel>h2,#floodWaterDiagram>h3) {
+   background:#fff5d9!important;
+   color:var(--chapter-ink)!important;
+   box-shadow:none!important;
+  }
+  html.story-dashboard #floodSectionPanel :is(.section-action,.water-report-stats>div:first-child) {
+   background:var(--chapter-blue)!important;
+   color:#fff!important;
+  }
+  html.story-dashboard #floodSectionPanel :is(.water-report-sources b,.flood-alert-map) { color:var(--chapter-blue)!important; }
+  html.story-dashboard #preparednessPane .ex-table thead th,
+  html.story-dashboard #floodSectionPanel .ex-report-table thead th { background:#eef2ff!important; color:var(--chapter-ink)!important; }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard body[data-flood-section] :is(#referenceRail,#floodSectionPanel,#referenceMenuToggle),
+  html.story-dashboard #estateFocusDashboard #floodInformationPane,
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates,#referenceViewTabs,button,select,details,.rp-status-legend li,.rp-station-row,.ex-card),
+  html.story-dashboard #floodSectionPanel :is(button,select,.ref-report-segments,.flood-alert-item,.water-report-stats>div) {
+   border-radius:0!important;
+  }
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates),
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button {
+   background:#f3f3f3!important;border:1px solid #c5c5c5!important;color:#414141!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs {gap:5px!important;border:0!important}
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true],
+  html.story-dashboard body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+   background:#e7f1f8!important;color:#234569!important;border:1px solid #a7bfd4!important;box-shadow:none!important;
+  }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi:is(:hover,:active) {
+   box-shadow:inset 0 0 0 1px #000!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi:focus-visible {
+   outline-color:#000!important;
+  }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard {
+   --panel-ink:var(--chapter-ink);
+   --panel-muted:#52636e;
+   --panel-line:var(--chapter-rule);
+   --panel-fill:#f4f7fa;
+   --panel-selected:#e7f1f8;
+  }
+  html.story-dashboard #floodInformationPane #approvedDashboardHeading,
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-head,.water-report-heading),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-prep-head {
+   border-inline-start:3px solid #ffbd28;
+   padding:2px 0 2px 12px;
+   margin:3px 0 8px;
+  }
+  html.story-dashboard :is(#floodInformationPane,#floodSectionPanel) :is(h1,h2,h3) {
+   color:var(--panel-ink)!important;
+  }
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-results>h2,.ref-chart-card>h2),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-card>h3,
+  html.story-dashboard #floodInformationPane :is(.rp-stations-title,#floodDamsSection>h2,.ef-canal-panel>h2,#floodWaterDiagram>h3) {
+   background:transparent!important;
+   border-bottom:1px solid var(--panel-line)!important;
+   border-radius:0!important;
+   box-shadow:none!important;
+   padding:4px 0 7px!important;
+  }
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-table thead th,
+  html.story-dashboard #floodSectionPanel .ex-report-table thead th,
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-filters select,.water-report-sources button,.section-action) {
+   background:var(--panel-fill)!important;
+   color:var(--panel-ink)!important;
+   border-color:var(--panel-line)!important;
+   border-radius:0!important;
+  }
+  html.story-dashboard body[data-flood-section=report] #floodSectionPanel .section-action {
+   background:#315783!important;color:#fff!important;
+  }
+  html.story-dashboard body[data-flood-section=report] #floodSectionPanel .water-report-stats>div:first-child {
+   background:var(--panel-selected)!important;color:var(--panel-ink)!important;
+  }
+  html.story-dashboard body[data-flood-section=report] #floodSectionPanel .water-report-stats>div:first-child b {
+   color:var(--panel-ink)!important;
+  }
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-stats>div,.water-report-stats>div),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-card {
+   border-radius:0!important;box-shadow:none!important;
+  }
+  html.story-dashboard #floodSectionPanel .flood-alert-stats>div {
+   background:var(--panel-fill)!important;
+   border:1px solid var(--panel-line);
+  }
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-card {border-top:1px solid var(--panel-line)!important}
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ html.story-dashboard #floodInformationPane .story-kpi-help { margin:2px 0 0!important;color:#315783!important;font-size:13px!important;font-weight:600!important; }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs {
+   position:sticky!important;
+   top:0!important;
+   z-index:5!important;
+   background:#fff!important;
+  }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
+   min-height:88px!important;
+   padding:8px 10px!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-copy {
+   align-items:stretch!important;
+   text-align:left;
+   gap:6px!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-label {
+   order:-1;
+   font-size:13px!important;
+   text-wrap:wrap;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge {
+   width:100%;aspect-ratio:auto;display:flex;flex-direction:column-reverse;gap:7px;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge svg {
+   position:static;width:100%;height:6px;overflow:hidden;
+  }
+  html.story-dashboard #floodInformationPane .ef-kpi-band {display:none}
+  html.story-dashboard #floodInformationPane :is(.ef-kpi-track,.ef-kpi-fill) {stroke-width:8}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] {--kpi-color:#8a520d;--kpi-track:#faecd9}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] {--kpi-color:#24688a;--kpi-track:#e2f3fc}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] {--kpi-color:#315783;--kpi-track:#e7f1f8}
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] {--kpi-band:#e9a44f}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] {--kpi-band:#67b9e5}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] {--kpi-band:#83bddb}
+  html.story-dashboard #floodInformationPane .ef-kpi-fill {stroke:var(--kpi-band)!important}
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong {color:var(--kpi-color)!important}
+  html.story-dashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates),
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button {
+   background:#f4f7fa!important;border-color:var(--chapter-rule)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true],
+  html.story-dashboard body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+   background:#e7f1f8!important;border-color:#a7bfd4!important;color:#234569!important;
+  }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard {
+   --drawing-ink:#202b2b;
+   --drawing-yellow:#ffbd28;
+   --drawing-water:#82d2e5;
+   --drawing-green:#67b98b;
+   --drawing-paper:#f8f5ee;
+   --drawing-line:#b8b5aa;
+   --chapter-blue:#3157bd;
+   --chapter-rule:var(--drawing-line);
+  }
+  html.story-dashboard #floodSectionPanel,
+  html.story-dashboard #preparednessPane {
+   --panel-fill:var(--drawing-paper);
+   --panel-selected:#e3f5f9;
+   --report-rule:var(--drawing-line);
+  }
+  html.story-dashboard #floodInformationPane #approvedDashboardHeading,
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-head,.water-report-heading),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-prep-head {
+   background:var(--drawing-yellow)!important;
+   border:2px solid var(--drawing-ink);
+   padding:8px 10px;
+   box-shadow:3px 3px #eae3d5!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane #expoBoothSubtitle {
+   color:var(--drawing-ink)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button,
+  html.story-dashboard #estateFocusDashboard #floodInformationPane :is(#ioEstatePicker,#ieatAllEstates) {
+   background:var(--drawing-paper)!important;
+   color:var(--drawing-ink)!important;
+   border-color:var(--drawing-ink)!important;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true],
+  html.story-dashboard body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+   background:var(--drawing-water)!important;
+   border-color:var(--drawing-ink)!important;
+   color:var(--drawing-ink)!important;
+  }
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] {--kpi-band:var(--drawing-yellow);--kpi-track:#f5eddb;--kpi-color:#775010}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] {--kpi-band:var(--drawing-water);--kpi-track:#e6f2f5;--kpi-color:#23536a}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] {--kpi-band:var(--drawing-green);--kpi-track:#e6f2ea;--kpi-color:#28583e}
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge svg {
+   box-shadow:0 0 0 1px var(--drawing-ink);
+  }
+  html.story-dashboard #floodSectionPanel :is(.flood-alert-results>h2,.ref-chart-card>h2),
+  html.story-dashboard #estateFocusDashboard #preparednessPane .ex-card>h3,
+  html.story-dashboard #floodInformationPane #floodStationsSection .rp-stations-title {
+   border-bottom-color:var(--drawing-ink)!important;
+  }
+  html.story-dashboard body[data-flood-section=report] #floodSectionPanel .section-action {
+   background:#3157bd!important;color:#fff!important;
+  }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+html.story-dashboard body #ioEstatePanel{background:#fffdf7!important;color:#223132!important;border:1px solid #223132!important;border-radius:0!important;box-shadow:4px 5px 0 #26363926!important;font-family:Kanit,Sarabun,sans-serif}
+html.story-dashboard #ioEstatePanel .io-picker-head{border-bottom:2px solid #efb14d;padding-bottom:8px}
+html.story-dashboard #ioEstatePanel :is(input,button){border-radius:0!important;font-family:inherit!important}
+html.story-dashboard #ioEstatePanel #ioEstatePanelSearch{background:#fff!important;border:1px solid #8d8678!important;color:#223132!important}
+html.story-dashboard #ioEstatePanel [data-picker-estate]{background:#f5f2eb!important;color:#223132!important;border:1px solid #ded6c8!important;display:flex;justify-content:space-between;text-align:left}
+html.story-dashboard #ioEstatePanel [data-picker-estate][aria-pressed=true]{background:#ffedc4!important;border-color:#9b6619!important;color:#4b330e!important}
+html.story-dashboard #ioEstatePanel #ioEstatePickerApply{background:#ffbd2c!important;border:1px solid #223132!important;color:#2b230e!important}
+html.story-dashboard #ioEstatePanel :is(#ioEstatePickerReset,#ioEstatePickerClose){background:#e5f4f7!important;border:1px solid #8eb8c2!important;color:#234e60!important}
+html.story-dashboard #ioEstatePanel :is(input,button):focus-visible{outline:2px solid #24688a;outline-offset:2px}
+}
+</style></head>
+<body>
+
+<main class="container"><section id="warning" data-clean-map aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
+
+<!-- mobile-responsive-20261006 -->
+
+
+<script id="flood-sequential-script">
+/* Only move existing data sections; appearance is defined in the canonical stylesheet. */
+(()=>{
+let queued=false;
+function arrange(){
+ queued=false;
+ const col=document.querySelector('.ef-data-column');if(!col)return;
+ const stations=col.querySelector('.rp-stations');
+ if(stations){stations.id='floodStationsSection';const title=stations.querySelector('.rp-stations-title');if(title&&title.textContent!=='สถานีระดับน้ำ')title.textContent='สถานีระดับน้ำ'}
+ let dams=document.getElementById('floodDamsSection');
+ if(!dams){dams=document.createElement('section');dams.id='floodDamsSection';dams.setAttribute('aria-label','เขื่อนและอ่างเก็บน้ำ');dams.innerHTML='<h2>เขื่อนและอ่างเก็บน้ำ</h2>';col.append(dams)}
+ for(const selector of ['.ef-related-dams','.ef-reservoir-panel']){const panel=col.querySelector(selector);if(panel&&panel.parentElement!==dams)dams.append(panel)}
+ const flows=document.getElementById('efDamFlowPanel');if(flows&&flows.parentElement!==col)col.append(flows);
+ const diagram=document.getElementById('rpMainRiver')?.closest('.rp-new-section');
+ if(diagram){diagram.id='floodWaterDiagram';if(diagram.parentElement!==col)col.append(diagram);const title=diagram.querySelector('h3');if(title&&title.textContent!=='ผังน้ำและสถานีตามสายน้ำ')title.textContent='ผังน้ำและสถานีตามสายน้ำ'}
+}
+new MutationObserver(()=>{if(!queued){queued=true;requestAnimationFrame(arrange)}}).observe(document.getElementById('warning'),{childList:true,subtree:true});arrange();
+})();
+</script>
+
+<script id="ieat-water-station-carousel-script">
+(()=>{
+const perPage=1;let page=0,pager=null,lastCards=[];
+function render(){
+const host=document.getElementById('rpCards');if(!host)return;
+const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));
+if(!cards.length)return;
+const changed=cards.length!==lastCards.length||cards.some((card,i)=>card!==lastCards[i]);
+if(changed){page=0;lastCards=cards.slice()}
+const pages=Math.ceil(cards.length/perPage);page=Math.max(0,Math.min(page,pages-1));
+cards.forEach((card,i)=>{const hide=Math.floor(i/perPage)!==page;card.classList.toggle('ieat-page-hidden',hide);card.hidden=hide});
+if(!pager){
+pager=document.createElement('nav');pager.id='ieatWaterStationPager';pager.setAttribute('aria-label','เปลี่ยนหน้าสถานีระดับน้ำ');
+pager.innerHTML='<button type="button" data-dir="-1" aria-label="หน้าก่อนหน้า">‹ ก่อนหน้า</button><span class="ieat-page-count" aria-live="polite"></span><button type="button" data-dir="1" aria-label="หน้าถัดไป">ถัดไป ›</button>';
+host.after(pager);
+pager.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{page+=Number(b.dataset.dir);render()}));
+}
+pager.querySelector('[data-dir="-1"]').disabled=page===0;
+pager.querySelector('[data-dir="1"]').disabled=page>=pages-1;
+const count=(page+1)+' / '+pages;if(pager.querySelector('.ieat-page-count').textContent!==count)pager.querySelector('.ieat-page-count').textContent=count;
+pager.hidden=pages<=1;
+let footer=document.getElementById('ieatStationFooter');
+if(!footer){footer=document.createElement('div');footer.id='ieatStationFooter';host.after(footer)}
+const stamp=cards[page]?.querySelector('.rp-row-time');
+let footerTime=footer.querySelector('.ieat-station-footer-time');
+if(!footerTime){footerTime=document.createElement('small');footerTime.className='ieat-station-footer-time';footer.prepend(footerTime)}
+const stampText=stamp?.textContent||'';
+if(footerTime.textContent!==stampText)footerTime.textContent=stampText;
+if(pager.parentElement!==footer)footer.append(pager);
+
+const caption=host.previousElementSibling;
+if(caption?.classList.contains('flood-row-caption')){
+const label=cards.length+' รายการ · แสดง '+(page*perPage+1)+'–'+Math.min((page+1)*perPage,cards.length)+' · กดปุ่มเพื่อดูหน้าถัดไป';
+if(caption.textContent!==label)caption.textContent=label;
+}
+}
+let scheduled=false;function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;render()})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule,{once:true});else schedule();
+const timer=setInterval(()=>{const host=document.getElementById('rpCards');if(!host)return;const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));if(cards.length!==lastCards.length||cards.some((c,i)=>c!==lastCards[i])||!document.getElementById('ieatWaterStationPager'))schedule()},1200);
+window.addEventListener('resize',schedule);
+})();
+</script><script src="flood-exhibition-preparedness.js?v=20261105-prep-shared-scope"></script><script id="flood-two-modes">(()=>{
+'use strict';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=v=>String(v||'').normalize('NFC').replace(/สำนักงานนิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
+let view='overview',scope=window.IEAT_FLOOD_PROVINCE_SCOPE||{},scroll=0,mounted=false;
+function send(data){document.getElementById('estateFocusMap')?.contentWindow?.postMessage(data,location.origin)}
+function renderPrep(){
+ if(window.IEAT_PREP_TABLES){window.IEAT_PREP_TABLES.render(scope);return;}
+
+ const pane=document.getElementById('preparednessPane');if(!pane)return;
+ const name=String(scope.name||scope.estate?.name||''),p=(window.IEAT_ESTATE_DIAGRAMS||[]).find(p=>p.match&&name&&norm(name).includes(norm(p.match)));
+ document.getElementById('floodModeEstate').textContent=name||'สถานการณ์น้ำในพื้นที่นิคมอุตสาหกรรม';
+ if(!p){pane.innerHTML='<div class="prep-page-head"><small>การเตรียมรับมือ</small><h2>'+esc(name||'เลือกนิคมอุตสาหกรรม')+'</h2></div><p class="prep-page-note">'+(name?'ยังไม่มีผังการเตรียมรับมือของพื้นที่นี้ในระบบ':'เลือกนิคมฯ ที่หน้าภาพรวมเพื่อดูข้อมูลเฉพาะพื้นที่')+'</p>';return}
+ const stations=p.key==='bang-pa-in'?[1,2,3,4]:[];
+ const stationRows=stations.map(id=>'<tr><th scope="row">สถานีสูบน้ำ '+id+'</th><td><button type="button" data-prep-map-station="'+id+'" aria-label="ซูมไปสถานีสูบน้ำ '+id+'">ดูบนแผนที่ ↗</button></td></tr>').join('');
+ const hasLocation=scope.estate?.lat!=null&&(scope.estate?.lon!=null||scope.estate?.lng!=null);
+ const planRows=(p.rows||[]).map(([k,v])=>'<tr><th scope="row">'+(hasLocation?'<button type="button" data-prep-reference aria-label="ซูมไปจุดอ้างอิงนิคมฯ สำหรับ '+esc(k)+'">'+esc(k)+' <span aria-hidden="true">↗</span></button>':esc(k))+'</th><td>'+esc(v)+'</td></tr>').join('');
+ const locationNote=hasLocation?'<p class="prep-page-note">↗ คลิกชื่อรายการเพื่อดูจุดอ้างอิงนิคมฯ บนแผนที่ แถวสถานีที่มีพิกัดจะซูมไปที่สถานีโดยตรง</p>':'';
+ pane.innerHTML='<div class="prep-page-head"><small>การเตรียมรับมือ</small><h2>'+esc(p.name)+'</h2><p>ระบบป้องกันและระบายน้ำของพื้นที่</p></div>'+
+ '<section class="prep-page-section"><h3 id="prepDataTitle">ข้อมูลที่ใช้ในการเตรียมรับมือ</h3><table class="prep-table" aria-labelledby="prepDataTitle"><thead><tr><th scope="col">รายการ</th><th scope="col">รายละเอียด</th></tr></thead><tbody>'+stationRows+planRows+'</tbody></table>'+locationNote+'</section>'+
+ (p.image?'<a class="prep-page-source" href="'+esc(p.image)+'" target="_blank" rel="noopener">เปิดผังต้นฉบับ ↗</a>':'')+
+ '<p class="prep-page-note">ที่มา '+esc(p.source||'ผังนิคมอุตสาหกรรม')+'<br>ข้อมูลอ้างอิงจากผังของพื้นที่'+(stations.length?' · ตำแหน่งสถานีบนแผนที่เป็นค่าประมาณ':'')+'</p>';
+}
+const supportTypes=[['water','ระดับน้ำ'],['canal','คลอง กทม.'],['dam','เขื่อน'],['camera','CCTV']];
+let supportSignature='';
+function selectedEstate(){return String(scope.name||scope.estate?.name||'')}
+function refreshPrep(){
+ renderPrep();
+ if(window.IEAT_PREP_TABLES)return;
+ supportSignature='';
+ const pane=document.getElementById('preparednessPane');
+ const section=document.createElement('section');
+ section.className='prep-page-section prep-support';
+ section.innerHTML='<h3>ข้อมูลสนับสนุน</h3><div data-prep-support-list><p>'+(selectedEstate()?'กำลังโหลดข้อมูลใกล้นิคมฯ…':'เลือกนิคมฯ ที่หน้าภาพรวมเพื่อดูจุดที่เกี่ยวข้อง')+'</p></div>';
+ const table=pane.querySelector('.prep-table')?.closest('section');
+ if(table)table.after(section);else pane.append(section);
+}
+window.addEventListener('message',e=>{
+ if(e.origin!==location.origin||e.source!==document.getElementById('estateFocusMap')?.contentWindow||e.data?.type!=='flood-prep-points'||view!=='preparedness')return;
+ const {estate,ready,rows}=e.data;
+ if(!estate||estate!==selectedEstate()||!ready||!Array.isArray(rows))return;
+ const host=document.querySelector('[data-prep-support-list]');
+ const signature=JSON.stringify(rows);
+ if(!host||signature===supportSignature)return;
+ const opened=new Set([...host.querySelectorAll('details[open]')].map(el=>el.dataset.kind));
+ supportSignature=signature;
+ host.innerHTML=supportTypes.map(([kind,label])=>{
+  const group=rows.filter(r=>r.kind===kind);
+  return '<details data-kind="'+kind+'" '+(opened.has(kind)?'open':'')+'><summary>'+label+' ('+group.length+')</summary>'+
+   (group.length?'<ul>'+group.map(r=>'<li><button type="button" data-prep-point="'+esc(r.key)+'">'+esc([r.code,r.name].filter(Boolean).join(' · '))+' ↗</button></li>').join('')+'</ul>':'<p>ไม่พบจุดใกล้นิคมฯ ที่เลือก</p>')+'</details>';
+ }).join('');
+});
+function select(next){
+ const col=document.querySelector('.ef-data-column');if(!col)return;
+ if(view==='overview')scroll=col.scrollTop;
+ view=next==='preparedness'?'preparedness':'overview';document.body.dataset.floodView=view;
+ document.querySelectorAll('[data-flood-view-tab]').forEach(b=>{const active=b.dataset.floodViewTab===view;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1});
+ col.setAttribute('aria-labelledby','floodTab-'+view);document.getElementById('preparednessPane').hidden=view!=='preparedness';
+ if(view==='preparedness'){refreshPrep();col.scrollTop=0;}else{col.scrollTop=scroll;send({type:'flood-support-close'})}
+ send({type:'flood-prep-support',active:view==='preparedness'});
+}
+function mount(){
+ if(mounted)return true;const col=document.querySelector('.ef-data-column');if(!col)return false;mounted=true;
+ col.id='floodInformationPane';col.setAttribute('role','tabpanel');
+ const bar=document.createElement('header');bar.id='floodModeBar';bar.innerHTML='<nav role="tablist" aria-label="มุมมองแดชบอร์ดน้ำท่วม"><button type="button" role="tab" id="floodTab-overview" data-flood-view-tab="overview" aria-controls="floodInformationPane">'+(window.IEAT_ICONS?.svg('layers')||'')+'ภาพรวม</button><button type="button" role="tab" id="floodTab-preparedness" data-flood-view-tab="preparedness" aria-controls="floodInformationPane">'+(window.IEAT_ICONS?.svg('protection')||'')+'การเตรียมรับมือ</button></nav><span id="floodModeEstate"></span>';
+ document.body.appendChild(bar);const pane=document.createElement('section');pane.id='preparednessPane';pane.hidden=true;col.appendChild(pane);
+ bar.addEventListener('click',e=>{const b=e.target.closest('[data-flood-view-tab]');if(b)select(b.dataset.floodViewTab)});
+ bar.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)||!e.target.matches('[role="tab"]'))return;e.preventDefault();const next=e.key==='Home'?'overview':e.key==='End'?'preparedness':view==='overview'?'preparedness':'overview';select(next);document.getElementById('floodTab-'+next).focus()});
+ document.getElementById('estateFocusMap')?.addEventListener('load',()=>send({type:'flood-prep-support',active:view==='preparedness'}));
+ pane.addEventListener('click',e=>{const point=e.target.closest('[data-prep-point]');if(point){send({type:'flood-prep-point',key:point.dataset.prepPoint,estate:selectedEstate()});return}const row=e.target.closest('tr');const reference=row?.querySelector('[data-prep-reference]');if(reference){send({type:'flood-prep-reference',estate:selectedEstate(),label:reference.firstChild.textContent.trim(),value:row.cells[1].textContent});return}const b=row?.querySelector('[data-prep-map-station]');if(b)send({type:'flood-support-open',estate:scope.name||scope.estate?.name,station:Number(b.dataset.prepMapStation)})});
+ renderPrep();select(new URLSearchParams(location.search).get('view')==='preparedness'?'preparedness':'overview');return true;
+}
+document.addEventListener('ieat-flood-estate-scope',e=>{scope=e.detail||{};if(view==='preparedness'){refreshPrep();send({type:'flood-prep-support',active:true})}else renderPrep()});
+function start(){if(mount())return;const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.body,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script><script id="reference-map-shell-behavior">(()=>{'use strict';
+let mounted=false,open=true;
+function sync(){document.body.dataset.referencePanel=open?'open':'closed';const col=document.getElementById('floodInformationPane');if(col){col.setAttribute('aria-hidden',String(!open));col.inert=!open}const mode=document.body.dataset.floodView||'overview';document.querySelectorAll('[data-reference-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.referenceMode===(open?mode:'map'))));document.getElementById('referencePanelToggle')?.setAttribute('aria-expanded',String(open));}
+function mount(){if(mounted)return true;if(!document.getElementById('floodModeBar'))return false;mounted=true;const icon=k=>window.IEAT_ICONS?.svg(k)||'';const rail=document.createElement('aside');rail.id='referenceRail';rail.setAttribute('aria-label','เครื่องมือมุมมอง');rail.innerHTML='<button type="button" id="referencePanelToggle" aria-label="เปิดหรือปิดแผงข้อมูล" aria-controls="floodInformationPane" aria-expanded="true"><svg class="ieat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav class="reference-rail-modes" aria-label="เลือกมุมมอง"><button type="button" data-reference-mode="overview" title="ภาพรวม" aria-label="ภาพรวม">'+icon('layers')+'</button><button type="button" data-reference-mode="preparedness" title="การเตรียมรับมือ" aria-label="การเตรียมรับมือ">'+icon('protection')+'</button></nav>';document.body.appendChild(rail);
+rail.addEventListener('click',e=>{const toggle=e.target.closest('#referencePanelToggle'),mode=e.target.closest('[data-reference-mode]');if(toggle){open=!open;sync();return}if(!mode)return;open=mode.dataset.referenceMode!=='map';if(open)document.getElementById('floodTab-'+mode.dataset.referenceMode)?.click();sync()});
+document.getElementById('floodModeBar').addEventListener('click',e=>{if(!e.target.closest('[data-flood-view-tab]'))return;open=true;sync();queueMicrotask(sync)},true);document.getElementById('floodModeBar').addEventListener('keydown',()=>queueMicrotask(sync));sync();return true;}
+function start(){if(mount())return;const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.body,{childList:true,subtree:true})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();</script>
+
+</body>
+</html>
+
