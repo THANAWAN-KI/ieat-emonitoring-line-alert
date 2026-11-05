@@ -37,7 +37,7 @@
 <script defer src="flood-icons.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-water-status.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-rid-source.js?v=20261105-clean-source-1"></script>
-<script defer src="flood-estate-dashboard.js?v=20261105-story-clarity"></script>
+<script defer src="flood-estate-dashboard.js?v=20261105-story-kpi-bars"></script>
 <script defer src="flood-river-panel.js?v=20261105-radar-palette"></script>
 <script defer src="flood-weather-overview.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-estate-diagrams.js?v=20261105-clean-source-1"></script>
@@ -234,6 +234,37 @@
    z-index:5!important;
    background:#fff!important;
   }
+ }
+}
+</style>
+<style>
+@layer floodDashboard {
+ @media screen {
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
+   min-height:88px!important;
+   padding:8px 10px!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-copy {
+   align-items:stretch!important;
+   text-align:left;
+   gap:6px!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-label {
+   order:-1;
+   font-size:13px!important;
+   text-wrap:wrap;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge {
+   width:100%;aspect-ratio:auto;display:flex;flex-direction:column-reverse;gap:7px;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane .ef-kpi-gauge svg {
+   position:static;width:100%;height:6px;overflow:hidden;
+  }
+  html.story-dashboard #floodInformationPane .ef-kpi-band {display:none}
+  html.story-dashboard #floodInformationPane :is(.ef-kpi-track,.ef-kpi-fill) {stroke-width:8}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] {--kpi-color:#a45e16;--kpi-track:#f3e7d8}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] {--kpi-color:#285c99;--kpi-track:#e2ecf8}
+  html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] {--kpi-color:#14796e;--kpi-track:#dcefeb}
  }
 }
 </style>
