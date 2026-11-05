@@ -902,3 +902,99 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     #estateFocusDashboard #floodInformationPane .ef-kpi-gauge { width:clamp(78px,78%,108px); }
   }
 }
+
+/* The map carries the visual detail; the data column uses a quiet reading surface. */
+@layer floodDashboard {
+  @media screen {
+    body[data-flood-section] {
+      --story-ink:#17313d;
+      --story-accent:#225c70;
+      --story-paper:#fafbf9;
+      --story-line:#dce5e7;
+      --radar-surface:#edf4f4;
+      --radar-heading:#edf4f4;
+      --radar-edge:#dce5e7;
+      --radar-active:#225c70;
+      --radar-accent:#225c70;
+    }
+    body[data-flood-section] :is(#referenceRail,#floodSectionPanel),
+    body[data-flood-section] #estateFocusDashboard #floodInformationPane {
+      background:var(--story-paper) !important;
+      box-shadow:none !important;
+    }
+    #estateFocusDashboard #floodInformationPane #floodPageTitle,
+    #floodSectionPanel h1,
+    #estateFocusDashboard #preparednessPane .ex-prep-head h2 {
+      color:var(--story-ink) !important;
+      font-weight:600 !important;
+      line-height:1.3 !important;
+    }
+    #estateFocusDashboard #floodInformationPane #approvedDashboardHeading {
+      gap:4px !important;
+      padding-bottom:6px;
+    }
+    body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs button[aria-selected=true] {
+      color:var(--story-accent) !important;
+      box-shadow:inset 0 -2px var(--story-accent) !important;
+    }
+    #estateFocusDashboard #floodInformationPane .flood-overview,
+    #estateFocusDashboard #floodInformationPane .flood-kpis {
+      background:transparent !important;
+    }
+    #estateFocusDashboard #floodInformationPane .flood-kpis {
+      gap:0 !important;
+      padding:8px 0 !important;
+      border-block:1px solid var(--story-line);
+    }
+    #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
+      border-radius:0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+      padding:6px !important;
+    }
+    #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi+.flood-kpi {
+      border-inline-start:1px solid var(--story-line) !important;
+    }
+    #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi:hover {
+      background:#edf4f4 !important;
+    }
+    #estateFocusDashboard #floodInformationPane .ef-kpi-gauge strong {
+      color:var(--story-ink) !important;
+    }
+    #floodInformationPane .flood-kpi[data-ef-card="efWatch"] { --kpi-color:#225c70; --kpi-band:#71a7b5; --kpi-track:#dcebee; }
+    #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] { --kpi-color:#365f8b; --kpi-band:#809ec0; --kpi-track:#e0e9f4; }
+    #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] { --kpi-color:#64517f; --kpi-band:#a898bd; --kpi-track:#ebe5f0; }
+    #estateFocusDashboard #floodInformationPane #floodStationsSection {
+      border-radius:0 !important;
+      padding:10px 0 0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+    }
+    #estateFocusDashboard #floodInformationPane #floodStationsSection .rp-station-row[aria-pressed=true] {
+      outline-color:var(--story-line) !important;
+    }
+    #floodSectionPanel :is(.ref-chart-card,.flood-alert-item),
+    #estateFocusDashboard #preparednessPane .ex-card {
+      box-shadow:none !important;
+    }
+  }
+  @media screen and (min-width:1440px) and (min-aspect-ratio:16/10) {
+    body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
+      padding:24px 20px 16px !important;
+      gap:10px !important;
+    }
+    #estateFocusDashboard #floodInformationPane #floodPageTitle {
+      font-size:clamp(23px,1.65vw,34px) !important;
+    }
+    #estateFocusDashboard #floodInformationPane .flood-kpis>.flood-kpi {
+      min-height:104px !important;
+    }
+    body[data-flood-section] #referenceRail .reference-rail-modes>button[aria-pressed=true] {
+      background:#edf4f4 !important;
+      color:var(--story-accent) !important;
+    }
+    body:not([data-reference-panel=closed]) #estateFocusDashboard .ef-map-column {
+      border-radius:8px !important;
+    }
+  }
+}
