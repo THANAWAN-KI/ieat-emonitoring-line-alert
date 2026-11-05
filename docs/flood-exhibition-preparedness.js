@@ -17,9 +17,8 @@
   const pane=document.getElementById('preparednessPane');if(!pane)return;
   selectedName=String(scope.name||scope.estate?.name||'');
   const estate=(D.master_estate||[]).find(r=>norm(r.name_th)===norm(selectedName));
-  const select='<div class="ex-prep-selector"><label for="exPrepEstate">เลือกนิคมอุตสาหกรรม</label><select id="exPrepEstate"><option value="">เลือกนิคมอุตสาหกรรม</option>'+(D.master_estate||[]).map(e=>'<option value="'+e.id+'" '+(estate?.id===e.id?'selected':'')+'>'+esc(e.name_th)+' · '+esc(e.province_th)+'</option>').join('')+'</select><button type="button" class="ex-map-action" data-ex-all>ทุกนิคมฯ</button></div>';
-  pane.innerHTML='<div class="ex-prep-head"><h2>แผนเตรียมรับมือน้ำท่วม</h2><p>มาตรการและโครงสร้างพื้นฐานรายนิคมฯ</p></div>'+select;
-  if(!estate){pane.innerHTML+=card('เลือกพื้นที่เพื่อดูแผนรับมือ','<p>เลือกนิคมฯ ด้านบนเพื่อดูมาตรการ ทรัพยากร และรายการที่ซูมดูบนแผนที่ได้</p>');return;}
+  pane.innerHTML='<div class="ex-prep-head"><h2>แผนเตรียมรับมือน้ำท่วม</h2><p>มาตรการและโครงสร้างพื้นฐานรายนิคมฯ</p>'+(selectedName?'<p>พื้นที่ที่เลือก: <strong>'+esc(selectedName)+'</strong></p>':'')+'</div>';
+  if(!estate){pane.innerHTML+=selectedName?card('แผนรับมือรายนิคมฯ','<p>ยังไม่มีข้อมูลแผนรับมือสำหรับนิคมฯ ที่เลือก</p>'):card('แผนรับมือรายนิคมฯ','<p>เลือกนิคมอุตสาหกรรมที่หน้า ‘สถานการณ์น้ำ’ เพื่อดูแผนรับมือของพื้นที่นั้น</p>');return;}
   const id=estate.id,profiles=byEstate('flood_estate_profile',id),measures=byEstate('flood_measure',id),docs=byEstate('flood_source_document',id),resources=byEstate('flood_resource',id);
   const planRows=measures.sort((a,b)=>(a.seq_no||0)-(b.seq_no||0)).map(r=>{
    const raw=r.measure_text||'',pos=raw.search(/[:：]/),hasCriterion=r.measure_term==='ALERT_PLAN'&&pos>=0;
@@ -52,8 +51,7 @@
    const summary=document.createElement('summary');summary.textContent='เอกสารแผนรับมือน้ำท่วมและข้อมูลประกอบ ↗';documents.append(summary,...supporting);pane.append(documents);
   }
  }};
- document.addEventListener('change',e=>{if(e.target.id!=='exPrepEstate')return;const estate=D.master_estate.find(r=>String(r.id)===e.target.value);const keepPrep=document.body.dataset.floodView==='preparedness';window.dispatchEvent(new CustomEvent('ieat-exhibition-select-estate',{detail:{name:estate?.name_th||''}}));if(keepPrep)queueMicrotask(()=>document.getElementById('floodTab-preparedness')?.click());});
  function focus(e){const row=e.target.closest('[data-ex-infra]');if(!row)return;const key=row.dataset.exInfra;document.querySelectorAll('#preparednessPane tr[data-ex-infra]').forEach(r=>r.classList.toggle('ex-selected',r.dataset.exInfra===key));document.getElementById('estateFocusMap')?.contentWindow?.postMessage({type:'flood-infrastructure-focus',key,estate:selectedName},location.origin);}
- document.addEventListener('click',e=>{if(e.target.closest('[data-ex-all]')){const keepPrep=document.body.dataset.floodView==='preparedness';window.dispatchEvent(new CustomEvent('ieat-exhibition-select-estate',{detail:{name:''}}));if(keepPrep)queueMicrotask(()=>document.getElementById('floodTab-preparedness')?.click());return;}focus(e);});
+ document.addEventListener('click',focus);
  document.addEventListener('keydown',e=>{if(e.target.matches('tr[data-ex-infra]')&&['Enter',' '].includes(e.key)){e.preventDefault();focus(e);}});
 })();
