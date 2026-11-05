@@ -2,9 +2,9 @@
 (()=>{'use strict';
 const n=v=>v===null||v===undefined||v===''?null:Number.isFinite(Number(v))?Number(v):null;
 const statusPairs={
- blue:['#109dc0','#000000'],teal:['#335238','#ffffff'],green:['#598c14','#000000'],
- yellow:['#ffc719','#000000'],orange:['#ff6908','#000000'],brown:['#ed3b21','#000000'],
- red:['#bf033b','#ffffff'],gray:['#706357','#ffffff']
+ blue:['#109dc0','#000000'],teal:['#335238','#ffffff'],green:['#598c14','#ffffff'],
+ yellow:['#ff6908','#ffffff'],orange:['#ff6908','#ffffff'],brown:['#ed3b21','#000000'],
+ red:['#f00a36','#ffffff'],gray:['#706357','#ffffff']
 };
 const palette={...Object.fromEntries(Object.entries(statusPairs).map(([key,pair])=>[key,pair[0]])),lightBlue:'#109dc0',navy:'#051736',lavender:'#2e1f54',purple:'#52057f'};
 const state=(key,label,criterion)=>({key:'standard-'+key,hex:palette[key],color:palette[key],background:statusPairs[key]?.[0]||palette[key],textColor:statusPairs[key]?.[1]||'#000000',label,criterion});
@@ -29,7 +29,7 @@ function canal(r){
 function dam(value){
  const p=n(value);if(p===null)return unknown();
  if(p>100)return state('red','เกินความจุเก็บกักปกติ','ปริมาณกักเก็บมากกว่า 100% ของความจุปกติ; ไม่ใช่ข้อสรุปว่าเขื่อนเสียหาย');
- if(p>80)return state('blue','น้ำมาก','ปริมาณกักเก็บมากกว่า 80% ถึง 100% ของความจุปกติ');
+ if(p>80)return state('yellow','น้ำมาก','ปริมาณกักเก็บมากกว่า 80% ถึง 100% ของความจุปกติ');
  if(p>50)return state('green','น้ำปกติ','ปริมาณกักเก็บมากกว่า 50% ถึง 80% ของความจุปกติ');
  if(p>30)return state('orange','น้ำน้อย','ปริมาณกักเก็บมากกว่า 30% ถึง 50% ของความจุปกติ');
  return state('brown','น้ำน้อยวิกฤต','ปริมาณกักเก็บไม่เกิน 30% ของความจุปกติ');
