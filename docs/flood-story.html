@@ -16,12 +16,37 @@
 @media(max-width:650px){.split,.steps{grid-template-columns:1fr}.cover{min-height:65svh}.cover-copy{margin:8px auto 0}}
 .story-map{min-height:calc(100svh - 52px);background:#fff}
 .story-map iframe{display:block;width:100%;height:calc(100svh - 52px);min-height:560px;border:0;background:#fff}
+
+.bar{min-height:56px;background:#fff}
+.bar .story-brand{color:var(--ink);font-weight:600}
+.story-slide-nav{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.story-slide-nav button{width:36px;height:34px;background:#fff;border:1px solid #ccc;color:var(--ink);cursor:pointer;font:600 19px/1 Sarabun,sans-serif}
+.story-slide-nav button:disabled{opacity:.35;cursor:default}
+#story-position{color:#53656b;font-variant-numeric:tabular-nums}
+.cover{min-height:calc(100svh - 56px);position:relative;overflow:hidden;padding:28px 20px 70px}
+.cover>div{width:min(100%,920px);position:relative}
+.cover-art{margin:0 auto;animation:cover-enter .85s ease-out both}
+.cover-copy{margin:-34px auto 0;position:relative;animation:cover-enter .8s .12s ease-out both}
+.cover h1{font-size:clamp(34px,6vw,76px)}
+.cover-rain{animation:cover-rain 2.8s ease-in-out infinite}
+.cover .cover-next{display:grid;place-items:center;width:44px;height:44px;margin:18px auto 0;border:1px solid #bfbab0;color:var(--ink);text-decoration:none;font-size:25px;background:var(--paper)}
+@keyframes cover-enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cover-rain{0%,100%{transform:translateY(0);opacity:.85}50%{transform:translateY(6px);opacity:1}}
+@media(max-width:650px){.cover-copy{margin:0 auto}.bar .story-brand{font-size:12px}.story-slide-nav button{width:30px}}
+@media(prefers-reduced-motion:reduce){.cover-art,.cover-copy,.cover-rain{animation:none}}
 </style>
 </head>
 <body>
-<header class="bar"><strong>IEAT e-Monitoring</strong><a href="flood-report.html">เปิดแดชบอร์ดสถานการณ์น้ำ ↗</a></header>
+<header class="bar">
+ <a class="story-brand" href="#cover">บันทึกเฝ้าระวังน้ำรอบนิคมฯ</a>
+ <nav class="story-slide-nav" aria-label="เลื่อนบท">
+  <button type="button" id="story-prev" aria-label="บทก่อนหน้า">←</button>
+  <span id="story-position" aria-live="polite">1 / 4</span>
+  <button type="button" id="story-next" aria-label="บทถัดไป">→</button>
+ </nav>
+</header>
 <main>
-<section class="cover" aria-labelledby="story-title">
+<section id="cover" class="cover" aria-labelledby="story-title">
 <div>
 <svg class="cover-art" viewBox="0 0 880 410" role="img" aria-label="ภาพประกอบโรงงาน คลอง และสถานีวัดระดับน้ำ">
 <path d="M110 83 749 47l29 266-607 56z" fill="#f0ece4"/><path d="M142 53 752 65l-14 252-580 22z" fill="#ffbd28" stroke="#202b2b" stroke-width="5" stroke-linejoin="round"/>
@@ -32,11 +57,11 @@
 <path d="M542 237v-92h51v92m-40-68h26m-26 18h17m-17 19h26m-26 18h17" fill="#fff"/>
 <path d="M611 228c45-22 76-17 112-9m-402 80c28-8 58-8 87 0m-269 27c27-2 54-10 81-19m399 9c32-7 63-13 97-16" fill="none"/>
 <path d="M390 126c-19 1-25-24-10-32 5-22 34-28 48-8 23-4 37 23 23 38z" fill="#fff"/>
-<path d="m389 145-8 16m30-17-8 17m31-18-8 16" fill="none" stroke="#3157bd"/>
+<path class="cover-rain" d="m389 145-8 16m30-17-8 17m31-18-8 16" fill="none" stroke="#3157bd"/>
 <path d="M98 240v-37m0 11c-30 2-33-22-15-24 5-16 25-17 31 0 17 7 13 27-16 24zm660 8v-37m0 12c-26 0-30-20-14-25 4-16 22-16 27 0 17 6 12 25-13 25z" fill="#67b98b"/>
 </g>
 </svg>
-<div class="cover-copy"><h1 id="story-title">บันทึกเฝ้าระวังน้ำ<br>รอบนิคมฯ</h1><p>จากฝนที่ตกเหนือพื้นที่ ถึงระดับน้ำที่สถานี และการเตรียมรับมือของนิคมอุตสาหกรรม</p><a href="#signals">เริ่มสำรวจ ↓</a></div>
+<div class="cover-copy"><h1 id="story-title">บันทึกเฝ้าระวังน้ำ<br>รอบนิคมฯ</h1><p>จากฝนที่ตกเหนือพื้นที่ ถึงระดับน้ำที่สถานี และการเตรียมรับมือของนิคมอุตสาหกรรม</p><a class="cover-next" href="#signals" aria-label="เริ่มสำรวจบทแรก">↓</a></div>
 </div>
 </section>
 <section id="signals" class="chapter notebook">
@@ -49,11 +74,44 @@
 </svg>
 </div>
 </section>
-<section class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>แดชบอร์ดคัดกรองสถานีฝนสะสมมากกว่า 35 มม. และสถานีระดับน้ำที่เข้าเกณฑ์เฝ้าระวัง ผลคัดกรองใช้ชี้พื้นที่ที่ควรติดตามต่อ</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ บนหน้าสถานการณ์น้ำ จากนั้นเปิดเมนูเตรียมรับมือเพื่อดูมาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
+<section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>แดชบอร์ดคัดกรองสถานีฝนสะสมมากกว่า 35 มม. และสถานีระดับน้ำที่เข้าเกณฑ์เฝ้าระวัง ผลคัดกรองใช้ชี้พื้นที่ที่ควรติดตามต่อ</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ บนหน้าสถานการณ์น้ำ จากนั้นเปิดเมนูเตรียมรับมือเพื่อดูมาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
 <section id="map" class="story-map" aria-label="บทสุดท้าย: ข้อมูลเฝ้าระวังน้ำและแผนที่นิคมฯ">
   <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-black-gauge-border" loading="lazy" allowfullscreen></iframe>
 </section>
 </main>
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
+<script>
+(() => {
+ const slides=['cover','signals','readiness','map'].map(id=>document.getElementById(id));
+ const prev=document.getElementById('story-prev'), next=document.getElementById('story-next');
+ const position=document.getElementById('story-position');
+ let current=0, frame=0, target=null;
+ const update=()=>{
+  frame=0;
+  const reached=slides.findLastIndex(slide=>slide.getBoundingClientRect().top<=Math.min(160,innerHeight*.25));
+  if(target!==null&&reached===target)target=null;
+  current=Math.max(0,reached);
+  prev.disabled=current===0;
+  next.disabled=current===slides.length-1;
+  const label=(current+1)+' / '+slides.length;
+  if(position.textContent!==label)position.textContent=label;
+ };
+ const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
+ const go=step=>{
+  const index=Math.max(0,Math.min(slides.length-1,(target??current)+step));
+  target=index;
+  slides[index].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  history.replaceState(null,'','#'+slides[index].id);
+ };
+ prev.addEventListener('click',()=>go(-1));
+ next.addEventListener('click',()=>go(1));
+ window.addEventListener('wheel',()=>{target=null;},{passive:true});
+ window.addEventListener('touchstart',()=>{target=null;},{passive:true});
+ window.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',schedule);
+ window.addEventListener('load',schedule);
+ update();
+})();
+</script>
 </body>
 </html>
