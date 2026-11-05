@@ -9,7 +9,7 @@
  const types=[['flood_pump_station','สถานีสูบน้ำ','station_id','station_name'],['flood_water_storage','บ่อหน่วงน้ำ / แหล่งกักเก็บ','storage_id','storage_name'],['flood_drainage_channel','คลองระบายน้ำ','channel_id','channel_name'],['flood_barrier','แนวคันกั้นน้ำ / ป้องกันน้ำท่วม','barrier_id','barrier_name']];
  const terms={ROUTINE:'เตรียมพร้อม',MONITORING:'เฝ้าระวัง',SHORT_TERM:'มาตรการระยะสั้น',LONG_TERM:'มาตรการระยะยาว',COMMUNICATION:'การประสานงาน',ALERT_PLAN:'แผนตามระดับเตือน'};
  const alerts={NORMAL:'ปกติ / เตรียมพร้อม',WATCH:'เฝ้าระวัง',WARNING:'เตือนภัย',EMERGENCY:'ฉุกเฉิน'};
- function table(headers,rows){return '<div class="ex-table-wrap"><table class="ex-table"><thead><tr>'+headers.map(h=>'<th scope="col">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'}
+ function table(headers,rows,label){return '<div class="ex-table-wrap"'+(label?' tabindex="0" role="region" aria-label="'+esc(label)+'"':'')+'><table class="ex-table"><thead><tr>'+headers.map(h=>'<th scope="col">'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>'}
  const empty=(n,text='ยังไม่มีข้อมูลในชุดต้นทาง')=>'<tr><td colspan="'+n+'" class="ex-empty">'+text+'</td></tr>';
  const card=(title,body)=>['ระบบรับมือและข้อจำกัดของพื้นที่','ทรัพยากรสำรองและการสนับสนุน','ผู้ประสานงาน'].includes(title)?'<details class="ex-card ex-more"><summary>'+title+'</summary>'+body+'</details>':'<section class="ex-card"><h3>'+title+'</h3>'+body+'</section>';
  let selectedName='';
@@ -26,9 +26,9 @@
    const criterion=hasCriterion?raw.slice(0,pos):'ไม่ได้ระบุเกณฑ์แยก';
    const action=hasCriterion?raw.slice(pos+1).trim():raw;
    const tone=r.alert_code==='EMERGENCY'?'red':r.alert_code==='WARNING'||r.alert_code==='WATCH'?'amber':'neutral';
-   return '<tr><th scope="row"><span class="ex-badge '+tone+'">'+esc(alerts[r.alert_code]||terms[r.measure_term]||r.measure_term)+'</span></th><td>'+(hasCriterion?'<b>'+esc(criterion)+'</b><br>':'')+esc(action)+(r.remark?'<small>'+esc(r.remark)+'</small>':'')+'</td><td>'+esc(r.responsible||'ยังไม่มีข้อมูล')+'</td></tr>';
+   return '<tr><th scope="row"><span class="ex-badge '+tone+'">'+esc(alerts[r.alert_code]||terms[r.measure_term]||r.measure_term)+'</span></th><td>'+esc(criterion)+'</td><td>'+esc(action)+(r.remark?'<small>'+esc(r.remark)+'</small>':'')+'</td><td>'+esc(r.responsible||'ยังไม่มีข้อมูล')+'</td></tr>';
   });
-  pane.innerHTML+=card('แผนและมาตรการรับมือ',table(['หมวด','แนวทางดำเนินการ','ผู้รับผิดชอบ'],planRows.length?planRows:[empty(3)])+'<p class="ex-note">เกณฑ์ตามแผนต้นทางของนิคมฯ ไม่ใช่การประกาศสถานะฉุกเฉินปัจจุบัน</p>');
+  pane.innerHTML+=card('ตารางแผนและมาตรการรับมือ',table(['ระดับ / หมวด','เกณฑ์เริ่มดำเนินการ','มาตรการและขั้นตอน','ผู้รับผิดชอบ'],planRows.length?planRows:[empty(4)],'ตารางแผนเตรียมรับมือน้ำท่วม')+'<p class="ex-note">เกณฑ์ตามแผนต้นทางของนิคมฯ ไม่ใช่การประกาศสถานะฉุกเฉินปัจจุบัน</p>');
   const infrastructure=[];
   for(const [key,label,pk,nameField] of types){for(const r of byEstate(key,id)){
    let detail='';
