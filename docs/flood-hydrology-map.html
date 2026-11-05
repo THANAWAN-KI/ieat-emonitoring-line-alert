@@ -605,6 +605,7 @@ const basemapUrls={streets:'https://services.arcgisonline.com/ArcGIS/rest/servic
 const storyMap=new URLSearchParams(location.search).get('story')==='1';
 if(storyMap){
  document.body.classList.add('story-map-mode');
+ if(new URLSearchParams(location.search).get('chapter')==='readiness')document.body.classList.add('readiness-map-mode');
  $('estateView3d').setAttribute('aria-pressed','false');
  $('estateView3d').textContent='มุมมอง 2D';
 }
@@ -2236,7 +2237,8 @@ html body.story-map-mode #ieatInfrastructure .infra-control-name{
  position:absolute!important;width:1px!important;height:1px!important;
  overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;
 }
-</style></body></html>
+</style><style>body.readiness-map-mode :is(#aerialTourHint,#satelliteKey){display:none!important}</style>
+</body></html>
 
 
 
