@@ -116,7 +116,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 const timer=setInterval(()=>{const host=document.getElementById('rpCards');if(!host)return;const cards=Array.from(host.children).filter(el=>el.matches('.rp-card'));if(cards.length!==lastCards.length||cards.some((c,i)=>c!==lastCards[i])||!document.getElementById('ieatWaterStationPager'))schedule()},1200);
 window.addEventListener('resize',schedule);
 })();
-</script><script src="flood-exhibition-preparedness.js?v=20261105-plan-table"></script><script id="flood-two-modes">(()=>{
+</script><script src="flood-exhibition-preparedness.js?v=20261105-prep-shared-scope"></script><script id="flood-two-modes">(()=>{
 'use strict';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v||'').normalize('NFC').replace(/สำนักงานนิคมอุตสาหกรรม|สำนักงานนิคมฯ|นิคมอุตสาหกรรม|นิคมฯ|\s|[()]/g,'').toLowerCase();
