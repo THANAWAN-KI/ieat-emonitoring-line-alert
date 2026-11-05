@@ -14,12 +14,8 @@
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 8px}.stats div{border-top:3px solid var(--blue);padding:8px 0}.stats dt{font-size:14px}.stats dd{margin:0;font-size:clamp(25px,5vw,46px);line-height:1.15;font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}.action{display:inline-block;padding:7px 13px;background:#fff;color:#244b82;border:1px solid #b8cce0;border-radius:5px;font-weight:700;text-decoration:none}.action.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0}.steps section{border-top:3px solid var(--blue);padding-top:12px}.steps h3{font-size:21px;margin-bottom:8px}.steps section:nth-child(2){border-color:#c78a15}.steps section:nth-child(3){border-color:#ad2541}footer{padding:28px 20px;border-top:1px solid var(--rule);color:#53656b;font-size:14px}
 @media(max-width:650px){.split,.steps{grid-template-columns:1fr}.cover{min-height:65svh}.cover-copy{margin:8px auto 0}}
-.story-map{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);min-height:calc(100svh - 52px);background:#fff}
-.story-map-data{align-self:center;padding:clamp(24px,4.5vw,86px);min-width:0}
-.story-map h2{font-size:clamp(28px,3.4vw,58px);margin-bottom:16px;letter-spacing:-.025em}
-.story-map iframe{display:block;width:100%;height:100%;min-height:calc(100svh - 52px);border:0;background:#eaf5f8}
-.story-map .stats dd{font-size:clamp(25px,3vw,46px)}
-@media(max-width:800px){.story-map{grid-template-columns:minmax(0,1fr)}.story-map iframe{height:65svh;min-height:400px}}
+.story-map{min-height:calc(100svh - 52px);background:#fff}
+.story-map iframe{display:block;width:100%;height:calc(100svh - 52px);min-height:560px;border:0;background:#fff}
 </style>
 </head>
 <body>
@@ -54,41 +50,10 @@
 </div>
 </section>
 <section class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>แดชบอร์ดคัดกรองสถานีฝนสะสมมากกว่า 35 มม. และสถานีระดับน้ำที่เข้าเกณฑ์เฝ้าระวัง ผลคัดกรองใช้ชี้พื้นที่ที่ควรติดตามต่อ</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ บนหน้าสถานการณ์น้ำ จากนั้นเปิดเมนูเตรียมรับมือเพื่อดูมาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><div class="actions"><a class="action primary" href="flood-report.html">เลือกนิคมฯ และดูแผน ↗</a></div></div></section>
-<section id="map" class="story-map" aria-labelledby="story-map-title">
-  <div class="story-map-data">
-    <span class="label">บทที่ 03 · สำรวจพื้นที่</span>
-    <h2 id="story-map-title">เฝ้าระวังน้ำรอบนิคมฯ</h2>
-    <p>ดูตำแหน่งนิคมอุตสาหกรรมและสถานีตรวจวัดบนแผนที่ด้านข้าง เปิดชั้นข้อมูลเพื่อดูฝน ระดับน้ำ และข้อมูลประกอบในพื้นที่ที่สนใจ</p>
-    <dl class="stats" aria-label="จำนวนระเบียนในชุดข้อมูล"><div><dt>นิคมฯ ในชุดข้อมูล</dt><dd id="estate-count">—</dd></div><div><dt>จุดวัดระดับน้ำ</dt><dd id="water-count">—</dd></div><div><dt>จุดวัดฝน</dt><dd id="rain-count">—</dd></div></dl><p id="feed-time" class="caption" role="status">กำลังโหลดชุดข้อมูลจากแดชบอร์ด</p>
-    <div class="actions"><a class="action primary" href="flood-report.html">เปิดแดชบอร์ดและมุมมอง 360° ↗</a></div>
-  </div>
-  <iframe title="แผนที่เฝ้าระวังน้ำของนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261105-purple-estate-pin&amp;layout=reference" loading="lazy" allowfullscreen></iframe>
+<section id="map" class="story-map" aria-label="บทสุดท้าย: ข้อมูลเฝ้าระวังน้ำและแผนที่นิคมฯ">
+  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-map" loading="lazy" allowfullscreen></iframe>
 </section>
 </main>
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
-<script>
-(async () => {
-  const time = document.getElementById('feed-time');
-  try {
-    const response = await fetch('./data/thaiwater_latest.json', { cache:'no-store' });
-    if (!response.ok) throw new Error('Unable to load dashboard data');
-    const data = await response.json();
-    if (!Array.isArray(data.estates) || !Array.isArray(data.stations)) throw new Error('Incomplete dashboard data');
-    const format = new Intl.NumberFormat('th-TH');
-    document.getElementById('estate-count').textContent = format.format(data.estates.length);
-    document.getElementById('water-count').textContent = format.format(data.stations.filter(point => point.kind === 'waterlevel').length);
-    document.getElementById('rain-count').textContent = format.format(data.stations.filter(point => point.kind === 'rainfall').length);
-    const stamp = new Date(data.generated_at);
-    const validStamp = data.generated_at && Number.isFinite(stamp.getTime());
-    time.textContent = validStamp
-      ? 'เวลาจัดทำชุดข้อมูล ' + new Intl.DateTimeFormat('th-TH',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Bangkok'}).format(stamp)
-      : 'ชุดข้อมูลไม่ได้ระบุเวลาจัดทำ';
-    if (data.status === 'stale' || (validStamp && Date.now() - stamp.getTime() > 86400000)) time.textContent += ' · ข้อมูลย้อนหลัง';
-    time.textContent += ' · นับระเบียนในชุดข้อมูล';
-  } catch {
-    time.textContent = 'โหลดชุดข้อมูลไม่ได้ในขณะนี้';
-  }
-})();
-</script>
 </body>
 </html>
