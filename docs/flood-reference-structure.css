@@ -998,3 +998,112 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     }
   }
 }
+
+/* A quiet, document-like surface for water reporting. */
+@layer floodDashboard {
+  body[data-flood-section=report] {
+    --report-paper:#fbfaf6;
+    --report-ink:#213830;
+    --report-accent:#31594b;
+    --report-muted:#56645d;
+    --report-rule:#d9dfd5;
+  }
+  @media screen {
+    body[data-flood-section=report] #floodSectionPanel {
+      background:var(--report-paper) !important;
+      color:var(--report-ink) !important;
+      padding-top:24px !important;
+      gap:16px !important;
+    }
+    #floodSectionPanel .water-report-heading h1 {
+      font-size:clamp(22px,1.6vw,31px) !important;
+      color:var(--report-ink) !important;
+    }
+    #floodSectionPanel .water-report-heading p {
+      color:var(--report-muted) !important;
+    }
+    body[data-flood-section=report] #floodSectionPanel .ref-report-segments {
+      background:transparent !important;
+      padding:0 !important;
+      border-bottom:1px solid var(--report-rule);
+      border-radius:0 !important;
+    }
+    body[data-flood-section=report] #floodSectionPanel .ref-report-segments button {
+      border-radius:0;
+      color:var(--report-muted) !important;
+      min-height:42px;
+    }
+    body[data-flood-section=report] #floodSectionPanel .ref-report-segments button[aria-pressed=true] {
+      background:transparent !important;
+      color:var(--report-accent) !important;
+      box-shadow:inset 0 -2px var(--report-accent);
+      font-weight:600 !important;
+    }
+    #floodSectionPanel .water-report-stats {
+      gap:0;
+      border-block:1px solid var(--report-rule);
+    }
+    #floodSectionPanel .water-report-stats>div,
+    #floodSectionPanel .water-report-stats>div:first-child {
+      padding:12px 8px;
+      border-radius:0;
+      background:transparent;
+    }
+    #floodSectionPanel .water-report-stats>div+div {
+      border-inline-start:1px solid var(--report-rule);
+    }
+    #floodSectionPanel .water-report-stats>div:first-child b { color:var(--report-accent) !important; }
+    body[data-flood-section=report] #floodSectionPanel .ref-chart-card {
+      background:transparent !important;
+      border-radius:0 !important;
+      padding:0 !important;
+      margin:0 !important;
+    }
+    body[data-flood-section=report] #floodSectionPanel .ref-chart-card>h2 {
+      background:transparent !important;
+      padding:0 !important;
+      color:var(--report-ink) !important;
+      box-shadow:none !important;
+    }
+    #floodSectionPanel .water-report-sources {
+      grid-template-columns:minmax(0,1fr);
+      gap:0;
+      border-top:1px solid var(--report-rule);
+    }
+    body[data-flood-section=report] #floodSectionPanel .water-report-sources button {
+      min-height:39px;
+      border:0 !important;
+      border-bottom:1px solid var(--report-rule) !important;
+      border-radius:0;
+      background:transparent !important;
+      color:var(--report-ink) !important;
+    }
+    body[data-flood-section=report] #floodSectionPanel .water-report-sources button:not(:disabled):hover {
+      background:#eaf0ea !important;
+    }
+    body[data-flood-section=report] #floodSectionPanel .section-action {
+      background:var(--report-accent) !important;
+      color:#fff !important;
+    }
+  }
+  body[data-flood-section=report] #ieatCurrentReport {
+    border-color:var(--report-rule) !important;
+    box-shadow:none !important;
+  }
+  body[data-flood-section=report] #ieatCurrentReport header {
+    border-color:var(--report-rule);
+  }
+  body[data-flood-section=report] #ieatCurrentReport :is(header p,a) {
+    color:var(--report-accent) !important;
+  }
+  body[data-flood-section=report] #ieatCurrentReport .ex-report-table thead th {
+    background:#eaf0ea !important;
+    color:var(--report-ink) !important;
+  }
+  body[data-flood-section=report] #ieatCurrentReport .ex-report-table :is(th,td) {
+    border-color:var(--report-rule) !important;
+  }
+  body[data-flood-section=report] #ieatCurrentReport .ex-report-table tbody tr:nth-child(even) {
+    background:#f7f8f4;
+  }
+}
