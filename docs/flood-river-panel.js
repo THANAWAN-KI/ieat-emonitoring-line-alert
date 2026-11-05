@@ -175,7 +175,7 @@
   const detail=daily?note.replace('อัตราเฉลี่ยรายวัน · ','').replace(/(\d{4})-(\d{2})-(\d{2})/,(_,y,m,d)=>Number(d)+'/'+Number(m)+'/'+String(Number(y)+543).slice(-2)):note;
   const name=String(r.name||'').replace(/^\s*\d+[.)]\s*/,''),number=Number(value),max=Number(maximum),percent=Number.isFinite(number)&&max>0?Math.max(0,Math.min(100,number/max*100)):0;
   const tone=['#2f68f4','#5a9bf6','#9dc5fa','#b9d6fc','#dbe9fc'][position-1]||'#9dc5fa';
-  return '<button type="button" class="rp-rank-card ieat-new-rank ieat-rank-bar-row" '+attribute+' aria-label="'+esc(name+' '+fmt(number,1)+' ลบ.ม./วินาที · '+kind+' · '+detail)+'" title="'+esc(kind+' · '+detail)+'"><span class="ieat-rank-copy"><b>'+esc(name)+'</b><small>'+esc(detail)+'</small></span><span class="ieat-rank-bar-track" aria-hidden="true"><span class="ieat-rank-bar-fill" style="width:'+percent.toFixed(3)+'%;background:'+tone+'"></span></span><span class="ieat-rank-value">'+fmt(number,1)+'</span></button>';
+  return '<button type="button" class="rp-rank-card ieat-new-rank ieat-rank-bar-row" '+attribute+' aria-label="'+esc(name+' '+fmt(number,1)+' ลบ.ม./วินาที · '+kind+' · '+detail)+'" title="'+esc(kind+' · '+detail)+'"><span class="ieat-rank-copy"><b>'+esc(name)+'</b></span><span class="ieat-rank-bar-track" aria-hidden="true"><span class="ieat-rank-bar-fill" style="width:'+percent.toFixed(3)+'%;background:'+tone+'"></span></span><span class="ieat-rank-value">'+fmt(number,1)+'</span></button>';
  }
  function renderWaterExtras(){
   if(!$('rpFlowRanks'))return;
