@@ -1107,10 +1107,31 @@ function drawOverviewClusters(clusters){
  const colors=rows.map(f=>color(f.properties,r.kind)),clusterColor=r.kind==='estate'?'#52057f':(['#bf033b','#ffc719','#ffc719','#52057f','#109dc0','#598c14','#2e1f54'].find(c=>colors.includes(c))||'#109dc0');
  const clusterIcon=r.kind==='estate'?'<span class="ieat-cluster-glyph" aria-hidden="true">นิคมฯ</span>':r.kind==='camera'?cameraSvg:measurementShape(r.kind,clusterColor);
  const html=window.IEAT_SQ?IEAT_SQ.cluster(r.kind,clusterColor,rows.length):'<span class="flood-cluster-symbol" style="--cluster-status:'+clusterColor+'">'+clusterIcon+'<b>'+rows.length+'</b></span>';
- const title=rows.length+' '+(labels[r.kind]||'สถานี')+' · คลิกเพื่อซูม';
+ const title=rows.length+' '+(labels[r.kind]||'สถานี')+(storyMap?' · ดูรายละเอียด':' · คลิกเพื่อซูม');
  const zoom=()=>{const coords=rows.map(f=>f.geometry.coordinates);if(vector){const b=new maplibregl.LngLatBounds();coords.forEach(p=>b.extend(p));vector.fitBounds(b,{padding:55,maxZoom:12,duration:400})}else raster.fitBounds(coords.map(p=>[p[1],p[0]]),{padding:[40,40],maxZoom:12});};
- if(vector){const el=document.createElement('button');el.type='button';el.className='flood-point-cluster'+(window.IEAT_SQ?' has-sq':'');el.setAttribute('aria-label',title);el.innerHTML=html;el.addEventListener('click',zoom);waterMarkers.push(new maplibregl.Marker({element:el,anchor:'center'}).setLngLat([lng,lat]).addTo(vector));}
- else L.marker([lat,lng],{icon:L.divIcon({className:'flood-point-cluster'+(window.IEAT_SQ?' has-sq':''),html,iconSize:window.IEAT_SQ?[44,44]:[46,46],iconAnchor:window.IEAT_SQ?[22,22]:[23,23]}),title,riseOnHover:true}).on('click',zoom).addTo(groups.points);
+ const select=storyMap?()=>{
+  preparednessPopup?.remove();
+  const box=document.createElement('article');
+  box.className='story-cluster-popup';
+  box.innerHTML='<h3>กลุ่ม'+esc(labels[r.kind]||'สถานี')+'</h3><div class="story-cluster-actions"><button type="button" data-cluster-zoom>ซูมไปยังกลุ่ม</button><button type="button" data-cluster-list aria-expanded="false">ดูรายการจุด</button></div><p>กลุ่มนี้มี <strong>'+rows.length+'</strong> จุด</p><div class="story-popup-list" hidden></div>';
+  const list=box.querySelector('.story-popup-list'),browse=box.querySelector('[data-cluster-list]');
+  box.querySelector('[data-cluster-zoom]').onclick=zoom;
+  browse.onclick=()=>{list.hidden=!list.hidden;browse.setAttribute('aria-expanded',String(!list.hidden));};
+  rows.forEach(f=>{
+   const button=document.createElement('button');
+   button.type='button';
+   button.textContent=f.properties.name||f.properties.code||'จุดข้อมูล';
+   button.onclick=()=>{
+    const [x,y]=f.geometry.coordinates,p={...f.properties,lat:y,lng:x};
+    if(p.kind==='estate')openPointPopup(x,y,'<div class="popup"><h3>'+esc(button.textContent)+'</h3><p>นิคมอุตสาหกรรม</p></div>');
+    else showMapDetails(p,p.kind);
+   };
+   list.append(button);
+  });
+  preparednessPopup=vector?new maplibregl.Popup({maxWidth:'360px',className:'prep-point-popup'}).setLngLat([lng,lat]).setDOMContent(box).addTo(vector):L.popup({maxWidth:360,className:'prep-point-popup'}).setLatLng([lat,lng]).setContent(box).openOn(raster);
+ }:zoom;
+ if(vector){const el=document.createElement('button');el.type='button';el.className='flood-point-cluster'+(window.IEAT_SQ?' has-sq':'');el.setAttribute('aria-label',title);el.innerHTML=html;el.addEventListener('click',select);waterMarkers.push(new maplibregl.Marker({element:el,anchor:'center'}).setLngLat([lng,lat]).addTo(vector));}
+ else L.marker([lat,lng],{icon:L.divIcon({className:'flood-point-cluster'+(window.IEAT_SQ?' has-sq':''),html,iconSize:window.IEAT_SQ?[44,44]:[46,46],iconAnchor:window.IEAT_SQ?[22,22]:[23,23]}),title,riseOnHover:true}).on('click',select).addTo(groups.points);
  }
 }
 
@@ -1480,6 +1501,17 @@ function renderWatchEvidence(){
  const distinct=kind=>new Set(stations.filter(s=>s.kind===kind).map(s=>s.lat+':'+s.lon+':'+s.name)).size;
  const water=distinct('water'),rain=distinct('rain');
  const estatetext=estates.length.toLocaleString('th-TH');
+ if(storyMap){
+  const total=new Set(stations.map(s=>s.lat+':'+s.lon+':'+s.name)).size;
+  const rows=[['นิคมฯ ที่เข้าเกณฑ์',estatetext+' แห่ง'],['สถานีที่เกี่ยวข้อง',total+' สถานี']];
+  if(water)rows.push(['สถานีระดับน้ำ','<label><input type="checkbox" data-watch-layer="water" '+(watchMapData.showWater!==false?'checked':'')+'> '+water+' จุด</label>']);
+  if(rain)rows.push(['สถานีฝน','<label><input type="checkbox" data-watch-layer="rain" '+(watchMapData.showRain!==false?'checked':'')+'> '+rain+' จุด</label>']);
+  panel.innerHTML='<header class="ieat-watch-head"><strong>'+esc(watchMapData.title)+'</strong><button type="button" data-watch-close aria-label="ปิดผลคัดกรอง">×</button></header>'+
+   '<div class="story-watch-body"><table class="story-watch-table"><tbody>'+rows.map(([label,value])=>'<tr><th scope="row">'+label+'</th><td>'+value+'</td></tr>').join('')+'</tbody></table>'+
+   '<details><summary>ดูรายชื่อนิคมฯ ('+estatetext+')</summary><div class="story-popup-list">'+estates.map(e=>'<button type="button" data-watch-estate="'+esc(e.id)+'">'+esc(e.name)+'</button>').join('')+'</div></details>'+
+   '<p>ผลคัดกรองจากสถานีใกล้นิคมฯ ยังไม่ยืนยันน้ำท่วมภายในพื้นที่</p></div>';
+  return;
+ }
  panel.innerHTML='<header class="ieat-watch-head"><div><strong>'+esc(watchMapData.title)+'</strong><small>พื้นที่ที่พบสถานีตรวจวัดเข้าเกณฑ์เฝ้าระวัง · ไม่ใช่การยืนยันน้ำท่วม</small></div><button type="button" data-watch-close aria-label="ปิดผลการเฝ้าระวัง">×</button></header>'+
  '<div class="ieat-watch-overview"><div><span class="ieat-summary-symbol" aria-hidden="true">'+compactWatchIcon('estate')+'</span><span>นิคมฯ ที่ต้องเฝ้าระวัง</span><strong>'+estatetext+' <small>แห่ง</small></strong></div><div><span class="ieat-summary-symbol" aria-hidden="true">'+compactWatchIcon('station')+'</span><span>สถานีที่เกี่ยวข้อง</span><strong>'+new Set(stations.map(s=>s.lat+':'+s.lon+':'+s.name)).size.toLocaleString('th-TH')+' <small>สถานี</small></strong></div></div>'+
  '<div class="watch-layer-options">'+(water?'<label><input type="checkbox" data-watch-layer="water" '+(watchMapData.showWater!==false?'checked':'')+'> สถานีน้ำสูง '+water+' จุด</label>':'')+(rain?'<label><input type="checkbox" data-watch-layer="rain" '+(watchMapData.showRain!==false?'checked':'')+'> สถานีฝนตกหนัก '+rain+' จุด</label>':'')+'</div>'+
@@ -1998,6 +2030,23 @@ html body.story-map-mode :is(.maplibregl-popup,.leaflet-popup,#mapDetails) table
 html body.story-map-mode :is(.maplibregl-popup,.leaflet-popup,#mapDetails) table :is(th,td){text-align:left;padding:6px 8px!important;border:1px solid #fff!important;background:#f7f7f7!important}
 html body.story-map-mode :is(.maplibregl-popup,.leaflet-popup,#mapDetails) table tr:nth-child(odd)>*{background:#ebebeb!important}
 html body.story-map-mode .story-popup-zoom{margin:6px 0;padding:4px 8px;background:#f3f3f3;border:1px solid #ccc;border-radius:0;color:#333;cursor:pointer}
+</style>
+<style>
+html body.story-map-mode #watchEvidence{background:#fff!important;border:1px solid #bcbcbc!important;border-radius:0!important;box-shadow:0 2px 7px #0003!important;backdrop-filter:none!important}
+html body.story-map-mode #watchEvidence .ieat-watch-head{padding:10px 12px!important;border-bottom:1px solid #ddd!important}
+html body.story-map-mode #watchEvidence [data-watch-close]{border-radius:0!important}
+.story-watch-body{padding:10px 12px;min-height:0;overflow:auto}
+.story-watch-table{width:100%;border-collapse:collapse;margin:0 0 8px}
+.story-watch-table :is(th,td){text-align:left;padding:6px 8px;border:1px solid #fff;background:#f7f7f7}
+.story-watch-table tr:nth-child(odd)>*{background:#ebebeb}
+.story-watch-body p{font-size:12px;margin:8px 0 0}
+.story-popup-list{max-height:180px;overflow:auto}
+.story-popup-list[hidden]{display:none}
+.story-popup-list button,.story-cluster-actions button{background:#f3f3f3;border:1px solid #ddd;border-radius:0;padding:5px 8px;cursor:pointer;color:#333}
+.story-popup-list button{display:block;width:100%;text-align:left;margin-top:3px}
+.story-cluster-popup h3{margin:0 20px 8px 0;font-size:17px}
+.story-cluster-actions{display:flex;gap:5px;border-block:1px solid #ddd;padding:6px 0}
+.story-cluster-popup p{margin:8px 0}
 </style>
 </body></html>
 
