@@ -330,6 +330,14 @@ html::-webkit-scrollbar-button{display:none;width:0;height:0}
  };
  prev.addEventListener('click',()=>go(-1));
  next.addEventListener('click',()=>go(1));
+ window.addEventListener('keydown',event=>{
+  if(event.key!=='Enter'||event.defaultPrevented||event.isComposing||event.repeat||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return;
+  const origin=event.target;
+  if(origin instanceof HTMLElement&&(origin.isContentEditable||origin.closest('a,button,input,textarea,select,summary,iframe,[role="button"],[role="link"]')))return;
+  if((target??current)>=slides.length-1)return;
+  event.preventDefault();
+  go(1);
+ });
  window.addEventListener('wheel',()=>{target=null;},{passive:true});
  window.addEventListener('touchstart',()=>{target=null;},{passive:true});
  window.addEventListener('scroll',schedule,{passive:true});
