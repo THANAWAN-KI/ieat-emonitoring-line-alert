@@ -71,7 +71,17 @@
 .coverage-map svg{width:min(100%,440px);height:min(76svh,700px);min-height:320px}
 @media(max-width:720px){.coverage-slide{grid-template-columns:1fr}.coverage-map svg{height:54svh}}
 </style>
-</head>
+<style>
+.coverage-map{background:radial-gradient(ellipse at center,#fcfaf3,#eee9dc)}
+.coverage-map .coverage-pulse{fill:none;stroke-width:1.6;transform-box:fill-box;transform-origin:center;opacity:0}
+@media(prefers-reduced-motion:no-preference){
+ .coverage-map.is-visible svg>path{animation:coverage-reveal 850ms ease-out both}
+ .coverage-map.is-visible .coverage-dot{animation:coverage-reveal 500ms ease-out both;animation-delay:var(--point-delay)}
+ .coverage-map.is-visible .coverage-pulse{animation:coverage-pulse 3.6s ease-out infinite;animation-delay:var(--point-delay)}
+}
+@keyframes coverage-reveal{from{opacity:0}to{opacity:1}}
+@keyframes coverage-pulse{0%{transform:scale(1);opacity:0}14%{opacity:.7}55%,100%{transform:scale(4);opacity:0}}
+</style></head>
 <body>
 <header class="bar">
  <a class="story-brand" href="#cover">เฝ้าระวังน้ำในนิคมอุตสาหกรรม</a>
@@ -144,11 +154,11 @@
 <dl><div><dt>เมื่อถึงเกณฑ์ในแผน</dt><dd>ระดับเฝ้าระวัง</dd></div><div><dt>ทำอะไร</dt><dd>ตรวจระดับน้ำเป็นระยะ และเตรียมเครื่องสูบน้ำ</dd></div><div><dt>ใครรับผิดชอบ</dt><dd>ฝ่ายบริหารจัดการนิคมอุตสาหกรรม</dd></div></dl>
 <p><strong>ทำไมยกตัวอย่างซีพีจีซี?</strong> แผนของนิคมฯ นี้มีตัวอย่างที่อธิบายได้ครบในเหตุการณ์เดียวว่า เมื่อเข้าสู่ระดับเฝ้าระวัง ต้องทำอะไร และฝ่ายใดรับผิดชอบ ส่วนสถานะน้ำปัจจุบันให้ดูจากข้อมูลตรวจวัดล่าสุด</p>
 </aside>
-<div class="actions"><a class="action primary" id="open-cpgc-plan" href="flood-report.html?story=1&amp;estate=79&amp;view=preparedness&amp;v=20261105-cpgc-plan">ดูแผนเตรียมรับมือของนิคมฯ ซีพีจีซี ↓</a></div>
+<div class="actions"><a class="action primary" id="open-cpgc-plan" href="flood-report.html?story=1&amp;estate=79&amp;view=preparedness&amp;v=20261105-cpgc-animated">ดูแผนเตรียมรับมือของนิคมฯ ซีพีจีซี ↓</a></div>
 </div></section>
 <section id="map" class="story-map" aria-label="บทสุดท้าย: ข้อมูลเฝ้าระวังน้ำและแผนที่นิคมฯ">
   <p class="booth-map-guide"><strong>ลองสำรวจแผนที่</strong><span>เลือกนิคมฯ ทางซ้าย แล้วกดตัวเลขสรุปเพื่อดูจุดบนแผนที่ กดหมุดเพื่อดูรายละเอียด</span></p>
-  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-drawing-palette" loading="lazy" allowfullscreen></iframe>
+  <iframe title="ข้อมูลเฝ้าระวังน้ำและแผนที่ 3 มิติของนิคมอุตสาหกรรม" src="flood-report.html?story=1&amp;v=20261105-story-animated" loading="lazy" allowfullscreen></iframe>
 </section>
 </main>
 <footer><div class="inner">ข้อมูลและแผนที่จาก IEAT e-Monitoring และแหล่งที่ระบุในแดชบอร์ด · ภาพประกอบเป็นภาพสื่อความหมาย</div></footer>
@@ -197,6 +207,11 @@
 (async()=>{
  const group=document.getElementById('coverage-points'), status=document.getElementById('coverage-count');
  const buttons=[...document.querySelectorAll('[data-coverage]')];
+ const map=group.closest('.coverage-map');
+ if('IntersectionObserver' in window){
+  const observer=new IntersectionObserver(([entry])=>map.classList.toggle('is-visible',entry.isIntersecting),{threshold:.15});
+  observer.observe(map);
+ }else map.classList.add('is-visible');
  const colors={estate:'#9e5b20',rainfall:'#315783',waterlevel:'#157768'};
  let data;
  try{
@@ -212,11 +227,18 @@
  function draw(kind){
   const rows=(kind==='estate'?data.estates:data.stations.filter(row=>row.kind===kind))
    .filter(row=>row.lon!=null&&row.lat!=null&&Number(row.lon)>=96&&Number(row.lon)<=104.88&&Number(row.lat)>=4.73&&Number(row.lat)<=21);
-  group.replaceChildren(...rows.map(row=>{
+  group.replaceChildren(...rows.flatMap((row,index)=>{
    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
    dot.setAttribute('cx',(Number(row.lon)-96)*45);dot.setAttribute('cy',(21-Number(row.lat))*43);
    dot.setAttribute('r',kind==='estate'?3:2.4);dot.setAttribute('fill',colors[kind]);dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','.6');
-   return dot;
+   dot.classList.add('coverage-dot');
+   dot.style.setProperty('--point-delay',Math.round(Number(dot.getAttribute('cy'))*.85)+'ms');
+   if(index%Math.max(1,Math.ceil(rows.length/7))!==0)return [dot];
+   const ring=dot.cloneNode();
+   ring.classList.replace('coverage-dot','coverage-pulse');
+   ring.setAttribute('stroke',colors[kind]);
+   ring.style.setProperty('--point-delay',(index%7)*230+'ms');
+   return [ring,dot];
   }));
   buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.coverage===kind)));
   status.textContent='แสดง '+rows.length.toLocaleString('th-TH')+' ตำแหน่งจากชุดข้อมูลแดชบอร์ด';
