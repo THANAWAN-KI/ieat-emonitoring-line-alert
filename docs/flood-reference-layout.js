@@ -64,12 +64,13 @@
     const flows = $('efDamFlowPanel');
     if (flows && dams?.contains(flows)) pane.append(flows);
     for (const card of dams?.querySelectorAll('.ef-dam-card') || []) {
-      if (card.querySelector('.reference-dam-details')) continue;
+      if (card.dataset.detailsPrepared) continue;
+      card.dataset.detailsPrepared = 'true';
       const details = document.createElement('details'); details.className = 'reference-dam-details';
       const summary = document.createElement('summary'); summary.textContent = 'รายละเอียดเขื่อนและแหล่งข้อมูล';
       details.append(summary);
       for (const node of [...card.children]) {
-        if (!node.matches('.dam-value-line')) details.append(node);
+        if (!node.matches('.dam-compact-head,.dam-value-line,.storage-progress')) details.append(node);
       }
       card.append(details);
     }
