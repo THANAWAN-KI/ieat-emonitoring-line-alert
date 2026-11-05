@@ -999,14 +999,14 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   }
 }
 
-/* Water report palette and summary hierarchy. */
+/* A quiet, document-like surface for water reporting. */
 @layer floodDashboard {
   body[data-flood-section=report] {
     --report-paper:#ffffff;
-    --report-ink:#142540;
-    --report-accent:#1649d2;
-    --report-muted:#475871;
-    --report-rule:#dce5f1;
+    --report-ink:#16213d;
+    --report-accent:#2547e8;
+    --report-muted:#475675;
+    --report-rule:#dbe4f5;
   }
   @media screen {
     body[data-flood-section=report] #floodSectionPanel {
@@ -1040,28 +1040,24 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
       font-weight:600 !important;
     }
     #floodSectionPanel .water-report-stats {
-      grid-template-columns:1.18fr 1fr 1fr;
-      gap:6px;
+      gap:0;
+      border-block:1px solid var(--report-rule);
     }
     #floodSectionPanel .water-report-stats>div,
     #floodSectionPanel .water-report-stats>div:first-child {
-      padding:10px 8px;
-      border-radius:9px;
-      background:#f3f6fc;
-      color:var(--report-ink);
+      padding:12px 8px;
+      border-radius:0;
+      background:transparent;
+    }
+    #floodSectionPanel .water-report-stats>div+div {
+      border-inline-start:1px solid var(--report-rule);
     }
     body[data-flood-section=report] #floodSectionPanel .water-report-stats>div:first-child {
-      background:linear-gradient(125deg,#123db8,#2259e8);
+      background:var(--report-accent);
       color:#fff !important;
     }
     body[data-flood-section=report] #floodSectionPanel .water-report-stats>div:first-child b {
       color:#fff !important;
-      font-size:clamp(25px,2vw,38px) !important;
-      line-height:1.12;
-      font-variant-numeric:tabular-nums;
-    }
-    body[data-flood-section=report] #floodSectionPanel .water-report-sources b {
-      color:var(--report-accent) !important;
     }
     body[data-flood-section=report] #floodSectionPanel .ref-chart-card {
       background:transparent !important;
@@ -1089,7 +1085,7 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
       color:var(--report-ink) !important;
     }
     body[data-flood-section=report] #floodSectionPanel .water-report-sources button:not(:disabled):hover {
-      background:#edf4ff !important;
+      background:#edf2ff !important;
     }
     body[data-flood-section=report] #floodSectionPanel .section-action {
       background:var(--report-accent) !important;
@@ -1107,13 +1103,13 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
     color:var(--report-accent) !important;
   }
   body[data-flood-section=report] #ieatCurrentReport .ex-report-table thead th {
-    background:#edf4ff !important;
+    background:#edf2ff !important;
     color:var(--report-ink) !important;
   }
   body[data-flood-section=report] #ieatCurrentReport .ex-report-table :is(th,td) {
     border-color:var(--report-rule) !important;
   }
   body[data-flood-section=report] #ieatCurrentReport .ex-report-table tbody tr:nth-child(even) {
-    background:#f7faff;
+    background:#f7f9ff;
   }
 }
