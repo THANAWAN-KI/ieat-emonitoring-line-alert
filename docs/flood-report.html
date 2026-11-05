@@ -37,7 +37,7 @@
 <script defer src="flood-icons.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-water-status.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-rid-source.js?v=20261105-clean-source-1"></script>
-<script defer src="flood-estate-dashboard.js?v=20261105-map-polish"></script>
+<script defer src="flood-estate-dashboard.js?v=20261105-map-single-load"></script>
 <script defer src="flood-river-panel.js?v=20261105-radar-palette"></script>
 <script defer src="flood-weather-overview.js?v=20261105-clean-source-1"></script>
 <script defer src="flood-estate-diagrams.js?v=20261105-clean-source-1"></script>
@@ -361,13 +361,10 @@ html.story-dashboard #ioEstatePanel :is(input,button):focus-visible{outline:2px 
 </style></head>
 <body>
 
-<main class="container"><section id="warning" aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
+<main class="container"><section id="warning" data-clean-map aria-label="Dashboard สถานการณ์น้ำ"><div id="dashboardLoading" class="dashboard-loading" role="status">กำลังโหลดข้อมูลสถานการณ์น้ำ…</div><noscript>กรุณาเปิด JavaScript เพื่อใช้งาน dashboard</noscript></section></main>
 
 <!-- mobile-responsive-20261006 -->
 
-<script id="flood-clean-map-default">
-(()=>{function mount(){const frame=document.getElementById('estateFocusMap');if(!frame)return false;const url=new URL(frame.getAttribute('src'),location.href);url.searchParams.set('dashboard','clean');url.searchParams.set('v','20261104-outline-pins');url.searchParams.set('refresh',String(Date.now()));frame.src=url.href;return true}if(!mount()){const observer=new MutationObserver(()=>{if(mount())observer.disconnect()});observer.observe(document.getElementById('warning'),{childList:true,subtree:true})}})();
-</script>
 
 <script id="flood-sequential-script">
 /* Only move existing data sections; appearance is defined in the canonical stylesheet. */
