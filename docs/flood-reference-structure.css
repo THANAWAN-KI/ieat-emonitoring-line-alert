@@ -30,7 +30,7 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #referenceMenuToggle{position:absolute!important;left:12px!important;top:14px!important;border:0!important;background:#fff!important;width:48px!important;height:44px!important;color:#81858a!important}
 #referenceMenuToggle svg{width:25px!important;height:25px!important}
 #referenceRail .section-alert-count{position:absolute;top:1px;right:0;border:2px solid #fff;border-radius:14px;background:#d74e73;color:#fff;padding:0 4px;font-size:11px!important;line-height:18px!important}
-#referenceViewTabs{position:fixed!important;left:calc(var(--ref-left) + 16px)!important;top:40px!important;width:calc(var(--ref-panel) - 32px)!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;min-height:52px!important;padding:5px!important;border:0!important;border-radius:30px!important;background:#edf2ff!important;z-index:1860!important}
+#referenceViewTabs{position:fixed!important;left:calc(var(--ref-left) + 16px)!important;top:40px!important;width:calc(var(--ref-panel) - 32px)!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;min-height:52px!important;padding:5px!important;border:0!important;border-radius:30px!important;background:#f1e8f8!important;z-index:1860!important}
 #referenceViewTabs button{padding:7px 3px!important;border:0!important;border-radius:26px!important;background:transparent!important;color:var(--blue)!important;font-size:18px!important;font-weight:400!important;white-space:nowrap!important;min-width:0!important;min-height:40px!important;box-shadow:none!important}
 #referenceViewTabs button[aria-selected=true]{background:var(--blue)!important;color:#fff!important}
 #approvedDashboardHeading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;order:-25!important}
@@ -150,7 +150,7 @@ body:not([data-flood-section=overview]) #referenceViewTabs{display:none!importan
 body:not([data-flood-section=overview]) .ef-data-column{padding-top:24px!important}
 body[data-reference-panel=closed] :is(#floodInformationPane,#referenceViewTabs,#floodSectionPanel){display:none!important}
 #referencePanelSurface,#referencePanelToggle,#floodModeBar,.ef-map-head,#ieatDashboardCamera,#efMapFullscreen,#efMapExitFullscreen,#ieatDataIntegrity,.ex-kpi-note,#waterStatusGuide,.reference-dam-art,.rp-heading-icon,[data-water-heading-icon],#referenceSettings,.rp-area-picker,.flood-row-caption,#ieatCanalSample{display:none!important}
-#estateFocusDashboard .ieat-page-hidden,body [hidden]{display:none!important}
+#estateFocusDashboard .ieat-page-hidden,#estateFocusDashboard [hidden],#floodSectionPanel[hidden],#ioEstatePanel[hidden],#approvedAreaSearch[hidden],body [hidden]{display:none!important}
 
 #floodSectionPanel>h1,#floodSectionPanel>.section-subtitle{display:block!important}
 body[data-flood-section=alerts] #floodSectionPanel,body[data-flood-section=settings] #floodSectionPanel{padding-top:24px!important}
