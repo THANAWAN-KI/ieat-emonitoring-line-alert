@@ -4,6 +4,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600&display=swap");
 @layer floodDashboard, floodReports;
 @layer floodDashboard {
+
+/* The dams tab only shows its dam and reservoir content. */
+body[data-water-category="dams"] #estateFocusDashboard #rpRankingsAfterWarning,
+body[data-water-category="dams"] #estateFocusDashboard #approvedDashboardHeading,
+body[data-water-category="dams"] #estateFocusDashboard #floodPageTitle,
+body[data-water-category="dams"] #estateFocusDashboard #expoBoothSubtitle {
+  display: none !important;
+}
 :root{--ref-left:96px;--ref-rail:72px;--ref-panel:clamp(360px,40vw,620px);--ref-top:20px;--text:#303841;--muted:#59616b;--blue:#774aa4;--water:#2e9df7;--purple:#7437a8;--normal:#598c14;--watch:#ff6908;--danger:#f00a36}
 *{box-sizing:border-box}
 html,body{margin:0!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#fff!important}
