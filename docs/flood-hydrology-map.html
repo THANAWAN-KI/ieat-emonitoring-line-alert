@@ -1507,13 +1507,14 @@ function renderWatchEvidence(){
  const estatetext=estates.length.toLocaleString('th-TH');
  if(storyMap){
   const total=new Set(stations.map(s=>s.lat+':'+s.lon+':'+s.name)).size;
-  const rows=[['นิคมฯ ที่เข้าเกณฑ์',estatetext+' แห่ง'],['สถานีที่เกี่ยวข้อง',total+' สถานี']];
-  if(water)rows.push(['สถานีระดับน้ำ','<label><input type="checkbox" data-watch-layer="water" '+(watchMapData.showWater!==false?'checked':'')+'> '+water+' จุด</label>']);
-  if(rain)rows.push(['สถานีฝน','<label><input type="checkbox" data-watch-layer="rain" '+(watchMapData.showRain!==false?'checked':'')+'> '+rain+' จุด</label>']);
+  const layer=(kind,label,count,visible)=>'<label><input type="checkbox" data-watch-layer="'+kind+'" '+(visible?'checked':'')+'><span>'+label+'</span><strong>'+count.toLocaleString('th-TH')+' จุด</strong></label>';
   panel.innerHTML='<header class="ieat-watch-head"><strong>'+esc(watchMapData.title)+'</strong><button type="button" data-watch-close aria-label="ปิดผลคัดกรอง">×</button></header>'+
-   '<div class="story-watch-body"><table class="story-watch-table"><tbody>'+rows.map(([label,value])=>'<tr><th scope="row">'+label+'</th><td>'+value+'</td></tr>').join('')+'</tbody></table>'+
-   '<details><summary>ดูรายชื่อนิคมฯ ('+estatetext+')</summary><div class="story-popup-list">'+estates.map(e=>'<button type="button" data-watch-estate="'+esc(e.id)+'">'+esc(e.name)+'</button>').join('')+'</div></details>'+
-   '<p>ผลคัดกรองจากสถานีใกล้นิคมฯ ยังไม่ยืนยันน้ำท่วมภายในพื้นที่</p></div>';
+   '<div class="story-watch-body"><div class="story-watch-result"><strong>'+estatetext+' <small>แห่ง</small></strong><span>นิคมฯ ที่ควรติดตามจากผลคัดกรอง</span></div>'+
+   '<p class="story-watch-note">ผลคัดกรองจากสถานีใกล้นิคมฯ ยังไม่ยืนยันน้ำท่วมภายในพื้นที่</p>'+
+   '<div class="story-watch-layers"><b>สถานีที่ใช้คัดกรอง '+total.toLocaleString('th-TH')+' สถานี</b><small>เลือกจุดที่จะแสดงบนแผนที่</small>'+
+   (water?layer('water','สถานีระดับน้ำ',water,watchMapData.showWater!==false):'')+
+   (rain?layer('rain','สถานีฝน',rain,watchMapData.showRain!==false):'')+'</div>'+
+   '<details><summary>ดูรายชื่อนิคมฯ ('+estatetext+')</summary><div class="story-popup-list">'+estates.map(e=>'<button type="button" data-watch-estate="'+esc(e.id)+'">'+esc(e.name)+'</button>').join('')+'</div></details></div>';
   return;
  }
  panel.innerHTML='<header class="ieat-watch-head"><div><strong>'+esc(watchMapData.title)+'</strong><small>พื้นที่ที่พบสถานีตรวจวัดเข้าเกณฑ์เฝ้าระวัง · ไม่ใช่การยืนยันน้ำท่วม</small></div><button type="button" data-watch-close aria-label="ปิดผลการเฝ้าระวัง">×</button></header>'+
@@ -2129,7 +2130,18 @@ html body.story-map-mode #watchEvidence [data-watch-close]{border-radius:0!impor
 .story-cluster-actions{display:flex;gap:5px;border-block:1px solid #ddd;padding:6px 0}
 .story-cluster-popup p{margin:8px 0}
 </style>
-</body></html>
+<style>
+html body.story-map-mode #watchEvidence:has(.story-watch-result){background:#fffdf7!important;border:1px solid #8b8172!important;border-radius:0!important;box-shadow:4px 5px 0 #26363926!important}
+html body.story-map-mode #watchEvidence:has(.story-watch-result) .ieat-watch-head{background:#fffdf7!important;border-bottom:2px solid #efb14d!important}
+#watchEvidence .story-watch-result{display:grid;gap:2px;padding:8px 12px;background:#ffedc4;color:#67430f;border-left:3px solid #d69432}
+#watchEvidence .story-watch-result>strong{font-size:28px;line-height:1.1}
+#watchEvidence .story-watch-result small{font-size:14px}
+#watchEvidence .story-watch-note{margin:8px 0 12px;color:#514b41;font-size:12px}
+#watchEvidence .story-watch-layers{display:grid;gap:5px;margin-bottom:10px}
+#watchEvidence .story-watch-layers label{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:7px;padding:6px 8px;color:#23536a;background:#e6f2f5}
+#watchEvidence .story-watch-layers label:has([data-watch-layer=rain]){background:#e6f2ea;color:#28583e}
+html body #watchEvidence .story-watch-layers input{accent-color:#24688a!important}
+</style></body></html>
 
 
 
