@@ -1346,7 +1346,7 @@ function rasterStart(){
  riverSvgRenderer=L.svg({padding:.5});
  rasterBaseLayer=L.tileLayer(basemapUrls[selectedBasemap]||basemapUrls.gray,{attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true,className:'dashboard-base-tiles'}).addTo(raster);
  if(!cleanDashboard)L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
- groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries()});
+ groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries();queueDashboardLabels()});
  ready=true;syncPaperBasemap();document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(!cleanDashboard&&map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
 }
 function vectorStart(){
@@ -1356,7 +1356,8 @@ function vectorStart(){
  if(!cleanDashboard)vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
- vector.on('moveend',()=>{if(!aerialPlaying)queueBoundaries()});vector.on('zoomend',()=>{if(cleanDashboard&&ready)queueRender()});
+ vector.on('movestart',()=>{if(cleanDashboard&&storyMap&&!aerialPlaying)clearAerialLabels()});
+ vector.on('moveend',()=>{if(!aerialPlaying){queueBoundaries();queueDashboardLabels()}});vector.on('zoomend',()=>{if(cleanDashboard&&ready)queueRender()});
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
   if(!vector)return;clearTimeout(timeout);
@@ -1893,8 +1894,20 @@ function clearAerialLabels(){
  aerialLabels=null;
  aerialLabelTick=-Infinity;
 }
-function drawAerialLabels(map, elapsed){
- if(elapsed-aerialLabelTick<180)return;
+let dashboardLabelFrame=0;
+function queueDashboardLabels(){
+ if(!cleanDashboard||!storyMap||aerialPlaying||!mapOnScreen)return;
+ cancelAnimationFrame(dashboardLabelFrame);
+ dashboardLabelFrame=requestAnimationFrame(()=>{
+  const map=vector||raster;
+  if(aerialPlaying||!map||!mapOnScreen)return;
+  if(!estateProvinceScope?.active){clearAerialLabels();return}
+  drawAerialLabels(map,performance.now(),true);
+ });
+}
+document.addEventListener('ieat-infrastructure-rendered',queueDashboardLabels);
+function drawAerialLabels(map, elapsed, steady=false){
+ if(!steady&&elapsed-aerialLabelTick<180)return;
  aerialLabelTick=elapsed;
  const host=map.getContainer(), bounds=host.getBoundingClientRect();
  if(!aerialLabels){
@@ -1908,12 +1921,14 @@ function drawAerialLabels(map, elapsed){
   return {left:r.left-bounds.left,top:r.top-bounds.top,right:r.right-bounds.left,bottom:r.bottom-bounds.top};
  };
  const intersects=(a,b)=>a.left<b.right+5&&a.right>b.left-5&&a.top<b.bottom+5&&a.bottom>b.top-5;
- const points=[];
+ const points=[],markerBoxes=[];
  for(const marker of host.querySelectorAll('.maplibregl-marker,.leaflet-marker-icon')){
   if(getComputedStyle(marker).opacity==='0'||getComputedStyle(marker).visibility==='hidden')continue;
   const icon=marker.querySelector('.ieat-nm-btn,.prep-feature button')||marker;
   const rect=relative(icon);
   if(rect.right<=0||rect.left>=bounds.width||rect.bottom<=0||rect.top>=bounds.height||rect.right===rect.left)continue;
+  markerBoxes.push(rect);
+  if(steady&&!marker.classList.contains('infra-data-pin')&&!marker.classList.contains('estate-pin'))continue;
   const label=marker.getAttribute('aria-label')||icon.getAttribute('aria-label')||marker.getAttribute('title')||marker.querySelector('.prep-name,.estate-name,.fd-pin-name')?.textContent;
   if(!label||marker.classList.contains('flood-point-cluster')||readinessEstateLabel&&label===estateProvinceScope?.name)continue;
   const x=(rect.left+rect.right)/2,y=(rect.top+rect.bottom)/2;
@@ -1925,14 +1940,14 @@ function drawAerialLabels(map, elapsed){
   const {x,y}=position;
   if(x>12&&y>12&&x<bounds.width-12&&y<bounds.height-12)points.unshift({label:estateProvinceScope.name,x,y,rect:{left:x-5,right:x+5,top:y-5,bottom:y+5}});
  }
- const occupied=points.map(p=>p.rect);
- for(const item of document.querySelectorAll('.maplibregl-popup,.maplibregl-ctrl,.map-tool-btn,#aerialTourHint')){
+ const occupied=[...new Set([...markerBoxes,...points.map(p=>p.rect)])];
+ for(const item of document.querySelectorAll('.maplibregl-popup,.leaflet-popup,.maplibregl-ctrl,.map-tool-btn,#aerialTourHint,#satelliteKey,#watchEvidence,#mapLayers[open],#mapLegend[open],#ieatInfrastructure')){
   if(item.getClientRects().length)occupied.push(relative(item));
  }
  points.sort((a,b)=>Number(b.label===estateProvinceScope?.name)-Number(a.label===estateProvinceScope?.name)||a.label.localeCompare(b.label,'th')||a.x-b.x);
  const batchSize=bounds.width<600?3:5;
  const batches=Math.ceil(points.length/batchSize);
- const start=batches?Math.floor(elapsed/4200)%batches*batchSize:0;
+ const start=!steady&&batches?Math.floor(elapsed/4200)%batches*batchSize:0;
  const labels=document.createDocumentFragment(), previous=aerialLabels;
  const layer=previous.cloneNode(false);
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
@@ -1948,7 +1963,7 @@ function drawAerialLabels(map, elapsed){
   const w=tag.offsetWidth,h=tag.offsetHeight,{x,y,rect}=point;
   const candidates=[
    [rect.right+22,y-h/2],[rect.left-w-22,y-h/2],
-   [x-w/2,rect.top-h-20],[x-w/2,rect.bottom+20],
+   ...(!steady?[[x-w/2,rect.top-h-20],[x-w/2,rect.bottom+20]]:[]),
    [rect.right+18,rect.top-h-12],[rect.left-w-18,rect.top-h-12]
   ];
   for(const [left,top] of candidates){
@@ -1968,7 +1983,7 @@ function drawAerialLabels(map, elapsed){
    placed++;
    break;
   }
-  tag.remove();
+  if(tag.parentNode===layer)tag.remove();
  }
  layer.append(labels);
 }
@@ -1980,7 +1995,7 @@ function stopAerialTour(){
  aerialPlaying=false;cancelAnimationFrame(aerialFrame);clearTimeout(aerialTimer);
  if(aerialMap&&aerialLaunch)aerialMap.off('moveend',aerialLaunch);aerialLaunch=null;
  aerialMap?.stop?.();aerialMap=null;
- if(wasPlaying&&ready)queueBoundaries();
+ if(wasPlaying&&ready){queueBoundaries();queueDashboardLabels()}
  aerialButton.setAttribute('aria-pressed','false');aerialButton.innerHTML='<span aria-hidden="true">▷</span> ชมมุมสูง';
 }
 function startAerialTour(){
@@ -2241,7 +2256,7 @@ html body #mapStage .estate-pin>.ieat-estate-location{
 }
 /* The map library assigns the parent transform; do not override it. */
 </style>
-<script src="flood-infrastructure-20261104.js?v=20261105-map-lite"></script>
+<script src="flood-infrastructure-20261104.js?v=20261105-infra-callouts"></script>
 <script src="flood-map-alerts.js?v=20261105-cyan1"></script>
 <style>
 html body.story-map-mode:not(.imagery-basemap) .dashboard-base-tiles{filter:grayscale(1) contrast(.92)!important}
