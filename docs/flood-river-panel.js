@@ -409,8 +409,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (()=>{const style=document.createElement('style');style.id='ieat-ranking-horizontal-bars';style.textContent=`
 @layer floodReferenceStructure {
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning{grid-template-columns:minmax(0,1fr)!important;gap:12px!important;width:100%!important}
-html body[data-flood-section=overview][data-water-category=stations] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning,
-html body[data-flood-section=overview][data-water-category=dams] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning{display:grid!important}
+html body[data-flood-section=overview][data-water-category=stations] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning{display:grid!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning>.rp-new-section{display:block!important;grid-column:1/-1!important;width:100%!important;min-width:0!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning{gap:20px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning .ieat-rank-bar-row{display:grid!important;grid-template-columns:minmax(100px,35%) minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important;min-height:64px!important;height:auto!important;padding:7px 0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;text-align:left!important}
