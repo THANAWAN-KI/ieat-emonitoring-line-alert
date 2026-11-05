@@ -550,7 +550,7 @@ html body .estate-pin .ieat-estate-plain-glyph,html body .clean-estate-point .ie
 html body .ieat-estate-location{animation:none!important}
 </style>
 <style>
-.aerial-callouts{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.aerial-callouts{position:absolute;inset:0;z-index:650;pointer-events:none;overflow:hidden}
 .aerial-callouts svg{position:absolute;inset:0;width:100%;height:100%;stroke:#263639;stroke-width:1.5;filter:drop-shadow(0 0 1px #fff)}
 .aerial-callouts span{position:absolute;left:0;top:0;box-sizing:border-box;width:max-content;max-width:190px;padding:4px 8px;background:#fffdf7;color:#202c2e;border:1px solid #39494a;box-shadow:0 2px 5px #16222526;font:500 13px/1.35 Kanit,Sarabun,sans-serif;overflow-wrap:anywhere}
 </style></head>
@@ -652,7 +652,7 @@ if(cleanDashboard){
 }
 const permanentDashboardLayers=['boundary','estate','flow','rings','radar'];
 function keepDashboardLayersOpen(){
- if(!cleanDashboard)return;
+ if(!cleanDashboard||storyMap)return;
  for(const kind of permanentDashboardLayers){
   flags[kind]=true;
   const input=document.querySelector('[data-layer="'+kind+'"]');
@@ -1060,7 +1060,7 @@ function nearbyEstate(f){
  return 12742*Math.asin(Math.sqrt(Math.min(1,h)))<=(estateProvinceScope.radiusKm||30);
 }
 function scoped(){
- if(cleanDashboard&&!estateProvinceScope?.active&&!watchMapData)return features.filter(f=>f.properties.kind==='estate'||f.properties.kind==='water'&&hasDischarge(f.properties));
+ if(cleanDashboard&&!storyMap&&!estateProvinceScope?.active&&!watchMapData)return features.filter(f=>f.properties.kind==='estate'||f.properties.kind==='water'&&hasDischarge(f.properties));
  const province=$('province').value;
  const base=features.filter(f=>(flags[f.properties.kind]||f.properties.kind==='water'&&flags.rings&&hasDischarge(f.properties))&&(estateProvinceScope?.active?(f.properties.kind==='estate'?f.properties.name===estateProvinceScope.name:nearbyEstate(f)):(!province||['estate','dam'].includes(f.properties.kind)||f.properties.province===province)));
  const visible=watchMapData?base.filter(f=>watchMapData.estates.some(e=>f.properties.kind==='estate'?e.name===f.properties.name:e.stations.some(r=>r.name===f.properties.name||String(r.id)===String(f.properties.code||f.properties.id)))):base;
@@ -1162,11 +1162,12 @@ function render(){
   // Overview: terrain, waterways and radar only. Mid: estate pins only.
   const baseDisplayPoints=!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
   const displayPoints=thinEstatePins(baseDisplayPoints);
+ const pinPoints=storyMap?displayPoints.filter(f=>flags[f.properties.kind]):displayPoints;
  if(vector){
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
-  displayPoints.filter(f=>['water','canal'].includes(f.properties.kind)||storyMap&&f.properties.kind==='rain').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin'+(window.IEAT_SQ?' has-sq':'');el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
+  pinPoints.filter(f=>['water','canal'].includes(f.properties.kind)||storyMap&&f.properties.kind==='rain').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin'+(window.IEAT_SQ?' has-sq':'');el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
   cameraMarkers.forEach(x=>x.remove());cameraMarkers=[];damMarkers.forEach(x=>x.remove());damMarkers=[];
-  displayPoints.filter(f=>['camera','dam'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin'+(window.IEAT_SQ?' has-sq':'');el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};const marker=new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector);(r.kind==='camera'?cameraMarkers:damMarkers).push(marker)});
+  pinPoints.filter(f=>['camera','dam'].includes(f.properties.kind)).forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin'+(window.IEAT_SQ?' has-sq':'');el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};const marker=new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector);(r.kind==='camera'?cameraMarkers:damMarkers).push(marker)});
   estateMarkers.forEach(x=>x.remove());estateMarkers=[];displayPoints.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';el.onclick=()=>showMapDetails(f.properties,'estate');estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
   if(vector.getLayer('water-stations'))vector.setLayoutProperty('water-stations','visibility','none');if(vector.getLayer('water-station-symbol'))vector.setLayoutProperty('water-station-symbol','visibility','none');
   if(cleanDashboard){for(const id of ['water-station-symbol','labels','overflow-alert'])if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility','none');}
@@ -1712,7 +1713,7 @@ window.addEventListener('message',async event=>{
  const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
  if(changed){clearWatchMap();clearIEATMeasuredDistance();preparednessPopup?.remove()}estateProvinceScope=d;
  if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
- if(cleanDashboard){
+ if(cleanDashboard&&(!storyMap||changed)){
  const active=!!(d.active&&d.estate);
  Object.assign(flags,{estate:true,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:true,radar:true,gistda:false,satellite:active});
  document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);
@@ -1750,7 +1751,7 @@ function clearAerialLabels(){
  aerialLabelTick=-Infinity;
 }
 function drawAerialLabels(map, elapsed){
- if(!estateProvinceScope?.estate||elapsed-aerialLabelTick<110)return;
+ if(elapsed-aerialLabelTick<110)return;
  aerialLabelTick=elapsed;
  const host=map.getContainer(), bounds=host.getBoundingClientRect();
  if(!aerialLabels){
@@ -1765,21 +1766,27 @@ function drawAerialLabels(map, elapsed){
  };
  const intersects=(a,b)=>a.left<b.right+5&&a.right>b.left-5&&a.top<b.bottom+5&&a.bottom>b.top-5;
  const points=[];
- for(const marker of host.querySelectorAll('.maplibregl-marker')){
+ for(const marker of host.querySelectorAll('.maplibregl-marker,.leaflet-marker-icon')){
   if(getComputedStyle(marker).opacity==='0'||getComputedStyle(marker).visibility==='hidden')continue;
   const icon=marker.querySelector('.ieat-nm-btn,.prep-feature button')||marker;
   const rect=relative(icon);
   if(rect.right<=0||rect.left>=bounds.width||rect.bottom<=0||rect.top>=bounds.height||rect.right===rect.left)continue;
-  const label=marker.getAttribute('aria-label')||icon.getAttribute('aria-label')||marker.getAttribute('title');
+  const label=marker.getAttribute('aria-label')||icon.getAttribute('aria-label')||marker.getAttribute('title')||marker.querySelector('.prep-name,.estate-name,.fd-pin-name')?.textContent;
   if(!label||marker.classList.contains('flood-point-cluster'))continue;
   const x=(rect.left+rect.right)/2,y=(rect.top+rect.bottom)/2;
   if(!points.some(p=>p.label===label&&Math.hypot(x-p.x,y-p.y)<12))points.push({label,rect,x,y});
+ }
+ const estate=estateProvinceScope?.estate;
+ if(flags.estate&&estate&&estateProvinceScope.name&&!points.some(p=>p.label===estateProvinceScope.name)){
+  const position=map===vector?map.project([Number(estate.lon??estate.lng),Number(estate.lat)]):map.latLngToContainerPoint([Number(estate.lat),Number(estate.lon??estate.lng)]);
+  const {x,y}=position;
+  if(x>12&&y>12&&x<bounds.width-12&&y<bounds.height-12)points.unshift({label:estateProvinceScope.name,x,y,rect:{left:x-5,right:x+5,top:y-5,bottom:y+5}});
  }
  const occupied=points.map(p=>p.rect);
  for(const item of document.querySelectorAll('.maplibregl-popup,.maplibregl-ctrl,.map-tool-btn,#aerialTourHint')){
   if(item.getClientRects().length)occupied.push(relative(item));
  }
- points.sort((a,b)=>a.label.localeCompare(b.label,'th')||a.x-b.x);
+ points.sort((a,b)=>Number(b.label===estateProvinceScope?.name)-Number(a.label===estateProvinceScope?.name)||a.label.localeCompare(b.label,'th')||a.x-b.x);
  const batchSize=bounds.width<600?3:5;
  const batches=Math.ceil(points.length/batchSize);
  const start=batches?Math.floor(elapsed/4200)%batches*batchSize:0;
@@ -1789,7 +1796,9 @@ function drawAerialLabels(map, elapsed){
  layer.append(svg);
  previous.replaceWith(layer);
  aerialLabels=layer;
- for(const point of points.slice(start,start+batchSize)){
+ let placed=0;
+ for(const point of points.slice(start).concat(points.slice(0,start))){
+  if(placed>=batchSize)break;
   const tag=document.createElement('span');
   tag.textContent=point.label;
   layer.append(tag);
@@ -1813,6 +1822,7 @@ function drawAerialLabels(map, elapsed){
    tag.style.left=left+'px';
    tag.style.top=top+'px';
    labels.append(tag);
+   placed++;
    break;
   }
   tag.remove();
@@ -1853,6 +1863,9 @@ function startAerialTour(){
  }else{
   /* Preserve access on browsers without WebGL: an honest pan/zoom tour. */
   const stops=[[center[0],center[1]+.006],[center[0]+.004,center[1]],[center[0],center[1]-.006],[center[0]-.004,center[1]]];let index=0;
+  const started=performance.now();
+  const labels=now=>{if(!aerialPlaying||aerialMap!==map||document.hidden)return;drawAerialLabels(map,now-started);aerialFrame=requestAnimationFrame(labels)};
+  aerialFrame=requestAnimationFrame(labels);
   const next=()=>{if(!aerialPlaying||document.hidden)return;const p=stops[index++%stops.length];map.flyTo([p[1],p[0]],14.6,{duration:4.5});aerialTimer=setTimeout(next,6500)};next();
   aerialNotice('โหมดสำรอง: เลื่อนและซูมชมมุมสูง · การหมุนกล้อง 3 มิติต้องใช้ WebGL');
  }
@@ -2182,6 +2195,15 @@ html body.story-map-mode #ieatInfrastructure small{color:#514b41!important}
 html body.story-map-mode #ieatInfrastructure :is(summary,input):focus-visible{
  outline:2px solid #24688a;outline-offset:2px;
 }
+</style><style>
+html body.story-map-mode #mapLayers[open]{overscroll-behavior:contain;pointer-events:auto!important}
+html body.story-map-mode #mapLayers[open] .layer-body{overflow:visible!important;pointer-events:auto!important}
+html body.story-map-mode #mapLayers[open] .layer-option input[type=checkbox]{
+ appearance:auto!important;-webkit-appearance:checkbox!important;accent-color:#775010!important;
+ width:17px!important;min-width:17px!important;height:17px!important;justify-self:center;
+ background:transparent!important;pointer-events:auto!important;visibility:visible!important;
+}
+html body.story-map-mode #mapLayers[open] .layer-option input[type=checkbox]::before{content:none!important}
 </style></body></html>
 
 
