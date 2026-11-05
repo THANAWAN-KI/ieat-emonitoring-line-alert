@@ -1356,7 +1356,7 @@ function vectorStart(){
  if(!cleanDashboard)vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
- vector.on('movestart',()=>{if(cleanDashboard&&storyMap&&!aerialPlaying)clearAerialLabels()});
+ vector.on('movestart',()=>{if(storyMap&&!aerialPlaying)clearAerialLabels()});
  vector.on('moveend',()=>{if(!aerialPlaying){queueBoundaries();queueDashboardLabels()}});vector.on('zoomend',()=>{if(cleanDashboard&&ready)queueRender()});
  vector.on('rotate',()=>{$('mapCompass').querySelector('svg').style.transform='rotate('+(-vector.getBearing())+'deg)'});
  vector.on('load',()=>{
@@ -1896,7 +1896,7 @@ function clearAerialLabels(){
 }
 let dashboardLabelFrame=0;
 function queueDashboardLabels(){
- if(!cleanDashboard||!storyMap||aerialPlaying||!mapOnScreen)return;
+ if(!storyMap||aerialPlaying||!mapOnScreen||!estateProvinceScope?.active&&!aerialLabels)return;
  cancelAnimationFrame(dashboardLabelFrame);
  dashboardLabelFrame=requestAnimationFrame(()=>{
   const map=vector||raster;
@@ -1922,6 +1922,7 @@ function drawAerialLabels(map, elapsed, steady=false){
  };
  const intersects=(a,b)=>a.left<b.right+5&&a.right>b.left-5&&a.top<b.bottom+5&&a.bottom>b.top-5;
  const points=[],markerBoxes=[];
+ const typeLabels={flood_pump_station:'สถานีสูบน้ำ',flood_water_storage:'บ่อหน่วงน้ำ',flood_drainage_channel:'คลองระบายน้ำ',flood_barrier:'แนวคันกั้นน้ำ',water:'สถานีวัดระดับน้ำ',rain:'สถานีวัดฝน',camera:'กล้องริมแม่น้ำ',dam:'เขื่อน / อ่างเก็บน้ำ',canal:'สถานีวัดระดับน้ำในคลอง'};
  for(const marker of host.querySelectorAll('.maplibregl-marker,.leaflet-marker-icon')){
   if(getComputedStyle(marker).opacity==='0'||getComputedStyle(marker).visibility==='hidden')continue;
   const icon=marker.querySelector('.ieat-nm-btn,.prep-feature button')||marker;
@@ -1929,22 +1930,24 @@ function drawAerialLabels(map, elapsed, steady=false){
   if(rect.right<=0||rect.left>=bounds.width||rect.bottom<=0||rect.top>=bounds.height||rect.right===rect.left)continue;
   markerBoxes.push(rect);
   if(steady&&!marker.classList.contains('infra-data-pin')&&!marker.classList.contains('estate-pin'))continue;
-  const label=marker.getAttribute('aria-label')||icon.getAttribute('aria-label')||marker.getAttribute('title')||marker.querySelector('.prep-name,.estate-name,.fd-pin-name')?.textContent;
-  if(!label||marker.classList.contains('flood-point-cluster')||readinessEstateLabel&&label===estateProvinceScope?.name)continue;
+  const infraKind=[...marker.classList].find(name=>name.startsWith('infra-kind-'))?.slice(11);
+  const kind=infraKind||marker.dataset.kind||marker.querySelector('[data-type]')?.dataset.type;
+  const label=marker.classList.contains('estate-pin')?'นิคมอุตสาหกรรม':typeLabels[kind];
+  if(!label||marker.classList.contains('flood-point-cluster'))continue;
   const x=(rect.left+rect.right)/2,y=(rect.top+rect.bottom)/2;
   if(!points.some(p=>p.label===label&&Math.hypot(x-p.x,y-p.y)<12))points.push({label,rect,x,y});
  }
  const estate=estateProvinceScope?.estate;
- if(!readinessEstateLabel&&flags.estate&&estate&&estateProvinceScope.name&&!points.some(p=>p.label===estateProvinceScope.name)){
+ if(!readinessEstateLabel&&flags.estate&&estate&&estateProvinceScope.name&&!points.some(p=>p.label==='นิคมอุตสาหกรรม')){
   const position=map===vector?map.project([Number(estate.lon??estate.lng),Number(estate.lat)]):map.latLngToContainerPoint([Number(estate.lat),Number(estate.lon??estate.lng)]);
   const {x,y}=position;
-  if(x>12&&y>12&&x<bounds.width-12&&y<bounds.height-12)points.unshift({label:estateProvinceScope.name,x,y,rect:{left:x-5,right:x+5,top:y-5,bottom:y+5}});
+  if(x>12&&y>12&&x<bounds.width-12&&y<bounds.height-12)points.unshift({label:'นิคมอุตสาหกรรม',x,y,rect:{left:x-5,right:x+5,top:y-5,bottom:y+5}});
  }
  const occupied=[...new Set([...markerBoxes,...points.map(p=>p.rect)])];
  for(const item of document.querySelectorAll('.maplibregl-popup,.leaflet-popup,.maplibregl-ctrl,.map-tool-btn,#aerialTourHint,#satelliteKey,#watchEvidence,#mapLayers[open],#mapLegend[open],#ieatInfrastructure')){
   if(item.getClientRects().length)occupied.push(relative(item));
  }
- points.sort((a,b)=>Number(b.label===estateProvinceScope?.name)-Number(a.label===estateProvinceScope?.name)||a.label.localeCompare(b.label,'th')||a.x-b.x);
+ points.sort((a,b)=>Number(b.label==='นิคมอุตสาหกรรม')-Number(a.label==='นิคมอุตสาหกรรม')||a.label.localeCompare(b.label,'th')||a.x-b.x);
  const batchSize=bounds.width<600?3:5;
  const batches=Math.ceil(points.length/batchSize);
  const start=!steady&&batches?Math.floor(elapsed/4200)%batches*batchSize:0;
@@ -1963,7 +1966,7 @@ function drawAerialLabels(map, elapsed, steady=false){
   const w=tag.offsetWidth,h=tag.offsetHeight,{x,y,rect}=point;
   const candidates=[
    [rect.right+22,y-h/2],[rect.left-w-22,y-h/2],
-   ...(!steady?[[x-w/2,rect.top-h-20],[x-w/2,rect.bottom+20]]:[]),
+   
    [rect.right+18,rect.top-h-12],[rect.left-w-18,rect.top-h-12]
   ];
   for(const [left,top] of candidates){
@@ -2014,12 +2017,20 @@ function startAerialTour(){
   const frame=now=>{
    if(!aerialPlaying||aerialMap!==map||document.hidden)return;
    if(!started)started=now;
-   if(now-last>=33){last=now;const camera={bearing:-25+(now-started)*.006};if(readiness&&selectedEstateExtent&&selectedEstateExtent!==framedExtent){framedExtent=selectedEstateExtent;camera.center=[(framedExtent.xmin+framedExtent.xmax)/2,(framedExtent.ymin+framedExtent.ymax)/2]}map.jumpTo(camera);drawAerialLabels(map,now-started);}
+   if(now-last>=33){last=now;const camera={bearing:-25+(now-started)*.006};if(readiness&&selectedEstateExtent&&selectedEstateExtent!==framedExtent){framedExtent=selectedEstateExtent;const fit=map.cameraForBounds([[framedExtent.xmin,framedExtent.ymin],[framedExtent.xmax,framedExtent.ymax]],{padding:65,maxZoom:14.4});if(fit){camera.center=fit.center;camera.zoom=fit.zoom}}map.jumpTo(camera);drawAerialLabels(map,now-started);}
    aerialFrame=requestAnimationFrame(frame);
   };
   aerialLaunch=()=>{aerialLaunch=null;if(aerialPlaying){queueBoundaries();aerialFrame=requestAnimationFrame(frame)}};
-  map.once('moveend',aerialLaunch);
-  map.flyTo({center,zoom:readiness?13.4:Math.min(14.8,Math.max(14,map.getZoom())),pitch:readiness?48:62,bearing:-25,duration:2600,essential:false});
+  if(readiness){
+   const e=selectedEstateExtent;
+   const fitted=e&&map.cameraForBounds([[e.xmin,e.ymin],[e.xmax,e.ymax]],{padding:65,maxZoom:14.4});
+   if(fitted)framedExtent=e;
+   map.jumpTo({center:fitted?.center||center,zoom:fitted?.zoom??13.8,pitch:53,bearing:-25});
+   aerialLaunch();
+  }else{
+   map.once('moveend',aerialLaunch);
+   map.flyTo({center,zoom:Math.min(14.8,Math.max(14,map.getZoom())),pitch:62,bearing:-25,duration:2600,essential:false});
+  }
   aerialNotice('ชมมุมสูง 3 มิติ · กล้องจะหมุนช้า ๆ รอบพื้นที่ · กดหยุดหรือลากแผนที่เพื่อควบคุมเอง');
  }else{
   /* Preserve access on browsers without WebGL: an honest pan/zoom tour. */
@@ -2256,7 +2267,7 @@ html body #mapStage .estate-pin>.ieat-estate-location{
 }
 /* The map library assigns the parent transform; do not override it. */
 </style>
-<script src="flood-infrastructure-20261104.js?v=20261105-infra-callouts"></script>
+<script src="flood-infrastructure-20261104.js?v=20261105-thai-labels"></script>
 <script src="flood-map-alerts.js?v=20261105-cyan1"></script>
 <style>
 html body.story-map-mode:not(.imagery-basemap) .dashboard-base-tiles{filter:grayscale(1) contrast(.92)!important}
