@@ -35,7 +35,11 @@
   storyMarkers.forEach(marker=>marker.remove());
   storyMarkers=[];
   if(storySymbols&&vector&&window.IEAT_SQ){
+   const visible=[];
    selected.filter(f=>enabled[f.properties.source_table]&&f.geometry.type==='Point').forEach(f=>{
+    const point=vector.project(f.geometry.coordinates);
+    if(visible.some(other=>Math.hypot(point.x-other.x,point.y-other.y)<42))return;
+    visible.push(point);
     const button=document.createElement('button');
     button.type='button';
     button.setAttribute('aria-label',groups.find(g=>g[0]===f.properties.source_table)[1]);
@@ -65,7 +69,7 @@
  function mount(){api=window.IEATPreparednessMap?.();if(!api?.ready)return false;vector=api.vector;raster=api.raster;render();return true;}
  document.addEventListener('ieat-map-ready',mount);
  if(!mount()){let tries=0;const timer=setInterval(()=>{if(mount()||++tries>=120)clearInterval(timer);},500);}
- window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='flood-province-scope')return;scope=e.data.active?e.data.name||'':'';popup?.remove();render();});
+ window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='flood-province-scope')return;const next=e.data.active?e.data.name||'':'';if(next===scope)return;scope=next;popup?.remove();render();});
 
  let selectedOutline=null;
  window.addEventListener('message',e=>{
