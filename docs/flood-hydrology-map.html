@@ -1125,6 +1125,16 @@ function queueWaterLabels(){if(!raster)return;cancelAnimationFrame(waterLabelFra
 document.querySelector('[data-layer="boundary"]').addEventListener('change',()=>{flags.boundary=document.querySelector('[data-layer="boundary"]').checked;syncBoundaries();queueBoundaries()});
 
 let estateProvinceScope=null;
+let readinessEstateLabel=null;
+function showReadinessEstateLabel(estate,name){
+ if(!document.body.classList.contains('readiness-map-mode'))return;
+ readinessEstateLabel?.remove();readinessEstateLabel=null;
+ const lat=Number(estate?.lat),lon=Number(estate?.lon??estate?.lng);
+ if(!estate||!name||!Number.isFinite(lat)||!Number.isFinite(lon))return;
+ const label=document.createElement('span');label.className='readiness-estate-label';label.textContent=name+' · ระยอง';
+ if(vector)readinessEstateLabel=new maplibregl.Marker({element:label,anchor:'bottom',offset:[0,-13]}).setLngLat([lon,lat]).addTo(vector);
+ else if(raster)readinessEstateLabel=L.marker([lat,lon],{interactive:false,keyboard:false,zIndexOffset:1500,icon:L.divIcon({className:'readiness-label-anchor',html:label,iconSize:[0,0],iconAnchor:[0,13]})}).addTo(raster);
+}
 function nearbyEstate(f){
  const e=estateProvinceScope?.estate;if(!e)return false;
  const [lon,lat]=f.geometry.coordinates,rad=Math.PI/180,dy=(lat-Number(e.lat))*rad,dx=(lon-Number(e.lon))*rad,h=Math.sin(dy/2)**2+Math.cos(Number(e.lat)*rad)*Math.cos(lat*rad)*Math.sin(dx/2)**2;
@@ -1844,6 +1854,7 @@ window.addEventListener('message',async event=>{
  const locationChanged=estateProvinceScope?.estate?.lat!==d.estate?.lat||estateProvinceScope?.estate?.lon!==d.estate?.lon;
  if(storyMap&&!changed&&!locationChanged){estateProvinceScope=d;return}
  if(changed){clearWatchMap();clearIEATMeasuredDistance();preparednessPopup?.remove()}estateProvinceScope=d;
+ if(changed||locationChanged)showReadinessEstateLabel(d.active?d.estate:null,d.name);
  if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
  if(cleanDashboard&&(!storyMap||changed)){
  const active=!!(d.active&&d.estate);
@@ -1904,12 +1915,12 @@ function drawAerialLabels(map, elapsed){
   const rect=relative(icon);
   if(rect.right<=0||rect.left>=bounds.width||rect.bottom<=0||rect.top>=bounds.height||rect.right===rect.left)continue;
   const label=marker.getAttribute('aria-label')||icon.getAttribute('aria-label')||marker.getAttribute('title')||marker.querySelector('.prep-name,.estate-name,.fd-pin-name')?.textContent;
-  if(!label||marker.classList.contains('flood-point-cluster'))continue;
+  if(!label||marker.classList.contains('flood-point-cluster')||readinessEstateLabel&&label===estateProvinceScope?.name)continue;
   const x=(rect.left+rect.right)/2,y=(rect.top+rect.bottom)/2;
   if(!points.some(p=>p.label===label&&Math.hypot(x-p.x,y-p.y)<12))points.push({label,rect,x,y});
  }
  const estate=estateProvinceScope?.estate;
- if(flags.estate&&estate&&estateProvinceScope.name&&!points.some(p=>p.label===estateProvinceScope.name)){
+ if(!readinessEstateLabel&&flags.estate&&estate&&estateProvinceScope.name&&!points.some(p=>p.label===estateProvinceScope.name)){
   const position=map===vector?map.project([Number(estate.lon??estate.lng),Number(estate.lat)]):map.latLngToContainerPoint([Number(estate.lat),Number(estate.lon??estate.lng)]);
   const {x,y}=position;
   if(x>12&&y>12&&x<bounds.width-12&&y<bounds.height-12)points.unshift({label:estateProvinceScope.name,x,y,rect:{left:x-5,right:x+5,top:y-5,bottom:y+5}});
@@ -1983,16 +1994,17 @@ function startAerialTour(){
  if(!map.__ieatAerialManualBound){map.on('dragstart',stopAerialTour);map.on('zoomstart',manual);map.getContainer().addEventListener('pointerdown',stopAerialTour,{passive:true});map.getContainer().addEventListener('wheel',stopAerialTour,{passive:true});if(vector)map.on('rotatestart',manual);map.__ieatAerialManualBound=true}
  if(vector){
   $('estateView3d').setAttribute('aria-pressed','true');$('estateView3d').textContent='มุมมอง 3D';
-  let started=0,last=0;
+  let started=0,last=0,framedExtent=null;
+  const readiness=document.body.classList.contains('readiness-map-mode');
   const frame=now=>{
    if(!aerialPlaying||aerialMap!==map||document.hidden)return;
    if(!started)started=now;
-   if(now-last>=33){last=now;map.jumpTo({bearing:-25+(now-started)*.006});drawAerialLabels(map,now-started);}
+   if(now-last>=33){last=now;const camera={bearing:-25+(now-started)*.006};if(readiness&&selectedEstateExtent&&selectedEstateExtent!==framedExtent){framedExtent=selectedEstateExtent;camera.center=[(framedExtent.xmin+framedExtent.xmax)/2,(framedExtent.ymin+framedExtent.ymax)/2]}map.jumpTo(camera);drawAerialLabels(map,now-started);}
    aerialFrame=requestAnimationFrame(frame);
   };
   aerialLaunch=()=>{aerialLaunch=null;if(aerialPlaying){queueBoundaries();aerialFrame=requestAnimationFrame(frame)}};
   map.once('moveend',aerialLaunch);
-  map.flyTo({center,zoom:Math.min(14.8,Math.max(14,map.getZoom())),pitch:62,bearing:-25,duration:2600,essential:false});
+  map.flyTo({center,zoom:readiness?13.4:Math.min(14.8,Math.max(14,map.getZoom())),pitch:readiness?48:62,bearing:-25,duration:2600,essential:false});
   aerialNotice('ชมมุมสูง 3 มิติ · กล้องจะหมุนช้า ๆ รอบพื้นที่ · กดหยุดหรือลากแผนที่เพื่อควบคุมเอง');
  }else{
   /* Preserve access on browsers without WebGL: an honest pan/zoom tour. */
@@ -2364,7 +2376,11 @@ html body.story-map-mode #ieatInfrastructure .infra-control-name{
 }
 </style><style>body.readiness-map-mode :is(#aerialTourHint,#satelliteKey){display:none!important}</style>
 <style>body.paper-basemap #raster{background:#f5f5f3}</style>
-</body></html>
+<style>
+.readiness-estate-label{display:block;white-space:nowrap;background:#fffdf7;border:1px solid #544934;padding:5px 9px;color:#20292a;font:600 13px/1.4 Kanit,Sarabun,sans-serif;pointer-events:none;z-index:675}
+.readiness-estate-label::after{content:"";position:absolute;left:50%;top:100%;height:13px;border-left:1px solid #544934}
+.readiness-label-anchor .readiness-estate-label{position:absolute;bottom:0;left:0;transform:translateX(-50%)}
+</style></body></html>
 
 
 
