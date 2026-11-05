@@ -131,6 +131,11 @@
 </style><style>
 body{border-inline-end:1px solid #bdbdbd}
 .bar{border-bottom:1px solid #bdbdbd}
+/* Keep the page scrollbar draggable without native arrow buttons. */
+html::-webkit-scrollbar{width:12px}
+html::-webkit-scrollbar-track{background:#fafafa}
+html::-webkit-scrollbar-thumb{background:#999;border:2px solid #fafafa;border-radius:8px}
+html::-webkit-scrollbar-button{display:none;width:0;height:0}
 </style>
 </head>
 <body>
