@@ -199,7 +199,7 @@
     pane.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
    });
    document.body.dataset.waterCategory='stations';
-   document.body.append(tabs);
+   $('floodInformationPane').append(tabs);
   }
   show('overview');render();supplement();$('estateFocusMap')?.addEventListener('load',()=>{cameraInitialized=false;});setInterval(()=>{if(!document.hidden){render();supplement();}},1800);return true;
  }
