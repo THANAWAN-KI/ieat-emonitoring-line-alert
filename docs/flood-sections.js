@@ -167,18 +167,6 @@
 const $=id=>document.getElementById(id);
 const style=document.createElement('style');
 style.textContent=`
-@layer floodReferenceStructure {
-html body #referenceViewTabs#referenceViewTabs{grid-template-columns:repeat(2,minmax(0,1fr))!important;border-radius:24px!important;gap:5px!important}
-html body #referenceViewTabs#referenceViewTabs button{font-size:14px!important;white-space:normal!important;line-height:1.35!important;min-height:40px!important;padding:8px!important}
-html body #warning #estateFocusDashboard .ef-data-column{padding-top:150px!important}
-html body:not([data-flood-section=overview]) #referenceViewTabs{display:none!important}
-html body #referencePanelSurface{display:none!important}
-html body[data-flood-section=overview] #floodInformationPane#floodInformationPane>:is(#rpRankingsAfterWarning,.ef-warning){display:none!important}
-html body[data-water-category=stations] #floodInformationPane>:is(#floodDamsSection,.ef-canal-panel,#floodWaterDiagram,#efDamFlowPanel),
-html body[data-water-category=dams] #floodInformationPane>:is(#floodStationsSection,.ef-canal-panel,#floodWaterDiagram),
-html body[data-water-category=canals] #floodInformationPane>:is(#floodStationsSection,#floodDamsSection,#floodWaterDiagram,#efDamFlowPanel),
-html body[data-water-category=diagram] #floodInformationPane>:is(#floodStationsSection,#floodDamsSection,.ef-canal-panel,#efDamFlowPanel){display:none!important}
-}
 #approvedAreaSearch{position:fixed;left:calc(var(--ref-left,108px) + var(--ref-panel,400px) + 20px);top:110px;z-index:2300;width:min(330px,calc(100vw - 100px));padding:20px;border-radius:22px;background:#fff;box-shadow:0 6px 26px #22344a24;font:15px/1.5 Sarabun,sans-serif;color:#404040}
 #approvedAreaSearch[hidden]{display:none!important}
 #approvedAreaSearch label{display:block;margin-bottom:14px}
@@ -244,13 +232,7 @@ mount();const timer=setInterval(()=>{if(!document.hidden)mount()},1000);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('approvedAreaSearch'))$('approvedAreaSearch').hidden=true});
 })();
 
-(()=>{const e=document.createElement('style');e.textContent=`
-@layer floodUnifiedTypography {
-html body #referenceViewTabs#referenceViewTabs#referenceViewTabs{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;border-radius:30px!important}
-html body #referenceViewTabs#referenceViewTabs#referenceViewTabs button{white-space:nowrap!important;min-width:0!important;padding:7px 3px!important;min-height:42px!important}
-html body #warning #estateFocusDashboard#estateFocusDashboard .ef-data-column{padding-top:100px!important}
-}
-`;document.head.append(e)})();
+
 
 /* Keep the existing live title and update timestamp together without copying data. */
 (()=>{
@@ -279,7 +261,7 @@ for(const [hostId,pagerId] of [['efRelatedDams','ieatDamPager'],['efReservoirLis
  let footer=panel.querySelector('.compact-water-footer');
  if(!footer){footer=document.createElement('div');footer.className='compact-water-footer';panel.append(footer)}
  const detail=panel.querySelector('details');
- if(detail&&detail.parentElement!==footer){footer.prepend(detail);const summary=detail.querySelector('summary');if(summary)summary.textContent='รายละเอียด / แหล่งข้อมูล'}
+ if(detail&&detail.parentElement!==footer){footer.querySelectorAll('details').forEach(old=>old.remove());footer.prepend(detail);const summary=detail.querySelector('summary');if(summary)summary.textContent='รายละเอียด / แหล่งข้อมูล'}
  if(pager.parentElement!==footer)footer.append(pager);
 }
 }
