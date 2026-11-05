@@ -599,7 +599,11 @@ let riverSvgRenderer=null;
 
 const basemapUrls={streets:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',topo:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',satellite:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',gray:'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'};
 const storyMap=new URLSearchParams(location.search).get('story')==='1';
-if(storyMap)document.body.classList.add('story-map-mode');
+if(storyMap){
+ document.body.classList.add('story-map-mode');
+ $('estateView3d').setAttribute('aria-pressed','false');
+ $('estateView3d').textContent='มุมมอง 2D';
+}
 let selectedBasemap='topo',rasterBaseLayer=null;
 function chooseBasemap(value){
  selectedBasemap=Object.hasOwn(basemapUrls,value)?value:'topo';
@@ -1222,7 +1226,7 @@ function rasterStart(){
 function vectorStart(){
  if(!window.maplibregl){rasterStart();return}
  try{
- vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray',paint:{'raster-saturation':storyMap&&selectedBasemap!=='satellite'?-1:selectedBasemap==='streets'?-.72:selectedBasemap==='topo'?-.65:0}}]},center:[101,14],zoom:6,pitch:55,bearing:-15,preserveDrawingBuffer:true,attributionControl:true});
+ vector=new maplibregl.Map({container:'map',style:{version:8,glyphs:'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',sources:{'esri-gray':{type:'raster',tiles:[basemapUrls[selectedBasemap]],tileSize:256,maxzoom:16,attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'}},layers:[{id:'esri-gray',type:'raster',source:'esri-gray',paint:{'raster-saturation':storyMap&&selectedBasemap!=='satellite'?-1:selectedBasemap==='streets'?-.72:selectedBasemap==='topo'?-.65:0}}]},center:[101,14],zoom:6,pitch:storyMap?0:55,bearing:storyMap?0:-15,preserveDrawingBuffer:true,attributionControl:true});
  if(!cleanDashboard)vector.addControl(new maplibregl.NavigationControl({showCompass:false}),'bottom-right');vector.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-left');
  const timeout=setTimeout(()=>{if(!ready)rasterStart()},25000);
  vector.on('error',e=>{if(!ready&&/webgl|context|initializ/i.test(e.error?.message||'')){clearTimeout(timeout);rasterStart()}});
@@ -1590,10 +1594,10 @@ function focusWithEstate(lon,lat){
   const mapWidth=(vector?.getContainer()||raster?.getContainer())?.clientWidth||900;
   const pad=Math.max(18,Math.min(70,Math.round(mapHeight*.09)));
   const side=Math.max(18,Math.min(85,Math.round(mapWidth*.07)));
-  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:pad,left:side,right:side,bottom:pad},maxZoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,duration:650});
+  if(vector)vector.fitBounds([[west,south],[east,north]],{padding:{top:pad,left:side,right:side,bottom:pad},maxZoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,...(storyMap&&$('estateView3d').getAttribute('aria-pressed')!=='true'?{bearing:0}:{}),duration:650});
   else raster?.fitBounds([[south,west],[north,east]],{paddingTopLeft:[side,pad],paddingBottomRight:[side,pad],maxZoom:13});
   queueBoundaries();
- }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:-15});else raster?.setView([lat,lon],13);
+ }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:storyMap&&$('estateView3d').getAttribute('aria-pressed')!=='true'?0:-15});else raster?.setView([lat,lon],13);
 }
 function openPointPopup(lon,lat,html,move=false,camera=null){
  if(lon==null||lat==null||!Number.isFinite(Number(lon))||!Number.isFinite(Number(lat))||(!vector&&!raster))return;
@@ -1616,7 +1620,7 @@ window.addEventListener('message',async event=>{
  if(d.type==='dashboard-camera'){
  if(!ready)return;
  if(vector){
-  if(d.action==='init'){autoFit=false;vector.dragRotate.enable();vector.touchZoomRotate.enableRotation();vector.easeTo({pitch:55,duration:650});}
+  if(d.action==='init'){autoFit=false;vector.dragRotate.enable();vector.touchZoomRotate.enableRotation();if(!storyMap)vector.easeTo({pitch:55,duration:650});}
   if(d.action==='reset'){stopAerialTour();vector.easeTo({pitch:55,bearing:-15,duration:700});}
   if(d.action==='orbit'){if(d.playing)startAerialTour();else stopAerialTour();}
   if(d.action==='left'||d.action==='right'){stopAerialTour();vector.easeTo({bearing:vector.getBearing()+(d.action==='left'?-45:45),pitch:55,duration:650});}
