@@ -659,6 +659,13 @@ function keepDashboardLayersOpen(){
   if(input){input.checked=true;input.disabled=true;input.title='เปิดแสดงตลอดเวลา';input.closest('label')?.setAttribute('title','ชั้นข้อมูลนี้เปิดแสดงตลอดเวลา')}
  }
 }
+if(cleanDashboard&&storyMap){
+ for(const kind of permanentDashboardLayers){
+  flags[kind]=true;
+  const input=document.querySelector('[data-layer="'+kind+'"]');
+  if(input)input.checked=true;
+ }
+}
 keepDashboardLayersOpen();
 function hasDischarge(r){const value=r.discharge??r.flow;return value!=null&&Number.isFinite(Number(value))}
 let historyOnly=false;
