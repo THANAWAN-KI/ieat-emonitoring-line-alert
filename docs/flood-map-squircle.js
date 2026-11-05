@@ -21,7 +21,7 @@ const GL={
  water:outline('<path d="M9 3h7v15H9zM12 7h4m-4 4h4m-4 4h4M3 21q3-2 6 0t6 0t6 0"/>'),
  canal:outline('<path d="M4 3v18M20 3v18M4 8h16M8 11v5m4-5v5m4-5v5M4 20q4-2 8 0t8 0"/>'),
  dam:outline('<path d="M4 4h11l3 16H7zM8 4l3 16m1-16 3 16M18 10h4m-3 5h3M2 22q3-2 6 0t6 0t6 0"/>'),
- camera:outline('<path d="m3 7 13-3 3 9-13 3zM7 17v4h7m-3-5v5M19 8l3-1v5l-2-1"/>'),
+ camera:c=>'<g stroke="'+c+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 5 15 3-2 8-14-4z" fill="'+c+'"/><path d="m18 9 4 1-1 5-4-1" fill="none"/><path d="m9 15-1 4h6m-2-3v3" fill="none"/><path d="m5 7 9 2" stroke="#ffffff" stroke-opacity=".8"/></g>',
  rain:outline('<path d="M6 14a4 4 0 0 1 0-8 6 6 0 0 1 11-1 4.5 4.5 0 0 1 1 9zM8 17l-1 4m6-4-1 4m6-4-1 4"/>'),
  pump:outline('<rect x="4" y="9" width="11" height="12" rx="2"/><path d="M9 9V4h6m0 9h5v7"/><circle cx="9" cy="15" r="2"/>'),
  storage:outline('<path d="M3 10h18v11H3zM3 16q4-2 9 0t9 0M12 2s-3 3-3 5a3 3 0 0 0 6 0c0-2-3-5-3-5z"/>'),
@@ -36,7 +36,7 @@ function waterCircle(hex,marker){
  return '<span class="ieat-water-circle'+(marker?' is-map-point':'')+'" data-type="water" style="--water-dot:'+c+'" aria-hidden="true"></span>';
 }
 function tile(kind,hex,size){if(kind==='water')return waterCircle(hex,false);size=size||28;return '<span class="ieat-nm-btn" style="width:'+size+'px;height:'+size+'px">'+glyph(kind,colour(kind,hex),Math.round(size*.66))+'</span>'}
-function pin(kind,hex){if(kind==='water')return waterCircle(hex,true);const crit=isCrit(hex);
+function pin(kind,hex){if(kind==='camera')return '<span class="ieat-sq-pin ieat-cctv-pin" data-type="camera" aria-hidden="true"><span class="ieat-nm-btn">'+glyph('camera','#ffffff',27)+'</span><span class="ieat-nm-tail"></span></span>';if(kind==='water')return waterCircle(hex,true);const crit=isCrit(hex);
  return '<span class="ieat-sq-pin'+(crit?' is-critical':'')+'" data-type="'+esc(kind)+'" aria-hidden="true"><span class="ieat-nm-btn">'+glyph(kind,colour(kind,hex),27)+'</span><span class="ieat-nm-tail"></span></span>'}
 function cluster(kind,hex,count){const c=colour(kind,hex),n=Number(count)||0,txt=n>99?'99+':String(n);
  return '<span class="ieat-sq-cluster" data-type="'+esc(kind)+'"><span class="ieat-nm-btn" style="--nm-ring:'+c+'"><b style="color:'+c+';font-size:'+(txt.length>2?12:15)+'px">'+txt+'</b></span><span class="ieat-sq-cluster-kind">'+tile(kind,hex,20)+'</span></span>'}
@@ -79,6 +79,11 @@ html body .ieat-water-circle.is-map-point{position:absolute!important;left:50%!i
 html body #mapLayers .layer-swatch[data-kind="water"]>*{display:none!important}
 html body #mapLayers .layer-swatch[data-kind="water"]:after{content:""!important;display:block!important;width:12px!important;height:12px!important;box-sizing:border-box!important;border-radius:50%!important;background:#99d3f0!important;border:1px solid #639bbb!important}
 html body .ieat-water-circle:before,html body .ieat-water-circle:after{content:none!important}
+`;
+css.textContent+=`
+html body .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-btn{background:#2f68f4!important;border:2px solid #fff!important;box-shadow:0 3px 9px #173b7040!important}
+html body .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-tail{border-top-color:#2f68f4!important}
+html body .ieat-cctv-pin.ieat-cctv-pin .ieat-nm-glyph{width:27px!important;height:27px!important}
 `;
 (document.head||document.documentElement).appendChild(css);
 /* Inline <style> blocks later in <body> can still win; move ours to the very end once parsed. */
