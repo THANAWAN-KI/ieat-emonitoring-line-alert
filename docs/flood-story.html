@@ -47,6 +47,18 @@
 .plan-example dd{margin:2px 0 0;font-size:15px;font-weight:600;line-height:1.5}
 .plan-example p{font-size:13px;color:#53656b}
 @media(max-width:650px){.plan-example dl{grid-template-columns:1fr}}
+.cover-wave{animation:cover-wave 5.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.cover-ripple{animation:cover-ripple 5.2s ease-in-out infinite}
+@keyframes cover-wave{0%,100%{transform:translateY(0) skewY(0)}50%{transform:translateY(5px) skewY(-.8deg)}}
+@keyframes cover-ripple{0%,100%{transform:translateX(0);opacity:.95}50%{transform:translate(9px,3px);opacity:.7}}
+.story-question{background:#fff;text-align:center;padding:clamp(32px,6vw,76px) 20px}
+.story-question p{max-width:760px;margin:auto;font-size:clamp(25px,4vw,47px);font-weight:700;line-height:1.35}
+.readiness-lead{max-width:680px}
+.story-sequence{counter-reset:story-step;grid-template-columns:minmax(0,1fr);gap:0;max-width:760px}
+.story-sequence section{counter-increment:story-step;position:relative;padding:13px 0 13px 52px;border-top:1px solid var(--rule)}
+.story-sequence section::before{content:"0" counter(story-step);position:absolute;left:0;top:12px;color:var(--blue);font-weight:700}
+.story-sequence h3{margin-bottom:4px}
+@media(prefers-reduced-motion:reduce){.cover-wave,.cover-ripple{animation:none}}
 </style>
 </head>
 <body>
@@ -64,11 +76,11 @@
 <svg class="cover-art" viewBox="0 0 880 410" role="img" aria-label="ภาพประกอบโรงงาน คลอง และสถานีวัดระดับน้ำ">
 <path d="M110 83 749 47l29 266-607 56z" fill="#f0ece4"/><path d="M142 53 752 65l-14 252-580 22z" fill="#ffbd28" stroke="#202b2b" stroke-width="5" stroke-linejoin="round"/>
 <g stroke="#202b2b" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-<path d="M84 291c147-13 163-57 283-40s182 75 422 17l20 58c-189 63-313 24-429-1S191 381 70 353z" fill="#82d2e5"/>
+<path class="cover-wave" d="M84 291c147-13 163-57 283-40s182 75 422 17l20 58c-189 63-313 24-429-1S191 381 70 353z" fill="#82d2e5"/>
 <path d="M162 246v-89l67 30v-39l72 39v-47h38v106z" fill="#f8f5ee"/>
 <path d="M180 206h24v19h-24zm53 0h24v19h-24zm54 0h24v19h-24z" fill="#3157bd"/>
 <path d="M542 237v-92h51v92m-40-68h26m-26 18h17m-17 19h26m-26 18h17" fill="#fff"/>
-<path d="M611 228c45-22 76-17 112-9m-402 80c28-8 58-8 87 0m-269 27c27-2 54-10 81-19m399 9c32-7 63-13 97-16" fill="none"/>
+<path d="M611 228c45-22 76-17 112-9" fill="none"/><path class="cover-ripple" d="M311 299c28-8 58-8 87 0M129 326c27-2 54-10 81-19m399 9c32-7 63-13 97-16" fill="none"/>
 <path d="M390 126c-19 1-25-24-10-32 5-22 34-28 48-8 23-4 37 23 23 38z" fill="#fff"/>
 <path class="cover-rain" d="m389 145-8 16m30-17-8 17m31-18-8 16" fill="none" stroke="#3157bd"/>
 <path d="M98 240v-37m0 11c-30 2-33-22-15-24 5-16 25-17 31 0 17 7 13 27-16 24zm660 8v-37m0 12c-26 0-30-20-14-25 4-16 22-16 27 0 17 6 12 25-13 25z" fill="#67b98b"/>
@@ -82,9 +94,10 @@
 </div>
 </div>
 </section>
+<section class="story-question" aria-label="เกริ่นนำ"><p>เมื่อฝนตกใกล้นิคมฯ เราจะรู้ได้อย่างไรว่า<br>พื้นที่ไหนควรติดตามก่อน?</p></section>
 <section id="signals" class="chapter notebook">
 <div class="inner split">
-<div><span class="label">บทที่ 01</span><h2>เมื่อฝนตก เราดูอะไร?</h2><p>เมื่อฝนตกหนักหรือระดับน้ำสูงขึ้น ระบบใช้ข้อมูลจากสถานีภายใน 30 กม. รอบนิคมฯ เพื่อชี้พื้นที่ที่ควรติดตาม จากนั้นเปิดแผนที่เพื่อดูว่าสถานีอยู่ตรงไหนและตรวจวัดเมื่อไร</p>
+<div><span class="label">บทที่ 01</span><h2>เมื่อฝนตก เราดูอะไร?</h2><p>ลองนึกถึงกลุ่มฝนที่เคลื่อนเข้ามาใกล้นิคมฯ เรดาร์ช่วยให้เห็นบริเวณที่มีกลุ่มฝน สถานีวัดฝนบอกว่าฝนสะสมเท่าไร และสถานีระดับน้ำช่วยให้เห็นว่าน้ำอยู่ห่างจากตลิ่งแค่ไหน</p><p>ระบบใช้สถานีภายใน 30 กม. รอบนิคมฯ เพื่อชี้พื้นที่ที่ควรติดตามต่อ เปิดแผนที่แล้วกดหมุดเพื่อดูตำแหน่ง ค่า และเวลาตรวจวัดของแต่ละสถานี</p>
 </div>
 <svg class="art" viewBox="0 0 450 340" role="img" aria-label="ภาพวาดสถานีระดับน้ำและสายฝน">
 <path d="m44 34 356 20-18 250-339-4z" fill="#ffe18a"/>
@@ -92,7 +105,7 @@
 </svg>
 </div>
 </section>
-<section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>อ่านสัญญาณ แล้วดูแผนรับมือ</h2><div class="steps"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>ดูป้ายปกติ เฝ้าระวัง หรือถึงตลิ่ง / ล้นตลิ่ง ผลคัดกรองจากสถานีใกล้นิคมฯ ใช้บอกว่าควรติดตามพื้นที่ใดต่อ การยืนยันสภาพในนิคมฯ ต้องอาศัยข้อมูลจากพื้นที่</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ ในบทสุดท้าย เปิดเมนูเตรียมรับมือเพื่อดูเกณฑ์เริ่มดำเนินการ มาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><aside class="plan-example" aria-labelledby="plan-example-title">
+<section id="readiness" class="chapter notebook"><div class="inner"><span class="label">บทที่ 02</span><h2>จากสัญญาณบนแผนที่<br>สู่การเตรียมรับมือ</h2><p class="readiness-lead">สมมติว่าคุณเห็นนิคมฯ หนึ่งแห่งอยู่ในรายการที่ควรติดตาม ลองอ่านข้อมูลตามลำดับนี้ก่อนเปิดแผนของพื้นที่</p><div class="steps story-sequence"><section><h3>ดูข้อมูลล่าสุด</h3><p>ดูเวลาตรวจวัดและชื่อสถานี ระดับน้ำกับฝนสะสมบอกสภาพที่จุดวัดและช่วงเวลาที่ระบุ</p></section><section><h3>ดูว่าเข้าเกณฑ์อะไร</h3><p>ดูป้ายปกติ เฝ้าระวัง หรือถึงตลิ่ง / ล้นตลิ่ง ผลคัดกรองจากสถานีใกล้นิคมฯ ใช้บอกว่าควรติดตามพื้นที่ใดต่อ การยืนยันสภาพในนิคมฯ ต้องอาศัยข้อมูลจากพื้นที่</p></section><section><h3>เปิดแผนของนิคมฯ</h3><p>เลือกนิคมฯ ในบทสุดท้าย เปิดเมนูเตรียมรับมือเพื่อดูเกณฑ์เริ่มดำเนินการ มาตรการ ผู้รับผิดชอบ และโครงสร้างพื้นฐานที่มีข้อมูล</p></section></div><aside class="plan-example" aria-labelledby="plan-example-title">
 <h3 id="plan-example-title">ตัวอย่างจากแผนของนิคมฯ ซีพีจีซี</h3>
 <dl><div><dt>เมื่อถึงเกณฑ์ในแผน</dt><dd>ระดับเฝ้าระวัง</dd></div><div><dt>ทำอะไร</dt><dd>ตรวจระดับน้ำเป็นระยะ และเตรียมเครื่องสูบน้ำ</dd></div><div><dt>ใครรับผิดชอบ</dt><dd>ฝ่ายบริหารจัดการนิคมอุตสาหกรรม</dd></div></dl>
 <p>ตัวอย่างนี้อ้างอิงมาตรการในแผนของนิคมฯ สถานะปัจจุบันให้ดูจากข้อมูลตรวจวัดล่าสุด</p>
