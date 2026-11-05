@@ -123,7 +123,7 @@
   const stats=[['จุดข้อมูลบนแผนที่',points.length,ready],['วิกฤต / ถึงตลิ่ง',critical,snap.loaded],['เฝ้าระวัง',items.length-critical,snap.loaded]];
   return '<header class="water-report-heading"><h1>รายงานสถานการณ์น้ำ</h1><p><strong>'+esc(selected())+'</strong> · '+esc($('expoBoothSubtitle')?.textContent||'ข้อมูลล่าสุดที่โหลดได้')+'</p></header>'+reportSegments()+
    '<div class="water-report-stats">'+stats.map(([label,value,loaded])=>'<div><b>'+count(value,loaded)+'</b><span>'+label+'</span></div>').join('')+'</div>'+
-   '<section class="ref-chart-card"><h2>ข้อมูลในพื้นที่</h2><p>เลือกประเภทเพื่อดูจุดตัวอย่างบนแผนที่</p><div class="water-report-sources">'+categories.map(([key,label])=>{
+   '<section class="ref-chart-card"><h2>ข้อมูลในพื้นที่</h2><p>จำนวนจุดที่แสดงบนแผนที่ แยกตามประเภท</p><div class="water-report-sources">'+categories.map(([key,label])=>{
     const total=points.filter(p=>p.kind===key).length;
     return '<button type="button" data-report-kind="'+key+'"'+(!ready||!total?' disabled':'')+'><span>'+label+'</span><b>'+count(total,ready)+'</b></button>';
    }).join('')+'</div></section>'+
