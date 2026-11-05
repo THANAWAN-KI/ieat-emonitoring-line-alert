@@ -364,8 +364,9 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
 }
 #floodInformationPane :is(#floodDamsSection>h2,.rp-stations-title,.ef-canal-panel>h2,#floodWaterDiagram>h3) {
   background: var(--overview-tint) !important;
-  border-radius: 8px !important;
-  padding: 6px 9px !important;
+  box-shadow: inset 3px 0 0 #4597d1 !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
   margin: 0 0 8px !important;
 }
 #floodInformationPane #floodDamsSection,
@@ -384,8 +385,17 @@ body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane {
   color: var(--overview-ink) !important;
 }
 #floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-row {
-  min-height: 34px !important;
-  padding: 3px 0 !important;
+  grid-template-columns: minmax(0, 42%) minmax(0, 1fr) minmax(5ch, auto) !important;
+  min-height: 32px !important;
+  padding: 2px 0 !important;
+}
+#floodInformationPane #rpRankingsAfterWarning .ieat-rank-value {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+#floodInformationPane #rpRankingsAfterWarning .rank-unit {
+  display: block !important;
+  margin-bottom: 4px !important;
 }
 #floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-track {
   height: 14px !important;
