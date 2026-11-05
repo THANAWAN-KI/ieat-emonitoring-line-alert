@@ -603,6 +603,11 @@ let riverSvgRenderer=null;
 
 const basemapUrls={streets:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',topo:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',satellite:'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',gray:'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'};
 const storyMap=new URLSearchParams(location.search).get('story')==='1';
+let mapOnScreen=true;
+if(storyMap&&'IntersectionObserver' in window){
+ const observer=new IntersectionObserver(([entry])=>{mapOnScreen=entry.isIntersecting});
+ observer.observe($('mapStage'));
+}
 if(storyMap){
  document.body.classList.add('story-map-mode');
  if(new URLSearchParams(location.search).get('chapter')==='readiness')document.body.classList.add('readiness-map-mode');
@@ -1141,10 +1146,10 @@ function sensorSvg(kind){return mapSymbol(kind);}
 // Hidden points remain in the source data and all estate locations return at close zoom.
 function thinEstatePins(list,allKinds=false){
  const map=vector||raster,zoom=map?.getZoom()??0;
- if(!map||zoom>=12)return list;
+ if(!map||zoom>=(allKinds?16:12))return list;
  const estates=allKinds?list:list.filter(f=>f.properties?.kind==='estate');
  if(!estates.length)return list;
- const cell=zoom<7?125:zoom<9?105:zoom<11?85:60;
+ const cell=zoom<7?132:zoom<9?110:zoom<11?84:zoom<13?60:46;
  const limit=allKinds||zoom<8?1:2;
  const buckets=new Map(),selected=[];
  const sorted=estates.slice().sort((a,b)=>{
@@ -1157,7 +1162,16 @@ function thinEstatePins(list,allKinds=false){
   if(!coords||!Number.isFinite(Number(coords[0]))||!Number.isFinite(Number(coords[1])))continue;
   const p=vector?vector.project(coords):raster.project([coords[1],coords[0]],zoom);
   if(!p||!Number.isFinite(p.x)||!Number.isFinite(p.y))continue;
-  const key=Math.floor(p.x/cell)+':'+Math.floor(p.y/cell);
+  const x=Math.floor(p.x/cell),y=Math.floor(p.y/cell),key=x+':'+y;
+  if(allKinds){
+   let overlaps=false;
+   for(let dx=-1;dx<=1&&!overlaps;dx++)for(let dy=-1;dy<=1;dy++){
+    const other=buckets.get((x+dx)+':'+(y+dy));
+    if(other&&Math.hypot(p.x-other.x,p.y-other.y)<cell){overlaps=true;break}
+   }
+   if(!overlaps){buckets.set(key,p);selected.push(f)}
+   continue;
+  }
   const count=buckets.get(key)||0;
   if(count>=limit)continue;
   buckets.set(key,count+1);
@@ -1218,6 +1232,7 @@ function syncPinLegend(){
  }
  syncStatusKey();
 }
+let lastVectorPins=[],lastVectorSensorPoints=[];
 function render(){
  keepDashboardLayersOpen();
  if(!ready)return;syncPinLegend();publishPreparednessPoints();
@@ -1228,8 +1243,10 @@ function render(){
   // Overview: terrain, waterways and radar only. Mid: estate pins only.
   const baseDisplayPoints=storyMap||!cleanDashboard||watchMapData?overviewPoints.points:presentationZoom<10?overviewPoints.points.filter(f=>f.properties.kind==='estate'):overviewPoints.points;
   const displayPoints=thinEstatePins(baseDisplayPoints);
- const pinPoints=storyMap?thinEstatePins(baseDisplayPoints.filter(f=>flags[f.properties.kind]),cleanDashboard&&!watchMapData):displayPoints;
+ const pinPoints=storyMap?thinEstatePins(baseDisplayPoints.filter(f=>flags[f.properties.kind]),!watchMapData):displayPoints;
  if(vector){
+  if(pinPoints.length!==lastVectorPins.length||pinPoints.some((point,index)=>point!==lastVectorPins[index])){
+  lastVectorPins=pinPoints;
   waterMarkers.forEach(m=>m.remove());waterMarkers=[];
   pinPoints.filter(f=>['water','canal'].includes(f.properties.kind)||storyMap&&f.properties.kind==='rain').forEach(f=>{const r=f.properties,el=document.createElement('div');el.className='flood-data-pin'+(window.IEAT_SQ?' has-sq':'');el.dataset.kind=r.kind;el.tabIndex=0;el.setAttribute('aria-label',floodPinTypes[r.kind].label+' · '+r.name);el.innerHTML=dataPinHTML(r,r.kind);el.onclick=()=>showMapDetails(r,r.kind);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showMapDetails(r,r.kind)}};waterMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
   cameraMarkers.forEach(x=>x.remove());cameraMarkers=[];damMarkers.forEach(x=>x.remove());damMarkers=[];
@@ -1237,7 +1254,11 @@ function render(){
   estateMarkers.forEach(x=>x.remove());estateMarkers=[];pinPoints.filter(f=>f.properties.kind==='estate').forEach(f=>{const el=document.createElement('div');el.className='estate-pin';el.tabIndex=0;el.setAttribute('aria-label',f.properties.name);el.innerHTML=estateSvg+'<span class="estate-name">'+esc(f.properties.name)+'</span>';el.onclick=()=>showMapDetails(f.properties,'estate');estateMarkers.push(new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat(f.geometry.coordinates).addTo(vector))});
   if(vector.getLayer('water-stations'))vector.setLayoutProperty('water-stations','visibility','none');if(vector.getLayer('water-station-symbol'))vector.setLayoutProperty('water-station-symbol','visibility','none');
   if(cleanDashboard){for(const id of ['water-station-symbol','labels','overflow-alert'])if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility','none');}
-  vector.getSource('sensors')?.setData({type:'FeatureCollection',features:displayPoints});
+  }
+  if(displayPoints.length!==lastVectorSensorPoints.length||displayPoints.some((point,index)=>point!==lastVectorSensorPoints[index])){
+   lastVectorSensorPoints=displayPoints;
+   vector.getSource('sensors')?.setData({type:'FeatureCollection',features:displayPoints});
+  }
   vector.setLayoutProperty('discharge-ring','visibility',flags.rings&&(!cleanDashboard||presentationZoom>=10)?'visible':'none');
   ['mapped-waterway-casing','mapped-waterways','mapped-river-base','mapped-water-motion','flow-arrows'].forEach(id=>{if(vector.getLayer(id))vector.setLayoutProperty(id,'visibility',flags.flow?'visible':'none')});
   if(vector.getLayer('gistda'))vector.setLayoutProperty('gistda','visibility',flags.gistda?'visible':'none');if(vector.getLayer('gistda-points'))vector.setLayoutProperty('gistda-points','visibility',flags.gistda?'visible':'none');
@@ -1389,8 +1410,9 @@ function addFlow(){
    window.__ieatFlowLoopStarted=true;
    const started=performance.now();let last=-1000;
    function animateRiver(now){
+    if(!mapOnScreen||document.hidden){setTimeout(()=>requestAnimationFrame(animateRiver),400);return}
     requestAnimationFrame(animateRiver);
-    if(document.hidden||!flags.flow||!vector?.getLayer('mapped-water-motion')||now-last<(aerialPlaying||vector.isMoving()?140:65))return;
+    if(document.hidden||!mapOnScreen||!flags.flow||!vector?.getLayer('mapped-water-motion')||now-last<(aerialPlaying||vector.isMoving()?140:65))return;
     last=now;
     const phase=((now-started)*.008)%8;
     try{vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])}catch(e){}
@@ -1416,15 +1438,16 @@ function addFlow(){
   let last=0;
   function animateArrows(now){
    if(!vector?.getSource('flow-arrow-motion'))return;
+   if(!mapOnScreen||document.hidden){setTimeout(()=>requestAnimationFrame(animateArrows),400);return}
    requestAnimationFrame(animateArrows);
-   if(document.hidden||!flags.flow||vector.getZoom()<6||now-last<(aerialPlaying||vector.isMoving()?450:180))return;
+   if(document.hidden||!mapOnScreen||!flags.flow||vector.getZoom()<6||now-last<(aerialPlaying||vector.isMoving()?650:220))return;
    last=now;
    const bounds=vector.getBounds(),spacing=Math.max(.012,70/2**vector.getZoom()),features=[];
    for(const {segments,distance} of paths){
     if(!distance)continue;
     const step=distance/Math.max(1,Math.min(28,Math.floor(distance/spacing)));
     let segment=0;
-    for(let d=(now*.000025)%step;d<distance&&features.length<150;d+=step){
+    for(let d=(now*.000025)%step;d<distance&&features.length<85;d+=step){
      while(segment<segments.length-1&&segments[segment].start+segments[segment].length<=d)segment++;
      const {a,dx,dy,length,start,angle}=segments[segment],t=(d-start)/length;
      const coordinates=[a[0]+dx*t,a[1]+dy*t];
@@ -1469,6 +1492,7 @@ function canalPopup(r){
  return '<div class="popup canal-popup" style="display:flex;gap:10px;min-width:235px">'+gauge+'<div><b>'+esc((r.code||'')+' · '+r.name)+'</b><br>ในคลอง '+fmt(r.wl)+' ม. รทก.<br>ฝั่งนอก '+fmt(r.outer)+' ม. รทก.<br>'+esc('เขต'+r.district)+' · '+(old(r,'canal')?'ข้อมูลย้อนหลัง':'อัปเดต')+' '+esc(new Date(date(r.measured_at)).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',dateStyle:'short',timeStyle:'short'}))+'<br><small>ตลิ่ง '+fmt(r.bank)+' ม. รทก.</small><br><a href="'+esc(r.source_url)+'" target="_blank" rel="noopener">ดูข้อมูลสถานีคลอง ↗</a></div></div>';
 }
 async function loadCanals(){
+ if(storyMap&&!flags.canal)return;
  let loaded=false;
  function apply(data){const rows=normalizeCanals(data);if(!rows.length)throw Error('ไม่มีค่าคลองใน 24 ชั่วโมง');extras=extras.filter(x=>x.kind!=='canal');extras.push({kind:'canal',rows});loaded=true;delete sourceErrors['คลอง กทม.'];build();}
  try{apply(await feed('bma_canal_latest'))}catch(e){sourceErrors['คลอง กทม.']=e.message;}
@@ -1554,7 +1578,7 @@ async function load(){
 }
 
 let camerasLoaded=false;const cameraImages=new Map();
-async function cameras(){if(camerasLoaded)return;try{const d=await feed('cctv_latest');extras.push({kind:'camera',rows:d.rows});camerasLoaded=true;delete sourceErrors.CCTV;build()}catch(e){sourceErrors.CCTV=e.message;updateDataAudit()}}
+async function cameras(){if(camerasLoaded||storyMap&&!flags.camera)return;try{const d=await feed('cctv_latest');extras.push({kind:'camera',rows:d.rows});camerasLoaded=true;delete sourceErrors.CCTV;build()}catch(e){sourceErrors.CCTV=e.message;updateDataAudit()}}
 async function loadCameraImage(r,force=false){
  const box=Array.from(document.querySelectorAll('[data-camera-id]')).find(e=>e.dataset.cameraId===String(r.id));if(!box)return;
  const time=box.querySelector('[data-camera-time]'),state=box.querySelector('[data-camera-state]'),img=box.querySelector('[data-camera-image]');time.textContent='กำลังโหลดภาพล่าสุด…';state.textContent='';
@@ -1572,7 +1596,7 @@ $('basemapChoice').addEventListener('change',e=>chooseBasemap(e.target.value));$
 $('province').addEventListener('change',()=>{render();fit();parent.postMessage({type:'flood-map-province',province:$('province').value},location.origin)});
 document.querySelectorAll('.controls details').forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)document.querySelectorAll('.controls details').forEach(other=>{if(other!==menu)other.open=false;});}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape')document.querySelectorAll('.controls details').forEach(menu=>{menu.open=false;});});
-document.querySelectorAll('[data-layer]').forEach(input=>input.addEventListener('change',()=>{flags[input.dataset.layer]=input.checked;if(input.dataset.layer==='camera'&&input.checked)cameras();render()}));
+document.querySelectorAll('[data-layer]').forEach(input=>input.addEventListener('change',()=>{flags[input.dataset.layer]=input.checked;if(input.checked){if(input.dataset.layer==='camera')cameras();if(input.dataset.layer==='canal')loadCanals();if(input.dataset.layer==='satellite')loadSatellite()};render()}));
 $('historyOnly').addEventListener('change',async event=>{
  historyOnly=event.target.checked;
  if(historyOnly){try{await loadHistoryIndex()}catch(e){}}
@@ -2021,6 +2045,7 @@ function updateSatelliteKey(){
 
 async function remoteFeed(path){const r=await fetch(faonamBase+path,{cache:'no-store',signal:AbortSignal.timeout(path==='/api/tmd/radar'?8000:25000)});if(!r.ok)throw Error('HTTP '+r.status);return r.json();}
 async function loadSatellite(){
+ if(storyMap&&!flags.satellite)return;
  try{const d=await remoteFeed('/api/gistda/flood');if(!Array.isArray(d.passes)||!d.passes.length||!d.tiles)throw Error('ไม่มีวันที่ภาพ');const next={...d,tiles:safeOverlayUrl(d.tiles)};
  if(vector?.getSource('satellite-live')&&satelliteFeed?.tiles!==next.tiles){vector.removeLayer('satellite-live');vector.removeSource('satellite-live');}satelliteFeed=next;satelliteError='';
  }catch(e){satelliteError='โหลดดาวเทียมไม่สำเร็จ ('+e.message+')';}
