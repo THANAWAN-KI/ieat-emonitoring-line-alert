@@ -10,7 +10,9 @@
  const enabled = Object.fromEntries(groups.map(g=>[g[0],true]));
  const escape = v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const normalize = v=>String(v||'').replace(/นิคมอุตสาหกรรม|นิคมฯ|\s/g,'');
- let scope='', api, vector, raster, leafletGroup, popup;
+ const storySymbols=new URLSearchParams(location.search).get('story')==='1';
+ const symbolKinds={flood_pump_station:'pump',flood_water_storage:'storage',flood_drainage_channel:'canal',flood_barrier:'protection'};
+ let scope='', api, vector, raster, leafletGroup, popup, storyMarkers=[];
  const fields = [['rep_capacity_m3h','กำลังสูบ','ลบ.ม./ชม.'],['operation_mode','การเดินเครื่อง',''],['backup_power','ไฟฟ้าสำรอง',''],['storage_type_code','ประเภทแหล่งกักเก็บ',''],['pond_count','จำนวนบ่อ','บ่อ'],['area_rai','พื้นที่','ไร่'],['capacity_m3','ความจุ','ลบ.ม.'],['length_m','ความยาว','ม.'],['top_width_m','ความกว้างด้านบน','ม.'],['bottom_width_m','ความกว้างด้านล่าง','ม.'],['depth_m','ความลึก','ม.'],['capacity_m3s','ความสามารถระบายน้ำ','ลบ.ม./วินาที'],['capacity_m3h','ความสามารถระบายน้ำ','ลบ.ม./ชม.'],['barrier_type_code','ประเภทแนวป้องกัน',''],['crest_level_msl','ระดับสันคัน','ม.รทก.'],['crest_width_m','ความกว้างสันคัน','ม.'],['remark','หมายเหตุ','']];
  const rows = ()=>data.features.filter(f=>!scope||normalize(f.properties.estate_name_th)===normalize(scope));
  function content(p){
@@ -28,7 +30,19 @@
   const selected=rows();
   groups.forEach(([key])=>panel.querySelector('[data-count="'+key+'"]').textContent='('+selected.filter(f=>f.properties.source_table===key).length+')');
   panel.querySelector('#infraScope').textContent=scope?'นิคมฯ '+scope:'ทุกนิคมฯ';
-  const collection={type:'FeatureCollection',features:selected};
+  storyMarkers.forEach(marker=>marker.remove());
+  storyMarkers=[];
+  if(storySymbols&&vector&&window.IEAT_SQ){
+   selected.filter(f=>enabled[f.properties.source_table]&&f.geometry.type==='Point').forEach(f=>{
+    const button=document.createElement('button');
+    button.type='button';
+    button.setAttribute('aria-label',groups.find(g=>g[0]===f.properties.source_table)[1]);
+    button.style.cssText='background:none;border:0;padding:0;cursor:pointer';
+    button.innerHTML=window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32);
+    storyMarkers.push(new maplibregl.Marker({element:button}).setLngLat(f.geometry.coordinates).setPopup(new maplibregl.Popup({maxWidth:'340px',className:'prep-point-popup'}).setHTML(content(f.properties))).addTo(vector));
+   });
+  }
+  const collection={type:'FeatureCollection',features:storySymbols&&window.IEAT_SQ?selected.filter(f=>f.geometry.type!=='Point'):selected};
   if(vector){
    if(!vector.getSource('ieat-infrastructure')){
     vector.addSource('ieat-infrastructure',{type:'geojson',data:collection});
@@ -43,7 +57,7 @@
    groups.forEach(([key])=>vector.setLayoutProperty('infra-'+key,'visibility',enabled[key]?'visible':'none'));
   }else if(raster){
    if(leafletGroup)raster.removeLayer(leafletGroup);
-   leafletGroup=L.geoJSON({type:'FeatureCollection',features:selected.filter(f=>enabled[f.properties.source_table])},{style:f=>({color:groups.find(g=>g[0]===f.properties.source_table)[2],weight:4}),pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:groups.find(g=>g[0]===f.properties.source_table)[2],fillOpacity:1}),onEachFeature:(f,l)=>l.bindPopup(content(f.properties),{maxWidth:340,className:'prep-point-popup'})}).addTo(raster);
+   leafletGroup=L.geoJSON({type:'FeatureCollection',features:selected.filter(f=>enabled[f.properties.source_table])},{style:f=>({color:groups.find(g=>g[0]===f.properties.source_table)[2],weight:4}),pointToLayer:(f,latlng)=>storySymbols&&window.IEAT_SQ?L.marker(latlng,{icon:L.divIcon({className:'',html:window.IEAT_SQ.tile(symbolKinds[f.properties.source_table],null,32),iconSize:[32,32]})}):L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:groups.find(g=>g[0]===f.properties.source_table)[2],fillOpacity:1}),onEachFeature:(f,l)=>l.bindPopup(content(f.properties),{maxWidth:340,className:'prep-point-popup'})}).addTo(raster);
   }
  }
  function mount(){api=window.IEATPreparednessMap?.();if(!api?.ready)return false;vector=api.vector;raster=api.raster;render();return true;}
