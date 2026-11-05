@@ -1,12 +1,12 @@
 /* Unified flood dashboard typography and restrained glass cards. */
-@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600&display=swap");
 @layer floodReferenceStructure {
-html:root,html:root body,html:root body *,html:root body *::before,html:root body *::after{font-family:"Prompt",Tahoma,sans-serif!important}
+html:root,html:root body,html:root body *,html:root body *::before,html:root body *::after{font-family:"Sarabun",Tahoma,sans-serif!important}
 html body{font-size:16px!important;line-height:1.35!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard,
 html body #floodSectionPanel#floodSectionPanel,html body #approvedAreaSearch,
 html body :is(.leaflet-popup-content,.maplibregl-popup-content,#watchEvidence,#mapDetails,#mapLayers,#mapLegend){font-size:16px!important;line-height:1.35!important}
-html body :is(#estateFocusDashboard,#floodSectionPanel,#approvedAreaSearch,#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content) :is(p,span,div,label,input,select,textarea,button,li,td,th,strong,b,em,a,summary,output){font-family:"Prompt",Tahoma,sans-serif!important;font-size:16px!important;line-height:1.35!important}
+html body :is(#estateFocusDashboard,#floodSectionPanel,#approvedAreaSearch,#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content) :is(p,span,div,label,input,select,textarea,button,li,td,th,strong,b,em,a,summary,output){font-family:"Sarabun",Tahoma,sans-serif!important;font-size:16px!important;line-height:1.35!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(h1,h2,h3,h4,.rp-stations-title,.ef-dam-value,.ef-reservoir-percent,.io-mini-stats b,.io-mini-stats strong,.rp-station-content>strong,.ef-canal-content>strong),
 html body #floodSectionPanel#floodSectionPanel :is(h1,h2,h3,h4,strong),
 html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content,#approvedAreaSearch) :is(h1,h2,h3,h4){font-size:16px!important;line-height:1.35!important;font-weight:600!important}
@@ -29,8 +29,8 @@ html body :is(#preparednessPane,#floodSectionPanel,#mapDetails,.leaflet-popup-co
 html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,#approvedAreaSearch) :is(input,select,textarea){font-size:16px!important;min-height:38px!important}
 html body #approvedAreaSearch#approvedAreaSearch{width:min(340px,calc(100vw - 100px))!important}
 html body #approvedAreaSearch#approvedAreaSearch output{font-size:14px!important}
-html body #rightMapToolbar#rightMapToolbar button{font-family:"Prompt",Tahoma,sans-serif!important;font-size:16px!important}
-html body #rightMapToolbar#rightMapToolbar #approvedRotate360 span{font:600 14px/1 "Prompt",Tahoma,sans-serif!important}
+html body #rightMapToolbar#rightMapToolbar button{font-family:"Sarabun",Tahoma,sans-serif!important;font-size:16px!important}
+html body #rightMapToolbar#rightMapToolbar #approvedRotate360 span{font:600 14px/1 "Sarabun",Tahoma,sans-serif!important}
 @supports not (backdrop-filter:blur(12px)){html body :is(#watchEvidence,#mapDetails,#approvedAreaSearch),html body #floodSectionPanel .ref-chart-card{background:#ffffff!important}}
 }
 
@@ -76,11 +76,11 @@ html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboa
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #rpRankingsAfterWarning .ieat-rank-bar-row{grid-template-columns:minmax(115px,30%) minmax(0,1fr) auto!important;gap:6px!important;min-height:46px!important;padding:5px 0!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ieat-rank-bar-row .ieat-rank-copy{gap:0!important;padding:0!important;text-align:left!important;justify-content:center!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ieat-rank-bar-row .ieat-rank-copy b{text-align:left!important;font-size:16px!important;line-height:1.35!important}
-html body #ioEstatePanel#ioEstatePanel#ioEstatePanel#ioEstatePanel{position:fixed!important;left:var(--io-picker-left)!important;top:var(--io-picker-top)!important;right:auto!important;bottom:auto!important;width:var(--io-picker-width,360px)!important;max-width:calc(100vw - 24px)!important;max-height:calc(100dvh - var(--io-picker-top,12px) - 16px)!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;gap:12px!important;padding:20px!important;background:#fff!important;border:1px solid #e7ebf2!important;border-radius:20px!important;box-shadow:0 8px 30px #233c5f26,0 2px 8px #233c5f12!important;backdrop-filter:none!important;z-index:2400!important;overflow:hidden!important;font-family:Prompt,Tahoma,sans-serif!important;color:#20252b!important}
+html body #ioEstatePanel#ioEstatePanel#ioEstatePanel#ioEstatePanel{position:fixed!important;left:var(--io-picker-left)!important;top:var(--io-picker-top)!important;right:auto!important;bottom:auto!important;width:var(--io-picker-width,360px)!important;max-width:calc(100vw - 24px)!important;max-height:calc(100dvh - var(--io-picker-top,12px) - 16px)!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;gap:12px!important;padding:20px!important;background:#fff!important;border:1px solid #e7ebf2!important;border-radius:20px!important;box-shadow:0 8px 30px #233c5f26,0 2px 8px #233c5f12!important;backdrop-filter:none!important;z-index:2400!important;overflow:hidden!important;font-family:Sarabun,Tahoma,sans-serif!important;color:#20252b!important}
 html body #ioEstatePanel#ioEstatePanel#ioEstatePanel#ioEstatePanel[hidden]{display:none!important}
 html body #ioEstatePanel#ioEstatePanel#ioEstatePanel#ioEstatePanel.io-picker-inline{position:static!important;width:100%!important;max-width:100%!important;max-height:440px!important;margin:10px 0!important;grid-column:1/-1!important}
 html body #ioEstatePanel#ioEstatePanel :is(.io-picker-head,.io-picker-actions){display:flex!important;gap:10px!important;justify-content:space-between!important;align-items:center!important;flex-shrink:0!important;background:#fff!important}
-html body #ioEstatePanel#ioEstatePanel :is(h2,label,button,input,p){font-family:Prompt,Tahoma,sans-serif!important;font-size:16px!important;line-height:1.4!important}
+html body #ioEstatePanel#ioEstatePanel :is(h2,label,button,input,p){font-family:Sarabun,Tahoma,sans-serif!important;font-size:16px!important;line-height:1.4!important}
 html body #ioEstatePanel#ioEstatePanel h2{margin:0!important;font-weight:600!important}
 html body #ioEstatePanel#ioEstatePanel #ioEstatePanelSearch{width:100%!important;box-sizing:border-box!important;border:1px solid #dce3ef!important;border-radius:10px!important;padding:10px 12px!important;background:#fff!important;min-height:42px!important;flex-shrink:0!important}
 html body #ioEstatePanel#ioEstatePanel #ioEstatePickerOptions{overflow-y:auto!important;min-height:0!important;max-height:320px!important;background:#fff!important}
@@ -138,4 +138,17 @@ html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboa
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection :is(.ef-dam-card,.ef-reservoir-row){box-sizing:border-box!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection :is(#ieatDamPager,#ieatReservoirPager){padding-top:12px!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodDamsSection :is(.ef-related-dams,.ef-reservoir-panel)>details{margin-top:12px!important}
+}
+
+/* Match the supplied looped Thai heading and light body-text references. */
+@layer floodReferenceStructure {
+html:root body,html:root body *,html:root body *::before,html:root body *::after{font-family:"Sarabun",Tahoma,sans-serif!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(h1,h2,h3,h4,.rp-stations-title,#floodPageTitle,.ef-panel>h2),
+html body #floodSectionPanel#floodSectionPanel :is(h1,h2,h3,h4),
+html body :is(#mapDetails,#mapLayers,#mapLegend,#watchEvidence,#ioEstatePanel,#approvedAreaSearch) :is(h1,h2,h3,h4){font-family:"Sarabun",Tahoma,sans-serif!important;font-size:18px!important;font-weight:500!important;line-height:1.5!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(p,small,label,li,td,th,summary,input,select,button,.io-picker-label,.ef-canal-content strong,.rp-station-content strong,.ieat-rank-copy b,.ieat-rank-value),
+html body #floodSectionPanel#floodSectionPanel :is(p,small,button,label,td,th),
+html body :is(#mapDetails,#mapLayers,#mapLegend,#watchEvidence,#ioEstatePanel,#approvedAreaSearch) :is(p,small,button,label,input,select,td,th){font-family:"Sarabun",Tahoma,sans-serif!important;font-size:14px!important;font-weight:400!important;line-height:1.6!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .io-mini-stats :is(b,strong),html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .dam-flow-compact b{font-family:"Sarabun",Tahoma,sans-serif!important;font-size:18px!important;font-weight:500!important}
+html body #referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs :is(button,span){font-family:"Sarabun",Tahoma,sans-serif!important;font-size:18px!important;font-weight:500!important}
 }
