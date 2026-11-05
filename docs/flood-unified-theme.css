@@ -1,36 +1,36 @@
 /* Unified flood dashboard typography and restrained glass cards. */
-@font-face{font-family:"TH Sarabun New";src:local("TH Sarabun New"),url("https://cdn.jsdelivr.net/gh/LynxelSins/Before-the-catastrophe@9c745b8f926b958bc585dd2aba89def0d0f8532e/fonts/THSarabunNew/THSarabunNew.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap");
 @layer floodReferenceStructure {
-html:root,html:root body,html:root body *,html:root body *::before,html:root body *::after{font-family:"TH Sarabun New",Sarabun,Tahoma,sans-serif!important}
-html body{font-size:22px!important;line-height:1.35!important}
+html:root,html:root body,html:root body *,html:root body *::before,html:root body *::after{font-family:"Prompt",Tahoma,sans-serif!important}
+html body{font-size:16px!important;line-height:1.35!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard,
 html body #floodSectionPanel#floodSectionPanel,html body #approvedAreaSearch,
-html body :is(.leaflet-popup-content,.maplibregl-popup-content,#watchEvidence,#mapDetails,#mapLayers,#mapLegend){font-size:22px!important;line-height:1.35!important}
-html body :is(#estateFocusDashboard,#floodSectionPanel,#approvedAreaSearch,#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content) :is(p,span,div,label,input,select,textarea,button,li,td,th,strong,b,em,a,summary,output){font-family:"TH Sarabun New",Sarabun,Tahoma,sans-serif!important;font-size:22px!important;line-height:1.35!important}
+html body :is(.leaflet-popup-content,.maplibregl-popup-content,#watchEvidence,#mapDetails,#mapLayers,#mapLegend){font-size:16px!important;line-height:1.35!important}
+html body :is(#estateFocusDashboard,#floodSectionPanel,#approvedAreaSearch,#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content) :is(p,span,div,label,input,select,textarea,button,li,td,th,strong,b,em,a,summary,output){font-family:"Prompt",Tahoma,sans-serif!important;font-size:16px!important;line-height:1.35!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(h1,h2,h3,h4,.rp-stations-title,.ef-dam-value,.ef-reservoir-percent,.io-mini-stats b,.io-mini-stats strong,.rp-station-content>strong,.ef-canal-content>strong),
 html body #floodSectionPanel#floodSectionPanel :is(h1,h2,h3,h4,strong),
-html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content,#approvedAreaSearch) :is(h1,h2,h3,h4){font-size:22px!important;line-height:1.35!important;font-weight:700!important}
+html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,.leaflet-popup-content,.maplibregl-popup-content,#approvedAreaSearch) :is(h1,h2,h3,h4){font-size:16px!important;line-height:1.35!important;font-weight:600!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(small,.rp-row-time,.rp-row-trend,.io-date,.ex-kpi-note,.ex-note,.today-source,.rp-station-content small),
 html body #floodSectionPanel#floodSectionPanel :is(small,.section-note,.section-subtitle,.ref-chart-caption,.ref-chart-pager span),
 html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,#approvedAreaSearch,.leaflet-popup-content,.maplibregl-popup-content) :is(small,footer,.section-note,.map-details-note),
-html body :is(.fd-pin-name,.estate-name,.map-flow-reading,.leaflet-tooltip,.maplibregl-popup-content small){font-size:18px!important;line-height:1.3!important;font-weight:400!important}
+html body :is(.fd-pin-name,.estate-name,.map-flow-reading,.leaflet-tooltip,.maplibregl-popup-content small){font-size:14px!important;line-height:1.3!important;font-weight:400!important}
 html body #referenceViewTabs#referenceViewTabs#referenceViewTabs button,
 html body #referenceViewTabs#referenceViewTabs#referenceViewTabs button span,
-html body #floodModeBar button{font-size:22px!important;line-height:1.25!important;font-weight:600!important}
+html body #floodModeBar button{font-size:16px!important;line-height:1.25!important;font-weight:600!important}
 html body #referenceViewTabs#referenceViewTabs#referenceViewTabs button{min-height:44px!important;padding:7px 10px!important}
-html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .io-mini-stats :is(b,strong){font-size:22px!important;font-weight:700!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .io-mini-stats :is(b,strong){font-size:16px!important;font-weight:600!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column :is(.ef-panel,.flood-overview,.io-card,.rp-station,.rp-station-card,#floodStationsSection,#floodDamsSection,.ef-canal-panel,#floodWaterDiagram,#rpRankingsAfterWarning>section,.ex-card),
 html body #floodSectionPanel#floodSectionPanel :is(.ref-chart-card,.section-settings-card,.section-kpis>div,.section-alert-card),
 html body :is(#watchEvidence,#mapDetails,#approvedAreaSearch),
 html body #mapLayers .layer-body,html body #mapLegend .legend-body{background:rgba(255,255,255,.90)!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:20px!important;box-shadow:0 4px 10px #233c5f0a,0 12px 28px #233c5f12,inset 0 1px 0 #fff!important;backdrop-filter:blur(12px) saturate(1.08)!important;-webkit-backdrop-filter:blur(12px) saturate(1.08)!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(.io-mini-stats>[role=button],.ef-dam-card,.ef-reservoir-row,.ef-canal-card),
 html body #watchEvidence :is(.ieat-watch-estate,.ieat-watch-station){background:rgba(255,255,255,.88)!important;border:1px solid #ffffffd9!important;border-radius:14px!important;box-shadow:0 3px 10px #233c5f0a!important}
-html body :is(#preparednessPane,#floodSectionPanel,#mapDetails,.leaflet-popup-content,.maplibregl-popup-content) :is(table,thead,th,td){background:rgba(255,255,255,.98)!important;font-size:22px!important}
-html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,#approvedAreaSearch) :is(input,select,textarea){font-size:22px!important;min-height:38px!important}
+html body :is(#preparednessPane,#floodSectionPanel,#mapDetails,.leaflet-popup-content,.maplibregl-popup-content) :is(table,thead,th,td){background:rgba(255,255,255,.98)!important;font-size:16px!important}
+html body :is(#watchEvidence,#mapDetails,#mapLayers,#mapLegend,#approvedAreaSearch) :is(input,select,textarea){font-size:16px!important;min-height:38px!important}
 html body #approvedAreaSearch#approvedAreaSearch{width:min(340px,calc(100vw - 100px))!important}
-html body #approvedAreaSearch#approvedAreaSearch output{font-size:18px!important}
-html body #rightMapToolbar#rightMapToolbar button{font-family:"TH Sarabun New",Sarabun,sans-serif!important;font-size:22px!important}
-html body #rightMapToolbar#rightMapToolbar #approvedRotate360 span{font:700 18px/1 "TH Sarabun New",Sarabun,sans-serif!important}
+html body #approvedAreaSearch#approvedAreaSearch output{font-size:14px!important}
+html body #rightMapToolbar#rightMapToolbar button{font-family:"Prompt",Tahoma,sans-serif!important;font-size:16px!important}
+html body #rightMapToolbar#rightMapToolbar #approvedRotate360 span{font:600 14px/1 "Prompt",Tahoma,sans-serif!important}
 @supports not (backdrop-filter:blur(12px)){html body :is(#watchEvidence,#mapDetails,#approvedAreaSearch),html body #floodSectionPanel .ref-chart-card{background:#ffffff!important}}
 }
 
@@ -38,8 +38,8 @@ html body #rightMapToolbar#rightMapToolbar #approvedRotate360 span{font:700 18px
 @layer floodReferenceStructure {
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column{display:flex!important;flex-direction:column!important;gap:12px!important;padding-top:94px!important;overflow-y:auto!important;overflow-x:hidden!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #approvedDashboardHeading{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;order:-25!important;flex-shrink:0!important;width:100%!important}
-html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodPageTitle{font-size:22px!important;line-height:1.25!important;margin:0!important;white-space:nowrap!important;color:#20252b!important}
-html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #expoBoothSubtitle{font-size:18px!important;line-height:1.25!important;margin:0!important;white-space:nowrap!important;color:#49515b!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #floodPageTitle{font-size:16px!important;line-height:1.25!important;margin:0!important;white-space:nowrap!important;color:#20252b!important}
+html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #expoBoothSubtitle{font-size:14px!important;line-height:1.25!important;margin:0!important;white-space:nowrap!important;color:#49515b!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatOverviewFilter{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:6px!important;padding:0!important;margin:0 0 10px!important;min-height:0!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatOverviewFilter .io-area{display:contents!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard #ieatOverviewFilter :is(.io-area-title,.io-date){display:none!important}
@@ -49,7 +49,7 @@ html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboa
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column :is(p,span,label,td,th,small,summary){color:#20252b!important;-webkit-text-fill-color:#20252b!important}
 html body #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard .ef-data-column :is(small,.ex-kpi-note,.rp-row-time,.rp-row-trend){color:#49515b!important;-webkit-text-fill-color:#49515b!important}
 html body #referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:2px!important;min-height:48px!important}
-html body #referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs button{white-space:nowrap!important;font-size:22px!important;padding:7px 3px!important;min-height:40px!important}
+html body #referenceViewTabs#referenceViewTabs#referenceViewTabs#referenceViewTabs button{white-space:nowrap!important;font-size:16px!important;padding:7px 3px!important;min-height:40px!important}
 html body #ieatDashboardCamera#ieatDashboardCamera,html body #efMapFullscreen#efMapFullscreen,html body #efMapExitFullscreen#efMapExitFullscreen{display:none!important}
 html body[data-flood-section=overview] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#rpRankingsAfterWarning,.ef-warning){display:none!important}
 html body[data-water-category=stations] #warning #estateFocusDashboard#estateFocusDashboard#estateFocusDashboard#estateFocusDashboard :is(#floodDamsSection,.ef-canal-panel,#floodWaterDiagram,#efDamFlowPanel),
