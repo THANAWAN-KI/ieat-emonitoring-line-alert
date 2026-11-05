@@ -5,13 +5,6 @@
 @layer floodDashboard, floodReports;
 @layer floodDashboard {
 
-/* The dams tab only shows its dam and reservoir content. */
-body[data-water-category="dams"] #estateFocusDashboard #rpRankingsAfterWarning,
-body[data-water-category="dams"] #estateFocusDashboard #approvedDashboardHeading,
-body[data-water-category="dams"] #estateFocusDashboard #floodPageTitle,
-body[data-water-category="dams"] #estateFocusDashboard #expoBoothSubtitle {
-  display: none !important;
-}
 :root{--ref-left:96px;--ref-rail:72px;--ref-panel:clamp(360px,40vw,620px);--ref-top:20px;--text:#303841;--muted:#59616b;--blue:#774aa4;--water:#2e9df7;--purple:#7437a8;--normal:#598c14;--watch:#ff6908;--danger:#f00a36}
 *{box-sizing:border-box}
 html,body{margin:0!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#fff!important}
@@ -103,7 +96,7 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #efDamFlowPanel .dam-flow-compact small:last-of-type{order:3!important}
 #efDamFlowPanel .dam-flow-compact>div:first-child b{color:#ef4444!important}
 #efDamFlowPanel .dam-flow-compact>div:last-child b{color:#2885c7!important}
-.ef-canal-panel{order:0!important}
+.ef-canal-panel{order:4!important}
 #estateFocusDashboard .ef-canal-card{display:block!important;width:100%!important;padding:0!important}
 #estateFocusDashboard .ef-canal-card>b{display:block!important;color:#388ed1!important;font-size:16px!important;margin:0 0 10px!important}
 #estateFocusDashboard .ef-canal-body{display:grid!important;grid-template-columns:110px minmax(0,1fr)!important;align-items:center!important;gap:12px!important}
@@ -124,7 +117,7 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #estateFocusDashboard .ieat-rank-bar-track{display:block!important;height:26px!important;width:100%!important;background:#eaf4ff!important;border-radius:0 18px 18px 0!important;overflow:hidden!important}
 #estateFocusDashboard .ieat-rank-bar-fill{display:block!important;height:100%!important;border-radius:0 18px 18px 0!important}
 #estateFocusDashboard .ieat-rank-value{font-size:16px!important;font-weight:600!important;color:#388ed1!important}
-#floodWaterDiagram{order:0!important}
+#floodWaterDiagram{order:5!important}
 #floodWaterDiagram :is(h2,h3){color:#303841!important;font-weight:400!important;}
 #rpMainRiver{width:100%!important;padding:12px!important;background:#f0f1f3!important;border:1px solid #e2e5e9!important;border-radius:12px!important;color:#303841!important;box-shadow:inset 0 1px 0 #fff,0 3px 7px #26364a18!important}
 #rpMainGraph{width:100%!important;max-width:none!important;max-height:70vh!important;overflow:auto!important;padding:10px 0!important}
@@ -146,12 +139,8 @@ main.container,#warning,#estateFocusDashboard,#estateFocusDashboard .ef-workspac
 #preparednessPane .ex-table{width:100%!important;border-collapse:collapse!important}
 #preparednessPane :is(td,th){padding:8px!important;vertical-align:top!important;text-align:left!important;border-bottom:1px solid #eee!important}
 body[data-flood-section=overview] #floodInformationPane>:not(#approvedDashboardHeading):not(.flood-overview):not(#floodStationsSection):not(#riverSidePanel):not(#rpRankingsAfterWarning):not(#floodDamsSection):not(#efDamFlowPanel):not(.ef-canal-panel):not(#floodWaterDiagram):not(.ef-warning){display:none!important}
-body[data-flood-section=overview][data-water-category=stations] #floodInformationPane>:is(#floodDamsSection,#efDamFlowPanel,.ef-canal-panel,#floodWaterDiagram,.ef-warning){display:none!important}
 body[data-flood-section=overview] #riverSidePanel{padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
 body[data-flood-section=overview] #riverSidePanel>:not(#floodStationsSection){display:none!important}
-body[data-flood-section=overview][data-water-category=dams] #floodInformationPane>:not(#floodDamsSection):not(#efDamFlowPanel){display:none!important}
-body[data-flood-section=overview][data-water-category=canals] #floodInformationPane>:not(.ef-canal-panel){display:none!important}
-body[data-flood-section=overview][data-water-category=diagram] #floodInformationPane>:not(#floodWaterDiagram):not(.ef-warning){display:none!important}
 body[data-flood-section=preparedness] #floodInformationPane>:not(#preparednessPane){display:none!important}
 body[data-flood-section=preparedness] #preparednessPane{display:block!important}
 body:not([data-flood-section=overview]) #referenceViewTabs{display:none!important}
