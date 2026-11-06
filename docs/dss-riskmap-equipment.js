@@ -114,11 +114,6 @@
     let note=doc.getElementById('dssExportScopeNote');
     if(!note){note=doc.createElement('p');note.id='dssExportScopeNote';note.style.cssText='margin:8px 0;font-size:13px;color:#333';nearby.before(note);}
     if(note.textContent!==scope)note.textContent=scope;
-    const row=[...nearby.querySelectorAll('tr')].find(tr=>/CCTV/i.test(tr.querySelector('th')?.textContent||''));
-    let cctv=doc.getElementById('dssExportCctvNote');
-    if(!cctv){cctv=doc.createElement('p');cctv.id='dssExportCctvNote';cctv.style.cssText='margin:8px 0;font-size:13px;color:#333';nearby.after(cctv);}
-    const summary=row?'4. กล้อง CCTV สังเกตการณ์ · ดูตำแหน่งและระยะในตารางข้อมูลสนับสนุน':'4. กล้อง CCTV สังเกตการณ์ · ยังไม่มีรายการกล้องแสดงในรายงาน โปรดตรวจชั้นข้อมูลและสถานะการโหลด';
-    if(cctv.textContent!==summary)cctv.textContent=summary;
   }
   let observer;
   function bindReport(){
