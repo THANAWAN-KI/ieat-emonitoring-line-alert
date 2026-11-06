@@ -2349,69 +2349,37 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const distance=value=>Number(value)<1?Math.round(Number(value)*1000)+' เมตร':Number(value).toFixed(2)+' กม.';
   window.ieatBuildRiskMapMessage=(context,kind)=>{
     if(!context?.summary||!['drill','actual'].includes(kind))return '';
-    const s=context.summary,w=s.weather||{},km=Number(s.km),points=s.support||[];
+    const s=context.summary,w=s.weather||{},km=Number(s.km);
+    const points=(s.support||[]).filter(p=>Number.isFinite(Number(p.distance))&&Number(p.distance)<=km);
+    const failed=type=>/โหลดข้อมูลไม่สำเร็จ|กำลังค้นหา/.test(String(s.supportStatus?.[type]||''));
+    const within=type=>points.filter(p=>p.type===type).sort((a,b)=>Number(a.distance)-Number(b.distance));
     const intro=kind==='drill'?'(ซ้อมแผน สน.)':'แจ้ง Risk map';
     const lines=[
       intro,
-      'ศสป.กนอ. ขอส่งข้อมูลแผนที่ความเสี่ยงของ '+missing(s.company)+(kind==='drill'?' ในรัศมี '+km+' กิโลเมตร':'')+' ประกอบด้วยข้อมูลดังนี้',
-      '- ข้อมูลสถานประกอบการ/พื้นที่เกิดเหตุ',
-      '- แผนที่และสภาพอากาศบริเวณจุดเกิดเหตุ และพื้นที่เสี่ยงอาจจะได้รับผลกระทบ',
-      '- ข้อมูลสนับสนุนการระงับเหตุบริเวณพื้นที่ใกล้เคียง',
-      '- กล้อง CCTV สังเกตการณ์',
-      '',
-      '1. ข้อมูลสถานประกอบการ/พื้นที่เกิดเหตุ',
-      'สถานประกอบการ: '+missing(s.company),
+      'ศสป.กนอ. ขอส่งสรุปข้อมูลแผนที่ความเสี่ยงของ '+missing(s.company),
       'นิคมฯ / ท่าเรือ: '+missing(s.estate),
-      'เลขทะเบียน: '+missing(s.registration),
-      'ที่อยู่: '+missing(s.address),
-      'ประเภทเหตุที่เลือก: '+missing(s.incidentType),
-      'พิกัดจุดเกิดเหตุ: '+Number(s.point.lat).toFixed(6)+', '+Number(s.point.lng).toFixed(6),
-      'รัศมีที่ใช้ค้นหา: '+km+' กิโลเมตร',
-      '',
-      '2. แผนที่ สภาพอากาศ และพื้นที่เฝ้าระวัง'
+      'ประเภทเหตุ: '+missing(s.incidentType)+' · รัศมีค้นหา '+km+' กิโลเมตร',
+      ''
     ];
     if(w.time){
-      lines.push('สภาพอากาศ: '+missing(w.description),
-        'อุณหภูมิ '+missing(w.temperature)+' °C · ความชื้น '+missing(w.humidity)+' %',
-        'ลมพัดจาก '+missing(w.windDirection)+' · ความเร็ว '+missing(w.windSpeed)+' กม./ชม.',
-        w.time,'แหล่งข้อมูลอากาศ: Open-Meteo (ข้อมูลจากแบบจำลอง)');
-    }else lines.push('สภาพอากาศ: โหลดข้อมูลล่าสุดไม่ได้ โปรดตรวจสอบก่อนใช้ประกอบการตัดสินใจ');
-    const community=points.filter(p=>p.type==='community');
-    lines.push(String(s.supportStatus?.community||'').includes('โหลดข้อมูลไม่สำเร็จ')?'ข้อมูลชุมชน: โหลดข้อมูลไม่สำเร็จ':'พื้นที่ชุมชนที่มีข้อมูลในรัศมี: '+community.length+' รายการ');
-    for(const p of community)lines.push('- '+missing(p.name)+' · '+distance(p.distance));
-    const risks=[['ความเสี่ยง_12_ประเภท','ความเสี่ยงสูง 12 ประเภท'],['อัคคีภัยสูง','ความเสี่ยงอัคคีภัยสูง'],['PSM','PSM']];
-    const flags=risks.filter(([field])=>String(context.attributes?.[field]||'').trim()==='เข้าข่าย').map(([,label])=>label);
-    lines.push('สถานะความเสี่ยงจากทะเบียน: '+risks.map(([field,label])=>label+' = '+(context.attributes?.[field]||'ไม่ระบุ')).join(' / '));
-    for(const group of context.rows||[]){
-      if(!/โรงงานใกล้เคียง|จุดตรวจวัด|บำบัด|คุณภาพอากาศ|ขยะ|โรงเรียน|เฝ้าระวัง/.test(group.title||''))continue;
-      if(group.failed){lines.push(group.title+': โหลดข้อมูลไม่สำเร็จ');continue;}
-      lines.push(group.title+': '+(group.items?.length||0)+' รายการ'+(group.truncated?' (ต้นทางจำกัดผลค้นหา รายการอาจไม่ครบ)':''));
-      for(const item of group.items||[])lines.push('- '+item);
+      lines.push('อากาศ: '+missing(w.description)+' · ลมพัดจาก '+missing(w.windDirection)+' '+missing(w.windSpeed)+' กม./ชม.',w.time);
+    }else lines.push('อากาศ: ยังไม่มีข้อมูลล่าสุด');
+    lines.push('', 'จุดสนับสนุนใกล้ที่สุดในรัศมี');
+    for(const [type,label] of [['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['police','ตำรวจ']]){
+      const point=within(type)[0];
+      const phone=point?.phone&&!/ไม่มีข้อมูล|ไม่พบข้อมูล|^[-—]$/.test(String(point.phone))?' · โทร. '+point.phone:'';
+      lines.push('- '+label+': '+(failed(type)?'โหลดข้อมูลไม่ได้':point?missing(point.name)+' · '+distance(point.distance)+phone:'ไม่พบข้อมูลในรัศมี'));
     }
-    lines.push('ขอบเขต '+km+' กม. เป็นระยะค้นหาและเฝ้าระวัง ไม่ใช่ขอบเขตผลกระทบที่ยืนยันแล้ว',
-      '', '3. ข้อมูลสนับสนุนการระงับเหตุบริเวณพื้นที่ใกล้เคียง');
-    for(const [type,label] of [['hospital','โรงพยาบาล'],['fire','ดับเพลิง'],['police','ตำรวจ'],['hydrant','หัวจ่ายน้ำ']]){
-      const all=points.filter(p=>p.type===type).sort((a,b)=>a.distance-b.distance);
-      const failed=String(s.supportStatus?.[type]||'').includes('โหลดข้อมูลไม่สำเร็จ');
-      lines.push(label+': '+(failed?'โหลดข้อมูลไม่สำเร็จ':all.length+' จุดในรัศมี '+km+' กม.'));
-      for(const p of all)lines.push('- '+missing(p.name)+' · '+distance(p.distance)+(p.phone?' · โทร. '+p.phone:''));
-    }
-    if(/สารเคมี/.test(s.incidentType))lines.push('สารที่ได้รับแจ้ง: '+(s.chemical||'ยังไม่ทราบชนิดสาร')+(s.chemicalCAS?' · CAS '+s.chemicalCAS:'')+(s.chemicalUN?' · UN '+s.chemicalUN:''));
-    lines.push('', '4. กล้อง CCTV สังเกตการณ์');
-    const cameras=points.filter(p=>p.type==='cctv').sort((a,b)=>a.distance-b.distance);
-    const cameraFailed=String(s.supportStatus?.cctv||'').includes('โหลดข้อมูลไม่สำเร็จ');
-    lines.push(cameraFailed?'โหลดข้อมูลกล้อง CCTV ไม่สำเร็จ':'พบข้อมูล CCTV ในรัศมี '+km+' กม. '+cameras.length+' จุด');
-    for(const p of cameras)lines.push('- '+missing(p.name)+' · '+distance(p.distance)+(p.phone?' · โทร. '+p.phone:''));
-    if(s.supportTotals?.cctv&&parseInt(String(s.supportTotals.cctv).replace(/,/g,''),10)>cameras.length)lines.push('ต้นทางรายงานทั้งหมด '+s.supportTotals.cctv+' · รายการที่มีพิกัดและโหลดได้ '+cameras.length+' จุด');
-    lines.push('', 'ข้อพิจารณาเบื้องต้น');
-    const nearest=points.filter(p=>p.type==='fire').sort((a,b)=>a.distance-b.distance)[0];
-    if(nearest)lines.push('จุดประสานดับเพลิงใกล้ที่สุดในรัศมี: '+nearest.name+' · '+distance(nearest.distance));
-    if(/สารเคมี/.test(s.incidentType))lines.push('ควรยืนยันชนิดสาร ปริมาณที่รั่ว และทิศทางลมกับเจ้าหน้าที่ก่อนประเมินพื้นที่ผลกระทบ');
-    else if(/ไฟ|เพลิง/.test(s.incidentType))lines.push('ใช้ตำแหน่งดับเพลิง หัวจ่ายน้ำ ชุมชน และทิศทางลมประกอบการประสานงาน โดยยืนยันสถานการณ์กับเจ้าหน้าที่ในพื้นที่');
-    if(cameraFailed)lines.push('CCTV: ต้องตรวจสอบความพร้อมของข้อมูลเพิ่มเติม');
-    else lines.push('รายชื่อ CCTV เป็นตำแหน่งในฐานข้อมูล ยังไม่ใช่การยืนยันว่ากล้องออนไลน์หรือมีภาพเหตุ');
-    lines.push('ข้อมูลที่ไม่พบหรือโหลดไม่ได้ ไม่ได้หมายความว่าไม่มีทรัพยากรในพื้นที่',
-      'เวลาจัดทำข้อมูล: '+missing(s.generatedAt),'แนบภาพรายงาน Risk Map ตามจุดเกิดเหตุและรัศมีข้างต้น');
+    const count=(type,label,unit)=>label+': '+(failed(type)?'โหลดข้อมูลไม่ได้':within(type).length+' '+unit);
+    lines.push(count('hydrant','หัวจ่ายน้ำ','จุด')+' · '+count('community','ชุมชน','แห่ง')+' · '+count('cctv','CCTV','จุด'));
+    const gaps=[];
+    if(!w.time)gaps.push('สภาพอากาศ');
+    for(const [type,label] of [['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['police','ตำรวจ'],['hydrant','หัวจ่ายน้ำ'],['community','ชุมชน'],['cctv','CCTV']])if(failed(type))gaps.push(label);
+    if(gaps.length)lines.push('ข้อมูลที่ยังขาด: '+gaps.join(', '));
+    if(/สารเคมี/.test(s.incidentType)&&(!s.chemical||s.chemical==='ยังไม่ทราบชนิดสาร'))lines.push('ข้อมูลที่ยังไม่ยืนยัน: ชนิดสารเคมีที่เกี่ยวข้องกับเหตุ');
+    else if(/สารเคมี/.test(s.incidentType))lines.push('สารที่ได้รับแจ้ง: '+s.chemical+(s.chemicalCAS?' · CAS '+s.chemicalCAS:''));
+    lines.push('CCTV: ตำแหน่งในฐานข้อมูล ยังไม่ยืนยันสถานะออนไลน์',
+      '', 'รายละเอียดและตำแหน่งจุดสนับสนุนตามภาพรายงานแนบ');
     return lines.join('\n');
   };
   function update(){
