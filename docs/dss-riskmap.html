@@ -2410,6 +2410,9 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 #riskmapReportPanel{width:100%;min-width:0}
 #riskmapReportPanel .report-workspace-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
 #riskmapReportPanel .report-workspace-controls{min-width:0}
+#riskmapReportPanel .report-workspace-map-column{min-width:0;display:flex;flex-direction:column;gap:16px}
+#riskmapReportPanel .report-workspace-map-column>#coverageMap{width:100%!important;box-sizing:border-box}
+#riskmapReportPanel .report-workspace-map-column>#riskMapLinePanel{width:100%;min-width:0;box-sizing:border-box;margin:0;padding:16px;background:#fff;border:1px solid #e2e6eb;border-radius:0}
 #riskmapReportPanel .report-workspace-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:20px}
 #riskmapReportPanel .report-workspace-bottom>section{min-width:0;margin:0!important;padding:16px;box-sizing:border-box;background:#fff;border:1px solid #e2e6eb;border-radius:10px}
 #riskmapReportPanel #riskMapLineText{display:block;width:100%;min-height:230px;box-sizing:border-box}
@@ -2455,8 +2458,9 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   controls.append(form,report);
   const bottom=document.createElement('div');bottom.className='report-workspace-bottom';
   if(equipment)auxiliary.append(equipment);bottom.append(auxiliary);
-  const line=get('riskMapLinePanel');if(line)bottom.append(line);
-  top.append(controls);panel.append(top,bottom);overviewPanel.after(panel);
+  const mapColumn=document.createElement('div');mapColumn.className='report-workspace-map-column';
+  const line=get('riskMapLinePanel');if(line)mapColumn.append(line);
+  top.append(controls,mapColumn);panel.append(top,bottom);overviewPanel.after(panel);
   report.style.removeProperty('display');report.hidden=false;
   links.replaceChildren();links.id='riskmapWorkspaceTabs';links.setAttribute('role','tablist');
   links.setAttribute('aria-label','เลือกส่วนการทำงาน');
@@ -2468,7 +2472,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   });
   function show(edit){
     // Move the same map and keep the same iframe alive to preserve selections and drafts.
-    if(edit)top.append(map);else home.after(map);
+    if(edit)mapColumn.prepend(map);else home.after(map);
     overviewPanel.hidden=edit;panel.hidden=!edit;
     tabs.forEach((tab,index)=>{tab.setAttribute('aria-selected',String(index===(edit?1:0)));tab.tabIndex=index===(edit?1:0)?0:-1});
     if(edit&&!frame.getAttribute('src')){
