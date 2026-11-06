@@ -398,7 +398,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261106-overlay-full-frame');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','4162f50');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -2552,7 +2552,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     tabs.forEach((tab,index)=>{tab.setAttribute('aria-selected',String(index===(edit?1:0)));tab.tabIndex=index===(edit?1:0)?0:-1});
     if(edit&&!frame.getAttribute('src')){
       const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');
-      url.searchParams.set('v','20261106-overlay-full-frame');frame.src=url.href;
+      url.searchParams.set('v','4162f50');frame.src=url.href;
     }
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   }
