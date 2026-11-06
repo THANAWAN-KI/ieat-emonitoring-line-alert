@@ -2398,28 +2398,79 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 <script src="./dss-riskmap-equipment.js?v=b2efe09"></script>
 
 
-<script id="report-after-coverage-risk-20261106">
+
+<style id="riskmap-two-workspaces-style">
+#riskmapWorkspaceTabs{display:flex;gap:8px;flex-wrap:wrap}
+#riskmapWorkspaceTabs button{font:inherit;padding:10px 18px;border:1px solid #d8e1e8;border-radius:8px;background:#fff;color:#171717;cursor:pointer}
+#riskmapWorkspaceTabs button[aria-selected="true"]{background:#0075b5;border-color:#0075b5;color:#fff}
+#riskmapWorkspaceTabs button:focus-visible{outline:3px solid #2e9df7;outline-offset:3px}
+#riskmapOverviewPanel[hidden],#riskmapReportPanel[hidden]{display:none!important}
+#riskmapReportPanel{width:100%;min-width:0}
+#riskmapReportPanel .report-workspace-top{display:grid;grid-template-columns:minmax(320px,2fr) minmax(0,3fr);gap:16px;align-items:start}
+#riskmapReportPanel .report-workspace-controls{min-width:0}
+#riskmapReportPanel #coverageMap{position:relative!important;top:auto!important;min-width:0;width:auto!important}
+#riskmapReportPanel #emergencyReportPage{position:static!important;opacity:1!important;pointer-events:auto!important;width:100%!important;min-width:0!important;margin:16px 0 0!important}
+#riskmapReportPanel #coverageIncidentForm,#riskmapReportPanel #dssEquipmentNearby{margin:0 0 16px}
+#riskmapReportPanel .dashboard-report-editor{height:auto!important;overflow:visible!important}
+#riskmapReportPanel #emergencyReportFrame{width:100%!important;min-height:800px!important;border:0}
+@media(max-width:900px){#riskmapReportPanel .report-workspace-top{grid-template-columns:minmax(0,1fr)}}
+</style>
+<script id="riskmap-two-workspaces">
 (() => {
-  const risk = document.getElementById('coverageRisk');
-  const report = document.getElementById('emergencyReportPage');
-  const frame = document.getElementById('emergencyReportFrame');
-  const columns = risk?.closest('.coverage-columns');
-  if (!columns || !report || !frame) return;
-  // Keep the report immediately below the factory risk summary in the data column.
-  columns.after(report);
-  report.hidden = false;
-  report.style.setProperty('display', 'block', 'important');
-  report.style.setProperty('width', '100%', 'important');
-  report.style.setProperty('min-width', '0', 'important');
-  report.style.setProperty('margin', '16px 0 0', 'important');
-  if (!frame.getAttribute('src')) {
-    const url = new URL('./dss.html', location.href);
-    url.searchParams.set('embedded', 'dashboard');
-    url.searchParams.set('v', '20261106-report-order');
-    frame.src = url.href;
+  const get=id=>document.getElementById(id);
+  const overview=document.querySelector('.coverage-map-layout');
+  const report=get('emergencyReportPage'),frame=get('emergencyReportFrame');
+  const map=get('coverageMap'),form=get('coverageIncidentForm'),equipment=get('dssEquipmentNearby');
+  const links=document.querySelector('.dss-section-bar__links');
+  if(!overview||!report||!frame||!map||!form||!links)return;
+  const home=document.createComment('dashboard map position');map.before(home);
+  const overviewPanel=document.createElement('section');
+  overviewPanel.id='riskmapOverviewPanel';overviewPanel.setAttribute('role','tabpanel');
+  overviewPanel.setAttribute('aria-labelledby','riskmapOverviewTab');
+  overview.before(overviewPanel);overviewPanel.append(overview);
+  const panel=document.createElement('section');panel.id='riskmapReportPanel';
+  panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','riskmapReportTab');
+  const top=document.createElement('div');top.className='report-workspace-top';
+  const controls=document.createElement('div');controls.className='report-workspace-controls';
+  const heading=document.createElement('h1');heading.textContent='จัดทำรายงานเหตุฉุกเฉิน';
+  const hint=document.createElement('p');hint.textContent='ค้นหาโรงงาน เลือกประเภทเหตุและรัศมี แล้วตรวจรายงาน ดาวน์โหลดภาพ และคัดลอกข้อความสำหรับ LINE';
+  controls.append(form);if(equipment)controls.append(equipment);
+  top.append(controls);panel.append(heading,hint,top,report);overviewPanel.after(panel);
+  report.style.removeProperty('display');report.hidden=false;
+  links.replaceChildren();links.id='riskmapWorkspaceTabs';links.setAttribute('role','tablist');
+  links.setAttribute('aria-label','เลือกส่วนการทำงาน');
+  const tabs=['ภาพรวม Dashboard','จัดทำรายงาน'].map((label,index)=>{
+    const button=document.createElement('button');button.type='button';button.textContent=label;
+    button.id=index?'riskmapReportTab':'riskmapOverviewTab';button.setAttribute('role','tab');
+    button.setAttribute('aria-controls',index?panel.id:overviewPanel.id);
+    button.onclick=()=>show(index===1);links.append(button);return button;
+  });
+  function show(edit){
+    // Move the same map and keep the same iframe alive to preserve selections and drafts.
+    if(edit)top.append(map);else home.after(map);
+    overviewPanel.hidden=edit;panel.hidden=!edit;
+    tabs.forEach((tab,index)=>{tab.setAttribute('aria-selected',String(index===(edit?1:0)));tab.tabIndex=index===(edit?1:0)?0:-1});
+    if(edit&&!frame.getAttribute('src')){
+      const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');
+      url.searchParams.set('v','20261106-workspaces');frame.src=url.href;
+    }
+    requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   }
+  links.addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+    event.preventDefault();const edit=event.key==='End'||(event.key!=='Home'&&tabs[0].getAttribute('aria-selected')==='true');
+    show(edit);tabs[edit?1:0].focus();
+  });
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('a[href="#emergencyReportPage"]');
+    if(link){event.preventDefault();show(true);report.scrollIntoView({block:'start',behavior:'smooth'})}
+  });
+  get('coverageOpenReport')?.addEventListener('click',()=>show(true));
+  window.ieatShowRiskmapReport=()=>show(true);
+  show(false);
 })();
 </script>
+
 
 </body></html>
 
