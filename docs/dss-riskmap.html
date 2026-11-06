@@ -213,6 +213,14 @@ html body header#ieatPortalHeader.standalone-dss-header {
 #coverageReportTitle { font-size:clamp(20px,3vw,28px); font-weight:600; }
 #coverageOpenReport { grid-column:1/-1; }
 </style>
+<style id="risk-map-line-style">
+#riskMapLinePanel { display:grid; gap:8px; margin:12px; padding:14px; border:1px solid #d8cde3; background:#faf7fc; }
+#riskMapLinePanel h3,#riskMapLinePanel p { margin:0; }
+#riskMapLinePanel :is(select,textarea,button) { font:inherit; border:1px solid #b6a6c6; border-radius:0; padding:8px; }
+#riskMapLinePanel textarea { width:100%; box-sizing:border-box; resize:vertical; line-height:1.55; }
+#riskMapLineCopy { justify-self:start; background:#68418f; color:#fff; cursor:pointer; }
+#riskMapLineCopy:disabled { opacity:.55; cursor:default; }
+</style>
 </head>
 <body>
 <header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</strong></span></div><div class="portal-top"><div class="header-nav"></div></div></header>
@@ -319,7 +327,15 @@ html body header#ieatPortalHeader.standalone-dss-header {
 
 
 </div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
-<section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจข้อมูลในรายงาน แล้วกดดาวน์โหลดภาพรายงาน (PNG) ได้ทั้ง 2 หน้า</p><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
+<section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจข้อมูลในรายงาน แล้วกดดาวน์โหลดภาพรายงาน (PNG) ได้ทั้ง 2 หน้า</p><section id="riskMapLinePanel" aria-labelledby="riskMapLineTitle">
+  <h3 id="riskMapLineTitle">ข้อความสำหรับส่งทาง LINE</h3>
+  <label for="riskMapCase">กรณีจัดทำรายงาน</label>
+  <select id="riskMapCase" required><option value="">เลือกกรณี</option><option value="drill">ซ้อมแผน (สน.)</option><option value="actual">เหตุจริง</option></select>
+  <label for="riskMapLineText">ข้อความแจ้ง Risk Map</label>
+  <textarea id="riskMapLineText" rows="9" readonly></textarea>
+  <button id="riskMapLineCopy" type="button" disabled>คัดลอกข้อความสำหรับ LINE</button>
+  <p id="riskMapLineStatus" role="status">เลือกกรณีและระบุสถานประกอบการในรายงาน แล้วแนบภาพ Risk Map ที่ดาวน์โหลด</p>
+</section><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
 <section id="otherPage" hidden><iframe id="otherFrame" allow="fullscreen" allowfullscreen class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
 <footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
@@ -1115,6 +1131,9 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  const download=document.createElement('button');download.type='button';download.id='dashboardDownloadImage';download.className='dashboard-download-image';download.title='ดาวน์โหลดรายงาน PNG 2 หน้า';
  download.textContent='ดาวน์โหลดภาพรายงาน (PNG)';
  download.addEventListener('click',async()=>{
+ const caseControl=document.getElementById('riskMapCase');
+ if(!caseControl.reportValidity()){caseControl.focus();return;}
+ window.ieatUpdateRiskMapCase?.();
  window.ieatOpenDashboardPanel?.('report');
  const frame=document.getElementById('emergencyReportFrame');let doc,png;
  let feedback=document.getElementById('dashboardExportFeedback');if(!feedback){feedback=document.createElement('div');feedback.id='dashboardExportFeedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');download.closest('.report-download-toolbar').after(feedback)}
@@ -2256,5 +2275,77 @@ html body header#ieatPortalHeader#ieatPortalHeader.standalone-dss-header #hub-al
 }
 html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert-count { font-size:10px!important; }
 </style>
+<script id="risk-map-line-message">
+(() => {
+  const get=id=>document.getElementById(id);
+  const frame=get('emergencyReportFrame'),mode=get('riskMapCase'),output=get('riskMapLineText');
+  const copy=get('riskMapLineCopy'),status=get('riskMapLineStatus');
+  const labels={drill:'(ซ้อมแผน สน.)',actual:'แจ้ง Risk map'};
+  const sections=[
+    '- ข้อมูลสถานประกอบการ/พื้นที่เกิดเหตุ',
+    '- แผนที่และสภาพอากาศบริเวณจุดเกิดเหตุ และพื้นที่เสี่ยงที่อาจได้รับผลกระทบ',
+    '- ข้อมูลสนับสนุนการระงับเหตุบริเวณพื้นที่ใกล้เคียง',
+    '- กล้อง CCTV สังเกตการณ์',
+    '',
+    'แนบรูป Risk map'
+  ];
+  let observer;
+  const boundDocuments=new WeakSet();
+  function update(){
+    const doc=frame.contentDocument;
+    const company=doc?.querySelector('#report [data-out="company"]')?.textContent.trim()||'';
+    const identified=company&&!['—','-','บริษัท / โรงงานที่เกิดเหตุ','กรุงเทพมหานคร (พื้นที่อ้างอิงเริ่มต้น)'].includes(company);
+    const radii=['bufferKm1','bufferKm2','bufferKm'].flatMap((id,index)=>{
+      const n=Number(doc?.getElementById(id)?.value);
+      return doc?.getElementById('bufferEnabled'+index)?.checked&&n>=.1&&n<=50?[n]:[];
+    });
+    const label=labels[mode.value];
+    const subject=identified?company:'……';
+    const range=mode.value==='drill'?' ในรัศมี '+(radii.join(' / ')||'……')+' กิโลเมตร':'';
+    const text=label?[label,'ศสป.กนอ. ขอส่งข้อมูลแผนที่ความเสี่ยงของ '+subject+range+' ประกอบด้วยข้อมูลดังนี้',...sections].join('\n'):'';
+    if(output.value!==text)output.value=text;
+    copy.disabled=!label||!identified||(mode.value==='drill'&&!radii.length);
+    for(const header of doc?.querySelectorAll('#report .report-header, #dssPageTwo .p2-header')||[]){
+      const container=header.querySelector('h1')?.parentElement||header;
+      let badge=container.querySelector('[data-risk-map-case]');
+      if(!label){badge?.remove();continue;}
+      if(!badge){
+        badge=doc.createElement('div');
+        badge.setAttribute('data-risk-map-case','');
+        badge.style.cssText='display:inline-block;margin-top:5px;padding:3px 8px;border:1px solid currentColor;font-size:13px;font-weight:700';
+        container.append(badge);
+      }
+      const wording=mode.value==='drill'?'ซ้อมแผน (สน.)':'เหตุจริง';
+      if(badge.textContent!==wording)badge.textContent=wording;
+      badge.style.color=mode.value==='drill'?'#60368b':'#a12832';
+    }
+  }
+  function bind(){
+    observer?.disconnect();
+    const doc=frame.contentDocument;
+    if(!doc?.body)return;
+    observer=new MutationObserver(update);
+    for(const node of doc.querySelectorAll('#report [data-out="company"], #dssPageTwo'))observer.observe(node,{childList:true,subtree:true,characterData:true});
+    if(!boundDocuments.has(doc)){
+      boundDocuments.add(doc);
+      doc.addEventListener('change',()=>queueMicrotask(update));
+      doc.addEventListener('input',()=>queueMicrotask(update));
+    }
+    update();
+  }
+  frame.addEventListener('load',bind);
+  window.addEventListener('message',event=>{
+    if(event.origin===location.origin&&event.source===frame.contentWindow&&['dss:incident','dss:report-ready'].includes(event.data?.type))bind();
+  });
+  mode.addEventListener('change',()=>{update();status.textContent='ตรวจข้อความ แล้วแนบภาพ Risk Map ที่ดาวน์โหลดก่อนส่งทาง LINE';});
+  copy.onclick=async()=>{
+    update();if(copy.disabled)return;
+    try{await navigator.clipboard.writeText(output.value);status.textContent='คัดลอกแล้ว · วางข้อความใน LINE แล้วแนบภาพ Risk Map';}
+    catch{output.focus();output.select();status.textContent='เลือกข้อความให้แล้ว · กด Ctrl+C หรือใช้คำสั่งคัดลอก';}
+  };
+  window.ieatUpdateRiskMapCase=update;
+  bind();
+})();
+</script>
 </body></html>
 
