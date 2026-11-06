@@ -2488,9 +2488,36 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   let line=get('riskMapLinePanel');if(line)mapColumn.append(line);
   mapColumn.append(auxiliary);
   top.append(controls,mapColumn);panel.append(top,bottom);overviewPanel.after(panel);
+  const editReportButton=document.createElement('button');
+  editReportButton.id='dashboardEditReportText';editReportButton.type='button';
+  editReportButton.textContent='แก้ไขข้อความรายงาน';editReportButton.setAttribute('aria-pressed','false');
+  function syncEditButton(){
+    const target=frame.contentDocument?.getElementById('reportTextEdit');
+    const active=target?.getAttribute('aria-pressed')==='true';
+    const label=active?'เสร็จสิ้นการแก้ไข':'แก้ไขข้อความรายงาน';
+    if(editReportButton.textContent!==label)editReportButton.textContent=label;
+    editReportButton.setAttribute('aria-pressed',String(active));
+  }
+  editReportButton.onclick=()=>{
+    const target=frame.contentDocument?.getElementById('reportTextEdit');
+    if(!target){get('coverageIncidentStatus').textContent='รายงานยังโหลดไม่เสร็จ กรุณารอสักครู่';return;}
+    target.click();syncEditButton();
+    get('coverageIncidentStatus').textContent=editReportButton.getAttribute('aria-pressed')==='true'
+      ?'คลิกข้อความในรายงานที่มีกรอบเส้นประเพื่อแก้ไข แล้วกดเสร็จสิ้นการแก้ไขก่อนดาวน์โหลด'
+      :'บันทึกข้อความที่แก้ไขสำหรับรายงานนี้แล้ว พร้อมดาวน์โหลด PNG';
+  };
   function keepMapTools(){
     const toolbar=document.querySelector('.report-download-toolbar');
-    if(toolbar&&report.firstElementChild!==toolbar)report.prepend(toolbar);
+    if(toolbar){
+      toolbar.classList.add('report-search-actions');
+      const search=get('coverageOpenReport'),download=get('dashboardDownloadImage');
+      if(search&&toolbar.firstElementChild!==search)toolbar.prepend(search);
+      if(search&&search.nextElementSibling!==editReportButton)search.after(editReportButton);
+      if(download&&editReportButton.nextElementSibling!==download)editReportButton.after(download);
+      const controls=form.querySelector('.coverage-incident-controls');
+      if(controls&&toolbar.parentElement!==controls)controls.append(toolbar);
+    }
+    syncEditButton();
     line=get('riskMapLinePanel')||line;
     if(map.parentElement===mapColumn){
       if(line&&map.nextElementSibling!==line)map.after(line);
@@ -2544,6 +2571,16 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 })();
 </script>
 
+
+
+<style id="report-search-action-row-20261106">
+#riskmapReportPanel .report-search-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;grid-column:1/-1!important;margin:6px 0 0!important;align-items:stretch}
+#riskmapReportPanel .report-search-actions>button{grid-column:auto!important;width:100%!important;min-width:0!important;min-height:46px!important;margin:0!important;padding:10px 8px!important;font:500 14px/1.5 Sarabun,sans-serif!important;border-radius:0!important;white-space:normal!important;box-sizing:border-box}
+#riskmapReportPanel #dashboardEditReportText{background:#fff!important;color:#68418f!important;-webkit-text-fill-color:#68418f!important;border:1px solid #9473ad!important;cursor:pointer}
+#riskmapReportPanel #dashboardEditReportText[aria-pressed="true"]{background:#f1e9f8!important;border-color:#68418f!important}
+#riskmapReportPanel .report-search-actions #dashboardDownloadImage{font-size:14px!important;min-height:46px!important}
+@media(max-width:480px){#riskmapReportPanel .report-search-actions{gap:5px!important}#riskmapReportPanel .report-search-actions>button{font-size:12px!important;padding:9px 5px!important}}
+</style>
 
 </body></html>
 
