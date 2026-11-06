@@ -194,8 +194,9 @@
     }
     if(key==='diagram')pane.querySelectorAll('#efDetails24,#efDetails48').forEach(detail=>detail.open=true);
     tabs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',String(b===button)));
-    const inset=document.documentElement.classList.contains('story-dashboard')
-      ? tabs.offsetHeight+8
+    const controls=$('storyOverviewControls');
+    const inset=controls
+      ? controls.offsetHeight+8
       : parseFloat(getComputedStyle(pane).paddingTop)||0;
     const top=key==='stations'?0:pane.scrollTop+target.getBoundingClientRect().top-pane.getBoundingClientRect().top-inset;
     pane.scrollTo({top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
@@ -294,7 +295,20 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('approvedAreaSear
  if(!row){row=document.createElement('header');row.id='approvedDashboardHeading';pane.prepend(row)}
  if(title.parentElement!==row)row.append(title);
  if(date.parentElement!==row)row.append(date);
+ if(!document.documentElement.classList.contains('story-dashboard'))return;
+ const tabs=document.getElementById('referenceViewTabs'),filter=document.getElementById('ieatOverviewFilter');
+ if(!tabs||!filter)return;
+ let controls=document.getElementById('storyOverviewControls');
+ if(!controls){
+  controls=document.createElement('div');
+  controls.id='storyOverviewControls';
+  pane.prepend(controls);
  }
+ for(const element of [row,tabs,filter]){
+  if(element.parentElement!==controls)controls.append(element);
+ }
+ }
+ document.addEventListener('ieat-flood-data-rendered',alignHeading);
  alignHeading();document.readyState==='loading'&&document.addEventListener('DOMContentLoaded',alignHeading,{once:true});
  setInterval(()=>{if(!document.hidden)alignHeading()},1000);
 })();

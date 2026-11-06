@@ -5,7 +5,7 @@
 
 <script defer src="flood-reference-layout.js?v=20261105-clean-source-1"></script>
 
-<script defer src="flood-sections.js?v=20261105-sticky-story-tabs"></script>
+<script defer src="flood-sections.js?v=20261106-sticky-overview"></script>
 
 <meta charset="utf-8">
 <script id="dashboard-reliable-boot">(function(){
@@ -228,11 +228,21 @@
 <style>
 @layer floodDashboard {
  @media screen {
-  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #floodInformationPane #referenceViewTabs {
-   position:sticky!important;
-   top:0!important;
-   z-index:5!important;
-   background:#fff!important;
+  html.story-dashboard body[data-flood-section=overview] #estateFocusDashboard #floodInformationPane:has(#storyOverviewControls) {
+   padding-top:0!important;
+  }
+  html.story-dashboard body[data-flood-section=overview] #floodInformationPane>#storyOverviewControls {
+   position:sticky;
+   top:0;
+   z-index:6;
+   order:-26;
+   display:flow-root!important;
+   padding-top:16px;
+   background:#fff;
+  }
+  html.story-dashboard body[data-flood-section=overview][data-water-category=stations] #storyOverviewControls #referenceViewTabs {
+   position:static!important;
+   margin:12px 0 10px;
   }
  }
 }
