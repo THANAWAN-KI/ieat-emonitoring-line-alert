@@ -3,13 +3,82 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-06T15:56:13.016713+00:00",
+    "fetchedAt": "2026-11-06T21:30:20.684176+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793866938000,
-    "latestEvent": 1793974096000
+    "oldestEvent": 1793906211000,
+    "latestEvent": 1793998068000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17386",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.765,
+          18.168,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.1,
+        "place": "ประเทศเมียนมา",
+        "time": 1793998068000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17386",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17385",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.413,
+          20.425,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.9,
+        "place": "ประเทศเมียนมา",
+        "time": 1793988854000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17385",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17384",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.018,
+          16.447,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.3,
+        "place": "ใกล้ชายฝั่งทางตอนใต้ของประเทศเมียนมา",
+        "time": 1793987138000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17384",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17383",
@@ -164,75 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1793906211000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17377",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17376",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          98.028,
-          20.03,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.7,
-        "place": "ประเทศเมียนมา",
-        "time": 1793891415000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17376",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17375",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.96,
-          22.174,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.7,
-        "place": "มณฑลยูนนาน, ประเทศจีน",
-        "time": 1793872772000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17375",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17374",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.311,
-          19.113,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.9,
-        "place": "ต.ควร อ.ปง จ.พะเยา",
-        "time": 1793866938000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17374",
         "source": "TMD",
         "types": "",
         "detail": null,
