@@ -25,9 +25,9 @@
    const criterion=hasCriterion?raw.slice(0,pos):'ไม่ได้ระบุเกณฑ์แยก';
    const action=hasCriterion?raw.slice(pos+1).trim():raw;
    const tone=r.alert_code==='EMERGENCY'?'red':r.alert_code==='WARNING'||r.alert_code==='WATCH'?'amber':'neutral';
-   return '<tr><th scope="row"><span class="ex-badge '+tone+'">'+esc(alerts[r.alert_code]||terms[r.measure_term]||r.measure_term)+'</span></th><td>'+esc(criterion)+'</td><td>'+esc(action)+(r.remark?'<small>'+esc(r.remark)+'</small>':'')+'</td><td>'+esc(r.responsible||'ยังไม่มีข้อมูล')+'</td></tr>';
+   return '<tr><th scope="row"><span class="ex-badge '+tone+'">'+esc(alerts[r.alert_code]||terms[r.measure_term]||r.measure_term)+'</span></th><td>'+esc(criterion)+'</td><td>'+esc(action)+(r.remark?'<small>'+esc(r.remark)+'</small>':'')+'</td></tr>';
   });
-  pane.innerHTML+=card('ตารางแผนและมาตรการรับมือ',table(['ระดับ / หมวด','เกณฑ์เริ่มดำเนินการ','มาตรการและขั้นตอน','ผู้รับผิดชอบ'],planRows.length?planRows:[empty(4)],'ตารางแผนเตรียมรับมือน้ำท่วม')+'<p class="ex-note">เกณฑ์ตามแผนต้นทางของนิคมฯ ไม่ใช่การประกาศสถานะฉุกเฉินปัจจุบัน</p>');
+  pane.innerHTML+=card('ตารางแผนและมาตรการรับมือ',table(['ระดับ / หมวด','เกณฑ์เริ่มดำเนินการ','มาตรการและขั้นตอน'],planRows.length?planRows:[empty(3)],'ตารางแผนเตรียมรับมือน้ำท่วม')+'<p class="ex-note">เกณฑ์ตามแผนต้นทางของนิคมฯ ไม่ใช่การประกาศสถานะฉุกเฉินปัจจุบัน</p>');
   const infrastructure=[];
   for(const [key,label,pk,nameField] of types){for(const r of byEstate(key,id)){
    let detail='';
