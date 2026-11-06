@@ -37,31 +37,52 @@
   const host=$('coverageMapView'), status=$('coverageMapStatus');
   if(!host)return;
   if(typeof window.require!=='function'){status.textContent='โหลดระบบแผนที่ไม่ได้';return;}
-  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home'],
-    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home)=>{
+  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend'],
+    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend)=>{
     const riskNames=riskFields.map(f=>f.field);
-    const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression}={})=>new FeatureLayer({
-      url,title,visible,definitionExpression,
+    const marker=(style,color,size=11)=>({type:'simple-marker',style,color,size,outline:{color:'#fff',width:1}});
+    const svgMarker=(drawing,width,height,yoffset=0)=>({
+      type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
+      width,height,yoffset
+    });
+    const pin=svgMarker('<path fill="#178d4c" stroke="#fff" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><circle cx="12" cy="9" r="2.8" fill="#fff"/>',23,23,10);
+    const fireStation=svgMarker('<path fill="#bb292e" stroke="#fff" d="M2 9 12 3l10 6v12H2Z"/><path fill="#ffd47b" d="M5 12h14v7H5Z"/><path stroke="#8b2c20" d="M9 12v7m6-7v7M5 15h14"/>',22,22);
+    const hospital=svgMarker('<rect x="2" y="2" width="20" height="20" fill="#fff" stroke="#be283c" stroke-width="2"/><path stroke="#be283c" stroke-width="4" d="M12 6v12M6 12h12"/>',17,17);
+    const supportSymbols={
+      fire:fireStation,hospital,hydrant:marker('square','#2074a6'),police:marker('diamond','#4053a0'),
+      community:marker('circle','#a959b0'),communityRisk:marker('circle','#a959b0'),
+      waterWatch:marker('triangle','#178da6'),school:marker('square','#df801a'),cctv:marker('diamond','#434753')
+    };
+    const polygon=(color,outline)=>({type:'simple-fill',color,outline:{color:outline,width:1}});
+    const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression,symbol,minScale=0,opacity=1}={})=>new FeatureLayer({
+      url,title,visible,definitionExpression,minScale,opacity,
+      ...(symbol?{renderer:{type:'simple',symbol}}:{}),
       popupEnabled:fields.length>0,
       ...(fields.length?{popupTemplate:{title:'{'+fields[0]+'}',content:[{type:'fields',fieldInfos:fields.map(fieldName=>({fieldName}))}]}}:{})
     });
-    const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ']});
-    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026');
-    const risks=riskFields.map(f=>layer('e_PP/FeatureServer/0',f.label,{
-      definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
+    const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ'],symbol:pin});
+    const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',{visible:true,opacity:.55,minScale:1500000});
+    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',{minScale:350000,symbol:polygon([105,91,156,.16],'#7967a8')});
+    const riskSymbols=[
+      polygon([240,155,46,.32],'#b46713'),polygon([221,56,59,.34],'#b12c33'),polygon([123,73,173,.29],'#6b3a92')
+    ];
+    const risks=riskFields.map((f,i)=>layer('e_PP/FeatureServer/0',f.label,{
+      minScale:1000000,symbol:riskSymbols[i],definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
+      visible:['fire','hospital','hydrant'].includes(d.id),minScale:1000000,symbol:supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
     }));
     const publicBase='https://gistdaportal.gistda.or.th/arcgis/rest/services/Hosted/Identity_gdb/FeatureServer/';
     const supplemental=[[0,'จุดตรวจวัดน้ำ'],[1,'ระบบบำบัดน้ำเสีย'],[2,'สถานีตรวจวัดคุณภาพอากาศ'],[3,'สถานที่รวบรวมและจัดการขยะ']].map(([id,title])=>layer('',title,{url:publicBase+id}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
-    const map=new ArcMap({basemap:'gray-vector',layers:[group('ข้อมูลสนับสนุน กนอ.',support),group('ข้อมูลเสริม GISTDA',supplemental),group('นิคมฯ และผู้ประกอบการ กนอ.',[businesses,center]),group('ความเสี่ยงโรงงาน กนอ.',risks)]});
+    const map=new ArcMap({basemap:'topo-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
     view.ui.add(new Home({view}),'top-left');
     view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่'}),'top-right');
-    const layers=[center,businesses,...support,...risks,...supplemental];
-    view.when(()=>{status.textContent='เปิดรายการชั้นข้อมูลเพื่อเลือกข้อมูลที่ต้องการแสดง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
+    view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
+    const layers=[center,zones,businesses,...support,...risks,...supplemental];
+    view.when(()=>{status.textContent='ซูมเข้าหรือเลือกนิคมฯ เพื่อดูเขตประกอบการและทรัพยากรใกล้เคียง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
     Promise.allSettled(layers.map(l=>l.load())).then(results=>{
       const failures=results.flatMap((r,i)=>r.status==='rejected'?[layers[i].title]:[]);
       if(failures.length)status.textContent='โหลดบางชั้นไม่ได้ · '+failures.join(' · ');
