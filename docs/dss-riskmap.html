@@ -231,6 +231,22 @@ html body header#ieatPortalHeader.standalone-dss-header {
 #dssEquipmentNearbyOutput:not(:empty) { padding:14px; margin:10px 0; background:#fff; border:1px solid #e2dce8; overflow-wrap:anywhere; }
 #dssEquipmentNearbyOutput li { margin:5px 0; }
 </style>
+<style id="riskmap-report-only-layout">
+html body #riskDashboard#riskDashboard#riskDashboard > :not(#emergencyReportPage) {
+  position:fixed!important;
+  inset:0 auto auto -20000px!important;
+  width:1200px!important;
+  min-width:1200px!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > #emergencyReportPage {
+  scroll-margin-top:16px;
+}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard > #emergencyReportPage {
+  margin-top:0!important;
+}
+</style>
 </head>
 <body>
 <header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</strong></span></div><div class="portal-top"><div class="header-nav"></div></div></header>
@@ -336,15 +352,7 @@ html body header#ieatPortalHeader.standalone-dss-header {
 
 
 </div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
-<section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจข้อมูลในรายงาน แล้วกดดาวน์โหลดภาพรายงาน (PNG) ได้ทั้ง 2 หน้า</p><section id="riskMapLinePanel" aria-labelledby="riskMapLineTitle">
-  <h3 id="riskMapLineTitle">ข้อความสำหรับส่งทาง LINE</h3>
-  <label for="riskMapCase">กรณีจัดทำรายงาน</label>
-  <select id="riskMapCase" required><option value="">เลือกกรณี</option><option value="drill">ซ้อมแผน (สน.)</option><option value="actual">เหตุจริง</option></select>
-  <label for="riskMapLineText">ข้อความแจ้ง Risk Map</label>
-  <textarea id="riskMapLineText" rows="9" readonly></textarea>
-  <button id="riskMapLineCopy" type="button" disabled>คัดลอกข้อความสำหรับ LINE</button>
-  <p id="riskMapLineStatus" role="status">เลือกกรณีและระบุสถานประกอบการในรายงาน แล้วแนบภาพ Risk Map ที่ดาวน์โหลด</p>
-</section><section id="dssEquipmentNearby" aria-labelledby="dssEquipmentNearbyTitle">
+<section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจข้อมูลในรายงานและเลือกกรณีในส่วนข้อความสำหรับส่งทาง LINE ด้านล่างก่อนดาวน์โหลด PNG ทั้ง 2 หน้า</p><section id="dssEquipmentNearby" aria-labelledby="dssEquipmentNearbyTitle">
   <h3 id="dssEquipmentNearbyTitle">ค้นหาอุปกรณ์ระงับเหตุของโรงงานใกล้เคียง</h3>
   <form id="dssEquipmentNearbyForm">
     <label>ชื่อหรือประเภทอุปกรณ์ <input id="dssEquipmentNearbyQuery" type="search" value="Class D" placeholder="เช่น Class D หรือเครื่องสูบน้ำดับเพลิง" required></label>
@@ -354,7 +362,16 @@ html body header#ieatPortalHeader.standalone-dss-header {
   <p id="dssEquipmentNearbyStatus" role="status">ใช้โรงงานและพิกัดจากรายงานปัจจุบันเป็นจุดอ้างอิง</p>
   <div id="dssEquipmentNearbyOutput"></div>
   <button id="dssEquipmentNearbyDownload" type="button" disabled>ดาวน์โหลดภาพผลค้นหา (PNG)</button>
-</section><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
+</section><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe>
+<section id="riskMapLinePanel" aria-labelledby="riskMapLineTitle">
+  <h3 id="riskMapLineTitle">ข้อความสำหรับส่งทาง LINE</h3>
+  <label for="riskMapCase">กรณีจัดทำรายงาน</label>
+  <select id="riskMapCase" required><option value="">เลือกกรณี</option><option value="drill">ซ้อมแผน (สน.)</option><option value="actual">เหตุจริง</option></select>
+  <label for="riskMapLineText">ข้อความแจ้ง Risk Map</label>
+  <textarea id="riskMapLineText" rows="9" readonly></textarea>
+  <button id="riskMapLineCopy" type="button" disabled>คัดลอกข้อความสำหรับ LINE</button>
+  <p id="riskMapLineStatus" role="status">เลือกกรณีและระบุสถานประกอบการในรายงาน แล้วแนบภาพ Risk Map ที่ดาวน์โหลด</p>
+</section></section>
 <section id="otherPage" hidden><iframe id="otherFrame" allow="fullscreen" allowfullscreen class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
 <footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
@@ -2373,21 +2390,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 })();
 </script>
 <script src="./dss-riskmap-equipment.js?v=7d441f0"></script>
-<style id="riskmap-report-only-layout">
-html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > :not(#emergencyReportPage) {
-  position:fixed!important;
-  inset:0 auto auto -20000px!important;
-  width:1200px!important;
-  min-width:1200px!important;
-  opacity:0!important;
-  pointer-events:none!important;
-}
-html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > #emergencyReportPage {
-  scroll-margin-top:16px;
-}
-html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard > #emergencyReportPage {
-  margin-top:0!important;
-}
-</style>
+
 </body></html>
 
