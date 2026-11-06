@@ -4,9 +4,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>รายงาน DSS / RiskMap | EMCC</title>
 <script>
-  // Open the data workspace by default while preserving report deep links.
+  // Keep this standalone page in the data workspace.
   const reportPageUrl = new URL(window.location.href);
-  if (!reportPageUrl.searchParams.has('view')) {
+  if (reportPageUrl.searchParams.get('view') !== 'data') {
     reportPageUrl.searchParams.set('view', 'data');
     window.history.replaceState(window.history.state, '', reportPageUrl);
   }
@@ -31,8 +31,8 @@
 .disaster-estate-list{max-height:270px;margin-top:8px;overflow:auto}
 .disaster-estate-list button{display:block;width:100%;padding:9px 10px;border:0;border-radius:8px;background:#fff;color:#000;font-size:12px;text-align:left}
 .disaster-estate-list button:hover,.disaster-estate-list button[aria-pressed="true"]{background:#e6f4eb;color:#17663f}
-@media(max-width:1100px){.portal-header{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 46px}.portal-header .brand{min-width:0;height:auto;min-height:58px}.portal-header .brand strong{font-size:16px}.portal-top{height:auto;min-height:58px}.disaster-header-tools{gap:7px}.disaster-scope{min-width:180px;max-width:220px}.disaster-clock{font-size:11px}}
-@media(max-width:850px){.portal-header{grid-template-areas:"brand brand" "tools tools" "nav nav";grid-template-columns:1fr;grid-template-rows:auto auto 46px}.portal-top{justify-content:space-between;padding:8px 12px;min-height:0}.disaster-header-tools{flex-wrap:wrap}.disaster-scope{max-width:230px}.portal-top .header-nav a{font-size:14px}.portal-header .brand{padding:8px 12px}}
+@media(max-width:1100px){.portal-header{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto}.portal-header .brand{min-width:0;height:auto;min-height:58px}.portal-header .brand strong{font-size:16px}.portal-top{height:auto;min-height:58px}.disaster-header-tools{gap:7px}.disaster-scope{min-width:180px;max-width:220px}.disaster-clock{font-size:11px}}
+@media(max-width:850px){.portal-header{grid-template-areas:"brand" "tools";grid-template-columns:1fr;grid-template-rows:auto auto}.portal-top{justify-content:space-between;padding:8px 12px;min-height:0}.disaster-header-tools{flex-wrap:wrap}.disaster-scope{max-width:230px}.portal-top .header-nav a{font-size:14px}.portal-header .brand{padding:8px 12px}}
 @media(max-width:480px){.portal-top{flex-wrap:wrap;gap:8px}.disaster-header-tools{width:100%;justify-content:space-between;gap:6px}.disaster-scope{min-width:0;width:190px;font-size:11px}.portal-top .header-nav{margin-left:auto}.disaster-clock{font-size:10px}.disaster-estate-pop{width:300px}}
 
 .portal-header{position:relative;z-index:5}.portal-top{position:relative;z-index:20}.disaster-clock{border:0;background:transparent;padding:7px 4px;color:#000}.disaster-clock:hover{background:#f4f4f5;border-radius:8px}.disaster-weather-pop{position:absolute;top:64px;right:230px;z-index:110;width:640px;max-width:calc(100vw - 24px);padding:18px;border:1px solid #e4e5e8;border-radius:22px;background:#fff;box-shadow:0 6px 22px #28323d30;color:#000}.disaster-weather-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.disaster-weather-grid article{min-height:150px;padding:20px 10px;border:1px solid #eceef1;border-radius:18px;text-align:center;box-shadow:0 3px 9px #28323d0d}.disaster-weather-grid img{display:block;width:48px;height:48px;object-fit:contain;margin:0 auto}.disaster-weather-grid b{display:block;margin-top:8px;font-size:13px}.disaster-weather-grid span{display:block;margin-top:12px;font-size:11px}.disaster-weather-pop p,.disaster-weather-pop>a{font-size:11px;margin:12px 0 0}.disaster-weather-pop>a{color:#532e7c}@media(max-width:850px){.disaster-weather-pop{position:fixed;top:110px;right:12px;left:12px;width:auto;max-height:calc(100dvh - 130px);overflow:auto}.disaster-weather-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
@@ -78,9 +78,8 @@ html body #riskDashboard.fire-focus .thermal-controls select{background:#f3eff9!
 </style>
 </head>
 <body>
-<header class="portal-header" id="ieatPortalHeader"><a class="brand" href="./hub.html"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></a><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><img class="scope-search-icon" src="https://api.iconify.design/solar/buildings-2-outline.svg?color=%2368418f" alt="" width="26" height="26"><span id="disasterScopeLabel">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><nav class="header-nav" aria-label="เมนูหลัก"><a href="./daily-situation.html">หน้าแรก</a><a href="./information.html#overview">ข้อมูล</a><a class="nav-active" aria-current="page" href="./hub.html">ภัยพิบัติ</a></nav></div></header>
+<header class="portal-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></div><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><img class="scope-search-icon" src="https://api.iconify.design/solar/buildings-2-outline.svg?color=%2368418f" alt="" width="26" height="26"><span id="disasterScopeLabel">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><div class="header-nav"></div></div></header>
 
-<nav id="disaster-mode-tabs" class="nav-tabs portal-disaster-tabs" aria-label="สถานการณ์ภัย"><button class="nav-tab active" data-page="risk" type="button">ไฟไหม้</button><button class="nav-tab" data-page="flood" type="button">น้ำท่วม</button><button class="nav-tab" data-page="drought" type="button">ภัยแล้ง</button><button class="nav-tab" data-page="pm25" type="button">ฝุ่น PM2.5</button><button class="nav-tab" data-page="earthquake" type="button">แผ่นดินไหว</button></nav>
 <main class="page">
 <section id="riskDashboard"><div class="risk-workspace"><div class="workspace-data">
 
@@ -1745,7 +1744,6 @@ html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHe
 <link rel="stylesheet" href="./workflow.css?v=1">
 <script src="./incident-store.js?v=20261022" defer></script>
 <script src="./report-store.js?v=1" defer></script>
-<script src="./workflow-navigation.js?v=2" defer></script>
 <script src="./hub-workflow.js?v=separate-search-20261029" defer></script><script src="./data-thermal-dashboard.js?v=grid-fix-20261027" defer></script>
 <script src="./incident-monitoring.js?v=1" defer></script>
 <script src="./report-route.js?v=a4-map-20261029" defer></script>
