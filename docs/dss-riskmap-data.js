@@ -360,7 +360,9 @@
         timer=setTimeout(()=>{cleanup();reject(Error('แผนที่ยังโหลดไม่ครบ กรุณารอสักครู่'));},12000);
         ready();
       });
-      const shot=await view.takeScreenshot({format:'png',width:986});
+      const aspect=8/5,areaWidth=Math.min(view.width,view.height*aspect),areaHeight=areaWidth/aspect;
+      const area={x:(view.width-areaWidth)/2,y:(view.height-areaHeight)/2,width:areaWidth,height:areaHeight};
+      const shot=await view.takeScreenshot({format:'png',area,width:986,height:616});
       return shot.dataUrl;
     };
     window.ieatSyncCoverageMapPreview=async()=>{
