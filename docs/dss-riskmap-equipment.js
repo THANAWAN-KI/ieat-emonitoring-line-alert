@@ -22,25 +22,28 @@
   }
   function equipmentCenter(){
     const incident=window.ieatCoverageIncident;
-    if(incident?.company&&Number.isFinite(incident.lat)&&Number.isFinite(incident.lng))return {...incident,valid:true};
+    if(incident?.company&&Number.isFinite(incident.lat)&&Number.isFinite(incident.lng))return {...incident,estate:window.ieatCoverageReport?.attributes?.['นิคมอุตสาหกรรม'],valid:true};
     return currentReport();
   }
-  function findEquipment(features,term,center,km){
+  function findEquipment(features,term,center,km,scope){
+    const estateKey=value=>norm(value).replace(/นิคมอุตสาหกรรม|นิคมฯ|\s+/g,'');
     const items=[],seen=new Set();
     let noLocation=0;
     const isClassD=classD.test(term)||norm(term)==='d';
     for(const feature of features){
       const p=feature.properties||{};
-      if(p.doc_active!==true||!p.comp_name||norm(p.comp_name)===norm(center.company))continue;
+      if(p.doc_active!==true||!p.comp_name)continue;
+      if(scope==='estate'&&estateKey(p.comp_zone)!==estateKey(center.estate))continue;
       const coordinates=feature.geometry?.coordinates||[feature.geometry?.x,feature.geometry?.y];
       const [x,y]=coordinates.map(Number);
       for(const key of Object.keys(p)){
         if(!/^equipment\d+_name$/.test(key)||!p[key])continue;
         const prefix=key.slice(0,-4),name=String(p[key]),type=String(p[prefix+'type']||'');
         if(isClassD?!(extinguisher.test(name)&&classD.test(name+' '+type)):!norm(name+' '+type).includes(norm(term)))continue;
-        if(!(x>=97&&x<=106&&y>=5&&y<=22)){noLocation++;continue;}
-        const distance=distanceKm(center.lat,center.lng,y,x);
-        if(distance>km)continue;
+        const located=x>=97&&x<=106&&y>=5&&y<=22;
+        if(!located&&scope==='radius'){noLocation++;continue;}
+        const distance=located?distanceKm(center.lat,center.lng,y,x):null;
+        if(scope==='radius'&&distance>km)continue;
         const amount=p[prefix+'amount'],unit=p[prefix+'amountUnit']||'';
         const capacity=p[prefix+'volume'],capacityUnit=p[prefix+'volumeUnit']||'';
         const identity=[p.comp_uid||p.comp_no||p.comp_name,name,type,amount,unit,capacity,capacityUnit,x,y].join('|');
@@ -48,17 +51,24 @@
         seen.add(identity);items.push({company:p.comp_name,estate:p.comp_zone||'ไม่ระบุ',name,type,amount,unit,capacity,capacityUnit,distance});
       }
     }
-    return {items:items.sort((a,b)=>a.distance-b.distance),noLocation};
+    return {items:items.sort((a,b)=>(a.distance??Infinity)-(b.distance??Infinity)),noLocation};
   }
   let savedKey='';
-  const key=()=>{const {company,lat,lng}=equipmentCenter();return [company,lat,lng,get('dssEquipmentNearbyQuery').value,get('dssEquipmentNearbyRadius').value].join('|');};
+  const key=()=>{const {company,lat,lng}=equipmentCenter();return [company,lat,lng,get('dssEquipmentNearbyQuery').value,get('dssEquipmentNearbyRadius').value,get('dssEquipmentNearbyScope').value].join('|');};
   form.addEventListener('input',()=>{download.disabled=true;status.textContent='กดค้นหาเพื่ออัปเดตผล';});
+  const scopeControl=get('dssEquipmentNearbyScope'),radiusControl=get('dssEquipmentNearbyRadius');
+  scopeControl.addEventListener('change',()=>{
+    radiusControl.disabled=scopeControl.value==='estate';
+    radiusControl.closest('label').hidden=radiusControl.disabled;
+  });
   form.onsubmit=async event=>{
     event.preventDefault();
     download.disabled=true;output.replaceChildren();savedKey='';
     const center=equipmentCenter();
     if(!center.valid){status.textContent='เลือกโรงงานและกำหนดจุดเกิดเหตุในรายงานก่อน';return;}
     const query=get('dssEquipmentNearbyQuery').value.trim(),km=Number(get('dssEquipmentNearbyRadius').value),searchKey=key();
+    const scope=get('dssEquipmentNearbyScope').value;
+    if(scope==='estate'&&(!center.estate||center.estate==='—')){status.textContent='โรงงานที่เลือกไม่มีชื่อนิคมฯ ในทะเบียน';return;}
     if(!query){status.textContent='กรอกชื่อหรือประเภทอุปกรณ์';return;}
     const button=form.querySelector('button[type="submit"]');
     button.disabled=true;status.textContent='กำลังค้นหาอุปกรณ์ในระบบ DSS กนอ.…';
@@ -68,14 +78,14 @@
       const features=await load();
       if(!features?.length)throw Error('โหลดฐานข้อมูลอุปกรณ์ DSS ไม่สำเร็จ');
       if(searchKey!==key()){status.textContent='ข้อมูลจุดเกิดเหตุหรือตัวกรองเปลี่ยน กรุณาค้นหาใหม่';return;}
-      const {items,noLocation}=findEquipment(features,query,center,km);
-      output.append(node('h4','ผลค้นหาอุปกรณ์สนับสนุนจาก DSS'),node('p','จุดอ้างอิง: '+center.company+' · รัศมี '+km+' กม. · ค้นหา “'+query+'”'),node('p','ค้นเมื่อ '+dateFormat.format(new Date())+' · พบ '+items.length+' รายการในระเบียนที่ใช้งาน'));
+      const {items,noLocation}=findEquipment(features,query,center,km,scope);
+      output.append(node('h4','ผลค้นหาอุปกรณ์สนับสนุนจาก DSS'),node('p','จุดอ้างอิง: '+center.company+' · '+(scope==='estate'?center.estate:'รัศมี '+km+' กม.')+' · ค้นหา “'+query+'”'),node('p','ค้นเมื่อ '+dateFormat.format(new Date())+' · พบ '+items.length+' รายการในระเบียนที่ใช้งาน'));
       if(items.length){
         const list=document.createElement('ol');
         for(const item of items){
           const amount=item.amount!=null&&String(item.amount).trim()?'จำนวนตามทะเบียน '+item.amount+' '+item.unit:'ไม่ระบุจำนวน';
           const size=item.capacity!=null&&String(item.capacity).trim()?' · ขนาด '+item.capacity+' '+item.capacityUnit:'';
-          list.append(node('li',item.company+' ('+item.estate+') · '+item.name+' '+item.type+' · '+amount+size+' · ระยะเส้นตรง '+item.distance.toFixed(2)+' กม.'));
+          list.append(node('li',item.company+' ('+item.estate+') · '+item.name+' '+item.type+' · '+amount+size+(item.distance==null?' · ไม่มีพิกัด':' · ระยะเส้นตรง '+item.distance.toFixed(2)+' กม.')));
         }
         output.append(list);
       }else output.append(node('p','ไม่พบรายการที่ตรงเงื่อนไขในข้อมูล DSS ที่มีพิกัด'));
