@@ -1922,16 +1922,29 @@ window.addEventListener('message',async event=>{
  if(d.type==='flood-province-scope'){
  const changed=estateProvinceScope?.name!==d.name||!!estateProvinceScope?.active!==!!d.active;
  const locationChanged=estateProvinceScope?.estate?.lat!==d.estate?.lat||estateProvinceScope?.estate?.lon!==d.estate?.lon;
- if(storyMap&&!changed&&!locationChanged){estateProvinceScope=d;return}
+ const openEstateLayers=Boolean(d.active&&d.estate&&(changed||locationChanged||d.reopenLayers));
+ if(storyMap&&!changed&&!locationChanged&&!openEstateLayers){estateProvinceScope=d;return}
  if(changed){clearWatchMap();clearIEATMeasuredDistance();preparednessPopup?.remove()}estateProvinceScope=d;
  if(changed||locationChanged)showReadinessEstateLabel(d.active?d.estate:null,d.name);
  if(changed){selectedEstateExtent=null;if(d.active)loadSelectedExtent(d.name)}
- if(cleanDashboard&&(!storyMap||changed)){
+ if(cleanDashboard&&(!storyMap||changed||locationChanged)){
  const active=!!(d.active&&d.estate);
  if(!storyMap)Object.assign(flags,{estate:true,boundary:true,water:active,canal:active,dam:active,camera:active,rain:active,rainfall:active,flow:true,rings:true,radar:true,gistda:false,satellite:active});
  document.querySelectorAll('[data-layer]').forEach(input=>input.checked=!!flags[input.dataset.layer]);
  $('estateView3d').setAttribute('aria-pressed',String(active));$('estateView3d').textContent=active?'มุมมอง 3D':'มุมมอง 2D';
- if(active)cameras();
+ }
+ if(openEstateLayers){
+  const loadRadarLayer=!flags.radar;
+  const loadCanalLayer=!flags.canal||!extras.some(source=>source.kind==='canal'),loadSatelliteLayer=!flags.satellite||!satelliteFeed;
+  for(const input of document.querySelectorAll('#mapLayers [data-layer]')){
+   flags[input.dataset.layer]=true;
+   input.checked=true;
+  }
+  flags.rain=true;flags.rainfall=true;
+  cameras();
+  if(loadCanalLayer)loadCanals();
+  if(loadSatelliteLayer)loadSatellite();
+  if(loadRadarLayer)loadRadar();
  }
  if(d.active&&d.estate)focus({lat:d.estate.lat,lon:d.estate.lon,label:d.name,scale:75000});
  else {render();if(cleanDashboard){stopAerialTour();if(vector)vector.flyTo({center:[101,13],zoom:5.5,pitch:0,bearing:0});else raster?.setView([13,101],5.5)}}

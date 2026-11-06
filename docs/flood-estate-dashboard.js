@@ -20,17 +20,17 @@
   return e&&lat!==null&&lon!==null?km(e,{lat,lon}):null;
  }
  function distanceLabel(r){if(!provinceScope.active)return '';const distance=scopeDistance(r);return '<small>ห่างจาก '+esc(provinceScope.name)+' '+(distance===null?'ไม่ทราบระยะ (ไม่มีพิกัด)':fmt(distance)+' กม. (ระยะเส้นตรง)')+'</small>';}
- async function publishProvinceScope(estate){
+ async function publishProvinceScope(estate,reopenLayers=false){
   const token=++provinceRequest,name=headerEstate;
   provinceScope={active:!!name,province:'',estate:estate||null,name,radiusKm:RADIUS};
-  function publish(){
+  function publish(reopenLayers=false){
    window.IEAT_FLOOD_PROVINCE_SCOPE=provinceScope;
    document.dispatchEvent(new CustomEvent('ieat-flood-estate-scope',{detail:provinceScope}));
    if(current&&provinceScope.active){const m=model(current);for(const [id,ds] of [['efWarning24',m.warning24],['efWarning48',m.warning48]]){const host=$(id);if(host)host.innerHTML=!ds.available?'<p>ข้อมูลประกาศยังไม่พร้อม</p>':ds.rows.length?ds.rows.map(r=>warningCard(r,id==='efWarning24'?24:48,true)).join(''):'<p>ไม่พบพื้นที่เฝ้าระวังในจังหวัดที่เลือก</p>';}}
-   $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-province-scope',...provinceScope},location.origin);
+   $('estateFocusMap')?.contentWindow?.postMessage({type:'flood-province-scope',...provinceScope,reopenLayers},location.origin);
    const note=$('efProvinceScopeNote');if(note)note.textContent=!name?'ข้อมูลทั่วประเทศ · แสดงตัวอย่างสูงสุด 6 รายการต่อส่วน กรุณาเลือกนิคมฯ เพื่อดูข้อมูลเฉพาะพื้นที่':provinceScope.province?name+' · ข้อมูลภายใน '+RADIUS+' กม. · เรียงใกล้ที่สุดก่อน · ระยะเส้นตรง':'กำลังตรวจสอบจังหวัดของ '+name;
   }
-  publish();if(!name||!estate)return;
+  publish(reopenLayers);if(!name||!estate)return;
   try{
    let province=provinceCache.get(String(estate.id))||provinceKey(estate.province||'');
    if(!province){
@@ -106,7 +106,7 @@
   if(current){const estate=model(current).estates[0];if(headerEstate&&estate)selected=String(estate.id);}
   if($('efSearch')&&!keepSearch)$('efSearch').value='';
   if($('efFilter'))$('efFilter').value=headerEstate?'all':'watch';
-  if(current)render(current);
+  if(current)render(current,true);
   if(!headerEstate)$('estateFocusMap')?.contentWindow?.postMessage({type:'flood-map-focus',lat:13,lon:101,scale:9244648},location.origin);
  }
  function deliverExecutiveFocus(){
@@ -463,7 +463,7 @@
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-canal-panel" hidden><h2>คลอง</h2><div id="efCanalList"></div><small id="efCanalTime"></small></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
 
    <div class="ef-warning"><details class="ef-panel" id="efDetails24"><summary>พื้นที่เฝ้าระวังน้ำท่วมฉับพลัน 24 ชั่วโมงข้างหน้า</summary><div id="efWarning24"></div></details><details class="ef-panel" id="efDetails48"><summary>พื้นที่เฝ้าระวังน้ำท่วมฉับพลัน 48 ชั่วโมงข้างหน้า</summary><div id="efWarning48"></div></details></div>
-   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่ 3 มิติ สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261106-map-smooth&layout=reference${$('warning')?.hasAttribute('data-clean-map')?"&dashboard=clean":""}${new URLSearchParams(location.search).get("story")==="1"?"&story=1":""}" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
+   </div><section class="ef-map-column"><button type="button" id="efMapExitFullscreen" aria-label="ออกจากแผนที่เต็มหน้าจอ">ย่อแผนที่ ↙</button><div class="ef-map-frame"><iframe id="estateFocusMap" title="แผนที่ 3 มิติ สถานการณ์น้ำและนิคมอุตสาหกรรม" src="flood-hydrology-map.html?v=20261106-estate-layers&layout=reference${$('warning')?.hasAttribute('data-clean-map')?"&dashboard=clean":""}${new URLSearchParams(location.search).get("story")==="1"?"&story=1":""}" loading="eager"></iframe></div><footer class="ef-map-foot"><button type="button" id="efMapFullscreen" aria-pressed="false">เต็มหน้าจอ ↗</button><span>GISTDA ผ่าน Faonam: พื้นที่น้ำท่วมตามวันที่ภาพ · กรมอุตุฯ: เรดาร์คอมโพสิท พร้อมแหล่งสำรอง Faonam · RID GeoJSON: สถานีระดับน้ำ</span></footer></section></div>`;
   warning.prepend(host);
   const loading=$('dashboardLoading');if(loading)loading.remove();
 
@@ -670,14 +670,14 @@ const filters={efWatch:'watch',efWaterWatch:'water',efRainWatch:'rain'};if(filte
   charts.replaceChildren(); // The retained upper KPI cards are the sole overview summary.
  }
 
- function render(data){
+ function render(data,reopenLayers=false){
   mount();if(!$('estateFocusDashboard'))return;current=data;expoUpdate(data);
   if($('efEstateOptions'))$('efEstateOptions').innerHTML=(data.estates||[]).filter(point).map(e=>'<option value="'+esc(e.name)+'"></option>').join('');
   const m=model(data);
   renderOverviewCharts(m,data);
   set('floodDataTime','รอบข้อมูล '+time(data.generated_at)+(m.stale?' · ข้อมูลย้อนหลัง':''));
   if(headerEstate&&m.estates[0])selected=String(m.estates[0].id);
-  publishProvinceScope(headerEstate?m.estates[0]||null:null);
+  publishProvinceScope(headerEstate?m.estates[0]||null:null,reopenLayers);
   set('efTotal',m.complete?fmt(m.estates.length):'รอตรวจสอบ');
   [['efWatch',m.watch.length],['efRainWatch',m.watch.filter(e=>e.rain.length).length],['efWaterWatch',m.watch.filter(e=>e.water.length).length]].forEach(([id,n])=>{
    set(id,m.usable?fmt(n):m.stale?'ข้อมูลย้อนหลัง':'ข้อมูลไม่ครบ');
