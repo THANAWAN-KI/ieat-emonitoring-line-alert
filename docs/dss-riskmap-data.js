@@ -43,7 +43,7 @@
   const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:true});
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
-  let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0;
+  let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,selectedFactory=null;
   const sql=value=>String(value).replace(/'/g,"''");
   function draw(){
     if(!origin)return;
@@ -117,6 +117,44 @@
     if(!picking||!event.mapPoint)return;
     event.stopPropagation();picking=false;place(event.mapPoint,name||'จุดเกิดเหตุ');
   });
+  $('coverageOpenReport').onclick=async()=>{
+    if(!origin||!selectedFactory){message.textContent='เลือกโรงงานก่อนเปิดรายงาน';return;}
+    if(!form.reportValidity())return;
+    const button=$('coverageOpenReport'),frame=$('emergencyReportFrame'),section=$('emergencyReportPage');
+    const point={lat:origin.latitude,lng:origin.longitude},attrs={...selectedFactory};
+    const km=Number(radius.value),incidentType=type.value;
+    button.disabled=true;
+    try{
+      let doc;
+      for(let i=0;i<60;i++){
+        doc=frame.contentDocument;
+        if(doc?.getElementById('pngBtn')?.onclick&&doc.getElementById('lat')&&doc.getElementById('lng')&&doc.getElementById('bufferKm1'))break;
+        await new Promise(resolve=>setTimeout(resolve,150));
+      }
+      if(!doc?.getElementById('pngBtn')?.onclick||!doc.getElementById('bufferKm1'))throw Error('รายงานยังโหลดไม่เสร็จ');
+      const localType=$('dashboardIncidentType');
+      localType.value=incidentType==='เหตุไฟไหม้'?'เหตุเพลิงไหม้':incidentType==='สารเคมีรั่วไหล'?incidentType:'ยังไม่ได้รับแจ้ง';
+      localType.dispatchEvent(new Event('change',{bubbles:true}));
+      const localRadius=$('supportRadius');
+      if(![...localRadius.options].some(option=>Number(option.value)===km))localRadius.add(new Option(km+' กม.',String(km)));
+      localRadius.value=String(km);
+      const {Event:ReportEvent}=frame.contentWindow;
+      doc.getElementById('lat').value=String(point.lat);
+      const lng=doc.getElementById('lng');
+      lng.value=String(point.lng);lng.dispatchEvent(new ReportEvent('change',{bubbles:true}));
+      const buffer=doc.getElementById('bufferKm1');
+      buffer.value=String(km);
+      for(let i=0;i<3;i++)doc.getElementById('bufferEnabled'+i).checked=i===0;
+      buffer.dispatchEvent(new ReportEvent('change',{bubbles:true}));
+      frame.dataset.coverageTransfer='true';
+      window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature:{attributes:attrs,geometry:{x:point.lng,y:point.lat,spatialReference:{wkid:4326}}}}}));
+      section.scrollIntoView({behavior:'smooth',block:'start'});
+      message.textContent=['อุบัติเหตุ','อื่น ๆ'].includes(incidentType)
+        ? 'ส่งข้อมูลไปยังรายงานแล้ว · โปรดระบุประเภทเหตุในรายละเอียดรายงาน'
+        : 'ส่งโรงงาน จุดเกิดเหตุ และรัศมีไปยังรายงานแล้ว';
+    }catch(error){message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}
+    finally{button.disabled=false;}
+  };
   radius.onchange=updateNearby;
   type.onchange=updateNearby;
   $('coverageSearchSupport').onclick=()=>{if(origin)updateNearby();else message.textContent='เลือกโรงงานหรือปักหมุดก่อนค้นหาข้อมูลสนับสนุน';};
@@ -140,6 +178,7 @@
         const point=feature.geometry?.type==='polygon'?feature.geometry.centroid:feature.geometry;
         if(!point){message.textContent='โรงงานนี้ไม่มีพิกัดสำหรับปักหมุด';return;}
         const label=feature.attributes[factoryName]||feature.attributes['ชื่อบริษัทภาษาอังกฤษ']||'โรงงานที่เลือก';
+        selectedFactory=feature.attributes;
         matches.replaceChildren();place(point,label);
         $('coverageMap').scrollIntoView({block:'nearest'});
         view.goTo({target:point,zoom:14}).catch(()=>{});
@@ -292,6 +331,13 @@
       }
       summary.append(chart);
     }
+    $('coverageSupportCards').replaceChildren(...rowsByLayer.map(({layer,rows})=>{
+      const card=el('article',null,'coverage-support-card');
+      const visibleCount=layer.status==='ready'||layer.status==='partial';
+      card.append(el('h3',layer.label),el('strong',visibleCount?number(rows.length):'—'),
+        el('small',stateLabel[layer.status]||freshness(layer)));
+      return card;
+    }));
     const supportMax=Math.max(1,...rowsByLayer.map(x=>x.rows.length));
     support.replaceChildren(...rowsByLayer.map(({layer,rows})=>{
       const linked=new Set(rows.map(r=>normalize(r.estate)).filter(k=>estates.has(k))).size;
