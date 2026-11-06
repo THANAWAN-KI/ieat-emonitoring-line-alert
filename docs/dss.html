@@ -3013,7 +3013,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!im
   }
   text('fbMapCaption','พิกัด '+Number(state.lat).toFixed(5)+', '+Number(state.lng).toFixed(5)+' · รัศมีค้นหาข้อมูล '+getBufferRadii().join(' / ')+' กม. (ไม่ใช่เขตปลอดภัย)');
   const weather=document.getElementById('fbWeather');weather.replaceChildren(el('strong','สภาพอากาศบริเวณเกิดเหตุ'));
-  weather.append(el('div','ลม '+(state.windSpeed||'—')+' กม./ชม. · พัดจาก '+(state.windDir||'—'),'fb-wind'),el('div',(state.weather||'—')+' · '+(state.temp||'—')+' °C · ความชื้น '+(state.humidity||'—')+'%'),el('div',state.weatherTime||'ยังไม่มีเวลาอากาศ','fb-muted'),el('div','Open-Meteo · ข้อมูลประมาณการจากแบบจำลอง','fb-muted'));
+  weather.append(el('div','ลม '+(state.windSpeed||'—')+' กม./ชม. · พัดจาก '+(state.windDir||'—'),'fb-wind'),el('div',(state.weather||'—')+' · '+(state.temp||'—')+' °C · ความชื้น '+(state.humidity||'—')+'%'),el('div',state.weatherTime&&state.weatherFetchedTime?'ดึงข้อมูลล่าสุด '+state.weatherFetchedTime:'ยังไม่มีเวลาที่ดึงข้อมูลอากาศ','fb-muted'),el('div','Open-Meteo · ข้อมูลประมาณการจากแบบจำลอง','fb-muted'));
   const support=document.getElementById('fbSupport');support.replaceChildren();
   [['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']].forEach(([key,label])=>{
    const row=el('tr'),value=el('td');value.append(el('span',short(state[key+'Name']||'ยังไม่มีข้อมูล',80)),el('span',state[key+'Distance']||'—','fb-distance'));row.append(el('th',label),value);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-label','ดูตำแหน่ง '+label);const zoom=()=>window.dssZoomSupport?.(key);row.onclick=zoom;row.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();zoom()}};support.append(row);
@@ -3200,8 +3200,8 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   field(weather,'ความชื้น',available(state.humidity)?state.humidity+' %':'');
   field(weather,'ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':'');
   field(weather,'ลมพัดจาก',available(state.windSpeed)?state.windDir:'');
-  field(weather,'เวลาข้อมูลอากาศ',state.weatherTime);
-  field(weather,'ดึงข้อมูลล่าสุด',state.weatherFetchedTime||'รอดึงข้อมูลใหม่');
+  field(weather,'ดึงข้อมูลล่าสุด',state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่');
+  field(weather,'เวลาของข้อมูลแบบจำลอง',state.weatherTime);
   weather.append(element('small','Open-Meteo · ข้อมูลแบบจำลอง','fb-muted'));
   const rows=Array.from(document.querySelectorAll('#fbSupport tr'));
   types.forEach(([type,label],index)=>{
