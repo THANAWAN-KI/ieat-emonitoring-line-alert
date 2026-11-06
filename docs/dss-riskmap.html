@@ -2458,10 +2458,10 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 #riskmapReportPanel .report-workspace-bottom>section{min-width:0;margin:0!important;padding:16px;box-sizing:border-box;background:#fff;border:1px solid #e2e6eb;border-radius:10px}
 #riskmapReportPanel #riskMapLineText{display:block;width:100%;min-height:230px;box-sizing:border-box}
 #riskmapReportPanel #coverageMap{align-self:start}
-#riskmapReportPanel .dss-auxiliary-search{min-width:0;background:#fff;border:1px solid #ded5e6;padding:16px}
-#riskmapReportPanel .dss-auxiliary-search summary{cursor:pointer;font-weight:600;color:#68418f;margin-bottom:12px}
-#riskmapReportPanel .dss-auxiliary-search label{display:block;margin:10px 0}
-#riskmapReportPanel .dss-auxiliary-search input{max-width:100%;box-sizing:border-box}
+#riskmapOverviewPanel .dss-auxiliary-search{min-width:0;background:#fff;border:1px solid #ded5e6;padding:16px}
+#riskmapOverviewPanel .dss-auxiliary-search summary{cursor:pointer;font-weight:600;color:#68418f;margin-bottom:12px}
+#riskmapOverviewPanel .dss-auxiliary-search label{display:block;margin:10px 0}
+#riskmapOverviewPanel .dss-auxiliary-search input{max-width:100%;box-sizing:border-box}
 #riskmapReportPanel #coverageOpenReport{grid-column:1/-1;background:#68418f;color:#fff}
 #riskmapReportPanel [hidden]{display:none!important}
 @media(max-width:900px){#riskmapReportPanel .report-workspace-bottom{grid-template-columns:minmax(0,1fr)}}
@@ -2472,7 +2472,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 #riskmapReportPanel #emergencyReportFrame{width:100%!important;min-height:800px!important;border:0}
 @media(max-width:900px){#riskmapReportPanel .report-workspace-top{grid-template-columns:minmax(0,1fr)}}
 </style>
-<script id="riskmap-two-workspaces">
+<script id="riskmap-single-workspace">
 (() => {
   const get=id=>document.getElementById(id);
   const overview=document.querySelector('.coverage-map-layout');
@@ -2481,15 +2481,13 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const links=document.querySelector('.dss-section-bar__links');
   const rail=overview?.querySelector('.riskmap-overview-rail');
   if(!overview||!rail||!report||!frame||!map||!form||!links)return;
-  const home=document.createComment('dashboard map position');map.before(home);
   const overviewPanel=document.createElement('section');
   overviewPanel.id='riskmapOverviewPanel';overviewPanel.setAttribute('aria-labelledby','riskCoverageTitle');
   const workspace=document.createElement('div');workspace.className='riskmap-shared-workspace';
   const body=document.createElement('div');body.className='riskmap-workspace-body';
   overview.before(workspace);workspace.append(rail,body);body.append(overviewPanel);overviewPanel.append(overview);
   const panel=document.createElement('section');panel.id='riskmapReportPanel';
-  panel.setAttribute('aria-labelledby','riskmapReportHeading');
-  const top=document.createElement('div');top.className='report-workspace-top';
+  panel.setAttribute('aria-labelledby','coverageReportTitle');
   const controls=document.createElement('div');controls.className='report-workspace-controls';
   const auxiliary=document.createElement('details');auxiliary.className='dss-auxiliary-search';
   const auxiliaryTitle=document.createElement('summary');auxiliaryTitle.textContent='เครื่องมือเสริม: ค้นหาสารเคมีและอุปกรณ์ระงับเหตุจาก DSS';
@@ -2498,7 +2496,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   if(supportInput)auxiliary.append(supportInput);
   const supportSearch=get('coverageSearchSupport');if(supportSearch)auxiliary.append(supportSearch);
   const pick=get('coveragePickIncident');if(pick)pick.hidden=true;
-  const heading=document.createElement('h1');heading.id='riskmapReportHeading';heading.className='riskmap-report-banner';heading.textContent='รายงานเหตุฉุกเฉิน';
   controls.append(form);
   const bottom=document.createElement('div');bottom.className='report-workspace-bottom';bottom.append(report);
   auxiliaryTitle.textContent='ค้นหาเพิ่มเติม';
@@ -2510,9 +2507,9 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const auxiliaryResults=document.createElement('div');auxiliaryResults.id='coverageAuxiliaryResults';auxiliaryResults.setAttribute('aria-live','polite');other.append(auxiliaryResults);
   auxiliary.append(wrapSearch('สารเคมีจาก DSS',get('coverageChemicalSearch')),wrapSearch('อุปกรณ์ระงับเหตุจาก DSS',equipment),other);
   controls.append(auxiliary);
-  const mapColumn=document.createElement('div');mapColumn.className='report-workspace-map-column';
-  let line=get('riskMapLinePanel');if(line)mapColumn.append(line);
-  top.append(controls,mapColumn);panel.append(heading,top,bottom);overviewPanel.after(panel);
+  const line=get('riskMapLinePanel');if(line)controls.append(line);
+  get('coverageEstateForm').after(controls);
+  panel.append(bottom);overviewPanel.after(panel);
   const editReportButton=document.createElement('button');
   editReportButton.id='dashboardEditReportText';editReportButton.type='button';
   editReportButton.textContent='แก้ไขข้อความรายงาน';editReportButton.setAttribute('aria-pressed','false');
@@ -2547,17 +2544,11 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       if(controls&&toolbar.parentElement!==controls)controls.append(toolbar);
     }
     syncEditButton();
-    line=get('riskMapLinePanel')||line;
-    if(map.parentElement===mapColumn){
-      if(line&&map.nextElementSibling!==line)map.after(line);
-    }else{
-      if(line&&line.parentElement!==mapColumn)mapColumn.append(line);
-    }
   }
   // Older report loaders rebuild the report container after the iframe has loaded.
   // Restore these tools to the right column without cloning controls or losing state.
   const toolsObserver=new MutationObserver(keepMapTools);
-  toolsObserver.observe(panel,{childList:true,subtree:true});
+  toolsObserver.observe(body,{childList:true,subtree:true});
   frame.addEventListener('load',keepMapTools);
   keepMapTools();
   const syncDownload=()=>{
@@ -2569,42 +2560,29 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   report.style.removeProperty('display');report.hidden=false;
   links.remove();
   const overviewButton=get('riskmapRailOverview'),reportButton=get('riskmapRailReport');
-  overviewButton.onclick=()=>show(false);
-  reportButton.onclick=()=>show(true);
-  rail.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>show(false)));
-  function show(edit){
-    // Move the same map and keep the same iframe alive to preserve selections and drafts.
-    if(edit)mapColumn.prepend(map);else home.after(map);
-    keepMapTools();
-    overviewPanel.hidden=edit;panel.hidden=!edit;
-    overviewButton.setAttribute('aria-pressed',String(!edit));
-    reportButton.setAttribute('aria-pressed',String(edit));
-    if(edit&&!frame.getAttribute('src')){
-      const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');
-      url.searchParams.set('v','a359b82');frame.src=url.href;
-    }
-    requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
-  }
+  overviewButton.onclick=()=>workspace.scrollIntoView({block:'start',behavior:'smooth'});
+  const openReport=()=>report.scrollIntoView({block:'start',behavior:'smooth'});
+  reportButton.onclick=openReport;
+  reportButton.setAttribute('aria-controls',report.id);
   document.addEventListener('click',event=>{
     const link=event.target.closest('a[href="#emergencyReportPage"]');
-    if(link){event.preventDefault();show(true);report.scrollIntoView({block:'start',behavior:'smooth'})}
+    if(link){event.preventDefault();openReport();}
   });
-  get('coverageOpenReport')?.addEventListener('click',()=>show(true));
-  window.ieatShowRiskmapReport=()=>show(true);
-  show(false);
+  window.ieatShowRiskmapReport=openReport;
+
 })();
 </script>
 
 
 
 <style id="report-search-action-row-20261106">
-#riskmapReportPanel .report-search-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;grid-column:1/-1!important;margin:6px 0 0!important;align-items:stretch}
-#riskmapReportPanel .report-search-actions>button{grid-column:auto!important;width:100%!important;min-width:0!important;min-height:46px!important;margin:0!important;padding:10px 8px!important;font:500 14px/1.5 Sarabun,sans-serif!important;border-radius:0!important;white-space:normal!important;box-sizing:border-box}
-#riskmapReportPanel .report-search-actions>#coverageOpenReport{grid-column:auto!important}
+#riskmapOverviewPanel .report-search-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;grid-column:1/-1!important;margin:6px 0 0!important;align-items:stretch}
+#riskmapOverviewPanel .report-search-actions>button{grid-column:auto!important;width:100%!important;min-width:0!important;min-height:46px!important;margin:0!important;padding:10px 8px!important;font:500 14px/1.5 Sarabun,sans-serif!important;border-radius:0!important;white-space:normal!important;box-sizing:border-box}
+#riskmapOverviewPanel .report-search-actions>#coverageOpenReport{grid-column:auto!important}
 #riskmapReportPanel #dashboardEditReportText{background:#fff!important;color:#68418f!important;-webkit-text-fill-color:#68418f!important;border:1px solid #9473ad!important;cursor:pointer}
 #riskmapReportPanel #dashboardEditReportText[aria-pressed="true"]{background:#f1e9f8!important;border-color:#68418f!important}
-#riskmapReportPanel .report-search-actions #dashboardDownloadImage{font-size:14px!important;min-height:46px!important}
-@media(max-width:480px){#riskmapReportPanel .report-search-actions{gap:5px!important}#riskmapReportPanel .report-search-actions>button{font-size:12px!important;padding:9px 5px!important}}
+#riskmapOverviewPanel .report-search-actions #dashboardDownloadImage{font-size:14px!important;min-height:46px!important}
+@media(max-width:480px){#riskmapOverviewPanel .report-search-actions{gap:5px!important}#riskmapOverviewPanel .report-search-actions>button{font-size:12px!important;padding:9px 5px!important}}
 </style>
 
 <style id="riskmap-purple-workspace">
@@ -2612,10 +2590,10 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 #riskmapReportPanel .report-workspace-top{grid-template-columns:minmax(0,44fr) minmax(0,56fr)}
 #riskmapReportPanel .report-workspace-bottom{display:block}
 #riskmapReportPanel .riskmap-workflow{background:#f4ecfa;color:#54246f;padding:8px 10px;margin:0 0 12px;font-weight:600;line-height:1.8}
-#riskmapReportPanel .report-search-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-#riskmapReportPanel .report-search-actions>button{white-space:normal!important}
-#riskmapReportPanel .report-search-actions>button:disabled{opacity:.5;cursor:default}
-#riskmapReportPanel #riskMapLineCopy{border:1px solid #a889be;background:#fff;color:#54246f}
+#riskmapOverviewPanel .report-search-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+#riskmapOverviewPanel .report-search-actions>button{white-space:normal!important}
+#riskmapOverviewPanel .report-search-actions>button:disabled{opacity:.5;cursor:default}
+#riskmapOverviewPanel #riskMapLineCopy{border:1px solid #a889be;background:#fff;color:#54246f}
 html body #dashboardExportFeedback a{background:#713c98!important}
 #riskmapReportPanel #dashboardEditReportText{padding:8px 14px;margin-bottom:8px}
 .riskmap-map-key{display:flex;flex-wrap:wrap;gap:7px 13px;padding:9px 0 0;margin:0;list-style:none;font-size:12px}
@@ -2630,8 +2608,8 @@ html body #dashboardExportFeedback a{background:#713c98!important}
 .incident-result-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
 .incident-result-cards>details,.incident-result-cards>p{min-width:0;border:1px solid #e2d5ea;background:#faf6fd;margin:0;padding:8px;color:#54246f;overflow-wrap:anywhere}
 .incident-result-cards>details[open]{grid-column:1/-1}
-#riskmapReportPanel .dss-auxiliary-search{margin-top:12px}
-#riskmapReportPanel .dss-auxiliary-search details{border-top:1px solid #e2d5ea;padding-top:7px;margin-top:7px}
+#riskmapOverviewPanel .dss-auxiliary-search{margin-top:12px}
+#riskmapOverviewPanel .dss-auxiliary-search details{border-top:1px solid #e2d5ea;padding-top:7px;margin-top:7px}
 #coverageChemicalOutput:not(:empty){background:#fff;color:#222;padding:12px;overflow-wrap:anywhere}
 #riskmapReportPanel #coverageMapView{aspect-ratio:8/5}
 @media(max-width:900px){#riskmapReportPanel .report-workspace-top{grid-template-columns:minmax(0,1fr)}}
@@ -2667,6 +2645,14 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 #riskmapOverviewPanel #coverageSupportTitle,#riskmapOverviewPanel #coverageRiskHeading{border-bottom:1px solid #8f749e;padding-bottom:7px}
 @media(max-width:1050px){.riskmap-shared-workspace{grid-template-columns:66px minmax(0,1fr)}#riskmapOverviewPanel .coverage-map-layout{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:560px){.riskmap-shared-workspace{display:block}.riskmap-shared-workspace .riskmap-overview-rail{position:static;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:10px}#riskmapOverviewPanel .coverage-map-layout{display:block}#riskmapOverviewPanel #coverageMap{margin-top:12px}}
+</style>
+<style id="riskmap-shared-map">
+#riskmapOverviewPanel #coverageIncidentForm{margin:0 0 12px}
+#riskmapOverviewPanel #riskMapLinePanel{margin-top:12px;padding:12px;border:1px solid #e2d5ea}
+#riskmapOverviewPanel #riskMapLineText{box-sizing:border-box;width:100%}
+#riskmapReportPanel{margin-top:20px}
+#emergencyReportPage{scroll-margin-top:16px}
+@media(min-width:1051px){#riskmapOverviewPanel #coverageMap{position:sticky;top:12px}}
 </style>
 </body></html>
 
