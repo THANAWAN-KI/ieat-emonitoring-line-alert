@@ -2397,5 +2397,29 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 </script>
 <script src="./dss-riskmap-equipment.js?v=b2efe09"></script>
 
+
+<script id="report-after-coverage-risk-20261106">
+(() => {
+  const risk = document.getElementById('coverageRisk');
+  const report = document.getElementById('emergencyReportPage');
+  const frame = document.getElementById('emergencyReportFrame');
+  const columns = risk?.closest('.coverage-columns');
+  if (!columns || !report || !frame) return;
+  // Keep the report immediately below the factory risk summary in the data column.
+  columns.after(report);
+  report.hidden = false;
+  report.style.setProperty('display', 'block', 'important');
+  report.style.setProperty('width', '100%', 'important');
+  report.style.setProperty('min-width', '0', 'important');
+  report.style.setProperty('margin', '16px 0 0', 'important');
+  if (!frame.getAttribute('src')) {
+    const url = new URL('./dss.html', location.href);
+    url.searchParams.set('embedded', 'dashboard');
+    url.searchParams.set('v', '20261106-report-order');
+    frame.src = url.href;
+  }
+})();
+</script>
+
 </body></html>
 
