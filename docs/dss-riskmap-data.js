@@ -206,7 +206,7 @@
       const data=await factory.queryFeatures(q);
       if(id!==searchId)return;
       message.textContent=data.features.length?'เลือกโรงงานจากผลค้นหา':'ไม่พบชื่อหรือเลขทะเบียนที่ตรงกัน';
-      const select=feature=>{
+      const select=async feature=>{
         const point=feature.geometry?.type==='polygon'?feature.geometry.centroid:feature.geometry;
         if(!point){message.textContent='โรงงานนี้ไม่มีพิกัดสำหรับปักหมุด';return;}
         const label=feature.attributes[factoryName]||feature.attributes['ชื่อบริษัทภาษาอังกฤษ']||'โรงงานที่เลือก';
@@ -214,9 +214,10 @@
         selectedFactory=feature.attributes;
         matches.replaceChildren();place(point,label);
         $('coverageMap').scrollIntoView({block:'nearest'});
-        view.goTo({target:point,zoom:14}).then(openIncident).catch(()=>{});
+        hasSearched=true;incidentRevision++;
+        await syncReport(true);
       };
-      if(data.features.length===1){select(data.features[0]);return;}
+      if(data.features.length===1){await select(data.features[0]);return;}
       for(const feature of data.features){
         const row=feature.attributes,button=el('button',[row[factoryName],row[newReg],row[oldReg]].filter(Boolean).join(' · ')||'โรงงานที่ไม่ระบุชื่อ');
         button.type='button';button.onclick=()=>select(feature);matches.append(button);
@@ -224,10 +225,17 @@
       if(data.exceededTransferLimit||data.features.length===30)matches.append(el('p','แสดงไม่เกิน 30 รายการ โปรดระบุชื่อหรือเลขทะเบียนเพิ่ม'));
     }catch(error){if(id===searchId)message.textContent='ค้นหาทะเบียนโรงงานไม่ได้ กรุณาลองอีกครั้ง';}
   };
-  $('coverageFactoryLookup').onclick=searchFactories;
-  $('coverageFactoryQuery').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();searchFactories(event);}});
+  const runSearch=async event=>{
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    if(!$('coverageFactoryQuery').value.trim()){message.textContent='กรอกชื่อโรงงานหรือเลขทะเบียนก่อนค้นหา';$('coverageFactoryQuery').focus();return;}
+    if(selectedFactory&&origin){hasSearched=true;incidentRevision++;await syncReport(true);}
+    else await searchFactories(event);
+  };
+  $('coverageOpenReport').onclick=runSearch;
+  $('coverageFactoryQuery').addEventListener('keydown',event=>{if(event.key==='Enter')runSearch(event);});
   $('coverageFactoryQuery').addEventListener('input',()=>{selectedFactory=null;hasSearched=false;incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));});
-  form.onsubmit=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
+  form.onsubmit=runSearch;
  }
 
  function createCoverageMap(){
@@ -242,9 +250,11 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=28)=>svgMarker(
-      '<circle cx="12" cy="12" r="11" fill="#fff" stroke="'+color+'" stroke-width="1.8"/>'+
-      '<g fill="none" stroke="'+color+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+drawing+'</g>',size,size);
+    const badge=(drawing,color,size=32)=>svgMarker(
+      '<defs><linearGradient id="face" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="'+color+'"/><stop offset="1" stop-color="'+color+'" stop-opacity=".82"/></linearGradient></defs>'+
+      '<circle cx="12" cy="12.8" r="10.8" fill="#12263a" opacity=".18"/>'+
+      '<circle cx="12" cy="11.5" r="10.5" fill="url(#face)" stroke="#fff" stroke-width="1.8"/>'+
+      '<g fill="none" stroke="#fff" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.4 1.9) scale(.8)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#7942a0" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',32,32,15);
     const fireStation=badge('<path d="M6 18V10l6-4 6 4v8H6Z"/><path d="M9 18v-5h6v5m-6-3h6"/><path d="M12 7V5"/>','#d34a32');
     const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#c53e58');
@@ -256,7 +266,7 @@
       communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#23866b'),
       waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#138fa9'),
       school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#ae7419'),
-      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#43546e',30)
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#365477',34)
     };
     const polygon=(color,outline)=>({type:'simple-fill',color,outline:{color:outline,width:1}});
     const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression,symbol,minScale=0,opacity=1}={})=>new FeatureLayer({
