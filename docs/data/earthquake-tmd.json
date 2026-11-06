@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-06T06:50:03.270545+00:00",
+    "fetchedAt": "2026-11-06T15:56:13.016713+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793818425000,
-    "latestEvent": 1793940363000
+    "oldestEvent": 1793866938000,
+    "latestEvent": 1793974096000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17383",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.617,
+          19.81,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.1,
+        "place": "ประเทศเมียนมา",
+        "time": 1793974096000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17383",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17382",
@@ -210,29 +233,6 @@
         "place": "ต.ควร อ.ปง จ.พะเยา",
         "time": 1793866938000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17374",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17373",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.906,
-          22.143,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.3,
-        "place": "พรมแดนประเทศเมียนมา - ประเทศจีน",
-        "time": 1793818425000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17373",
         "source": "TMD",
         "types": "",
         "detail": null,
