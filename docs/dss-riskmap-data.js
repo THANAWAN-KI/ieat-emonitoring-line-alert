@@ -149,45 +149,43 @@
     const km=Number(radius.value),incidentType=type.value;
     const revision=incidentRevision;
     button.disabled=true;
+    window.ieatCoverageReport={company:name,point,km,incidentType,status:'loading'};
+    window.dispatchEvent(new Event('ieat-coverage-context-updated'));
     try{
       const rows=await updateNearby(true);
       if(revision!==incidentRevision)return;
       if(!rows)throw Error('จุดเกิดเหตุหรือเงื่อนไขค้นหาเปลี่ยน กรุณาเปิดรายงานอีกครั้ง');
-      window.ieatCoverageReport={company:name,point,km,incidentType,rows};
+      window.ieatCoverageReport={company:name,point,km,incidentType,rows,status:'loading'};
       let doc;
       for(let i=0;i<60;i++){
         doc=frame.contentDocument;
-        if(doc?.getElementById('pngBtn')?.onclick&&doc.getElementById('lat')&&doc.getElementById('lng')&&doc.getElementById('bufferKm1'))break;
+        if(typeof frame.contentWindow?.dssApplyIncidentContext==='function')break;
         await new Promise(resolve=>setTimeout(resolve,150));
       }
       if(!doc?.getElementById('pngBtn')?.onclick||!doc.getElementById('bufferKm1'))throw Error('รายงานยังโหลดไม่เสร็จ');
       if(revision!==incidentRevision)return;
-      const localType=$('dashboardIncidentType');
-      localType.value=incidentType==='เหตุไฟไหม้'?'เหตุเพลิงไหม้':incidentType==='สารเคมีรั่วไหล'?incidentType:'ยังไม่ได้รับแจ้ง';
-      localType.dispatchEvent(new Event('change',{bubbles:true}));
-      const localRadius=$('supportRadius');
-      if(![...localRadius.options].some(option=>Number(option.value)===km))localRadius.add(new Option(km+' กม.',String(km)));
-      localRadius.value=String(km);
-      const {Event:ReportEvent}=frame.contentWindow;
-      doc.getElementById('lat').value=String(point.lat);
-      const lng=doc.getElementById('lng');
-      lng.value=String(point.lng);lng.dispatchEvent(new ReportEvent('change',{bubbles:true}));
-      const buffer=doc.getElementById('bufferKm1');
-      buffer.value=String(km);
-      for(let i=0;i<3;i++)doc.getElementById('bufferEnabled'+i).checked=i===0;
-      buffer.dispatchEvent(new ReportEvent('change',{bubbles:true}));
-      frame.dataset.coverageTransfer='true';
-      window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature:{attributes:attrs,geometry:{x:point.lng,y:point.lat,spatialReference:{wkid:4326}}}}}));
+      window.ieatIncidentChosen=true;
+      const context={id:String(Date.now())+'-'+revision,company:name,point,km,incidentType,rows,attributes:attrs,status:'loading'};
+      window.ieatCoverageReport=context;
+      window.dispatchEvent(new Event('ieat-coverage-context-updated'));
+      if(typeof frame.contentWindow.dssApplyIncidentContext!=='function')throw Error('รายงานเวอร์ชันใหม่ยังไม่พร้อม กรุณารีเฟรชหน้า');
+      const summary=await frame.contentWindow.dssApplyIncidentContext(context);
+      if(revision!==incidentRevision||!summary)return;
+      context.summary=summary;context.status='ready';
+      const circle=draw();
+      await view.goTo({target:circle.extent.expand(1.15)},{animate:false});
+      if(revision!==incidentRevision)return;
+      openIncident();
+      await window.ieatSyncCoverageMapPreview?.();
+      window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(manual)section.scrollIntoView({behavior:'smooth',block:'start'});
-      message.textContent=['อุบัติเหตุ','อื่น ๆ'].includes(incidentType)
-        ? 'ส่งข้อมูลไปยังรายงานแล้ว · โปรดระบุประเภทเหตุในรายละเอียดรายงาน'
-        : 'ส่งโรงงาน จุดเกิดเหตุ และรัศมีไปยังรายงานแล้ว';
-    }catch(error){message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}
+      message.textContent='อัปเดตโรงงาน ประเภทเหตุ รัศมี แผนที่ รายงาน และข้อความ LINE แล้ว';
+    }catch(error){if(revision===incidentRevision){if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}}
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
-  radius.onchange=()=>{incidentRevision++;draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
-  type.onchange=()=>{incidentRevision++;draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
+  radius.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
+  type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
   $('coverageSearchSupport').onclick=()=>{if(origin)updateNearby();else message.textContent='เลือกโรงงานหรือปักหมุดก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
     event.preventDefault();
@@ -201,7 +199,7 @@
       await factory.load();
       const q=factory.createQuery();
       q.where=fields.slice(0,4).flatMap(field=>terms.map(term=>"UPPER("+field+") LIKE '%"+term+"%'")).join(' OR ');
-      q.outFields=fields;q.returnGeometry=true;q.num=30;q.outSpatialReference=view.spatialReference;
+      q.outFields=['*'];q.returnGeometry=true;q.num=30;q.outSpatialReference=view.spatialReference;
       const data=await factory.queryFeatures(q);
       if(id!==searchId)return;
       message.textContent=data.features.length?'เลือกโรงงานจากผลค้นหา':'ไม่พบชื่อหรือเลขทะเบียนที่ตรงกัน';
@@ -225,7 +223,7 @@
   };
   $('coverageFactoryLookup').onclick=searchFactories;
   $('coverageFactoryQuery').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();searchFactories(event);}});
-  $('coverageFactoryQuery').addEventListener('input',()=>{selectedFactory=null;hasSearched=false;incidentRevision++;});
+  $('coverageFactoryQuery').addEventListener('input',()=>{selectedFactory=null;hasSearched=false;incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));});
   form.onsubmit=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
  }
 
@@ -294,11 +292,38 @@
       basemapSelect.disabled=false;
       basemapSelect.onchange=()=>{map.basemap=basemapSelect.value;};
     }
+    window.ieatCoverageMapNavigate=async data=>{
+      if(!view.ready)return;
+      if(data.type==='dss:report-map-pan'&&[data.dx,data.dy].every(Number.isFinite)){
+        const center=view.toMap({x:view.width*(.5-data.dx),y:view.height*(.5-data.dy)});
+        if(center)await view.goTo({target:center,zoom:view.zoom},{animate:false});
+      }else if(data.type==='dss:report-map-zoom'&&[1,-1].includes(data.delta)){
+        const x=Number.isFinite(data.x)?Math.max(0,Math.min(1,data.x)):.5,y=Number.isFinite(data.y)?Math.max(0,Math.min(1,data.y)):.5;
+        const target=view.toMap({x:view.width*x,y:view.height*y});
+        if(target)await view.goTo({target,zoom:view.zoom+data.delta},{animate:false});
+      }
+    };
+    let previewTimer,previewSequence=0;
     window.ieatCaptureCoverageMap=async()=>{
       if(!view.ready||!window.ieatCoverageReport)return null;
-      const shot=await view.takeScreenshot({format:'png'});
+      await view.when();
+      if(view.animation)await view.animation;
+      const shot=await view.takeScreenshot({format:'png',width:986});
       return shot.dataUrl;
     };
+    window.ieatSyncCoverageMapPreview=async()=>{
+      const context=window.ieatCoverageReport;
+      if(!context?.id||context.status!=='ready'||!view.stationary||view.updating)return;
+      const id=++previewSequence,image=await window.ieatCaptureCoverageMap();
+      if(id!==previewSequence||window.ieatCoverageReport?.id!==context.id)return;
+      const frame=$('emergencyReportFrame');
+      frame?.contentWindow?.dssSetCoverageMapImage?.(image,context.id);
+    };
+    const schedulePreview=()=>{clearTimeout(previewTimer);previewTimer=setTimeout(()=>window.ieatSyncCoverageMapPreview().catch(()=>{}),200);};
+    view.watch('stationary',value=>{if(value)schedulePreview();});
+    view.watch('updating',value=>{if(!value)schedulePreview();});
+    $('coverageBasemap')?.addEventListener('change',schedulePreview);
+
     view.ui.add(new Home({view}),'top-left');
     view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่'}),'top-right');
     view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
