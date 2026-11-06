@@ -27,13 +27,69 @@
  function visibleRows(d,includeType=true){return d.rows.filter(r=>filterRow(r,d,includeType));}
  function updateOptions(){const names=new Map();datasets.forEach(d=>d.rows.forEach(r=>{if(r.estate!=='—')names.set(normalize(r.estate),r.estate)}));const old=$('estate').value;$('estate').replaceChildren(new Option('ทุกนิคมอุตสาหกรรม',''));[...names].sort((a,b)=>a[1].localeCompare(b[1],'th')).forEach(([key,label])=>$('estate').add(new Option(label,key)));$('estate').value=old;}
  function donut(hostId,entries,centerLabel){const host=$(hostId);host.replaceChildren();const total=entries.reduce((s,e)=>s+e.count,0),wrap=el('div',null,'donut-layout'),ring=el('div',null,'donut'),inside=el('div',null,'donut-inner');inside.append(el('strong',number(total)),el('span',centerLabel));ring.append(inside);let angle=0;const stops=entries.filter(e=>e.count).map(e=>{const start=angle;angle+=e.count/Math.max(total,1)*360;return e.color+' '+start+'deg '+angle+'deg'});ring.style.background=stops.length?'conic-gradient('+stops.join(',')+')':'#edf1f5';const legend=el('div',null,'chart-legend');entries.forEach(e=>{const line=el('div',null,'legend-row'),dot=el('i');dot.style.background=e.color;line.append(dot,el('span',e.label),el('b',number(e.count)));legend.append(line)});wrap.append(ring,legend);host.append(wrap);}
+ const riskRegister={...datasets.find(d=>d.id==='business'),rows:[],path:'e_PP/FeatureServer/0'};
+ const extraSupport=[
+  {id:'waterWatch',label:'จุดเฝ้าระวังระดับน้ำ',path:'Risk_Map_WFL1/FeatureServer/0'},
+  {id:'school',label:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1'},
+  {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
+ ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
+ function createCoverageMap(){
+  const host=$('coverageMapView'), status=$('coverageMapStatus');
+  if(!host)return;
+  if(typeof window.require!=='function'){status.textContent='โหลดระบบแผนที่ไม่ได้';return;}
+  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home'],
+    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home)=>{
+    const riskNames=riskFields.map(f=>f.field);
+    const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression}={})=>new FeatureLayer({
+      url,title,visible,definitionExpression,
+      popupEnabled:fields.length>0,
+      ...(fields.length?{popupTemplate:{title:'{'+fields[0]+'}',content:[{type:'fields',fieldInfos:fields.map(fieldName=>({fieldName}))}]}}:{})
+    });
+    const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ']});
+    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026');
+    const risks=riskFields.map(f=>layer('e_PP/FeatureServer/0',f.label,{
+      definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
+    }));
+    const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
+      fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
+    }));
+    const publicBase='https://gistdaportal.gistda.or.th/arcgis/rest/services/Hosted/Identity_gdb/FeatureServer/';
+    const supplemental=[[0,'จุดตรวจวัดน้ำ'],[1,'ระบบบำบัดน้ำเสีย'],[2,'สถานีตรวจวัดคุณภาพอากาศ'],[3,'สถานที่รวบรวมและจัดการขยะ']].map(([id,title])=>layer('',title,{url:publicBase+id}));
+    const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
+    const map=new ArcMap({basemap:'gray-vector',layers:[group('ข้อมูลสนับสนุน กนอ.',support),group('ข้อมูลเสริม GISTDA',supplemental),group('นิคมฯ และผู้ประกอบการ กนอ.',[businesses,center]),group('ความเสี่ยงโรงงาน กนอ.',risks)]});
+    const view=new MapView({container:host,map,center:[101,14],zoom:5});
+    view.ui.add(new Home({view}),'top-left');
+    view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่'}),'top-right');
+    const layers=[center,businesses,...support,...risks,...supplemental];
+    view.when(()=>{status.textContent='เปิดรายการชั้นข้อมูลเพื่อเลือกข้อมูลที่ต้องการแสดง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
+    Promise.allSettled(layers.map(l=>l.load())).then(results=>{
+      const failures=results.flatMap((r,i)=>r.status==='rejected'?[layers[i].title]:[]);
+      if(failures.length)status.textContent='โหลดบางชั้นไม่ได้ · '+failures.join(' · ');
+    });
+    let request=0;
+    $('coverageEstate').addEventListener('change',async event=>{
+      const sequence=++request,select=event.currentTarget;
+      const name=select.selectedOptions[0]?.textContent;
+      try{
+        await view.when();
+        if(!select.value){if(sequence===request)await view.goTo({center:[101,14],zoom:5});return;}
+        const query=center.createQuery();
+        query.where="สำนักงานนิคมฯ = '"+name.replace(/'/g,"''")+"'";
+        query.returnGeometry=true;
+        const result=await center.queryFeatures(query);
+        if(sequence===request&&result.features.length)await view.goTo({target:result.features,zoom:13});
+      }catch(error){if(sequence===request&&error.name!=='AbortError')status.textContent='ซูมไปยังนิคมฯ ที่เลือกไม่ได้';}
+    });
+  },()=>{status.textContent='โหลดเครื่องมือแผนที่ไม่ได้';});
+ }
+
   function createCoverageOverview(){
   const panel=$('riskCoverage');
   const search=$('coverageEstateSearch'), select=$('coverageEstate');
   const summary=$('coverageSummary'), support=$('coverageSupport'), risk=$('coverageRisk'), detail=$('coverageDetail');
   const registry=datasets.find(d=>d.id==='estate');
-  const business=datasets.find(d=>d.id==='business');
-  const supportLayers=datasets.filter(d=>!['estate','business'].includes(d.id));
+  const business=riskRegister;
+  const supportLayers=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport);
   const groups=[riskFields[0],riskFields[2],riskFields[1]];
   const stateLabel={loading:'กำลังโหลด',error:'เชื่อมต่อไม่ได้',partial:'ข้อมูลยังไม่ครบ'};
   let drill='';
@@ -125,9 +181,9 @@
   $('coverageEstateForm').onsubmit=event=>{
     event.preventDefault();
     const query=normalize(search.value);
-    if(!query){select.value='';renderCoverage();return;}
+    if(!query){select.value='';select.dispatchEvent(new Event('change'));return;}
     const matches=[...select.options].filter(option=>option.value&&option.value.includes(query));
-    if(matches.length===1){select.value=matches[0].value;renderCoverage();}
+    if(matches.length===1){select.value=matches[0].value;select.dispatchEvent(new Event('change'));}
     else select.focus();
   };
   return renderCoverage;
@@ -231,7 +287,7 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
  document.querySelectorAll('.nav-tab').forEach(button=>button.onclick=()=>{document.querySelectorAll('.nav-tab').forEach(b=>b.classList.toggle('active',b===button));const page=button.dataset.page;$('riskDashboard').hidden=page!=='risk';$('otherPage').hidden=page==='risk';if(page!=='risk'){const paths={flood:'./flood-report.html?v=20261027-popup',drought:'./drought.html?v=20261023-water-security',pm25:'./pm25.html',earthquake:'./earthquake.html?v=20261020-sarabun-2'};if($('otherFrame').getAttribute('src')!==paths[page])$('otherFrame').src=paths[page];}});
  loadOperatingZones();
  window.addEventListener('ieat-dss-chemical-ready',schedule);
- render();(async()=>{let next=0;async function worker(){while(next<datasets.length)await load(datasets[next++]);}await Promise.allSettled([worker(),worker(),worker()]);})();
+ render();createCoverageMap();(async()=>{const queue=[riskRegister,...datasets,...extraSupport];let next=0;async function worker(){while(next<queue.length)await load(queue[next++]);}await Promise.allSettled([worker(),worker(),worker()]);})();
 
 
  function symbolStyle(def,attributes){
