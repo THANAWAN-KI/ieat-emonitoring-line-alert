@@ -221,6 +221,17 @@ html body header#ieatPortalHeader.standalone-dss-header {
 #riskMapLineCopy { justify-self:start; background:#68418f; color:#fff; cursor:pointer; }
 #riskMapLineCopy:disabled { opacity:.55; cursor:default; }
 </style>
+<style id="dss-equipment-nearby-style">
+#dssEquipmentNearby { margin:12px; padding:14px; border:1px solid #d8cde3; background:#faf7fc; }
+#dssEquipmentNearby h3,#dssEquipmentNearby h4 { margin:0 0 8px; }
+#dssEquipmentNearbyForm { display:flex; flex-wrap:wrap; align-items:end; gap:8px; }
+#dssEquipmentNearbyForm label { display:grid; gap:4px; min-width:0; }
+#dssEquipmentNearby :is(input,button) { min-height:40px; box-sizing:border-box; padding:7px 10px; border:1px solid #b6a6c6; border-radius:0; font:inherit; }
+#dssEquipmentNearby button { background:#68418f; color:#fff; cursor:pointer; }
+#dssEquipmentNearby button:disabled { opacity:.5; cursor:default; }
+#dssEquipmentNearbyOutput:not(:empty) { padding:14px; margin:10px 0; background:#fff; border:1px solid #e2dce8; overflow-wrap:anywhere; }
+#dssEquipmentNearbyOutput li { margin:5px 0; }
+</style>
 </head>
 <body>
 <header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</strong></span></div><div class="portal-top"><div class="header-nav"></div></div></header>
@@ -335,6 +346,16 @@ html body header#ieatPortalHeader.standalone-dss-header {
   <textarea id="riskMapLineText" rows="9" readonly></textarea>
   <button id="riskMapLineCopy" type="button" disabled>คัดลอกข้อความสำหรับ LINE</button>
   <p id="riskMapLineStatus" role="status">เลือกกรณีและระบุสถานประกอบการในรายงาน แล้วแนบภาพ Risk Map ที่ดาวน์โหลด</p>
+</section><section id="dssEquipmentNearby" aria-labelledby="dssEquipmentNearbyTitle">
+  <h3 id="dssEquipmentNearbyTitle">ค้นหาอุปกรณ์ระงับเหตุของโรงงานใกล้เคียง</h3>
+  <form id="dssEquipmentNearbyForm">
+    <label>ชื่อหรือประเภทอุปกรณ์ <input id="dssEquipmentNearbyQuery" type="search" value="Class D" placeholder="เช่น Class D หรือเครื่องสูบน้ำดับเพลิง" required></label>
+    <label>รัศมีจากจุดเกิดเหตุ (กม.) <input id="dssEquipmentNearbyRadius" type="number" min="0.1" max="50" step="0.1" value="5" required></label>
+    <button type="submit">ค้นหาใน DSS</button>
+  </form>
+  <p id="dssEquipmentNearbyStatus" role="status">ใช้โรงงานและพิกัดจากรายงานปัจจุบันเป็นจุดอ้างอิง</p>
+  <div id="dssEquipmentNearbyOutput"></div>
+  <button id="dssEquipmentNearbyDownload" type="button" disabled>ดาวน์โหลดภาพผลค้นหา (PNG)</button>
 </section><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe></section>
 <section id="otherPage" hidden><iframe id="otherFrame" allow="fullscreen" allowfullscreen class="other-frame" title="ข้อมูลสถานการณ์ภัย" loading="lazy"></iframe></section>
 </main>
@@ -1144,6 +1165,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  if(!png||typeof png.onclick!=='function'||png.disabled)throw Error('รายงานยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วลองอีกครั้ง');
  dashboard.dataset.exporting='true';preview=doc.body.classList.contains('dss-dashboard-preview');two=doc.body.classList.contains('dss-dashboard-preview-two');doc.body.classList.remove('dss-dashboard-preview','dss-dashboard-preview-two');
  feedback.textContent='กำลังสร้างภาพรายงาน 2 หน้า กรุณารอสักครู่…';
+ window.ieatCompleteRiskMapReport?.();
  await png.onclick.call(png,new Event('click'));
  const error=doc.getElementById('dssExportError'),files=frame.contentWindow.ieatReportDownloads;
  if(error)throw Error(error.textContent.replace(/^ส่งออกรายงานไม่สำเร็จ:\s*/,''));
@@ -2305,7 +2327,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     const text=label?[label,'ศสป.กนอ. ขอส่งข้อมูลแผนที่ความเสี่ยงของ '+subject+range+' ประกอบด้วยข้อมูลดังนี้',...sections].join('\n'):'';
     if(output.value!==text)output.value=text;
     copy.disabled=!label||!identified||(mode.value==='drill'&&!radii.length);
-    for(const header of doc?.querySelectorAll('#report .report-header, #dssPageTwo .p2-header')||[]){
+    for(const header of doc?.querySelectorAll('#report .report-header, #dssFieldBrief .fb-header, #dssPageTwo .p2-header')||[]){
       const container=header.querySelector('h1')?.parentElement||header;
       let badge=container.querySelector('[data-risk-map-case]');
       if(!label){badge?.remove();continue;}
@@ -2347,5 +2369,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   bind();
 })();
 </script>
+<script src="./dss-riskmap-equipment.js?v=7d441f0"></script>
 </body></html>
 
