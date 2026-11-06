@@ -125,7 +125,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:{type:'simple-marker',style:'diamond',color:'#b82e34',size:17,outline:{color:'#fff',width:2}}});
+    pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><path fill="#c64032" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:32,height:40,yoffset:20}});
     pinLayer.add(pin);
     draw();updateNearby();queueReport();openIncident();
     message.textContent='จุดเกิดเหตุ · '+name+' · คลิกหมุดแล้วลากเพื่อย้ายจุด';
@@ -241,13 +241,21 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const pin=svgMarker('<path fill="#178d4c" stroke="#fff" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><circle cx="12" cy="9" r="2.8" fill="#fff"/>',23,23,10);
-    const fireStation=svgMarker('<path fill="#bb292e" stroke="#fff" d="M2 9 12 3l10 6v12H2Z"/><path fill="#ffd47b" d="M5 12h14v7H5Z"/><path stroke="#8b2c20" d="M9 12v7m6-7v7M5 15h14"/>',22,22);
-    const hospital=svgMarker('<rect x="2" y="2" width="20" height="20" fill="#fff" stroke="#be283c" stroke-width="2"/><path stroke="#be283c" stroke-width="4" d="M12 6v12M6 12h12"/>',17,17);
+    const badge=(drawing,color,size=28)=>svgMarker(
+      '<circle cx="12" cy="12" r="11" fill="#fff" stroke="'+color+'" stroke-width="1.8"/>'+
+      '<g fill="none" stroke="'+color+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+drawing+'</g>',size,size);
+    const pin=svgMarker('<path fill="#7942a0" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',32,32,15);
+    const fireStation=badge('<path d="M6 18V10l6-4 6 4v8H6Z"/><path d="M9 18v-5h6v5m-6-3h6"/><path d="M12 7V5"/>','#d34a32');
+    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#c53e58');
     const supportSymbols={
-      fire:fireStation,hospital,hydrant:marker('square','#2074a6'),police:marker('diamond','#4053a0'),
-      community:marker('circle','#a959b0'),communityRisk:marker('circle','#a959b0'),
-      waterWatch:marker('triangle','#178da6'),school:marker('square','#df801a'),cctv:marker('diamond','#434753')
+      fire:fireStation,hospital,
+      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>','#167dad'),
+      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>','#365c9d'),
+      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#23866b'),
+      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#23866b'),
+      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#138fa9'),
+      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#ae7419'),
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#43546e',30)
     };
     const polygon=(color,outline)=>({type:'simple-fill',color,outline:{color:outline,width:1}});
     const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression,symbol,minScale=0,opacity=1}={})=>new FeatureLayer({
@@ -271,9 +279,21 @@
     }));
     const publicBase='https://gistdaportal.gistda.or.th/arcgis/rest/services/Hosted/Identity_gdb/FeatureServer/';
     const supplemental=[[0,'จุดตรวจวัดน้ำ'],[1,'ระบบบำบัดน้ำเสีย'],[2,'สถานีตรวจวัดคุณภาพอากาศ'],[3,'สถานที่รวบรวมและจัดการขยะ']].map(([id,title])=>layer('',title,{url:publicBase+id}));
+    const extraSymbols=[
+      supportSymbols.waterWatch,
+      badge('<path d="M5 8h14v9H5Zm0 3h14M8 5v3m8-3v3M8 14h2m4 0h2"/>','#168f9a'),
+      badge('<path d="M5 8h10a2 2 0 1 0-2-2M5 12h14a2 2 0 1 1-2 2M5 16h5"/>','#388578'),
+      badge('<path d="M7 8h10l-1 11H8L7 8Zm-2 0h14M9 8V5h6v3m-4 3v5m3-5v5"/>','#768338')
+    ];
+    supplemental.forEach((item,index)=>item.when(()=>{if(item.geometryType==='point')item.renderer={type:'simple',symbol:extraSymbols[index]};}).catch(()=>{}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
-    const map=new ArcMap({basemap:'topo-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
+    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
+    const basemapSelect=$('coverageBasemap');
+    if(basemapSelect){
+      basemapSelect.disabled=false;
+      basemapSelect.onchange=()=>{map.basemap=basemapSelect.value;};
+    }
     window.ieatCaptureCoverageMap=async()=>{
       if(!view.ready||!window.ieatCoverageReport)return null;
       const shot=await view.takeScreenshot({format:'png'});
