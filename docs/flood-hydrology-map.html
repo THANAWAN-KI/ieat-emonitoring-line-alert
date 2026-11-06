@@ -633,7 +633,10 @@ const basemapUrls={streets:'https://services.arcgisonline.com/ArcGIS/rest/servic
 const storyMap=new URLSearchParams(location.search).get('story')==='1';
 let mapOnScreen=true;
 if(storyMap&&'IntersectionObserver' in window){
- const observer=new IntersectionObserver(([entry])=>{mapOnScreen=entry.isIntersecting});
+ const observer=new IntersectionObserver(([entry])=>{
+  mapOnScreen=entry.isIntersecting;
+  document.body.classList.toggle('map-offscreen',!mapOnScreen);
+ });
  observer.observe($('mapStage'));
 }
 if(storyMap){
@@ -1369,12 +1372,21 @@ function rasterStart(){
  $('map').style.display='none';$('raster').style.display='block';
  if(!window.L){$('status').textContent='โหลดแผนที่ไม่สำเร็จ กรุณาเปิดใหม่';return}
  raster=L.map('raster',{preferCanvas:true,zoomControl:false}).setView([14,101],6);
- raster.on('zoomend moveend',queueRasterIllustrations);raster.on('zoomend',()=>{if(cleanDashboard&&ready)render()});
+ let lastZoom=raster.getZoom();
+ raster.on('movestart',()=>document.body.classList.add('map-moving'));
+ raster.on('moveend',()=>{
+  document.body.classList.remove('map-moving');
+  const zoom=raster.getZoom();
+  if(cleanDashboard&&ready&&zoom!==lastZoom)render();
+  else{drawFlow();queueWaterLabels()}
+  lastZoom=zoom;
+  queueRasterIllustrations();queueBoundaries();queueDashboardLabels();
+ });
  raster.on('popupopen',event=>{if(cleanDashboard||storyMap||event.popup.getElement()?.classList.contains('prep-point-popup'))return;const html=event.popup.getContent();raster.closePopup(event.popup);window.IEAT_MAP_DETAILS?.showHTML(typeof html==='string'?html:html?.outerHTML||'')});
  riverSvgRenderer=L.svg({padding:.5});
  rasterBaseLayer=L.tileLayer(basemapUrls[selectedBasemap]||basemapUrls.gray,{attribution:'Imagery © Esri and its data providers · Tiles © Esri, HERE, Garmin, OpenStreetMap contributors · Buildings: Microsoft, CDLA Permissive 2.0 · © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium',maxZoom:18,maxNativeZoom:16,crossOrigin:true,className:'dashboard-base-tiles'}).addTo(raster);
  if(!cleanDashboard)L.control.zoom({position:'bottomright'}).addTo(raster);L.control.scale({imperial:false,position:'bottomleft'}).addTo(raster);
- groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};raster.on('moveend zoomend',()=>{drawFlow();queueWaterLabels();queueBoundaries();queueDashboardLabels()});
+ groups={points:L.layerGroup().addTo(raster),rings:L.layerGroup().addTo(raster),gistda:L.layerGroup().addTo(raster),flow:L.layerGroup().addTo(raster)};
  ready=true;syncPaperBasemap();document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(!cleanDashboard&&map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
 }
 function vectorStart(){
@@ -1404,7 +1416,7 @@ function vectorStart(){
   vector.on('click','points',e=>{const p=e.features[0];createMapPopup({maxWidth:'330px'}).setLngLat(p.geometry.coordinates).setHTML(content(p.properties,p.properties.kind)).addTo(vector)});
   ['water-stations','points'].forEach(id=>{vector.on('mouseenter',id,()=>vector.getCanvas().style.cursor='pointer');vector.on('mouseleave',id,()=>vector.getCanvas().style.cursor='')});
   ready=true;syncPaperBasemap();document.dispatchEvent(new Event('ieat-map-ready'));setTimeout(()=>{const map=vector||raster;if(!cleanDashboard&&map&&map.getZoom()<10)showEstateIllustrationExample()},1800);render();queueBoundaries();if(pending){focus(pending);pending=null}parent.postMessage({type:'flood-water-ready'},location.origin);if(watchMapData)showWatchMapData(watchMapData);
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let phase=0;animation=setInterval(()=>{phase++;if(vector?.getLayer('overflow-alert'))vector.setPaintProperty('overflow-alert','circle-stroke-opacity',phase%2?.15:1);if(!document.hidden&&vector?.getLayer('river-flow')&&flags.flow)vector.setPaintProperty('river-flow','line-dasharray',phase%2?[1,4]:[0,2,1,2])},500)}
+
   if(gistda)addGistda();addFlow();
  });
  }catch(e){rasterStart()}
@@ -1443,21 +1455,15 @@ function addFlow(){
  vector.addSource('mapped-flow',{type:'geojson',data:{...waterways,features:waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f))}});
  vector.addLayer({id:'mapped-river-base',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#109dc0','line-width':['interpolate',['linear'],['zoom'],4,.65,8,1.35,10,2.6,14,6,18,12],'line-opacity':.94}},'discharge-ring');
  vector.addLayer({id:'mapped-water-motion',type:'line',source:'mapped-flow',layout:{visibility:flags.flow?'visible':'none'},paint:{'line-color':'#c6f1fa','line-width':['interpolate',['linear'],['zoom'],4,.55,8,.85,10,1.4,14,2.7,18,5],'line-dasharray':[.8,7.2],'line-opacity':1}},'discharge-ring');
- // Single time-based animation loop; the phase is never reset by zoom/pan events.
-  // Throttled paint updates reduce expensive map redraws during camera movement.
-  if(!window.__ieatFlowLoopStarted){
-   window.__ieatFlowLoopStarted=true;
-   const started=performance.now();let last=-1000;
-   function animateRiver(now){
-    if(!mapOnScreen||document.hidden){setTimeout(()=>requestAnimationFrame(animateRiver),400);return}
-    requestAnimationFrame(animateRiver);
-    if(document.hidden||!mapOnScreen||!flags.flow||!vector?.getLayer('mapped-water-motion')||now-last<(aerialPlaying||vector.isMoving()?140:65))return;
-    last=now;
-    const phase=((now-started)*.008)%8;
-    try{vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase])}catch(e){}
-   }
-   requestAnimationFrame(animateRiver);
-  }
+ // Keep the river and its direction marks visible while the camera moves.
+ const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+ const canAnimate=()=>mapOnScreen&&!document.hidden&&flags.flow&&!aerialPlaying&&!vector?.isMoving();
+ const started=performance.now();
+ animation=setInterval(()=>{
+  if(reducedMotion.matches||!canAnimate()||!vector?.getLayer('mapped-water-motion'))return;
+  const phase=((performance.now()-started)*.008)%8;
+  vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase]);
+ },125);
  const paths=waterways.features.filter(f=>f.properties.direction==='downstream'&&!excludeCambodiaLowerMekong(f)).map(f=>{
   let distance=0;
   const coords=f.geometry.coordinates;
@@ -1474,13 +1480,15 @@ function addFlow(){
   vector.addImage('flow-arrow',img);
   vector.addSource('flow-arrow-motion',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   vector.addLayer({id:'flow-arrows',type:'symbol',source:'flow-arrow-motion',minzoom:6,layout:{visibility:flags.flow?'visible':'none','icon-image':'flow-arrow','icon-size':.52,'icon-rotate':['get','angle'],'icon-rotation-alignment':'map','icon-allow-overlap':false,'icon-ignore-placement':true}});
-  let last=0;
-  function animateArrows(now){
-   if(!vector?.getSource('flow-arrow-motion'))return;
-   if(!mapOnScreen||document.hidden){setTimeout(()=>requestAnimationFrame(animateArrows),400);return}
-   requestAnimationFrame(animateArrows);
-   if(document.hidden||!mapOnScreen||!flags.flow||vector.getZoom()<6||now-last<(aerialPlaying||vector.isMoving()?650:220))return;
-   last=now;
+  let staticView='';
+  const arrowTimer=setInterval(()=>{
+   const source=vector?.getSource('flow-arrow-motion');
+   if(!source){clearInterval(arrowTimer);return}
+   if(!canAnimate()||vector.getZoom()<6)return;
+   const view=vector.getBounds().toArray().flat().join(',');
+   if(reducedMotion.matches&&view===staticView)return;
+   staticView=reducedMotion.matches?view:'';
+   const now=reducedMotion.matches?0:performance.now();
    const bounds=vector.getBounds(),spacing=Math.max(.012,70/2**vector.getZoom()),features=[];
    for(const {segments,distance} of paths){
     if(!distance)continue;
@@ -1493,9 +1501,8 @@ function addFlow(){
      if(bounds.contains(coordinates))features.push({type:'Feature',geometry:{type:'Point',coordinates},properties:{angle:angle-90}});
     }
    }
-   vector.getSource('flow-arrow-motion').setData({type:'FeatureCollection',features});
-  }
-  requestAnimationFrame(animateArrows);
+   source.setData({type:'FeatureCollection',features});
+  },360);
  };
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
@@ -2672,6 +2679,8 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .map-flow-reading small{font-size:9px}
  .satellite-flood-mask{filter:hue-rotate(-9deg) saturate(.55) brightness(1.16)!important}
  .river-motion{animation:riverTravel 1.45s linear infinite!important;will-change:stroke-dashoffset}
+ body:is(.map-moving,.map-offscreen) .river-motion{animation-play-state:paused!important}
+ @media(prefers-reduced-motion:reduce){.river-motion{animation:none!important}}
  #mapLayers .layer-swatch:has(.map-measure-symbol){position:relative!important;height:30px!important}
  #mapLayers .layer-swatch .map-measure-symbol{position:static!important;width:27px!important;height:36px!important;transform:translateY(-6px)!important}
  #mapLayers .requested-cctv-svg,#mapLayers .requested-estate-svg{width:27px!important;height:29px!important;stroke-width:0!important}
