@@ -89,9 +89,9 @@ html body header#ieatPortalHeader.standalone-dss-header {
     display:flex!important;
     justify-content:space-between!important;
     flex-wrap:nowrap!important;
-    min-height:58px!important;
+    min-height:53px!important;
     height:auto!important;
-    padding:8px 24px!important;
+    padding:4px 24px!important;
   }
   html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader.standalone-dss-header .brand {
     flex:1 1 auto!important;
@@ -119,7 +119,7 @@ html body header#ieatPortalHeader.standalone-dss-header {
   flex-wrap:wrap;
   gap:0 16px;
 }
-.dss-section-bar__title { font-weight:600; padding-block:10px; }
+.dss-section-bar__title { font-weight:400; padding-block:10px; }
 .dss-section-bar__links { display:flex; align-items:center; flex-wrap:wrap; }
 .dss-section-bar .dss-section-link {
   display:inline-flex;
@@ -129,7 +129,7 @@ html body header#ieatPortalHeader.standalone-dss-header {
   color:#fff;
   text-decoration:none;
 }
-.dss-section-bar .dss-section-link:hover { background:#333; }
+.dss-section-bar .dss-section-link:not(.dss-section-link--report):is(:hover,:focus-visible) { background:#2d2d2d; box-shadow:inset 0 -3px #00a5e5; }
 .dss-section-bar .dss-section-link:focus-visible { outline:2px solid #fff; outline-offset:-3px; }
 .dss-section-bar .dss-section-link--report { background:#0075b5; }
 .dss-section-bar .dss-section-link--report:hover { background:#005f94; }
@@ -150,7 +150,7 @@ html body header#ieatPortalHeader.standalone-dss-header {
   box-sizing:border-box;
   max-width:1440px;
   margin-inline:auto;
-  padding:clamp(36px,5vw,76px) clamp(16px,3vw,24px);
+  padding:clamp(20px,2vw,28px) clamp(16px,3vw,24px);
 }
 .dss-dashboard-intro h1 {
   margin:0 0 8px;
@@ -164,7 +164,7 @@ html body header#ieatPortalHeader.standalone-dss-header {
   font-size:16px;
   line-height:1.55;
 }
-.dss-dashboard-intro strong { font-weight:700; }
+.dss-dashboard-intro strong { color:#68418f; font-weight:700; }
 </style>
 </head>
 <body>
@@ -1964,43 +1964,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 html body header#ieatPortalHeader #hub-alert-button{background:#159653!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #159653!important}
 html body header#ieatPortalHeader #hub-alert-button:hover{background:#117c45!important}
 html body header#ieatPortalHeader #hub-alert-button .alert-count{background:#63417f!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
-</style><script id="ieat-header-button-inline-color-fix">
-(function(){
-  function setImportant(el, property, value){if(el)el.style.setProperty(property,value,'important');}
-  function apply(){
-    var header=document.getElementById('ieatPortalHeader');
-    if(!header)return;
-    header.querySelectorAll('.header-nav a.nav-active,.header-nav a.main-nav-current,.header-nav a[aria-current="page"]').forEach(function(el){
-      setImportant(el,'background-color','#9B4DCA');
-      setImportant(el,'background-image','none');
-      setImportant(el,'color','#ffffff');
-      setImportant(el,'-webkit-text-fill-color','#ffffff');
-      setImportant(el,'border-color','#9B4DCA');
-    });
-    var alert=header.querySelector('#hub-alert-button');
-    if(alert){
-      setImportant(alert,'background-color','#9B4DCA');
-      setImportant(alert,'background-image','none');
-      setImportant(alert,'color','#ffffff');
-      setImportant(alert,'-webkit-text-fill-color','#ffffff');
-      setImportant(alert,'border-color','#9B4DCA');
-      alert.querySelectorAll('.alert-count').forEach(function(count){
-        setImportant(count,'background-color','#606C76');
-        setImportant(count,'color','#ffffff');
-        setImportant(count,'-webkit-text-fill-color','#ffffff');
-      });
-    }
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});
-  else apply();
-  window.addEventListener('load',apply,{once:true});
-  var header=document.getElementById('ieatPortalHeader');
-  if(header){
-    var observer=new MutationObserver(function(){apply();});
-    observer.observe(header,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-current']});
-  }
-})();
-</script><style id="emcc-official-header-reference-20261026">
+</style><style id="emcc-official-header-reference-20261026">
 /* Formal visual refinement only; existing navigation and controls remain unchanged. */
 html body header#ieatPortalHeader{background:#fff!important;box-shadow:0 3px 14px rgba(38,25,64,.10)!important;border-bottom:1px solid #eee9f4!important}
 html body header#ieatPortalHeader .disaster-scope{background:#faf9fd!important;border:1px solid #e3dbee!important;border-radius:999px!important;box-shadow:0 2px 7px #3d266311!important}
@@ -2172,5 +2136,36 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 .support-network-control small{display:block;font-size:10px;color:#606c76}
 #map .incident-support-label{box-shadow:0 2px 8px #33243d16}
 @media(max-width:600px){.support-network-control{max-width:176px;padding:7px;font-size:11px}}
-</style></body></html>
+</style><style id="dss-compact-header-controls">
+html body header#ieatPortalHeader.standalone-dss-header {
+  margin-inline:auto!important;
+}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader.standalone-dss-header .header-nav {
+  border:0;
+  padding-inline-start:0!important;
+}
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader.standalone-dss-header #disasterScope,
+html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader.standalone-dss-header #hub-alert-button {
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  color:#171717!important;
+  -webkit-text-fill-color:#171717!important;
+  font-weight:400!important;
+}
+html body header#ieatPortalHeader.standalone-dss-header :is(#disasterScope,#hub-alert-button) img {
+  filter:brightness(0);
+}
+html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert-count {
+  background:#303030!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+html body header#ieatPortalHeader.standalone-dss-header :is(#disasterScope,#hub-alert-button):focus-visible {
+  outline:2px solid #0075b5!important;
+  outline-offset:2px;
+}
+</style>
+</body></html>
 
