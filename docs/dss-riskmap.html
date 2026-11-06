@@ -2475,6 +2475,23 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const line=get('riskMapLinePanel');if(line)mapColumn.append(line);
   mapColumn.append(auxiliary);
   top.append(controls,mapColumn);panel.append(top,bottom);overviewPanel.after(panel);
+  function keepMapTools(){
+    if(map.parentElement===mapColumn){
+      if(line&&map.nextElementSibling!==line)map.after(line);
+      const anchor=line||map;
+      if(anchor.nextElementSibling!==auxiliary)anchor.after(auxiliary);
+    }else{
+      if(line&&line.parentElement!==mapColumn)mapColumn.append(line);
+      if(auxiliary.parentElement!==mapColumn)mapColumn.append(auxiliary);
+    }
+  }
+  // Older report loaders rebuild the report container after the iframe has loaded.
+  // Restore these tools to the right column without cloning controls or losing state.
+  const toolsObserver=new MutationObserver(keepMapTools);
+  toolsObserver.observe(panel,{childList:true,subtree:true});
+  frame.addEventListener('load',keepMapTools);
+  keepMapTools();
+
   report.style.removeProperty('display');report.hidden=false;
   links.replaceChildren();links.id='riskmapWorkspaceTabs';links.setAttribute('role','tablist');
   links.setAttribute('aria-label','เลือกส่วนการทำงาน');
@@ -2487,6 +2504,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   function show(edit){
     // Move the same map and keep the same iframe alive to preserve selections and drafts.
     if(edit)mapColumn.prepend(map);else home.after(map);
+    keepMapTools();
     overviewPanel.hidden=edit;panel.hidden=!edit;
     tabs.forEach((tab,index)=>{tab.setAttribute('aria-selected',String(index===(edit?1:0)));tab.tabIndex=index===(edit?1:0)?0:-1});
     if(edit&&!frame.getAttribute('src')){
