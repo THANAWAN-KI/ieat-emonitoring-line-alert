@@ -44,6 +44,7 @@
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,selectedFactory=null;
+  const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
   const sql=value=>String(value).replace(/'/g,"''");
   function draw(){
     if(!origin)return;
@@ -55,9 +56,10 @@
     ]);
     return circle;
   }
-  async function updateNearby(){
+  async function updateNearby(forReport=false){
     if(!origin||!form.reportValidity())return;
-    const id=++nearbyId, circle=draw(), term=keyword.value.trim().toLowerCase();
+    publishPoint();
+    const id=++nearbyId, circle=draw(), term=forReport===true?'':keyword.value.trim().toLowerCase();
     results.replaceChildren(el('p','กำลังค้นหาข้อมูลสนับสนุน…'));
     const tasks=sources.map(async ({layer,fields:preferred})=>{
       await layer.load();
@@ -96,6 +98,7 @@
       group.append(list);results.append(group);
     });
     if(!found)results.append(el('p','ไม่พบรายการที่ตรงกันในแหล่งที่ค้นหาได้'));
+    if(forReport===true)return settled.map((entry,i)=>entry.status==='fulfilled'?entry.value:{title:sources[i]?.layer.title||'DSS',failed:true}).filter(Boolean);
   }
   function place(point,label){
     sketch.cancel();
@@ -125,6 +128,9 @@
     const km=Number(radius.value),incidentType=type.value;
     button.disabled=true;
     try{
+      const rows=await updateNearby(true);
+      if(!rows)throw Error('จุดเกิดเหตุหรือเงื่อนไขค้นหาเปลี่ยน กรุณาเปิดรายงานอีกครั้ง');
+      window.ieatCoverageReport={company:name,point,km,incidentType,rows};
       let doc;
       for(let i=0;i<60;i++){
         doc=frame.contentDocument;
@@ -238,6 +244,11 @@
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
     const map=new ArcMap({basemap:'topo-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
+    window.ieatCaptureCoverageMap=async()=>{
+      if(!view.ready||!window.ieatCoverageReport)return null;
+      const shot=await view.takeScreenshot({format:'png'});
+      return shot.dataUrl;
+    };
     view.ui.add(new Home({view}),'top-left');
     view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่'}),'top-right');
     view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
