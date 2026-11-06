@@ -45,9 +45,30 @@
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,selectedFactory=null;
   const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
+  let syncTimer, incidentRevision=0;
+  const queueReport=()=>{incidentRevision++;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncReport(false),350);};
   const sql=value=>String(value).replace(/'/g,"''");
+  function incidentDetails(){
+    const box=el('div'),table=el('table');
+    const attrs=selectedFactory||{};
+    const rows=[
+      ['สถานประกอบการ',name],
+      ['นิคมอุตสาหกรรม',attrs['นิคมอุตสาหกรรม']||'ไม่พบข้อมูล'],
+      ['เลขทะเบียนใหม่',attrs[newReg]||'ไม่พบข้อมูล'],
+      ['เลขทะเบียนเดิม',attrs[oldReg]||'ไม่พบข้อมูล'],
+      ['ประเภทเหตุ',type.selectedOptions[0]?.textContent||'ยังไม่ระบุ'],
+      ['รัศมีค้นหา',radius.value+' กม.'],
+      ['พิกัด',origin?origin.latitude.toFixed(6)+', '+origin.longitude.toFixed(6):'']
+    ];
+    for(const [label,value] of rows){const row=el('tr');row.append(el('th',label),el('td',value));table.append(row);}
+    table.style.cssText='width:100%;font:14px/1.7 Sarabun,sans-serif;text-align:left';
+    box.append(table);return box;
+  }
+  function openIncident(){if(pin&&origin)view.openPopup({features:[pin],location:origin});}
+
   function draw(){
     if(!origin)return;
+    if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ · '+name,content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     graphics.addMany([
@@ -106,29 +127,31 @@
     pinLayer.removeAll();
     pin=new Graphic({geometry:point,symbol:{type:'simple-marker',style:'diamond',color:'#b82e34',size:17,outline:{color:'#fff',width:2}}});
     pinLayer.add(pin);
-    draw();updateNearby();
+    draw();updateNearby();queueReport();openIncident();
     message.textContent='จุดเกิดเหตุ · '+name+' · คลิกหมุดแล้วลากเพื่อย้ายจุด';
   }
   sketch.on('update',event=>{
     const moved=event.graphics[0];
     if(moved!==pin||!moved?.geometry)return;
     if(event.state==='active'||event.state==='complete'){origin=moved.geometry;draw();}
-    if(event.state==='complete')updateNearby();
+    if(event.state==='complete'){updateNearby();queueReport();openIncident();}
   });
   $('coveragePickIncident').onclick=()=>{picking=true;message.textContent='คลิกบนแผนที่เพื่อกำหนดจุดเกิดเหตุ';$('coverageMap').scrollIntoView({block:'nearest'});};
   view.on('click',event=>{
     if(!picking||!event.mapPoint)return;
     event.stopPropagation();picking=false;place(event.mapPoint,name||'จุดเกิดเหตุ');
   });
-  $('coverageOpenReport').onclick=async()=>{
+  async function syncReport(manual=true){
     if(!origin||!selectedFactory){message.textContent='เลือกโรงงานก่อนเปิดรายงาน';return;}
     if(!form.reportValidity())return;
     const button=$('coverageOpenReport'),frame=$('emergencyReportFrame'),section=$('emergencyReportPage');
     const point={lat:origin.latitude,lng:origin.longitude},attrs={...selectedFactory};
     const km=Number(radius.value),incidentType=type.value;
+    const revision=incidentRevision;
     button.disabled=true;
     try{
       const rows=await updateNearby(true);
+      if(revision!==incidentRevision)return;
       if(!rows)throw Error('จุดเกิดเหตุหรือเงื่อนไขค้นหาเปลี่ยน กรุณาเปิดรายงานอีกครั้ง');
       window.ieatCoverageReport={company:name,point,km,incidentType,rows};
       let doc;
@@ -138,6 +161,7 @@
         await new Promise(resolve=>setTimeout(resolve,150));
       }
       if(!doc?.getElementById('pngBtn')?.onclick||!doc.getElementById('bufferKm1'))throw Error('รายงานยังโหลดไม่เสร็จ');
+      if(revision!==incidentRevision)return;
       const localType=$('dashboardIncidentType');
       localType.value=incidentType==='เหตุไฟไหม้'?'เหตุเพลิงไหม้':incidentType==='สารเคมีรั่วไหล'?incidentType:'ยังไม่ได้รับแจ้ง';
       localType.dispatchEvent(new Event('change',{bubbles:true}));
@@ -154,15 +178,16 @@
       buffer.dispatchEvent(new ReportEvent('change',{bubbles:true}));
       frame.dataset.coverageTransfer='true';
       window.dispatchEvent(new CustomEvent('ieat-unified-company-select',{detail:{feature:{attributes:attrs,geometry:{x:point.lng,y:point.lat,spatialReference:{wkid:4326}}}}}));
-      section.scrollIntoView({behavior:'smooth',block:'start'});
+      if(manual)section.scrollIntoView({behavior:'smooth',block:'start'});
       message.textContent=['อุบัติเหตุ','อื่น ๆ'].includes(incidentType)
         ? 'ส่งข้อมูลไปยังรายงานแล้ว · โปรดระบุประเภทเหตุในรายละเอียดรายงาน'
         : 'ส่งโรงงาน จุดเกิดเหตุ และรัศมีไปยังรายงานแล้ว';
     }catch(error){message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}
     finally{button.disabled=false;}
   };
-  radius.onchange=updateNearby;
-  type.onchange=updateNearby;
+  $('coverageOpenReport').onclick=()=>syncReport(true);
+  radius.onchange=()=>{updateNearby();queueReport();openIncident();};
+  type.onchange=()=>{updateNearby();queueReport();openIncident();};
   $('coverageSearchSupport').onclick=()=>{if(origin)updateNearby();else message.textContent='เลือกโรงงานหรือปักหมุดก่อนค้นหาข้อมูลสนับสนุน';};
   form.onsubmit=async event=>{
     event.preventDefault();
@@ -187,7 +212,7 @@
         selectedFactory=feature.attributes;
         matches.replaceChildren();place(point,label);
         $('coverageMap').scrollIntoView({block:'nearest'});
-        view.goTo({target:point,zoom:14}).catch(()=>{});
+        view.goTo({target:point,zoom:14}).then(openIncident).catch(()=>{});
       };
       if(data.features.length===1){select(data.features[0]);return;}
       for(const feature of data.features){
