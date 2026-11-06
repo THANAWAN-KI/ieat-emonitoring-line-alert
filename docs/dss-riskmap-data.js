@@ -101,10 +101,12 @@
   function line(label,count,max,description,onClick){
     const row=el(onClick?'button':'div',null,'coverage-bar');
     if(onClick){row.type='button';row.onclick=onClick;}
-    row.append(el('span',label),el('strong',count===null?'—':number(count)));
-    const track=el('span',null,'coverage-track'),fill=el('span');
-    track.setAttribute('aria-hidden','true');fill.style.width=(count===null?0:count/Math.max(1,max)*100)+'%';
-    track.append(fill);row.append(track,el('small',description));
+    const plot=el('span',null,'coverage-track'),fill=el('span');
+    const value=el('strong',count===null?'—':number(count));
+    plot.setAttribute('aria-hidden','true');
+    fill.style.height=(count===null?0:count/Math.max(1,max)*100)+'%';
+    plot.append(fill);
+    row.append(value,plot,el('span',label,'coverage-bar-label'),el('small',description));
     return row;
   }
   function renderCoverage(){
@@ -131,6 +133,16 @@
       el('span',key?'ความครอบคลุมของ '+estates.get(key):'นิคมฯ / ท่าเรือฯ ที่มีข้อมูลสนับสนุน'),
       el('small',hasFullSource?'ครบ '+number(complete)+' · มีบางส่วน '+number(known.size-complete)+' · ไม่พบในชุดข้อมูล '+number(denominator-known.size):'รอข้อมูลครบจากทะเบียนและชั้นข้อมูลสนับสนุน')
     );
+    if(hasFullSource&&denominator){
+      const chart=el('div',null,'coverage-stacked');
+      chart.setAttribute('aria-hidden','true');
+      for(const [kind,count] of [['complete',complete],['partial',known.size-complete],['missing',denominator-known.size]]){
+        const segment=el('span',null,'coverage-segment-'+kind);
+        segment.style.width=(count/denominator*100)+'%';
+        chart.append(segment);
+      }
+      summary.append(chart);
+    }
     const supportMax=Math.max(1,...rowsByLayer.map(x=>x.rows.length));
     support.replaceChildren(...rowsByLayer.map(({layer,rows})=>{
       const linked=new Set(rows.map(r=>normalize(r.estate)).filter(k=>estates.has(k))).size;
