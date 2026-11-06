@@ -3201,7 +3201,6 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   field(weather,'ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':'');
   field(weather,'ลมพัดจาก',available(state.windSpeed)?state.windDir:'');
   field(weather,'ดึงข้อมูลล่าสุด',state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่');
-  field(weather,'เวลาของข้อมูลแบบจำลอง',state.weatherTime);
   weather.append(element('small','Open-Meteo · ข้อมูลแบบจำลอง','fb-muted'));
   const rows=Array.from(document.querySelectorAll('#fbSupport tr'));
   types.forEach(([type,label],index)=>{
