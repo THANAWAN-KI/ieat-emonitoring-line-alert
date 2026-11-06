@@ -142,7 +142,7 @@ html body header#ieatPortalHeader.standalone-dss-header {
 </style>
 <style id="risk-coverage-style">
 #riskCoverage { min-width:0; padding:clamp(14px,2vw,24px); border:1px solid #e2dce8; background:#fff; color:#24202b; scroll-margin-top:16px; }
-#riskCoverage h1,#riskCoverage h3,.coverage-report-heading { margin:0 0 6px; font-weight:600; }
+#riskCoverage h1,#riskCoverage h3 { margin:0 0 6px; font-weight:600; }
 #riskCoverage h1 { font-size:clamp(24px,3vw,34px); line-height:1.2; }
 #riskCoverage p { margin:0 0 12px; line-height:1.55; }
 #coverageEstateForm { display:flex; flex-wrap:wrap; gap:8px; align-items:end; margin:16px 0; }
@@ -173,7 +173,6 @@ html body header#ieatPortalHeader.standalone-dss-header {
 #riskCoverage small,#riskCoverage .coverage-note { color:#645b6c; }
 #riskCoverage .coverage-note { margin:12px 0 0; font-size:13px; }
 #coverageDetail { max-height:260px; overflow:auto; padding:10px; margin-top:8px; background:#f7f3fa; }
-.coverage-report-heading { max-width:1440px; margin:12px auto!important; }
 .coverage-map-layout,.coverage-map-layout * { border-radius:0!important; }
 </style>
 <style id="coverage-map-layout">
@@ -293,7 +292,6 @@ html body header#ieatPortalHeader.standalone-dss-header {
   <p class="coverage-map-note">เลือกนิคมฯ เพื่อซูมดูพื้นที่สีโปร่งและหมุดทรัพยากร ใช้ปุ่มชั้นข้อมูลเปิดกลุ่มความเสี่ยง และปุ่มคำอธิบายสัญลักษณ์เพื่ออ่านความหมาย</p>
 </section>
 </div>
-<h2 class="coverage-report-heading">ข้อมูลสำหรับวิเคราะห์และจัดทำรายงาน</h2>
 <section id="riskDashboard"><div class="risk-workspace"><div class="workspace-data">
 
 
@@ -853,7 +851,6 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
   // Dashboard buffer controls own all radius rings; this layer owns the incident pin only.
   map.invalidateSize();map.setView([data.lat,data.lng],15,{animate:false});pendingIncident=null;
   const status=document.getElementById('factoryMapSelectionStatus');if(status)status.textContent='แผนที่และรายงานเชื่อมกับ '+data.name+' แล้ว';
-  if(queuedCompany&&!frame.dataset.coverageTransfer)mapSection.scrollIntoView({behavior:'smooth',block:'center'});
   delete frame.dataset.coverageTransfer;
  }
  window.addEventListener('ieat-support-map-ready',()=>{requestAnimationFrame(()=>{if(pendingIncident)showIncident(pendingIncident)})});
@@ -865,7 +862,7 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
    const item=event.data.item,map=window.ieatSupportMap;if(!map||![item?.lat,item?.lng].every(Number.isFinite))return;
    if(focusLayer)map.removeLayer(focusLayer);
    const text=document.createElement('div');text.textContent=item.name+' · '+Number(item.distance).toFixed(2)+' กม.'+(item.phone?' · '+item.phone:'');
-   focusLayer=L.marker([item.lat,item.lng],{zIndexOffset:2500}).addTo(map).bindPopup(text).openPopup();map.setView([item.lat,item.lng],17);mapSection.scrollIntoView({behavior:'smooth',block:'center'});
+   focusLayer=L.marker([item.lat,item.lng],{zIndexOffset:2500}).addTo(map).bindPopup(text).openPopup();map.setView([item.lat,item.lng],17);document.getElementById('coverageMap').scrollIntoView({behavior:'smooth',block:'start'});
   }
  });
  window.ieatCaptureReportMap=async (renderer)=>{
@@ -1694,7 +1691,13 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 (function(){
  const dashboard=document.getElementById('riskDashboard'),support=document.getElementById('dashboardPanel-support'),combined=support.querySelector('.risk-stacked'),cards=document.getElementById('emergencySupportCards');
  const analysis=document.createElement('div');analysis.className='risk-analysis-columns';combined.before(analysis);analysis.append(combined,cards);
- const workspace=dashboard.querySelector('.risk-workspace'),report=document.getElementById('emergencyReportPage');workspace.after(report);
+ const workspace=dashboard.querySelector('.risk-workspace'),report=document.getElementById('emergencyReportPage');
+ // Keep the off-screen map sized for the report's PNG capture.
+ workspace.inert=true;
+ workspace.setAttribute('aria-hidden','true');
+ workspace.after(report);
+ report.removeAttribute('aria-label');
+ report.setAttribute('aria-labelledby','coverageReportTitle');
  const frame=document.getElementById('emergencyReportFrame'),holder=frame.parentElement;let observer;
  function fitReports(){const doc=frame.contentDocument;if(!doc?.body)return;const wrap=doc.querySelector('.report-wrap');if(!wrap)return;const height=Math.ceil(wrap.getBoundingClientRect().height)+30;if(height>100)holder.style.setProperty('--parallel-report-height',height+'px');}
  frame.addEventListener('load',()=>{observer?.disconnect();const wrap=frame.contentDocument?.querySelector('.report-wrap');if(wrap&&window.ResizeObserver){observer=new ResizeObserver(fitReports);observer.observe(wrap)}fitReports()});
@@ -2370,5 +2373,20 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 })();
 </script>
 <script src="./dss-riskmap-equipment.js?v=7d441f0"></script>
+<style id="riskmap-report-only-layout">
+html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > .risk-workspace {
+  position:fixed!important;
+  inset:0 auto auto -20000px!important;
+  width:1200px!important;
+  min-width:1200px!important;
+  pointer-events:none!important;
+}
+html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > #emergencyReportPage {
+  scroll-margin-top:16px;
+}
+html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard > #emergencyReportPage {
+  margin-top:0!important;
+}
+</style>
 </body></html>
 
