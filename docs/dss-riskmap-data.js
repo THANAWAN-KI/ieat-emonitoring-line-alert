@@ -72,8 +72,8 @@
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     graphics.addMany([
-      new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.06],outline:{color:'#b82e34',width:2}}}),
-      new Graphic({geometry:origin,symbol:{type:'text',text:name,color:'#61191c',haloColor:'#fff',haloSize:2,yoffset:20,font:{size:12,weight:'bold'}}})
+      new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}),
+      new Graphic({geometry:origin,symbol:{type:'text',text:name.length>36?name.slice(0,36)+'…':name,color:'#61191c',haloColor:'#fff',haloSize:1.5,yoffset:38,font:{size:10,weight:'bold'}}})
     ]);
     return circle;
   }
@@ -125,7 +125,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><path fill="#c64032" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:32,height:40,yoffset:20}});
+    pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><path fill="#c64032" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     draw();updateNearby();queueReport();openIncident();
     message.textContent='จุดเกิดเหตุ · '+name+' · คลิกหมุดแล้วลากเพื่อย้ายจุด';
@@ -250,12 +250,12 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=32)=>svgMarker(
+    const badge=(drawing,color,size=18)=>svgMarker(
       '<defs><linearGradient id="face" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="'+color+'"/><stop offset="1" stop-color="'+color+'" stop-opacity=".82"/></linearGradient></defs>'+
       '<circle cx="12" cy="12.8" r="10.8" fill="#12263a" opacity=".18"/>'+
       '<circle cx="12" cy="11.5" r="10.5" fill="url(#face)" stroke="#fff" stroke-width="1.8"/>'+
       '<g fill="none" stroke="#fff" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.4 1.9) scale(.8)">'+drawing+'</g>',size,size);
-    const pin=svgMarker('<path fill="#7942a0" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',32,32,15);
+    const pin=svgMarker('<path fill="#7942a0" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',25,25,12);
     const fireStation=badge('<path d="M6 18V10l6-4 6 4v8H6Z"/><path d="M9 18v-5h6v5m-6-3h6"/><path d="M12 7V5"/>','#d34a32');
     const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#c53e58');
     const supportSymbols={
@@ -266,7 +266,7 @@
       communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#23866b'),
       waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#138fa9'),
       school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#ae7419'),
-      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#365477',34)
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#365477',18)
     };
     const polygon=(color,outline)=>({type:'simple-fill',color,outline:{color:outline,width:1}});
     const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression,symbol,minScale=0,opacity=1}={})=>new FeatureLayer({
@@ -288,6 +288,25 @@
       visible:['fire','hospital','hydrant'].includes(d.id),minScale:1000000,symbol:supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
     }));
+    const supportColors={fire:'#d34a32',hospital:'#c53e58',hydrant:'#167dad',police:'#365c9d',community:'#23866b',communityRisk:'#23866b',waterWatch:'#138fa9',school:'#ae7419',cctv:'#365477'};
+    const supportDefinitions=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport);
+    support.forEach((item,index)=>{
+      const def=supportDefinitions[index],color=supportColors[def.id]||'#586b7f';
+      if(def.id==='hydrant'||def.id==='cctv')item.minScale=150000;
+      item.when(()=>{
+        if(item.geometryType!=='point')return;
+        item.featureReduction={
+          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'24px',clusterMaxSize:'34px',maxScale:2000,
+          symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:1.5}},
+          labelingInfo:[{
+            deconflictionStrategy:'none',labelPlacement:'center-center',
+            labelExpressionInfo:{expression:"Text($feature.cluster_count, '#,###')"},
+            symbol:{type:'text',color:'#fff',font:{family:'Sarabun',size:10,weight:'bold'}}
+          }],
+          popupTemplate:{title:def.label+' · {cluster_count} จุด',content:'กลุ่มจุดข้อมูลที่อยู่ใกล้กัน ซูมเข้าเพื่อดูตำแหน่งและรายละเอียดรายจุด'}
+        };
+      }).catch(()=>{});
+    });
     const publicBase='https://gistdaportal.gistda.or.th/arcgis/rest/services/Hosted/Identity_gdb/FeatureServer/';
     const supplemental=[[0,'จุดตรวจวัดน้ำ'],[1,'ระบบบำบัดน้ำเสีย'],[2,'สถานีตรวจวัดคุณภาพอากาศ'],[3,'สถานที่รวบรวมและจัดการขยะ']].map(([id,title])=>layer('',title,{url:publicBase+id}));
     const extraSymbols=[
@@ -300,6 +319,18 @@
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
     const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
+    function resizeSupportSymbols(){
+      const baseSize=view.scale>100000?13:view.scale>20000?15:view.scale>5000?17:19;
+      support.forEach((item,index)=>{
+        if(item.renderer?.symbol?.type!=='picture-marker')return;
+        const def=supportDefinitions[index],size=baseSize-(['hydrant','cctv'].includes(def.id)?2:0);
+        if(Number(item.renderer.symbol.width)===size)return;
+        const renderer=item.renderer.clone();renderer.symbol.width=size;renderer.symbol.height=size;item.renderer=renderer;
+      });
+    }
+    view.watch('stationary',stationary=>{if(stationary)resizeSupportSymbols();});
+    view.when(resizeSupportSymbols).catch(()=>{});
+
     const basemapSelect=$('coverageBasemap');
     if(basemapSelect){
       basemapSelect.disabled=false;
