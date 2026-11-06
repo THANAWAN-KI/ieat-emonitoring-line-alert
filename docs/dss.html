@@ -839,7 +839,7 @@ supportGrid.append(card)});windArrow.style.transform=`rotate(${(Number(state.win
 const mapNode=document.getElementById('map');
 mapNode.style.position='relative';
 const mapImage=document.createElement('img');mapImage.alt='ภาพแผนที่บริเวณเกิดเหตุ';
-mapImage.crossOrigin='anonymous';mapImage.style.cssText='width:100%;height:100%;display:block;object-fit:fill';
+mapImage.crossOrigin='anonymous';mapImage.style.cssText='width:100%;height:100%;display:block;object-fit:contain';
 const bufferOverlay=document.createElement('div');
 bufferOverlay.style.cssText='position:absolute;left:50%;top:50%;border:3px solid #d9273f;background:rgba(217,39,63,.13);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none';
 const locationPin=document.createElement('div');
@@ -1527,7 +1527,7 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
   lines.push(line);lines.slice(0,3).forEach((part,i)=>ctx.fillText(part,x,y+i*lineHeight));
 }
 async function downloadReportPng(){
- document.getElementById('dssExportError')?.remove();window.ieatReportDownloads?.forEach(item=>URL.revokeObjectURL(item.url));window.ieatReportDownloads=[];const exportScale=matchMedia('(max-width:760px)').matches?1.5:2;loading.classList.add('show');pngBtn.disabled=true;
+ document.getElementById('dssExportError')?.remove();window.ieatReportDownloads?.forEach(item=>URL.revokeObjectURL(item.url));window.ieatReportDownloads=[];const exportScale=2;loading.classList.add('show');pngBtn.disabled=true;
  try{
   if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&parent.ieatCoverageReport&&parent.ieatCoverageReport.status!=='ready')throw Error('กรุณารอผลค้นหาและรายงานอัปเดตครบก่อนดาวน์โหลด');
   if(window.dssIncidentContextPending)throw Error('กำลังอัปเดตรายงานตามผลค้นหา กรุณารอสักครู่');
@@ -1539,6 +1539,7 @@ async function downloadReportPng(){
   if(window.dssRefreshPageTwo)await window.dssRefreshPageTwo();
   render();await document.fonts.ready;
   if(typeof html2canvas!=='function')throw Error('ไม่สามารถโหลดเครื่องมือบันทึกภาพได้');
+  const activeReport=new URLSearchParams(location.search).get('embedded')==='dashboard'?parent.ieatCoverageReport:null;
   let mapImage;
   if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&typeof parent.ieatCaptureReportMap==='function')mapImage=await parent.ieatCaptureReportMap(html2canvas,{lat:Number(state.lat),lng:Number(state.lng),points:['fire','hospital','hydrant','police','community','cctv'].map(type=>(state.supportLocations||[]).filter(p=>p.type===type).sort((a,b)=>a.distance-b.distance)[0]).filter(p=>p&&Number.isFinite(Number(p.distance))&&Number(p.distance)<=50)});
   else{
@@ -1559,6 +1560,7 @@ async function downloadReportPng(){
    const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
    second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
   }finally{stage.remove()}
+  if(activeReport&&(parent.ieatCoverageReport!==activeReport||activeReport.status!=='ready'))throw Error('เงื่อนไขค้นหาเปลี่ยนระหว่างสร้างภาพ กรุณาค้นหาใหม่');
   const blobs=await Promise.all([first,second].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
   for(let index=0;index<blobs.length;index++){
    const url=URL.createObjectURL(blobs[index]),name='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';window.ieatReportDownloads.push({url,name});const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();
@@ -3873,7 +3875,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
 
 <style id="report-map-proportions-20261106">
 html body #report#report#report#report#report #fieldBriefMap{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:8/5!important;position:relative!important;overflow:hidden!important;box-sizing:border-box!important;background:#edf1f4!important}
-html body #report#report#report#report#report #fieldBriefMap>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important}
+html body #report#report#report#report#report #fieldBriefMap>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important}
 html body #report#report#report#report#report #fieldBriefMap>#dssLiveMap{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;margin:0!important}
 html body #report#report#report#report#report #fieldBriefMap .leaflet-tile{max-width:none!important;max-height:none!important}
 html body #report#report#report#report#report #fieldBriefMap #fbWeather{display:block!important;position:absolute!important;left:auto!important;top:auto!important;right:12px!important;bottom:12px!important;width:230px!important;max-width:42%!important;max-height:calc(100% - 24px)!important;overflow:auto!important;margin:0!important;padding:12px!important;background:#fffffff5!important;border:1px solid #dce1e5!important;border-radius:0!important;box-shadow:0 2px 12px #1325381a!important;box-sizing:border-box!important;z-index:1000!important}
