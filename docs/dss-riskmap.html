@@ -140,6 +140,32 @@ html body header#ieatPortalHeader.standalone-dss-header {
   .dss-section-bar .dss-section-link { font-size:14px; padding:9px 11px; }
 }
 </style>
+<style id="dss-dashboard-intro-style">
+.dss-dashboard-intro {
+  background:#fff;
+  color:#171717;
+  font-family:Sarabun,sans-serif;
+}
+.dss-dashboard-intro__inner {
+  box-sizing:border-box;
+  max-width:1440px;
+  margin-inline:auto;
+  padding:clamp(36px,5vw,76px) clamp(16px,3vw,24px);
+}
+.dss-dashboard-intro h1 {
+  margin:0 0 8px;
+  font-size:clamp(26px,3vw,34px);
+  font-weight:600;
+  line-height:1.25;
+}
+.dss-dashboard-intro p {
+  max-width:76ch;
+  margin:0;
+  font-size:16px;
+  line-height:1.55;
+}
+.dss-dashboard-intro strong { font-weight:700; }
+</style>
 </head>
 <body>
 <header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong>ระบบภูมิสารสนเทศเพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในพื้นที่นิคมอุตสาหกรรม</strong></span></div><div class="portal-top"><div class="disaster-header-tools"><div class="disaster-scope-wrap"><button type="button" id="disasterScope" class="disaster-scope" aria-expanded="false" aria-controls="disasterEstatePop"><img class="scope-search-icon" src="https://api.iconify.design/solar/buildings-2-outline.svg?color=%2368418f" alt="" width="26" height="26"><span id="disasterScopeLabel">เลือกนิคมอุตสาหกรรม</span><span aria-hidden="true">⌄</span></button><div id="disasterEstatePop" class="disaster-estate-pop" hidden><input id="disasterEstateSearch" type="search" placeholder="ค้นหาชื่อนิคมอุตสาหกรรม" aria-label="ค้นหาชื่อนิคมอุตสาหกรรม"><div id="disasterEstateList" class="disaster-estate-list"></div></div></div></div><div class="header-nav"></div></div></header>
@@ -153,6 +179,13 @@ html body header#ieatPortalHeader.standalone-dss-header {
     </div>
   </div>
 </nav>
+
+<section class="dss-dashboard-intro" aria-labelledby="dss-dashboard-title" lang="en">
+  <div class="dss-dashboard-intro__inner">
+    <h1 id="dss-dashboard-title">Dashboard Risk Map</h1>
+    <p>A spatial data hub supporting decision-making and <strong>emergency response</strong> for fire, chemical leaks, and severe disasters. It aggregates risk boundaries, dispersion pathways, and response resources to assist operational command, enabling accurate and timely summary and incident reporting.</p>
+  </div>
+</section>
 
 <main class="page">
 <section id="riskDashboard"><div class="risk-workspace"><div class="workspace-data">
