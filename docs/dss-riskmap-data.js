@@ -515,7 +515,7 @@
     const estates=new Map(registry.rows.filter(r=>r.estate!=='—').map(r=>[normalize(r.estate),r.estate]));
     const selectedKey=select.value, query=normalize(search.value);
     const names=[...estates].sort((a,b)=>a[1].localeCompare(b[1],'th'));
-    select.replaceChildren(new Option('ทุกนิคมอุตสาหกรรม / ท่าเรือฯ',''));
+    select.replaceChildren(new Option($('riskmapOverviewMetrics')?'ทุกนิคมฯ':'ทุกนิคมอุตสาหกรรม / ท่าเรือฯ',''));
     for(const [key,name] of names)if(!query||key.includes(query)||key===selectedKey)select.add(new Option(name,key));
     select.value=estates.has(selectedKey)?selectedKey:'';
     const key=select.value;
@@ -587,6 +587,26 @@
         groupAvailable?()=>{drill=drill===group.field?'':group.field;renderCoverage();if(drill){detail.focus();detail.scrollIntoView({block:'nearest'});}else risk.querySelectorAll('button')[groups.indexOf(group)]?.focus();}:null);
     });
     risk.replaceChildren(scope,...riskRows);
+    const metrics=$('riskmapOverviewMetrics');
+    if(metrics){
+      const names=['เสี่ยงสูง 12 ประเภท','อัคคีภัยสูง','โรงงาน PSM'];
+      const colors=['#78429e','#98562a','#2b695a'];
+      metrics.replaceChildren(...groups.map((group,index)=>{
+        const enabled=available&&business.fields?.includes(group.field);
+        const count=items.filter(item=>item.flags.has(group.field)).length;
+        const button=el('button',null,'riskmap-overview-metric');
+        button.type='button';button.disabled=!enabled;
+        button.style.setProperty('--metric',colors[index]);
+        button.append(el('span',names[index]),el('strong',enabled?number(count):'—'));
+        const meter=el('meter');meter.max=Math.max(items.length,1);meter.value=enabled?count:0;
+        meter.setAttribute('aria-hidden','true');button.append(meter);
+        if(status)button.append(el('small',status));
+        button.onclick=()=>riskRows[index].click();
+        return button;
+      }));
+      const source=$('riskmapOverviewSource');
+      source.textContent='ทะเบียน e‑PP กนอ. · '+(status||freshness(business));
+    }
     const group=groups.find(g=>g.field===drill);
     detail.hidden=!group;
     if(group){
