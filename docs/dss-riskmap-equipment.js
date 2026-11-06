@@ -20,6 +20,11 @@
     const valid=company&&!['—','-','บริษัท / โรงงานที่เกิดเหตุ','กรุงเทพมหานคร (พื้นที่อ้างอิงเริ่มต้น)'].includes(company)&&lat>=5&&lat<=22&&lng>=97&&lng<=106;
     return {doc,company,lat,lng,registration,valid};
   }
+  function equipmentCenter(){
+    const incident=window.ieatCoverageIncident;
+    if(incident?.company&&Number.isFinite(incident.lat)&&Number.isFinite(incident.lng))return {...incident,valid:true};
+    return currentReport();
+  }
   function findEquipment(features,term,center,km){
     const items=[],seen=new Set();
     let noLocation=0;
@@ -46,12 +51,12 @@
     return {items:items.sort((a,b)=>a.distance-b.distance),noLocation};
   }
   let savedKey='';
-  const key=()=>{const {company,lat,lng}=currentReport();return [company,lat,lng,get('dssEquipmentNearbyQuery').value,get('dssEquipmentNearbyRadius').value].join('|');};
+  const key=()=>{const {company,lat,lng}=equipmentCenter();return [company,lat,lng,get('dssEquipmentNearbyQuery').value,get('dssEquipmentNearbyRadius').value].join('|');};
   form.addEventListener('input',()=>{download.disabled=true;status.textContent='กดค้นหาเพื่ออัปเดตผล';});
   form.onsubmit=async event=>{
     event.preventDefault();
     download.disabled=true;output.replaceChildren();savedKey='';
-    const center=currentReport();
+    const center=equipmentCenter();
     if(!center.valid){status.textContent='เลือกโรงงานและกำหนดจุดเกิดเหตุในรายงานก่อน';return;}
     const query=get('dssEquipmentNearbyQuery').value.trim(),km=Number(get('dssEquipmentNearbyRadius').value),searchKey=key();
     if(!query){status.textContent='กรอกชื่อหรือประเภทอุปกรณ์';return;}
@@ -101,6 +106,15 @@
     const {doc}=currentReport();
     const brief=doc?.getElementById('dssFieldBrief'),nearby=doc?.getElementById('reportNearbySupport');
     if(!brief||!nearby)return;
+    const snapshot=window.ieatCoverageReport;
+    const selected=doc.querySelector('#report [data-out="company"]')?.textContent.trim();
+    let syncNote=doc.getElementById('dssCoverageReportData');
+    if(snapshot&&selected===snapshot.company){
+      if(!syncNote){syncNote=doc.createElement('section');syncNote.id='dssCoverageReportData';nearby.after(syncNote);}
+      const lines=snapshot.rows.map(row=>row.title+': '+(row.failed?'โหลดไม่ได้':row.items.length+(row.truncated?'+':'')+' รายการ'+(row.items.length?' · '+row.items.slice(0,3).join(' / '):'')));
+      const text='ข้อมูลจาก Dashboard Risk Map · '+snapshot.incidentType+' · รัศมี '+snapshot.km+' กม.\n'+lines.join('\n');
+      if(syncNote.textContent!==text){syncNote.textContent=text;syncNote.style.cssText='white-space:pre-line;font-size:12px;line-height:1.55;padding:8px;border:1px solid #ddd';}
+    }else syncNote?.remove();
     const radii=['bufferKm1','bufferKm2','bufferKm'].flatMap((id,i)=>{
       const value=Number(doc.getElementById(id)?.value);
       return doc.getElementById('bufferEnabled'+i)?.checked&&value>0?[value]:[];
