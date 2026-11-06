@@ -2472,10 +2472,11 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const bottom=document.createElement('div');bottom.className='report-workspace-bottom';
   if(equipment)auxiliary.append(equipment);
   const mapColumn=document.createElement('div');mapColumn.className='report-workspace-map-column';
-  const line=get('riskMapLinePanel');if(line)mapColumn.append(line);
+  let line=get('riskMapLinePanel');if(line)mapColumn.append(line);
   mapColumn.append(auxiliary);
   top.append(controls,mapColumn);panel.append(top,bottom);overviewPanel.after(panel);
   function keepMapTools(){
+    line=get('riskMapLinePanel')||line;
     if(map.parentElement===mapColumn){
       if(line&&map.nextElementSibling!==line)map.after(line);
       const anchor=line||map;
