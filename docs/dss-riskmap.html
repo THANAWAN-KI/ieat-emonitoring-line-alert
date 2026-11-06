@@ -397,7 +397,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261106-context-9ddff36');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261106-map-proportions-clean');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -2463,6 +2463,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 .coverage-basemap-control{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0}
 .coverage-basemap-control label{font-weight:500;color:#303841}
 .coverage-basemap-control select{font:inherit;min-height:40px;padding:6px 10px;background:#fff;color:#303841;border:1px solid #d9cce4;border-radius:0;max-width:100%}
+#riskmapReportPanel #coverageMapView{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:8/5!important;box-sizing:border-box}
 #riskmapReportPanel .report-workspace-map-column{min-width:0;display:flex;flex-direction:column;gap:16px}
 #riskmapReportPanel .report-workspace-map-column>#coverageMap{width:100%!important;box-sizing:border-box}
 #riskmapReportPanel .report-workspace-map-column>#riskMapLinePanel{width:100%;min-width:0;box-sizing:border-box;margin:0;padding:16px;background:#fff;border:1px solid #e2e6eb;border-radius:0}
@@ -2552,7 +2553,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     tabs.forEach((tab,index)=>{tab.setAttribute('aria-selected',String(index===(edit?1:0)));tab.tabIndex=index===(edit?1:0)?0:-1});
     if(edit&&!frame.getAttribute('src')){
       const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');
-      url.searchParams.set('v','20261106-context-9ddff36');frame.src=url.href;
+      url.searchParams.set('v','20261106-map-proportions-clean');frame.src=url.href;
     }
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   }
