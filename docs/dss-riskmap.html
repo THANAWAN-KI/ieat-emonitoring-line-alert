@@ -275,10 +275,11 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
     <p id="riskmapOverviewSource">ข้อมูลจากทะเบียน e‑PP และชั้นข้อมูล กนอ.</p>
   </div>
   <nav class="riskmap-overview-links" aria-label="หมวดข้อมูล"><a href="#coverageRiskHeading">โรงงานเสี่ยง</a><a href="#coverageSupportTitle">ข้อมูลสนับสนุน</a><a href="#coverageMapTitle">แผนที่</a></nav>
-  <form id="coverageEstateForm" role="search">
-    <label><span class="riskmap-visually-hidden">ค้นหานิคมอุตสาหกรรม</span><input id="coverageEstateSearch" type="search" placeholder="ค้นหานิคมฯ"></label>
+  <h2 id="coverageEstateHeading">ค้นหานิคมอุตสาหกรรม</h2>
+  <form id="coverageEstateForm" role="search" aria-labelledby="coverageEstateHeading">
+    <label><span class="riskmap-visually-hidden">ค้นหานิคมอุตสาหกรรม</span><input id="coverageEstateSearch" type="search" placeholder="พิมพ์ชื่อนิคมฯ"></label>
     <label><span class="riskmap-visually-hidden">เลือกนิคมฯ</span><select id="coverageEstate"><option value="">ทุกนิคมฯ</option></select></label>
-    <button type="submit" aria-label="ค้นหานิคมฯ"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg></button>
+    <button type="submit">ค้นหา</button>
   </form>
   <div id="riskmapOverviewMetrics" aria-label="สรุปจำนวนโรงงานตามกลุ่มความเสี่ยง"></div>
   <p class="riskmap-overview-note">เลือกตัวเลขเพื่อดูรายชื่อโรงงานตามกลุ่มความเสี่ยง</p>
@@ -2508,7 +2509,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   auxiliary.append(wrapSearch('สารเคมีจาก DSS',get('coverageChemicalSearch')),wrapSearch('อุปกรณ์ระงับเหตุจาก DSS',equipment),other);
   controls.append(auxiliary);
   const line=get('riskMapLinePanel');if(line)controls.append(line);
-  get('coverageEstateForm').after(controls);
+  document.querySelector('.riskmap-overview-note').after(controls);
   panel.append(bottom);overviewPanel.after(panel);
   const editReportButton=document.createElement('button');
   editReportButton.id='dashboardEditReportText';editReportButton.type='button';
@@ -2631,8 +2632,9 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 #riskmapOverviewPanel .riskmap-overview-links a{display:grid;place-items:center;text-align:center;padding:7px 3px;border-color:#b5a0c2;background:#faf8fb}
 #riskmapOverviewPanel .riskmap-overview-links a:first-child{background:#e8d4f3;border-color:#9570aa}
 #riskmapOverviewPanel .riskmap-overview-links a:hover{background:#e8d4f3}
-#riskmapOverviewPanel #coverageEstateForm{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,34%) 42px;gap:5px;margin:0 0 16px}
-#coverageEstateForm button svg{display:block;margin:auto}
+#riskmapOverviewPanel #coverageEstateForm{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,34%) auto;gap:5px;margin:0 0 16px}
+#riskmapOverviewPanel #coverageEstateHeading{margin:12px 0 6px;font-size:16px;color:#54246f}
+@media(max-width:420px){#riskmapOverviewPanel #coverageEstateForm{grid-template-columns:minmax(0,1fr) auto}#riskmapOverviewPanel #coverageEstateForm label:nth-child(2){grid-column:1/-1;grid-row:2}}
 .riskmap-visually-hidden{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
 #riskmapOverviewMetrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid #ddd2e5;padding-block:8px}
 .riskmap-overview-metric{min-width:0;display:grid;gap:5px;padding:8px;background:#fff;color:#443450;border:0;border-inline-end:1px solid #ddd2e5;text-align:start;font:inherit;cursor:pointer}
