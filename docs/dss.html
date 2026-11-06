@@ -1529,6 +1529,8 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
 async function downloadReportPng(){
  document.getElementById('dssExportError')?.remove();window.ieatReportDownloads?.forEach(item=>URL.revokeObjectURL(item.url));window.ieatReportDownloads=[];const exportScale=matchMedia('(max-width:760px)').matches?1.5:2;loading.classList.add('show');pngBtn.disabled=true;
  try{
+  if(new URLSearchParams(location.search).get('embedded')==='dashboard'&&parent.ieatCoverageReport&&parent.ieatCoverageReport.status!=='ready')throw Error('กรุณารอผลค้นหาและรายงานอัปเดตครบก่อนดาวน์โหลด');
+  if(window.dssIncidentContextPending)throw Error('กำลังอัปเดตรายงานตามผลค้นหา กรุณารอสักครู่');
   if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานก่อนดาวน์โหลด');
   await loadWeather();
   if(!state.weatherTime)throw Error('ยังโหลดสภาพอากาศล่าสุดไม่ได้ กรุณาลองดาวน์โหลดอีกครั้ง');
@@ -3781,6 +3783,82 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
   const previous=render;render=function(){const result=previous.apply(this,arguments);scope();return result};
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&validPoint())loadWeather()});
   scope();
+})();
+</script>
+
+
+<script id="canonical-incident-report-context">
+(() => {
+  let revision=0,queue=Promise.resolve();
+  const activeSummary=()=>{
+    const km=Number(state.bufferKm),types=['hospital','fire','police','hydrant','community','cctv'];
+    return {
+      id:state.coverageContextId,company:state.company,registration:state.registration,estate:state.estate,address:state.address,
+      incidentType:state.event,km,point:{lat:Number(state.lat),lng:Number(state.lng)},radii:getBufferRadii(),
+      weather:{description:state.weather,temperature:state.temp,humidity:state.humidity,windSpeed:state.windSpeed,windDirection:state.windDir,time:state.weatherTime},
+      support:(state.supportLocations||[]).filter(p=>Number.isFinite(Number(p.distance))&&Number(p.distance)<=km).map(p=>({...p})),
+      supportStatus:Object.fromEntries(types.map(type=>[type,state[type+'Name']||'ไม่พบข้อมูล'])),
+      supportTotals:{community:state.communityDistance,cctv:state.cctvDistance},
+      chemical:state.leakChemical||'',chemicalCAS:state.leakCAS||'',chemicalUN:state.leakUN||'',
+      generatedAt:new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})
+    };
+  };
+  window.dssGetIncidentSummary=activeSummary;
+  window.dssSetCoverageMapImage=(image,id)=>{
+    if(id&&id!==state.coverageContextId)return;
+    const target=document.getElementById('dashboardReportMapImage');
+    if(target&&image){target.src=image;target.hidden=false;}
+  };
+  window.dssApplyIncidentContext=context=>{
+    const token=++revision;window.dssIncidentContextPending=true;
+    const run=queue.catch(()=>{}).then(async()=>{
+      if(token!==revision)return null;
+      const p=context.point,km=Number(context.km);
+      if(!p||![p.lat,p.lng,km].every(Number.isFinite)||km<.1||km>50)throw Error('ข้อมูลพิกัดหรือรัศมีไม่ถูกต้อง');
+      const attrs=context.attributes||{},feature=normalizeEppFeature({attributes:attrs,geometry:{x:p.lng,y:p.lat,spatialReference:{wkid:4326}}});
+      if(state.company!==context.company){
+        state.positionSource='factory';state.keepManualPosition=false;
+        await selectDssLookup({type:'factory',feature,name:context.company});
+      }
+      if(token!==revision)return null;
+      state.company=context.company;state.estate=attrs['นิคมอุตสาหกรรม']||feature.attributes?.IEAT||state.estate;
+      state.registration=[attrs['เลขทะเบียนใหม่'],attrs['เลขทะเบียนเดิม']].filter(Boolean).join(' / ')||state.registration;
+      state.lat=String(p.lat);state.lng=String(p.lng);state.positionSource='manual';state.keepManualPosition=true;state.positionConfirmed=true;
+      state.event=context.incidentType==='เหตุไฟไหม้'?'เหตุเพลิงไหม้':context.incidentType;
+      if(/สารเคมี/.test(state.event)&&!state.leakChemical)state.leakChemical='ยังไม่ทราบชนิดสาร';
+      state.bufferRadii=[km,km,km];state.bufferEnabled=[true,false,false];state.bufferKm=km;
+      state.coverageContextId=context.id;state.weatherLocation=context.company;
+      syncBufferControls();
+      for(const node of document.querySelectorAll('[data-key]')){
+        const key=node.dataset.key;if(state[key]===undefined)continue;
+        if(node.tagName==='SELECT'&&![...node.options].some(o=>o.value===String(state[key])))node.add(new Option(String(state[key]),String(state[key])));
+        node.value=String(state[key]);
+      }
+      render();updateMap();
+      await Promise.allSettled([loadDssNearby(p.lat,p.lng),loadWeather()]);
+      if(token!==revision)return null;
+      if(window.dssLoadReportChemicals)await window.dssLoadReportChemicals();
+      if(token!==revision)return null;
+      state.supportLocations=(state.supportLocations||[]).filter(p=>Number.isFinite(Number(p.distance))&&Number(p.distance)<=km);
+      for(const type of ['hospital','fire','police','hydrant','community','cctv']){
+        if(String(state[type+'Name']).includes('โหลดข้อมูลไม่สำเร็จ'))continue;
+        const matches=state.supportLocations.filter(p=>p.type===type).sort((a,b)=>a.distance-b.distance);
+        if(type==='community'||type==='cctv'){
+          state[type+'Name']=matches.length?(type==='community'?'ชุมชน':'กล้อง CCTV')+' ในรัศมี '+km+' กม.':'ไม่พบข้อมูลในรัศมี '+km+' กม.';
+          if(!matches.length)state[type+'Distance']='ไม่พบข้อมูล';
+        }else{
+          state[type+'Name']=matches[0]?.name||'ไม่พบข้อมูลในรัศมี '+km+' กม.';
+          state[type+'Distance']=matches[0]?matches[0].distance.toFixed(2)+' กม.':'—';
+        }
+      }
+      render();window.dssSyncSupportMarkers?.();
+      if(window.dssRefreshPageTwo)await window.dssRefreshPageTwo();
+      const summary=activeSummary();
+      parent.postMessage({type:'dss:context-applied',summary},location.origin);
+      return summary;
+    }).finally(()=>{if(token===revision)window.dssIncidentContextPending=false;});
+    queue=run;return run;
+  };
 })();
 </script>
 
