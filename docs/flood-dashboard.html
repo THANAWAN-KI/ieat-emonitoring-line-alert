@@ -339,6 +339,75 @@
    border-color:var(--drawing-ink)!important;
    color:var(--drawing-ink)!important;
   }
+
+  /* Match the overview controls while keeping measurement and alert colors distinct. */
+  html.story-dashboard #estateFocusDashboard #floodInformationPane :is(#rpRankingsAfterWarning>section,#floodDamsSection,.ef-canal-panel) {
+   border:1px solid var(--drawing-ink)!important;
+   border-radius:0!important;
+   box-shadow:3px 3px #eae3d5!important;
+   padding:12px!important;
+   background:#fff!important;
+  }
+  html.story-dashboard #floodInformationPane :is(#rpRankingsAfterWarning h3,#floodDamsSection>h2,.ef-canal-panel>h2) {
+   border-inline-start:4px solid var(--drawing-yellow)!important;
+   border-bottom:1px solid var(--drawing-line)!important;
+   border-radius:0!important;
+   padding:4px 8px 6px!important;
+   color:var(--drawing-ink)!important;
+   font-weight:600!important;
+  }
+  html.story-dashboard #floodInformationPane #rpRankingsAfterWarning h3 {grid-column:1/-1}
+  html.story-dashboard #floodInformationPane #rpRankingsAfterWarning .rank-unit {grid-column:1/-1;margin:0!important}
+  html.story-dashboard #floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-row {
+   border-bottom:1px solid #eee9df!important;
+   border-radius:0!important;
+   min-height:34px!important;
+  }
+  html.story-dashboard #floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-track,
+  html.story-dashboard #floodInformationPane #floodDamsSection .storage-progress-track {
+   height:12px!important;
+   border:1px solid var(--drawing-ink)!important;
+   border-radius:0!important;
+   background:var(--drawing-paper)!important;
+  }
+  html.story-dashboard #floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-fill,
+  html.story-dashboard #floodInformationPane #floodDamsSection .storage-progress-track i {
+   background:var(--drawing-water)!important;
+   border-radius:0!important;
+  }
+  html.story-dashboard #floodInformationPane #rpRankingsAfterWarning .ieat-rank-bar-row:first-child .ieat-rank-bar-fill {background:var(--drawing-yellow)!important}
+  html.story-dashboard #estateFocusDashboard #floodInformationPane #floodDamsSection>.ef-panel {
+   border:1px solid var(--drawing-line)!important;
+   border-radius:0!important;
+   box-shadow:none!important;
+   background:#fff!important;
+   padding:10px!important;
+  }
+  html.story-dashboard #floodInformationPane #floodDamsSection .ef-panel>h2 {
+   background:var(--drawing-paper)!important;
+   border-radius:0!important;
+   padding:5px 8px!important;
+   color:var(--drawing-ink)!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane :is(.ef-dam-card,.ef-reservoir-row,.ef-canal-card) {
+   background:#fff!important;
+   border-radius:0!important;
+   box-shadow:none!important;
+  }
+  html.story-dashboard #floodInformationPane .ef-canal-gauge svg rect[fill="#2e9df7"] {fill:var(--drawing-water)}
+  html.story-dashboard #floodInformationPane :is(.ieat-rank-value,.ef-dam-value,.ef-reservoir-row b,.ef-canal-card>b) {
+   color:var(--drawing-ink)!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane :is(#ieatCanalPager,#ieatDamPager,#ieatReservoirPager) button {
+   background:var(--drawing-paper)!important;
+   border:1px solid var(--drawing-ink)!important;
+   border-radius:0!important;
+   color:var(--drawing-ink)!important;
+   box-shadow:none!important;
+  }
+  html.story-dashboard #estateFocusDashboard #floodInformationPane :is(#ieatCanalPager,#ieatDamPager,#ieatReservoirPager) button:hover:not(:disabled) {
+   background:var(--drawing-water)!important;
+  }
   html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWatch"] {--kpi-band:var(--drawing-yellow);--kpi-track:#f5eddb;--kpi-color:#775010}
   html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efWaterWatch"] {--kpi-band:var(--drawing-water);--kpi-track:#e6f2f5;--kpi-color:#23536a}
   html.story-dashboard #floodInformationPane .flood-kpi[data-ef-card="efRainWatch"] {--kpi-band:var(--drawing-green);--kpi-track:#e6f2ea;--kpi-color:#28583e}
