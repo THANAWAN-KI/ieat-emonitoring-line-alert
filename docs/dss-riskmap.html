@@ -2416,6 +2416,10 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   };
   function update(){
     const context=window.ieatCoverageReport;
+    if(context?.status==='ready'){
+      const fresh=frame.contentWindow?.dssGetIncidentSummary?.();
+      if(fresh?.id===context.id)context.summary=fresh;
+    }
     const ready=context?.status==='ready'&&context.summary&&context.summary.id===context.id;
     output.value=ready?window.ieatBuildRiskMapMessage(context,mode.value):'';
     copy.disabled=!ready||!mode.value;
