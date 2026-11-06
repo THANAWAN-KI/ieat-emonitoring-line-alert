@@ -553,7 +553,35 @@ html body .ieat-estate-location{animation:none!important}
 .aerial-callouts{position:absolute;inset:0;z-index:650;pointer-events:none;overflow:hidden}
 .aerial-callouts svg{position:absolute;inset:0;width:100%;height:100%;stroke:#263639;stroke-width:1.5;filter:drop-shadow(0 0 1px #fff)}
 .aerial-callouts span{position:absolute;left:0;top:0;box-sizing:border-box;width:max-content;max-width:190px;padding:4px 8px;background:#fffdf7;color:#202c2e;border:1px solid #39494a;box-shadow:0 2px 5px #16222526;font:500 13px/1.35 Kanit,Sarabun,sans-serif;overflow-wrap:anywhere}
-</style></head>
+</style>
+<style id="story-point-details-theme">
+body.story-map-mode:has(#storyPointDetails:not([hidden])){--point-details-width:clamp(250px,32vw,350px)}
+html body.story-map-mode:has(#storyPointDetails:not([hidden])) #mapStage{right:var(--point-details-width)!important;width:auto!important}
+html body.story-map-mode:has(#storyPointDetails:not([hidden])) #rightMapToolbar{right:calc(var(--point-details-width) + 12px)!important}
+html body.story-map-mode:has(#storyPointDetails:not([hidden])) :is(#mapLayers,#mapLegend)[open]{right:calc(var(--point-details-width) + 68px)!important}
+#storyPointDetails{position:absolute;inset:0 0 0 auto;width:var(--point-details-width);display:flex;flex-direction:column;z-index:1100;background:#fff;color:#202b2b;border-left:1px solid #202b2b;font:14px/1.55 Sarabun,sans-serif}
+#storyPointDetails[hidden]{display:none}
+#storyPointDetails>header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;background:#ffbd28;border-bottom:1px solid #202b2b}
+#storyPointDetails h2{margin:0;font-size:16px;font-weight:600}
+#storyPointDetails button:is(.story-point-close,.story-popup-zoom,.ieat-measure-btn){font:600 13px/1.4 Sarabun,sans-serif;color:#202b2b!important;background:#82d2e5!important;border:1px solid #202b2b!important;border-radius:0!important;padding:7px 10px;cursor:pointer}
+#storyPointDetails button.story-point-close{font-size:21px;line-height:1}
+#storyPointDetails button[aria-pressed="true"]{background:#ffbd28!important}
+#storyPointDetails button:focus-visible{outline:2px solid #315783;outline-offset:2px}
+#storyPointDetailsBody{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px;overflow-wrap:anywhere}
+#storyPointDetailsBody .popup{width:100%!important;min-width:0!important;max-width:100%!important;max-height:none;color:#202b2b!important}
+#storyPointDetailsBody .popup h3{margin-right:0;color:#202b2b!important}
+#storyPointDetailsBody .popup-estate-distance{background:#f7f4ed;border:1px solid #202b2b;border-radius:0;color:#202b2b;font-size:13px}
+#storyPointDetailsBody table{width:100%;border-collapse:collapse}
+#storyPointDetailsBody table :is(th,td){padding:5px;text-align:left;vertical-align:top;border-bottom:1px solid #dfdbd3}
+@media(max-width:650px){
+ body.story-map-mode:has(#storyPointDetails:not([hidden])){--point-details-height:38%}
+ html body.story-map-mode:has(#storyPointDetails:not([hidden])) #mapStage{right:0!important;bottom:var(--point-details-height)!important}
+ html body.story-map-mode:has(#storyPointDetails:not([hidden])) #rightMapToolbar{right:12px!important;top:31%!important;max-height:calc(62dvh - 16px)!important}
+ html body.story-map-mode:has(#storyPointDetails:not([hidden])) :is(#mapLayers,#mapLegend)[open]{right:66px!important;top:31%!important;max-height:calc(62dvh - 16px)!important}
+ #storyPointDetails{inset:auto 0 0;width:100%;height:var(--point-details-height);border-left:0;border-top:1px solid #202b2b}
+}
+</style>
+</head>
 <body><div id="mapStage"><div id="map" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div><div id="raster" aria-label="แผนที่สายน้ำและสถานีวัดน้ำ"></div></div>
 <div class="ieat-3d-tools"><button id="estateView3d" title="ภาพจำลองขนาดสูงสุด 120 / 120 · ความสูงประมาณ" type="button" aria-pressed="true">มุมมอง 3D</button><button id="estateExample3d" type="button" hidden>ตัวอย่างบางปะอิน 3D</button><output id="estateDepthValue" hidden>45</output><input id="estateDepth" type="range" min="0" max="120" step="5" value="45" hidden aria-label="ความสูงแบบจำลอง"><input id="estateParcelVisibility" type="checkbox" checked hidden><input id="estateTreeVisibility" type="checkbox" checked hidden><span id="estate3dState" role="status" hidden></span></div><button id="mapCompass" type="button" aria-label="ปรับแผนที่ให้ทิศเหนืออยู่ด้านบน" title="ปรับทิศเหนือและมุมมองให้ตรง"><span>N</span><svg viewBox="0 0 24 28" aria-hidden="true"><path d="M12 2 20 25 12 20 4 25Z" fill="#051736"/><path d="M12 2V20L4 25Z" fill="#109dc0"/></svg></button><div class="controls"><details class="layer-menu" id="mapLayers"><summary>เลเยอร์</summary><div class="layer-body"><div class="layer-panel-heading"><strong>ชั้นข้อมูลแผนที่</strong><span>เลือกข้อมูลที่ต้องการแสดง</span></div><div class="search"><select id="province" aria-label="เลือกจังหวัดในแผนที่"><option value="">ทั่วประเทศ</option></select><label for="waterStationSearch" class="station-search-label">ค้นหาสถานีระดับน้ำทั่วประเทศ</label><input id="waterStationSearch" type="search" placeholder="ชื่อสถานี / รหัสสถานี / จังหวัด" autocomplete="off" aria-controls="waterStationResults"><div id="waterStationResults" class="station-search-results" aria-label="ผลค้นหาสถานี"></div><small id="waterStationSearchStatus" class="station-search-status">ค้นหาจากสถานีทั่วประเทศ</small></div>
 <label class="basemap-select" for="basemapChoice">พื้นแผนที่<select id="basemapChoice"><option value="streets">แผนที่ถนนโทนสว่าง</option><option value="topo" selected>แผนที่ภูมิประเทศ</option><option value="paper">แผนที่ลายกระดาษสีเทา</option><option value="gray">แผนที่เรียบโทนสว่าง</option><option value="satellite">ภาพถ่ายดาวเทียม</option></select></label><div class="toggles" aria-label="ชั้นข้อมูล">
@@ -1778,6 +1806,33 @@ function focusWithEstate(lon,lat){
   queueBoundaries();
  }else if(vector)vector.flyTo({center:[lon,lat],zoom:13,pitch:$('estateView3d').getAttribute('aria-pressed')==='true'?55:0,bearing:storyMap&&$('estateView3d').getAttribute('aria-pressed')!=='true'?0:-15});else raster?.setView([lat,lon],13);
 }
+function openStoryPointDetails(node){
+ let panel=$('storyPointDetails');
+ if(!panel){
+  panel=document.createElement('aside');
+  panel.id='storyPointDetails';
+  panel.setAttribute('aria-labelledby','storyPointDetailsTitle');
+  panel.innerHTML='<header><h2 id="storyPointDetailsTitle">รายละเอียดบนแผนที่</h2><button type="button" class="story-point-close" aria-label="ปิดรายละเอียด">×</button></header><div id="storyPointDetailsBody" tabindex="0" aria-label="ข้อมูลจุดที่เลือก"></div>';
+  panel.querySelector('button').onclick=()=>preparednessPopup?.remove();
+  panel.addEventListener('keydown',event=>{if(event.key==='Escape')preparednessPopup?.remove()});
+  document.body.append(panel);
+ }
+ const body=$('storyPointDetailsBody');
+ const trigger=document.activeElement;
+ body.replaceChildren(node);
+ panel.hidden=false;
+ vector?.resize();
+ raster?.invalidateSize({pan:false});
+ panel.querySelector('button').focus({preventScroll:true});
+ preparednessPopup={remove(){
+  const restoreFocus=panel.contains(document.activeElement);
+  panel.hidden=true;
+  body.replaceChildren();
+  clearIEATMeasuredDistance();
+  preparednessPopup=null;
+  if(restoreFocus)trigger?.focus({preventScroll:true});
+ }};
+}
 function openPointPopup(lon,lat,html,move=false,camera=null){
  if(lon==null||lat==null||!Number.isFinite(Number(lon))||!Number.isFinite(Number(lat))||(!vector&&!raster))return;
  window.IEAT_MAP_DETAILS?.close();
@@ -1799,6 +1854,13 @@ function openPointPopup(lon,lat,html,move=false,camera=null){
  }
  const estate=estateProvinceScope?.active?estateProvinceScope.estate:null;
  if(estate){const d=distanceFromEstate(Number(lon),Number(lat));if(Number.isFinite(d)){const note=document.createElement('div');note.className='popup-estate-distance';note.innerHTML='<strong>ระยะห่างจากนิคมฯ</strong><span>'+esc(estateProvinceScope.name)+' · '+d.toLocaleString('th-TH',{maximumFractionDigits:2})+' กม. (เส้นตรง)</span>';const btn=document.createElement('button');btn.type='button';btn.className='ieat-measure-btn';btn.setAttribute('aria-pressed','false');btn.textContent='วัดระยะทางบนแผนที่';btn.addEventListener('click',()=>toggleIEATMeasuredDistance(Number(lon),Number(lat),btn));note.append(btn);node.append(note)}}
+ if(storyMap){
+  openStoryPointDetails(node);
+  if(move)focusWithEstate(Number(lon),Number(lat));
+  mountPopupHistory(node);
+  if(camera)loadCameraImage(camera);
+  return;
+ }
  if(move)window.IEATPreparednessMap().focusPoint(Number(lon),Number(lat));
  preparednessPopup=vector
   ?new maplibregl.Popup({maxWidth:'300px',offset:14,className:'prep-point-popup',closeButton:true,closeOnClick:false}).setLngLat([lon,lat]).setDOMContent(node).addTo(vector)
