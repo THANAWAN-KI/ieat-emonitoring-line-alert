@@ -171,12 +171,15 @@
       if(typeof frame.contentWindow.dssApplyIncidentContext!=='function')throw Error('รายงานเวอร์ชันใหม่ยังไม่พร้อม กรุณารีเฟรชหน้า');
       const summary=await frame.contentWindow.dssApplyIncidentContext(context);
       if(revision!==incidentRevision||!summary)return;
-      context.summary=summary;context.status='ready';
+      context.summary=summary;context.status='rendering-map';
       const circle=draw();
       await view.goTo({target:circle.extent.expand(1.15)},{animate:false});
       if(revision!==incidentRevision)return;
       openIncident();
-      await window.ieatSyncCoverageMapPreview?.();
+      const mapImage=await window.ieatCaptureCoverageMap();
+      if(revision!==incidentRevision)return;
+      frame.contentWindow.dssSetCoverageMapImage(mapImage,context.id);
+      context.status='ready';
       window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(manual)section.scrollIntoView({behavior:'smooth',block:'start'});
       message.textContent='อัปเดตโรงงาน ประเภทเหตุ รัศมี แผนที่ รายงาน และข้อความ LINE แล้ว';
