@@ -907,7 +907,7 @@ mapNode.addEventListener('click',function(e){
   state.lng=(lng+((e.clientX-box.left)/box.width-0.5)*2*spanLng).toFixed(6);
   render();updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather();
 });
-const dirs=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];let weatherSequence=0;async function loadWeather(){const lat=Number(state.lat),lng=Number(state.lng);if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');const sequence=++weatherSequence;weatherBtn.textContent='กำลังดึงข้อมูล…';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FBangkok`;let c,lastError;for(let attempt=0;attempt<2;attempt++){try{const r=await fetch(u,{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('weather HTTP '+r.status);c=(await r.json()).current;if(c?.temperature_2m==null||c?.wind_speed_10m==null)throw Error('incomplete weather');break}catch(error){lastError=error}}if(!c)throw lastError||Error('weather');if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;const desc={0:'ท้องฟ้าแจ่มใส',1:'ท้องฟ้าโปร่ง',2:'มีเมฆบางส่วน',3:'เมฆมาก',45:'มีหมอก',48:'หมอกจัด',51:'ฝนปรอยเล็กน้อย',53:'ฝนปรอย',55:'ฝนปรอยหนัก',61:'ฝนเล็กน้อย',63:'ฝนปานกลาง',65:'ฝนหนัก',80:'ฝนซู่เล็กน้อย',81:'ฝนซู่ปานกลาง',82:'ฝนซู่หนัก',95:'พายุฝนฟ้าคะนอง'};state.temp=c.temperature_2m;state.humidity=c.relative_humidity_2m;state.windSpeed=c.wind_speed_10m;state.windDeg=c.wind_direction_10m;state.windDir=dirs[Math.round(c.wind_direction_10m/45)%8];state.weather=desc[c.weather_code]||'สภาพอากาศทั่วไป';state.weatherTime='ข้อมูล ณ '+new Date(c.time+'+07:00').toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย)';render()}catch(e){if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;state.weather='โหลดข้อมูลอากาศไม่สำเร็จ';state.weatherTime='';render();console.warn('Weather data unavailable',e)}finally{weatherBtn.textContent='ดึงสภาพอากาศ'}}
+const dirs=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];let weatherSequence=0;async function loadWeather(){const lat=Number(state.lat),lng=Number(state.lng);if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');const sequence=++weatherSequence;weatherBtn.textContent='กำลังดึงข้อมูล…';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FBangkok`;let c,lastError;for(let attempt=0;attempt<2;attempt++){try{const r=await fetch(u,{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('weather HTTP '+r.status);c=(await r.json()).current;if(c?.temperature_2m==null||c?.wind_speed_10m==null)throw Error('incomplete weather');break}catch(error){lastError=error}}if(!c)throw lastError||Error('weather');if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;const desc={0:'ท้องฟ้าแจ่มใส',1:'ท้องฟ้าโปร่ง',2:'มีเมฆบางส่วน',3:'เมฆมาก',45:'มีหมอก',48:'หมอกจัด',51:'ฝนปรอยเล็กน้อย',53:'ฝนปรอย',55:'ฝนปรอยหนัก',61:'ฝนเล็กน้อย',63:'ฝนปานกลาง',65:'ฝนหนัก',80:'ฝนซู่เล็กน้อย',81:'ฝนซู่ปานกลาง',82:'ฝนซู่หนัก',95:'พายุฝนฟ้าคะนอง'};state.temp=c.temperature_2m;state.humidity=c.relative_humidity_2m;state.windSpeed=c.wind_speed_10m;state.windDeg=c.wind_direction_10m;state.windDir=dirs[Math.round(c.wind_direction_10m/45)%8];state.weather=desc[c.weather_code]||'สภาพอากาศทั่วไป';state.weatherTime='ข้อมูล ณ '+new Date(c.time+'+07:00').toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย)';render()}catch(e){if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;state.temp='—';state.humidity='—';state.windSpeed='—';state.windDeg=null;state.windDir='—';state.weather='โหลดข้อมูลอากาศไม่สำเร็จ';state.weatherTime='';render();console.warn('Weather data unavailable',e)}finally{weatherBtn.textContent='ดึงสภาพอากาศ'}}
 document.getElementById('mapBtn').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดในประเทศไทยให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};document.getElementById('weatherBtn').onclick=loadWeather;resetBtn.onclick=()=>{if(confirm('ล้างข้อมูลที่แก้ไขและกลับเป็นค่าเริ่มต้นหรือไม่?')){weatherSequence++;nearbySequence++;state={...defaults,bufferRadii:[1,3,5],bufferEnabled:[true,true,true],supportLocations:[]};syncBufferControls();factoryLookup.value='';lookupResults.replaceChildren();render();updateMap();window.dssSyncSupportMarkers?.()}};
 pngBtn.onclick=()=>downloadReportPng();render();updateMap();
 </script>
@@ -1530,6 +1530,8 @@ async function downloadReportPng(){
  document.getElementById('dssExportError')?.remove();window.ieatReportDownloads?.forEach(item=>URL.revokeObjectURL(item.url));window.ieatReportDownloads=[];const exportScale=matchMedia('(max-width:760px)').matches?1.5:2;loading.classList.add('show');pngBtn.disabled=true;
  try{
   if(!validPoint()||(state.company===defaults.company&&state.positionSource!=='manual'))throw Error('กรุณาเลือกโรงงานก่อนดาวน์โหลด');
+  await loadWeather();
+  if(!state.weatherTime)throw Error('ยังโหลดสภาพอากาศล่าสุดไม่ได้ กรุณาลองดาวน์โหลดอีกครั้ง');
   state.date=new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'});
   if(window.dssLoadReportChemicals)await window.dssLoadReportChemicals();
   if(window.dssRefreshPageTwo)await window.dssRefreshPageTwo();
@@ -3660,7 +3662,7 @@ function note(){const weather=document.getElementById('fbWeather');if(!weather)r
 const before=render;render=function(){const result=before.apply(this,arguments);note();return result};
 window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='dss:weather-location')return;const {lat,lng,name}=event.data;if(!Number.isFinite(lat)||!Number.isFinite(lng))return;state.lat=lat;state.lng=lng;state.weatherLocation=name;loadWeather()});
 window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='dss:select-epp')state.weatherLocation=''});
-loadWeather();note();setInterval(()=>loadWeather(),10*60*1000);
+loadWeather();note();setInterval(()=>{if(!document.hidden)loadWeather()},5*60*1000);
 })();
 </script><style id="mobile-emergency-reports">
 @media(max-width:760px){
@@ -3744,6 +3746,40 @@ html body.dss-inline-dashboard .report-wrap{display:block!important;width:100%!i
 html body.dss-inline-dashboard #report,
 html body.dss-inline-dashboard #dssPageTwo{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;margin:0 0 16px!important}
 </style>
+
+
+<style id="square-report-and-scope-20261106">
+html body #report#report#report#report,
+html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,
+html body #report#report#report#report :is(#dssFieldBrief,.fb-section,.fb-fact,.fb-facts,#fbWeather,.weather-panel,.report-scope){border-radius:0!important}
+html body #report#report#report#report #fbWeather{border-radius:0!important}
+.report-scope{margin:12px 0 18px;padding:12px;border:1px solid #dfe4e8;color:#303841;font:inherit}
+.report-scope p{margin:0 0 6px}.report-scope ul{margin:0;padding-left:22px}
+</style>
+<script id="report-scope-and-weather-refresh-20261106">
+(() => {
+  function scope(){
+    const brief=document.getElementById('dssFieldBrief');if(!brief)return;
+    let box=brief.querySelector('.report-scope');
+    if(!box){box=document.createElement('section');box.className='report-scope';
+      const header=brief.querySelector('.fb-header,.fb-head');
+      if(header)header.after(box);else brief.prepend(box);
+    }
+    const title=document.createElement('p');title.textContent='รัศมี '+getBufferRadii().join(' / ')+' กิโลเมตร ประกอบด้วยข้อมูลดังนี้';
+    const list=document.createElement('ul');
+    for(const text of [
+      'ข้อมูลสถานประกอบการ/พื้นที่เกิดเหตุ',
+      'แผนที่และสภาพอากาศบริเวณจุดเกิดเหตุ และพื้นที่เสี่ยงอาจจะได้รับผลกระทบ',
+      'ข้อมูลสนับสนุนการระงับเหตุบริเวณพื้นที่ใกล้เคียง',
+      'กล้อง CCTV สังเกตการณ์'
+    ]){const item=document.createElement('li');item.textContent=text;list.append(item);}
+    box.replaceChildren(title,list);
+  }
+  const previous=render;render=function(){const result=previous.apply(this,arguments);scope();return result};
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&validPoint())loadWeather()});
+  scope();
+})();
+</script>
 
 </body></html>
 
