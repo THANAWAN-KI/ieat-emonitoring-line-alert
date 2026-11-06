@@ -2362,7 +2362,10 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       ''
     ];
     if(w.time){
-      lines.push('อากาศ: '+missing(w.description)+' · ลมพัดจาก '+missing(w.windDirection)+' '+missing(w.windSpeed)+' กม./ชม.',w.time);
+      lines.push('สภาพอากาศ: '+missing(w.description),
+        'อุณหภูมิ '+missing(w.temperature)+' °C · ความชื้น '+missing(w.humidity)+' %',
+        'ลมพัดจาก '+missing(w.windDirection)+' · ความเร็ว '+missing(w.windSpeed)+' กม./ชม.',
+        w.time,'แหล่งข้อมูลอากาศ: Open-Meteo (ข้อมูลจากแบบจำลอง)');
     }else lines.push('อากาศ: ยังไม่มีข้อมูลล่าสุด');
     lines.push('', 'จุดสนับสนุนใกล้ที่สุดในรัศมี');
     for(const [type,label] of [['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['police','ตำรวจ']]){
