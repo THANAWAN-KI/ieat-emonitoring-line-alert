@@ -3750,6 +3750,8 @@ html body.dss-inline-dashboard #dssPageTwo{width:100%!important;min-width:0!impo
 
 
 <style id="square-report-and-scope-20261106">
+html body #report#report#report#report#report#report.dss-field-document>:not(#dssFieldBrief){display:none!important}
+html body #report#report#report#report#report#report.dss-field-document>#dssFieldBrief{display:block!important}
 html body #report#report#report#report,
 html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,
 html body #report#report#report#report :is(#dssFieldBrief,.fb-section,.fb-fact,.fb-facts,#fbWeather,.weather-panel,.report-scope){border-radius:0!important}
@@ -3762,7 +3764,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
   function scope(){
     const brief=document.getElementById('dssFieldBrief');if(!brief)return;
     let box=brief.querySelector('.report-scope');
-    if(!box){box=document.createElement('section');box.className='report-scope';
+    if(!box){box=document.createElement('div');box.className='report-scope';
       const header=brief.querySelector('.fb-header,.fb-head');
       if(header)header.after(box);else brief.prepend(box);
     }
