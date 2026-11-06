@@ -1961,15 +1961,15 @@ html body:has(#riskDashboard:not([hidden])) header#ieatPortalHeader#ieatPortalHe
 <link rel="stylesheet" href="./workflow.css?v=1">
 <script src="./incident-store.js?v=20261022" defer></script>
 <script src="./report-store.js?v=1" defer></script>
-<script src="./hub-workflow.js?v=separate-search-20261029" defer></script><script src="./data-thermal-dashboard.js?v=grid-fix-20261027" defer></script>
+<script src="./hub-workflow.js?v=separate-search-20261029" defer></script>
 <script src="./incident-monitoring.js?v=1" defer></script>
 <script src="./report-route.js?v=a4-map-20261029" defer></script>
 <link rel="stylesheet" href="./fire-dashboard.css?v=20261022-4">
-<script src="./fire-dashboard.js?v=5" defer></script>
+
 <link rel="stylesheet" href="./hub-appearance.css?v=b979abe">
 <script src="./hub-appearance.js?v=solar-20261027-2" defer></script>
 <link rel="stylesheet" href="./fire-focus.css?v=solar-theme-20261027">
-<script src="./fire-focus.js?v=full-theme-20261027" defer></script>
+
 
 <style id="emergency-support-three-cards-layout">
 /* ข้อมูลสนับสนุน: การ์ดหลัก 3 ใบเรียงในแถวเดียว */
@@ -2374,11 +2374,12 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 </script>
 <script src="./dss-riskmap-equipment.js?v=7d441f0"></script>
 <style id="riskmap-report-only-layout">
-html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > .risk-workspace {
+html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > :not(#emergencyReportPage) {
   position:fixed!important;
   inset:0 auto auto -20000px!important;
   width:1200px!important;
   min-width:1200px!important;
+  opacity:0!important;
   pointer-events:none!important;
 }
 html body #riskDashboard#riskDashboard.dashboard-single-page.continuous-dashboard > #emergencyReportPage {
