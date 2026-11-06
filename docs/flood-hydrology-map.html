@@ -1459,7 +1459,7 @@ function addFlow(){
  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
  const canAnimate=()=>mapOnScreen&&!document.hidden&&flags.flow&&!aerialPlaying&&!vector?.isMoving();
  const started=performance.now();
- animation=setInterval(()=>{
+ if(!storyMap)animation=setInterval(()=>{
   if(reducedMotion.matches||!canAnimate()||!vector?.getLayer('mapped-water-motion'))return;
   const phase=((performance.now()-started)*.008)%8;
   vector.setPaintProperty('mapped-water-motion','line-dasharray',phase<.8?[phase,7.2,.8-phase,0]:[0,phase-.8,.8,8-phase]);
@@ -1481,14 +1481,15 @@ function addFlow(){
   vector.addSource('flow-arrow-motion',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   vector.addLayer({id:'flow-arrows',type:'symbol',source:'flow-arrow-motion',minzoom:6,layout:{visibility:flags.flow?'visible':'none','icon-image':'flow-arrow','icon-size':.52,'icon-rotate':['get','angle'],'icon-rotation-alignment':'map','icon-allow-overlap':false,'icon-ignore-placement':true}});
   let staticView='';
-  const arrowTimer=setInterval(()=>{
+  function updateArrows(){
    const source=vector?.getSource('flow-arrow-motion');
-   if(!source){clearInterval(arrowTimer);return}
-   if(!canAnimate()||vector.getZoom()<6)return;
-   const view=vector.getBounds().toArray().flat().join(',');
-   if(reducedMotion.matches&&view===staticView)return;
-   staticView=reducedMotion.matches?view:'';
-   const now=reducedMotion.matches?0:performance.now();
+   if(!source||!flags.flow||vector.getZoom()<6||vector.isMoving())return;
+   if(!storyMap&&!canAnimate())return;
+   const stationary=storyMap||reducedMotion.matches;
+   const view=stationary?vector.getBounds().toArray().flat().join(','):'';
+   if(stationary&&view===staticView)return;
+   staticView=view;
+   const now=stationary?0:performance.now();
    const bounds=vector.getBounds(),spacing=Math.max(.012,70/2**vector.getZoom()),features=[];
    for(const {segments,distance} of paths){
     if(!distance)continue;
@@ -1502,7 +1503,17 @@ function addFlow(){
     }
    }
    source.setData({type:'FeatureCollection',features});
-  },360);
+  }
+  if(storyMap){
+   vector.on('moveend',updateArrows);
+   document.querySelector('[data-layer="flow"]').addEventListener('change',updateArrows);
+   updateArrows();
+  }else{
+   const arrowTimer=setInterval(()=>{
+    if(!vector?.getSource('flow-arrow-motion'))clearInterval(arrowTimer);
+    else updateArrows();
+   },360);
+  }
  };
  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="18" viewBox="0 0 28 18"><path d="M2 6H16V2L26 9 16 16V12H2Z" fill="#ffffff" stroke="#109dc0" stroke-width="1.5" stroke-linejoin="round"/></svg>');
 }
@@ -2693,6 +2704,7 @@ body.dashboard-clean .maplibregl-popup{visibility:visible!important}
  .satellite-flood-mask{filter:hue-rotate(-9deg) saturate(.55) brightness(1.16)!important}
  .river-motion{animation:riverTravel 1.45s linear infinite!important;will-change:stroke-dashoffset}
  body:is(.map-moving,.map-offscreen) .river-motion{animation-play-state:paused!important}
+ body.story-map-mode .river-motion{animation:none!important;will-change:auto}
  @media(prefers-reduced-motion:reduce){.river-motion{animation:none!important}}
  #mapLayers .layer-swatch:has(.map-measure-symbol){position:relative!important;height:30px!important}
  #mapLayers .layer-swatch .map-measure-symbol{position:static!important;width:27px!important;height:36px!important;transform:translateY(-6px)!important}
