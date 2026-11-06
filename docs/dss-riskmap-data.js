@@ -307,7 +307,15 @@
     window.ieatCaptureCoverageMap=async()=>{
       if(!view.ready||!window.ieatCoverageReport)return null;
       await view.when();
-      if(view.animation)await view.animation;
+      if(!view.stationary||view.updating)await new Promise((resolve,reject)=>{
+        let timer;
+        const handles=[];
+        const cleanup=()=>{clearTimeout(timer);handles.forEach(handle=>handle.remove());};
+        const ready=()=>{if(view.stationary&&!view.updating){cleanup();resolve();}};
+        handles.push(view.watch('stationary',ready),view.watch('updating',ready));
+        timer=setTimeout(()=>{cleanup();reject(Error('แผนที่ยังโหลดไม่ครบ กรุณารอสักครู่'));},12000);
+        ready();
+      });
       const shot=await view.takeScreenshot({format:'png',width:986});
       return shot.dataUrl;
     };
