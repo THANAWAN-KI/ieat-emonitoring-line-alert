@@ -896,6 +896,12 @@ body>footer{color:#0072cf;background:#f3f8fd;border-top:1px solid #deebf8;font-s
  window.ieatCaptureReportMap=async (renderer,incident)=>{
  const snapshot=window.ieatCoverageReport;
  const samePoint=!incident||snapshot&&Math.abs(snapshot.point.lat-incident.lat)<0.00001&&Math.abs(snapshot.point.lng-incident.lng)<0.00001;
+ if(snapshot?.id){
+   if(!samePoint)throw Error('พิกัดรายงานไม่ตรงกับผลค้นหา กรุณาค้นหาใหม่');
+   const image=await window.ieatCaptureCoverageMap?.();
+   if(!image)throw Error('แผนที่ผลค้นหายังไม่พร้อม');
+   return image;
+ }
  if(samePoint&&window.ieatCaptureCoverageMap){
    try{const image=await window.ieatCaptureCoverageMap();if(image)return image;}catch(error){console.warn('Risk Map capture',error);}
  }
@@ -2376,6 +2382,12 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     const risks=[['ความเสี่ยง_12_ประเภท','ความเสี่ยงสูง 12 ประเภท'],['อัคคีภัยสูง','ความเสี่ยงอัคคีภัยสูง'],['PSM','PSM']];
     const flags=risks.filter(([field])=>String(context.attributes?.[field]||'').trim()==='เข้าข่าย').map(([,label])=>label);
     lines.push('สถานะความเสี่ยงจากทะเบียน: '+risks.map(([field,label])=>label+' = '+(context.attributes?.[field]||'ไม่ระบุ')).join(' / '));
+    for(const group of context.rows||[]){
+      if(!/โรงงานใกล้เคียง|จุดตรวจวัด|บำบัด|คุณภาพอากาศ|ขยะ|โรงเรียน|เฝ้าระวัง/.test(group.title||''))continue;
+      if(group.failed){lines.push(group.title+': โหลดข้อมูลไม่สำเร็จ');continue;}
+      lines.push(group.title+': '+(group.items?.length||0)+' รายการ'+(group.truncated?' (ต้นทางจำกัดผลค้นหา รายการอาจไม่ครบ)':''));
+      for(const item of group.items||[])lines.push('- '+item);
+    }
     lines.push('ขอบเขต '+km+' กม. เป็นระยะค้นหาและเฝ้าระวัง ไม่ใช่ขอบเขตผลกระทบที่ยืนยันแล้ว',
       '', '3. ข้อมูลสนับสนุนการระงับเหตุบริเวณพื้นที่ใกล้เคียง');
     for(const [type,label] of [['hospital','โรงพยาบาล'],['fire','ดับเพลิง'],['police','ตำรวจ'],['hydrant','หัวจ่ายน้ำ']]){
