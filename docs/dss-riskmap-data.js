@@ -45,8 +45,8 @@
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,selectedFactory=null;
   const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
-  let syncTimer, incidentRevision=0;
-  const queueReport=()=>{incidentRevision++;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncReport(false),350);};
+  let syncTimer, incidentRevision=0, hasSearched=false;
+  const queueReport=()=>{incidentRevision++;clearTimeout(syncTimer);if(hasSearched)syncTimer=setTimeout(()=>syncReport(false),350);};
   const sql=value=>String(value).replace(/'/g,"''");
   function incidentDetails(){
     const box=el('div'),table=el('table');
@@ -185,11 +185,11 @@
     }catch(error){message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}
     finally{button.disabled=false;}
   };
-  $('coverageOpenReport').onclick=()=>syncReport(true);
-  radius.onchange=()=>{updateNearby();queueReport();openIncident();};
-  type.onchange=()=>{updateNearby();queueReport();openIncident();};
+  $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
+  radius.onchange=()=>{incidentRevision++;draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
+  type.onchange=()=>{incidentRevision++;draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
   $('coverageSearchSupport').onclick=()=>{if(origin)updateNearby();else message.textContent='เลือกโรงงานหรือปักหมุดก่อนค้นหาข้อมูลสนับสนุน';};
-  form.onsubmit=async event=>{
+  const searchFactories=async event=>{
     event.preventDefault();
     const value=$('coverageFactoryQuery').value.trim();
     if(!value){$('coverageSearchSupport').click();return;}
@@ -209,6 +209,7 @@
         const point=feature.geometry?.type==='polygon'?feature.geometry.centroid:feature.geometry;
         if(!point){message.textContent='โรงงานนี้ไม่มีพิกัดสำหรับปักหมุด';return;}
         const label=feature.attributes[factoryName]||feature.attributes['ชื่อบริษัทภาษาอังกฤษ']||'โรงงานที่เลือก';
+        hasSearched=false;incidentRevision++;
         selectedFactory=feature.attributes;
         matches.replaceChildren();place(point,label);
         $('coverageMap').scrollIntoView({block:'nearest'});
@@ -222,6 +223,10 @@
       if(data.exceededTransferLimit||data.features.length===30)matches.append(el('p','แสดงไม่เกิน 30 รายการ โปรดระบุชื่อหรือเลขทะเบียนเพิ่ม'));
     }catch(error){if(id===searchId)message.textContent='ค้นหาทะเบียนโรงงานไม่ได้ กรุณาลองอีกครั้ง';}
   };
+  $('coverageFactoryLookup').onclick=searchFactories;
+  $('coverageFactoryQuery').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();searchFactories(event);}});
+  $('coverageFactoryQuery').addEventListener('input',()=>{selectedFactory=null;hasSearched=false;incidentRevision++;});
+  form.onsubmit=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
  }
 
  function createCoverageMap(){
