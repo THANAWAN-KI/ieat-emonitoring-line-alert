@@ -3,13 +3,82 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-07T01:56:39.009034+00:00",
+    "fetchedAt": "2026-11-07T08:49:24.010302+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793906211000,
-    "latestEvent": 1793998068000
+    "oldestEvent": 1793927691000,
+    "latestEvent": 1794034447000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17389",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          94.605,
+          5.848,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 4.1,
+        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
+        "time": 1794034447000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17389",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17388",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.12,
+          21.219,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.1,
+        "place": "ประเทศเมียนมา",
+        "time": 1794031346000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17388",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17387",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.08,
+          4.093,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.9,
+        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
+        "time": 1794016781000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17387",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17386",
@@ -164,75 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1793927691000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17380",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17379",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.618,
-          4.184,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.7,
-        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
-        "time": 1793917501000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17379",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17378",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.943,
-          20.912,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.6,
-        "place": "ประเทศเมียนมา",
-        "time": 1793911586000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17378",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17377",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.065,
-          21.024,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.6,
-        "place": "ประเทศเมียนมา",
-        "time": 1793906211000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17377",
         "source": "TMD",
         "types": "",
         "detail": null,
