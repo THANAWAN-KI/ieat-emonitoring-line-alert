@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-07T08:49:24.010302+00:00",
+    "fetchedAt": "2026-11-07T16:27:41.844267+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793927691000,
-    "latestEvent": 1794034447000
+    "oldestEvent": 1793933249000,
+    "latestEvent": 1794057080000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17390",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.683,
+          19.694,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.1,
+        "place": "ประเทศเมียนมา",
+        "time": 1794057080000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17390",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17389",
@@ -210,29 +233,6 @@
         "place": "ต.แม่แฝกใหม่ อ.สันทราย จ.เชียงใหม่",
         "time": 1793933249000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17381",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17380",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.243,
-          17.489,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.0,
-        "place": "ประเทศเมียนมา",
-        "time": 1793927691000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17380",
         "source": "TMD",
         "types": "",
         "detail": null,
