@@ -3,13 +3,82 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-08T16:41:06.027857+00:00",
+    "fetchedAt": "2026-11-08T22:07:34.970636+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1793998068000,
-    "latestEvent": 1794140271000
+    "oldestEvent": 1794034447000,
+    "latestEvent": 1794173773000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17398",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.285,
+          22.314,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.7,
+        "place": "ประเทศเมียนมา",
+        "time": 1794173773000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17398",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17397",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.978,
+          20.042,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.4,
+        "place": "ประเทศเมียนมา",
+        "time": 1794173532000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17397",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17396",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.315,
+          19.728,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.5,
+        "place": "ประเทศเมียนมา",
+        "time": 1794163332000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17396",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17395",
@@ -164,75 +233,6 @@
         "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
         "time": 1794034447000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17389",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17388",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.12,
-          21.219,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.1,
-        "place": "ประเทศเมียนมา",
-        "time": 1794031346000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17388",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17387",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.08,
-          4.093,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.9,
-        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
-        "time": 1794016781000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17387",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17386",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.765,
-          18.168,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.1,
-        "place": "ประเทศเมียนมา",
-        "time": 1793998068000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17386",
         "source": "TMD",
         "types": "",
         "detail": null,
