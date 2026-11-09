@@ -457,8 +457,11 @@
   // Overview KPI styling is maintained in flood-reference-structure.css.
   const host=document.createElement('section');host.id='estateFocusDashboard';
   const storyLabels=new URLSearchParams(location.search).get('story')==='1';
-  const metrics=[['efWatch',storyLabels?'นิคมฯ ควรติดตาม':'นิคมฯ เฝ้าระวัง','ผลคัดกรองจากสถานีใกล้นิคมฯ'],['efWaterWatch',storyLabels?'ใกล้จุดน้ำสูง':'ใกล้สถานีน้ำสูง','สถานีระดับน้ำเข้าเกณฑ์เฝ้าระวังภายใน 30 กม.'],['efRainWatch',storyLabels?'ใกล้จุดฝนหนัก':'ใกล้สถานีฝนหนัก','ฝนสะสมมากกว่า 35 มม. ภายใน 30 กม.']];
-  host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">${$('warning')?.hasAttribute('data-clean-map')?`<section class="flood-overview" aria-label="สรุปสถานการณ์น้ำ"><div class="flood-kpis">${metrics.map(([id,label,note])=>`<button type="button" class="flood-kpi" data-ef-card="${id}" aria-describedby="overviewKpiScope" title="${note}"><span class="ef-kpi-copy"><span class="ef-kpi-gauge"><svg viewBox="${storyLabels?'0 0 100 8':'0 0 76 41'}" preserveAspectRatio="${storyLabels?'none':'xMidYMid meet'}" aria-hidden="true" focusable="false"><path class="ef-kpi-track" d="${storyLabels?'M0 4h100':'M5 38a33 33 0 0 1 66 0'}"/><path class="ef-kpi-band" d="${storyLabels?'M0 4h100':'M5 38a33 33 0 0 1 66 0'}" pathLength="100" stroke-dasharray="0 100"/><path class="ef-kpi-fill" d="${storyLabels?'M0 4h100':'M5 38a33 33 0 0 1 66 0'}" pathLength="100" stroke-dasharray="0 100"/></svg><strong id="${id}">—</strong></span><span class="ef-kpi-label">${label}</span></span></button>`).join("")}</div><p id="overviewKpiScope">ประเมินจากสถานีภายใน 30 กม.</p>${storyLabels?'<p class="story-kpi-help">กดตัวเลขเพื่อดูจุดที่เกี่ยวข้องบนแผนที่</p>':''}<details id="overviewKpiCriteria" hidden><summary>เกณฑ์การประเมิน</summary><p id="overviewKpiCriteriaText"></p></details></section>`:""}
+  const metrics=[
+   ['efWaterWatch','นิคมฯ ใกล้สถานีน้ำเข้าเกณฑ์','นับจำนวนนิคมฯ ที่อยู่ในระยะ 30 กม. จากสถานีระดับน้ำเข้าเกณฑ์เฝ้าระวังขึ้นไป โดยใช้ข้อมูลตรวจวัดไม่เกิน 6 ชั่วโมง','นิคมฯ (แห่ง) · รัศมี 30 กม. · ข้อมูล ≤ 6 ชม.'],
+   ['efRainWatch','นิคมฯ ใกล้สถานีฝนหนัก','นับจำนวนนิคมฯ ที่อยู่ในระยะ 30 กม. จากสถานีฝนที่มีฝนสะสมมากกว่า 35 มม. โดยใช้ข้อมูลตรวจวัดไม่เกิน 24 ชั่วโมง','นิคมฯ (แห่ง) · ฝน > 35 มม. · ข้อมูล ≤ 24 ชม.']
+  ];
+  host.innerHTML=`<div class="ef-workspace"><div class="ef-data-column">${$('warning')?.hasAttribute('data-clean-map')?`<section class="flood-overview" aria-label="สรุปสถานการณ์น้ำ"><div class="flood-kpis">${metrics.map(([id,label,note,hint])=>`<button type="button" class="flood-kpi" data-ef-card="${id}" aria-describedby="overviewKpiScope" title="${note}"><span class="ef-kpi-copy"><span class="ef-kpi-gauge"><svg viewBox="${storyLabels?'0 0 100 8':'0 0 76 41'}" preserveAspectRatio="${storyLabels?'none':'xMidYMid meet'}" aria-hidden="true" focusable="false"><path class="ef-kpi-track" d="${storyLabels?'M0 4h100':'M5 38a33 33 0 0 1 66 0'}"/><path class="ef-kpi-band" d="${storyLabels?'M0 4h100':'M5 38a33 33 0 0 1 66 0'}" pathLength="100" stroke-dasharray="0 100"/><path class="ef-kpi-fill" d="${storyLabels?'M0 4h100':'M5 38a33 33 0 0 1 66 0'}" pathLength="100" stroke-dasharray="0 100"/></svg><strong id="${id}">—</strong></span><span class="ef-kpi-label">${label}</span><small class="ef-kpi-caption">${hint}</small></span></button>`).join("")}</div><p id="overviewKpiScope">ประเมินจากสถานีภายใน 30 กม.</p>${storyLabels?'<p class="story-kpi-help">กดตัวเลขเพื่อดูจุดที่เกี่ยวข้องบนแผนที่</p>':''}<details id="overviewKpiCriteria" hidden><summary>เกณฑ์การประเมิน</summary><p id="overviewKpiCriteriaText"></p></details></section>`:""}
    <section class="ef-panel ef-estate-panel"><h2>ติดตามนิคมฯ / ท่าเรือ</h2><div class="ef-tools"><input id="efSearch" list="efEstateOptions" type="search" aria-label="ค้นหาชื่อนิคมฯ / ท่าเรือ" placeholder="ค้นหาชื่อนิคมฯ / ท่าเรือ"><datalist id="efEstateOptions"></datalist><select id="efFilter" aria-label="กรองข้อมูลนิคมฯ"><option value="watch">เข้าเกณฑ์เฝ้าระวัง</option><option value="water">ใกล้ระดับน้ำเข้าเกณฑ์</option><option value="rain">ใกล้ฝนเข้าเกณฑ์</option><option value="all">ทุกนิคมฯ / ท่าเรือ</option></select></div><p id="efResultCount" class="ef-count"></p><div class="ef-selection" id="efSelection" hidden></div><div id="efEstates" class="ef-estates"></div></section>
    <section class="ef-panel ef-related-dams"><h2>เขื่อนที่เกี่ยวข้อง</h2><div id="efRelatedDams" role="status">กำลังโหลดข้อมูลเขื่อน…</div></section><section class="ef-panel ef-canal-panel" hidden><h2>คลอง</h2><div id="efCanalList"></div><small id="efCanalTime"></small></section><section class="ef-panel ef-reservoir-panel"><h2>อ่างเก็บน้ำขนาดกลางในจังหวัด</h2><select id="efReservoirProvince" aria-label="เลือกจังหวัดอ่างเก็บน้ำ" hidden style="display:none"><option value="กาญจนบุรี">กาญจนบุรี</option></select><div id="efReservoirList" role="status">กำลังโหลดข้อมูลอ่างเก็บน้ำ…</div><small id="efReservoirTime"></small></section>
 
@@ -516,8 +519,8 @@ $('efFilter').onchange=()=>renderEstates();
   function openCard(id){
    const criteria={
     efWatch:'นับนิคมฯ ที่มีสถานีระดับน้ำหรือฝนเข้าเกณฑ์ภายใน 30 กม. โดยไม่นับนิคมฯ ซ้ำระหว่างประเภท สถานีเข้าเกณฑ์ใกล้นิคมฯ ไม่ใช่การยืนยันน้ำท่วมภายในนิคมฯ',
-    efWaterWatch:'นับนิคมฯ ที่มีสถานีระดับน้ำเข้าเกณฑ์เฝ้าระวังขึ้นไปภายใน 30 กม. ใช้ข้อมูลตรวจวัดไม่เกิน 6 ชั่วโมง',
-    efRainWatch:'นับนิคมฯ ที่มีสถานีฝนสะสมมากกว่า 35 มม. ภายใน 30 กม. ใช้ข้อมูลตรวจวัดไม่เกิน 24 ชั่วโมง'
+    efWaterWatch:'ตัวเลขแสดงจำนวนนิคมอุตสาหกรรม (แห่ง) ที่อยู่ห่างจากสถานีระดับน้ำซึ่งเข้าเกณฑ์เฝ้าระวังขึ้นไป ไม่เกิน 30 กม. (ระยะเส้นตรง) โดยใช้ข้อมูลสถานีไม่เกิน 6 ชั่วโมง ไม่ได้หมายถึงจำนวนสถานี ระดับน้ำเป็นเมตร หรือยืนยันว่านิคมฯ น้ำท่วม',
+    efRainWatch:'ตัวเลขแสดงจำนวนนิคมอุตสาหกรรม (แห่ง) ที่อยู่ห่างจากสถานีฝนซึ่งวัดฝนสะสมได้มากกว่า 35 มม. ไม่เกิน 30 กม. (ระยะเส้นตรง) โดยใช้ข้อมูลสถานีไม่เกิน 24 ชั่วโมง ไม่ได้หมายถึงจำนวนสถานีหรือยืนยันว่าฝนตกหนักภายในนิคมฯ'
    };
    const detail=$('overviewKpiCriteria'),text=$('overviewKpiCriteriaText');
    if(detail&&text&&criteria[id]){text.textContent=criteria[id];detail.hidden=false;detail.open=true;}
@@ -691,9 +694,9 @@ const filters={efWatch:'watch',efWaterWatch:'water',efRainWatch:'rain'};if(filte
   const storyScope=new URLSearchParams(location.search).get('story')==='1';
   if(storyScope){
    set('overviewKpiScope',m.usable
-    ? 'ตัวเลขนับเป็นนิคมฯ จาก '+fmt(m.estates.length)+' แห่งในพื้นที่ที่เลือก · ดูสถานีในระยะ 30 กม.'
+    ? 'ตัวเลขนับเป็นจำนวนนิคมฯ (แห่ง) จาก '+fmt(m.estates.length)+' แห่ง · สถานีในระยะเส้นตรง 30 กม. · ไม่ใช่การยืนยันน้ำท่วมในนิคมฯ'
     : 'ข้อมูลยังไม่พร้อมสรุปจำนวนนิคมฯ');
-  }else set('overviewKpiScope',m.usable?'เทียบกับนิคมฯ ในขอบเขต '+fmt(m.estates.length)+' แห่ง · ประเมินจากสถานีภายใน 30 กม.':'ประเมินจากสถานีภายใน 30 กม.');
+  }else set('overviewKpiScope',m.usable?'ตัวเลขนับนิคมฯ (แห่ง) จาก '+fmt(m.estates.length)+' แห่ง · สถานีในระยะเส้นตรง 30 กม. · ไม่ยืนยันน้ำท่วมภายในนิคมฯ':'ประเมินจากสถานีภายใน 30 กม.');
   for(const [id,ds] of [['ef24',m.warning24],['ef48',m.warning48]])set(id,!ds.available?'ไม่มีข้อมูล':ds.unlocated?(ds.rows.length?'≥ '+fmt(ds.rows.length):'ข้อมูลไม่ครบ'):fmt(ds.rows.length));
   renderEstates();
   const chosen=m.estates.find(e=>String(e.id)===selected);
