@@ -495,6 +495,42 @@
   const groups=[riskFields[0],riskFields[2],riskFields[1]];
   const stateLabel={loading:'กำลังโหลด',error:'เชื่อมต่อไม่ได้',partial:'ข้อมูลยังไม่ครบ'};
   let drill='';
+  let estateNames=[], showEstateMatches=false;
+  const estateForm=$('coverageEstateForm');
+  const estateResults=el('div',null,'coverage-estate-results');
+  const estateStatus=el('p');
+  estateStatus.setAttribute('role','status');
+  estateResults.append(estateStatus);
+  estateResults.hidden=true;
+  estateForm.append(estateResults);
+
+  function matchingEstates(){
+    const query=normalize(search.value);
+    return query?estateNames.filter(([key])=>key.includes(query)):[];
+  }
+  function chooseEstate(key,name=''){
+    showEstateMatches=false;
+    search.value=name;
+    select.value=key;
+    select.dispatchEvent(new Event('change'));
+  }
+  function renderEstateMatches(){
+    const matches=matchingEstates();
+    estateResults.hidden=!showEstateMatches||!normalize(search.value);
+    if(estateResults.hidden)return;
+    estateStatus.textContent=matches.length?'เลือกนิคมฯ จากผลค้นหา':
+      registry.status==='loading'?'กำลังโหลดรายชื่อนิคมฯ…':
+      registry.status==='error'?'โหลดรายชื่อนิคมฯ ไม่ได้':'ไม่พบชื่อนิคมฯ ที่ตรงกัน';
+    estateResults.replaceChildren(estateStatus,...matches.map(([key,name])=>{
+      const option=el('button',name);
+      option.type='button';
+      option.onclick=()=>{
+        search.focus();
+        chooseEstate(key,name);
+      };
+      return option;
+    }));
+  }
   const dateFormat=new Intl.DateTimeFormat('th-TH',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Bangkok'});
   function freshness(layer){
     const time=layer.meta?.editingInfo?.dataLastEditDate ?? layer.meta?.editingInfo?.lastEditDate;
@@ -513,11 +549,11 @@
   }
   function renderCoverage(){
     const estates=new Map(registry.rows.filter(r=>r.estate!=='—').map(r=>[normalize(r.estate),r.estate]));
-    const selectedKey=select.value, query=normalize(search.value);
-    const names=[...estates].sort((a,b)=>a[1].localeCompare(b[1],'th'));
-    select.replaceChildren(new Option($('riskmapOverviewMetrics')?'ทุกนิคมฯ':'ทุกนิคมอุตสาหกรรม / ท่าเรือฯ',''));
-    for(const [key,name] of names)if(!query||key.includes(query)||key===selectedKey)select.add(new Option(name,key));
+    const selectedKey=select.value;
+    estateNames=[...estates].sort((a,b)=>a[1].localeCompare(b[1],'th'));
+    select.replaceChildren(new Option('ทุกนิคมฯ',''),...estateNames.map(([key,name])=>new Option(name,key)));
     select.value=estates.has(selectedKey)?selectedKey:'';
+    renderEstateMatches();
     const key=select.value;
     const match=r=>!key||normalize(r.estate)===key;
     const rowsByLayer=supportLayers.map(layer=>({layer,rows:layer.rows.filter(match)}));
@@ -616,14 +652,28 @@
     }
   }
   select.onchange=renderCoverage;
-  search.oninput=renderCoverage;
-  $('coverageEstateForm').onsubmit=event=>{
+  search.oninput=()=>{
+    if(!search.value.trim()&&select.value){chooseEstate('');return;}
+    showEstateMatches=true;
+    renderEstateMatches();
+  };
+  estateForm.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&!estateResults.hidden){
+      event.preventDefault();
+      showEstateMatches=false;
+      renderEstateMatches();
+      search.focus();
+    }
+  });
+  estateForm.onsubmit=event=>{
     event.preventDefault();
     const query=normalize(search.value);
-    if(!query){select.value='';select.dispatchEvent(new Event('change'));return;}
-    const matches=[...select.options].filter(option=>option.value&&option.value.includes(query));
-    if(matches.length===1){select.value=matches[0].value;select.dispatchEvent(new Event('change'));}
-    else select.focus();
+    if(!query){chooseEstate('');return;}
+    const matches=matchingEstates();
+    const exact=matches.find(([key])=>key===query);
+    if(exact||matches.length===1){chooseEstate(...(exact||matches[0]));return;}
+    showEstateMatches=true;
+    renderEstateMatches();
   };
   return renderCoverage;
  }
