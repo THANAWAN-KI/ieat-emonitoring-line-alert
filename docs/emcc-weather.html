@@ -5,27 +5,50 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f6f4fa;color:#282136;font:16px/1.55 Sarabun,sans-serif}a{color:#613880}header{background:linear-gradient(110deg,#352047,#68418f);color:#fff}.top,main{max-width:1320px;margin:auto;padding:18px 24px}.top,nav,.notice,.heading,.links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.top,.notice,.heading{justify-content:space-between}.top strong{font-size:23px}.top a{color:#fff;text-decoration:none;padding:7px 10px}.top [aria-current]{border-bottom:2px solid white}.notice{background:#eee5f7;border:1px solid #ddcce9;padding:10px 16px;border-radius:10px}.notice a,.links a{font-weight:600}.heading{margin:22px 0 14px}h1,h2,p{margin:0}h1{font-size:clamp(25px,4vw,36px)}h2{font-size:20px}.muted,small{color:#645971}.heading label{font-weight:600}select,button{font:inherit;color:inherit;background:#fff;border:1px solid #d6c9e2;border-radius:8px;padding:8px 12px;max-width:100%}.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px}.card{background:white;border:1px solid #e6dfee;border-radius:14px;padding:18px;min-width:0}.current{background:linear-gradient(145deg,#fff,#f1e8fa)}.temperature{font-size:clamp(42px,7vw,65px);font-weight:700;line-height:1.25;color:#573279}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stats div,.day{background:#faf7fd;border:1px solid #ece3f4;border-radius:9px;padding:10px}.stats strong,.day strong{display:block;color:#573279}.forecast{display:grid;grid-template-columns:repeat(7,minmax(88px,1fr));gap:7px;overflow:auto;margin-top:13px;padding-bottom:5px}.day{padding:8px;text-align:center}.map-card{margin-top:14px}.map-card h2{margin-bottom:10px}#map{height:380px;border-radius:10px;background:#eee8f5}.links{margin-top:14px}.links a{padding:7px 10px;background:#f5eff9;border-radius:8px}footer{margin:16px 0;color:#645971;font-size:14px}#weather-status{min-height:1.6em;margin:5px 0;color:#645971}@media(max-width:820px){.grid{grid-template-columns:1fr}.top,main{padding:14px}.heading label,.heading select{width:100%}#map{height:290px}}
+.shell{display:grid;grid-template-columns:82px minmax(0,1fr);max-width:1420px;margin:auto;gap:12px;padding:18px 22px}.shell main{width:100%;min-width:0;padding:0}.rail{display:flex;flex-direction:column;align-items:stretch;gap:8px;align-self:start;position:sticky;top:16px;background:#fff;border:1px solid #ece7f2;border-radius:22px;padding:8px}.rail a{display:grid;justify-items:center;gap:4px;padding:10px 2px;border-radius:14px;color:#625674;text-decoration:none;font-size:11px;font-weight:700}.rail a[aria-current]{background:#eee6f8;color:#573279}.rail svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.welcome{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(110deg,#ece0f7,#f8f4fc);padding:22px 28px;border-radius:22px;color:#3c2551}.welcome img{border-radius:50%;object-fit:cover;border:4px solid #fff}.eyebrow{font-size:13px;font-weight:700;color:#68418f}.area-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.area-controls select{width:min(260px,100%)}.area-controls button{cursor:pointer;color:#573279}.assistant-note{border-radius:14px;background:#fff;border:1px solid #e6dfee;padding:12px 16px}.assistant-note strong{color:#573279}.section-intro{margin:10px 0 18px}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}.link-card{display:grid;gap:6px;text-decoration:none}.link-card:hover,.link-card:focus-visible{background:#f4ecfa}.link-card span{color:#645971}.top a{border:1px solid #ffffff66;border-radius:9px}.notice{display:none}@media(max-width:600px){.shell{grid-template-columns:56px minmax(0,1fr);padding:12px 8px;gap:8px}.rail{padding:4px;border-radius:14px}.rail a{font-size:8px}.welcome{padding:14px}.welcome img{width:60px;height:60px}.card{padding:12px}.stats div{padding:6px}.heading select{width:100%}}
 </style></head><body>
-<header><div class="top"><strong>EMCC GIS Portal</strong><nav aria-label="เมนูหลัก"><a href="./emcc-weather.html" aria-current="page">สภาพอากาศ</a><a href="#dashboard">Dashboard</a><a href="#risk-map">Risk Map</a><a href="#alerts">แจ้งเตือน</a></nav></div></header>
+<header><div class="top"><strong>EMCC GIS Portal</strong><a href="./daily-situation.html">แจ้งเตือนและประกาศ ↗</a></div></header>
+<div class="shell">
+<nav class="rail" aria-label="เมนูหลัก">
+  <a href="#weather" data-view="weather" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M5 17a4 4 0 0 1 4-4 5 5 0 0 1 9-1 3 3 0 0 1 0 6H8"/></svg><span>อากาศ</span></a>
+  <a href="#dashboard" data-view="dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a>
+  <a href="#risk-map" data-view="risk-map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></svg><span>Risk Map</span></a>
+</nav>
 <main>
-<section class="notice" id="alerts" aria-label="แจ้งเตือน"><div><strong>แจ้งเตือนและประกาศ</strong><p class="muted">ติดตามประกาศและเหตุการณ์ที่เกี่ยวข้องกับพื้นที่นิคมฯ</p></div><a href="./daily-situation.html">ดูประกาศและสถานการณ์ →</a></section>
-<div class="heading"><div><h1>สภาพอากาศในพื้นที่นิคมอุตสาหกรรม</h1><p class="muted">เลือกนิคมฯ หรือท่าเรือฯ เพื่อดูสภาพอากาศและพยากรณ์รายวัน</p></div><label for="estate">เลือกพื้นที่ <select id="estate" disabled><option>กำลังโหลดรายชื่อพื้นที่…</option></select></label></div>
+<section id="weather" data-panel>
+<div class="welcome">
+  <div><p class="eyebrow">ศูนย์ข้อมูลแผนที่นิคมอุตสาหกรรม</p><h1>ยินดีต้อนรับสู่ EMCC</h1><p>ดูอากาศวันนี้และวางแผนก่อนออกเดินทาง</p></div>
+  <img src="data:image/webp;base64,UklGRgQRAABXRUJQVlA4IPgQAACwQwCdASqRAJYAPmEskUYkIqGhJXWtYIAMCWQIcAF+z7r+66sLhXyPOktP+Z/tvEj0z5vfQPk+9UXmB/rD0pvMb5xn+/9YP+H9QD+odRh6C37d9bn/ebBt/NdLd7W9yOcmzj/aeef+v8X/Vx6hH5F/P/9Bv0YAvzn+rf7n7fPiOm75AHC5UA/Eq0F/Un7QfAd/N/7f/2exb+y3s0/t63XhC+XPdRb+id4wEZa7uvijgKYa9sUEeQG1thEGo0pXEIjjGM3sgPnvAwqkt5IcPZDReb3MD4YGCzYEorpSvkTpuJ+L/I1guRrTf2hL3ZZRMCp2aRiSidvSypOsZ8huK0iU+XZEIutnNzVhRKvFaN/eFroNGYggNTEeO/2ZkMQD/1rWX39KglADooRBB5DNBNRvt9nwZ8byRqGB663zdhN17gaGflWXT1NA76VrlRiCPkPQzeDcOsAym/u7dvkeNZIMXnZKMlYcW6M1qRCYBtjlIBpMs0pejphLGeABeyqO0d3BLjaa+Iu7W4P4rOVdBENvNWrKcH2G/7TqRIZjRzNipSQaU2Sxw5vIle1cs/u3A0SVoHCb13WMn1Sf0/WviyYwPyACO+g0gH9OO8OIRY6fo/sf4JXwk7fsReTObDSEjJ+Hat1YAwKkG2YRgzviF/4W+enU+R038IdxtLIWHWtGwhlIOFYaduHIOvfF1o1LUk15qaerLDryWwTZAMfzG+8J8oZd2G1AAP7e/X+D+fkBg6f4zcWRIxoKM8fWemmxtrHWZvNeYD0HFfmP2L4rxckEzEi6ppA8O1/f4qaBGFJ253RetbIiEnab4q144kGtNv8NmAjroQicvj8onDX4chCyrk5ASRDi7R35jJ14bxyB6CEiWp765J1YfzcmIu2RWGiVa5cKlDpZk34GU+CHkwuGgbJ8jx0n+Qja2wfhqpmUM0wJBrBeDJc5zXGPfDSmr4ern4ebTRXTnEDWTczSqVaLyS5d7bPFIWw+4aQkDSMguPdQMmmzH0L2YRkWuf2KAISMY/tfHIDZKJfmYgpd96xh406oSl9FEW1/UhSErf/ZXYURtVrWzca/+FMjGPFW4938pYW53XNZ8inHTt+alL4hMbsU3F8Es6YXN4SbA2ZsOMMdBB4les9VdTLWrIBDA9EbwjN6gY/7AMYYTicelwXl3+GbTMbzptrx3XUKAdaA9NZOewUb8UWxuGuqADwpoyilMzHxwyeSzdyBmPEPGqmYs47EQRzBORE5rRgZ+7rB8VZ64CduFZWVnc1aj6IIh3kOi2SY18pNy2pjIIWMo7BL7fs24xH7v0YGuW1LCAADmCGyh2V/bV61KInGQTYl8B3ZBtMSRmwm2utbkGfM4doflewFiGG+Z8vQjpbH4SyTJjx+8ilBbpkVfVr9AAPUloya8gdzFA2lb+Jm2K35/3B+H+++5HgqDQ1oJVK8DkvgAAgArm4jjKwkAVBFZV8DP2bt3pxivw502X6R38Vr5J6a+xcmp9kHqRRn0coKVrEzRV9JgJYpGfADFT7vrxHlxaNBVbuD1fUiMmYhnNNEy74VX9YKyD1IBmk6MuswXhXCdLRl2qscexmGBH4c0U2wWvAYJO7I/cAC3SoJEyF+t1PSOVLLEdIirYWey9QVhCAPa9HOcE2eSE8XUwjwEtYcgTSqBCcgjmMjLl/ca1nvrgzfPlQk7uVjXOmmXVwpKyCLAMXGb7RWIKg+Jp1DSLDp4giNKisepARbumTSs5pWG9mJnSGoossLckBE20Vs9Ak6cRVfW/9qex1c5DZ8/LAGNhOa2cIYafLnsAu3/OYceOSFJolyqChGyFiukajJ4eX23Q8T86xICYhPrAAOMOdqN09DbIhbEOe4eVKUhz2XNw63niQCB3VZ5NeUKIiRTl06FRIsYBznvwV15DCZGTkc/3QDmhduO5rsdwAzKKF6HVi7kVuuq3XhZmvaSlnhc4l4ScTXACt5LEGo1muqVX3oyFRzEwZqh0PDPRFbymSMdigBDXzjtjLjWn547E5O9FVOgn3x/g1aidhyb2o61VHahCkIwRY5sUzbCaB9TaiZeLBiMukb9zM78LtEaduwYIFOzhffWXqhtxeCNxZB/RqhbaKNoC6Po1XQFguvmMmEE9xHCehRiSaUCP+kgJFCy4Ne0bSto6P0+xNhJZJeUatvj6lGExeA5Zuhb08F/x8YN2eoB9m3wYXoOPquyiEH0sANLdRwBSz58BmK9bzshOA7YAHPCBMqR13D8v+djvzjGlqBdCzMFAVDP7OCmWmrNXf9l5L9p9t32yT60kVMX/y2Ry5Q92wYJy5uY2TlLBOE4PGcR2h0ZWbwzIjh1DGU6XrptKou12pYESOKdcg5d+EYKsZ9nESiw1nahDmc3J23+k9lDZOR7gqhLtCDvQwkEkgEv6OY6bHDKIJr8ho8Kgb4B6LpLl0MX6HrmusLMCmHQcQLGSI3MSIFNmDGvyhxFGSWLBagIrnM/UmekP6KlSbTZdfle/oR1B+sxUa6aC9jm9+ZjNIAlyIcetwT+q9kTdipK8HmHm2adIWQhyny//GFFWK9NtQcf5U7Oddd3Edqr/PXXJk9Ya/6sJ8D9YnGl+BSQYdM2jQOkDHnGRXZ4ArsGbztroe8W6HpRA8ahqI223+lh2cixpt6ifnn1eO/faADzl+171n4/PzzhrjkJymfHxRpRZ2/upTiEewPGCnqCMeZM5Wu3B2P9IogaUYiCx9is4sCtAbHoj2zvtgMlal93B8ZNGbnD15fBTYjUce/LDshKJXy27p6GYNkFxX92ReqTyOHPREcOVQehU9KripUix42vQaJlrL3sMbe3q/yzlcfQI8WRxvo+xsFjRCZcubodkjGWTETLhNzdMyg8J9r4u9fzn9iS92WciqZzIp5gBn1KMJRHizcHBm98OkSSKOQw/klIALfYdGPzOKgiT+GVHFY3SjRiaikFU47JQIFm3OhzQ7AYS0Zd9G7P/zwbqcGmKqBudiKL42eUz5GCDdxKTLFHttTTpSrK4uCrQvLDK8aP4lZZVoge11L16SlrS9A63aECUKnZBm8cwo4owzab24JPY0gpNFSqWx+C7UwYO91yR3YJShiPiMg33el611+KtiLv1rzteWQS2LjMYeyMbktdcMW/3EdRt/hjifAkcp1J+EnqLz4How1nNgdGwyoDU2pMBcPoet+lY73UFQX9E1Y6nAC+5w6XCrgnEJv0i1eTbGNiFykgQtSGKTDvARAjrKx25K0jqy4rM3Vdj5KMZzkUfK539tggj5p+jwweVLtGheZlHyI7B7styTz+451pqqdajh/RNC56npy2xVBiwqGnCmNN+JEH5wB7meBNFxkQqxLI9TUHmWx4E+pN2IG1NaXgPEimffqLN6yiw2sVTp795EqdHAH1F/2hTEGjmlsPv2sGOLTNINhJM96//De3cSQhcyaFnF30R0frLl8NR/Y/lSIs6i9suLtNa+p2ExpWcrqIqblmrOmj8PIjHAzaTXXYryWpoUR5fQDFhkisA2JBIb98Dk7SOqHSPRKBwvHZNxXaOxJni2jxexCIfaZLkHUtj5i4kWCw53xjeFD9suWVrZToqgkK7qfnS1NrT63MOcBRiuyTWUYM3eK3jTTJX9J+4qYf212irHI1myJVHVmOk10BBPL5PsimzeJ/rODNXOrj5xyC1iKwttHg2MuW+tBKF6YkBrECfAhHv8ncBAAMuWr+n+LgeFjTQ8J2f5Ysbo9SN7cb9QtNKqcO66PsXptjBrxBsAzam/fBH4VkJWiYiwPjWLH/PNrf8yjMYXLWVdlDSInDr+cmYlvNB3loPn5DOk6+4Gs69hGN7tdW5OhJG2/CTuclnqc0AvH97+1mGuASPNJbi6nKDwMD5/8LwmTRJilHvkgxSu9OiO68vc9he2HgQ4RgvjKv7VOa1Svn0eiAYWl+s3DG066YTYCvqebgl+Tda/aUPId4HSNH3MIEbk//QufFVN26V228TBV3cX4+s4qhecjY1oiFsonG5ZjXeD12iT58nR0B/S3M7LhiMqpk/4LIMu4ZMa3VfzWO9ge58TJUN2+47DJ7BSbOMuFEgMJGdY+H+G491GFwDTjsNisP84HhlEZb+EVls6oZAW6wuvG8BK+NZ2L32DPUTINxNeDycqsuhrcxhzltPS3JzTqSdGkZFCCcjsbwjEjFl3Xj/ijYupjZgH35BljK/kgs4rwE+hT9NqLuzVwUjyRo5XYzEquoaPUH+kKZfThGKFjlJyMC2y51PrUZJJedZhxFK0PAFqZIpt+WLN3kfOSjrjhyQYkrVyKAjHmKuVdOWkZaVZdz2lXZWpUUtjbCpdM2bKhzHi3Kmn//7QrhBh47ZJi+WUKRMei20wNua2ERf3AqAA4njvS83tDFvISShZ05q3y4pOWPv2JynWhj7rIdgf2e5b1Zxjv0izgF1RxHwX68Z/ZCxv2qKhJ71K4H5drlVoVvLLlKjc5XK988O/Ld84AhnVMOhMGvWVBSDS4uK3Iy4do3Xn/QvNJ1xLp5JzvRHApz8G+u5xFzKqP+OtEhpFLlNDoma+RgWsVr/kUh+o7SZCuxlWmMrcPLR0j15LvCCiuv2OOVQSLeokkl3j4FXNixsv6xOh9dwC2XqZFP0wHhpzKMEE4/4tPIJxEgReO8V2jRMO7iwhhjc9hjg3A9e6A32GuxP3Mx6zZYupjoUCKioBhLk2+oNqTYImcPXdJFhs2rAF0d8vhsfGOvuTrp4CvKAOKQMMKvgVIbMCi2eUFSNOa2vNaKLs8yUsxgyiCju5KK6bJszC33Yz9PN8KpN3X2boV/tF/Y4/ppuD6IpPdtOV91XdKyBpAdhtK1YQYdxygsFD3r/UqEizT/zvHU4/LfJlb/24RHsIRs3vqv+z8ytL7k/bBcVwcbTZ/N0ptv6nBz8tTDRirDumusW5X44MZGWiglrONziakthOhR6tCCGR7no+WiEJfAhK/Li87WLitUTuLXfVBtfMRtOe8ZK1jXU/XNKZJg40AQ7zmOu4rc8eS9+tRTZcjfd+V9kbY8rtcgBtKcOthoycI0Fpbb6JSRN/iYHS8BwtfFZFHo2RyLAEFkoFz2cOcT+aQW8rOYBgFOQ4DTtCXML9KX+SCrJ4hluJn22InoFd9JqOI4FeKb/jMEGKvBWpv1cJMIiQJxvAZu2jtUYsrZ77oZd9NY3KfJga7JnkaiFu3LaljkSh2EXX59WAcpRSfbQ92SSqU7AavJLTwsZqooDQe0PW3J89PDwBPSwNScLd8hY+H7AW64efj/yk/v4VfoDzlwtvKD4xiXrTJiMcPQOZ/NNZP615SgKUdxRegT9VM9RpIDJEZEh6p5z/SQOFkKLNhCT5CP8gbNf/1huCmYH26sq6kDiWMHhHI8OeQ+U5S5lL7/0vM+BGpKJtzIUcivt/tMFNSJjvzH9+VDl7+Ihb8D57TAh+l6zscSgN96ExpnI4/vemqqJOr8kvky3FJIws2TGhROzKis2LwL7hDVhaLq1xT+x7CzZ1ReD8o70PhZ51D2hkVp9E7YYqy8cz2S84eyxPJ/YBBWejeVfIgn1kNjQAT+r4z+xs2/6UKWT7jx0D7vwRip3bMFjuR2asUg9WcKvLOs89u+Qj/rTHgK0QAp/igAFFFzQ4HtlwWv9tG1+HvBdSt3QALQyxyRrOGnMBsiRfNLC8ayzIrt0dAKLlp0NBfFS4tnHCCStRglVWHNhn/HLr9DWbQesOvTDA2S0dUHZRd/4nDZ8PtSJWx5yhT1udxMBxC5A5ZVdtHwKTt9QAUPcmhgkQAAAA=" alt="น้องฟ้าใส ผู้ช่วยสภาพอากาศ" width="112" height="112">
+</div>
+<div class="heading"><div><h2>สภาพอากาศในพื้นที่ของคุณ</h2><p class="muted">เลือกนิคมฯ หรือดูตามตำแหน่งปัจจุบัน</p></div><div class="area-controls"><label for="estate">เลือกนิคมฯ <select id="estate" disabled><option>กำลังโหลดรายชื่อพื้นที่…</option></select></label><button id="locate" type="button">ใช้ตำแหน่งปัจจุบัน</button></div></div>
+<div class="assistant-note"><strong>น้องฟ้าใส</strong><p id="advice" aria-live="polite">เลือกพื้นที่ แล้วฟ้าใสจะช่วยสรุปอากาศให้ค่ะ</p></div>
 <p id="weather-status" role="status">กำลังโหลดข้อมูล</p>
 <div class="grid">
 <section class="card current"><h2 id="area-name">สภาพอากาศขณะนี้</h2><p class="temperature" id="temperature">—</p><p id="condition">รอข้อมูลพยากรณ์</p><div class="stats"><div><small>ความชื้น</small><strong id="humidity">—</strong></div><div><small>ความเร็วลม</small><strong id="wind">—</strong></div><div><small>โอกาสฝนวันนี้</small><strong id="rain">—</strong></div></div></section>
 <section class="card"><h2>พยากรณ์ 7 วัน</h2><p class="muted">อุณหภูมิต่ำสุด–สูงสุด และโอกาสฝนสูงสุดรายวัน</p><div class="forecast" id="forecast"></div></section>
 </div>
 <section class="card map-card"><h2>แผนที่ตำแหน่งนิคมฯ และท่าเรือฯ</h2><div id="map" aria-label="แผนที่ตำแหน่งพื้นที่ที่เลือก"></div></section>
-<section class="card map-card" id="dashboard"><h2>Dashboard</h2><div class="links"><a href="./weather-dashboard.html">สถานีตรวจวัดอากาศ</a><a href="./information.html#monitor">e-Monitoring</a><a href="./flood-report.html">สถานการณ์น้ำ</a></div></section>
-<section class="card map-card" id="risk-map"><h2>EMCC Risk Map</h2><p class="muted">เปิดแผนที่และข้อมูลประกอบการรับมือเหตุ</p><div class="links"><a href="./dss-riskmap.html?view=data">แผนที่ความเสี่ยงนิคมฯ และรายงาน</a><a href="./flood-report.html">แผนที่สถานการณ์น้ำ</a></div></section>
+</section>
+<section id="dashboard" data-panel hidden><div class="section-intro"><p class="eyebrow">ข้อมูลรายด้าน</p><h1>Dashboard</h1><p class="muted">เลือกชุดข้อมูลที่ต้องการเปิดดู</p></div><div class="card-grid"><a class="card link-card" href="./weather-dashboard.html"><strong>สถานีตรวจวัดอากาศ</strong><span>อุณหภูมิ ฝน และลมจากสถานี</span></a><a class="card link-card" href="./information.html#monitor"><strong>e-Monitoring</strong><span>ผลตรวจวัดคุณภาพสิ่งแวดล้อม</span></a><a class="card link-card" href="./flood-report.html"><strong>สถานการณ์น้ำ</strong><span>ระดับน้ำและจุดเฝ้าระวัง</span></a><a class="card link-card" href="./dss-riskmap.html?view=data"><strong>ข้อมูลผู้ประกอบการและความปลอดภัย</strong><span>โรงงานกลุ่มเสี่ยงและทรัพยากรสนับสนุน</span></a></div></section>
+<section id="risk-map" data-panel hidden><div class="section-intro"><p class="eyebrow">แผนที่และข้อมูลสนับสนุน</p><h1>EMCC Risk Map</h1><p class="muted">เลือกประเภทภัยเพื่อเปิดข้อมูลที่เกี่ยวข้อง</p></div><div class="card-grid"><a class="card link-card" href="./dss-riskmap.html?view=data#coverageIncidentTitle"><strong>ไฟไหม้</strong><span>ค้นหาโรงงานและข้อมูลประกอบรายงาน</span></a><a class="card link-card" href="./flood-report.html"><strong>น้ำท่วม</strong><span>แผนที่สถานการณ์น้ำและจุดเฝ้าระวัง</span></a><a class="card link-card" href="./drought.html"><strong>ภัยแล้ง</strong><span>ข้อมูลสถานการณ์และความมั่นคงด้านน้ำ</span></a><a class="card link-card" href="./pm25.html"><strong>ฝุ่น PM2.5</strong><span>ข้อมูลและแผนที่คุณภาพอากาศ</span></a><a class="card link-card" href="./earthquake.html"><strong>แผ่นดินไหว</strong><span>ข้อมูลและตำแหน่งเหตุการณ์</span></a><a class="card link-card" href="./dss-riskmap.html?view=data#coverageIncidentTitle"><strong>สารเคมี</strong><span>ค้นหาข้อมูล DSS และเตรียมรายงานเหตุ</span></a></div></section>
 <footer>ตำแหน่งพื้นที่จาก GIS กนอ. · สภาพอากาศและพยากรณ์จาก <a href="https://open-meteo.com/">Open-Meteo</a> · ข้อมูลสภาพอากาศเป็นค่าจากแบบจำลอง ณ พิกัดที่เลือก</footer>
-</main>
+</main></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const el = id => document.getElementById(id);
 const field = 'สำนักงานนิคมฯ';
 const estate = el('estate');
 const status = el('weather-status');
+function showPanel() {
+  const hash = location.hash.slice(1);
+  const active = ['dashboard','risk-map'].includes(hash) ? hash : 'weather';
+  for (const panel of document.querySelectorAll('[data-panel]')) panel.hidden = panel.id !== active;
+  for (const link of document.querySelectorAll('[data-view]')) {
+    if (link.dataset.view === active) link.setAttribute('aria-current','page');
+    else link.removeAttribute('aria-current');
+  }
+  if (active === 'weather') map?.invalidateSize();
+}
 const map = window.L ? L.map('map').setView([13.5,101],6) : null;
 if (map) L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(map);
 else el('map').textContent = 'โหลดแผนที่ไม่ได้';
@@ -45,8 +68,7 @@ async function getJson(url, signal) {
   if (!response.ok) throw new Error('โหลดข้อมูลไม่สำเร็จ');
   return response.json();
 }
-async function showWeather(index) {
-  const area = areas[index];
+async function showWeather(area) {
   if (!area) return;
   request?.abort();
   const controller = new AbortController();
@@ -54,6 +76,7 @@ async function showWeather(index) {
   el('area-name').textContent = area.name;
   for (const id of ['temperature','humidity','wind','rain']) el(id).textContent = '—';
   el('condition').textContent = 'กำลังโหลดสภาพอากาศ';
+  el('advice').textContent = 'ฟ้าใสกำลังดูอากาศของ ' + area.name + ' ให้ค่ะ';
   el('forecast').replaceChildren();
   status.textContent = 'กำลังโหลดข้อมูลของ ' + area.name;
   if (map) {
@@ -75,7 +98,13 @@ async function showWeather(index) {
     el('condition').textContent = condition(current.weather_code);
     el('humidity').textContent = format(current.relative_humidity_2m,'%');
     el('wind').textContent = format(current.wind_speed_10m,' กม./ชม.');
-    el('rain').textContent = format(daily.precipitation_probability_max[0],'%');
+    const chance = daily.precipitation_probability_max[0];
+    el('rain').textContent = format(chance,'%');
+    const now = Number.isFinite(current.temperature_2m) ? 'ตอนนี้ประมาณ ' + format(current.temperature_2m,' °C') + ' ค่ะ ' : '';
+    const rainTip = !Number.isFinite(chance) ? 'วันนี้ยังไม่มีข้อมูลโอกาสฝนค่ะ' :
+      chance >= 50 ? 'วันนี้มีช่วงที่โอกาสฝนถึง ' + format(chance,'%') + ' พกร่มไว้ก็ดีนะคะ' :
+      'วันนี้โอกาสฝนสูงสุด ' + format(chance,'%') + ' ค่ะ';
+    el('advice').textContent = area.name + ' · ' + now + rainTip;
     const dayFormat = new Intl.DateTimeFormat('th-TH',{weekday:'short',day:'numeric',month:'short',timeZone:'Asia/Bangkok'});
     for (const [i,date] of daily.time.entries()) {
       const card = document.createElement('article');
@@ -94,8 +123,9 @@ async function showWeather(index) {
     status.textContent = 'ข้อมูลแบบจำลอง ณ ' + current.time.replace('T',' เวลา ') + ' น. (เวลาไทย)';
   } catch (error) {
     if (controller.signal.aborted) return;
-    status.textContent = 'โหลดข้อมูลพยากรณ์ไม่ได้ กรุณาลองเลือกพื้นที่อีกครั้ง';
+    status.textContent = 'โหลดข้อมูลพยากรณ์ไม่ได้ ลองเลือกพื้นที่อีกครั้งหรือรีเฟรชหน้า';
     el('condition').textContent = 'ไม่มีข้อมูลที่จะแสดง';
+    el('advice').textContent = 'ฟ้าใสยังโหลดอากาศของพื้นที่นี้ไม่ได้ค่ะ ลองอีกครั้งได้เลย';
   }
 }
 async function loadAreas() {
@@ -111,17 +141,41 @@ async function loadAreas() {
     }
     areas = [...byName.values()].sort((a,b) => a.name.localeCompare(b.name,'th'));
     if (!areas.length) throw new Error('ไม่พบรายชื่อพื้นที่');
-    estate.replaceChildren(...areas.map((area,i) => new Option(area.name,i)));
+    estate.replaceChildren(new Option('เลือกนิคมฯ หรือท่าเรือฯ',''),...areas.map((area,i) => new Option(area.name,i)));
     const defaultIndex = areas.findIndex(area => area.name.includes('มาบตาพุด'));
     estate.value = String(Math.max(0,defaultIndex));
     estate.disabled = false;
-    estate.addEventListener('change',() => showWeather(Number(estate.value)));
-    showWeather(Number(estate.value));
+    estate.addEventListener('change',() => {if(estate.value !== '') showWeather(areas[Number(estate.value)]);});
+    if (!request) showWeather(areas[Number(estate.value)]);
+    else estate.value = '';
   } catch {
     estate.replaceChildren(new Option('โหลดรายชื่อพื้นที่ไม่ได้'));
     status.textContent = 'เชื่อมต่อทะเบียนพื้นที่ GIS ไม่สำเร็จ';
   }
 }
+const locate = el('locate');
+let locationRequest = 0;
+estate.addEventListener('change',() => {locationRequest++; locate.disabled = false;});
+locate.addEventListener('click',() => {
+  if (!navigator.geolocation) {
+    el('advice').textContent = 'อุปกรณ์นี้เปิดตำแหน่งไม่ได้ค่ะ เลือกชื่อนิคมฯ จากรายการได้เลย';
+    return;
+  }
+  const attempt = ++locationRequest;
+  locate.disabled = true;
+  navigator.geolocation.getCurrentPosition(({coords}) => {
+    if (attempt !== locationRequest) return;
+    locate.disabled = false;
+    estate.value = '';
+    showWeather({name:'ตำแหน่งปัจจุบันของคุณ',lat:coords.latitude,lon:coords.longitude});
+  }, () => {
+    if (attempt !== locationRequest) return;
+    locate.disabled = false;
+    el('advice').textContent = 'ฟ้าใสเข้าถึงตำแหน่งไม่ได้ค่ะ เลือกชื่อนิคมฯ จากรายการได้เลย';
+  }, {timeout:8000,maximumAge:60000});
+});
+window.addEventListener('hashchange',showPanel);
+showPanel();
 loadAreas();
 </script>
 </body></html>
