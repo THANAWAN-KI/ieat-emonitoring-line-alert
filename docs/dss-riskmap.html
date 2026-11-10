@@ -241,18 +241,10 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 }
 </style>
 <style id="riskmap-start-guide">
-.riskmap-start{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 18px}
-.riskmap-start a{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;border:1px solid #bca7ca;color:#4d2366;background:#f8f3fb;line-height:1.45;text-decoration:none}
-.riskmap-start a[data-active]{background:#68418f;color:#fff;border-color:#68418f}
 #riskCoverage #riskmapEstateContent[hidden],#riskCoverage .report-workspace-controls[hidden],#riskmapReportPanel[hidden]{display:none!important}
 .riskmap-report-preview-link{display:inline-block;color:#54246f;margin:4px 0 12px}
 .riskmap-report-preview-link[hidden]{display:none}
-.riskmap-start a:hover{text-decoration:underline}
-.riskmap-start a:focus-visible{outline:2px solid #4d2366;outline-offset:2px}
-.riskmap-start strong{font-size:15px}
-.riskmap-start span{font-size:13px}
 #coverageEstateHeading,#coverageIncidentTitle{scroll-margin-top:90px}
-@media(max-width:460px){.riskmap-start{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -271,7 +263,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <main class="page">
 <div class="coverage-map-layout">
 <nav class="riskmap-overview-rail" aria-label="เมนู DSS / RiskMap">
-  <button type="button" id="riskmapRailOverview" aria-controls="riskmapOverviewPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>ภาพรวม</button>
+  <button type="button" id="riskmapRailOverview" aria-controls="riskmapEstateContent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>ภาพรวม</button>
   <a href="#coverageRiskHeading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 17H2zM12 9v4m0 3v1"/></svg>ความเสี่ยง</a>
   <a href="#coverageSupportTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM9 7V4h6v3m-7 6h8m-4-4v8"/></svg>สนับสนุน</a>
   <button type="button" id="riskmapRailReport" aria-controls="riskmapReportPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg>ดูรายงาน</button>
@@ -280,10 +272,6 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   <div class="riskmap-overview-heading">
     <h1 id="riskCoverageTitle">แผนที่ความเสี่ยงนิคมฯ</h1>
   </div>
-  <nav class="riskmap-start" aria-label="เลือกงานที่ต้องการทำ">
-    <a id="riskmapBrowseMode" href="#coverageEstateHeading"><strong>ดูข้อมูลรอบนิคมฯ</strong><span>ดูโรงงานกลุ่มเสี่ยง โรงพยาบาล และจุดช่วยเหลือ</span></a>
-    <a id="riskmapIncidentMode" href="#coverageIncidentTitle"><strong>ทำรายงานเหตุฉุกเฉิน</strong><span>ค้นหาโรงงานที่เกิดเหตุและจัดทำรายงาน</span></a>
-  </nav>
   <div id="riskmapEstateContent">
   <h2 id="coverageEstateHeading">ค้นหานิคมอุตสาหกรรม</h2>
   <form id="coverageEstateForm" role="search" aria-labelledby="coverageEstateHeading">
@@ -2573,18 +2561,13 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   report.style.removeProperty('display');report.hidden=false;
   links.remove();
   const overviewButton=get('riskmapRailOverview'),reportButton=get('riskmapRailReport');
-  const browseMode=get('riskmapBrowseMode'),incidentMode=get('riskmapIncidentMode');
   function showMode(isIncident){
     estateContent.hidden=isIncident;
     controls.hidden=!isIncident;
     panel.hidden=!isIncident;
-    browseMode.toggleAttribute('data-active',!isIncident);
-    incidentMode.toggleAttribute('data-active',isIncident);
-    (isIncident?browseMode:incidentMode).removeAttribute('aria-current');
-    (isIncident?incidentMode:browseMode).setAttribute('aria-current','true');
+    overviewButton.setAttribute('aria-expanded',String(!isIncident));
+    reportButton.setAttribute('aria-expanded',String(isIncident));
   }
-  browseMode.onclick=event=>{event.preventDefault();showMode(false);};
-  incidentMode.onclick=event=>{event.preventDefault();showMode(true);};
   overviewButton.onclick=()=>{
     showMode(false);
     workspace.scrollIntoView({block:'start',behavior:'smooth'});
