@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-09T20:46:14.408284+00:00",
+    "fetchedAt": "2026-11-10T04:08:07.956449+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1794114631000,
-    "latestEvent": 1794251362000
+    "oldestEvent": 1794116459000,
+    "latestEvent": 1794270629000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17401",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.688,
+          20.931,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.6,
+        "place": "ประเทศเมียนมา",
+        "time": 1794270629000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17401",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17400",
@@ -210,29 +233,6 @@
         "place": "หมู่เกาะอันดามัน ประเทศอินเดีย",
         "time": 1794116459000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17392",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17391",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.374,
-          19.105,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.8,
-        "place": "ประเทศเมียนมา",
-        "time": 1794114631000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17391",
         "source": "TMD",
         "types": "",
         "detail": null,
