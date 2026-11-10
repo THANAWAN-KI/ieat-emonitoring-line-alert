@@ -247,6 +247,17 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   margin-top:0!important;
 }
 </style>
+<style id="riskmap-start-guide">
+.riskmap-start{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+.riskmap-start a{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;border:1px solid #bca7ca;color:#4d2366;background:#f8f3fb;line-height:1.45;text-decoration:none}
+.riskmap-start a:last-child{background:#68418f;color:#fff;border-color:#68418f}
+.riskmap-start a:hover{text-decoration:underline}
+.riskmap-start a:focus-visible{outline:2px solid #4d2366;outline-offset:2px}
+.riskmap-start strong{font-size:15px}
+.riskmap-start span{font-size:13px}
+#coverageEstateHeading,#coverageIncidentTitle{scroll-margin-top:90px}
+@media(max-width:460px){.riskmap-start{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</strong></span></div><div class="portal-top"><div class="header-nav"></div></div></header>
@@ -267,37 +278,39 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   <button type="button" id="riskmapRailOverview" aria-controls="riskmapOverviewPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>ภาพรวม</button>
   <a href="#coverageRiskHeading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 17H2zM12 9v4m0 3v1"/></svg>ความเสี่ยง</a>
   <a href="#coverageSupportTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM9 7V4h6v3m-7 6h8m-4-4v8"/></svg>สนับสนุน</a>
-  <button type="button" id="riskmapRailReport" aria-controls="riskmapReportPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg>รายงาน</button>
+  <button type="button" id="riskmapRailReport" aria-controls="riskmapReportPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg>ดูรายงาน</button>
 </nav>
 <section id="riskCoverage" aria-labelledby="riskCoverageTitle">
   <div class="riskmap-overview-heading">
     <h1 id="riskCoverageTitle">แผนที่ความเสี่ยงนิคมฯ</h1>
-    <p id="riskmapOverviewSource">ข้อมูลจากทะเบียน e‑PP และชั้นข้อมูล กนอ.</p>
+    <p id="riskmapOverviewSource">ดูโรงงานกลุ่มเสี่ยง จุดสนับสนุน และข้อมูลรอบจุดเกิดเหตุ</p>
   </div>
-  <nav class="riskmap-overview-links" aria-label="หมวดข้อมูล"><a href="#coverageRiskHeading">โรงงานเสี่ยง</a><a href="#coverageSupportTitle">ข้อมูลสนับสนุน</a><a href="#coverageMapTitle">แผนที่</a></nav>
+  <nav class="riskmap-start" aria-label="เลือกงานที่ต้องการทำ">
+    <a href="#coverageEstateHeading"><strong>ดูข้อมูลรายนิคมฯ</strong><span>โรงงานกลุ่มเสี่ยงและจุดสนับสนุน</span></a>
+    <a href="#coverageIncidentTitle"><strong>ค้นหาโรงงานเพื่อทำรายงาน</strong><span>เลือกประเภทเหตุและรัศมีค้นหา</span></a>
+  </nav>
   <h2 id="coverageEstateHeading">ค้นหานิคมอุตสาหกรรม</h2>
   <p id="coverageEstateGuide" class="riskmap-search-guide">เลือกนิคมฯ เพื่อดูภาพรวมความเสี่ยงและจุดสนับสนุนบนแผนที่</p>
   <form id="coverageEstateForm" role="search" aria-labelledby="coverageEstateHeading" aria-describedby="coverageEstateGuide">
     <label><span class="riskmap-visually-hidden">ค้นหานิคมอุตสาหกรรม</span><input id="coverageEstateSearch" type="search" placeholder="พิมพ์ชื่อนิคมฯ"></label>
     <label><span class="riskmap-visually-hidden">เลือกนิคมฯ</span><select id="coverageEstate"><option value="">ทุกนิคมฯ</option></select></label>
-    <button type="submit">ค้นหา</button>
+    <button type="submit">แสดงข้อมูล</button>
   </form>
   <div id="riskmapOverviewMetrics" aria-label="สรุปจำนวนโรงงานตามกลุ่มความเสี่ยง"></div>
   <p class="riskmap-overview-note">เลือกตัวเลขเพื่อดูรายชื่อโรงงานตามกลุ่มความเสี่ยง</p>
   <form id="coverageIncidentForm" aria-labelledby="coverageIncidentTitle" aria-describedby="coverageFactoryGuide">
-  <h2 id="coverageIncidentTitle">ค้นหาโรงงาน</h2>
-  <p id="coverageFactoryGuide" class="riskmap-search-guide">ใช้ส่วนนี้เมื่อต้องการจัดทำรายงานเหตุฉุกเฉินสำหรับโรงงาน</p>
-  <p class="riskmap-workflow">กรอกชื่อโรงงาน → เลือกรัศมีและประเภทเหตุ → กดค้นหา</p>
+  <h2 id="coverageIncidentTitle">ค้นหาโรงงานเพื่อทำรายงาน</h2>
+  <p id="coverageFactoryGuide" class="riskmap-search-guide">ค้นหาโรงงานเพื่อใช้เป็นจุดอ้างอิง ระบบจะแสดงข้อมูลในรัศมีบนแผนที่และเตรียมรายงานให้</p>
   <div class="coverage-incident-controls">
-    <label class="coverage-wide">ชื่อโรงงาน / เลขทะเบียนเดิมหรือใหม่ <input id="coverageFactoryQuery" type="search" placeholder="เช่น 72250000325534 หรือ น.53(1)-3/2553-ญอต."></label>
-    <label>รัศมีค้นหา (กม.) <input id="coverageIncidentRadius" type="number" min="0.1" max="50" step="0.1" value="5" required></label>
-    <label>ประเภทเหตุ <select id="coverageIncidentType" required><option value="">ยังไม่ระบุ</option><option>เหตุไฟไหม้</option><option>สารเคมีรั่วไหล</option><option>อุบัติเหตุ</option><option>อื่น ๆ</option></select></label>
+    <label class="coverage-wide">1. ชื่อโรงงานหรือเลขทะเบียน (เดิมหรือใหม่) <input id="coverageFactoryQuery" type="search" placeholder="เช่น 72250000325534 หรือ น.53(1)-3/2553-ญอต."></label>
+    <label>2. ประเภทเหตุ <select id="coverageIncidentType" required><option value="">ยังไม่ระบุ</option><option>เหตุไฟไหม้</option><option>สารเคมีรั่วไหล</option><option>อุบัติเหตุ</option><option>อื่น ๆ</option></select></label>
+    <label>3. รัศมีค้นหา (กม.) <input id="coverageIncidentRadius" type="number" min="0.1" max="50" step="0.1" value="5" required></label>
     <label class="coverage-wide">ค้นหาข้อมูลสนับสนุน <input id="coverageSupportQuery" type="search" placeholder="ชื่อสารเคมี / CAS / หัวจ่ายน้ำ / โรงงานใกล้เคียง"></label>
     <button id="coverageSearchSupport" type="button">ค้นหาในรัศมี</button>
     <button id="coveragePickIncident" type="button">ปักหมุดบนแผนที่</button>
-    <button id="coverageOpenReport" type="submit">ค้นหา</button>
+    <button id="coverageOpenReport" type="submit">ค้นหาโรงงาน</button>
   </div>
-  <p id="coverageIncidentStatus" role="status">เมื่อผลค้นหาพร้อม จะดาวน์โหลดรายงาน 2 หน้าและคัดลอกข้อความสำหรับส่ง LINE ได้</p>
+  <p id="coverageIncidentStatus" role="status">หากพบหลายโรงงาน ให้เลือกจากผลค้นหา เมื่อรายงานพร้อม ให้ตรวจตัวอย่างก่อนดาวน์โหลดภาพ 2 หน้าหรือคัดลอกข้อความ LINE</p>
   <div id="coverageFactoryMatches"></div>
   <div id="coverageNearbyResults" aria-live="polite"></div>
 </form>
@@ -338,7 +351,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 </section>
 <section id="coverageMap" aria-labelledby="coverageMapTitle">
   <h2 id="coverageMapTitle">แผนที่ข้อมูลสนับสนุนและความเสี่ยง</h2>
-  <p class="coverage-map-density-note" style="font-size:12px;color:#58616d;margin:6px 0">หมุดแดง = จุดเกิดเหตุ · วงกลมตัวเลข = จำนวนจุดใกล้กัน · ซูมเข้าเพื่อดูรายจุด</p>
+  <p class="coverage-map-density-note" style="font-size:12px;color:#58616d;margin:6px 0">หมุดแดงคือจุดเกิดเหตุ วงรัศมีแสดงขอบเขตค้นหารอบหมุด หากเห็นวงกลมมีตัวเลข ให้ซูมเข้าเพื่อดูแต่ละจุด</p>
   <div class="coverage-basemap-control"><label for="coverageBasemap">แผนที่พื้นฐาน</label>
     <select id="coverageBasemap" disabled aria-label="เลือกแผนที่พื้นฐาน">
       <option value="gray-vector">สีเทาอ่อน</option>
@@ -2502,7 +2515,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const pick=get('coveragePickIncident');if(pick)pick.hidden=true;
   controls.append(form);
   const bottom=document.createElement('div');bottom.className='report-workspace-bottom';bottom.append(report);
-  auxiliaryTitle.textContent='ค้นหาเพิ่มเติม';
+  auxiliaryTitle.textContent='ค้นหาสารเคมี อุปกรณ์ และข้อมูลสนับสนุน';
   const wrapSearch=(label,...nodes)=>{
     const section=document.createElement('details'),title=document.createElement('summary');
     title.textContent=label;section.append(title,...nodes);return section;
