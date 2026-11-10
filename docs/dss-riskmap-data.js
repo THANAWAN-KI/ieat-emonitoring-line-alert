@@ -548,8 +548,8 @@
     $('coverageSupportCards').replaceChildren(...rowsByLayer.map(({layer,rows})=>{
       const card=el('article',null,'coverage-support-card');
       const visibleCount=layer.status==='ready'||layer.status==='partial';
-      card.append(el('h3',layer.label),el('strong',visibleCount?number(rows.length):'—'),
-        el('small',stateLabel[layer.status]||freshness(layer)));
+      card.append(el('h3',layer.label),el('strong',visibleCount?number(rows.length):'—'));
+      if(stateLabel[layer.status])card.append(el('small',stateLabel[layer.status]));
       return card;
     }));
     const supportMax=Math.max(1,...rowsByLayer.map(x=>x.rows.length));
@@ -604,8 +604,6 @@
         button.onclick=()=>riskRows[index].click();
         return button;
       }));
-      const source=$('riskmapOverviewSource');
-      source.textContent='ทะเบียน e‑PP กนอ. · '+(status||freshness(business));
     }
     const group=groups.find(g=>g.field===drill);
     detail.hidden=!group;
