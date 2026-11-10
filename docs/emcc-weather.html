@@ -49,6 +49,40 @@ header{background:#fff;border-bottom:1px solid #e9e6ef}
 .forecast .day:last-child{border-inline-end:0}
 @media(max-width:850px){.weather-grid .map-card{grid-row:2}.weather-grid #map{min-height:260px}}
 @media(max-width:540px){.top{display:grid;grid-template-columns:auto minmax(0,1fr) auto}.top .wordmark svg{width:59px}#hub-alert-button{padding:6px;font-size:12px;gap:3px}#hub-alert-button img{width:15px;height:15px}}
+/* Weather view with a white canvas and a single purple palette. */
+:root{--page:#fff;--ink:#5d5669;--muted:#5d5669;--accent:#5a3483;--line:#ebe2f6;--card:#fff}
+.top,.top .wordmark,.emcc-band div,h1,h2,.temperature,.eyebrow{color:var(--accent)}
+.emcc-band{background:#fff;border-block:1px solid var(--line)}
+.rail,.card{box-shadow:none;border:1px solid var(--line)}
+.rail a,.rail a[aria-current]{color:var(--accent)}
+.rail a[aria-current],.rail a:hover,.stats div,.gis-assistant #advice{background:var(--line)}
+.rail a[aria-current]:before{background:var(--accent)}
+.rail .weather-icon circle,.rail .weather-icon path{fill:var(--line);stroke:var(--accent)}
+.header-alerts #hub-alert-button{background:var(--accent)!important;border-color:var(--accent)!important}
+.header-alerts #hub-alert-button:hover{background:var(--muted)!important;border-color:var(--muted)!important}
+#weather{max-width:980px;margin-inline:auto}
+.weather-heading{justify-content:space-between;align-items:center}
+.weather-heading h1{font-size:clamp(22px,3vw,30px)}
+#locate{border-color:var(--line);color:var(--accent);font-weight:700}
+.weather-grid{display:block}
+.current{border:0;background:#fff;padding:24px clamp(10px,5vw,36px);text-align:center}
+.current #area-name{font-size:clamp(21px,4vw,32px)}
+.weather-reading{justify-content:center;gap:12px;margin:7px 0}
+.current .temperature{font-size:clamp(64px,11vw,108px);font-weight:600;line-height:1}
+#condition{font-size:18px;font-weight:600}#weather-symbol,.forecast .day [aria-hidden]{color:var(--accent)}
+.stats{max-width:620px;margin:16px auto 0}
+.stats div{padding:10px 5px;color:var(--accent)}
+.gis-assistant{max-width:620px;margin:16px auto 0;text-align:start}
+.gis-profile img{width:68px;height:68px;border:2px solid #fff;box-shadow:0 5px 12px #5a348336;animation:gis-float 4s ease-in-out infinite}
+@keyframes gis-float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+@media(prefers-reduced-motion:reduce){.gis-profile img{animation:none}}
+.forecast-card,.map-card{padding:16px 20px}
+.forecast{display:block;overflow:visible}
+.forecast .day{display:grid;grid-template-columns:minmax(85px,1.3fr) 28px minmax(65px,1fr) minmax(52px,.75fr) minmax(64px,.85fr);gap:6px;align-items:center;text-align:start;border:0;border-bottom:1px solid var(--line);padding:8px 0}
+.forecast .day:last-child{border:0}.forecast .day strong{text-align:end;color:var(--accent)}
+#weather .map-card{margin-top:14px}
+#weather #map{background:#fff;border:1px solid var(--line)}
+@media(max-width:540px){.forecast-card,.map-card{padding:10px}.forecast .day{grid-template-columns:minmax(52px,1fr) 18px minmax(35px,.7fr) minmax(41px,.7fr) minmax(43px,.7fr);font-size:12px;gap:3px}.forecast .day strong{font-size:13px}}
 </style></head><body>
 <header>
   <div class="top"><a class="wordmark" href="#weather" aria-label="EMCC หน้าแรก"><svg viewBox="0 0 124 31" width="124" height="31" aria-hidden="true"><path d="M20 4H4v23h16M4 15h13M30 27V4l12 14L54 4v23M85 8a11.5 11.5 0 1 0 0 15m33-15a11.5 11.5 0 1 0 0 15" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</span><nav class="header-alerts" aria-label="การแจ้งเตือน"></nav></div>
@@ -67,21 +101,22 @@ header{background:#fff;border-bottom:1px solid #e9e6ef}
 <section id="weather" data-panel>
 <div class="weather-heading">
   <div><p class="eyebrow">ยินดีต้อนรับสู่ EMCC GIS Portal</p><h1>สภาพอากาศในพื้นที่นิคมฯ</h1></div>
-  <div class="area-controls"><label class="sr-only" for="estate">เลือกนิคมฯ</label><select id="estate" disabled><option>กำลังโหลดรายชื่อพื้นที่…</option></select><button id="locate" type="button">◎ ใช้ตำแหน่งปัจจุบัน</button></div>
+  <div class="area-controls"><button id="locate" type="button">◎ ใช้ตำแหน่งปัจจุบัน</button></div>
 </div>
 <div class="weather-grid">
-  <section class="card map-card"><h2>แผนที่ตำแหน่งนิคมฯ และท่าเรือฯ</h2><div id="map" aria-label="แผนที่ตำแหน่งพื้นที่ที่เลือก"></div></section>
+
   <section class="card current">
     <p class="eyebrow">สภาพอากาศขณะนี้</p>
     <h2 id="area-name">กำลังโหลดพื้นที่</h2>
     <div class="weather-reading"><p class="temperature" id="temperature">—</p><span id="weather-symbol" aria-hidden="true"></span></div>
     <p id="condition">รอข้อมูลพยากรณ์</p>
     <div class="stats"><div><small>โอกาสฝนวันนี้</small><strong id="rain">—</strong></div><div><small>ความชื้น</small><strong id="humidity">—</strong></div><div><small>ความเร็วลม</small><strong id="wind">—</strong></div></div>
-  <div class="gis-assistant"><div class="gis-profile"><img src="data:image/webp;base64,UklGRgQRAABXRUJQVlA4IPgQAACwQwCdASqRAJYAPmEskUYkIqGhJXWtYIAMCWQIcAF+z7r+66sLhXyPOktP+Z/tvEj0z5vfQPk+9UXmB/rD0pvMb5xn+/9YP+H9QD+odRh6C37d9bn/ebBt/NdLd7W9yOcmzj/aeef+v8X/Vx6hH5F/P/9Bv0YAvzn+rf7n7fPiOm75AHC5UA/Eq0F/Un7QfAd/N/7f/2exb+y3s0/t63XhC+XPdRb+id4wEZa7uvijgKYa9sUEeQG1thEGo0pXEIjjGM3sgPnvAwqkt5IcPZDReb3MD4YGCzYEorpSvkTpuJ+L/I1guRrTf2hL3ZZRMCp2aRiSidvSypOsZ8huK0iU+XZEIutnNzVhRKvFaN/eFroNGYggNTEeO/2ZkMQD/1rWX39KglADooRBB5DNBNRvt9nwZ8byRqGB663zdhN17gaGflWXT1NA76VrlRiCPkPQzeDcOsAym/u7dvkeNZIMXnZKMlYcW6M1qRCYBtjlIBpMs0pejphLGeABeyqO0d3BLjaa+Iu7W4P4rOVdBENvNWrKcH2G/7TqRIZjRzNipSQaU2Sxw5vIle1cs/u3A0SVoHCb13WMn1Sf0/WviyYwPyACO+g0gH9OO8OIRY6fo/sf4JXwk7fsReTObDSEjJ+Hat1YAwKkG2YRgzviF/4W+enU+R038IdxtLIWHWtGwhlIOFYaduHIOvfF1o1LUk15qaerLDryWwTZAMfzG+8J8oZd2G1AAP7e/X+D+fkBg6f4zcWRIxoKM8fWemmxtrHWZvNeYD0HFfmP2L4rxckEzEi6ppA8O1/f4qaBGFJ253RetbIiEnab4q144kGtNv8NmAjroQicvj8onDX4chCyrk5ASRDi7R35jJ14bxyB6CEiWp765J1YfzcmIu2RWGiVa5cKlDpZk34GU+CHkwuGgbJ8jx0n+Qja2wfhqpmUM0wJBrBeDJc5zXGPfDSmr4ern4ebTRXTnEDWTczSqVaLyS5d7bPFIWw+4aQkDSMguPdQMmmzH0L2YRkWuf2KAISMY/tfHIDZKJfmYgpd96xh406oSl9FEW1/UhSErf/ZXYURtVrWzca/+FMjGPFW4938pYW53XNZ8inHTt+alL4hMbsU3F8Es6YXN4SbA2ZsOMMdBB4les9VdTLWrIBDA9EbwjN6gY/7AMYYTicelwXl3+GbTMbzptrx3XUKAdaA9NZOewUb8UWxuGuqADwpoyilMzHxwyeSzdyBmPEPGqmYs47EQRzBORE5rRgZ+7rB8VZ64CduFZWVnc1aj6IIh3kOi2SY18pNy2pjIIWMo7BL7fs24xH7v0YGuW1LCAADmCGyh2V/bV61KInGQTYl8B3ZBtMSRmwm2utbkGfM4doflewFiGG+Z8vQjpbH4SyTJjx+8ilBbpkVfVr9AAPUloya8gdzFA2lb+Jm2K35/3B+H+++5HgqDQ1oJVK8DkvgAAgArm4jjKwkAVBFZV8DP2bt3pxivw502X6R38Vr5J6a+xcmp9kHqRRn0coKVrEzRV9JgJYpGfADFT7vrxHlxaNBVbuD1fUiMmYhnNNEy74VX9YKyD1IBmk6MuswXhXCdLRl2qscexmGBH4c0U2wWvAYJO7I/cAC3SoJEyF+t1PSOVLLEdIirYWey9QVhCAPa9HOcE2eSE8XUwjwEtYcgTSqBCcgjmMjLl/ca1nvrgzfPlQk7uVjXOmmXVwpKyCLAMXGb7RWIKg+Jp1DSLDp4giNKisepARbumTSs5pWG9mJnSGoossLckBE20Vs9Ak6cRVfW/9qex1c5DZ8/LAGNhOa2cIYafLnsAu3/OYceOSFJolyqChGyFiukajJ4eX23Q8T86xICYhPrAAOMOdqN09DbIhbEOe4eVKUhz2XNw63niQCB3VZ5NeUKIiRTl06FRIsYBznvwV15DCZGTkc/3QDmhduO5rsdwAzKKF6HVi7kVuuq3XhZmvaSlnhc4l4ScTXACt5LEGo1muqVX3oyFRzEwZqh0PDPRFbymSMdigBDXzjtjLjWn547E5O9FVOgn3x/g1aidhyb2o61VHahCkIwRY5sUzbCaB9TaiZeLBiMukb9zM78LtEaduwYIFOzhffWXqhtxeCNxZB/RqhbaKNoC6Po1XQFguvmMmEE9xHCehRiSaUCP+kgJFCy4Ne0bSto6P0+xNhJZJeUatvj6lGExeA5Zuhb08F/x8YN2eoB9m3wYXoOPquyiEH0sANLdRwBSz58BmK9bzshOA7YAHPCBMqR13D8v+djvzjGlqBdCzMFAVDP7OCmWmrNXf9l5L9p9t32yT60kVMX/y2Ry5Q92wYJy5uY2TlLBOE4PGcR2h0ZWbwzIjh1DGU6XrptKou12pYESOKdcg5d+EYKsZ9nESiw1nahDmc3J23+k9lDZOR7gqhLtCDvQwkEkgEv6OY6bHDKIJr8ho8Kgb4B6LpLl0MX6HrmusLMCmHQcQLGSI3MSIFNmDGvyhxFGSWLBagIrnM/UmekP6KlSbTZdfle/oR1B+sxUa6aC9jm9+ZjNIAlyIcetwT+q9kTdipK8HmHm2adIWQhyny//GFFWK9NtQcf5U7Oddd3Edqr/PXXJk9Ya/6sJ8D9YnGl+BSQYdM2jQOkDHnGRXZ4ArsGbztroe8W6HpRA8ahqI223+lh2cixpt6ifnn1eO/faADzl+171n4/PzzhrjkJymfHxRpRZ2/upTiEewPGCnqCMeZM5Wu3B2P9IogaUYiCx9is4sCtAbHoj2zvtgMlal93B8ZNGbnD15fBTYjUce/LDshKJXy27p6GYNkFxX92ReqTyOHPREcOVQehU9KripUix42vQaJlrL3sMbe3q/yzlcfQI8WRxvo+xsFjRCZcubodkjGWTETLhNzdMyg8J9r4u9fzn9iS92WciqZzIp5gBn1KMJRHizcHBm98OkSSKOQw/klIALfYdGPzOKgiT+GVHFY3SjRiaikFU47JQIFm3OhzQ7AYS0Zd9G7P/zwbqcGmKqBudiKL42eUz5GCDdxKTLFHttTTpSrK4uCrQvLDK8aP4lZZVoge11L16SlrS9A63aECUKnZBm8cwo4owzab24JPY0gpNFSqWx+C7UwYO91yR3YJShiPiMg33el611+KtiLv1rzteWQS2LjMYeyMbktdcMW/3EdRt/hjifAkcp1J+EnqLz4How1nNgdGwyoDU2pMBcPoet+lY73UFQX9E1Y6nAC+5w6XCrgnEJv0i1eTbGNiFykgQtSGKTDvARAjrKx25K0jqy4rM3Vdj5KMZzkUfK539tggj5p+jwweVLtGheZlHyI7B7styTz+451pqqdajh/RNC56npy2xVBiwqGnCmNN+JEH5wB7meBNFxkQqxLI9TUHmWx4E+pN2IG1NaXgPEimffqLN6yiw2sVTp795EqdHAH1F/2hTEGjmlsPv2sGOLTNINhJM96//De3cSQhcyaFnF30R0frLl8NR/Y/lSIs6i9suLtNa+p2ExpWcrqIqblmrOmj8PIjHAzaTXXYryWpoUR5fQDFhkisA2JBIb98Dk7SOqHSPRKBwvHZNxXaOxJni2jxexCIfaZLkHUtj5i4kWCw53xjeFD9suWVrZToqgkK7qfnS1NrT63MOcBRiuyTWUYM3eK3jTTJX9J+4qYf212irHI1myJVHVmOk10BBPL5PsimzeJ/rODNXOrj5xyC1iKwttHg2MuW+tBKF6YkBrECfAhHv8ncBAAMuWr+n+LgeFjTQ8J2f5Ysbo9SN7cb9QtNKqcO66PsXptjBrxBsAzam/fBH4VkJWiYiwPjWLH/PNrf8yjMYXLWVdlDSInDr+cmYlvNB3loPn5DOk6+4Gs69hGN7tdW5OhJG2/CTuclnqc0AvH97+1mGuASPNJbi6nKDwMD5/8LwmTRJilHvkgxSu9OiO68vc9he2HgQ4RgvjKv7VOa1Svn0eiAYWl+s3DG066YTYCvqebgl+Tda/aUPId4HSNH3MIEbk//QufFVN26V228TBV3cX4+s4qhecjY1oiFsonG5ZjXeD12iT58nR0B/S3M7LhiMqpk/4LIMu4ZMa3VfzWO9ge58TJUN2+47DJ7BSbOMuFEgMJGdY+H+G491GFwDTjsNisP84HhlEZb+EVls6oZAW6wuvG8BK+NZ2L32DPUTINxNeDycqsuhrcxhzltPS3JzTqSdGkZFCCcjsbwjEjFl3Xj/ijYupjZgH35BljK/kgs4rwE+hT9NqLuzVwUjyRo5XYzEquoaPUH+kKZfThGKFjlJyMC2y51PrUZJJedZhxFK0PAFqZIpt+WLN3kfOSjrjhyQYkrVyKAjHmKuVdOWkZaVZdz2lXZWpUUtjbCpdM2bKhzHi3Kmn//7QrhBh47ZJi+WUKRMei20wNua2ERf3AqAA4njvS83tDFvISShZ05q3y4pOWPv2JynWhj7rIdgf2e5b1Zxjv0izgF1RxHwX68Z/ZCxv2qKhJ71K4H5drlVoVvLLlKjc5XK988O/Ld84AhnVMOhMGvWVBSDS4uK3Iy4do3Xn/QvNJ1xLp5JzvRHApz8G+u5xFzKqP+OtEhpFLlNDoma+RgWsVr/kUh+o7SZCuxlWmMrcPLR0j15LvCCiuv2OOVQSLeokkl3j4FXNixsv6xOh9dwC2XqZFP0wHhpzKMEE4/4tPIJxEgReO8V2jRMO7iwhhjc9hjg3A9e6A32GuxP3Mx6zZYupjoUCKioBhLk2+oNqTYImcPXdJFhs2rAF0d8vhsfGOvuTrp4CvKAOKQMMKvgVIbMCi2eUFSNOa2vNaKLs8yUsxgyiCju5KK6bJszC33Yz9PN8KpN3X2boV/tF/Y4/ppuD6IpPdtOV91XdKyBpAdhtK1YQYdxygsFD3r/UqEizT/zvHU4/LfJlb/24RHsIRs3vqv+z8ytL7k/bBcVwcbTZ/N0ptv6nBz8tTDRirDumusW5X44MZGWiglrONziakthOhR6tCCGR7no+WiEJfAhK/Li87WLitUTuLXfVBtfMRtOe8ZK1jXU/XNKZJg40AQ7zmOu4rc8eS9+tRTZcjfd+V9kbY8rtcgBtKcOthoycI0Fpbb6JSRN/iYHS8BwtfFZFHo2RyLAEFkoFz2cOcT+aQW8rOYBgFOQ4DTtCXML9KX+SCrJ4hluJn22InoFd9JqOI4FeKb/jMEGKvBWpv1cJMIiQJxvAZu2jtUYsrZ77oZd9NY3KfJga7JnkaiFu3LaljkSh2EXX59WAcpRSfbQ92SSqU7AavJLTwsZqooDQe0PW3J89PDwBPSwNScLd8hY+H7AW64efj/yk/v4VfoDzlwtvKD4xiXrTJiMcPQOZ/NNZP615SgKUdxRegT9VM9RpIDJEZEh6p5z/SQOFkKLNhCT5CP8gbNf/1huCmYH26sq6kDiWMHhHI8OeQ+U5S5lL7/0vM+BGpKJtzIUcivt/tMFNSJjvzH9+VDl7+Ihb8D57TAh+l6zscSgN96ExpnI4/vemqqJOr8kvky3FJIws2TGhROzKis2LwL7hDVhaLq1xT+x7CzZ1ReD8o70PhZ51D2hkVp9E7YYqy8cz2S84eyxPJ/YBBWejeVfIgn1kNjQAT+r4z+xs2/6UKWT7jx0D7vwRip3bMFjuR2asUg9WcKvLOs89u+Qj/rTHgK0QAp/igAFFFzQ4HtlwWv9tG1+HvBdSt3QALQyxyRrOGnMBsiRfNLC8ayzIrt0dAKLlp0NBfFS4tnHCCStRglVWHNhn/HLr9DWbQesOvTDA2S0dUHZRd/4nDZ8PtSJWx5yhT1udxMBxC5A5ZVdtHwKTt9QAUPcmhgkQAAAA=" alt="GIS ผู้ช่วยสภาพ EMCC" width="112" height="112"><div><p class="eyebrow">ผู้ช่วยสภาพ EMCC</p><h2>GIS</h2></div></div><p id="advice" aria-live="polite">เลือกพื้นที่ แล้วGISจะช่วยสรุปอากาศให้ค่ะ</p><p id="weather-status" role="status">กำลังโหลดข้อมูล</p></div>
+  <div class="gis-assistant"><div class="gis-profile"><img src="data:image/webp;base64,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" alt="GIS ผู้ช่วยสภาพ EMCC" width="112" height="112"><div><p class="eyebrow">ผู้ช่วยสภาพ EMCC</p><h2>GIS</h2></div></div><p id="advice" aria-live="polite">เลือกพื้นที่ แล้วGISจะช่วยสรุปอากาศให้ค่ะ</p><p id="weather-status" role="status">กำลังโหลดข้อมูล</p></div>
   </section>
 </div>
 <section class="card forecast-card" id="forecast-panel"><div class="forecast-head"><h2>พยากรณ์ 7 วัน</h2><p class="muted">อุณหภูมิต่ำสุด–สูงสุดและโอกาสฝนรายวัน</p></div><div class="forecast" id="forecast"></div></section>
 
+  <section class="card map-card"><h2>แผนที่ตำแหน่งนิคมฯ และท่าเรือฯ</h2><div id="map" aria-label="แผนที่ตำแหน่งพื้นที่ที่เลือก"></div></section>
 </section>
 <section id="dashboard" data-panel hidden><div class="section-intro"><p class="eyebrow">ข้อมูลรายด้าน</p><h1>Dashboard</h1><p class="muted">เลือกชุดข้อมูลที่ต้องการเปิดดู</p></div><div class="card-grid"><a class="card link-card" href="./weather-dashboard.html"><strong>สถานีตรวจวัดอากาศ</strong><span>อุณหภูมิ ฝน และลมจากสถานี</span></a><a class="card link-card" href="./information.html#monitor"><strong>e-Monitoring</strong><span>ผลตรวจวัดคุณภาพสิ่งแวดล้อม</span></a><a class="card link-card" href="./flood-report.html"><strong>สถานการณ์น้ำ</strong><span>ระดับน้ำและจุดเฝ้าระวัง</span></a><a class="card link-card" href="./dss-riskmap.html?view=data"><strong>ข้อมูลผู้ประกอบการและความปลอดภัย</strong><span>โรงงานกลุ่มเสี่ยงและทรัพยากรสนับสนุน</span></a></div></section>
 <section id="risk-map" data-panel hidden><div class="section-intro"><p class="eyebrow">แผนที่และข้อมูลสนับสนุน</p><h1>EMCC Risk Map</h1><p class="muted">เลือกประเภทภัยเพื่อเปิดข้อมูลที่เกี่ยวข้อง</p></div><div class="card-grid"><a class="card link-card" href="./dss-riskmap.html?view=data#coverageIncidentTitle"><strong>ไฟไหม้</strong><span>ค้นหาโรงงานและข้อมูลประกอบรายงาน</span></a><a class="card link-card" href="./flood-report.html"><strong>น้ำท่วม</strong><span>แผนที่สถานการณ์น้ำและจุดเฝ้าระวัง</span></a><a class="card link-card" href="./drought.html"><strong>ภัยแล้ง</strong><span>ข้อมูลสถานการณ์และความมั่นคงด้านน้ำ</span></a><a class="card link-card" href="./pm25.html"><strong>ฝุ่น PM2.5</strong><span>ข้อมูลและแผนที่คุณภาพอากาศ</span></a><a class="card link-card" href="./earthquake.html"><strong>แผ่นดินไหว</strong><span>ข้อมูลและตำแหน่งเหตุการณ์</span></a><a class="card link-card" href="./dss-riskmap.html?view=data#coverageIncidentTitle"><strong>สารเคมี</strong><span>ค้นหาข้อมูล DSS และเตรียมรายงานเหตุ</span></a></div></section>
@@ -91,7 +126,6 @@ header{background:#fff;border-bottom:1px solid #e9e6ef}
 <script>
 const el = id => document.getElementById(id);
 const field = 'สำนักงานนิคมฯ';
-const estate = el('estate');
 const status = el('weather-status');
 function showPanel() {
   const hash = location.hash.slice(1);
@@ -107,11 +141,11 @@ function showPanel() {
 const map = window.L ? L.map('map').setView([13.5,101],6) : null;
 if (map) L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(map);
 else el('map').textContent = 'โหลดแผนที่ไม่ได้';
-let areas = [], marker, request;
+let marker, request;
 const format = (value, unit) => Number.isFinite(value) ? Math.round(value) + unit : '—';
 function weatherSymbol(code) {
   if (!Number.isFinite(code)) return '';
-  return code === 0 ? '☀️' : code <= 3 ? '⛅' : code <= 48 ? '🌫️' : code >= 95 ? '⛈️' : '🌧️';
+  return code === 0 ? '☀︎' : code <= 48 ? '☁︎' : code >= 95 ? 'ϟ' : '☂︎';
 }
 function condition(code) {
   if (!Number.isFinite(code)) return 'ไม่มีข้อมูลสภาพอากาศ';
@@ -181,13 +215,13 @@ async function showWeather(area) {
       const icon = document.createElement('div');
       icon.setAttribute('aria-hidden','true');
       icon.textContent = weatherSymbol(daily.weather_code[i]);
-      card.append(day,icon,temperature,description,rain);
+      card.append(day,icon,description,rain,temperature);
       el('forecast').append(card);
     }
     status.textContent = 'ข้อมูลแบบจำลอง ณ ' + current.time.replace('T',' เวลา ') + ' น. (เวลาไทย)';
   } catch (error) {
     if (controller.signal.aborted) return;
-    status.textContent = 'โหลดข้อมูลพยากรณ์ไม่ได้ ลองเลือกพื้นที่อีกครั้งหรือรีเฟรชหน้า';
+    status.textContent = 'โหลดข้อมูลพยากรณ์ไม่ได้ ลองกดใช้ตำแหน่งปัจจุบันอีกครั้งหรือรีเฟรชหน้า';
     el('condition').textContent = 'ไม่มีข้อมูลที่จะแสดง';
     el('advice').textContent = 'GISยังโหลดอากาศของพื้นที่นี้ไม่ได้ค่ะ ลองอีกครั้งได้เลย';
   }
@@ -203,26 +237,23 @@ async function loadAreas() {
       const {x,y} = row.geometry || {};
       if (name && Number.isFinite(x) && Number.isFinite(y) && !byName.has(name)) byName.set(name,{name,lon:x,lat:y});
     }
-    areas = [...byName.values()].sort((a,b) => a.name.localeCompare(b.name,'th'));
-    if (!areas.length) throw new Error('ไม่พบรายชื่อพื้นที่');
-    estate.replaceChildren(new Option('เลือกนิคมฯ หรือท่าเรือฯ',''),...areas.map((area,i) => new Option(area.name,i)));
-    const defaultIndex = areas.findIndex(area => area.name.includes('มาบตาพุด'));
-    estate.value = String(Math.max(0,defaultIndex));
-    estate.disabled = false;
-    estate.addEventListener('change',() => {if(estate.value !== '') showWeather(areas[Number(estate.value)]);});
-    if (!request) showWeather(areas[Number(estate.value)]);
-    else estate.value = '';
+    const areas = [...byName.values()];
+    const defaultArea = areas.find(area => area.name.replace(/^นิคมอุตสาหกรรม\s*/, '').trim() === 'มาบตาพุด')
+      || areas.find(area => area.name.includes('มาบตาพุด'));
+    if (!defaultArea) throw new Error('ไม่พบพิกัดนิคมฯ มาบตาพุด');
+    if (!request) showWeather(defaultArea);
   } catch {
-    estate.replaceChildren(new Option('โหลดรายชื่อพื้นที่ไม่ได้'));
-    status.textContent = 'เชื่อมต่อทะเบียนพื้นที่ GIS ไม่สำเร็จ';
+    if (!request) {
+      status.textContent = 'เชื่อมต่อพิกัดนิคมฯ มาบตาพุดไม่สำเร็จ';
+      el('advice').textContent = 'ลองกดใช้ตำแหน่งปัจจุบันเพื่อดูอากาศใกล้คุณค่ะ';
+    }
   }
 }
 const locate = el('locate');
 let locationRequest = 0;
-estate.addEventListener('change',() => {locationRequest++; locate.disabled = false;});
 locate.addEventListener('click',() => {
   if (!navigator.geolocation) {
-    el('advice').textContent = 'อุปกรณ์นี้เปิดตำแหน่งไม่ได้ค่ะ เลือกชื่อนิคมฯ จากรายการได้เลย';
+    el('advice').textContent = 'อุปกรณ์นี้เปิดตำแหน่งไม่ได้ค่ะ ดูข้อมูลพื้นที่เริ่มต้นได้ค่ะ';
     return;
   }
   const attempt = ++locationRequest;
@@ -230,12 +261,11 @@ locate.addEventListener('click',() => {
   navigator.geolocation.getCurrentPosition(({coords}) => {
     if (attempt !== locationRequest) return;
     locate.disabled = false;
-    estate.value = '';
     showWeather({name:'ตำแหน่งปัจจุบันของคุณ',lat:coords.latitude,lon:coords.longitude});
   }, () => {
     if (attempt !== locationRequest) return;
     locate.disabled = false;
-    el('advice').textContent = 'GISเข้าถึงตำแหน่งไม่ได้ค่ะ เลือกชื่อนิคมฯ จากรายการได้เลย';
+    el('advice').textContent = 'GISเข้าถึงตำแหน่งไม่ได้ค่ะ ดูข้อมูลพื้นที่เริ่มต้นได้ค่ะ';
   }, {timeout:8000,maximumAge:60000});
 });
 window.addEventListener('hashchange',showPanel);
