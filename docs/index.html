@@ -1,199 +1,298 @@
-<!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EMCC GIS Portal | กนอ.</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="./emcc-home.css">
-</head><body>
-<header id="overview">
-<div class="top"><a class="wordmark" href="#overview" aria-label="EMCC หน้าแรก"><svg viewBox="0 0 124 31" width="124" height="31" aria-hidden="true"><path d="M20 4H4v23h16M4 15h13M30 27V4l12 14L54 4v23M85 8a11.5 11.5 0 1 0 0 15m33-15a11.5 11.5 0 1 0 0 15" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="top-title" lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</span><div class="language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><div class="language-options" role="group" aria-label="Language"><button type="button" data-lang="th" aria-pressed="true">ไทย</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div><nav class="header-alerts" aria-label="การแจ้งเตือน"></nav></div>
-<div class="emcc-band"><div lang="en">Environmental Monitoring and Control Center: EMCC</div></div>
-<nav class="portal-nav" aria-label="เมนูหลัก"><div class="portal-inner nav-row">
-<a class="nav-overview" href="#overview"><span data-en="Overview">ภาพรวม</span></a>
-<details class="data-menu"><summary><span data-en="Data">ข้อมูล</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></summary><div class="data-links">
-<a href="#dashboard"><span data-en="Dashboard">Dashboard</span></a><a href="#risk-map"><span data-en="EMCC Risk Map">EMCC Risk Map</span></a><a href="./weather-dashboard.html"><span data-en="Weather stations">สถานีตรวจวัดอากาศ</span></a><a href="./information.html#monitor"><span data-en="e-Monitoring">e-Monitoring</span></a><a href="./flood-report.html"><span data-en="Water situation">สถานการณ์น้ำ</span></a><a href="#weather"><span data-en="Weather">สภาพอากาศ</span></a><a href="./daily-situation.html"><span data-en="Alerts and notices">แจ้งเตือนและประกาศ</span></a>
-</div></details>
-<a class="nav-risk" href="./dss-riskmap.html?view=data"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></svg> Risk map</a>
-</div></nav>
-</header>
-<main>
-<section class="portal-hero" aria-labelledby="hero-title"><div class="portal-inner hero-layout">
-<div class="hero-copy"><p class="hero-kicker"><b>EMCC</b><span data-en="Environmental Monitoring and Control Center">ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</span></p>
-<h1 id="hero-title"><span data-en="Spatial data for safer, sustainable industrial estates">ข้อมูลเชิงพื้นที่ เพื่อนิคมอุตสาหกรรมที่ปลอดภัยและยั่งยืน</span></h1>
-<p class="hero-lead"><span data-en="Water, environment and emergency information in one place">น้ำ สิ่งแวดล้อม และเหตุฉุกเฉิน ในที่เดียว</span></p>
-<p><span data-en="Track water conditions, environmental quality and emergencies across industrial estates nationwide with EMCC.">ติดตามสถานการณ์น้ำ คุณภาพสิ่งแวดล้อม และเหตุฉุกเฉินของนิคมอุตสาหกรรมทั่วประเทศ จากศูนย์ข้อมูล EMCC</span></p>
-<div class="hero-actions"><a href="./dss-riskmap.html?view=data"><span data-en="Open Risk map">เปิด Risk map</span></a><a href="#dashboard"><span data-en="Explore data systems">สำรวจระบบข้อมูล</span></a></div></div>
-<div class="hero-art"><a class="hex-link hex-radar" href="./weather-dashboard.html"><span class="hex"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M22 23l15 8-7 15 17 9-9 17 24 7 9 22M49 20l-8 14 15 15 15-7 10 16M73 18l12 16-8 11 13 12" /></svg></span><span class="hex-label"><span data-en="Rain radar">เรดาร์ฝน</span></span></a><a class="hex-link hex-water" href="./flood-report.html"><span class="hex"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M36 5l-6 19 10 14-8 9 19 12 4 19 17 17M82 9l-7 23 4 13-16 14 9 22-3 16M20 26l17 9m21 20 22-11"/></svg></span><span class="hex-label"><span data-en="Water situation">สถานการณ์น้ำ</span></span></a><a class="hex-link hex-use" href="./drought.html"><span class="hex"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M0 58l14-8 12 6 18-13 16 7 11-8 13 13 16-1M0 69l16-7 14 4 14-6 15 7 13-8 28 11M0 82l19-7 11 5 19-4 14 7 17-6 20 6"/></svg></span><span class="hex-label"><span data-en="Water use">การใช้น้ำ</span></span></a><a class="hex-link hex-risk" href="./dss-riskmap.html?view=data"><span class="hex"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="37" cy="17" r="2"/><circle cx="43" cy="26" r="2.5"/><circle cx="44" cy="34" r="2"/><circle cx="54" cy="29" r="2"/><circle cx="53" cy="46" r="2"/><circle cx="51" cy="54" r="2.5"/><circle cx="43" cy="54" r="2"/><circle cx="46" cy="60" r="2"/><circle cx="50" cy="64" r="2.5"/><circle cx="57" cy="59" r="2"/><circle cx="63" cy="56" r="2"/><circle cx="53" cy="68" r="2"/><circle cx="50" cy="74" r="2"/><circle cx="55" cy="80" r="2"/><circle cx="60" cy="85" r="2"/><circle cx="64" cy="90" r="2"/></svg></span><span class="hex-label"><span data-en="Risk map">Risk map</span></span></a><a class="hex-link hex-quake" href="./earthquake.html"><span class="hex"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="12"/><circle cx="50" cy="52" r="22"/><circle cx="50" cy="52" r="33"/><circle cx="50" cy="52" r="45"/><path d="M35 17l10 11 12 7-8 12 6 10 8 15 7 15"/></svg></span><span class="hex-label"><span data-en="Earthquakes">แผ่นดินไหว</span></span></a></div></div></section><div class="systems" id="systems"><div class="portal-inner systems-heading"><h2><span data-en="EMCC data systems">ระบบข้อมูลของ EMCC</span></h2><p><span data-en="Explore monitoring dashboards or open maps by hazard type.">เลือกดูแดชบอร์ดรายด้าน หรือเปิดแผนที่ตามประเภทภัย</span></p></div>
-<section class="system-group dashboard" id="dashboard" aria-labelledby="dashboard-heading"><div class="portal-inner"><h3 class="group-title" id="dashboard-heading">Dashboard</h3><p class="group-copy"><span data-en="Track conditions and monitoring results.">ติดตามสถานการณ์และผลการตรวจวัด</span></p><div class="system-grid"><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15a4 4 0 0 1 3-4 6 6 0 0 1 11-1 4 4 0 1 1 1 8H6a3 3 0 0 1-3-3z"/></svg><h3><span data-en="Weather stations">สถานีตรวจวัดอากาศ</span></h3><p><span data-en="Temperature, rainfall and wind observations">อุณหภูมิ ฝน และลมจากสถานีตรวจวัด</span></p><a href="./weather-dashboard.html"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Weather stations">สถานีตรวจวัดอากาศ</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3zM6 14l4-4 3 3 5-6"/></svg><h3><span data-en="e-Monitoring">e-Monitoring</span></h3><p><span data-en="Environmental monitoring across industrial estates">ผลตรวจวัดคุณภาพสิ่งแวดล้อมในนิคมฯ</span></p><a href="./information.html#monitor"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="e-Monitoring">e-Monitoring</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10q3-4 6 0t6 0t6 0M2 16q3-4 6 0t6 0t6 0"/></svg><h3><span data-en="Water situation">สถานการณ์น้ำ</span></h3><p><span data-en="Water levels, stations and areas under watch">ระดับน้ำ สถานีตรวจวัด และพื้นที่เฝ้าระวัง</span></p><a href="./flood-report.html"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Water situation">สถานการณ์น้ำ</span></span> <span aria-hidden="true">↗</span></a></article></div></div></section>
-<section class="system-group risk-map" id="risk-map" aria-labelledby="risk-map-heading"><div class="portal-inner"><h3 class="group-title" id="risk-map-heading">EMCC Risk Map</h3><p class="group-copy"><span data-en="Maps and supporting information by hazard type.">แผนที่และข้อมูลสนับสนุนตามประเภทภัย</span></p><div class="system-grid"><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c2 5 6 7 6 12a6 6 0 0 1-12 0c0-2 1-4 3-6 0 3 1 4 2 4 2-3 1-7 1-10z"/></svg><h3><span data-en="Fire">ไฟไหม้</span></h3><p><span data-en="Fire risk and response information">ภาพรวมความเสี่ยงและข้อมูลประกอบการระงับเหตุ</span></p><a href="./hub.html#coverageRiskHeading"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Fire">ไฟไหม้</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10q3-4 6 0t6 0t6 0M2 16q3-4 6 0t6 0t6 0"/></svg><h3><span data-en="Flood">น้ำท่วม</span></h3><p><span data-en="Flood situation and watch locations">แผนที่สถานการณ์น้ำและจุดเฝ้าระวัง</span></p><a href="./flood-report.html"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Flood">น้ำท่วม</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg><h3><span data-en="Drought">ภัยแล้ง</span></h3><p><span data-en="Drought and water security">สถานการณ์และความมั่นคงด้านน้ำ</span></p><a href="./drought.html"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Drought">ภัยแล้ง</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13a2 2 0 1 0-2-2M3 12h16a2 2 0 1 1-2 2M3 17h8a2 2 0 1 1-2 2"/></svg><h3><span data-en="PM2.5">ฝุ่น PM2.5</span></h3><p><span data-en="Air-quality data and maps">ข้อมูลและแผนที่คุณภาพอากาศ</span></p><a href="./pm25.html"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="PM2.5">ฝุ่น PM2.5</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h5l2-5 4 11 3-8 2 2h4"/></svg><h3><span data-en="Earthquake">แผ่นดินไหว</span></h3><p><span data-en="Earthquake locations and event information">ตำแหน่งและข้อมูลเหตุแผ่นดินไหว</span></p><a href="./earthquake.html"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Earthquake">แผ่นดินไหว</span></span> <span aria-hidden="true">↗</span></a></article><article class="system-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6m-5 0v7l-6 9q-1 2 2 2h12q3 0 2-2l-6-9V3M8 15h8"/></svg><h3><span data-en="Chemical incidents">สารเคมี</span></h3><p><span data-en="Facilities, chemicals and incident response resources">ค้นหาโรงงาน สารเคมี และข้อมูลสนับสนุนการรับมือ</span></p><a href="./dss-riskmap.html?view=data#coverageIncidentTitle"><span data-en="Explore">เปิดข้อมูล</span><span class="sr-only"> <span data-en="Chemical incidents">สารเคมี</span></span> <span aria-hidden="true">↗</span></a></article></div></div></section></div>
-<section class="portal-inner weather-section" id="weather">
-<div class="weather-heading">
-  <div><p class="eyebrow"><span data-en="EMCC GIS Portal">ยินดีต้อนรับสู่ EMCC GIS Portal</span></p><h2><span data-en="Industrial estate weather">สภาพอากาศในพื้นที่นิคมฯ</span></h2></div>
-  <div class="area-controls"><button id="locate" type="button"><span data-en="◎ Use current location">◎ ใช้ตำแหน่งปัจจุบัน</span></button></div>
-</div>
-<div class="weather-content"><div class="weather-grid">
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+<title>สถานการณ์ e-Monitoring | กนอ.</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap");
+:root{
+  --purple:#5d2a7a;--red:#e63946;--red-soft:#fdecef;--orange:#e67700;
+  --orange-soft:#fff5df;--green:#2f8f46;--green-soft:#eef7f0;
+  --blue:#0871b9;--blue-soft:#e5f2fb;--ink:#202124;--muted:#667078;
+  --line:#e2e5e7;--page:#f3f5f6;--card:#ffffff
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",Tahoma,sans-serif}
+button,select{font:inherit}
+.dashboard{width:100%;max-width:460px;min-height:100vh;margin:0 auto;padding:10px;background:var(--page)}
+.top{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+  padding:13px 14px;background:#fff;border-bottom:1px solid var(--line);
+  border-radius:12px 12px 0 0
+}
+.title{margin:0;font-size:19px;line-height:1.35;font-weight:700}
+.subtitle{margin-top:3px;color:var(--muted);font-size:12px;line-height:1.5}
+.live{display:flex;align-items:center;gap:5px;padding-top:2px;color:var(--green);font-size:11px;font-weight:700;white-space:nowrap}
+.live-dot{width:13px;height:13px;border:1.5px solid var(--green);border-radius:50%;display:grid;place-items:center;font-size:8px}
+.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px;background:#fff;border-bottom:1px solid var(--line)}.filters>div{min-width:0}
+.filter{width:100%;min-height:42px;padding:8px 9px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;font-size:12px;outline:none}
+.filter:focus{border-color:var(--purple);box-shadow:0 0 0 2px rgba(93,42,122,.1)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px;background:#fff}
+.kpi{min-height:67px;padding:11px;border-radius:9px}
+.kpi.red{color:var(--red);background:var(--red-soft)}.kpi.orange{color:var(--orange);background:var(--orange-soft)}
+.kpi.green{color:var(--green);background:var(--green-soft)}.kpi.blue{color:var(--blue);background:var(--blue-soft)}
+.kpi strong{display:block;font-size:21px;line-height:1;font-weight:600}
+.kpi span{display:block;margin-top:8px;font-size:11px}
+.section{margin-top:9px;overflow:hidden;background:var(--card);border-radius:10px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:41px;padding:10px 11px;border-bottom:1px solid var(--line)}
+.section-head h2{margin:0;font-size:14px;font-weight:600}
+.section-head span{color:var(--muted);font-size:10px;text-align:right}
+.events,.station-list{background:#fff}
+.event,.station{padding:11px;border-bottom:1px solid var(--line)}
+.event:last-child,.station:last-child{border-bottom:0}
+.event-top{display:flex;justify-content:space-between;gap:8px}
+.event-title{color:var(--red);font-size:13px;font-weight:600}.event-time{font-size:11px;font-weight:600}
+.event-name{margin-top:2px;font-size:12px}.event-meta{margin-top:3px;color:var(--muted);font-size:10px;line-height:1.5}
+.empty{padding:24px 12px;color:var(--muted);font-size:11px;text-align:center}
+.map-wrap{position:relative;background:var(--blue-soft)}
+.map-frame{display:block;width:100%;height:310px;border:0;background:var(--blue-soft)}
+.map-note{padding:7px 10px;color:var(--blue);background:#f2f8fc;border-top:1px solid #cfe5f3;font-size:10px;text-align:center}
+.trend-body{padding:12px}
+.trend-chart{display:block;width:100%;height:auto}
+.trend-empty{padding:22px 10px;color:var(--muted);background:#f8f9fa;border-radius:8px;font-size:11px;text-align:center}
+.station-name{font-size:13px;font-weight:600}
+.station-data{margin-top:3px;color:#30343a;font-size:11px;line-height:1.55}
+.station-alert{color:var(--red);font-weight:600}.station-normal{color:var(--green);font-weight:600}
+.station-actions{display:flex;gap:6px;margin-top:7px}
+.station-link{display:inline-block;padding:5px 8px;color:var(--blue);background:var(--blue-soft);border-radius:6px;font-size:10px;text-decoration:none}
+.more{display:block;padding:10px;color:var(--purple);border-top:1px solid var(--line);font-size:11px;text-align:center;text-decoration:none;font-weight:600}
+.footer{padding:16px 10px 20px;color:var(--muted);font-size:10px;line-height:1.6;text-align:center}
+.loading{padding:22px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:699px){.filters{grid-template-columns:1fr 1fr}}
+@media(min-width:700px){
+  .dashboard{max-width:760px;padding:16px}.title{font-size:22px}.map-frame{height:500px}
+  .kpi{min-height:82px}.kpi strong{font-size:25px}.section-head h2{font-size:14px}
+  .event-title,.station-name{font-size:13px}.event-name,.station-data{font-size:11px}
+}
+</style>
 
-  <section class="card current">
-    <p class="eyebrow"><span data-en="Current conditions">สภาพอากาศขณะนี้</span></p>
-    <h2 id="area-name">กำลังโหลดพื้นที่</h2>
-    <div class="weather-reading"><p class="temperature" id="temperature">—</p><span id="weather-symbol" aria-hidden="true"></span></div>
-    <p id="condition">รอข้อมูลพยากรณ์</p>
-    <div class="stats"><div><small><span data-en="Chance of rain">โอกาสฝนวันนี้</span></small><strong id="rain">—</strong></div><div><small><span data-en="Humidity">ความชื้น</span></small><strong id="humidity">—</strong></div><div><small><span data-en="Wind speed">ความเร็วลม</span></small><strong id="wind">—</strong></div></div>
-  <div class="gis-assistant"><div class="gis-profile"><img src="data:image/webp;base64,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" alt="GIS ผู้ช่วยสภาพ EMCC" width="112" height="112"><div><p class="eyebrow">ผู้ช่วยสภาพ EMCC</p><h2>GIS</h2></div></div><p id="advice" aria-live="polite">เลือกพื้นที่ แล้วGISจะช่วยสรุปอากาศให้ค่ะ</p><p id="weather-status" role="status">กำลังโหลดข้อมูล</p></div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Unified website typography matching the supplied reference */
+    html,body,button,input,select,textarea,table{font-family:"Noto Sans Thai","Segoe UI",Tahoma,sans-serif!important}
+  </style>
+</head>
+<body>
+<main class="dashboard">
+  <header class="top">
+    <div>
+      <h1 class="title">สถานการณ์ e-Monitoring</h1>
+      <div class="subtitle"><span id="scopeText">ภาพรวมสถานีตรวจวัด</span> • อัปเดต <span id="updatedAt">กำลังโหลด…</span></div>
+    </div>
+    <div class="live"><span class="live-dot">✓</span><span>ข้อมูลล่าสุด</span></div>
+  </header>
+
+  <section class="filters" aria-label="ค้นหาและกรองข้อมูล">
+    <div>
+      <input id="estateFilter" class="filter" type="search" list="estateOptions" placeholder="ค้นหานิคมอุตสาหกรรม" aria-label="ค้นหานิคมอุตสาหกรรม" oninput="applyFilters();scheduleEstateMapFocus()" onchange="focusEstateOnMap()">
+      <datalist id="estateOptions"></datalist>
+    </div>
+    <select id="systemFilter" class="filter" onchange="applyFilters()" aria-label="เลือกประเภทระบบ">
+      <option value="">ประเภท: ทั้งหมด</option>
+      <option value="AQMS">ประเภท: AQMs</option>
+      <option value="WQMS">ประเภท: WQMs</option>
+      <option value="CEMS">ประเภท: CEMs</option>
+    </select>
+    <select id="statusFilter" class="filter" onchange="applyFilters()" aria-label="เลือกสถานะ">
+      <option value="">สถานะ: ทั้งหมด</option>
+      <option value="ALERT">สถานะ: แจ้งเตือน</option>
+      <option value="ONLINE">สถานะ: Online</option>
+      <option value="OFFLINE">สถานะ: Offline</option>
+    </select>
+    <select id="timeFilter" class="filter" onchange="applyFilters()" aria-label="เลือกช่วงเวลา">
+      <option value="">ช่วงเวลา: ทั้งหมด</option>
+      <option value="TODAY">ช่วงเวลา: วันนี้</option>
+      <option value="24H">ช่วงเวลา: 24 ชั่วโมง</option>
+      <option value="7D">ช่วงเวลา: 7 วัน</option>
+      <option value="30D">ช่วงเวลา: 30 วัน</option>
+    </select>
   </section>
-</div>
-<section class="card forecast-card" id="forecast-panel"><div class="forecast-head"><h2><span data-en="7-day forecast">พยากรณ์ 7 วัน</span></h2><p class="muted"><span data-en="Daily temperature range and chance of rain">อุณหภูมิต่ำสุด–สูงสุดและโอกาสฝนรายวัน</span></p></div><div class="forecast" id="forecast"></div></section>
 
-  <section class="card map-card"><h2><span data-en="Industrial estates and ports map">แผนที่ตำแหน่งนิคมฯ และท่าเรือฯ</span></h2><div id="map" aria-label="แผนที่ตำแหน่งพื้นที่ที่เลือก"></div></section>
-</div></section>
+  <section class="kpis" aria-label="สรุปสถานการณ์">
+    <article class="kpi red"><strong id="eventCount">—</strong><span>เหตุการณ์ต้องตรวจสอบ</span></article>
+    <article class="kpi orange"><strong id="parameterCount">—</strong><span>พารามิเตอร์แจ้งเตือน</span></article>
+    <article class="kpi green"><strong id="onlineCount">—</strong><span>สถานี Online</span></article>
+    <article class="kpi blue"><strong id="offlineCount">—</strong><span>สถานี Offline</span></article>
+  </section>
 
+  <section class="section">
+    <div class="section-head"><h2>เหตุการณ์ที่ต้องดำเนินการ</h2><span>เรียงตามความเร่งด่วน</span></div>
+    <div id="eventList" class="events"><div class="loading">กำลังโหลดข้อมูล…</div></div>
+  </section>
+
+  <section id="stationMapSection" class="section">
+    <div class="section-head"><h2>ตำแหน่งสถานี</h2><span>แตะสถานีเพื่อดูข้อมูล</span></div>
+    <div class="map-wrap">
+      <iframe id="stationMapFrame" class="map-frame" width="700" height="600" allow="local-network-access; geolocation" allowfullscreen loading="lazy" title="emcc geo hub" src="https://ieat.maps.arcgis.com/apps/mapviewer/index.html?configurableview=true&amp;webmap=590841b3f03147f38703740281ff87a6&amp;theme=light&amp;bookmarks=true&amp;legend=true&amp;information=true&amp;share=true&amp;scroll=true&amp;basemaps=true&amp;zoom=true&amp;center=103.64927288807529,13.120087367299625&amp;scale=9244648.868618"></iframe>
+      <div class="map-note">แผนที่ EMCC Geo Hub • ใช้เครื่องมือในแผนที่เพื่อค้นหาและตรวจสอบสถานี</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>แนวโน้มค่าพารามิเตอร์</h2><span>ข้อมูลย้อนหลัง</span></div>
+    <div class="trend-body">
+      <div class="trend-empty">ข้อมูลชุดปัจจุบันมีเฉพาะค่าล่าสุด<br>กราฟย้อนหลังจะแสดงเมื่อเชื่อมข้อมูลอนุกรมเวลาจากระบบต้นทาง</div>
+    </div>
+  </section>
+
+  <section id="offline-stations" class="section">
+    <div class="section-head"><h2>รายละเอียดสถานี</h2><span>ค่าล่าสุด</span></div>
+    <div id="stationList" class="station-list"><div class="loading">กำลังโหลดข้อมูล…</div></div>
+    <a class="more" href="./stations.html">เปิดรายงานสถานีทั้งหมด</a>
+  </section>
+
+  <footer class="footer">ระบบติดตามตรวจสอบสิ่งแวดล้อม<br>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ.</footer>
 </main>
-<footer class="portal-footer" id="about"><div class="portal-inner"><div class="footer-grid">
-<div><a class="footer-brand" href="#overview">EMCC</a><p><span data-en="Environmental Monitoring and Control Center">ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย</span></p></div>
-<div><h2>Dashboard</h2><a href="./weather-dashboard.html"><span data-en="Weather stations">สถานีตรวจวัดอากาศ</span></a><a href="./information.html#monitor"><span data-en="e-Monitoring">e-Monitoring</span></a><a href="./flood-report.html"><span data-en="Water situation">สถานการณ์น้ำ</span></a><a href="./station-status-overview.html"><span data-en="Station status">สถานะสถานีตรวจวัด</span></a></div>
-<div><h2>EMCC Risk Map</h2><a href="./hub.html#coverageRiskHeading"><span data-en="Fire">ไฟไหม้</span></a><a href="./flood-report.html"><span data-en="Flood">น้ำท่วม</span></a><a href="./drought.html"><span data-en="Drought">ภัยแล้ง</span></a><a href="./pm25.html"><span data-en="PM2.5">ฝุ่น PM2.5</span></a><a href="./earthquake.html"><span data-en="Earthquake">แผ่นดินไหว</span></a><a href="./dss-riskmap.html?view=data#coverageIncidentTitle"><span data-en="Chemical incidents">สารเคมี</span></a></div>
-<div><h2><span data-en="Data and agencies">ข้อมูลและหน่วยงาน</span></h2><a href="#weather"><span data-en="Weather">สภาพอากาศ</span></a><a href="./daily-situation.html"><span data-en="Alerts and notices">แจ้งเตือนและประกาศ</span></a><a href="https://oc.ieat.go.th/th"><span data-en="IEAT Operations Center">ศูนย์เฝ้าระวังฯ กนอ.</span></a><a href="https://open-meteo.com/">Open-Meteo</a></div>
-</div><div class="footer-bottom"><span>© EMCC · <span data-en="Industrial Estate Authority of Thailand">การนิคมอุตสาหกรรมแห่งประเทศไทย</span></span><span><span data-en="Weather model data for the selected location">ข้อมูลสภาพอากาศจากแบบจำลอง ณ พิกัดที่เลือก</span></span></div></div></footer>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-const el = id => document.getElementById(id);
-const field = 'สำนักงานนิคมฯ';
-const status = el('weather-status');
 
-const map = window.L ? L.map('map').setView([13.5,101],6) : null;
-if (map) L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(map);
-else el('map').textContent = 'โหลดแผนที่ไม่ได้';
-let marker, request, selectedWeatherArea;
-const localized = (thai, english) => document.documentElement.lang === "en" ? english : thai;
-const format = (value, unit) => Number.isFinite(value) ? Math.round(value) + unit : '—';
-function weatherSymbol(code) {
-  if (!Number.isFinite(code)) return '';
-  return code === 0 ? '☀︎' : code <= 48 ? '☁︎' : code >= 95 ? 'ϟ' : '☂︎';
+<script>
+const byId=id=>document.getElementById(id);
+const esc=value=>String(value??"-").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
+const num=value=>Number.isFinite(Number(value))?Number(value):0;
+const fmt=value=>num(value).toLocaleString("th-TH");
+let DATA=null;
+const requestedEstate=new URLSearchParams(location.search).get("estate")||"";
+
+function isOnline(value){return String(value||"").trim().toUpperCase()==="ONLINE"}
+function estateOf(s){return String(s.estate_name||s.IndustryZone||"-").trim()}
+function typeOf(s){
+  const raw=String(s.station_type||s.StationType||"-").trim().toUpperCase();
+  if(raw.includes("AIR")||raw.includes("AQM"))return "AQMS";
+  if(raw.includes("WATER")||raw.includes("WQM"))return "WQMS";
+  if(raw.includes("STACK")||raw.includes("CEM"))return "CEMS";
+  return raw;
 }
-function condition(code) {
-  if (!Number.isFinite(code)) return localized('ไม่มีข้อมูลสภาพอากาศ', 'Weather unavailable');
-  if (code === 0) return localized('ท้องฟ้าแจ่มใส', 'Clear skies');
-  if (code <= 3) return localized('มีเมฆ', 'Cloudy');
-  if (code <= 48) return localized('มีหมอก', 'Fog');
-  if (code >= 95) return localized('ฝนฟ้าคะนอง', 'Thunderstorms');
-  if ([71,73,75,77,85,86].includes(code)) return localized('หิมะ', 'Snow');
-  return localized('ฝน', 'Rain');
+function alarmOf(s){return String(s.parameter_alarm||s.ParameterAlram||"-").trim()}
+function hasAlarm(s){const value=alarmOf(s);return value&&value!=="-"}
+function stateOf(s){if(hasAlarm(s))return "ALERT";return isOnline(s.status)?"ONLINE":"OFFLINE"}
+function parameterNames(value){
+  return String(value||"").split(/[,;|]/).map(item=>item.trim()).filter(item=>item&&item!=="-");
 }
-async function getJson(url, signal) {
-  const response = await fetch(url, {signal});
-  if (!response.ok) throw new Error('โหลดข้อมูลไม่สำเร็จ');
-  return response.json();
+const THAI_MONTHS={"ม.ค.":0,"ก.พ.":1,"มี.ค.":2,"เม.ย.":3,"พ.ค.":4,"มิ.ย.":5,"ก.ค.":6,"ส.ค.":7,"ก.ย.":8,"ต.ค.":9,"พ.ย.":10,"ธ.ค.":11};
+function parseStationTime(value){
+  const text=String(value||"").trim();
+  const iso=new Date(text);
+  if(!Number.isNaN(iso.getTime()))return iso;
+  const match=text.match(/(\d{1,2})\s+([^\s]+)\s+(\d{4}),?\s+(\d{1,2}):(\d{2})/);
+  if(!match||THAI_MONTHS[match[2]]===undefined)return null;
+  let year=Number(match[3]);if(year>2400)year-=543;
+  return new Date(year,THAI_MONTHS[match[2]],Number(match[1]),Number(match[4]),Number(match[5]));
 }
-async function showWeather(area) {
-  if (!area) return;
-  selectedWeatherArea = area;
-  request?.abort();
-  const controller = new AbortController();
-  request = controller;
-  el('area-name').textContent = area.name;
-  for (const id of ['temperature','humidity','wind','rain']) el(id).textContent = '—';
-  el('condition').textContent = localized('กำลังโหลดสภาพอากาศ', 'Loading conditions');
-  el('weather-symbol').textContent = '';
-  el('advice').textContent = localized('GISกำลังดูอากาศของ ', 'GIS is checking weather for ') + area.name + localized(' ให้ค่ะ', '');
-  el('forecast').replaceChildren();
-  status.textContent = localized('กำลังโหลดข้อมูลของ ', 'Loading data for ') + area.name;
-  if (map) {
-    marker?.remove();
-    const label = document.createElement('span');
-    label.textContent = area.name;
-    marker = L.marker([area.lat,area.lon]).addTo(map).bindTooltip(label);
-    map.setView([area.lat,area.lon],11);
-  }
-  const params = new URLSearchParams({
-    latitude:area.lat,longitude:area.lon,timezone:'Asia/Bangkok',forecast_days:'7',
-    current:'temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code',
-    daily:'temperature_2m_min,temperature_2m_max,precipitation_probability_max,weather_code'
-  });
-  try {
-    const {current,daily} = await getJson('https://api.open-meteo.com/v1/forecast?' + params, controller.signal);
-    if (controller.signal.aborted) return;
-    el('temperature').textContent = format(current.temperature_2m,' °C');
-    el('condition').textContent = condition(current.weather_code);
-    el('weather-symbol').textContent = weatherSymbol(current.weather_code);
-    el('humidity').textContent = format(current.relative_humidity_2m,'%');
-    el('wind').textContent = format(current.wind_speed_10m,localized(' กม./ชม.', ' km/h'));
-    const chance = daily.precipitation_probability_max[0];
-    el('rain').textContent = format(chance,'%');
-    const now = Number.isFinite(current.temperature_2m) ? localized('ตอนนี้ประมาณ ', 'Currently around ') + format(current.temperature_2m,' °C') + localized(' ค่ะ ', ' ') : '';
-    const rainTip = !Number.isFinite(chance) ? localized('วันนี้ยังไม่มีข้อมูลโอกาสฝนค่ะ', 'Rain probability unavailable.') :
-      chance >= 50 ? localized('วันนี้มีช่วงที่โอกาสฝนถึง ', 'Rain chance reaches ') + format(chance,'%') + localized(' พกร่มไว้ก็ดีนะคะ', '. Consider carrying an umbrella.') :
-      localized('วันนี้โอกาสฝนสูงสุด ', 'Highest rain chance today: ') + format(chance,'%') + localized(' ค่ะ', '.');
-    el('advice').textContent = area.name + ' · ' + now + rainTip;
-    const dayFormat = new Intl.DateTimeFormat(localized('th-TH', 'en-GB'),{weekday:'short',day:'numeric',month:'short',timeZone:'Asia/Bangkok'});
-    for (const [i,date] of daily.time.entries()) {
-      const card = document.createElement('article');
-      card.className = 'day';
-      const day = document.createElement('small');
-      day.textContent = dayFormat.format(new Date(date + 'T12:00:00+07:00'));
-      const temperature = document.createElement('strong');
-      temperature.textContent = format(daily.temperature_2m_min[i],'°') + '–' + format(daily.temperature_2m_max[i],'°');
-      const description = document.createElement('div');
-      description.textContent = condition(daily.weather_code[i]);
-      const rain = document.createElement('small');
-      rain.textContent = localized('ฝน ', 'Rain ') + format(daily.precipitation_probability_max[i],'%');
-      const icon = document.createElement('div');
-      icon.setAttribute('aria-hidden','true');
-      icon.textContent = weatherSymbol(daily.weather_code[i]);
-      card.append(day,icon,description,rain,temperature);
-      el('forecast').append(card);
-    }
-    status.textContent = localized('ข้อมูลแบบจำลอง ณ ', 'Model data as of ') + current.time.replace('T',localized(' เวลา ', ' ')) + localized(' น. (เวลาไทย)', ' (Thailand time)');
-  } catch (error) {
-    if (controller.signal.aborted) return;
-    status.textContent = localized('โหลดข้อมูลพยากรณ์ไม่ได้ ลองกดใช้ตำแหน่งปัจจุบันอีกครั้งหรือรีเฟรชหน้า', 'Forecast unavailable. Try your current location or reload the page.');
-    el('condition').textContent = localized('ไม่มีข้อมูลที่จะแสดง', 'No data available');
-    el('advice').textContent = localized('GISยังโหลดอากาศของพื้นที่นี้ไม่ได้ค่ะ ลองอีกครั้งได้เลย', 'GIS could not load weather for this location.');
-  }
+function referenceTime(){
+  const parsed=new Date(DATA?.updated_at||"");
+  return Number.isNaN(parsed.getTime())?new Date():parsed;
 }
-async function loadAreas() {
-  try {
-    const params = new URLSearchParams({f:'json',where:'1=1',outFields:field,returnGeometry:'true',outSR:'4326'});
-    const url = 'https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/e_PP_2025/FeatureServer/1/query?';
-    const result = await getJson(url + params);
-    const byName = new Map();
-    for (const row of result.features || []) {
-      const name = row.attributes?.[field]?.trim();
-      const {x,y} = row.geometry || {};
-      if (name && Number.isFinite(x) && Number.isFinite(y) && !byName.has(name)) byName.set(name,{name,lon:x,lat:y});
-    }
-    const areas = [...byName.values()];
-    const defaultArea = areas.find(area => area.name.replace(/^นิคมอุตสาหกรรม\s*/, '').trim() === 'มาบตาพุด')
-      || areas.find(area => area.name.includes('มาบตาพุด'));
-    if (!defaultArea) throw new Error('ไม่พบพิกัดนิคมฯ มาบตาพุด');
-    if (!request) showWeather(defaultArea);
-  } catch {
-    if (!request) {
-      status.textContent = localized('เชื่อมต่อพิกัดนิคมฯ มาบตาพุดไม่สำเร็จ', 'Could not load Map Ta Phut coordinates');
-      el('advice').textContent = localized('ลองกดใช้ตำแหน่งปัจจุบันเพื่อดูอากาศใกล้คุณค่ะ', 'Use your current location to view nearby weather.');
-    }
-  }
+function inTimeRange(s,range){
+  if(!range)return true;
+  const observed=parseStationTime(s.last_update||s.LastUpdate);if(!observed)return false;
+  const end=referenceTime(),diff=end-observed;if(diff<0)return false;
+  if(range==="TODAY")return observed.getFullYear()===end.getFullYear()&&observed.getMonth()===end.getMonth()&&observed.getDate()===end.getDate();
+  const limit=range==="24H"?1:range==="7D"?7:30;
+  return diff<=limit*24*60*60*1000;
 }
-const locate = el('locate');
-let locationRequest = 0;
-locate.addEventListener('click',() => {
-  if (!navigator.geolocation) {
-    el('advice').textContent = localized('อุปกรณ์นี้เปิดตำแหน่งไม่ได้ค่ะ ดูข้อมูลพื้นที่เริ่มต้นได้ค่ะ', 'Location is unavailable on this device.');
+function populateEstateOptions(){
+  const list=byId("estateOptions");if(!list||list.dataset.ready)return;
+  const names=[...new Set((DATA?.all_stations||[]).map(estateOf).filter(v=>v&&v!=="-"))].sort((a,b)=>a.localeCompare(b,"th"));
+  list.innerHTML=names.map(name=>'<option value="'+esc(name)+'"></option>').join("");
+  if(requestedEstate)byId("estateFilter").value=requestedEstate;
+  list.dataset.ready="1";
+}
+function baseStations(){
+  const rows=Array.isArray(DATA?.all_stations)?DATA.all_stations:[];
+  return requestedEstate?rows.filter(s=>estateOf(s)===requestedEstate):rows;
+}
+function filteredStations(){
+  const estate=byId("estateFilter").value.trim().toLowerCase();
+  const system=byId("systemFilter").value,status=byId("statusFilter").value,time=byId("timeFilter").value;
+  return baseStations().filter(s=>(!estate||estateOf(s).toLowerCase().includes(estate))&&(!system||typeOf(s)===system)&&(!status||stateOf(s)===status)&&inTimeRange(s,time));
+}
+function mapLink(s){
+  const lat=Number(s.latitude),lon=Number(s.longitude);
+  return Number.isFinite(lat)&&Number.isFinite(lon)?"https://www.google.com/maps/search/?api=1&query="+lat+","+lon:"";
+}
+function eventHtml(s){
+  const params=alarmOf(s),updated=s.last_update||s.LastUpdate||"-";
+  return '<article class="event"><div class="event-top"><div class="event-title">'+esc(params)+'</div><div class="event-time">'+esc(updated)+'</div></div><div class="event-name">'+esc(s.station_name||"-")+'</div><div class="event-meta">'+esc(typeOf(s))+' • '+esc(estateOf(s))+' • กรุณาตรวจสอบข้อมูลล่าสุด</div></article>';
+}
+function stationHtml(s){
+  const alarm=alarmOf(s),link=mapLink(s),state=stateOf(s);
+  return '<article class="station"><div class="station-name">'+esc(s.station_name||"-")+'</div><div class="station-data">'+esc(typeOf(s))+' • '+esc(estateOf(s))+'<br>'+(state==="ALERT"?'<span class="station-alert">'+esc(alarm)+'</span>':'<span class="station-normal">'+esc(s.status||"-")+'</span>')+' • '+esc(s.last_update||s.LastUpdate||"-")+'</div>'+(link?'<div class="station-actions"><a class="station-link" target="_blank" rel="noopener" href="'+link+'">ดูตำแหน่ง</a></div>':'')+'</article>';
+}
+
+let estateMapTimer=null;
+function stationCoordinates(station){
+  const lat=Number(station.latitude??station.lat??station.Latitude);
+  const lon=Number(station.longitude??station.lon??station.lng??station.Longitude);
+  return Number.isFinite(lat)&&Number.isFinite(lon)?{lat,lon}:null;
+}
+function scheduleEstateMapFocus(){
+  clearTimeout(estateMapTimer);
+  estateMapTimer=setTimeout(()=>{
+    const value=byId("estateFilter").value.trim();
+    const exact=(DATA?.all_stations||[]).some(station=>estateOf(station)===value);
+    if(exact)focusEstateOnMap();
+  },450);
+}
+function focusEstateOnMap(){
+  if(!DATA)return;
+  const estate=byId("estateFilter").value.trim();
+  if(!estate)return;
+  const points=(DATA.all_stations||[])
+    .filter(station=>estateOf(station)===estate)
+    .map(stationCoordinates).filter(Boolean);
+  const mapSection=byId("stationMapSection"),frame=byId("stationMapFrame");
+  if(!points.length){
+    mapSection?.scrollIntoView({behavior:"smooth",block:"start"});
     return;
   }
-  const attempt = ++locationRequest;
-  locate.disabled = true;
-  navigator.geolocation.getCurrentPosition(({coords}) => {
-    if (attempt !== locationRequest) return;
-    locate.disabled = false;
-    showWeather({name:localized('ตำแหน่งปัจจุบันของคุณ', 'Your current location'),lat:coords.latitude,lon:coords.longitude});
-  }, () => {
-    if (attempt !== locationRequest) return;
-    locate.disabled = false;
-    el('advice').textContent = localized('GISเข้าถึงตำแหน่งไม่ได้ค่ะ ดูข้อมูลพื้นที่เริ่มต้นได้ค่ะ', 'GIS could not access your location.');
-  }, {timeout:8000,maximumAge:60000});
-});
-loadAreas();
+  const lat=points.reduce((sum,p)=>sum+p.lat,0)/points.length;
+  const lon=points.reduce((sum,p)=>sum+p.lon,0)/points.length;
+  const latSpan=Math.max(...points.map(p=>p.lat))-Math.min(...points.map(p=>p.lat));
+  const lonSpan=Math.max(...points.map(p=>p.lon))-Math.min(...points.map(p=>p.lon));
+  const span=Math.max(latSpan,lonSpan);
+  const scale=span>.5?500000:span>.2?250000:span>.08?120000:span>.03?70000:35000;
+  const url=new URL(frame.src);
+  url.searchParams.set("center",lon.toFixed(6)+","+lat.toFixed(6));
+  url.searchParams.set("scale",String(scale));
+  frame.src=url.toString();
+  mapSection.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function applyFilters(){
+  if(!DATA)return;
+  const rows=filteredStations(),alerts=rows.filter(hasAlarm),online=rows.filter(s=>isOnline(s.status)),offline=rows.filter(s=>!isOnline(s.status));
+  const parameters=alerts.flatMap(s=>parameterNames(alarmOf(s)));
+  byId("eventCount").textContent=fmt(alerts.length);
+  byId("parameterCount").textContent=fmt(parameters.length);
+  byId("onlineCount").textContent=fmt(online.length);
+  byId("offlineCount").textContent=fmt(offline.length);
+  byId("eventList").innerHTML=alerts.length?alerts.slice(0,8).map(eventHtml).join(""):'<div class="empty">ไม่พบเหตุการณ์ที่ต้องดำเนินการตามตัวกรอง</div>';
+  byId("stationList").innerHTML=rows.length?rows.slice(0,12).map(stationHtml).join(""):'<div class="empty">ไม่พบสถานีตามตัวกรอง</div>';
+}
+async function load(){
+  try{
+    const response=await fetch("./status.json?t="+Date.now(),{cache:"no-store"});
+    if(!response.ok)throw new Error("HTTP "+response.status);
+    DATA=await response.json();
+    byId("updatedAt").textContent=DATA.updated_at_text||DATA.updated_at||"-";
+    byId("scopeText").textContent=requestedEstate||"ภาพรวมสถานีตรวจวัด";
+    populateEstateOptions();
+    if(location.hash==="#offline-stations")byId("statusFilter").value="OFFLINE";
+    applyFilters();
+  }catch(error){
+    console.error(error);
+    byId("updatedAt").textContent="ไม่สามารถโหลดข้อมูล";
+    byId("eventList").innerHTML='<div class="empty">ไม่สามารถโหลดข้อมูลจาก status.json ได้</div>';
+    byId("stationList").innerHTML='<div class="empty">กรุณาลองเปิดหน้าใหม่อีกครั้ง</div>';
+  }
+}
+load();
+setInterval(load,60000);
 </script>
-<script src="./hub-notifications-demo.js?v=alerts-cards-20261027" defer></script>
-<script src="./emcc-home.js" defer></script>
-</body></html>
+<link rel="stylesheet" href="./mobile-responsive.css?v=20260915-1">
+</body>
+</html>
