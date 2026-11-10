@@ -250,7 +250,12 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <style id="riskmap-start-guide">
 .riskmap-start{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 18px}
 .riskmap-start a{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;border:1px solid #bca7ca;color:#4d2366;background:#f8f3fb;line-height:1.45;text-decoration:none}
-.riskmap-start a:last-child{background:#68418f;color:#fff;border-color:#68418f}
+.riskmap-start a[data-active]{background:#68418f;color:#fff;border-color:#68418f}
+#riskCoverage #riskmapEstateContent[hidden],#riskCoverage .report-workspace-controls[hidden],#riskmapReportPanel[hidden]{display:none!important}
+.riskmap-report-preview-link{display:inline-block;color:#54246f;margin:4px 0 12px}
+.riskmap-report-preview-link[hidden]{display:none}
+.riskmap-extra-details{margin-top:10px}
+.riskmap-extra-details summary{cursor:pointer;color:#54246f;padding:8px 0}
 .riskmap-start a:hover{text-decoration:underline}
 .riskmap-start a:focus-visible{outline:2px solid #4d2366;outline-offset:2px}
 .riskmap-start strong{font-size:15px}
@@ -285,23 +290,24 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
     <h1 id="riskCoverageTitle">แผนที่ความเสี่ยงนิคมฯ</h1>
   </div>
   <nav class="riskmap-start" aria-label="เลือกงานที่ต้องการทำ">
-    <a href="#coverageEstateHeading"><strong>ดูข้อมูลรายนิคมฯ</strong><span>โรงงานกลุ่มเสี่ยงและจุดสนับสนุน</span></a>
-    <a href="#coverageIncidentTitle"><strong>ค้นหาโรงงานเพื่อทำรายงาน</strong><span>เลือกประเภทเหตุและรัศมีค้นหา</span></a>
+    <a id="riskmapBrowseMode" href="#coverageEstateHeading"><strong>ดูข้อมูลรอบนิคมฯ</strong><span>ดูโรงงานกลุ่มเสี่ยง โรงพยาบาล และจุดช่วยเหลือ</span></a>
+    <a id="riskmapIncidentMode" href="#coverageIncidentTitle"><strong>ทำรายงานเหตุฉุกเฉิน</strong><span>ค้นหาโรงงานที่เกิดเหตุและจัดทำรายงาน</span></a>
   </nav>
+  <div id="riskmapEstateContent">
   <h2 id="coverageEstateHeading">ค้นหานิคมอุตสาหกรรม</h2>
-  <p id="coverageEstateGuide" class="riskmap-search-guide">พิมพ์บางส่วนของชื่อนิคมฯ แล้วเลือกจากรายการ เพื่อดูความเสี่ยงและจุดสนับสนุนบนแผนที่</p>
+  <p id="coverageEstateGuide" class="riskmap-search-guide">พิมพ์บางส่วนของชื่อ เช่น มาบตาพุด แล้วเลือกชื่อจากรายการ</p>
   <form id="coverageEstateForm" role="search" aria-labelledby="coverageEstateHeading" aria-describedby="coverageEstateGuide">
     <label><span class="riskmap-visually-hidden">ค้นหานิคมอุตสาหกรรม</span><input id="coverageEstateSearch" type="search" autocomplete="off" placeholder="พิมพ์ชื่อนิคมฯ"></label>
     <select id="coverageEstate" hidden aria-hidden="true" tabindex="-1"><option value="">ทุกนิคมฯ</option></select>
     <button type="submit">แสดงข้อมูล</button>
   </form>
   <div id="riskmapOverviewMetrics" aria-label="สรุปจำนวนโรงงานตามกลุ่มความเสี่ยง"></div>
-  <p class="riskmap-overview-note">เลือกตัวเลขเพื่อดูรายชื่อโรงงานตามกลุ่มความเสี่ยง</p>
+  <p class="riskmap-overview-note">จำนวนโรงงานตามกลุ่มในทะเบียน กนอ. กดตัวเลขเพื่อดูรายชื่อ</p>
   <div id="coverageSummary" role="status">กำลังโหลดทะเบียนและชั้นข้อมูลสนับสนุน…</div>
   <section class="coverage-support-overview" aria-labelledby="coverageSupportTitle">
     <h2 id="coverageSupportTitle">ข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2>
     <div id="coverageSupportCards">กำลังโหลดข้อมูลสนับสนุน…</div>
-    <article><h3>ข้อมูลสนับสนุนตามหมวด</h3><p>ความครบถ้วนเทียบกับชั้นข้อมูลที่แสดงด้านล่าง</p><div id="coverageSupport"></div></article>
+    <details class="riskmap-extra-details"><summary>ดูรายละเอียดข้อมูลสนับสนุนตามหมวด</summary><div id="coverageSupport"></div><p class="coverage-note">วันที่แก้ไขอ้างอิงจากชั้นข้อมูลทั้งชุด</p></details>
   </section>
   <div class="coverage-columns" id="coverageRiskSection">
     <article><h3 id="coverageRiskHeading">โรงงานที่เข้าข่ายความเสี่ยง</h3><p>นับตามเลขทะเบียนเมื่อมีข้อมูล และนับตามรายการต้นทางเมื่อไม่มีเลขทะเบียน</p><div id="coverageRisk"></div>
@@ -309,9 +315,10 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
       <div id="coverageDetail" tabindex="-1" hidden></div>
     </article>
   </div>
+  </div>
   <form id="coverageIncidentForm" aria-labelledby="coverageIncidentTitle" aria-describedby="coverageFactoryGuide">
   <h2 id="coverageIncidentTitle">ค้นหาโรงงานเพื่อทำรายงาน</h2>
-  <p id="coverageFactoryGuide" class="riskmap-search-guide">ค้นหาโรงงานเพื่อใช้เป็นจุดอ้างอิง ระบบจะแสดงข้อมูลในรัศมีบนแผนที่และเตรียมรายงานให้</p>
+  <p id="coverageFactoryGuide" class="riskmap-search-guide">ระบุโรงงาน ประเภทเหตุ และระยะค้นหา ระบบจะแสดงจุดช่วยเหลือรอบโรงงานและเตรียมรายงาน</p>
   <div class="coverage-incident-controls">
     <label class="coverage-wide">1. ชื่อโรงงานหรือเลขทะเบียน (เดิมหรือใหม่) <input id="coverageFactoryQuery" type="search" placeholder="เช่น 72250000325534 หรือ น.53(1)-3/2553-ญอต."></label>
     <label>2. ประเภทเหตุ <select id="coverageIncidentType" required><option value="">ยังไม่ระบุ</option><option>เหตุไฟไหม้</option><option>สารเคมีรั่วไหล</option><option>อุบัติเหตุ</option><option>อื่น ๆ</option></select></label>
@@ -346,10 +353,9 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
     <div id="coverageChemicalOutput"></div>
     <button id="coverageChemicalDownload" type="button" disabled>ดาวน์โหลดภาพผลค้นหา</button>
   </section>
-  <p class="coverage-note">เวลาแก้ไขเป็นของชั้นข้อมูลทั้งชุด ส่วนการยืนยันรายนิคมฯ ต้องใช้วันที่จากรายการต้นทาง</p>
 </section>
 <section id="coverageMap" aria-labelledby="coverageMapTitle">
-  <h2 id="coverageMapTitle">แผนที่ข้อมูลสนับสนุนและความเสี่ยง</h2>
+  <h2 id="coverageMapTitle">แผนที่นิคมฯ และจุดช่วยเหลือ</h2>
   <div class="coverage-basemap-control"><label for="coverageBasemap">แผนที่พื้นฐาน</label>
     <select id="coverageBasemap" disabled aria-label="เลือกแผนที่พื้นฐาน">
       <option value="gray-vector">สีเทาอ่อน</option>
@@ -2521,9 +2527,15 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const other=wrapSearch('ข้อมูลสนับสนุนอื่นในรัศมี',...Array.from(auxiliary.children).slice(1));
   const auxiliaryResults=document.createElement('div');auxiliaryResults.id='coverageAuxiliaryResults';auxiliaryResults.setAttribute('aria-live','polite');other.append(auxiliaryResults);
   auxiliary.append(wrapSearch('สารเคมีจาก DSS',get('coverageChemicalSearch')),wrapSearch('อุปกรณ์ระงับเหตุจาก DSS',equipment),other);
-  controls.append(auxiliary);
+  const previewLink=document.createElement('a');
+  previewLink.className='riskmap-report-preview-link';
+  previewLink.href='#emergencyReportPage';
+  previewLink.textContent='ไปที่ตัวอย่างรายงาน ↓';
+  previewLink.hidden=true;
+  controls.append(previewLink,auxiliary);
   const line=get('riskMapLinePanel');if(line)controls.append(line);
-  get('coverageRiskSection').after(controls);
+  const estateContent=get('riskmapEstateContent');
+  estateContent.after(controls);
   panel.append(bottom);overviewPanel.after(panel);
   const editReportButton=document.createElement('button');
   editReportButton.id='dashboardEditReportText';editReportButton.type='button';
@@ -2567,15 +2579,40 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   keepMapTools();
   const syncDownload=()=>{
     const button=get('dashboardDownloadImage');
-    if(button&&button.textContent!=='กำลังสร้างภาพ…')button.disabled=window.ieatCoverageReport?.status!=='ready';
+    const ready=window.ieatCoverageReport?.status==='ready';
+    if(button&&button.textContent!=='กำลังสร้างภาพ…')button.disabled=!ready;
+    previewLink.hidden=!ready;
   };
   window.addEventListener('ieat-coverage-context-updated',syncDownload);syncDownload();
 
   report.style.removeProperty('display');report.hidden=false;
   links.remove();
   const overviewButton=get('riskmapRailOverview'),reportButton=get('riskmapRailReport');
-  overviewButton.onclick=()=>workspace.scrollIntoView({block:'start',behavior:'smooth'});
-  const openReport=()=>report.scrollIntoView({block:'start',behavior:'smooth'});
+  const browseMode=get('riskmapBrowseMode'),incidentMode=get('riskmapIncidentMode');
+  function showMode(isIncident){
+    estateContent.hidden=isIncident;
+    controls.hidden=!isIncident;
+    panel.hidden=!isIncident;
+    browseMode.toggleAttribute('data-active',!isIncident);
+    incidentMode.toggleAttribute('data-active',isIncident);
+    (isIncident?browseMode:incidentMode).removeAttribute('aria-current');
+    (isIncident?incidentMode:browseMode).setAttribute('aria-current','true');
+  }
+  browseMode.onclick=event=>{event.preventDefault();showMode(false);};
+  incidentMode.onclick=event=>{event.preventDefault();showMode(true);};
+  overviewButton.onclick=()=>{
+    showMode(false);
+    workspace.scrollIntoView({block:'start',behavior:'smooth'});
+  };
+  rail.querySelectorAll('a[href="#coverageRiskHeading"],a[href="#coverageSupportTitle"]').forEach(link=>{
+    link.addEventListener('click',()=>showMode(false));
+  });
+  const openReport=()=>{
+    showMode(true);
+    const target=window.ieatCoverageReport?.status==='ready'?report:form;
+    target.scrollIntoView({block:'start',behavior:'smooth'});
+  };
+  showMode(['#coverageIncidentTitle','#emergencyReportPage'].includes(location.hash));
   reportButton.onclick=openReport;
   reportButton.setAttribute('aria-controls',report.id);
   document.addEventListener('click',event=>{
