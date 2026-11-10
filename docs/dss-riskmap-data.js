@@ -486,9 +486,8 @@
  }
 
   function createCoverageOverview(){
-  const panel=$('riskCoverage');
   const search=$('coverageEstateSearch'), select=$('coverageEstate');
-  const summary=$('coverageSummary'), support=$('coverageSupport'), risk=$('coverageRisk'), detail=$('coverageDetail');
+  const risk=$('coverageRisk'), detail=$('coverageDetail');
   const registry=datasets.find(d=>d.id==='estate');
   const business=riskRegister;
   const supportLayers=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport);
@@ -531,11 +530,6 @@
       return option;
     }));
   }
-  const dateFormat=new Intl.DateTimeFormat('th-TH',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Bangkok'});
-  function freshness(layer){
-    const time=layer.meta?.editingInfo?.dataLastEditDate ?? layer.meta?.editingInfo?.lastEditDate;
-    return typeof time==='number'&&time>0?'แก้ไขชั้นข้อมูล '+dateFormat.format(time):'ต้นทางไม่ระบุเวลาแก้ไข';
-  }
   function line(label,count,max,description,onClick){
     const row=el(onClick?'button':'div',null,'coverage-bar');
     if(onClick){row.type='button';row.onclick=onClick;}
@@ -544,7 +538,8 @@
     plot.setAttribute('aria-hidden','true');
     fill.style.height=(count===null?0:count/Math.max(1,max)*100)+'%';
     plot.append(fill);
-    row.append(value,plot,el('span',label,'coverage-bar-label'),el('small',description));
+    row.append(value,plot,el('span',label,'coverage-bar-label'));
+    if(description)row.append(el('small',description));
     return row;
   }
   function renderCoverage(){
@@ -557,30 +552,6 @@
     const key=select.value;
     const match=r=>!key||normalize(r.estate)===key;
     const rowsByLayer=supportLayers.map(layer=>({layer,rows:layer.rows.filter(match)}));
-    const known=new Set(), coverage=new Map();
-    for(const {rows} of rowsByLayer){
-      const linked=new Set(rows.map(r=>normalize(r.estate)).filter(k=>estates.has(k)));
-      for(const k of linked){known.add(k);coverage.set(k,(coverage.get(k)||0)+1);}
-    }
-    const complete=[...coverage.values()].filter(n=>n===supportLayers.length).length;
-    const hasFullSource=registry.status==='ready'&&supportLayers.every(layer=>layer.status==='ready');
-    const denominator=key?1:estates.size;
-    const coverageText=hasFullSource?number(known.size)+' / '+number(denominator):'—';
-    summary.replaceChildren(
-      el('strong',coverageText),
-      el('span',key?'ความครอบคลุมของ '+estates.get(key):'นิคมฯ / ท่าเรือฯ ที่มีข้อมูลสนับสนุน'),
-      el('small',hasFullSource?'ครบ '+number(complete)+' · มีบางส่วน '+number(known.size-complete)+' · ไม่พบในชุดข้อมูล '+number(denominator-known.size):'รอข้อมูลครบจากทะเบียนและชั้นข้อมูลสนับสนุน')
-    );
-    if(hasFullSource&&denominator){
-      const chart=el('div',null,'coverage-stacked');
-      chart.setAttribute('aria-hidden','true');
-      for(const [kind,count] of [['complete',complete],['partial',known.size-complete],['missing',denominator-known.size]]){
-        const segment=el('span',null,'coverage-segment-'+kind);
-        segment.style.width=(count/denominator*100)+'%';
-        chart.append(segment);
-      }
-      summary.append(chart);
-    }
     $('coverageSupportCards').replaceChildren(...rowsByLayer.map(({layer,rows})=>{
       const card=el('article',null,'coverage-support-card');
       const visibleCount=layer.status==='ready'||layer.status==='partial';
@@ -588,59 +559,35 @@
       if(stateLabel[layer.status])card.append(el('small',stateLabel[layer.status]));
       return card;
     }));
-    const supportMax=Math.max(1,...rowsByLayer.map(x=>x.rows.length));
-    support.replaceChildren(...rowsByLayer.map(({layer,rows})=>{
-      const linked=new Set(rows.map(r=>normalize(r.estate)).filter(k=>estates.has(k))).size;
-      const status=stateLabel[layer.status];
-      return line(layer.label,layer.status==='ready'||layer.status==='partial'?rows.length:null,supportMax,
-        (status?status+' · ':'')+number(linked)+' นิคมฯ ในทะเบียน · '+freshness(layer));
-    }));
     const facilities=new Map();
     for(const row of business.rows.filter(match)){
       const registration=row.registration==='—'?'':row.registration.replace(/\s+/g,'');
       const identity=registration||'record:'+row.id;
-      if(!facilities.has(identity))facilities.set(identity,{row,flags:new Set(),negative:new Set()});
+      if(!facilities.has(identity))facilities.set(identity,{row,flags:new Set()});
       const item=facilities.get(identity);
       for(const group of groups){
         const value=String(row.attrs[group.field]??'').trim();
         if(flagged(value))item.flags.add(group.field);
-        if(value==='ไม่เข้าข่าย')item.negative.add(group.field);
       }
     }
     const items=[...facilities.values()];
     const available=business.status==='ready'||business.status==='partial';
-    const flaggedItems=items.filter(item=>item.flags.size);
-    const excluded=items.filter(item=>!item.flags.size&&item.negative.size===groups.length).length;
-    const unknown=items.length-flaggedItems.length-excluded;
     const status=stateLabel[business.status];
-    const scope=el('p',available?'เข้าข่ายอย่างน้อย 1 กลุ่ม '+number(flaggedItems.length)+' · ไม่เข้าข่ายทั้ง 3 กลุ่ม '+number(excluded)+' · ผลยังไม่ครบหรือไม่ระบุ '+number(unknown):status);
-    const riskRows=groups.map(group=>{
-      const matching=items.filter(item=>item.flags.has(group.field));
-      const linked=new Set(matching.map(item=>normalize(item.row.estate)).filter(k=>estates.has(k))).size;
-      const groupAvailable=available&&business.fields?.includes(group.field);
-      return line(group.label,groupAvailable?matching.length:null,items.length,
-        groupAvailable?number(linked)+' นิคมฯ ในทะเบียน · '+(status?status+' · ':'')+freshness(business):status||'ต้นทางไม่มีฟิลด์นี้',
-        groupAvailable?()=>{drill=drill===group.field?'':group.field;renderCoverage();if(drill){detail.focus();detail.scrollIntoView({block:'nearest'});}else risk.querySelectorAll('button')[groups.indexOf(group)]?.focus();}:null);
+    const counts=groups.map(group=>available&&business.fields?.includes(group.field)
+      ?items.filter(item=>item.flags.has(group.field)).length:null);
+    const max=Math.max(1,...counts);
+    const riskRows=groups.map((group,index)=>{
+      const count=counts[index];
+      return line(group.label,count,max,status||(count===null?'ไม่มีข้อมูล':''),count===null?null:()=>{
+        drill=drill===group.field?'':group.field;
+        renderCoverage();
+        if(drill){
+          detail.focus();
+          detail.scrollIntoView({block:'nearest'});
+        }else risk.children[index]?.focus();
+      });
     });
-    risk.replaceChildren(scope,...riskRows);
-    const metrics=$('riskmapOverviewMetrics');
-    if(metrics){
-      const names=['เสี่ยงสูง 12 ประเภท','อัคคีภัยสูง','โรงงาน PSM'];
-      const colors=['#78429e','#98562a','#2b695a'];
-      metrics.replaceChildren(...groups.map((group,index)=>{
-        const enabled=available&&business.fields?.includes(group.field);
-        const count=items.filter(item=>item.flags.has(group.field)).length;
-        const button=el('button',null,'riskmap-overview-metric');
-        button.type='button';button.disabled=!enabled;
-        button.style.setProperty('--metric',colors[index]);
-        button.append(el('span',names[index]),el('strong',enabled?number(count):'—'));
-        const meter=el('meter');meter.max=Math.max(items.length,1);meter.value=enabled?count:0;
-        meter.setAttribute('aria-hidden','true');button.append(meter);
-        if(status)button.append(el('small',status));
-        button.onclick=()=>riskRows[index].click();
-        return button;
-      }));
-    }
+    risk.replaceChildren(...riskRows);
     const group=groups.find(g=>g.field===drill);
     detail.hidden=!group;
     if(group){
