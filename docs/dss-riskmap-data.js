@@ -571,6 +571,23 @@
       }
     }
     const items=[...facilities.values()];
+    window.ieatFactoryRegister={rows:items.map(item=>item.row),status:business.status};
+    window.dispatchEvent(new CustomEvent('ieat-factory-register-updated',{detail:window.ieatFactoryRegister}));
+    window.ieatFocusCoverageFactory=async id=>{
+      const result=await json(base+business.path+'/query',new URLSearchParams({f:'json',objectIds:String(id),outFields:'*',returnGeometry:'true',outSR:'4326'}));
+      const feature=result.features?.[0],g=feature?.geometry;
+      if(!g)throw Error('No geometry');
+      let x=g.x,y=g.y;
+      if(!Number.isFinite(x)||!Number.isFinite(y)){
+        const points=g.rings?.flat()||g.paths?.flat()||[];
+        if(!points.length)throw Error('No location');
+        x=points.reduce((sum,p)=>sum+p[0],0)/points.length;y=points.reduce((sum,p)=>sum+p[1],0)/points.length;
+      }
+      if(view?.ready)await view.goTo({target:{type:'point',longitude:x,latitude:y,spatialReference:{wkid:4326}},zoom:16});
+      else if(window.ieatSupportMap)window.ieatSupportMap.setView([y,x],16);
+      else throw Error('Map not ready');
+    };
+
     const available=business.status==='ready'||business.status==='partial';
     const status=stateLabel[business.status];
     const counts=groups.map(group=>available&&business.fields?.includes(group.field)
