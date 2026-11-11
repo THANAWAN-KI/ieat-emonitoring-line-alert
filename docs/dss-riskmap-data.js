@@ -353,18 +353,18 @@
       '<circle cx="12" cy="12" r="11" fill="#fff" stroke="'+color+'" stroke-width="1.5"/>'+
       '<circle cx="12" cy="12" r="9" fill="'+color+'" opacity=".09"/>'+
       '<g fill="none" stroke="'+color+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.4 2.4) scale(.8)">'+drawing+'</g>',size,size);
-    const pin=svgMarker('<path fill="#7942a0" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',25,25,12);
-    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#d34a32');
-    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#c53e58');
+    const pin=svgMarker('<path fill="#b88b20" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',25,25,12);
+    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#cc5257');
+    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#cc5257');
     const supportSymbols={
       fire:fireStation,hospital,
-      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>','#167dad'),
-      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>','#365c9d'),
-      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#23866b'),
-      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#23866b'),
-      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#138fa9'),
-      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#ae7419'),
-      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#365477',18)
+      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>','#24845a'),
+      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>','#24845a'),
+      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#24845a'),
+      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#24845a'),
+      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#b88b20'),
+      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#b88b20'),
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#24845a',18)
     };
     const legend=document.querySelector('.riskmap-map-key');
     if(legend){
@@ -384,9 +384,9 @@
     });
     const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ'],symbol:pin});
     const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',{visible:true,opacity:.55,minScale:1500000});
-    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',{minScale:350000,symbol:polygon([105,91,156,.16],'#7967a8')});
+    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',{minScale:350000,symbol:polygon([36,132,90,.12],'#7b9a83')});
     const riskSymbols=[
-      polygon([240,155,46,.32],'#b46713'),polygon([221,56,59,.34],'#b12c33'),polygon([123,73,173,.29],'#6b3a92')
+      polygon([232,186,63,.25],'#b88b20'),polygon([204,82,87,.26],'#a1363e'),polygon([204,82,87,.18],'#a1363e')
     ];
     const risks=riskFields.map((f,i)=>layer('e_PP/FeatureServer/0',f.label,{
       minScale:1000000,symbol:riskSymbols[i],definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
@@ -395,7 +395,7 @@
       visible:['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
     }));
-    const supportColors={fire:'#d34a32',hospital:'#c53e58',hydrant:'#167dad',police:'#365c9d',community:'#23866b',communityRisk:'#23866b',waterWatch:'#138fa9',school:'#ae7419',cctv:'#365477'};
+    const supportColors={fire:'#cc5257',hospital:'#cc5257',hydrant:'#24845a',police:'#24845a',community:'#24845a',communityRisk:'#24845a',waterWatch:'#b88b20',school:'#b88b20',cctv:'#24845a'};
     const supportDefinitions=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport);
     support.forEach((item,index)=>{
       const def=supportDefinitions[index],color=supportColors[def.id]||'#586b7f';
@@ -517,7 +517,7 @@
 
       const hosts=popupSources.map(source=>{box.append(el('h4',source.title));const content=el('div');content.append(el('p','กำลังโหลดข้อมูล…'));box.append(content);return content;});
       box.append(el('small','แหล่งข้อมูล: ระบบ DSS กนอ. · แสดงตามระเบียนที่จับคู่ได้'));
-      const graphic=new Graphic({geometry,attributes:feature.attributes,symbol:geometry.type==='point'?{type:'simple-marker',size:15,color:'#7942a0',outline:{color:'#fff',width:2}}:geometry.type==='polygon'?{type:'simple-fill',color:[121,66,160,.15],outline:{color:'#7942a0',width:2}}:{type:'simple-line',color:'#7942a0',width:3},popupTemplate:{title:row.name,content:()=>box}});
+      const graphic=new Graphic({geometry,attributes:feature.attributes,symbol:geometry.type==='point'?{type:'simple-marker',size:15,color:'#b88b20',outline:{color:'#fff',width:2}}:geometry.type==='polygon'?{type:'simple-fill',color:[232,186,63,.18],outline:{color:'#b88b20',width:2}}:{type:'simple-line',color:'#b88b20',width:3},popupTemplate:{title:row.name,content:()=>box}});
       factorySelection.removeAll();factorySelection.add(graphic);
       await view.goTo(geometry.type==='point'?{target:geometry,zoom:17}:{target:geometry});
       if(sequence!==factorySelectionSequence)return;
