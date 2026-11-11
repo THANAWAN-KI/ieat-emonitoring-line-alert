@@ -246,6 +246,14 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 .riskmap-report-preview-link[hidden]{display:none}
 #coverageEstateHeading,#coverageIncidentTitle{scroll-margin-top:90px}
 </style>
+<style id="riskbkk-reference-style">
+#coverageMap .riskbkk-reference { margin-top:12px; padding:10px 12px; border:1px solid #e2d5ea; color:#412053; font-size:13px; }
+#coverageMap .riskbkk-reference summary { cursor:pointer; font-weight:700; }
+#coverageMap .riskbkk-reference p { margin:8px 0; }
+#coverageMap .riskbkk-reference ul { margin:8px 0; padding-inline-start:20px; }
+#coverageMap .riskbkk-reference a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+#coverageMap .riskbkk-reference :focus-visible { outline:2px solid #7b5595; outline-offset:2px; }
+</style>
 </head>
 <body>
 <header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</strong></span></div><div class="portal-top"><div class="header-nav"></div></div></header>
@@ -343,6 +351,17 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   <div id="coverageMapView" aria-label="แผนที่นิคมอุตสาหกรรมและข้อมูลสนับสนุน"></div>
   <ul class="riskmap-map-key" aria-label="คำอธิบายสัญลักษณ์แผนที่"><li style="--key:#c64032">จุดเกิดเหตุ</li><li class="radius">รัศมีค้นหา</li><li style="--key:#7942a0">นิคมฯ</li><li style="--key:#d34a32">ดับเพลิง</li><li style="--key:#c53e58">โรงพยาบาล</li><li style="--key:#167dad">หัวจ่ายน้ำ</li><li style="--key:#365c9d">ตำรวจ</li><li style="--key:#23866b">ชุมชน</li><li style="--key:#365477">CCTV</li></ul>
   <p class="coverage-map-note">เปิดชั้นข้อมูลเพื่อดูสัญลักษณ์และรายละเอียดของข้อมูลเพิ่มเติม</p>
+  <details class="riskbkk-reference">
+    <summary>แผนที่จุดเสี่ยงกรุงเทพฯ จาก RiskBKK</summary>
+    <p>ใช้ประกอบการตรวจสอบพื้นที่ในกรุงเทพฯ เปิดแผนที่ต้นทางตามประเภทภัย</p>
+    <ul>
+      <li><a href="https://cpudgiportal.bangkok.go.th/portal/apps/experiencebuilder/experience/?id=8c7cb7ecc7d64a16843798a9bd179ad2&amp;page=%E0%B8%88%E0%B8%B8%E0%B8%94%E0%B9%80%E0%B8%AA%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%87%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%81%E0%B8%A0%E0%B8%B1%E0%B8%A2" target="_blank" rel="noopener noreferrer">จุดเสี่ยงอุทกภัย<span class="riskmap-visually-hidden"> (เปิดแท็บใหม่)</span></a></li>
+      <li><a href="https://cpudgiportal.bangkok.go.th/portal/apps/experiencebuilder/experience/?id=8c7cb7ecc7d64a16843798a9bd179ad2&amp;page=%E0%B8%88%E0%B8%B8%E0%B8%94%E0%B9%80%E0%B8%AA%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%87%E0%B8%AD%E0%B8%B1%E0%B8%84%E0%B8%84%E0%B8%B5%E0%B8%A0%E0%B8%B1%E0%B8%A2" target="_blank" rel="noopener noreferrer">จุดเสี่ยงอัคคีภัย<span class="riskmap-visually-hidden"> (เปิดแท็บใหม่)</span></a></li>
+      <li><a href="https://cpudgiportal.bangkok.go.th/portal/apps/webappviewer/index.html?id=c9dde1e1ff704ebea0f0373872607237" target="_blank" rel="noopener noreferrer">จุดเสี่ยงภัยสารเคมี<span class="riskmap-visually-hidden"> (เปิดแท็บใหม่)</span></a></li>
+      <li><a href="https://cpudgiportal.bangkok.go.th/portal/apps/experiencebuilder/experience/?id=8c7cb7ecc7d64a16843798a9bd179ad2&amp;page=%E0%B8%88%E0%B8%B8%E0%B8%94%E0%B9%80%E0%B8%AA%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%87%E0%B8%A0%E0%B8%B1%E0%B8%A2%E0%B8%9D%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B8%A5%E0%B8%B0%E0%B8%AD%E0%B8%AD%E0%B8%87%E0%B8%82%E0%B8%99%E0%B8%B2%E0%B8%94%E0%B9%80%E0%B8%A5%E0%B9%87%E0%B8%81-%28PM-2_5%29" target="_blank" rel="noopener noreferrer">จุดเสี่ยง PM2.5<span class="riskmap-visually-hidden"> (เปิดแท็บใหม่)</span></a></li>
+    </ul>
+    <p>ที่มา <a href="https://cpudapp.bangkok.go.th/riskbkk/" target="_blank" rel="noopener noreferrer">สำนักการวางผังและพัฒนาเมือง กรุงเทพมหานคร<span class="riskmap-visually-hidden"> (เปิดแท็บใหม่)</span></a></p>
+  </details>
 </section>
 </div>
 <section id="riskDashboard"><div class="risk-workspace"><div class="workspace-data">
