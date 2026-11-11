@@ -272,9 +272,15 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <div class="coverage-map-layout">
 <nav class="riskmap-overview-rail" aria-label="เมนู DSS / RiskMap">
   <button type="button" id="riskmapRailOverview" aria-controls="riskmapEstateContent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>ภาพรวม</button>
-  <a href="#coverageRiskHeading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 17H2zM12 9v4m0 3v1"/></svg>ความเสี่ยง</a>
-  <a href="#coverageSupportTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM9 7V4h6v3m-7 6h8m-4-4v8"/></svg>สนับสนุน</a>
-  <button type="button" id="riskmapRailReport" aria-controls="riskmapReportPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg>ดูรายงาน</button>
+  <div id="riskmapRailSteps" role="group" aria-label="ลำดับการดูข้อมูล">
+    <a href="#dssBriefCoverage">1. ข้อมูลโรงงาน</a>
+    <a href="#coverageRiskHeading">2. ความเสี่ยง</a>
+    <a href="#coverageSupportTitle">3. จุดช่วยเหลือ</a>
+    <a href="#dssBriefReadiness">4. ความพร้อม</a>
+    <a href="#dssBriefWorkflow">5. ขั้นตอนรับมือ</a>
+    <a href="#dssBriefReview">6. ทบทวนการซ้อม</a>
+  </div>
+  <button type="button" id="riskmapRailReport" aria-controls="riskmapReportPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg>ค้นหาและจัดทำรายงาน</button>
 </nav>
 <section id="riskCoverage" aria-labelledby="riskCoverageTitle">
   <div class="riskmap-overview-heading">
@@ -287,14 +293,6 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
     <select id="coverageEstate" hidden aria-hidden="true" tabindex="-1"><option value="">ทุกนิคมฯ</option></select>
     <button type="submit">ค้นหา</button>
   </form>
-  <nav class="riskmap-overview-links" aria-label="ลำดับการดูข้อมูล">
-    <a href="#dssBriefCoverage">1. ข้อมูลโรงงาน</a>
-    <a href="#coverageRiskHeading">2. ความเสี่ยง</a>
-    <a href="#coverageSupportTitle">3. จุดช่วยเหลือ</a>
-    <a href="#dssBriefReadiness">4. ความพร้อม</a>
-    <a href="#dssBriefWorkflow">5. ขั้นตอนรับมือ</a>
-    <a href="#dssBriefReview">6. ทบทวนการซ้อม</a>
-  </nav>
   <section id="dssBriefCoverage" class="dss-brief" aria-labelledby="dssBriefCoverageTitle">
     <h2 id="dssBriefCoverageTitle">1. ความครอบคลุมของข้อมูลโรงงาน</h2>
     <p id="dssBriefEstate"></p>
@@ -2638,6 +2636,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const overviewButton=get('riskmapRailOverview'),reportButton=get('riskmapRailReport');
   function showMode(isIncident){
     estateContent.hidden=isIncident;
+    get("riskmapRailSteps").hidden=isIncident;
     controls.hidden=!isIncident;
     panel.hidden=!isIncident;
     overviewButton.setAttribute('aria-expanded',String(!isIncident));
@@ -2647,9 +2646,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     showMode(false);
     workspace.scrollIntoView({block:'start',behavior:'smooth'});
   };
-  rail.querySelectorAll('a[href="#coverageRiskHeading"],a[href="#coverageSupportTitle"]').forEach(link=>{
-    link.addEventListener('click',()=>showMode(false));
-  });
   const openReport=()=>{
     showMode(true);
     const target=window.ieatCoverageReport?.status==='ready'?report:form;
@@ -2735,7 +2731,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 .riskmap-visually-hidden{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
 #riskmapOverviewPanel #coverageSupportTitle,#riskmapOverviewPanel #coverageRiskHeading{border-bottom:1px solid #8f749e;padding-bottom:7px}
 @media(max-width:1050px){.riskmap-shared-workspace{grid-template-columns:66px minmax(0,1fr)}#riskmapOverviewPanel .coverage-map-layout{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:560px){.riskmap-shared-workspace{display:block}.riskmap-shared-workspace .riskmap-overview-rail{position:static;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:10px}#riskmapOverviewPanel .coverage-map-layout{display:block}#riskmapOverviewPanel #coverageMap{margin-top:12px}}
+@media(max-width:560px){.riskmap-shared-workspace{display:block}.riskmap-shared-workspace .riskmap-overview-rail{position:static;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;margin-bottom:10px}#riskmapOverviewPanel .coverage-map-layout{display:block}#riskmapOverviewPanel #coverageMap{margin-top:12px}}
 </style>
 <style id="riskmap-shared-map">
 #riskmapOverviewPanel #coverageIncidentForm{margin:0 0 12px}
@@ -2834,5 +2830,15 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
   render();
 })();
 </script>
+<style id="riskmap-sidebar-steps">
+.riskmap-shared-workspace{grid-template-columns:130px minmax(0,1fr)}
+#riskmapRailSteps{display:grid;gap:4px;border-block:1px solid #e2d5ea;padding:6px 0}
+#riskmapRailSteps[hidden]{display:none}
+#riskmapRailSteps a{justify-items:start;text-align:start;padding:7px 8px}
+@media(max-width:560px){
+  .riskmap-shared-workspace .riskmap-overview-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #riskmapRailSteps{grid-column:1/-1;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+</style>
 </body></html>
 
