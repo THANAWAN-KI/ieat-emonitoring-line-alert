@@ -349,11 +349,9 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=22)=>svgMarker(
-      '<circle cx="12" cy="12" r="11" fill="#fff" stroke="'+color+'" stroke-width="1.5"/>'+
-      '<circle cx="12" cy="12" r="9" fill="'+color+'" opacity=".09"/>'+
-      '<g fill="none" stroke="'+color+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.4 2.4) scale(.8)">'+drawing+'</g>',size,size);
-    const pin=svgMarker('<path fill="#b88b20" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',25,25,12);
+    const badge=(drawing,color,size=24)=>svgMarker(
+      '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
+    const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',29,29,0);
     const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#cc5257');
     const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#cc5257');
     const supportSymbols={
@@ -411,6 +409,13 @@
       }
 
       if(def.id==='hydrant'||def.id==='cctv')item.minScale=150000;
+      item.labelsVisible=true;
+      item.labelingInfo=[{
+        minScale:18000,labelPlacement:'above-center',
+        labelExpressionInfo:{expression:'$feature["'+def.names[0]+'"]'},
+        symbol:{type:'text',color:'#26312f',haloColor:'#fffdf5',haloSize:2,font:{family:'Sarabun',size:10,weight:'bold'},yoffset:14}
+      }];
+
       item.when(()=>{
         if(item.geometryType!=='point')return;
         item.featureReduction={
