@@ -591,11 +591,21 @@
     const group=groups.find(g=>g.field===drill);
     detail.hidden=!group;
     if(group){
-      const list=el('ul');
-      for(const item of items.filter(i=>i.flags.has(drill)).sort((a,b)=>a.row.name.localeCompare(b.row.name,'th'))){
-        const {row}=item;list.append(el('li',row.name+' · '+row.estate+(row.registration==='—'?'':' · '+row.registration)));
+      const table=el('table',null,'dss-risk-table');
+      const head=table.createTHead().insertRow();
+      for(const label of ['โรงงาน','นิคมอุตสาหกรรม','เลขทะเบียน']) {
+        const th=el('th',label);th.scope='col';head.append(th);
       }
-      detail.replaceChildren(el('h3',group.label),list.children.length?list:el('p','ไม่พบรายการในขอบเขตที่เลือก'));
+      const body=table.createTBody();
+      const sorted=items.filter(i=>i.flags.has(drill)).sort((a,b)=>a.row.name.localeCompare(b.row.name,'th'));
+      for(const {row} of sorted) {
+        const tr=body.insertRow();
+        for(const value of [row.name,row.estate,row.registration])tr.append(el('td',value));
+      }
+      const wrap=el('div',null,'dss-risk-table-wrap');
+      wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label',group.label);
+      wrap.append(table);
+      detail.replaceChildren(el('h3',group.label+' · '+number(sorted.length)+' ราย'),sorted.length?wrap:el('p','ไม่พบรายการในขอบเขตที่เลือก'));
     }
   }
   select.onchange=renderCoverage;
