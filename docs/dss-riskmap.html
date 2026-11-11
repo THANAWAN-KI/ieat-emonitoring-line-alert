@@ -271,16 +271,14 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <main class="page">
 <div class="coverage-map-layout">
 <nav class="riskmap-overview-rail" aria-label="เมนู DSS / RiskMap">
-  <button type="button" id="riskmapRailOverview" aria-controls="riskmapEstateContent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>ภาพรวม</button>
   <div id="riskmapRailSteps" role="group" aria-label="ลำดับการดูข้อมูล">
-    <a href="#dssBriefCoverage">1. ข้อมูลโรงงาน</a>
-    <a href="#coverageRiskHeading">2. ความเสี่ยง</a>
-    <a href="#coverageSupportTitle">3. จุดช่วยเหลือ</a>
-    <a href="#dssBriefReadiness">4. ความพร้อม</a>
-    <a href="#emergencyReportPage">5. จัดทำรายงาน</a>
-    <a href="#dssBriefReview">6. เก็บข้อมูลสถิติ</a>
+    <a href="#dssBriefCoverage"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V9l5 3V7l5 3V3h6v18zM8 16v2m4-2v2m4-2v2"/></svg><span>1. ข้อมูลโรงงาน</span></a>
+    <a href="#coverageRiskHeading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2zM12 9v5m0 3v1"/></svg><span>2. ความเสี่ยง</span></a>
+    <a href="#coverageSupportTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg><span>3. จุดช่วยเหลือ</span></a>
+    <a href="#dssBriefReadiness"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 7v5c0 5 9 9 9 9s9-4 9-9V7zM8 12l3 3 5-6"/></svg><span>4. ความพร้อม</span></a>
+    <a href="#emergencyReportPage"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg><span>5. จัดทำรายงาน</span></a>
+    <a href="#dssBriefReview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18h17M8 17v-5m5 5V7m5 10V4"/></svg><span>6. เก็บข้อมูลสถิติ</span></a>
   </div>
-  <button type="button" id="riskmapRailReport" aria-controls="riskmapReportPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8m-8 4h8m-8 4h5"/></svg>ค้นหาและจัดทำรายงาน</button>
 </nav>
 <section id="riskCoverage" aria-labelledby="riskCoverageTitle">
   <div class="riskmap-overview-heading">
@@ -2609,30 +2607,32 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 
   report.style.removeProperty('display');report.hidden=false;
   links.remove();
-  const overviewButton=get('riskmapRailOverview'),reportButton=get('riskmapRailReport');
+  const stepLinks=[...get('riskmapRailSteps').querySelectorAll('a')];
   function showMode(isIncident){
     estateContent.hidden=isIncident;
-    get("riskmapRailSteps").hidden=isIncident;
     controls.hidden=!isIncident;
     panel.hidden=!isIncident;
-    overviewButton.setAttribute('aria-expanded',String(!isIncident));
-    reportButton.setAttribute('aria-expanded',String(isIncident));
+    stepLinks.forEach(link=>{
+      const active=isIncident ? link.hash==='#emergencyReportPage' : link.hash===location.hash;
+      if(active)link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    });
   }
-  overviewButton.onclick=()=>{
-    showMode(false);
-    workspace.scrollIntoView({block:'start',behavior:'smooth'});
-  };
   const openReport=()=>{
     showMode(true);
     const target=window.ieatCoverageReport?.status==='ready'?report:form;
     target.scrollIntoView({block:'start',behavior:'smooth'});
   };
   showMode(['#coverageIncidentTitle','#emergencyReportPage'].includes(location.hash));
-  reportButton.onclick=openReport;
-  reportButton.setAttribute('aria-controls',report.id);
   document.addEventListener('click',event=>{
     const link=event.target.closest('a[href="#emergencyReportPage"]');
-    if(link){event.preventDefault();openReport();}
+    if(link){event.preventDefault();openReport();return;}
+    const step=event.target.closest('#riskmapRailSteps a');
+    if(step){
+      showMode(false);
+      stepLinks.forEach(item=>item.removeAttribute('aria-current'));
+      step.setAttribute('aria-current','location');
+    }
   });
   window.ieatShowRiskmapReport=openReport;
 
@@ -2875,12 +2875,13 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 </script>
 <style id="riskmap-sidebar-steps">
 .riskmap-shared-workspace{grid-template-columns:130px minmax(0,1fr)}
-#riskmapRailSteps{display:grid;gap:4px;border-block:1px solid #e2d5ea;padding:6px 0}
+#riskmapRailSteps{display:grid;gap:10px;padding:0}
 #riskmapRailSteps[hidden]{display:none}
-#riskmapRailSteps a{justify-items:start;text-align:start;padding:7px 8px}
+#riskmapRailSteps a{justify-items:center;text-align:center;padding:8px 2px}
+#riskmapRailSteps a:is([aria-current="location"],:focus-visible){background:#eee1f6;border-color:#a67fbb;color:#54246f}
 @media(max-width:560px){
-  .riskmap-shared-workspace .riskmap-overview-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
-  #riskmapRailSteps{grid-column:1/-1;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .riskmap-shared-workspace .riskmap-overview-rail{grid-template-columns:1fr}
+  #riskmapRailSteps{grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
 }
 </style>
 <style id="dss-20261111-cards">
