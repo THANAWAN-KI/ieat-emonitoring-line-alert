@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "24h",
   "date": "2026-11-11",
-  "time": "06:00:00",
+  "time": "13:00:00",
   "type": "แผนที่แสดงพื้นที่เสี่ยงน้ำท่วมฉับพลัน (รายตำบล)ใน 24 ชม. ข้างหน้า จากปริมาณฝนสะสมที่สถานีโทรมาตร",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-24h",
   "area_count": 1,
@@ -18,8 +18,8 @@
       "station": "อบต.ทุ่งคาวัด",
       "latitude": 9.74115,
       "longitude": 99.02649,
-      "sum_rainfall_mm": 166.2,
-      "observed_at": "2026-11-10T18:00:00+07:00",
+      "sum_rainfall_mm": 189.0,
+      "observed_at": "2026-11-11T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -395,8 +395,8 @@
       "station": "บ้านเขาช่องลม",
       "latitude": 9.7378,
       "longitude": 99.006127,
-      "sum_rainfall_mm": 6.0,
-      "observed_at": "2026-11-10T18:00:00+07:00",
+      "sum_rainfall_mm": 5.5,
+      "observed_at": "2026-11-11T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -770,8 +770,8 @@
       "station": "บ้านคลองสง*",
       "latitude": 9.736841,
       "longitude": 98.989378,
-      "sum_rainfall_mm": 53.5,
-      "observed_at": "2026-11-10T18:00:00+07:00",
+      "sum_rainfall_mm": 56.5,
+      "observed_at": "2026-11-11T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
