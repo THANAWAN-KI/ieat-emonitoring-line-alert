@@ -324,17 +324,22 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
     <div id="coverageContactDirectory" class="dss-risk-table-wrap" tabindex="0" role="region" aria-label="เบอร์ติดต่อหน่วยงานสนับสนุน">กำลังโหลดเบอร์ติดต่อ…</div>
   </section>
   <section id="dssBriefReadiness" class="dss-brief" aria-labelledby="dssBriefReadinessTitle">
-    <h2 id="dssBriefReadinessTitle">4. ความพร้อมของทรัพยากร</h2>
+    <h2 id="dssBriefReadinessTitle">ความพร้อมของทรัพยากร</h2>
     <p id="dssBriefPlanStatus" role="status"></p>
-    <div id="dssBriefPlanRows"></div>
+    <dl id="dssResourceSummary" class="dss-brief-metrics"></dl>
+    <div id="dssResourceChart"></div>
+    <h3>บัญชีทรัพยากรตามแผน</h3>
+    <label class="resource-search">ค้นหาทรัพยากร <input id="dssResourceSearch" type="search" placeholder="ชื่ออุปกรณ์ / หมวด / นิคมฯ"></label>
+    <p id="dssResourceTableStatus" role="status"></p>
+    <div id="dssBriefPlanRows" class="dss-risk-table-wrap" tabindex="0" role="region" aria-label="ตารางทรัพยากร เลื่อนดูรายการเพิ่มเติม"></div>
     <p>ก่อนประสานขอใช้ ให้ยืนยันจำนวนพร้อมใช้ วันที่ตรวจล่าสุด ผู้ดูแล และช่องทางติดต่อ</p>
   </section>
   <section id="dssBriefWorkflow" class="dss-brief">
-    <h2>5. จัดทำรายงาน</h2>
+    <h2>จัดทำรายงาน</h2>
     <a class="dss-brief-action" href="#emergencyReportPage">ค้นหาโรงงานเพื่อทำรายงาน</a>
   </section>
   <section id="dssBriefReview" class="dss-brief" aria-labelledby="dssStatsTitle">
-    <h2 id="dssStatsTitle">6. เก็บข้อมูลสถิติ</h2>
+    <h2 id="dssStatsTitle">เก็บข้อมูลสถิติ</h2>
     <p id="dssStatsScope" role="status">กำลังโหลดทะเบียนเหตุการณ์…</p>
     <dl id="dssStatsCards" class="dss-brief-metrics"></dl>
     <div id="dssStatsCharts"></div>
@@ -2908,16 +2913,36 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
     get('dssBriefPlanStatus').textContent = !plans ? 'โหลดบัญชีตามแผนไม่ได้' : planRows.length
       ? 'พบ '+number.format(planRows.length)+' บัญชีตามแผน · สถานะพร้อมใช้รอยืนยัน'
       : 'ไม่พบบัญชีตามแผนในขอบเขตนี้';
-    const entries = planRows.flatMap(row=>row.items || []);
-    const chart = bars('จำนวนรายการในบัญชีตามหมวด',grouped(entries,item=>item.category));
-    const details = planRows.map(record=>{
-      const group = node('details');
-      const list = node('ul');
-      for(const item of record.items || []) list.append(node('li',[item.name,item.amount,item.unit,item.type,item.capacity].filter(Boolean).join(' ') + (item.page?' · หน้า '+item.page:'')));
-      group.append(node('summary',record.zone || 'บัญชีทรัพยากร'),list,node('p','ที่มา '+(record.source_file || plans.source || 'แผนรับมือเหตุ')));
-      return group;
-    });
-    get('dssBriefPlanRows').replaceChildren(...(plans?[chart,...details]:[]));
+    const entries=planRows.flatMap(record=>(record.items||[]).map(item=>({...item,estate:record.zone||'ไม่ระบุนิคมฯ',source:record.source_file||plans.source||'แผนรับมือเหตุ',year:record.source_year||plans.source_year})));
+    const categories=grouped(entries,item=>item.category);
+    metrics(get('dssResourceSummary'),[
+      ['นิคมฯ ที่มีบัญชีทรัพยากร (แห่ง)',plans?new Set(planRows.map(row=>normalize(row.zone))).size:null],
+      ['รายการตามแผน (รายการ)',plans?entries.length:null],
+      ['หมวดทรัพยากร (หมวด)',plans?categories.length:null]
+    ]);
+    get('dssBriefPlanStatus').textContent=!plans?'โหลดบัญชีทรัพยากรไม่ได้':planRows.length
+      ?'บัญชีตามแผน ปี '+(plans.source_year||'ไม่ระบุ')+' · ยังไม่ยืนยันจำนวนพร้อมใช้งานปัจจุบัน'
+      :'ไม่พบบัญชีทรัพยากรของนิคมฯ ที่เลือก';
+    get('dssResourceChart').replaceChildren(...(entries.length?[bars('จำนวนรายการตามแผน แยกตามหมวด',categories),node('p','กราฟนับจำนวนรายการในเอกสาร ไม่ใช่จำนวนชิ้นอุปกรณ์ และไม่รวมจำนวนต่างหน่วยเข้าด้วยกัน','resource-chart-note')]:[]));
+    function renderResourceTable(){
+      const term=get('dssResourceSearch').value.trim().toLowerCase();
+      const filtered=entries.filter(item=>!term||[item.name,item.category,item.estate,item.type].join(' ').toLowerCase().includes(term));
+      const table=node('table',null,'dss-risk-table'),head=table.createTHead().insertRow();
+      for(const title of ['ทรัพยากร / อุปกรณ์','หมวด','จำนวนตามแผน','หน่วย','ประเภท / ขนาด','นิคมฯ','ความพร้อมปัจจุบัน','เอกสารอ้างอิง']){
+        const th=node('th',title);th.scope='col';head.append(th);
+      }
+      const body=table.createTBody();
+      for(const item of filtered){
+        const tr=body.insertRow();
+        for(const value of [item.name||'ไม่ระบุ',item.category||'ไม่ระบุ',item.amount??'ไม่ระบุ',item.unit||'ไม่ระบุ',[item.type,item.capacity].filter(Boolean).join(' · ')||'ไม่ระบุ',item.estate,'รอยืนยัน',item.source+(item.page?' · หน้า '+item.page:'')]){
+          tr.append(node('td',String(value)));
+        }
+      }
+      get('dssResourceTableStatus').textContent=plans?'พบ '+number.format(filtered.length)+' จาก '+number.format(entries.length)+' รายการ · เลื่อนตารางเพื่อดูเพิ่มเติม':'ยังแสดงรายการไม่ได้';
+      get('dssBriefPlanRows').replaceChildren(...(filtered.length?[table]:[node('p',term?'ไม่พบรายการที่ตรงคำค้น':'ไม่มีรายการทรัพยากรในขอบเขตนี้')]));
+    }
+    get('dssResourceSearch').oninput=renderResourceTable;
+    renderResourceTable();
     const rows = Array.isArray(incidents) ? incidents.filter(row=>matches(label,row.estate)) : [];
     const confirmed = rows.filter(row=>row.verification==='ยืนยันโดยเจ้าหน้าที่พื้นที่').length;
     get('dssStatsScope').textContent = Array.isArray(incidents)
@@ -3022,5 +3047,24 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 #coverageDetail button{padding:6px 9px;border:1px solid #bba5c9;background:#faf6fd;color:#54246f;cursor:pointer}
 #coverageDetail .risk-table-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}
 #coverageRisk button[aria-pressed="true"]{outline:2px solid currentColor;outline-offset:-4px}
+</style><style id="resource-readable-layout">
+#dssBriefReadiness h3{margin:14px 0 8px;color:#54246f;font-size:16px}
+#dssResourceSummary{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#dssResourceSummary>div{background:#e5f2ff;border-color:#bad7f2}
+#dssResourceSummary>div:nth-child(2){background:#e9f4ec;border-color:#c0ddc9}
+#dssResourceSummary>div:nth-child(3){background:#fff4d5;border-color:#ead9a1}
+#dssResourceSummary dd{color:#222}
+#dssResourceChart .dss-chart-row{grid-template-columns:minmax(110px,1.3fr) minmax(55px,1fr) auto}
+#dssResourceChart .dss-chart-track{height:14px;border-radius:3px;overflow:hidden}
+#dssResourceChart .dss-chart-track span{background:#2e9df7}
+.resource-chart-note{font-size:12px!important;color:#58515f}
+.resource-search{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.resource-search input{box-sizing:border-box;max-width:100%;flex:1;min-width:150px;padding:8px 10px;border:1px solid #c8b6d3;font:inherit}
+#dssBriefPlanRows{max-height:330px;overscroll-behavior:contain}
+#dssBriefPlanRows table{min-width:760px;font-size:13px}
+#dssBriefPlanRows td{vertical-align:top}
+#dssBriefPlanRows td:nth-child(3){font-weight:700;text-align:right}
+#dssBriefPlanRows td:nth-child(7){color:#7b5b00;background:#fff9e8;white-space:nowrap}
+@media(max-width:560px){#dssResourceSummary{grid-template-columns:1fr}}
 </style></body></html>
 
