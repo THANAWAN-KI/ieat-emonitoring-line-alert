@@ -2670,5 +2670,55 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 #emergencyReportPage{scroll-margin-top:16px}
 @media(min-width:1051px){#riskmapOverviewPanel #coverageMap{position:sticky;top:12px}}
 </style>
+<style id="riskmap-coastal-theme">
+:root {
+  --risk-ink: #20302e;
+  --risk-blue: #294990;
+  --risk-yellow: #ffbe2d;
+  --risk-water: #85d1e1;
+  --risk-green: #c8e8d5;
+  --risk-paper: #f7f5ef;
+  --risk-line: #d5dfd9;
+}
+body { background:var(--risk-paper); color:var(--risk-ink); }
+#ieatPortalHeader { background:#fff!important; border-bottom:3px solid var(--risk-water); }
+.dss-section-bar { background:var(--risk-blue)!important; color:#fff!important; }
+.dss-section-bar .dss-section-bar__title,.dss-section-bar .dss-section-link { color:#fff!important; }
+.dss-section-bar .dss-section-link--report { background:var(--risk-yellow)!important; color:var(--risk-ink)!important; }
+html body .riskmap-overview-heading {
+  padding:16px clamp(14px,2.5vw,24px);
+  background:var(--risk-yellow);
+  border:1px solid var(--risk-ink);
+  box-shadow:4px 4px 0 var(--risk-water);
+  margin-bottom:20px;
+}
+html body #riskCoverageTitle { color:var(--risk-ink); margin:0; font-size:clamp(1.2rem,2.6vw,1.65rem); }
+html body #riskmapOverviewPanel :is(#riskCoverage,#coverageMap) {
+  background:#fff; border:1px solid var(--risk-line); border-radius:12px;
+  box-shadow:0 4px 14px #20302e0c; min-width:0;
+}
+html body #riskmapOverviewPanel #coverageMap { border-top:5px solid var(--risk-water); }
+html body #riskmapOverviewPanel :is(#coverageRiskHeading,#coverageSupportTitle,#coverageEstateHeading,#coverageMapTitle) { color:var(--risk-blue); border-color:var(--risk-line); }
+html body #riskmapOverviewPanel #coverageSupportTitle { background:var(--risk-green); padding:8px 10px; }
+html body .riskmap-shared-workspace .riskmap-overview-rail :is(a,button) {
+  background:#fff; border-color:var(--risk-line); color:var(--risk-blue); min-height:44px;
+}
+html body .riskmap-shared-workspace .riskmap-overview-rail :is(a,button):is(:hover,:focus-visible,[aria-current="true"],[aria-pressed="true"]) {
+  background:var(--risk-water); color:var(--risk-ink);
+}
+html body #riskmapOverviewPanel :is(#coverageEstateForm,#coverageIncidentForm) button[type="submit"] {
+  background:var(--risk-blue); border-color:var(--risk-blue); color:#fff;
+}
+html body :is(#riskmapOverviewPanel,#riskmapReportPanel,.riskmap-overview-rail) :is(a,button,input,select,textarea):focus-visible {
+  outline:2px solid var(--risk-blue); outline-offset:2px;
+}
+html body #riskmapOverviewPanel #coverageEstateForm .coverage-estate-results { border-color:var(--risk-line); }
+html body #riskmapOverviewPanel #coverageEstateForm .coverage-estate-results button:is(:hover,:focus-visible) { background:var(--risk-green); }
+html body #riskmapOverviewPanel #coverageMapView { border-color:var(--risk-line); }
+@media(max-width:560px) {
+  html body .riskmap-overview-heading { margin-bottom:15px; }
+  html body #riskmapOverviewPanel #coverageMap { margin-top:14px; }
+}
+</style>
 </body></html>
 
