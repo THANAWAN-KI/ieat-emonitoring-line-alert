@@ -2830,6 +2830,22 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
       ['ขอข้อมูลเพิ่มเติม (ราย)',dssRow?.more],
       ['อยู่ระหว่างจัดทำ (ราย)',dssRow?.draft]
     ]);
+    const statusIcons = [
+      'M4 4h16v16H4zM8 9h8m-8 4h8m-8 4h4',
+      'M20 6 9 17l-5-5',
+      'M5 3h14v18H5zM8 8h8m-8 4h4m4 2v6m-3-3h6',
+      'M4 20l4-1 12-12-3-3L5 16zM14 7l3 3'
+    ];
+    get('dssBriefDssCards').querySelectorAll('dt').forEach((heading,index) => {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      svg.setAttribute('viewBox','0 0 24 24');
+      svg.setAttribute('aria-hidden','true');
+      svg.setAttribute('focusable','false');
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',statusIcons[index]);
+      svg.append(path);
+      heading.prepend(svg);
+    });
     get('dssBriefSources').textContent = dssRow
       ? 'รายงานสถานะ DSS 1 ม.ค.–30 ก.ย. 2569 · จำนวนที่นำเข้า = จำนวนในรายงานหักกลุ่มไม่มีชุดข้อมูล' + (dssRow.review ? ' · อยู่ระหว่างตรวจสอบ '+number.format(dssRow.review)+' ราย' : '')
       : dss ? 'ไม่พบนิคมฯ นี้ในรายงานสถานะ DSS รอบดังกล่าว' : 'โหลดรายงานสถานะ DSS ไม่สำเร็จ';
@@ -2906,6 +2922,8 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 #dssBriefDssCards>div:nth-child(3){background:#fff0e4;border-color:#f0c5a1;color:#8a410a}
 #dssBriefDssCards>div:nth-child(4){background:#fff7d9;border-color:#e8d58b;color:#705400}
 #dssBriefDssCards>div dd{color:inherit}
+#dssBriefDssCards dt{display:flex;align-items:flex-start;gap:8px}
+#dssBriefDssCards dt svg{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .dss-risk-table-wrap{overflow:auto;max-height:440px}
 .dss-risk-table{width:100%;border-collapse:collapse;text-align:start}
 .dss-risk-table :is(th,td){padding:7px;border-bottom:1px solid #e2d5ea;text-align:start}
