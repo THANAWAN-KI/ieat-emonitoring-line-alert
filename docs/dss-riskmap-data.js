@@ -685,26 +685,47 @@
         }else risk.children[index]?.focus();
       });
     });
+    riskRows.forEach((row,index)=>row.setAttribute('aria-pressed',String(drill===groups[index].field)));
     risk.replaceChildren(...riskRows);
     const group=groups.find(g=>g.field===drill);
-    detail.hidden=!group;
-    if(group){
-      const table=el('table',null,'dss-risk-table');
-      const head=table.createTHead().insertRow();
-      for(const label of ['โรงงาน','นิคมอุตสาหกรรม','เลขทะเบียน']) {
-        const th=el('th',label);th.scope='col';head.append(th);
-      }
-      const body=table.createTBody();
-      const sorted=items.filter(i=>i.flags.has(drill)).sort((a,b)=>a.row.name.localeCompare(b.row.name,'th'));
-      for(const {row} of sorted) {
-        const tr=body.insertRow();
-        for(const value of [row.name,row.estate,row.registration])tr.append(el('td',value));
-      }
-      const wrap=el('div',null,'dss-risk-table-wrap');
-      wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label',group.label);
-      wrap.append(table);
-      detail.replaceChildren(el('h3',group.label+' · '+number(sorted.length)+' ราย'),sorted.length?wrap:el('p','ไม่พบรายการในขอบเขตที่เลือก'));
+    detail.hidden=false;
+    const sorted=items.filter(item=>drill?item.flags.has(drill):item.flags.size>0).sort((a,b)=>a.row.name.localeCompare(b.row.name,'th'));
+    const heading=el('h3',(group?.label||'รายชื่อโรงงานที่เข้าข่ายความเสี่ยง')+' · '+(available?number(sorted.length):'—')+' ราย');
+    const note=el('p',available?'โรงงานหนึ่งแห่งอาจเข้าข่ายหลายกลุ่ม จึงไม่ควรบวกจำนวนการ์ดรวมกัน · คลิกการ์ดเพื่อกรองรายการ':'กำลังโหลดหรือเชื่อมต่อทะเบียนโรงงานไม่ได้');
+    const actions=el('div',null,'risk-table-actions'),reset=el('button','ดูทุกกลุ่มความเสี่ยง');
+    reset.type='button';reset.disabled=!drill;reset.onclick=()=>{drill='';renderCoverage();};
+    actions.append(reset);
+    const table=el('table',null,'dss-risk-table');
+    const head=table.createTHead().insertRow();
+    for(const label of ['โรงงาน','นิคมฯ','เลขทะเบียน',...groups.map(group=>group.label),'แผนที่']){
+      const th=el('th',label);th.scope='col';head.append(th);
     }
+    const body=table.createTBody();
+    for(const {row,flags} of sorted){
+      const tr=body.insertRow();
+      for(const value of [row.name,row.estate,row.registration])tr.append(el('td',value));
+      for(const group of groups){
+        const known=business.fields?.includes(group.field);
+        tr.append(el('td',flags.has(group.field)?'เข้าข่าย':known?'ไม่ระบุว่าเข้าข่าย':'ไม่มีข้อมูล'));
+      }
+      const td=el('td'),button=el('button','ดูแผนที่');button.type='button';
+      button.onclick=async()=>{
+        button.disabled=true;
+        try{await window.ieatFocusCoverageFactory(row.id);$('coverageMap').scrollIntoView({block:'nearest',behavior:'smooth'});}
+        catch{note.textContent='เปิดตำแหน่งไม่ได้ แผนที่อาจยังโหลดไม่เสร็จ กรุณาลองอีกครั้ง';}
+        finally{button.disabled=false;}
+      };
+      td.append(button);tr.append(td);
+    }
+    const wrap=el('div',null,'dss-risk-table-wrap');
+    wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','รายชื่อโรงงานเสี่ยง เลื่อนดูรายการเพิ่มเติม');
+    wrap.append(table);
+    const sourceNote=el('p','แหล่งข้อมูล: ทะเบียน e_PP กนอ. · แสดงตามธงความเสี่ยงในทะเบียน ไม่ใช่ผลประเมินอุบัติเหตุ ณ เวลาปัจจุบัน');
+    detail.replaceChildren(heading,actions,note,...(sorted.length?[wrap]:[el('p',available?'ไม่พบรายการในขอบเขตที่เลือก':'ยังแสดงรายชื่อไม่ได้')]),sourceNote);
+    if(sorted.length)requestAnimationFrame(()=>{
+      const rows=[...body.rows].slice(0,3);
+      wrap.style.maxHeight=(table.tHead.getBoundingClientRect().height+rows.reduce((sum,row)=>sum+row.getBoundingClientRect().height,0)+2)+'px';
+    });
   }
   select.onchange=renderCoverage;
   search.oninput=()=>{
