@@ -287,14 +287,70 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
     <select id="coverageEstate" hidden aria-hidden="true" tabindex="-1"><option value="">ทุกนิคมฯ</option></select>
     <button type="submit">ค้นหา</button>
   </form>
+  <nav class="riskmap-overview-links" aria-label="ลำดับการดูข้อมูล">
+    <a href="#dssBriefCoverage">1. ข้อมูลโรงงาน</a>
+    <a href="#coverageRiskHeading">2. ความเสี่ยง</a>
+    <a href="#coverageSupportTitle">3. จุดช่วยเหลือ</a>
+    <a href="#dssBriefReadiness">4. ความพร้อม</a>
+    <a href="#dssBriefWorkflow">5. ขั้นตอนรับมือ</a>
+    <a href="#dssBriefReview">6. ทบทวนการซ้อม</a>
+  </nav>
+  <section id="dssBriefCoverage" class="dss-brief" aria-labelledby="dssBriefCoverageTitle">
+    <h2 id="dssBriefCoverageTitle">1. ความครอบคลุมของข้อมูลโรงงาน</h2>
+    <p id="dssBriefEstate"></p>
+    <dl class="dss-brief-metrics">
+      <div><dt>รายการในดัชนีค้นหาโรงงาน</dt><dd id="dssBriefRegistry">…</dd></div>
+      <div><dt>รายการพิกัดจาก DSS</dt><dd id="dssBriefPoints">…</dd></div>
+      <div><dt>รายการพิกัดที่มีสถานะเอกสารเป็นจริง</dt><dd id="dssBriefActive">…</dd></div>
+    </dl>
+    <details><summary>วิธีนับและวันที่ข้อมูล</summary>
+      <p id="dssBriefSources"></p>
+      <p>จำนวนมาจากคนละชุดข้อมูล ควรจับคู่ด้วยรหัสโรงงานก่อนคำนวณความครอบคลุม และยืนยันความหมายของสถานะเอกสารกับเจ้าของข้อมูลก่อนใช้เป็นยอดอนุมัติ DSS</p>
+    </details>
+  </section>
   <section id="coverageRiskSection" aria-labelledby="coverageRiskHeading">
-    <h2 id="coverageRiskHeading">โรงงานที่เข้าข่ายความเสี่ยง</h2>
+    <h2 id="coverageRiskHeading">2. โรงงานที่เข้าข่ายความเสี่ยง</h2>
     <div id="coverageRisk">กำลังโหลดข้อมูลโรงงาน…</div>
     <div id="coverageDetail" tabindex="-1" hidden></div>
   </section>
   <section class="coverage-support-overview" aria-labelledby="coverageSupportTitle">
-    <h2 id="coverageSupportTitle">ข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2>
+    <h2 id="coverageSupportTitle">3. ข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2>
     <div id="coverageSupportCards">กำลังโหลดข้อมูลสนับสนุน…</div>
+  </section>
+  <section id="dssBriefReadiness" class="dss-brief" aria-labelledby="dssBriefReadinessTitle">
+    <h2 id="dssBriefReadinessTitle">4. ความพร้อมของทรัพยากร</h2>
+    <p id="dssBriefPlanStatus" role="status"></p>
+    <div id="dssBriefPlanRows"></div>
+    <p>ก่อนประสานขอใช้ ให้ยืนยันจำนวนพร้อมใช้ วันที่ตรวจล่าสุด ผู้ดูแล และช่องทางติดต่อ</p>
+  </section>
+  <section id="dssBriefWorkflow" class="dss-brief">
+    <h2>5. จากรับแจ้งเหตุถึงรายงาน</h2>
+    <ol class="dss-brief-steps">
+      <li><strong>รับแจ้งและยืนยันจุด</strong><span>โรงงานแจ้งพิกัด ประเภทเหตุ และข้อเท็จจริงที่ยืนยันได้ สำนักงานนิคมฯ ตรวจสอบตำแหน่ง</span></li>
+      <li><strong>ดูพื้นที่รอบเหตุ</strong><span>ค้นโรงงาน เลือกประเภทเหตุ และกำหนดรัศมีค้นข้อมูล ตรวจชุมชน โรงเรียน และโรงพยาบาลจากชั้นข้อมูลที่เปิดใช้</span></li>
+      <li><strong>ประสานทรัพยากร</strong><span>สำนักงานนิคมฯ ประสานผู้ดูแลทรัพยากรตามแผน EMCC สนับสนุนพิกัดและข้อมูลรอบจุดเกิดเหตุ</span></li>
+      <li><strong>สรุปและส่งต่อ</strong><span>ตรวจรายงานและข้อความ LINE ก่อนส่งตามช่องทางของหน่วยงาน</span></li>
+    </ol>
+    <p>รัศมีใช้ค้นข้อมูลสนับสนุน ขอบเขตผลกระทบต้องอาศัยผลประเมินเหตุ</p>
+    <a class="dss-brief-action" href="#emergencyReportPage">ค้นหาโรงงานและจัดทำรายงาน</a>
+  </section>
+  <section id="dssBriefReview" class="dss-brief">
+    <h2>6. ทบทวนการซ้อมและแผนพัฒนาขีดความสามารถ</h2>
+    <details><summary>กรณีสาธิต เหตุเพลิงไหม้จำลองในนิคมฯ นครหลวง</summary>
+      <p>เลือกนครหลวง ค้นโรงงานตัวอย่าง เลือกเหตุไฟไหม้ แล้วค้นจุดช่วยเหลือรอบเหตุ เปิดบัญชีรถดับเพลิงและแหล่งน้ำเพื่อระบุรายการที่ต้องโทรยืนยัน ก่อนเปิดตัวอย่างรายงานและข้อความ LINE</p>
+    </details>
+    <details><summary>ประเด็นบันทึกระหว่างซ้อม</summary>
+      <p>บันทึกเวลารับแจ้ง ยืนยันจุด ประสานผู้ดูแล และออกรายงานฉบับแรก พร้อมระบุข้อมูลที่หาไม่เจอหรือจุดที่ต้องโทรถามซ้ำ</p>
+      <p>ผลการซ้อมของพื้นที่ที่เลือก รอหน่วยงานยืนยันหลักฐาน</p>
+      <a href="./incidents.html">เปิดทะเบียนเหตุการณ์</a>
+    </details>
+    <details><summary>ประเด็นให้ที่ประชุมกำหนดเจ้าของงาน</summary>
+      <ol>
+        <li>จับคู่ทะเบียนโรงงาน พิกัด และข้อมูล DSS แล้วกำหนดรอบทบทวน</li>
+        <li>ยืนยันสถานะพร้อมใช้และช่องทางประสานของทรัพยากรสำคัญ</li>
+        <li>กำหนดผู้รับแจ้ง ผู้ยืนยันข้อมูล ผู้ประสาน และผู้อนุมัติรายงานตามแผน แล้วทดสอบการส่งต่อในการซ้อม</li>
+      </ol>
+    </details>
   </section>
   </div>
   <form id="coverageIncidentForm" aria-labelledby="coverageIncidentTitle" aria-describedby="coverageFactoryGuide">
@@ -2689,5 +2745,94 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 #emergencyReportPage{scroll-margin-top:16px}
 @media(min-width:1051px){#riskmapOverviewPanel #coverageMap{position:sticky;top:12px}}
 </style>
+<style id="dss-brief-style">
+#riskCoverage .dss-brief { margin:20px 0; padding:14px; border:1px solid #d9c8e5; background:#fff; scroll-margin-top:16px; }
+#riskCoverage .dss-brief h2 { margin:0 0 9px; color:#54246f; font-size:clamp(16px,2vw,22px); }
+.dss-brief p,.dss-brief li { font-size:14px; line-height:1.55; }
+.dss-brief-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:0 0 10px; }
+.dss-brief-metrics div { background:#f7f2fa; padding:9px; border:1px solid #e2d5ea; }
+.dss-brief-metrics dd { margin:4px 0 0; font-size:23px; color:#68418f; font-weight:700; }
+.dss-brief summary { cursor:pointer; color:#54246f; font-weight:600; }
+.dss-brief details { margin:8px 0; }
+.dss-brief-steps { padding-inline-start:24px; }
+.dss-brief-steps li { margin:7px 0; }
+.dss-brief-steps span { display:block; }
+.dss-brief-action { display:inline-block; padding:8px 12px; background:#68418f; color:white!important; }
+#dssBriefPlanRows ul { margin:7px 0; padding-inline-start:22px; }
+@media(max-width:560px){.dss-brief-metrics{grid-template-columns:1fr}}
+</style>
+<script id="dss-brief-data">
+(() => {
+  const get = id => document.getElementById(id);
+  const estate = get('coverageEstate');
+  const normalize = value => String(value ?? '').normalize('NFC')
+    .replace(/^\s*(?:สำนักงาน)?นิคมอุตสาหกรรม\s*/, '').replace(/\s+/g, '').toLowerCase();
+  const read = async path => {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error(String(response.status));
+    return response.json();
+  };
+  const sources = Promise.allSettled([
+    read('./factory-search-index.json'),
+    read('./dss-data.json'),
+    read('./data/estate-emergency-equipment-2026.json')
+  ]);
+  const number = new Intl.NumberFormat('th-TH');
+  let revision = 0;
+  async function render() {
+    const request = ++revision;
+    const label = estate.value ? estate.selectedOptions[0]?.textContent : '';
+    const key = normalize(label);
+    get('dssBriefEstate').textContent = label || 'ทุกนิคมฯ ในชุดข้อมูล';
+    const ids = ['dssBriefRegistry','dssBriefPoints','dssBriefActive'];
+    ids.forEach(id => { get(id).textContent = '…'; });
+    get('dssBriefPlanRows').replaceChildren();
+    get('dssBriefPlanStatus').textContent = 'กำลังโหลดบัญชีทรัพยากร…';
+    const [registry, points, plans] = await sources;
+    if (request !== revision) return;
+    const matches = value => !key || normalize(value) === key;
+    const factories = registry.value?.factories;
+    const features = points.value?.features;
+    const selectedFactories = Array.isArray(factories) ? factories.filter(row => matches(row[3])) : null;
+    const selectedPoints = Array.isArray(features) ? features.filter(row => row.geometry?.type === 'Point' && matches(row.properties?.comp_zone)) : null;
+    const counts = [selectedFactories?.length, selectedPoints?.length, selectedPoints?.filter(row => row.properties?.doc_active === true).length];
+    ids.forEach((id,i) => {
+      get(id).textContent = counts[i] == null ? 'โหลดไม่ได้' : counts[i] === 0 && key ? 'ไม่พบในชุดข้อมูล' : number.format(counts[i]);
+    });
+    get('dssBriefSources').textContent = 'ดัชนีโรงงาน ' + (registry.value?.updated || 'ไม่ระบุวันที่') + ' · พิกัด DSS ไม่ระบุวันอัปเดตในไฟล์';
+    const status = get('dssBriefPlanStatus');
+    const records = plans.value?.records;
+    if (!Array.isArray(records)) {
+      status.textContent = 'โหลดบัญชีตามแผนไม่ได้';
+      return;
+    }
+    const selectedPlans = records.filter(record => matches(record.zone));
+    status.textContent = selectedPlans.length
+      ? 'พบ ' + number.format(selectedPlans.length) + ' บัญชีตามเอกสาร · สถานะพร้อมใช้รอยืนยัน'
+      : 'ไม่พบบัญชีตามแผนของนิคมฯ นี้ในชุดข้อมูล';
+    const fragment = document.createDocumentFragment();
+    selectedPlans.forEach(record => {
+      const group = document.createElement('details');
+      const title = document.createElement('summary');
+      const items = Array.isArray(record.items) ? record.items : [];
+      title.textContent = (record.zone || record.company || 'บัญชีทรัพยากร') + ' · ' + number.format(items.length) + ' รายการ';
+      const list = document.createElement('ul');
+      items.forEach(item => {
+        const line = document.createElement('li');
+        line.textContent = [item.name, item.amount, item.unit, item.type, item.capacity].filter(Boolean).join(' ') + (item.page ? ' · หน้า ' + item.page : '');
+        list.append(line);
+      });
+      const source = document.createElement('p');
+      source.textContent = 'ที่มา ' + (record.source_file || plans.value.source || 'แผนรับมือเหตุ');
+      group.open = Boolean(key) && selectedPlans.length === 1;
+      group.append(title,list,source);
+      fragment.append(group);
+    });
+    get('dssBriefPlanRows').append(fragment);
+  }
+  estate.addEventListener('change', render);
+  render();
+})();
+</script>
 </body></html>
 
