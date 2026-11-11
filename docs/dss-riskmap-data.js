@@ -393,6 +393,95 @@
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
     const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
+    const factorySelection=new GraphicsLayer({title:'โรงงานที่เลือกจากทะเบียน',listMode:'hide'});
+    map.add(factorySelection);
+    let factorySelectionSequence=0;
+    const dssCache=new Map();
+    const normIdentity=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/นิคมอุตสาหกรรม|นิคมฯ|สำนักงานนิคมฯ|[\s\u200b-\u200d]/g,'');
+    const rowsOf=data=>{
+      const rows=Array.isArray(data)?data:data.features||data.data||data.records;
+      if(!Array.isArray(rows))throw Error('รูปแบบข้อมูลไม่ถูกต้อง');
+      return rows.map(row=>row.properties||row.attributes||row);
+    };
+    function loadPopupSource(url){
+      if(!dssCache.has(url))dssCache.set(url,fetch(url,{signal:AbortSignal.timeout(25000)}).then(response=>{
+        if(!response.ok)throw Error('HTTP '+response.status);return response.json();
+      }).then(rowsOf).catch(error=>{dssCache.delete(url);throw error;}));
+      return dssCache.get(url);
+    }
+    function matchPopupCompany(rows,row){
+      const attrs=row.attrs||{};
+      const numbers=[attrs['เลขทะเบียนใหม่'],attrs['เลขทะเบียนเดิม'],row.registration].filter(value=>value&&value!=='—').map(normIdentity);
+      let candidates=rows.filter(p=>numbers.includes(normIdentity(p.comp_no)));
+      if(!candidates.length)candidates=rows.filter(p=>normIdentity(p.comp_name)===normIdentity(row.name)&&normIdentity(p.comp_zone)===normIdentity(row.estate));
+      if(candidates.length>1){const active=candidates.filter(p=>p.doc_active===true);if(active.length===1)return active[0];throw Error('พบหลายระเบียน ยังยืนยันการจับคู่โรงงานไม่ได้');}
+      return candidates[0]||null;
+    }
+    const popupSources=[
+      {title:'ข้อมูลสารเคมี',url:'./dss-data.json',kind:'chemical'},
+      {title:'อุปกรณ์ระงับเหตุ',url:'./data/equipment_latest.json',kind:'equipment'},
+      {title:'แผนผังโรงงาน',url:'https://emonitor.ieat.go.th/envisys/gis/file/chartXGGEz35P2ksHhyywS7A4SzLddPpt8fqqVTCoaR1i18T2Bt5OMxIsUgvzGMUu5gAb.json',kind:'plan'},
+      {title:'แผนผังทีมตอบโต้ภาวะฉุกเฉิน',url:'https://emonitor.ieat.go.th/envisys/gis/file/plotplanPFdxm48K5k8oWuAg8G3Av0yjyWEOLrmiVifKJiyF5d5vL4EM6gCDw3tKEhmvKT9q.json',kind:'plan'}
+    ];
+    function renderPopupRecord(host,p,kind){
+      host.replaceChildren();
+      if(!p){host.append(el('p','ไม่พบข้อมูลที่จับคู่กับโรงงานนี้'));return;}
+      if(p.doc_active===false){host.append(el('p','ระเบียนนี้ไม่ได้ใช้งานในระบบ DSS'));return;}
+      const list=el('ul');
+      if(kind==='chemical'||kind==='equipment'){
+        const prefix=kind==='chemical'?'hazard':'equipment';
+        const keys=Object.keys(p).filter(key=>new RegExp('^'+prefix+'\\d+_name$').test(key)&&p[key]).sort((a,b)=>Number(a.match(/\d+/)[0])-Number(b.match(/\d+/)[0]));
+        for(const key of keys){
+          const stem=key.slice(0,-4);
+          const parts=kind==='chemical'?[p[key],p[stem+'casNo']?'CAS '+p[stem+'casNo']:'',p[stem+'volume'],p[stem+'storageUnit']]:[p[key],p[stem+'type'],p[stem+'amount']!=null?'จำนวน '+p[stem+'amount']:'',p[stem+'amountUnit'],p[stem+'volume']!=null?'ขนาด '+p[stem+'volume']:'',p[stem+'volumeUnit']];
+          list.append(el('li',parts.filter(value=>value!=null&&String(value).trim()).join(' · ')));
+        }
+        host.append(list.children.length?list:el('p','ไม่พบรายการในระเบียนนี้'));
+      }else{
+        const links=new Set();
+        for(const [key,value] of Object.entries(p)){
+          if(typeof value!=='string'||!/(?:url|path|file)$/i.test(key))continue;
+          try{const url=new URL(value);if(['https:','http:'].includes(url.protocol))links.add(url.href);}catch{}
+          if(/<(?:a|img)\b/i.test(value)){
+            const doc=new DOMParser().parseFromString(value,'text/html');
+            doc.querySelectorAll('a[href],img[src]').forEach(item=>{
+              try{const url=new URL(item.getAttribute('href')||item.getAttribute('src'),'https://emonitor.ieat.go.th/');if(['https:','http:'].includes(url.protocol))links.add(url.href);}catch{}
+            });
+          }
+        }
+        for(const url of links){
+          const link=el('a','เปิดแผนผัง / เอกสารแนบ');link.href=url;link.target='_blank';link.rel='noopener noreferrer';host.append(link);
+          if(/\.(?:png|jpe?g|webp)(?:[?#]|$)/i.test(url)){const image=el('img');image.src=url;image.alt='แผนผังของโรงงานที่เลือก';image.loading='lazy';image.onerror=()=>image.remove();host.append(image);}
+        }
+        if(!links.size)host.append(el('p','ไม่พบไฟล์แผนผังที่เปิดดูได้ในข้อมูลต้นทาง'));
+      }
+    }
+    window.ieatOpenFactoryPopup=async(row,path)=>{
+      const sequence=++factorySelectionSequence;
+      await view.when();
+      const result=await json(base+path+'/query',new URLSearchParams({f:'json',objectIds:String(row.id),outFields:'*',returnGeometry:'true',outSR:'4326'}));
+      if(sequence!==factorySelectionSequence)return;
+      const feature=result.features?.[0],raw=feature?.geometry;
+      if(!raw)throw Error('ไม่มีพิกัดโรงงาน');
+      const geometry={...raw,type:raw.rings?'polygon':raw.paths?'polyline':'point',spatialReference:{wkid:4326}};
+      const box=el('div',null,'factory-dss-popup');
+      box.append(el('strong',row.name),el('p',row.estate+' · เลขทะเบียน '+row.registration));
+      const hosts=popupSources.map(source=>{box.append(el('h4',source.title));const content=el('div');content.append(el('p','กำลังโหลดข้อมูล…'));box.append(content);return content;});
+      box.append(el('small','แหล่งข้อมูล: ระบบ DSS กนอ. · แสดงตามระเบียนที่จับคู่ได้'));
+      const graphic=new Graphic({geometry,attributes:feature.attributes,symbol:geometry.type==='point'?{type:'simple-marker',size:15,color:'#7942a0',outline:{color:'#fff',width:2}}:geometry.type==='polygon'?{type:'simple-fill',color:[121,66,160,.15],outline:{color:'#7942a0',width:2}}:{type:'simple-line',color:'#7942a0',width:3},popupTemplate:{title:row.name,content:()=>box}});
+      factorySelection.removeAll();factorySelection.add(graphic);
+      await view.goTo(geometry.type==='point'?{target:geometry,zoom:17}:{target:geometry});
+      if(sequence!==factorySelectionSequence)return;
+      view.openPopup({features:[graphic],location:geometry.type==='point'?geometry:graphic.geometry.extent.center});
+      popupSources.forEach((source,index)=>{
+        loadPopupSource(source.url).then(rows=>{if(sequence===factorySelectionSequence)renderPopupRecord(hosts[index],matchPopupCompany(rows,row),source.kind);}).catch(error=>{
+          if(sequence!==factorySelectionSequence)return;
+          hosts[index].replaceChildren(el('p',error.message.includes('หลายระเบียน')?error.message:'โหลดข้อมูลไม่สำเร็จ'));
+          const retry=el('button','ลองโหลดใหม่');retry.type='button';retry.onclick=()=>{hosts[index].replaceChildren(el('p','กำลังโหลดข้อมูล…'));loadPopupSource(source.url).then(rows=>renderPopupRecord(hosts[index],matchPopupCompany(rows,row),source.kind)).catch(()=>hosts[index].replaceChildren(el('p','โหลดข้อมูลไม่สำเร็จ')));};hosts[index].append(retry);
+        });
+      });
+    };
+
     function resizeSupportSymbols(){
       const baseSize=view.scale>100000?13:view.scale>20000?15:view.scale>5000?17:19;
       support.forEach((item,index)=>{
@@ -574,18 +663,10 @@
     window.ieatFactoryRegister={rows:items.map(item=>item.row),status:business.status};
     window.dispatchEvent(new CustomEvent('ieat-factory-register-updated',{detail:window.ieatFactoryRegister}));
     window.ieatFocusCoverageFactory=async id=>{
-      const result=await json(base+business.path+'/query',new URLSearchParams({f:'json',objectIds:String(id),outFields:'*',returnGeometry:'true',outSR:'4326'}));
-      const feature=result.features?.[0],g=feature?.geometry;
-      if(!g)throw Error('No geometry');
-      let x=g.x,y=g.y;
-      if(!Number.isFinite(x)||!Number.isFinite(y)){
-        const points=g.rings?.flat()||g.paths?.flat()||[];
-        if(!points.length)throw Error('No location');
-        x=points.reduce((sum,p)=>sum+p[0],0)/points.length;y=points.reduce((sum,p)=>sum+p[1],0)/points.length;
-      }
-      if(view?.ready)await view.goTo({target:{type:'point',longitude:x,latitude:y,spatialReference:{wkid:4326}},zoom:16});
-      else if(window.ieatSupportMap)window.ieatSupportMap.setView([y,x],16);
-      else throw Error('Map not ready');
+      const row=business.rows.find(item=>String(item.id)===String(id));
+      if(!row)throw Error('ไม่พบโรงงาน');
+      if(!window.ieatOpenFactoryPopup)throw Error('แผนที่ยังโหลดไม่เสร็จ');
+      return window.ieatOpenFactoryPopup(row,business.path);
     };
 
     const available=business.status==='ready'||business.status==='partial';
