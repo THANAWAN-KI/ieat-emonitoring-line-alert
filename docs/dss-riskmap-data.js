@@ -349,13 +349,12 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=18)=>svgMarker(
-      '<defs><linearGradient id="face" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="'+color+'"/><stop offset="1" stop-color="'+color+'" stop-opacity=".82"/></linearGradient></defs>'+
-      '<circle cx="12" cy="12.8" r="10.8" fill="#12263a" opacity=".18"/>'+
-      '<circle cx="12" cy="11.5" r="10.5" fill="url(#face)" stroke="#fff" stroke-width="1.8"/>'+
-      '<g fill="none" stroke="#fff" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.4 1.9) scale(.8)">'+drawing+'</g>',size,size);
+    const badge=(drawing,color,size=22)=>svgMarker(
+      '<circle cx="12" cy="12" r="11" fill="#fff" stroke="'+color+'" stroke-width="1.5"/>'+
+      '<circle cx="12" cy="12" r="9" fill="'+color+'" opacity=".09"/>'+
+      '<g fill="none" stroke="'+color+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" transform="translate(2.4 2.4) scale(.8)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#7942a0" stroke="#fff" stroke-width="1.4" d="M12 1a8 8 0 0 0-8 8c0 5.5 8 14 8 14s8-8.5 8-14a8 8 0 0 0-8-8Z"/><path fill="none" stroke="#fff" stroke-width="1.3" d="M7 12V7l3 2V6l3 2V5h4v7H7Zm3-1v-1m3 1v-1m3 1v-1"/>',25,25,12);
-    const fireStation=badge('<path d="M6 18V10l6-4 6 4v8H6Z"/><path d="M9 18v-5h6v5m-6-3h6"/><path d="M12 7V5"/>','#d34a32');
+    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#d34a32');
     const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#c53e58');
     const supportSymbols={
       fire:fireStation,hospital,
@@ -367,6 +366,15 @@
       school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#ae7419'),
       cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#365477',18)
     };
+    const legend=document.querySelector('.riskmap-map-key');
+    if(legend){
+      const legends=[['นิคมฯ',pin],['ดับเพลิง',supportSymbols.fire],['โรงพยาบาล',supportSymbols.hospital],['หัวจ่ายน้ำ',supportSymbols.hydrant],['ตำรวจ',supportSymbols.police],['ชุมชน',supportSymbols.community],['CCTV',supportSymbols.cctv],['โรงเรียน',supportSymbols.school],['เฝ้าระวังน้ำ',supportSymbols.waterWatch]];
+      legend.replaceChildren(...legends.map(([title,symbol])=>{
+        const li=el('li'),img=el('img');img.src=symbol.url;img.alt='';li.append(img,el('span',title));return li;
+      }));
+      const incident=el('li','จุดเกิดเหตุ');incident.style.setProperty('--key','#c64032');const dot=el('span','●');dot.style.color='#c64032';incident.prepend(dot);
+      const radius=el('li','รัศมีค้นหา','radius');legend.prepend(incident,radius);
+    }
     const polygon=(color,outline)=>({type:'simple-fill',color,outline:{color:outline,width:1}});
     const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression,symbol,minScale=0,opacity=1}={})=>new FeatureLayer({
       url,title,visible,definitionExpression,minScale,opacity,
@@ -524,7 +532,7 @@
     };
 
     function resizeSupportSymbols(){
-      const baseSize=view.scale>100000?13:view.scale>20000?15:view.scale>5000?17:19;
+      const baseSize=view.scale>100000?18:view.scale>20000?21:view.scale>5000?24:27;
       support.forEach((item,index)=>{
         if(item.renderer?.symbol?.type!=='picture-marker')return;
         const def=supportDefinitions[index],size=baseSize-(['hydrant','cctv'].includes(def.id)?2:0);
@@ -757,7 +765,7 @@
     actions.append(reset);
     const table=el('table',null,'dss-risk-table');
     const head=table.createTHead().insertRow();
-    for(const label of ['โรงงาน','นิคมฯ','เลขทะเบียน',...groups.map(group=>group.label),'แผนที่']){
+    for(const label of ['โรงงาน','นิคมฯ','เลขทะเบียน',...groups.map(group=>group.label)]){
       const th=el('th',label);th.scope='col';head.append(th);
     }
     const body=table.createTBody();
@@ -775,7 +783,7 @@
         catch{note.textContent='เปิดตำแหน่งไม่ได้ แผนที่อาจยังโหลดไม่เสร็จ กรุณาลองอีกครั้ง';}
         finally{button.disabled=false;}
       };
-      td.append(button);tr.append(td);
+      button.textContent=row.name;button.className='factory-name-link';button.title='ดูตำแหน่งและข้อมูลโรงงานบนแผนที่';tr.cells[0].replaceChildren(button);
     }
     const wrap=el('div',null,'dss-risk-table-wrap');
     wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','รายชื่อโรงงานเสี่ยง เลื่อนดูรายการเพิ่มเติม');
