@@ -105,11 +105,12 @@
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}));
-    const cue = {type:'simple-marker',style:'circle',size:22,color:[198,64,50,.12],outline:{color:'#c64032',width:2}};
-    const leader = {type:'picture-marker',width:28,height:19,xoffset:13,yoffset:42,
-      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 19"><path d="M1 18L13 2H27" fill="none" stroke="#fff" stroke-width="4"/><path d="M1 18L13 2H27" fill="none" stroke="#7e2222" stroke-width="2"/></svg>')};
-    const label = {type:'text',text:name,color:'#651e20',haloColor:'#fff',haloSize:2,
-      horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:54,font:{family:'Sarabun',size:11,weight:'bold'}};
+    const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
+    const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
+      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6a4877" stroke-width="1.4" stroke-linecap="round"/></svg>')};
+    const label = {type:'text',text:name,color:'#302239',backgroundColor:'#fff',
+      borderLineColor:'#d8c8df',borderLineSize:1,
+      horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
     graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
     return circle;
   }
@@ -416,14 +417,14 @@
         defaultLabel:'เขตอื่นหรือไม่ระบุ',defaultSymbol:polygon([143,150,160,.2],'#8f96a0'),
         uniqueValueInfos:values.map((value,index)=>{
           const color=palette[index%palette.length];
-          return {value,label:value,symbol:polygon([...color.slice(1).match(/../g).map(channel=>parseInt(channel,16)),.33],color)};
+          return {value,label:value,symbol:polygon([...color.slice(1).match(/../g).map(channel=>parseInt(channel,16)),.19],color)};
         })
       };
     }).catch(()=>{});
     [zones,businesses,eppZones].forEach(item=>{item.labelsVisible=false;});
     const risks=riskFields.map((f,i)=>layer(eppPath,f.label,{
       visible:true,minScale:1000000,
-      symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:5-i*1.7}},
+      symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:2.2-i*.45}},
       definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
     risks.forEach((risk,index)=>{
