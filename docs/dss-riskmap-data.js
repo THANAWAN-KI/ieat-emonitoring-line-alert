@@ -96,10 +96,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ · '+name,content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.addMany([
-      new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}),
-      new Graphic({geometry:origin,symbol:{type:'text',text:name.length>36?name.slice(0,36)+'…':name,color:'#61191c',haloColor:'#fff',haloSize:1.5,yoffset:38,font:{size:10,weight:'bold'}}})
-    ]);
+    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}));
     return circle;
   }
   async function updateNearby(forReport=false,auxiliary=false){
@@ -351,7 +348,7 @@
     });
     const badge=(drawing,color,size=24)=>svgMarker(
       '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
-    const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',29,29,0);
+    const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
     const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#cc5257');
     const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#cc5257');
     const supportSymbols={
@@ -408,10 +405,11 @@
         }};
       }
 
-      if(def.id==='hydrant'||def.id==='cctv')item.minScale=150000;
+      if(def.id==='hydrant'||def.id==='cctv')item.minScale=45000;
+      if(def.id==='community'||def.id==='communityRisk')item.minScale=30000;
       item.labelsVisible=true;
       item.labelingInfo=[{
-        minScale:18000,labelPlacement:'above-center',
+        minScale:7500,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["'+def.names[0]+'"]'},
         symbol:{type:'text',color:'#26312f',haloColor:'#fffdf5',haloSize:2,font:{family:'Sarabun',size:10,weight:'bold'},yoffset:14}
       }];
@@ -419,12 +417,12 @@
       item.when(()=>{
         if(item.geometryType!=='point')return;
         item.featureReduction={
-          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'24px',clusterMaxSize:'34px',maxScale:2000,
+          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:2000,
           symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:1.5}},
           labelingInfo:[{
             deconflictionStrategy:'none',labelPlacement:'center-center',
             labelExpressionInfo:{expression:"Text($feature.cluster_count, '#,###')"},
-            symbol:{type:'text',color:'#fff',font:{family:'Sarabun',size:10,weight:'bold'}}
+            symbol:{type:'text',color:'#fff',font:{family:'Sarabun',size:9,weight:'bold'}}
           }],
           popupTemplate:{title:def.label+' · {cluster_count} จุด',content:'กลุ่มจุดข้อมูลที่อยู่ใกล้กัน ซูมเข้าเพื่อดูตำแหน่งและรายละเอียดรายจุด'}
         };
