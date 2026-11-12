@@ -74,7 +74,7 @@
   const graphics=new GraphicsLayer({title:'จุดเกิดเหตุและรัศมีค้นหา',listMode:'hide'});
   const pinLayer=new GraphicsLayer({title:'หมุดจุดเกิดเหตุ',listMode:'hide'});
   map.addMany([graphics,pinLayer]);
-  const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:true});
+  const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:true,defaultUpdateOptions:{tool:'move',enableRotation:false,enableScaling:false}});
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
@@ -98,7 +98,6 @@
     table.style.cssText='width:100%;font:14px/1.7 Sarabun,sans-serif;text-align:left';
     box.append(table);return box;
   }
-  function openIncident(){if(pin&&origin)view.openPopup({features:[pin],location:origin});}
 
   function draw(){
     if(!origin)return;
@@ -106,6 +105,12 @@
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}));
+    const cue = {type:'simple-marker',style:'circle',size:22,color:[198,64,50,.12],outline:{color:'#c64032',width:2}};
+    const leader = {type:'picture-marker',width:28,height:19,xoffset:13,yoffset:42,
+      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 19"><path d="M1 18L13 2H27" fill="none" stroke="#fff" stroke-width="4"/><path d="M1 18L13 2H27" fill="none" stroke="#7e2222" stroke-width="2"/></svg>')};
+    const label = {type:'text',text:name,color:'#651e20',haloColor:'#fff',haloSize:2,
+      horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:54,font:{family:'Sarabun',size:11,weight:'bold'}};
+    graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
     return circle;
   }
   async function updateNearby(forReport=false,auxiliary=false){
@@ -162,14 +167,15 @@
     pinLayer.removeAll();
     pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><path fill="#c64032" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
-    draw();updateNearby();queueReport();openIncident();
+    view.closePopup();draw();updateNearby();queueReport();
+    view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
     message.textContent='จุดเกิดเหตุ · '+name+' · คลิกหมุดแล้วลากเพื่อย้ายจุด';
   }
   sketch.on('update',event=>{
     const moved=event.graphics[0];
     if(moved!==pin||!moved?.geometry)return;
     if(event.state==='active'||event.state==='complete'){origin=moved.geometry;draw();}
-    if(event.state==='complete'){updateNearby();queueReport();openIncident();}
+    if(event.state==='complete'){updateNearby();queueReport();}
   });
   $('coveragePickIncident').onclick=()=>{picking=true;message.textContent='คลิกบนแผนที่เพื่อกำหนดจุดเกิดเหตุ';$('coverageMap').scrollIntoView({block:'nearest'});};
   view.on('click',event=>{
@@ -207,10 +213,7 @@
       const summary=await frame.contentWindow.dssApplyIncidentContext(context);
       if(revision!==incidentRevision||!summary)return;
       context.summary=summary;context.status='rendering-map';
-      const circle=draw();
-      await view.goTo({target:circle.extent.expand(1.15)},{animate:false});
-      if(revision!==incidentRevision)return;
-      openIncident();
+      draw();
       const mapImage=await window.ieatCaptureCoverageMap();
       if(revision!==incidentRevision)return;
       frame.contentWindow.dssSetCoverageMapImage(mapImage,context.id);
@@ -222,8 +225,8 @@
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
-  radius.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
-  type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();openIncident();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
+  radius.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
+  type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
   $('coverageSearchSupport').onclick=()=>{if(origin&&selectedFactory)updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
     event.preventDefault();
@@ -417,12 +420,14 @@
         })
       };
     }).catch(()=>{});
+    [zones,businesses,eppZones].forEach(item=>{item.labelsVisible=false;});
     const risks=riskFields.map((f,i)=>layer(eppPath,f.label,{
       visible:true,minScale:1000000,
       symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:5-i*1.7}},
       definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
     risks.forEach((risk,index)=>{
+      risk.labelsVisible=false;
       riskMapLayers.set(riskFields[index].field,risk);
       risk.watch('visible',syncRiskCards);
     });
@@ -446,7 +451,7 @@
         }};
       }
 
-      if(def.id==='hydrant'||def.id==='cctv')item.minScale=45000;
+      if(def.id==='hydrant'||def.id==='cctv')item.minScale=18000;
       if(def.id==='community'||def.id==='communityRisk')item.minScale=30000;
       item.labelsVisible=!['hydrant','cctv'].includes(def.id);
       item.labelingInfo=[{
@@ -458,7 +463,7 @@
       item.when(()=>{
         if(item.geometryType!=='point')return;
         item.featureReduction={
-          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:2000,
+          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:['hydrant','cctv'].includes(def.id)?600:2000,
           symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:1.5}},
           labelingInfo:[{
             deconflictionStrategy:'none',labelPlacement:'center-center',
@@ -579,7 +584,7 @@
       const baseSize=view.scale>100000?18:view.scale>20000?21:view.scale>5000?24:27;
       support.forEach((item,index)=>{
         if(item.renderer?.symbol?.type!=='picture-marker')return;
-        const def=supportDefinitions[index],size=baseSize-(['hydrant','cctv'].includes(def.id)?2:0);
+        const def=supportDefinitions[index],size=Math.max(9,baseSize-(['hydrant','cctv'].includes(def.id)?7:3));
         if(Number(item.renderer.symbol.width)===size)return;
         const renderer=item.renderer.clone();renderer.symbol.width=size;renderer.symbol.height=size;item.renderer=renderer;
       });
