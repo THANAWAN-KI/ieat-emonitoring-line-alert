@@ -2630,10 +2630,20 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   // Restore these tools to the right column without cloning controls or losing state.
   const toolsObserver=new MutationObserver(keepMapTools);
   toolsObserver.observe(body,{childList:true,subtree:true});
+  let reportPageObserver;
   function styleReportPages(){
     const doc=frame.contentDocument;
     const pageTwo=doc?.getElementById('dssPageTwo');
-    if(!doc?.head||!pageTwo||!line)return;
+    if(!doc?.head||!line)return;
+    if(!pageTwo){
+      if(doc.body&&!reportPageObserver){
+        reportPageObserver=new MutationObserver(styleReportPages);
+        reportPageObserver.observe(doc.body,{childList:true,subtree:true});
+      }
+      return;
+    }
+    reportPageObserver?.disconnect();
+    reportPageObserver=null;
     if(pageTwo.nextElementSibling!==line)pageTwo.after(line);
     if(doc.getElementById('dss-separated-page-frames'))return;
     const style=doc.createElement('style');
@@ -2662,7 +2672,12 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     `;
     doc.head.append(style);
   }
-  frame.addEventListener('load',()=>{keepMapTools();styleReportPages();});
+  frame.addEventListener('load',()=>{
+    reportPageObserver?.disconnect();
+    reportPageObserver=null;
+    keepMapTools();
+    styleReportPages();
+  });
   keepMapTools();
   styleReportPages();
   const syncDownload=()=>{
@@ -3210,7 +3225,7 @@ html body #riskmapOverviewPanel #coverageMap .esri-widget--button:hover{backgrou
   #riskmapOverviewPanel #coverageMapView{height:clamp(490px,calc(100dvh - 180px),960px)}
 }
 </style>
-<style id="dss-report-overview-style">
+<style id="dss-report-reference-buttons">
 #emergencyReportPage :is(#coverageReportTitle,#coverageReportHint){display:none!important}
 html body #riskmapReportPanel #emergencyReportPage{
   border:0!important;border-radius:0!important;
@@ -3218,23 +3233,22 @@ html body #riskmapReportPanel #emergencyReportPage{
 }
 html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar{
   display:flex!important;flex-wrap:wrap;align-items:center;justify-content:flex-start!important;gap:10px;
-  margin:0 0 16px!important;padding:10px 12px;background:#f3cf69;
+  margin:0 0 16px!important;padding:0;background:transparent!important;
   border:0;box-shadow:none;
 }
 html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage){
   display:inline-flex!important;align-items:center;justify-content:center;
   width:auto!important;min-height:46px!important;margin:0!important;padding:8px 14px!important;
   font:600 15px/1.4 Sarabun,sans-serif!important;border-radius:0!important;
-  border:1px solid #b4cbbb!important;background:#eaf4ed!important;
-  color:#236842!important;-webkit-text-fill-color:#236842!important;box-shadow:none!important;
+  border:1px solid #26312f!important;background:#f6f3ec!important;
+  color:#17201d!important;-webkit-text-fill-color:#17201d!important;box-shadow:none!important;
 }
 html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage):hover:enabled,
 html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria-pressed="true"]{
-  background:#dcece0!important;border-color:#4d6055!important;
+  background:#85d1e1!important;border-color:#26312f!important;
 }
 @media(max-width:560px){
   html body #riskmapReportPanel #emergencyReportPage{padding:10px!important}
-  html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar{padding:8px}
 }
 </style>
 <style id="dss-report-jump">
