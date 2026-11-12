@@ -2576,12 +2576,16 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   const other=wrapSearch('ข้อมูลสนับสนุนอื่นในรัศมี',...Array.from(auxiliary.children).slice(1));
   const auxiliaryResults=document.createElement('div');auxiliaryResults.id='coverageAuxiliaryResults';auxiliaryResults.setAttribute('aria-live','polite');other.append(auxiliaryResults);
   auxiliary.append(wrapSearch('สารเคมีจาก DSS',get('coverageChemicalSearch')),wrapSearch('อุปกรณ์ระงับเหตุจาก DSS',equipment),other);
-  const previewLink=document.createElement('a');
-  previewLink.className='riskmap-report-preview-link';
-  previewLink.href='#emergencyReportPage';
-  previewLink.textContent='ไปที่ตัวอย่างรายงาน ↓';
-  previewLink.hidden=true;
-  controls.append(previewLink,auxiliary);
+  const previewButton=document.createElement('button');
+  previewButton.type='button';
+  previewButton.textContent='รายงาน';
+  previewButton.setAttribute('aria-controls',report.id);
+  previewButton.onclick=()=>{
+    report.tabIndex=-1;
+    report.focus({preventScroll:true});
+    report.scrollIntoView({block:'start',behavior:'smooth'});
+  };
+  controls.append(auxiliary);
   const line=get('riskMapLinePanel');if(line)controls.append(line);
   const estateContent=get('riskmapEstateContent');
   estateContent.after(controls);
@@ -2606,6 +2610,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   };
   const searchActions=document.createElement('div');
   searchActions.className='report-search-actions';
+  searchActions.append(previewButton);
   function keepMapTools(){
     const toolbar=document.querySelector('.report-download-toolbar');
     if(toolbar){
@@ -2614,7 +2619,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       const search=get('coverageOpenReport');
       if(search&&searchActions.firstElementChild!==search)searchActions.prepend(search);
       const copy=get('riskMapLineCopy');
-      if(copy&&copy.parentElement!==searchActions)searchActions.append(copy);
+      if(copy&&copy.parentElement!==searchActions)searchActions.insertBefore(copy,previewButton);
       if(copy&&copy.textContent!=='คัดลอกข้อความ LINE')copy.textContent='คัดลอกข้อความ LINE';
       const controls=form.querySelector('.coverage-incident-controls');
       if(controls&&searchActions.parentElement!==controls)controls.append(searchActions);
@@ -2631,7 +2636,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     const button=get('dashboardDownloadImage');
     const ready=window.ieatCoverageReport?.status==='ready';
     if(button&&button.textContent!=='กำลังสร้างภาพ…')button.disabled=!ready;
-    previewLink.hidden=!ready;
   };
   window.addEventListener('ieat-coverage-context-updated',syncDownload);syncDownload();
 
@@ -3199,6 +3203,9 @@ html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria
   html body #riskmapReportPanel #emergencyReportPage{padding:10px!important}
   html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar{padding:8px}
 }
+</style>
+<style id="dss-report-jump">
+#riskmapOverviewPanel .report-search-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 </style>
 </body></html>
 
