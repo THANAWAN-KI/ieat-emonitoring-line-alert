@@ -2630,7 +2630,24 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   // Restore these tools to the right column without cloning controls or losing state.
   const toolsObserver=new MutationObserver(keepMapTools);
   toolsObserver.observe(body,{childList:true,subtree:true});
-  frame.addEventListener('load',keepMapTools);
+  function styleReportPages(){
+    const doc=frame.contentDocument;
+    if(!doc?.head||doc.getElementById('dss-separated-page-frames'))return;
+    const style=doc.createElement('style');
+    style.id='dss-separated-page-frames';
+    style.textContent=`
+      html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
+        background:transparent!important;border:0!important;box-shadow:none!important;
+        gap:18px!important;
+      }
+      html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > :is(#report,#dssPageTwo){
+        border:1px solid #a9b8ad!important;border-radius:0!important;box-shadow:none!important;
+      }
+    `;
+    doc.head.append(style);
+  }
+  frame.addEventListener('load',()=>{keepMapTools();styleReportPages();});
+  styleReportPages();
   keepMapTools();
   const syncDownload=()=>{
     const button=get('dashboardDownloadImage');
@@ -3180,13 +3197,13 @@ html body #riskmapOverviewPanel #coverageMap .esri-widget--button:hover{backgrou
 <style id="dss-report-overview-style">
 #emergencyReportPage :is(#coverageReportTitle,#coverageReportHint){display:none!important}
 html body #riskmapReportPanel #emergencyReportPage{
-  border:2px solid #4d6055!important;border-radius:0!important;
-  background:#fff!important;box-shadow:5px 5px 0 #e8ede7!important;padding:16px!important;
+  border:0!important;border-radius:0!important;
+  background:#fff!important;box-shadow:none!important;padding:0!important;
 }
 html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar{
   display:flex!important;flex-wrap:wrap;align-items:center;justify-content:flex-start!important;gap:10px;
   margin:0 0 16px!important;padding:10px 12px;background:#f3cf69;
-  border:2px solid #4d6055;box-shadow:4px 4px 0 #e8ede7;
+  border:0;box-shadow:none;
 }
 html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage){
   display:inline-flex!important;align-items:center;justify-content:center;
