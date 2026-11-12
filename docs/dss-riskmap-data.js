@@ -2,6 +2,15 @@
  'use strict';
  const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
+ const riskMapLayers=new Map();
+ function syncRiskCards(){
+   document.querySelectorAll('#coverageRisk [data-risk-field]').forEach(card=>{
+     const layer=riskMapLayers.get(card.dataset.riskField);
+     card.disabled=!layer;
+     if(layer)card.setAttribute('aria-pressed',String(layer.visible));
+     card.querySelector('.risk-layer-state').textContent=layer?(layer.visible?'เปิดบนแผนที่':'ปิดบนแผนที่'):'แผนที่ยังไม่พร้อม';
+   });
+ }
  const datasets=[
  {id:'estate',label:'นิคมอุตสาหกรรม / ท่าเรือฯ',path:'e_PP_2025/FeatureServer/1',names:['สำนักงานนิคมฯ'],estates:['สำนักงานนิคมฯ'],color:'#00b1c1'},
  {id:'hospital',label:'โรงพยาบาล',path:'Hospital_Locations/FeatureServer/0',names:['โรงพยาบาล'],estates:['นิคมอุตสาหกรรม'],color:'#d6083b'},
@@ -413,6 +422,11 @@
       symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:5-i*1.7}},
       definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
+    risks.forEach((risk,index)=>{
+      riskMapLayers.set(riskFields[index].field,risk);
+      risk.watch('visible',syncRiskCards);
+    });
+    syncRiskCards();
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
       visible:['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
@@ -774,17 +788,21 @@
     const max=Math.max(1,...counts);
     const riskRows=groups.map((group,index)=>{
       const count=counts[index];
-      return line(group.label,count,max,status||(count===null?'ไม่มีข้อมูล':''),count===null?null:()=>{
-        drill=drill===group.field?'':group.field;
+      const card=line(group.label,count,max,status||(count===null?'ไม่มีข้อมูล':''),()=>{
+        const layer=riskMapLayers.get(group.field);
+        if(!layer)return;
+        layer.visible=!layer.visible;
+        if(layer.visible)drill=group.field;
+        else if(drill===group.field)drill='';
         renderCoverage();
-        if(drill){
-          detail.focus();
-          detail.scrollIntoView({block:'nearest'});
-        }else risk.children[index]?.focus();
+        risk.children[index]?.focus({preventScroll:true});
       });
+      card.dataset.riskField=group.field;
+      card.append(el('small','','risk-layer-state'));
+      return card;
     });
-    riskRows.forEach((row,index)=>row.setAttribute('aria-pressed',String(drill===groups[index].field)));
     risk.replaceChildren(...riskRows);
+    syncRiskCards();
     const group=groups.find(g=>g.field===drill);
     detail.hidden=false;
     const sorted=items.filter(item=>drill?item.flags.has(drill):item.flags.size>0).sort((a,b)=>a.row.name.localeCompare(b.row.name,'th'));
