@@ -2644,7 +2644,14 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     }
     reportPageObserver?.disconnect();
     reportPageObserver=null;
-    if(pageTwo.nextElementSibling!==line)pageTwo.after(line);
+    let column=doc.getElementById('dssReportSecondColumn');
+    if(!column){
+      column=doc.createElement('div');
+      column.id='dssReportSecondColumn';
+      pageTwo.before(column);
+      column.append(pageTwo);
+    }
+    if(line.parentElement!==column)column.append(line);
     if(doc.getElementById('dss-separated-page-frames'))return;
     const style=doc.createElement('style');
     style.id='dss-separated-page-frames';
@@ -2653,24 +2660,35 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
         background:transparent!important;border:0!important;box-shadow:none!important;
         gap:18px!important;
       }
-      #riskMapLinePanel{display:grid;gap:8px;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
+      #dssReportSecondColumn{min-width:0;align-self:start}
+      #dssReportSecondColumn > #riskMapLinePanel{display:grid!important;gap:8px;margin:14px 0 0;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
       #riskMapLinePanel :is(h3,p){margin:0}
       #riskMapLinePanel :is(select,textarea){width:100%;padding:8px;font:inherit;border:1px solid #b6a6c6;background:#fff}
       #riskMapLinePanel textarea{resize:vertical}
-      body.dss-edit-exporting #riskMapLinePanel{display:none}
+      body.dss-edit-exporting #dssReportSecondColumn > #riskMapLinePanel{display:none!important}
       @media(min-width:851px){
         html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
-          display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto 1fr;
+          display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
         }
-        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #report{grid-area:1 / 1 / 3 / 2}
-        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssPageTwo{grid-area:1 / 2}
-        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #riskMapLinePanel{grid-area:2 / 2;align-self:start}
+        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #report{grid-area:1 / 1}
+        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssReportSecondColumn{grid-area:1 / 2}
       }
-      html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > :is(#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo){
+      html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap :is(#report#report#report,#dssReportSecondColumn > #dssPageTwo#dssPageTwo){
         border:1px solid #000!important;border-radius:0!important;box-shadow:none!important;
       }
     `;
     doc.head.append(style);
+    const wrap=column.parentElement;
+    const fit=()=>{
+      const height=Math.ceil(wrap.getBoundingClientRect().height)+32;
+      if(height>100)frame.parentElement.style.setProperty('--parallel-report-height',height+'px');
+    };
+    if(window.ResizeObserver){
+      const observer=new ResizeObserver(fit);
+      observer.observe(wrap);
+      frame.addEventListener('load',()=>observer.disconnect(),{once:true});
+    }
+    fit();
   }
   frame.addEventListener('load',()=>{
     reportPageObserver?.disconnect();
