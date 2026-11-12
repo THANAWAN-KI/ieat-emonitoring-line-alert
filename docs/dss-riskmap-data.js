@@ -369,6 +369,10 @@
       }));
       const incident=el('li','จุดเกิดเหตุ');incident.style.setProperty('--key','#c64032');const dot=el('span','●');dot.style.color='#c64032';incident.prepend(dot);
       const radius=el('li','รัศมีค้นหา','radius');legend.prepend(incident,radius);
+      for(const risk of riskFields){
+        const key=el('li',risk.label,'riskmap-risk-key');
+        key.style.setProperty('--key',risk.color);legend.append(key);
+      }
     }
     const polygon=(color,outline)=>({type:'simple-fill',color,outline:{color:outline,width:1}});
     const layer=(path,title,{visible=false,url=base+encodeURI(path),fields=[],definitionExpression,symbol,minScale=0,opacity=1}={})=>new FeatureLayer({
@@ -380,11 +384,34 @@
     const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ'],symbol:pin});
     const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',{visible:true,opacity:.55,minScale:1500000});
     const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',{minScale:350000,symbol:polygon([36,132,90,.12],'#7b9a83')});
-    const riskSymbols=[
-      polygon([232,186,63,.25],'#b88b20'),polygon([204,82,87,.26],'#a1363e'),polygon([204,82,87,.18],'#a1363e')
-    ];
-    const risks=riskFields.map((f,i)=>layer('e_PP/FeatureServer/0',f.label,{
-      minScale:1000000,symbol:riskSymbols[i],definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
+    const eppPath='e_PP/FeatureServer/0';
+    const zoneField='เขตประกอบการ';
+    const eppZones=layer(eppPath,'เขตประกอบการ e-PP',{
+      visible:true,minScale:350000,fields:[zoneField,'นิคมอุตสาหกรรม'],
+      symbol:polygon([143,150,160,.2],'#8f96a0')
+    });
+    eppZones.when(async()=>{
+      const query=eppZones.createQuery();
+      query.where=zoneField+' IS NOT NULL';
+      query.outFields=[zoneField];
+      query.returnDistinctValues=true;
+      query.returnGeometry=false;
+      const result=await eppZones.queryFeatures(query);
+      const values=[...new Set(result.features.map(feature=>feature.attributes[zoneField]).filter(value=>String(value||'').trim()))].sort((a,b)=>a.localeCompare(b,'th'));
+      const palette=['#7554a3','#397fb5','#5d8a3d','#9a674c','#348b85','#9b5b89','#8a7837','#606aaf'];
+      eppZones.renderer={
+        type:'unique-value',field:zoneField,legendOptions:{title:'สีพื้นแปลงตามเขตประกอบการ'},
+        defaultLabel:'เขตอื่นหรือไม่ระบุ',defaultSymbol:polygon([143,150,160,.2],'#8f96a0'),
+        uniqueValueInfos:values.map((value,index)=>{
+          const color=palette[index%palette.length];
+          return {value,label:value,symbol:polygon([...color.slice(1).match(/../g).map(channel=>parseInt(channel,16)),.33],color)};
+        })
+      };
+    }).catch(()=>{});
+    const risks=riskFields.map((f,i)=>layer(eppPath,f.label,{
+      visible:true,minScale:1000000,
+      symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:5-i*1.7}},
+      definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
       visible:['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:supportSymbols[d.id],
@@ -438,7 +465,7 @@
     ];
     supplemental.forEach((item,index)=>item.when(()=>{if(item.geometryType==='point')item.renderer={type:'simple',symbol:extraSymbols[index]};}).catch(()=>{}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
-    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
+    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
     const factorySelection=new GraphicsLayer({title:'โรงงานที่เลือกจากทะเบียน',listMode:'hide'});
     map.add(factorySelection);
@@ -603,7 +630,7 @@
       ...support.map((item,i)=>({layer:item,fields:supportData[i].names})),
       ...supplemental.map(item=>({layer:item,fields:[]}))
     ],GraphicsLayer,Graphic,Circle,SketchViewModel)).catch(()=>{});
-    const layers=[center,zones,businesses,...support,...risks,...supplemental];
+    const layers=[center,zones,businesses,eppZones,...support,...risks,...supplemental];
     view.when(()=>{status.textContent='ซูมเข้าหรือเลือกนิคมฯ เพื่อดูเขตประกอบการและทรัพยากรใกล้เคียง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
     Promise.allSettled(layers.map(l=>l.load())).then(results=>{
       const failures=results.flatMap((r,i)=>r.status==='rejected'?[layers[i].title]:[]);
