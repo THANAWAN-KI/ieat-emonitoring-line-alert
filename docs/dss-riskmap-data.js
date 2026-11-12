@@ -93,7 +93,7 @@
 
   function draw(){
     if(!origin)return;
-    if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ · '+name,content:incidentDetails};
+    if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}));
@@ -407,7 +407,7 @@
 
       if(def.id==='hydrant'||def.id==='cctv')item.minScale=45000;
       if(def.id==='community'||def.id==='communityRisk')item.minScale=30000;
-      item.labelsVisible=true;
+      item.labelsVisible=!['hydrant','cctv'].includes(def.id);
       item.labelingInfo=[{
         minScale:7500,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["'+def.names[0]+'"]'},
