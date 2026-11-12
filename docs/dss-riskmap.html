@@ -370,7 +370,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   </div>
   <p id="coverageIncidentStatus" role="status">หากพบหลายโรงงาน ให้เลือกจากผลค้นหา เมื่อรายงานพร้อม ให้ตรวจตัวอย่างก่อนดาวน์โหลดภาพ 2 หน้าหรือคัดลอกข้อความ LINE</p>
   <div id="coverageFactoryMatches"></div>
-  <div id="coverageNearbyResults" aria-live="polite"></div>
+  <div id="coverageNearbyResults" hidden></div>
 </form>
 <section id="dssEquipmentNearby" aria-labelledby="dssEquipmentNearbyTitle">
   <h3 id="dssEquipmentNearbyTitle">ค้นหาอุปกรณ์ระงับเหตุของโรงงานใกล้เคียง</h3>
@@ -2586,7 +2586,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     report.scrollIntoView({block:'start',behavior:'smooth'});
   };
   controls.append(auxiliary);
-  const line=get('riskMapLinePanel');if(line)controls.append(line);
+  const line=get('riskMapLinePanel');
   const estateContent=get('riskmapEstateContent');
   estateContent.after(controls);
   panel.append(bottom);overviewPanel.after(panel);
@@ -2618,7 +2618,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       if(toolbar.firstElementChild!==editReportButton)toolbar.prepend(editReportButton);
       const search=get('coverageOpenReport');
       if(search&&searchActions.firstElementChild!==search)searchActions.prepend(search);
-      const copy=get('riskMapLineCopy');
+      const copy=get('riskMapLineCopy')||line?.querySelector('#riskMapLineCopy');
       if(copy&&copy.parentElement!==searchActions)searchActions.insertBefore(copy,previewButton);
       if(copy&&copy.textContent!=='คัดลอกข้อความ LINE')copy.textContent='คัดลอกข้อความ LINE';
       const controls=form.querySelector('.coverage-incident-controls');
@@ -2632,13 +2632,29 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   toolsObserver.observe(body,{childList:true,subtree:true});
   function styleReportPages(){
     const doc=frame.contentDocument;
-    if(!doc?.head||doc.getElementById('dss-separated-page-frames'))return;
+    const pageTwo=doc?.getElementById('dssPageTwo');
+    if(!doc?.head||!pageTwo||!line)return;
+    if(pageTwo.nextElementSibling!==line)pageTwo.after(line);
+    if(doc.getElementById('dss-separated-page-frames'))return;
     const style=doc.createElement('style');
     style.id='dss-separated-page-frames';
     style.textContent=`
       html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
         background:transparent!important;border:0!important;box-shadow:none!important;
         gap:18px!important;
+      }
+      #riskMapLinePanel{display:grid;gap:8px;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
+      #riskMapLinePanel :is(h3,p){margin:0}
+      #riskMapLinePanel :is(select,textarea){width:100%;padding:8px;font:inherit;border:1px solid #b6a6c6;background:#fff}
+      #riskMapLinePanel textarea{resize:vertical}
+      body.dss-edit-exporting #riskMapLinePanel{display:none}
+      @media(min-width:851px){
+        html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
+          display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto 1fr;
+        }
+        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #report{grid-area:1 / 1 / 3 / 2}
+        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssPageTwo{grid-area:1 / 2}
+        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #riskMapLinePanel{grid-area:2 / 2;align-self:start}
       }
       html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > :is(#report,#dssPageTwo){
         border:1px solid #a9b8ad!important;border-radius:0!important;box-shadow:none!important;
@@ -2647,8 +2663,8 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     doc.head.append(style);
   }
   frame.addEventListener('load',()=>{keepMapTools();styleReportPages();});
-  styleReportPages();
   keepMapTools();
+  styleReportPages();
   const syncDownload=()=>{
     const button=get('dashboardDownloadImage');
     const ready=window.ieatCoverageReport?.status==='ready';
@@ -3224,5 +3240,6 @@ html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria
 <style id="dss-report-jump">
 #riskmapOverviewPanel .report-search-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 </style>
+<style id="dss-line-page-two">#coverageNearbyResults[hidden]{display:none!important}</style>
 </body></html>
 
