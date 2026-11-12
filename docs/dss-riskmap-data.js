@@ -764,7 +764,6 @@
     detail.hidden=false;
     const sorted=items.filter(item=>drill?item.flags.has(drill):item.flags.size>0).sort((a,b)=>a.row.name.localeCompare(b.row.name,'th'));
     const heading=el('h3',(group?.label||'รายชื่อโรงงานที่เข้าข่ายความเสี่ยง')+' · '+(available?number(sorted.length):'—')+' ราย');
-    const note=el('p',available?'โรงงานหนึ่งแห่งอาจเข้าข่ายหลายกลุ่ม จึงไม่ควรบวกจำนวนการ์ดรวมกัน · คลิกการ์ดเพื่อกรองรายการ':'กำลังโหลดหรือเชื่อมต่อทะเบียนโรงงานไม่ได้');
     const actions=el('div',null,'risk-table-actions'),reset=el('button','ดูทุกกลุ่มความเสี่ยง');
     reset.type='button';reset.disabled=!drill;reset.onclick=()=>{drill='';renderCoverage();};
     actions.append(reset);
@@ -794,7 +793,7 @@
     wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','รายชื่อโรงงานเสี่ยง เลื่อนดูรายการเพิ่มเติม');
     wrap.append(table);
     const sourceNote=el('p','แหล่งข้อมูล: ทะเบียน e_PP กนอ. · แสดงตามธงความเสี่ยงในทะเบียน ไม่ใช่ผลประเมินอุบัติเหตุ ณ เวลาปัจจุบัน');
-    detail.replaceChildren(heading,actions,note,...(sorted.length?[wrap]:[el('p',available?'ไม่พบรายการในขอบเขตที่เลือก':'ยังแสดงรายชื่อไม่ได้')]),sourceNote);
+    detail.replaceChildren(heading,actions,...(!available?[el('p','กำลังโหลดหรือเชื่อมต่อทะเบียนโรงงานไม่ได้')]:[]),...(sorted.length?[wrap]:[el('p',available?'ไม่พบรายการในขอบเขตที่เลือก':'ยังแสดงรายชื่อไม่ได้')]),sourceNote);
     if(sorted.length)requestAnimationFrame(()=>{
       const rows=[...body.rows].slice(0,3);
       wrap.style.maxHeight=(table.tHead.getBoundingClientRect().height+rows.reduce((sum,row)=>sum+row.getBoundingClientRect().height,0)+2)+'px';
