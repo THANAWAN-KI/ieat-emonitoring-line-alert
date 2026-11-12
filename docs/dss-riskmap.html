@@ -2609,14 +2609,13 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   function keepMapTools(){
     const toolbar=document.querySelector('.report-download-toolbar');
     if(toolbar){
-      const hint=get('coverageReportHint');
-      if(hint&&hint.nextElementSibling!==toolbar)hint.after(toolbar);
+      if(report.firstElementChild!==toolbar)report.prepend(toolbar);
+      if(toolbar.firstElementChild!==editReportButton)toolbar.prepend(editReportButton);
       const search=get('coverageOpenReport');
       if(search&&searchActions.firstElementChild!==search)searchActions.prepend(search);
       const copy=get('riskMapLineCopy');
       if(copy&&copy.parentElement!==searchActions)searchActions.append(copy);
       if(copy&&copy.textContent!=='คัดลอกข้อความ LINE')copy.textContent='คัดลอกข้อความ LINE';
-      if(editReportButton.parentElement!==report)report.prepend(editReportButton);
       const controls=form.querySelector('.coverage-incident-controls');
       if(controls&&searchActions.parentElement!==controls)controls.append(searchActions);
     }
@@ -3172,6 +3171,17 @@ html body #riskmapOverviewPanel #coverageMap .esri-widget--button:hover{backgrou
 @media(min-width:1051px){
   .riskmap-shared-workspace #riskmapOverviewPanel .coverage-map-layout{grid-template-columns:minmax(0,46fr) minmax(0,54fr)}
   #riskmapOverviewPanel #coverageMapView{height:clamp(490px,calc(100dvh - 180px),960px)}
+}
+</style>
+<style id="dss-report-compact-actions">
+#emergencyReportPage :is(#coverageReportTitle,#coverageReportHint){display:none!important}
+#riskmapReportPanel #emergencyReportPage .report-download-toolbar{
+  display:flex!important;flex-wrap:wrap;align-items:center;justify-content:flex-start!important;gap:10px;
+}
+#riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage){
+  display:inline-flex!important;align-items:center;justify-content:center;
+  width:auto!important;min-height:42px!important;margin:0!important;padding:8px 14px!important;
+  font:600 15px/1.4 Sarabun,sans-serif!important;
 }
 </style>
 </body></html>
