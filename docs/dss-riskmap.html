@@ -3173,15 +3173,31 @@ html body #riskmapOverviewPanel #coverageMap .esri-widget--button:hover{backgrou
   #riskmapOverviewPanel #coverageMapView{height:clamp(490px,calc(100dvh - 180px),960px)}
 }
 </style>
-<style id="dss-report-compact-actions">
+<style id="dss-report-overview-style">
 #emergencyReportPage :is(#coverageReportTitle,#coverageReportHint){display:none!important}
-#riskmapReportPanel #emergencyReportPage .report-download-toolbar{
-  display:flex!important;flex-wrap:wrap;align-items:center;justify-content:flex-start!important;gap:10px;
+html body #riskmapReportPanel #emergencyReportPage{
+  border:2px solid #4d6055!important;border-radius:0!important;
+  background:#fff!important;box-shadow:5px 5px 0 #e8ede7!important;padding:16px!important;
 }
-#riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage){
+html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar{
+  display:flex!important;flex-wrap:wrap;align-items:center;justify-content:flex-start!important;gap:10px;
+  margin:0 0 16px!important;padding:10px 12px;background:#f3cf69;
+  border:2px solid #4d6055;box-shadow:4px 4px 0 #e8ede7;
+}
+html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage){
   display:inline-flex!important;align-items:center;justify-content:center;
-  width:auto!important;min-height:42px!important;margin:0!important;padding:8px 14px!important;
-  font:600 15px/1.4 Sarabun,sans-serif!important;
+  width:auto!important;min-height:46px!important;margin:0!important;padding:8px 14px!important;
+  font:600 15px/1.4 Sarabun,sans-serif!important;border-radius:0!important;
+  border:1px solid #b4cbbb!important;background:#eaf4ed!important;
+  color:#236842!important;-webkit-text-fill-color:#236842!important;box-shadow:none!important;
+}
+html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage):hover:enabled,
+html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria-pressed="true"]{
+  background:#dcece0!important;border-color:#4d6055!important;
+}
+@media(max-width:560px){
+  html body #riskmapReportPanel #emergencyReportPage{padding:10px!important}
+  html body #riskmapReportPanel #emergencyReportPage .report-download-toolbar{padding:8px}
 }
 </style>
 </body></html>
