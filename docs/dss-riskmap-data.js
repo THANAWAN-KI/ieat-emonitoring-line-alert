@@ -407,7 +407,7 @@
       query.returnGeometry=false;
       const result=await eppZones.queryFeatures(query);
       const values=[...new Set(result.features.map(feature=>feature.attributes[zoneField]).filter(value=>String(value||'').trim()))].sort((a,b)=>a.localeCompare(b,'th'));
-      const palette=['#7554a3','#397fb5','#5d8a3d','#9a674c','#348b85','#9b5b89','#8a7837','#606aaf'];
+      const palette=['#7554a3','#397fb5','#5d8a3d','#a053b7','#348b85','#9b5b89','#8a7837','#606aaf'];
       eppZones.renderer={
         type:'unique-value',field:zoneField,legendOptions:{title:'สีพื้นแปลงตามเขตประกอบการ'},
         defaultLabel:'เขตอื่นหรือไม่ระบุ',defaultSymbol:polygon([143,150,160,.2],'#8f96a0'),
