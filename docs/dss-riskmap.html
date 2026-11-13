@@ -285,7 +285,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 </div>
 <style>
 .emcc-gis-header { position: sticky; top: 0; z-index: 1100; font-family: Sarabun, sans-serif; }
-.emcc-gis-brand { display: flex; align-items: center; gap: 16px; padding: 8px 24px; min-height: 50px; box-sizing: border-box; background: white; color: #141718; }
+.emcc-gis-brand#ieatPortalHeader { justify-content: flex-start; display: flex; align-items: center; gap: 16px; padding: 8px 24px; min-height: 50px; box-sizing: border-box; background: white; color: #141718; }
 .emcc-gis-brand a { color: inherit; text-decoration: none; font-size: 28px; letter-spacing: .1em; }
 .emcc-gis-nav { display: flex; flex-wrap: wrap; align-items: stretch; background: linear-gradient(90deg,#362048,#533273 55%,#643e88); color: white; }
 .emcc-gis-nav > span { flex: 1 1 350px; padding: 14px 24px; }
@@ -295,8 +295,8 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 .emcc-gis-nav summary::after { content: " ⌄"; }
 .emcc-gis-nav details > div { position: absolute; right: 0; min-width: 180px; background: #362048; }
 .emcc-gis-nav a:hover, .emcc-gis-nav summary:hover { background: #643e88; }
-:where(#riskCoverage,#riskMapSection,#coverageMap,#emergencyReportPage) { scroll-margin-top: 125px; }
-@media(max-width:640px){ .emcc-gis-brand { padding-inline:12px; font-size:13px; } .emcc-gis-nav > span { flex-basis:100%; padding:8px 12px; } :where(#riskCoverage,#riskMapSection,#coverageMap,#emergencyReportPage){scroll-margin-top:170px} }
+#riskCoverage, #riskMapSection, #coverageMap, #emergencyReportPage { scroll-margin-top: 125px; }
+@media(max-width:640px){ .emcc-gis-brand { padding-inline:12px; font-size:13px; } .emcc-gis-nav > span { flex-basis:100%; padding:8px 12px; } #riskCoverage, #riskMapSection, #coverageMap, #emergencyReportPage { scroll-margin-top:170px; } }
 </style>
 <script>
 document.querySelector('.emcc-gis-nav details').addEventListener('click', function(event) {
@@ -3298,5 +3298,15 @@ html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria
 #riskmapOverviewPanel .report-search-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 </style>
 <style id="dss-line-page-two">#coverageNearbyResults[hidden]{display:none!important}</style>
+<script>
+window.addEventListener('load', function () {
+  if (location.hash !== '#riskMapSection') return;
+  const map = document.getElementById('riskMapSection');
+  if (!map) return;
+  const header = document.querySelector('.emcc-gis-header');
+  map.style.scrollMarginTop = (header.offsetHeight + 12) + 'px';
+  map.scrollIntoView({ block: 'start' });
+});
+</script>
 </body></html>
 
