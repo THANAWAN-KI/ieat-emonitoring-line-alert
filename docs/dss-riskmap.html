@@ -265,6 +265,15 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 #coverageRisk [aria-pressed="false"] .risk-layer-state{color:#49554e}
 #coverageRisk button:focus-visible{outline:2px solid #335b46;outline-offset:2px}
 </style>
+<style>
+#riskCoverage .fire-workflow{margin-block:16px 24px;padding:14px;border:1px solid #ddd3e7;background:#faf8fc}
+#riskCoverage .fire-workflow h2{margin:0 0 10px;font-size:18px}
+.fire-workflow ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;margin:0;padding-inline-start:24px}
+.fire-workflow a{color:#512971;font-weight:600;text-decoration:underline}
+.fire-workflow li span{display:block;font-size:13px;color:#51465b}
+#coverageEstateForm,#riskMapSection,#coverageSupportTitle,#emergencyReportPage{scroll-margin-top:155px}
+@media(max-width:480px){.fire-workflow ol{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
@@ -337,6 +346,15 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
   <div class="riskmap-overview-heading">
     <h1 id="riskCoverageTitle">แผนที่ความเสี่ยงนิคมฯ</h1>
   </div>
+  <nav class="fire-workflow" aria-label="ขั้นตอนการใช้งานเมื่อได้รับแจ้งเหตุไฟไหม้">
+    <h2>เมื่อได้รับแจ้งเหตุไฟไหม้</h2>
+    <ol>
+      <li><a href="#coverageEstateForm">ค้นหานิคมฯ</a><span>พิมพ์ชื่อและเลือกพื้นที่เกิดเหตุ</span></li>
+      <li><a href="#riskMapSection">ระบุจุดเกิดเหตุ</a><span>เลือกตำแหน่งบนแผนที่</span></li>
+      <li><a href="#coverageSupportTitle">ดูจุดช่วยเหลือ</a><span>ตรวจทรัพยากรใกล้จุดเกิดเหตุ</span></li>
+      <li><a href="#emergencyReportPage">จัดทำรายงาน</a><span>ตรวจข้อมูลในรายงานก่อนดาวน์โหลด</span></li>
+    </ol>
+  </nav>
   <div id="riskmapEstateContent">
   <h2 id="coverageEstateHeading">ค้นหานิคมอุตสาหกรรม</h2>
   <form id="coverageEstateForm" role="search" aria-labelledby="coverageEstateHeading">
