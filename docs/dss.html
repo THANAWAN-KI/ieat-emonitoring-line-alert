@@ -1070,19 +1070,7 @@ html body #report .wind-arrow{
  -webkit-text-fill-color:#511378!important;
 }
 </style>
-<script id="dss-match-fire-font-lock-final">
-(function(){
- function apply(){
-  document.querySelectorAll("body *:not(svg):not(path):not(.material-icons):not([class*='fa-'])").forEach(function(el){
-   el.style.setProperty("font-family","Sarabun, sans-serif","important");
-  });
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",apply,{once:true});else apply();
- var root=document.body;
- if(root)new MutationObserver(function(){requestAnimationFrame(apply)}).observe(root,{childList:true,subtree:true});
- [100,500,1200,2500].forEach(function(ms){setTimeout(apply,ms)});
-})();
-</script>
+<style id="dss-report-font">body,body *:not(svg):not(path):not(.material-icons):not([class*='fa-']){font-family:Sarabun,sans-serif!important}</style>
 
 <style id="dss-purple-important-only-final">
 /* Normal report copy */
@@ -1742,7 +1730,7 @@ async function downloadReportPng(){
    loadDssNearby(point.lat,point.lng);loadWeather();
  });
  mapNode.classList.add('dss-live-ready');
- if(window.ResizeObserver)new ResizeObserver(()=>live.invalidateSize()).observe(mapNode);
+ if(window.ResizeObserver)new ResizeObserver(()=>{if(!document.hidden)live.invalidateSize({pan:false})}).observe(mapNode);
  updateMap();render();
 })();
 </script>
@@ -2227,7 +2215,7 @@ html body #supportList button:hover,html body #supportList button:focus-visible{
 @media print{html body .workspace{display:block!important}html body #dssNearbyPanel{display:none!important}}
 </style>
 <script id="dss-three-column-map-resize">
-(function(){const map=document.getElementById('dssLiveMap');if(map&&window.ResizeObserver){new ResizeObserver(()=>{window.dssLeafletMap?.invalidateSize({pan:false})}).observe(map)}})();
+
 </script>
 <script id="dss-remove-search-introduction">
 (function(){
@@ -3638,7 +3626,7 @@ function showSupport(data){
 
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='dss:dashboard-map-image'&&!state.coverageContextId&&!window.dssIncidentContextPending)image.src=e.data.image;if(e.data?.type==='dss:nearby-support'&&!state.coverageContextId)showSupport(e.data)});
 const before=render;render=function(){const result=before.apply(this,arguments);paint();refreshCoverageSupport();return result};paint();showSupport({rows:[],radius:Number(state.bufferKm),unselected:true});refreshCoverageSupport();
-if(window.ResizeObserver)new ResizeObserver(fitImage).observe(slot);
+// Image aspect changes on load; observing the slot here duplicated A4 layout work.
 matchMedia('(max-width:760px)').addEventListener('change',paint);
 parent.postMessage({type:'dss:request-dashboard-map'},location.origin);
 })();
@@ -3867,7 +3855,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
     const title=map?.closest('.fb-section')?.querySelector('h2');
     const text='2. แผนที่และสภาพอากาศ · รัศมี '+getBufferRadii().join(' / ')+' กม.';
     if(title&&title.textContent!==text)title.textContent=text;
-    if(map)requestAnimationFrame(()=>window.dssLeafletMap?.invalidateSize?.({pan:false}));
+    // Map sizing is handled by its ResizeObserver, not unrelated report text changes.
   }
   const previous=render;render=function(){const result=previous.apply(this,arguments);tidy();return result};
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&validPoint())loadWeather()});
@@ -4034,13 +4022,6 @@ html body #report#report#report#report#report#report#report #fbWeather .report-w
  display:block!important;width:76px!important;height:76px!important;margin:12px auto!important;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;box-sizing:border-box!important;
 }
 html body #report#report#report#report#report#report#report #fbWeather .report-weather-arrow svg{width:100%!important;height:100%!important}
-html body #report#report#report#report#report#report#report #fbWeather .report-weather-table{
- width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;background:#fafbf8!important;margin:0!important;
-}
-html body #report#report#report#report#report#report#report #fbWeather .report-weather-table :is(th,td){
- border:1px solid #b9c7b8!important;padding:6px!important;text-align:left!important;vertical-align:top!important;white-space:normal!important;overflow-wrap:anywhere!important;font:12px/1.5 Sarabun,sans-serif!important;color:#17201d!important;
-}
-html body #report#report#report#report#report#report#report #fbWeather .report-weather-table th{width:42%!important;background:#edf6f0!important;font-weight:500!important}
 html body #report#report#report#report#report#report#report #fbWeather :is(.weather-reference-area,small,.fb-muted){display:none!important}
 html body #report#report#report#report#report#report#report.dss-field-export #fieldBriefMap{height:auto!important;aspect-ratio:var(--report-map-aspect,1.6)!important}
 @media(max-width:760px){
