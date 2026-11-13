@@ -263,7 +263,10 @@
       if(typeof frame.contentWindow.dssApplyIncidentContext!=='function')throw Error('รายงานเวอร์ชันใหม่ยังไม่พร้อม กรุณารีเฟรชหน้า');
       const summary=await frame.contentWindow.dssApplyIncidentContext(context);
       if(revision!==incidentRevision||!summary)return;
-      context.summary=summary;context.status='rendering-map';
+      context.summary=summary;
+      await window.ieatMonitoringReport?.update(context);
+      if(revision!==incidentRevision)return;
+      context.status='rendering-map';
       draw();
       const mapImage=await window.ieatCaptureCoverageMap();
       if(revision!==incidentRevision)return;
@@ -549,8 +552,8 @@
     const parcelGroup=group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]);
     parcelGroup.visible=!fireView;
     const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[parcelGroup,group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
-    if(fireView)map.add(new GeoJSONLayer({
-      url:'https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json',
+    if(fireView)window.ieatMonitoringReport.load().then(dataset=>map.add(new GeoJSONLayer({
+      url:URL.createObjectURL(new Blob([JSON.stringify({type:'FeatureCollection',features:dataset.features})],{type:'application/json'})),
       title:'สถานี e-Monitoring',
       copyright:'การนิคมอุตสาหกรรมแห่งประเทศไทย',
       visible:true,
@@ -566,7 +569,7 @@
         {fieldName:'Status',label:'สถานะ'},
         {fieldName:'LastUpdate',label:'อัปเดตล่าสุด'}
       ]}]}
-    }));
+    }))).catch(error=>console.warn('Monitoring stations',error));
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
     const factorySelection=new GraphicsLayer({title:'โรงงานที่เลือกจากทะเบียน',listMode:'hide'});
     map.add(factorySelection);
