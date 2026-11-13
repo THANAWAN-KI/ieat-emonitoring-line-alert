@@ -380,7 +380,7 @@
     const legend=document.querySelector('.riskmap-map-key');
     if(legend){
       const legends=[['นิคมฯ',pin],['ดับเพลิง',supportSymbols.fire],['โรงพยาบาล',supportSymbols.hospital],['หัวจ่ายน้ำ',supportSymbols.hydrant],['ตำรวจ',supportSymbols.police],['ชุมชน',supportSymbols.community],['CCTV',supportSymbols.cctv],['โรงเรียน',supportSymbols.school],['เฝ้าระวังน้ำ',supportSymbols.waterWatch]];
-      if(fireView)legends.push(['สถานี e-Monitoring กนอ.',monitoringSymbol]);
+      if(fireView)legends.push(['สถานี e-Monitoring · AQMs / WQMs / CEMs',monitoringSymbol]);
       legend.replaceChildren(...legends.map(([title,symbol])=>{
         const li=el('li'),img=el('img');img.src=symbol.url;img.alt='';li.append(img,el('span',title));return li;
       }));
@@ -502,15 +502,18 @@
     const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[parcelGroup,group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     if(fireView)map.add(new GeoJSONLayer({
       url:'https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json',
-      title:'สถานี e-Monitoring กนอ.',
+      title:'สถานี e-Monitoring',
       copyright:'การนิคมอุตสาหกรรมแห่งประเทศไทย',
       visible:true,
       renderer:{type:'simple',symbol:monitoringSymbol},
+      labelingInfo:[{minScale:150000,labelPlacement:'above-center',
+        labelExpressionInfo:{expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', 'สถานี e-Monitoring')"},
+        symbol:{type:'text',color:'#153a38',haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size:10,weight:'bold'}}}],
       featureReduction:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
         labelingInfo:[{labelPlacement:'center-center',labelExpressionInfo:{expression:'Text($feature.cluster_count)'},symbol:{type:'text',color:'#153a38',font:{size:9,weight:'bold'}}}]},
-      popupTemplate:{title:'{StationTH}',content:[{type:'fields',fieldInfos:[
+      popupTemplate:{title:'{StationTH}',expressionInfos:[{name:'stationCategory',title:'ประเภทสถานี',expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', DefaultValue($feature.Type, 'ไม่ระบุ'))"}],content:[{type:'fields',fieldInfos:[
         {fieldName:'IndustryZone',label:'นิคมอุตสาหกรรม'},
-        {fieldName:'Type',label:'ประเภทสถานี'},
+        {fieldName:'expression/stationCategory',label:'ประเภทสถานี'},
         {fieldName:'Status',label:'สถานะ'},
         {fieldName:'LastUpdate',label:'อัปเดตล่าสุด'}
       ]}]}
