@@ -3396,5 +3396,27 @@ html body #riskMapLinePanel#riskMapLinePanel p{margin:0!important;color:#17201d!
  html body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy{width:100%!important}
 }
 </style>
+<script id="riskmap-line-location">
+(() => {
+  const line=document.getElementById('riskMapLinePanel');
+  if(!line)return;
+  const place=()=>{
+    const auxiliary=document.querySelector('#riskmapOverviewPanel .dss-auxiliary-search');
+    if(auxiliary&&auxiliary.nextElementSibling!==line)auxiliary.after(line);
+  };
+  place();
+  // Report loaders may rebuild or reparent sections after the initial layout.
+  // Keep the existing composer and its event handlers in the search workspace.
+  const observer=new MutationObserver(place);
+  observer.observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('DOMContentLoaded',place,{once:true});
+  document.getElementById('emergencyReportFrame')?.addEventListener('load',place);
+})();
+</script>
+<style id="riskmap-line-location-layout">
+#riskmapOverviewPanel .report-workspace-controls > #riskMapLinePanel{
+  grid-column:1 / -1!important;width:100%!important;min-width:0!important;
+}
+</style>
 </body></html>
 
