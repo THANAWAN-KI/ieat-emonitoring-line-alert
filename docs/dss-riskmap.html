@@ -267,17 +267,42 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 </style>
 </head>
 <body>
-<header class="portal-header standalone-dss-header" id="ieatPortalHeader"><div class="brand"><img src="./assets/TH-Vertical.png" alt="กนอ."><span><strong lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</strong></span></div><div class="portal-top"><div class="header-nav"></div></div></header>
-<nav class="dss-section-bar" aria-label="ส่วนต่าง ๆ ของหน้า DSS / RiskMap">
-  <div class="dss-section-bar__inner">
-    <span class="dss-section-bar__title" lang="en">Environmental Monitoring and Control Center: EMCC</span>
-    <div class="dss-section-bar__links">
-      <a class="dss-section-link" href="#riskCoverage">ภาพรวม</a>
-      <a class="dss-section-link" href="#coverageMap">แผนที่ความเสี่ยง</a>
-      <a class="dss-section-link dss-section-link--report" href="#emergencyReportPage">จัดทำรายงาน</a>
-    </div>
-  </div>
+<div class="emcc-gis-header">
+<header class="emcc-gis-brand" id="ieatPortalHeader">
+  <a href="https://emcc-gis.pages.dev/">EMCC</a>
+  <span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span>
+</header>
+<nav class="emcc-gis-nav" aria-label="เมนู EMCC">
+  <span lang="en">Environmental Monitoring and Control Center: EMCC</span>
+  <a href="https://emcc-gis.pages.dev/">ภาพรวม</a>
+  <details><summary>ข้อมูล</summary><div>
+    <a href="#riskCoverage">ภาพรวมข้อมูล DSS</a>
+    <a href="#coverageMap">แผนที่ความเสี่ยง</a>
+    <a href="#emergencyReportPage">จัดทำรายงาน</a>
+  </div></details>
+  <a href="#riskMapSection" aria-current="page">Risk map</a>
 </nav>
+</div>
+<style>
+.emcc-gis-header { position: sticky; top: 0; z-index: 1100; font-family: Sarabun, sans-serif; }
+.emcc-gis-brand { display: flex; align-items: center; gap: 16px; padding: 8px 24px; min-height: 50px; box-sizing: border-box; background: white; color: #141718; }
+.emcc-gis-brand a { color: inherit; text-decoration: none; font-size: 28px; letter-spacing: .1em; }
+.emcc-gis-nav { display: flex; flex-wrap: wrap; align-items: stretch; background: linear-gradient(90deg,#362048,#533273 55%,#643e88); color: white; }
+.emcc-gis-nav > span { flex: 1 1 350px; padding: 14px 24px; }
+.emcc-gis-nav a, .emcc-gis-nav summary { display: block; padding: 14px 18px; color: white; text-decoration: none; cursor: pointer; }
+.emcc-gis-nav > a { background: #45235f; }
+.emcc-gis-nav details { position: relative; }
+.emcc-gis-nav summary::after { content: " ⌄"; }
+.emcc-gis-nav details > div { position: absolute; right: 0; min-width: 180px; background: #362048; }
+.emcc-gis-nav a:hover, .emcc-gis-nav summary:hover { background: #643e88; }
+:where(#riskCoverage,#riskMapSection,#coverageMap,#emergencyReportPage) { scroll-margin-top: 125px; }
+@media(max-width:640px){ .emcc-gis-brand { padding-inline:12px; font-size:13px; } .emcc-gis-nav > span { flex-basis:100%; padding:8px 12px; } :where(#riskCoverage,#riskMapSection,#coverageMap,#emergencyReportPage){scroll-margin-top:170px} }
+</style>
+<script>
+document.querySelector('.emcc-gis-nav details').addEventListener('click', function(event) {
+  if (event.target.closest('a')) this.open = false;
+});
+</script>
 
 <main class="page">
 <div class="coverage-map-layout">
