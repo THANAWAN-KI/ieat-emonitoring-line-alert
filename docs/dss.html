@@ -3578,7 +3578,7 @@ function paint(){
  const direction=document.createElement('p');direction.className='report-wind-direction';direction.textContent=dssReportWindDirection().text;
  const arrow=weather.querySelector('.report-weather-arrow');
  if(arrow){arrow.setAttribute('role','img');arrow.setAttribute('aria-label',direction.textContent);arrow.after(direction);}
- else (weather.querySelector('.report-weather-wind')||weather).append(direction);
+ else {direction.style.gridColumn='1 / -1';(weather.querySelector('.report-weather-wind')||weather).append(direction);}
 
 }
 function refreshCoverageSupport(){
