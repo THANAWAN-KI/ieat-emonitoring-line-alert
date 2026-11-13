@@ -2765,7 +2765,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     const fireView=document.documentElement.classList.contains('fire-risk-view');
     estateContent.hidden=fireView||isIncident;
     controls.hidden=!fireView&&!isIncident;
-    panel.hidden=!isIncident;
+    panel.hidden=!fireView&&!isIncident;
     stepLinks.forEach(link=>{
       const active=isIncident ? link.hash==='#emergencyReportPage' : link.hash===location.hash;
       if(active)link.setAttribute('aria-current','location');
