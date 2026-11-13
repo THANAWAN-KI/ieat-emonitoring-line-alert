@@ -3581,6 +3581,14 @@ function paint(){
  else (weather.querySelector('.report-weather-wind')||weather).append(direction);
 
 }
+function refreshCoverageSupport(){
+ if(!state.coverageContextId&&state.company===defaults.company)return;
+ const types=['fire','hospital','hydrant','police','community','cctv'];
+ const failures=types.filter(type=>/โหลดข้อมูลไม่สำเร็จ/.test(String(state[type+'Name']||'')));
+ const loading=types.some(type=>/กำลังค้นหา/.test(String(state[type+'Name']||'')));
+ showSupport({radius:Number(state.bufferKm),loading,failures,contextId:state.coverageContextId,
+  rows:(state.supportLocations||[]).map(point=>({...point,sourceId:point.type,lon:Number(point.lng),distance:Number(point.distance)*1000}))});
+}
 function showSupport(data){
  const categories=[['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']];
  const allowed=new Set(categories.map(c=>c[0])),groups=new Map(),seen=new Set();
@@ -3605,13 +3613,13 @@ function showSupport(data){
  distance.className='support-place-distance';distance.setAttribute('aria-label','ระยะเส้นตรง '+distance.textContent);entry.append(button,distance);details.append(entry);
  });tr.append(type,details);body.append(tr);
  });
- if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.loading?'กำลังค้นหา…':'ไม่พบจุดสนับสนุนในระยะที่เลือก';tr.append(td);body.append(tr)}
+ if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.unselected?'ค้นหาโรงงานเพื่อแสดงข้อมูลสนับสนุนใกล้จุดเกิดเหตุ':data.loading?'กำลังค้นหาข้อมูลสนับสนุน…':data.failures?.length?'ยังยืนยันรายการไม่ได้ เนื่องจากบางแหล่งข้อมูลเชื่อมต่อไม่สำเร็จ':'ไม่พบจุดสนับสนุนในรัศมี '+data.radius+' กม. จากข้อมูลที่โหลดสำเร็จ';tr.append(td);body.append(tr)}
  table.append(body);nearby.append(table);
  if(data.failures?.some(id=>allowed.has(id))){const p=document.createElement('p');p.className='report-nearby-note';p.textContent='บางกลุ่มเชื่อมต่อข้อมูลไม่สำเร็จ';nearby.append(p)}
 }
 
-window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='dss:dashboard-map-image'&&!state.coverageContextId&&!window.dssIncidentContextPending)image.src=e.data.image;if(e.data?.type==='dss:nearby-support')showSupport(e.data)});
-const before=render;render=function(){const result=before.apply(this,arguments);paint();return result};paint();
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==parent)return;if(e.data?.type==='dss:dashboard-map-image'&&!state.coverageContextId&&!window.dssIncidentContextPending)image.src=e.data.image;if(e.data?.type==='dss:nearby-support'&&!state.coverageContextId)showSupport(e.data)});
+const before=render;render=function(){const result=before.apply(this,arguments);paint();refreshCoverageSupport();return result};paint();showSupport({rows:[],radius:Number(state.bufferKm),unselected:true});refreshCoverageSupport();
 if(window.ResizeObserver)new ResizeObserver(fitImage).observe(slot);
 matchMedia('(max-width:760px)').addEventListener('change',paint);
 parent.postMessage({type:'dss:request-dashboard-map'},location.origin);
