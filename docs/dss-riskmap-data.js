@@ -324,6 +324,7 @@
     else await searchFactories(event);
   };
   $('coverageOpenReport').onclick=runSearch;
+  $('coverageOpenReport').disabled=false;
   $('coverageFactoryQuery').addEventListener('keydown',event=>{if(event.key==='Enter')runSearch(event);});
   $('coverageFactoryQuery').addEventListener('input',()=>{selectedFactory=null;hasSearched=false;searchId++;auxiliaryId++;matches.replaceChildren();incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));});
   form.onsubmit=runSearch;
