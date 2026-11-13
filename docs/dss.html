@@ -3241,15 +3241,13 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   }
   incident.hidden=!incidentFields.children.length;
   const weather=document.getElementById('fbWeather');weather.replaceChildren(element('strong','สภาพอากาศ'));
-  const wind=element('div',undefined,'report-weather-wind');weather.append(wind);
+  const wind=element('div',undefined,'report-weather-wind');wind.append(element('span','ทิศทางลม','report-weather-wind-label'));weather.append(wind);
   const metrics=element('dl',undefined,'report-weather-metrics');
   [
    ['ลักษณะอากาศ',state.weather],['อุณหภูมิ',available(state.temp)?state.temp+' °C':''],
-   ['ความชื้น',available(state.humidity)?state.humidity+' %':''],
    ['ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':'']
   ].forEach(([label,value])=>{const item=element('div');item.append(element('dt',label),element('dd',valueOf(value)));metrics.append(item)});
   weather.append(metrics);
-  weather.append(element('p','อัปเดต '+String(state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่').replace(/\s*\(เวลาไทย\)/g,''),'report-weather-updated'));
   const rows=Array.from(document.querySelectorAll('#fbSupport tr'));
   types.forEach(([type,label],index)=>{
    const row=rows[index];if(!row)return;
@@ -4136,6 +4134,32 @@ html body #report#report#report#report#report#report#report#report#report#report
 @media(max-width:650px){
  html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{grid-template-columns:1fr!important}
  html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px 0!important}
+}
+</style>
+<style id="weather-independent-cells">
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{gap:8px!important;border:1px solid #4d6055!important;padding:10px!important;grid-template-columns:minmax(0,1.3fr) minmax(0,2.7fr)!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather>strong{
+ padding:7px 10px!important;background:#f3cf69!important;border:1px solid #4d6055!important;text-align:center!important;
+ color:#4d6055!important;-webkit-text-fill-color:#4d6055!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind{
+ display:grid!important;grid-template-columns:56px minmax(0,1fr)!important;gap:0!important;
+ border:1px solid #b9c7b8!important;background:#fafbf8!important;align-content:start!important;align-items:center!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind-label{
+ grid-column:1/-1!important;background:#edf6f0!important;border-bottom:1px solid #b9c7b8!important;padding:6px 8px!important;font-weight:500!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-arrow{margin:8px 4px!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-wind-direction{padding:8px!important;font-weight:500!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;align-items:stretch!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{padding:0!important;border:1px solid #b9c7b8!important;background:#fafbf8!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dt{
+ background:#edf6f0!important;border-bottom:1px solid #b9c7b8!important;padding:6px 8px!important;color:#17201d!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dd{padding:8px!important;background:#fafbf8!important;font-weight:500!important}
+@media(max-width:650px){
+ html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{grid-template-columns:1fr!important}
+ html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 </style>
 </body></html>
