@@ -1,0 +1,19 @@
+#supportAllDialog{width:min(1000px,calc(100vw - 32px));max-height:85vh;border:1px solid #4d6055;padding:18px;background:#fff;color:#17201d;font:13px/1.6 Sarabun,sans-serif}
+#supportAllDialog::backdrop{background:#17201d66}
+.support-dialog-bar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.support-dialog-bar h2{font-size:19px;color:#5b8f32;margin:0}
+.support-dialog-bar button,.support-all-button{padding:8px 14px;border:1px solid #b9c7b8;background:#edf6f0;color:#17201d;cursor:pointer;font:inherit}
+.support-dialog-scroll{max-height:62vh;overflow:auto}
+.support-all-button{margin:8px 0 0}.support-appendix-reference{margin:5px 0;color:#60675d}
+.support-complete-table{width:100%;border-collapse:collapse;table-layout:fixed;font:13px/1.6 Sarabun,sans-serif}
+.support-complete-table :is(th,td){border:1px solid #d6ddcf;padding:6px;vertical-align:top;text-align:left;overflow-wrap:anywhere}
+.support-complete-table th{background:#eef5e8;color:#17201d;font-weight:600}
+.support-complete-table th:nth-child(1){width:6%}.support-complete-table th:nth-child(2){width:14%}.support-complete-table th:nth-child(3){width:42%}.support-complete-table th:nth-child(4){width:16%}.support-complete-table th:nth-child(5){width:22%}
+.dss-support-appendix{width:1050px!important;min-height:1485px!important;height:auto!important;box-sizing:border-box!important;padding:32px!important;border:1px solid #4d6055!important;background:#fff!important;color:#17201d!important;font:13px/1.6 Sarabun,sans-serif!important}
+.dss-support-appendix :is(p,span,div,th,td){font-size:13px!important;line-height:1.6!important}
+.support-appendix-header{display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid #5b8f32}
+.support-appendix-header img{width:52px;height:auto;max-height:64px;object-fit:contain}
+.support-appendix-header h1{font:700 19px/1.5 Sarabun,sans-serif!important;margin:0;color:#17201d}
+.support-appendix-header a{color:#17201d}.support-appendix-meta{padding:8px;background:#f6f9f2;border:1px solid #d6ddcf}
+.dss-support-appendix .dss-page-footer{min-height:32px;margin-top:16px;padding-top:8px;border-top:1px solid #d6ddcf;text-align:right;color:#60675d}
+@media(max-width:650px){.support-dialog-scroll .support-complete-table{min-width:650px}}
