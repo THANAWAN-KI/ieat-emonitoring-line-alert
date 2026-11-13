@@ -91,21 +91,15 @@
     if(token!==sequence||window.ieatCoverageReport?.id!==context.id)return;
     context.summary.monitoring=result;
     const host=build(doc,result,context.km);
-    const summary=textNode(doc,'section',undefined,'monitoring-summary');summary.id='reportMonitoringSummary';
-    const exceedCount=result.rows.filter(s=>s.exceeded.length).length;
-    summary.append(textNode(doc,'h3','สรุปสถานี e-Monitoring ใกล้จุดเกิดเหตุ'));
-    summary.append(textNode(doc,'p',result.error?'โหลดข้อมูลสถานีไม่สำเร็จ · ยังประเมินไม่ได้':
-      'ในรัศมี '+context.km+' กม. พบ '+result.rows.length+' สถานี · เกินค่า STD '+exceedCount+' สถานี · แจ้งเตือนจากต้นทาง '+result.rows.filter(s=>s.alarm).length+' สถานี'));
-    const link=textNode(doc,'a','ดูรายชื่อสถานี ค่าตรวจวัด และผลเทียบมาตรฐานในหน้าที่ 3');link.href='#dssPageThree';summary.append(link);
     const place=()=>{
-      const page=doc.getElementById('dssPageThree'),target=doc.getElementById('reportNearbySupport'),content=doc.getElementById('dssPageThreeContent');
+      const page=doc.getElementById('dssPageThree'),content=doc.getElementById('dssPageThreeContent');
       if(content&&host.parentElement!==content){content.replaceChildren(host);}
       if(page){
         const facts=doc.getElementById('dssPageThreeFacts');
         const text=context.company+' · รัศมี '+context.km+' กม.';
         if(facts&&facts.textContent!==text)facts.textContent=text;
       }
-      if(target&&summary.parentElement!==target)target.append(summary);
+      doc.getElementById('reportMonitoringSummary')?.remove();
     };
     place();mountObserver=new MutationObserver(place);mountObserver.observe(doc.body,{childList:true,subtree:true});
     return result;
