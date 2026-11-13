@@ -106,7 +106,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:fireView?new Circle({center:origin,radius:Number(radius.value)*3,radiusUnit:'kilometers',geodesic:true}):circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    if(!fireView)graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
       url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
@@ -114,7 +114,6 @@
       borderLineColor:fireView?'#928b7f':'#d8c8df',borderLineSize:1,
       horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
     graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
-    if(fireView)graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:'#553879',width:1}}}));
     return circle;
   }
   async function updateNearby(forReport=false,auxiliary=false){
