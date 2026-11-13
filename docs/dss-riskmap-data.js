@@ -366,16 +366,16 @@
     const badge=(drawing,color,size=24)=>svgMarker(
       '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
-    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#d95661':'#24845a');
-    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#d65fa4':'#24845a');
+    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#d95661':'#cc5257');
+    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#d65fa4':'#cc5257');
     const supportSymbols={
       fire:fireStation,hospital,
       hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>',fireView?'#4388ce':'#24845a'),
       police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>',fireView?'#7658bb':'#24845a'),
       community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#4b9e65':'#24845a'),
       communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#9c7460':'#24845a'),
-      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#37a5ce':'#24845a'),
-      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#c49138':'#24845a'),
+      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#37a5ce':'#b88b20'),
+      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#c49138':'#b88b20'),
       cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#51627a':'#24845a',fireView?20:18)
     };
     const monitoringSymbol=badge('<path d="M4 20h16M9 20V9h6v11M12 9V5m-4 2a5 5 0 0 1 8 0M6 5a8 8 0 0 1 12 0"/><path d="M11 13h2"/>','#55bfba',24);
