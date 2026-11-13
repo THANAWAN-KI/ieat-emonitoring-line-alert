@@ -4048,6 +4048,17 @@ html body .report-wrap>#dssPageThree{grid-column:1/-1;width:calc((100% - 18px)/2
  mount();document.addEventListener('DOMContentLoaded',mount,{once:true});
 })();
 </script>
+<style id="consistent-report-body-type">
+/* Match the 13px body text in the equipment table, including exported pages. */
+html body :is(#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree){
+ --report-body-font-size:13px;
+}
+html body :is(#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :where(p,small,span,strong,b,em,label,a,li,dt,dd,div,table,thead,tbody,tfoot,tr,th,td,input,textarea)
+:not(:where(h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.fb-header,.fb-header *,.fb-head,.fb-head *,.p2-header,.p2-header *)){
+ font-size:var(--report-body-font-size)!important;
+ line-height:1.6!important;
+}
+</style>
 </body></html>
 
 
