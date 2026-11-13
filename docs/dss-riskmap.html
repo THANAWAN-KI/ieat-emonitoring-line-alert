@@ -2762,8 +2762,9 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   links.querySelectorAll('a:not(.dss-section-link--report)').forEach(link=>link.remove());
   const stepLinks=[...get('riskmapRailSteps').querySelectorAll('a')];
   function showMode(isIncident){
-    estateContent.hidden=isIncident;
-    controls.hidden=!isIncident;
+    const fireView=document.documentElement.classList.contains('fire-risk-view');
+    estateContent.hidden=fireView||isIncident;
+    controls.hidden=!fireView&&!isIncident;
     panel.hidden=!isIncident;
     stepLinks.forEach(link=>{
       const active=isIncident ? link.hash==='#emergencyReportPage' : link.hash===location.hash;
