@@ -1579,7 +1579,7 @@ async function downloadReportPng(){
   const firstStage=document.createElement('div');firstStage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const firstNode=document.getElementById('report').cloneNode(true);firstNode.classList.add('dss-field-export','dss-two-page-first');firstNode.style.setProperty('width','1050px','important');firstNode.style.setProperty('height','auto','important');firstNode.style.setProperty('padding','32px','important');firstNode.style.setProperty('box-sizing','border-box','important');firstNode.style.setProperty('max-height','none','important');
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
-  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);img.id='dashboardReportMapImage';await img.decode();slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));slot.style.removeProperty('height');
+  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.after(weather);img.id='dashboardReportMapImage';await img.decode();slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));slot.style.removeProperty('height');
   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 3';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
   let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
   const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
@@ -3241,17 +3241,15 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   }
   incident.hidden=!incidentFields.children.length;
   const weather=document.getElementById('fbWeather');weather.replaceChildren(element('strong','สภาพอากาศ'));
-  const table=element('table',undefined,'report-weather-table'),body=element('tbody');
-  const weatherRows=[
+  const wind=element('div',undefined,'report-weather-wind');weather.append(wind);
+  const metrics=element('dl',undefined,'report-weather-metrics');
+  [
    ['ลักษณะอากาศ',state.weather],['อุณหภูมิ',available(state.temp)?state.temp+' °C':''],
    ['ความชื้น',available(state.humidity)?state.humidity+' %':''],
-   ['ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':''],
-   ['ลมพัดจาก',dssReportWindDirection().from],
-   ['ลมพัดไปทาง',dssReportWindDirection().to],
-   ['ดึงข้อมูลล่าสุด',String(state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่').replace(/\s*\(เวลาไทย\)/g,'')]
-  ];
-  weatherRows.forEach(([label,value])=>{const row=element('tr'),th=element('th',label);th.scope='row';row.append(th,element('td',valueOf(value)));body.append(row)});
-  table.append(body);weather.append(table);
+   ['ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':'']
+  ].forEach(([label,value])=>{const item=element('div');item.append(element('dt',label),element('dd',valueOf(value)));metrics.append(item)});
+  weather.append(metrics);
+  weather.append(element('p','อัปเดต '+String(state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่').replace(/\s*\(เวลาไทย\)/g,''),'report-weather-updated'));
   const rows=Array.from(document.querySelectorAll('#fbSupport tr'));
   types.forEach(([type,label],index)=>{
    const row=rows[index];if(!row)return;
@@ -3550,7 +3548,7 @@ html body #report#report.dss-field-document #dssFieldBrief #fbWeather :is(small,
 .report-weather-arrow svg{display:block;width:100%;height:100%}
 </style><script id="report-full-map-preview">
 (function(){
-const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.append(weather);
+const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.after(weather);
 const image=document.createElement('img');image.id='dashboardReportMapImage';image.alt='แผนที่จาก Dashboard ตามมุมมองปัจจุบัน';slot.prepend(image);
 const zoomTools=document.createElement('div');zoomTools.className='report-map-zoom-controls';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่รายงาน');
 [['+','ซูมเข้าแผนที่รายงาน',1],['−','ซูมออกแผนที่รายงาน',-1]].forEach(([text,label,delta])=>{const button=document.createElement('button');button.type='button';button.textContent=text;button.setAttribute('aria-label',label);button.title=label;button.onclick=()=>parent.postMessage({type:'dss:report-map-zoom',delta},location.origin);zoomTools.append(button)});
@@ -3571,18 +3569,18 @@ function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ra
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
- if(weather.parentElement!==slot)slot.append(weather);
+ if(slot.nextElementSibling!==weather)slot.after(weather);
  weather.querySelector('.report-weather-arrow')?.remove();
  weather.querySelector('.report-wind-direction')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
  if(state.windSpeed!==''&&state.windSpeed!=='—'&&Number.isFinite(speed)&&speed>0&&Number.isFinite(deg)){
- const arrow=document.createElement('span');arrow.className='report-weather-arrow';arrow.innerHTML='<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#2e9df7" stroke="#000" stroke-width="2.5" stroke-linejoin="round" d="M5 32 L30 10 L30 23 L58 23 L58 41 L30 41 L30 54 Z"/></svg>';arrow.style.transform='rotate('+((deg+270)%360)+'deg)';weather.insertBefore(arrow,weather.children[1]||null);
+ const arrow=document.createElement('span');arrow.className='report-weather-arrow';arrow.innerHTML='<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#2e9df7" stroke="#000" stroke-width="2.5" stroke-linejoin="round" d="M5 32 L30 10 L30 23 L58 23 L58 41 L30 41 L30 54 Z"/></svg>';arrow.style.transform='rotate('+((deg+270)%360)+'deg)';(weather.querySelector('.report-weather-wind')||weather).append(arrow);
  }
 
  const direction=document.createElement('p');direction.className='report-wind-direction';direction.textContent=dssReportWindDirection().text;
  const arrow=weather.querySelector('.report-weather-arrow');
  if(arrow){arrow.setAttribute('role','img');arrow.setAttribute('aria-label',direction.textContent);arrow.after(direction);}
- else weather.insertBefore(direction,weather.querySelector('.report-weather-table'));
+ else (weather.querySelector('.report-weather-wind')||weather).append(direction);
 
 }
 function showSupport(data){
@@ -3841,7 +3839,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
       if(!node.querySelector('#fieldBriefMap,table'))node.remove();
     }
     const map=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');
-    if(map&&weather&&weather.parentElement!==map)map.append(weather);
+    if(map&&weather&&map.nextElementSibling!==weather)map.after(weather);
     const title=map?.closest('.fb-section')?.querySelector('h2');
     const text='2. แผนที่และสภาพอากาศ · รัศมี '+getBufferRadii().join(' / ')+' กม.';
     if(title&&title.textContent!==text)title.textContent=text;
@@ -4105,6 +4103,39 @@ html body :is(#report#report#report#report#report#report#report#report#report#re
 html body #reportMonitoringSummary{display:none!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree):is(.dss-field-export,.dss-page-two-export,.dss-page-three-export){padding:32px!important}
 @media(max-width:650px){html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree){padding:14px!important}}
+</style>
+<style id="weather-strip-below-map">
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{
+ position:static!important;inset:auto!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,2fr)!important;
+ width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;
+ margin:10px 0 14px!important;padding:10px 12px!important;overflow:visible!important;
+ border:1px solid #d6ddcf!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;box-sizing:border-box!important;gap:6px 12px!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather>strong{
+ grid-column:1/-1!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;
+ color:#5b8f32!important;-webkit-text-fill-color:#5b8f32!important;text-align:left!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-arrow{
+ width:48px!important;height:48px!important;flex:0 0 48px!important;margin:0!important;padding:0!important;background:transparent!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-wind-direction{
+ margin:0!important;padding:0!important;text-align:left!important;line-height:1.6!important;font-weight:600!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding:0!important;align-items:center!important;
+}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{padding:0 8px!important;border-left:1px solid #d6ddcf!important;min-width:0!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics :is(dt,dd){margin:0!important;overflow-wrap:anywhere!important;line-height:1.6!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dt{color:#60675d!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dd{font-weight:600!important;color:#17201d!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-updated{
+ grid-column:1/-1!important;margin:2px 0 0!important;text-align:right!important;color:#60675d!important;
+}
+@media(max-width:650px){
+ html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{grid-template-columns:1fr!important}
+ html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px 0!important}
+}
 </style>
 </body></html>
 
