@@ -926,6 +926,15 @@ mapNode.addEventListener('click',function(e){
   state.lng=(lng+((e.clientX-box.left)/box.width-0.5)*2*spanLng).toFixed(6);
   render();updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather();
 });
+function dssReportWindDirection(){
+ const speed=Number(state.windSpeed),raw=state.windDeg,deg=Number(raw);
+ if(state.windSpeed===''||state.windSpeed==='—'||!Number.isFinite(speed)||speed<0)return {text:'ไม่พบข้อมูลทิศทางลม',from:'',to:''};
+ if(speed===0)return {text:'ลมสงบ',from:'ลมสงบ',to:'ลมสงบ'};
+ if(raw===null||raw===undefined||raw===''||!Number.isFinite(deg))return {text:'ไม่พบข้อมูลทิศทางลม',from:'',to:''};
+ const names=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
+ const normalized=((deg%360)+360)%360,from=names[Math.round(normalized/45)%8],to=names[Math.round(((normalized+180)%360)/45)%8];
+ return {from,to,text:'ลมพัดจาก'+from+' ไปทาง'+to};
+}
 const dirs=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];let weatherSequence=0;async function loadWeather(){if(document.documentElement.classList.contains('dss-embedded-report')&&!state.coverageContextId)return;const lat=Number(state.lat),lng=Number(state.lng);if(!validPoint())return alert('กรุณากรอกพิกัดให้ถูกต้อง');const sequence=++weatherSequence;weatherBtn.textContent='กำลังดึงข้อมูล…';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m&timezone=Asia%2FBangkok`;let c,lastError;for(let attempt=0;attempt<2;attempt++){try{const r=await fetch(u,{cache:'no-store',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('weather HTTP '+r.status);c=(await r.json()).current;if(!c?.time||!['temperature_2m','relative_humidity_2m','wind_speed_10m','wind_direction_10m','weather_code'].every(key=>typeof c[key]==='number'&&Number.isFinite(c[key])))throw Error('incomplete weather');break}catch(error){c=null;lastError=error}}if(!c)throw lastError||Error('weather');if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;const desc={0:'ท้องฟ้าแจ่มใส',1:'ท้องฟ้าโปร่ง',2:'มีเมฆบางส่วน',3:'เมฆมาก',45:'มีหมอก',48:'หมอกจัด',51:'ฝนปรอยเล็กน้อย',53:'ฝนปรอย',55:'ฝนปรอยหนัก',61:'ฝนเล็กน้อย',63:'ฝนปานกลาง',65:'ฝนหนัก',80:'ฝนซู่เล็กน้อย',81:'ฝนซู่ปานกลาง',82:'ฝนซู่หนัก',95:'พายุฝนฟ้าคะนอง'};state.temp=c.temperature_2m;state.humidity=c.relative_humidity_2m;state.windSpeed=c.wind_speed_10m;state.windDeg=c.wind_direction_10m;state.windDir=dirs[Math.round(c.wind_direction_10m/45)%8];state.weather=desc[c.weather_code]||'สภาพอากาศทั่วไป';state.weatherTime='ข้อมูล ณ '+new Date(c.time+'+07:00').toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+' (เวลาไทย)';state.weatherFetchedAt=new Date().toISOString();state.weatherFetchedTime=new Date(state.weatherFetchedAt).toLocaleString('th-TH',{timeZone:'Asia/Bangkok',hour12:false})+' (เวลาไทย)';render()}catch(e){if(sequence!==weatherSequence||lat!==Number(state.lat)||lng!==Number(state.lng))return;state.temp='—';state.humidity='—';state.windSpeed='—';state.windDeg=null;state.windDir='—';state.weather='โหลดข้อมูลอากาศไม่สำเร็จ';state.weatherTime='';state.weatherFetchedAt='';state.weatherFetchedTime='';render();console.warn('Weather data unavailable',e)}finally{weatherBtn.textContent='ดึงสภาพอากาศ'}}
 document.getElementById('mapBtn').onclick=()=>{if(!validPoint())return alert('กรุณากรอกพิกัดในประเทศไทยให้ถูกต้อง');updateMap();loadDssNearby(Number(state.lat),Number(state.lng));loadWeather()};document.getElementById('weatherBtn').onclick=loadWeather;resetBtn.onclick=()=>{if(confirm('ล้างข้อมูลที่แก้ไขและกลับเป็นค่าเริ่มต้นหรือไม่?')){weatherSequence++;nearbySequence++;state={...defaults,bufferRadii:[1,3,5],bufferEnabled:[true,true,true],supportLocations:[]};syncBufferControls();factoryLookup.value='';lookupResults.replaceChildren();render();updateMap();window.dssSyncSupportMarkers?.()}};
 pngBtn.onclick=()=>downloadReportPng();render();updateMap();
@@ -3237,7 +3246,8 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
    ['ลักษณะอากาศ',state.weather],['อุณหภูมิ',available(state.temp)?state.temp+' °C':''],
    ['ความชื้น',available(state.humidity)?state.humidity+' %':''],
    ['ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':''],
-   ['ลมพัดจาก',available(state.windSpeed)?state.windDir:''],
+   ['ลมพัดจาก',dssReportWindDirection().from],
+   ['ลมพัดไปทาง',dssReportWindDirection().to],
    ['ดึงข้อมูลล่าสุด',String(state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่').replace(/\s*\(เวลาไทย\)/g,'')]
   ];
   weatherRows.forEach(([label,value])=>{const row=element('tr'),th=element('th',label);th.scope='row';row.append(th,element('td',valueOf(value)));body.append(row)});
@@ -3563,10 +3573,16 @@ function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
  if(weather.parentElement!==slot)slot.append(weather);
  weather.querySelector('.report-weather-arrow')?.remove();
+ weather.querySelector('.report-wind-direction')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
  if(state.windSpeed!==''&&state.windSpeed!=='—'&&Number.isFinite(speed)&&speed>0&&Number.isFinite(deg)){
  const arrow=document.createElement('span');arrow.className='report-weather-arrow';arrow.innerHTML='<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#2e9df7" stroke="#000" stroke-width="2.5" stroke-linejoin="round" d="M5 32 L30 10 L30 23 L58 23 L58 41 L30 41 L30 54 Z"/></svg>';arrow.style.transform='rotate('+((deg+270)%360)+'deg)';weather.insertBefore(arrow,weather.children[1]||null);
  }
+
+ const direction=document.createElement('p');direction.className='report-wind-direction';direction.textContent=dssReportWindDirection().text;
+ const arrow=weather.querySelector('.report-weather-arrow');
+ if(arrow){arrow.setAttribute('role','img');arrow.setAttribute('aria-label',direction.textContent);arrow.after(direction);}
+ else weather.insertBefore(direction,weather.querySelector('.report-weather-table'));
 
 }
 function showSupport(data){
@@ -4056,6 +4072,11 @@ html body :is(#report#report#report#report#report#report#report#report#report#re
 html body :is(#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :where(p,small,span,strong,b,em,label,a,li,dt,dd,div,table,thead,tbody,tfoot,tr,th,td,input,textarea):not(:where(h1 *,h2 *,h3 *,h4 *,h5 *,h6 *,.fb-header,.fb-header *,.fb-head,.fb-head *,.p2-header,.p2-header *)){
  font-size:var(--report-body-font-size)!important;
  line-height:1.6!important;
+}
+</style>
+<style id="readable-wind-direction">
+html body #report#report#report#report#report#report#report #fbWeather .report-wind-direction{
+ margin:0 0 10px!important;padding:0 4px!important;text-align:center!important;line-height:1.6!important;font-weight:600!important;color:#17201d!important;white-space:normal!important;
 }
 </style>
 </body></html>
