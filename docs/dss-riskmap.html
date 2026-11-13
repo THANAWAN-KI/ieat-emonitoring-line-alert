@@ -2650,9 +2650,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       if(toolbar.firstElementChild!==editReportButton)toolbar.prepend(editReportButton);
       const search=get('coverageOpenReport');
       if(search&&searchActions.firstElementChild!==search)searchActions.prepend(search);
-      const copy=get('riskMapLineCopy')||line?.querySelector('#riskMapLineCopy');
-      if(copy&&copy.parentElement!==searchActions)searchActions.insertBefore(copy,previewButton);
-      if(copy&&copy.textContent!=='คัดลอกข้อความ LINE')copy.textContent='คัดลอกข้อความ LINE';
       const controls=form.querySelector('.coverage-incident-controls');
       if(controls&&searchActions.parentElement!==controls)controls.append(searchActions);
     }
@@ -2693,10 +2690,18 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
         gap:18px!important;
       }
       #dssReportSecondColumn{min-width:0;align-self:start}
-      #dssReportSecondColumn > #riskMapLinePanel{display:grid!important;gap:8px;margin:14px 0 0;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
+      #dssReportSecondColumn > #riskMapLinePanel{display:grid!important;gap:8px;margin:0;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
       #riskMapLinePanel :is(h3,p){margin:0}
       #riskMapLinePanel :is(select,textarea){width:100%;padding:8px;font:inherit;border:1px solid #b6a6c6;background:#fff}
       #riskMapLinePanel textarea{resize:vertical}
+      @media(min-width:1100px){
+        body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssReportSecondColumn{
+          display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.68fr);gap:14px;align-items:start;
+        }
+        html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
+          grid-template-columns:minmax(0,1fr) minmax(0,1.68fr)!important;
+        }
+      }
       body.dss-edit-exporting #dssReportSecondColumn > #riskMapLinePanel{display:none!important}
       @media(min-width:851px){
         html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
