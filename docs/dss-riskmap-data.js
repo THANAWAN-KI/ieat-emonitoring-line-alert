@@ -83,16 +83,18 @@
   let incidentCallout, calloutRevision=0;
   async function updateIncidentCallout(){
     const revision=++calloutRevision;
-    const surface=view.container?.querySelector('.esri-view-surface');
+    const surface=$('coverageMapView');
     if(!origin||!surface)return;
     if(!incidentCallout){
       const layer=el('div'),label=el('div');
-      layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2';
+      layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3';
       label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:6px 10px;background:#fffdf6;border:2px solid #edb800;color:#292824;text-align:center;font:600 14px Sarabun,sans-serif;overflow-wrap:anywhere';
       const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
       svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
       line.setAttribute('stroke','#edb800');line.setAttribute('stroke-width','2.5');
-      svg.append(line);layer.append(svg,label);surface.append(layer);
+      svg.append(line);layer.append(svg,label);
+      if(getComputedStyle(surface).position==='static')surface.style.position='relative';
+      surface.append(layer);
       incidentCallout={layer,label,line};
       for(const property of ['viewpoint','width','height','stationary','updating'])view.watch(property,updateIncidentCallout);
     }
