@@ -351,8 +351,9 @@
   const host=$('coverageMapView'), status=$('coverageMapStatus');
   if(!host)return;
   if(typeof window.require!=='function'){status.textContent='โหลดระบบแผนที่ไม่ได้';return;}
-  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel'],
-    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel)=>{
+  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel','esri/layers/GeoJSONLayer'],
+    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel,GeoJSONLayer)=>{
+    const fireView=new URLSearchParams(location.search).get('hazard')==='fire';
     const riskNames=riskFields.map(f=>f.field);
     const marker=(style,color,size=11)=>({type:'simple-marker',style,color,size,outline:{color:'#fff',width:1}});
     const svgMarker=(drawing,width,height,yoffset=0)=>({
@@ -423,7 +424,7 @@
     }).catch(()=>{});
     [zones,businesses,eppZones].forEach(item=>{item.labelsVisible=false;});
     const risks=riskFields.map((f,i)=>layer(eppPath,f.label,{
-      visible:true,minScale:1000000,
+      visible:!fireView,minScale:1000000,
       symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:2.2-i*.45}},
       definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
@@ -485,7 +486,30 @@
     ];
     supplemental.forEach((item,index)=>item.when(()=>{if(item.geometryType==='point')item.renderer={type:'simple',symbol:extraSymbols[index]};}).catch(()=>{}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
+    if(fireView){
+      center.renderer={type:'simple',symbol:{type:'simple-marker',style:'diamond',size:11,color:'#543074',outline:{color:'#fff',width:1.5}}};
+      center.labelsVisible=true;
+      center.labelingInfo=[{minScale:400000,labelPlacement:'above-center',
+        labelExpressionInfo:{expression:'$feature["สำนักงานนิคมฯ"]'},
+        symbol:{type:'text',color:'#30203f',haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size:12,weight:'bold'}}}];
+      businesses.visible=false;
+      eppZones.visible=false;
+      zones.opacity=.42;
+    }
     const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
+    if(fireView)map.add(new GeoJSONLayer({
+      url:'https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json',
+      title:'สถานี e-Monitoring กนอ.',
+      copyright:'การนิคมอุตสาหกรรมแห่งประเทศไทย',
+      minScale:600000,
+      renderer:{type:'simple',symbol:{type:'simple-marker',size:8,color:'#087e80',outline:{color:'#fff',width:1.5}}},
+      popupTemplate:{title:'{StationTH}',content:[{type:'fields',fieldInfos:[
+        {fieldName:'IndustryZone',label:'นิคมอุตสาหกรรม'},
+        {fieldName:'Type',label:'ประเภทสถานี'},
+        {fieldName:'Status',label:'สถานะ'},
+        {fieldName:'LastUpdate',label:'อัปเดตล่าสุด'}
+      ]}]}
+    }));
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
     const factorySelection=new GraphicsLayer({title:'โรงงานที่เลือกจากทะเบียน',listMode:'hide'});
     map.add(factorySelection);
