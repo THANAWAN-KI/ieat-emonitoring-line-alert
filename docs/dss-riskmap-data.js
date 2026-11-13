@@ -108,9 +108,9 @@
     graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
-      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#171717" stroke-width="1.4" stroke-linecap="round"/></svg>')};
-    const label = {type:'text',text:name||'จุดเกิดเหตุ',color:'#302239',backgroundColor:'#fff',
-      borderLineColor:fireView?'#171717':'#d8c8df',borderLineSize:1,
+      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
+    const label = {type:'text',text:name||'จุดเกิดเหตุ',color:'#292824',backgroundColor:fireView?'#fffdf6':'#fff',
+      borderLineColor:fireView?'#928b7f':'#d8c8df',borderLineSize:1,
       horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
     graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
     return circle;
@@ -361,7 +361,7 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=24)=>fireView?svgMarker('<circle cx="12" cy="12" r="11" fill="'+color+'" stroke="#fff" stroke-width="1.5"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4) scale(.67)">'+drawing+'</g>',size,size):svgMarker(
+    const badge=(drawing,color,size=24)=>svgMarker(
       '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
     const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#cc5257');
@@ -488,11 +488,11 @@
     supplemental.forEach((item,index)=>item.when(()=>{if(item.geometryType==='point')item.renderer={type:'simple',symbol:extraSymbols[index]};}).catch(()=>{}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
     if(fireView){
-      center.renderer={type:'simple',symbol:{type:'simple-marker',style:'diamond',size:11,color:'#543074',outline:{color:'#fff',width:1.5}}};
+      center.renderer={type:'simple',symbol:svgMarker('<path d="M12 2v7" stroke="#6f695f" stroke-width="1.2"/><path fill="#edb552" stroke="#383630" stroke-width="1.3" d="M3 22V12l6 3v-4l6 3V8h6v14Z"/><path d="M6 19h2m3 0h2m3 0h2" stroke="#383630" stroke-width="1.3"/>',22,22,0)};
       center.labelsVisible=true;
       center.labelingInfo=[{minScale:400000,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["สำนักงานนิคมฯ"]'},
-        symbol:{type:'text',color:'#30203f',haloColor:'#fff',haloSize:2,backgroundColor:'#fff',borderLineColor:'#171717',borderLineSize:1,yoffset:8,font:{family:'Sarabun',size:12,weight:'bold'}}}];
+        symbol:{type:'text',color:'#292824',backgroundColor:'#fffdf6',borderLineColor:'#928b7f',borderLineSize:1,yoffset:0,font:{family:'Sarabun',size:12,weight:'bold'}}}];
       zones.opacity=.42;
     }
     const parcelGroup=group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]);
