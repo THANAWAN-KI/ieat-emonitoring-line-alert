@@ -262,6 +262,10 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <style>
 #coverageEstateForm,#riskMapSection,#coverageSupportTitle,#emergencyReportPage{scroll-margin-top:155px}
 </style>
+<script>if(new URLSearchParams(location.search).get('hazard')==='fire')document.documentElement.classList.add('fire-risk-view');</script>
+<style>
+.fire-risk-view :is(#dssBriefCoverage,#coverageRiskSection,#dssBriefWorkflow,#dssBriefReview,#riskmapRailSteps a[href="#dssBriefCoverage"],#riskmapRailSteps a[href="#coverageRiskHeading"],#riskmapRailSteps a[href="#dssBriefReview"],.emcc-gis-nav a[href="#riskCoverage"]){display:none!important}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
@@ -3301,5 +3305,15 @@ html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria
 #riskmapOverviewPanel .report-search-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 </style>
 <style id="dss-line-page-two">#coverageNearbyResults[hidden]{display:none!important}</style>
+<script>
+if(document.documentElement.classList.contains('fire-risk-view')){
+  document.title='แผนที่ความเสี่ยงไฟไหม้ | EMCC';
+  document.getElementById('riskCoverageTitle').textContent='แผนที่ความเสี่ยงไฟไหม้ในนิคมฯ';
+  const incidentType=document.getElementById('coverageIncidentType');
+  incidentType.value='เหตุไฟไหม้';
+  for(const option of incidentType.options)option.disabled=option.value!==incidentType.value;
+  document.getElementById('coverageFactoryGuide').textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูทรัพยากรใกล้พื้นที่และเตรียมรายงานเหตุไฟไหม้';
+}
+</script>
 </body></html>
 
