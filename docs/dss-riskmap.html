@@ -282,10 +282,21 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   <span lang="en">Environmental Monitoring and Control Center: EMCC</span>
   <a href="https://emcc-gis.pages.dev/">Overview</a>
   <details><summary>Data</summary><div>
-    <a href="#riskCoverage">ภาพรวมข้อมูล DSS</a>
-    <a href="#coverageMap">แผนที่ความเสี่ยง</a>
-    <a href="#emergencyReportPage">จัดทำรายงาน</a>
-  </div></details>
+          <div class="dd-group-title" role="presentation">EMCC DASHBOARD</div>
+          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/" target="_blank" rel="noopener" >Estate operators (e-PP)</a>
+          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss.html" target="_blank" rel="noopener" >DSS</a>
+          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" >E-Monitoring: environment</a>
+          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener" >EMCC accident statistics</a>
+          <a class="dd-item" role="menuitem" href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Water use: estates / ports</a>
+          <div class="dd-group-title" role="presentation">EMCC RISK MAP</div>
+          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data&amp;hazard=fire#riskCoverage" target="_blank" rel="noopener" >Fire</a>
+          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-dashboard.html" target="_blank" rel="noopener" >Flood</a>
+          <a class="dd-item" role="menuitem" href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Drought</a>
+          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" >PM2.5</a>
+          <a class="dd-item" role="menuitem" href="https://tmd-earthquake.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Earthquake</a>
+          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data#riskMapSection" target="_blank" rel="noopener" >Chemical leaks</a>
+          <a class="dd-item dd-all" role="menuitem" href="https://emcc-gis.pages.dev/#systems" >View all systems ↓</a>
+        </div></details>
   <a href="#riskMapSection" aria-current="page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14m6-12v14"/></svg> Risk map</a>
 </nav>
 </div>
@@ -302,7 +313,10 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 .emcc-gis-nav > a { background: #45235f; }
 .emcc-gis-nav details { position: relative; }
 .emcc-gis-nav summary::after { content: " ⌄"; }
-.emcc-gis-nav details > div { position: absolute; right: 0; min-width: 180px; background: #362048; }
+.emcc-gis-nav details > div { position: absolute; right: 0; min-width: 180px; background: #10202ce8; width:min(320px,90vw); max-height:75dvh; overflow:auto; padding:5px; }
+.emcc-gis-nav .dd-group-title{padding:8px 12px;color:#d5e1ea;font-size:11px;font-weight:600}
+.emcc-gis-nav .dd-item{padding:9px 12px;font-size:14px;font-weight:300}
+.emcc-gis-nav .dd-all{background:#ffffff14}
 .emcc-gis-nav a:hover, .emcc-gis-nav summary:hover { background: #643e88; }
 
 @media(max-width:640px){ .emcc-gis-brand { padding-inline:12px; font-size:13px; } .emcc-gis-nav > span { flex-basis:100%; padding:8px 12px; }  }
@@ -529,7 +543,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','a359b82');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','ea693d5');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -2625,7 +2639,8 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   controls.append(auxiliary);
   const line=get('riskMapLinePanel');
   const estateContent=get('riskmapEstateContent');
-  estateContent.after(controls);
+  if(document.documentElement.classList.contains('fire-risk-view'))estateContent.before(controls);
+  else estateContent.after(controls);
   panel.append(bottom);overviewPanel.after(panel);
   const editReportButton=document.createElement('button');
   editReportButton.id='dashboardEditReportText';editReportButton.type='button';
@@ -2676,8 +2691,10 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       }
       return;
     }
-    reportPageObserver?.disconnect();
-    reportPageObserver=null;
+    if(!reportPageObserver){
+      reportPageObserver=new MutationObserver(styleReportPages);
+      reportPageObserver.observe(doc.body,{childList:true,subtree:true});
+    }
     let column=doc.getElementById('dssReportSecondColumn');
     if(!column){
       column=doc.createElement('div');
@@ -2685,7 +2702,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       pageTwo.before(column);
       column.append(pageTwo);
     }
-    if(pageTwo.nextElementSibling!==line)pageTwo.after(line);
+    if(line.parentElement!==column||pageTwo.nextElementSibling!==line)pageTwo.after(line);
     if(doc.getElementById('dss-separated-page-frames'))return;
     const style=doc.createElement('style');
     style.id='dss-separated-page-frames';
@@ -2698,7 +2715,9 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       #dssReportSecondColumn > #riskMapLinePanel{display:grid!important;gap:8px;margin:16px 0 0;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
       #riskMapLinePanel :is(h3,p){margin:0}
       #riskMapLinePanel :is(select,textarea){width:100%;padding:8px;font:inherit;border:1px solid #b6a6c6;background:#fff}
-      #riskMapLinePanel textarea{resize:vertical}
+      #riskMapLinePanel textarea{resize:vertical;box-sizing:border-box}
+      #riskMapLineCopy{justify-self:start;background:#4d6055;color:#fff;padding:8px 12px;border:0;cursor:pointer}
+      #riskMapLineCopy:disabled{opacity:.55}
       body.dss-edit-exporting #dssReportSecondColumn > #riskMapLinePanel{display:none!important}
       @media(min-width:851px){
         html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
