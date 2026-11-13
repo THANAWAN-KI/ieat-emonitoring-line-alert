@@ -266,6 +266,11 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <style>
 .fire-risk-view :is(#riskmapRailSteps a[href="#coverageSupportTitle"],#riskmapRailSteps a[href="#dssBriefReadiness"],#dssBriefCoverage,#coverageRiskSection,#dssBriefWorkflow,#dssBriefReview,#riskmapRailSteps a[href="#dssBriefCoverage"],#riskmapRailSteps a[href="#coverageRiskHeading"],#riskmapRailSteps a[href="#dssBriefReview"],.emcc-gis-nav a[href="#riskCoverage"]){display:none!important}
 </style>
+<style>
+.fire-risk-view .riskmap-shared-workspace { grid-template-columns: minmax(0, 1fr) !important; }
+.fire-risk-view .riskmap-shared-workspace > .riskmap-overview-rail { display: none !important; }
+.fire-risk-view .riskmap-shared-workspace > .riskmap-workspace-body { grid-column: 1; min-width: 0; }
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
