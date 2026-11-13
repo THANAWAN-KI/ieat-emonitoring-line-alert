@@ -2,7 +2,7 @@
   "schema_version": 1,
   "period": "48h",
   "date": "2026-11-13",
-  "time": "01:00:00",
+  "time": "07:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
   "area_count": 6,
@@ -18,8 +18,8 @@
       "station": "อบต.ทุ่งคาวัด",
       "latitude": 9.74115,
       "longitude": 99.02649,
-      "sum_rainfall_mm": 304.5999999999999,
-      "observed_at": "2026-11-13T00:00:00+07:00",
+      "sum_rainfall_mm": 229.19999999999996,
+      "observed_at": "2026-11-13T06:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -393,8 +393,8 @@
       "station": "อบต.เขาค่าย",
       "latitude": 10.12198,
       "longitude": 98.89594,
-      "sum_rainfall_mm": 163.6,
-      "observed_at": "2026-11-13T00:00:00+07:00",
+      "sum_rainfall_mm": 154.6,
+      "observed_at": "2026-11-13T06:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -728,8 +728,8 @@
       "station": "บ้านดอนกระจาย",
       "latitude": 9.974858,
       "longitude": 99.042699,
-      "sum_rainfall_mm": 169.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 172.0,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -995,8 +995,8 @@
       "station": "อบต.มะนังดาลำ",
       "latitude": 6.67271,
       "longitude": 101.60943,
-      "sum_rainfall_mm": 160.60000000000002,
-      "observed_at": "2026-11-13T00:00:00+07:00",
+      "sum_rainfall_mm": 167.99999999999997,
+      "observed_at": "2026-11-13T06:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1162,8 +1162,8 @@
       "station": "หน่วยป้องกันรักษาป่า ที่ สฎ. ๑๖ (เกาะสมุย)",
       "latitude": 9.47909,
       "longitude": 99.9874,
-      "sum_rainfall_mm": 202.59999999999997,
-      "observed_at": "2026-11-13T00:00:00+07:00",
+      "sum_rainfall_mm": 225.60000000000002,
+      "observed_at": "2026-11-13T06:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1286,7 +1286,7 @@
       "latitude": 13.85604,
       "longitude": 100.57558,
       "sum_rainfall_mm": 140.0,
-      "observed_at": "2026-11-13T00:00:00+07:00"
+      "observed_at": "2026-11-13T06:00:00+07:00"
     }
   ],
   "area_nearby": [
@@ -1300,7 +1300,7 @@
       "station": "บ้านเขาช่องลม",
       "latitude": 9.7378,
       "longitude": 99.006127,
-      "sum_rainfall_mm": 1.0,
+      "sum_rainfall_mm": 0.0,
       "observed_at": "2026-11-11T11:00:00+07:00",
       "geometry": {
         "rings": [
@@ -1675,8 +1675,8 @@
       "station": "บ้านคลองสง*",
       "latitude": 9.736841,
       "longitude": 98.989378,
-      "sum_rainfall_mm": 101.0,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 68.0,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2050,8 +2050,8 @@
       "station": "บ้านแก่งกะทั่ง*",
       "latitude": 10.223265,
       "longitude": 99.011633,
-      "sum_rainfall_mm": 58.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 40.0,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2533,8 +2533,8 @@
       "station": "บ้านคลองน้อย*",
       "latitude": 10.256597,
       "longitude": 99.003799,
-      "sum_rainfall_mm": 19.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 18.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3016,8 +3016,8 @@
       "station": "บ้านนาสัก*",
       "latitude": 10.195399,
       "longitude": 99.048489,
-      "sum_rainfall_mm": 50.0,
-      "observed_at": "2026-11-12T23:00:00+07:00"
+      "sum_rainfall_mm": 50.5,
+      "observed_at": "2026-11-13T05:00:00+07:00"
     },
     {
       "geocode": "860708",
@@ -3029,8 +3029,8 @@
       "station": "บ้านแพรกแห้ง",
       "latitude": 10.397219,
       "longitude": 98.99493,
-      "sum_rainfall_mm": 27.0,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 15.0,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3700,8 +3700,8 @@
       "station": "บ้านหัวหิน*",
       "latitude": 9.917436,
       "longitude": 99.01039,
-      "sum_rainfall_mm": 67.0,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 66.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4167,8 +4167,8 @@
       "station": "บ้านตะบิ้ง*",
       "latitude": 6.700474,
       "longitude": 101.607109,
-      "sum_rainfall_mm": 58.0,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 60.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4342,8 +4342,8 @@
       "station": "บ้านเตราะบอน",
       "latitude": 6.687275,
       "longitude": 101.533633,
-      "sum_rainfall_mm": 14.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 18.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4437,8 +4437,8 @@
       "station": "บ้านแป้น",
       "latitude": 6.740221,
       "longitude": 101.546681,
-      "sum_rainfall_mm": 51.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 54.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4529,7 +4529,7 @@
       "latitude": 9.522996,
       "longitude": 100.056885,
       "sum_rainfall_mm": 0.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4775,8 +4775,8 @@
       "station": "บ้านแม่น้ำ",
       "latitude": 9.565863,
       "longitude": 99.995151,
-      "sum_rainfall_mm": 68.5,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 77.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4910,8 +4910,8 @@
       "station": "บ้านบางมะขาม",
       "latitude": 9.543899,
       "longitude": 99.932205,
-      "sum_rainfall_mm": 78.0,
-      "observed_at": "2026-11-12T23:00:00+07:00",
+      "sum_rainfall_mm": 78.5,
+      "observed_at": "2026-11-13T05:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -5014,7 +5014,7 @@
       "latitude": 13.83022,
       "longitude": 100.55723,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-11-13T00:00:00+07:00"
+      "observed_at": "2026-11-13T06:00:00+07:00"
     },
     {
       "geocode": "103004",
@@ -5027,7 +5027,7 @@
       "latitude": 13.80967,
       "longitude": 100.57498,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-11-13T00:00:00+07:00"
+      "observed_at": "2026-11-13T06:00:00+07:00"
     },
     {
       "geocode": "103001",
@@ -5040,7 +5040,7 @@
       "latitude": 13.83978,
       "longitude": 100.54175,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-11-13T00:00:00+07:00"
+      "observed_at": "2026-11-13T06:00:00+07:00"
     },
     {
       "geocode": "103002",
@@ -5053,7 +5053,7 @@
       "latitude": 13.85796,
       "longitude": 100.58682,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-11-13T00:00:00+07:00"
+      "observed_at": "2026-11-13T06:00:00+07:00"
     }
   ]
 }
