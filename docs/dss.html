@@ -1561,6 +1561,12 @@ async function downloadReportPng(){
    second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
   }finally{stage.remove()}
   if(activeReport&&(parent.ieatCoverageReport!==activeReport||activeReport.status!=='ready'))throw Error('เงื่อนไขค้นหาเปลี่ยนระหว่างสร้างภาพ กรุณาค้นหาใหม่');
+  for(const canvas of [first,second]){
+   const context=canvas.getContext('2d'),width=2*exportScale;
+   context.strokeStyle='#4d6055';
+   context.lineWidth=width;
+   context.strokeRect(width/2,width/2,canvas.width-width,canvas.height-width);
+  }
   const blobs=await Promise.all([first,second].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
   for(let index=0;index<blobs.length;index++){
    const url=URL.createObjectURL(blobs[index]),name='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';window.ieatReportDownloads.push({url,name});const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();
