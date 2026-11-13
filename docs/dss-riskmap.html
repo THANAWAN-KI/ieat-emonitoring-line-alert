@@ -3311,7 +3311,9 @@ if(document.documentElement.classList.contains('fire-risk-view')){
   document.getElementById('riskCoverageTitle').textContent='แผนที่ความเสี่ยงไฟไหม้ในนิคมฯ';
   const incidentType=document.getElementById('coverageIncidentType');
   incidentType.value='เหตุไฟไหม้';
-  for(const option of incidentType.options)option.disabled=option.value!==incidentType.value;
+  for(const option of Array.from(incidentType.options)){
+    if(option.value!==incidentType.value)option.remove();
+  }
   document.getElementById('coverageFactoryGuide').textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูทรัพยากรใกล้พื้นที่และเตรียมรายงานเหตุไฟไหม้';
 }
 </script>
