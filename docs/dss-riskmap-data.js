@@ -67,6 +67,7 @@
   {id:'school',label:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1'},
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
+ const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30"><path d="M12 28S3 17 3 11a9 9 0 0 1 18 0c0 6-9 17-9 17Z" fill="#e87549" stroke="#26312f" stroke-width="1.6"/><path d="M12 7v6m0 3v.5" stroke="#26312f" stroke-width="2" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire';
   const form=$('coverageIncidentForm'), matches=$('coverageFactoryMatches'), results=$('coverageNearbyResults');
@@ -105,7 +106,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    graphics.add(new Graphic({geometry:fireView?new Circle({center:origin,radius:Number(radius.value)*3,radiusUnit:'kilometers',geodesic:true}):circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
       url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
@@ -113,6 +114,7 @@
       borderLineColor:fireView?'#928b7f':'#d8c8df',borderLineSize:1,
       horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
     graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
+    if(fireView)graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:'#553879',width:1}}}));
     return circle;
   }
   async function updateNearby(forReport=false,auxiliary=false){
@@ -167,7 +169,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:24,height:30,yoffset:15}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
@@ -364,16 +366,16 @@
     const badge=(drawing,color,size=24)=>svgMarker(
       '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
-    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#cc5257');
-    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>','#cc5257');
+    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#d95661':'#24845a');
+    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#d65fa4':'#24845a');
     const supportSymbols={
       fire:fireStation,hospital,
-      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>','#24845a'),
-      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>','#24845a'),
-      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#24845a'),
-      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#24845a'),
-      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#b88b20'),
-      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#b88b20'),
+      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>',fireView?'#4388ce':'#24845a'),
+      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>',fireView?'#7658bb':'#24845a'),
+      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#4b9e65':'#24845a'),
+      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#9c7460':'#24845a'),
+      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#37a5ce':'#24845a'),
+      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#c49138':'#24845a'),
       cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#51627a':'#24845a',fireView?20:18)
     };
     const monitoringSymbol=badge('<path d="M4 20h16M9 20V9h6v11M12 9V5m-4 2a5 5 0 0 1 8 0M6 5a8 8 0 0 1 12 0"/><path d="M11 13h2"/>','#55bfba',24);
@@ -385,7 +387,7 @@
         const li=el('li'),img=el('img');img.src=symbol.url;img.alt='';li.append(img,el('span',title));return li;
       }));
       const incident=el('li','จุดเกิดเหตุ');incident.style.setProperty('--key','#c64032');const dot=el('span','●');dot.style.color='#c64032';incident.prepend(dot);
-      const radius=el('li','รัศมีค้นหา','radius');legend.prepend(incident,radius);
+      const radius=el('li','รัศมีค้นหา','radius');if(fireView){const img=el('img');img.src=fireIncidentIcon;img.alt='';dot.replaceWith(img);legend.prepend(incident);}else legend.prepend(incident,radius);
       for(const risk of riskFields){
         const key=el('li',risk.label,'riskmap-risk-key');
         key.style.setProperty('--key',risk.color);legend.append(key);
