@@ -3310,9 +3310,16 @@ if(document.documentElement.classList.contains('fire-risk-view')){
   document.title='แผนที่ความเสี่ยงไฟไหม้ | EMCC';
   document.getElementById('riskCoverageTitle').textContent='แผนที่ความเสี่ยงไฟไหม้ในนิคมฯ';
   const incidentType=document.getElementById('coverageIncidentType');
+  incidentType.required=false;
   incidentType.value='เหตุไฟไหม้';
   for(const option of Array.from(incidentType.options)){
-    if(option.value!==incidentType.value)option.remove();
+    if(option.value==='สารเคมีรั่วไหล')option.remove();
+    else if(option.value==='เหตุไฟไหม้')option.label='ไฟไหม้';
+    else if(option.value==='อื่น ๆ')option.label='อื่นๆ';
+    else if(option.value===''){
+      option.label='ไม่ระบุ';
+      incidentType.append(option);
+    }
   }
   document.getElementById('coverageFactoryGuide').textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูทรัพยากรใกล้พื้นที่และเตรียมรายงานเหตุไฟไหม้';
 }
