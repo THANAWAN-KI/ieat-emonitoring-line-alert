@@ -68,6 +68,7 @@
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
+  const fireView=new URLSearchParams(location.search).get('hazard')==='fire';
   const form=$('coverageIncidentForm'), matches=$('coverageFactoryMatches'), results=$('coverageNearbyResults');
   if(!form)return;
   const message=$('coverageIncidentStatus'), radius=$('coverageIncidentRadius'), type=$('coverageIncidentType'), keyword=$('coverageSupportQuery');
@@ -104,12 +105,12 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[184,46,52,.025],outline:{color:'#b82e34',width:1.5}}}));
+    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
-      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6a4877" stroke-width="1.4" stroke-linecap="round"/></svg>')};
-    const label = {type:'text',text:name,color:'#302239',backgroundColor:'#fff',
-      borderLineColor:'#d8c8df',borderLineSize:1,
+      url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#171717" stroke-width="1.4" stroke-linecap="round"/></svg>')};
+    const label = {type:'text',text:name||'จุดเกิดเหตุ',color:'#302239',backgroundColor:'#fff',
+      borderLineColor:fireView?'#171717':'#d8c8df',borderLineSize:1,
       horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
     graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
     return circle;
@@ -166,7 +167,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><path fill="#c64032" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
@@ -351,8 +352,8 @@
   const host=$('coverageMapView'), status=$('coverageMapStatus');
   if(!host)return;
   if(typeof window.require!=='function'){status.textContent='โหลดระบบแผนที่ไม่ได้';return;}
-  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel','esri/layers/GeoJSONLayer'],
-    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel,GeoJSONLayer)=>{
+  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel','esri/layers/GeoJSONLayer','esri/widgets/DistanceMeasurement2D'],
+    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel,GeoJSONLayer,DistanceMeasurement2D)=>{
     const fireView=new URLSearchParams(location.search).get('hazard')==='fire';
     const riskNames=riskFields.map(f=>f.field);
     const marker=(style,color,size=11)=>({type:'simple-marker',style,color,size,outline:{color:'#fff',width:1}});
@@ -491,7 +492,7 @@
       center.labelsVisible=true;
       center.labelingInfo=[{minScale:400000,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["สำนักงานนิคมฯ"]'},
-        symbol:{type:'text',color:'#30203f',haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size:12,weight:'bold'}}}];
+        symbol:{type:'text',color:'#30203f',haloColor:'#fff',haloSize:2,backgroundColor:'#fff',borderLineColor:'#171717',borderLineSize:1,yoffset:8,font:{family:'Sarabun',size:12,weight:'bold'}}}];
       businesses.visible=false;
       eppZones.visible=false;
       zones.opacity=.42;
@@ -664,6 +665,12 @@
     view.watch('updating',value=>{if(!value)schedulePreview();});
     $('coverageBasemap')?.addEventListener('change',schedulePreview);
 
+    if(fireView){
+      const measure=new DistanceMeasurement2D({view});
+      const tool=new Expand({view,content:measure,expandIcon:'measure-line',expandTooltip:'วัดระยะทาง'});
+      tool.watch('expanded',expanded=>{if(!expanded)measure.viewModel.clear();});
+      view.ui.add(tool,'top-right');
+    }
     view.ui.add(new Home({view}),'top-left');
     view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่'}),'top-right');
     view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
