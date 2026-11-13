@@ -2638,6 +2638,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   };
   controls.append(auxiliary);
   const line=get('riskMapLinePanel');
+  if(line)auxiliary.after(line);
   const estateContent=get('riskmapEstateContent');
   if(document.documentElement.classList.contains('fire-risk-view'))estateContent.before(controls);
   else estateContent.after(controls);
@@ -2702,7 +2703,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       pageTwo.before(column);
       column.append(pageTwo);
     }
-    if(pageTwo.nextElementSibling!==line)pageTwo.after(line);
     // Preview styles must take precedence over the embedded report's inline layout.
     const firstPage=doc.getElementById('report');
     for(const page of [firstPage,pageTwo]){
@@ -3356,38 +3356,7 @@ if(document.documentElement.classList.contains('fire-risk-view')){
   document.getElementById('coverageFactoryGuide').textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูทรัพยากรใกล้พื้นที่และเตรียมรายงานเหตุไฟไหม้';
 }
 </script>
-<script>
-(() => {
-  const frame=document.getElementById('emergencyReportFrame');
-  const panel=document.getElementById('riskMapLinePanel');
-  if(!frame||!panel)return;
-  let observer;
-  function mount(){
-    observer?.disconnect();
-    const doc=frame.contentDocument;
-    if(!doc?.body)return;
-    function place(){
-      const page=doc.getElementById('dssPageTwo');
-      if(!page)return;
-      if(!doc.getElementById('line-after-page-two')){
-        const style=doc.createElement('style');
-        style.id='line-after-page-two';
-        style.textContent=document.getElementById('riskmap-line-reference-style').textContent;
-        doc.head.append(style);
-      }
-      if(page.nextElementSibling!==panel)page.after(panel);
-      const copy=panel.querySelector('button')||document.getElementById('riskMapLineCopy');
-      if(copy&&copy.parentElement!==panel)panel.append(copy);
-      panel.setAttribute('data-export-exclude','');
-    }
-    observer=new MutationObserver(place);
-    observer.observe(doc.body,{childList:true,subtree:true});
-    place();
-  }
-  frame.addEventListener('load',mount);
-  mount();
-})();
-</script>
+
 <style id="riskmap-line-reference-style">
 /* LINE composer matches the report search reference, including inside the report frame. */
 html body #riskMapLinePanel#riskMapLinePanel{
