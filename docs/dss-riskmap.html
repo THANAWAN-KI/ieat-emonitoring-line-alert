@@ -2696,13 +2696,22 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       reportPageObserver.observe(doc.body,{childList:true,subtree:true});
     }
     let column=doc.getElementById('dssReportSecondColumn');
-    if(!column){
+    if(!column||column.parentElement!==pageTwo.parentElement&&pageTwo.parentElement!==column){
       column=doc.createElement('div');
       column.id='dssReportSecondColumn';
       pageTwo.before(column);
       column.append(pageTwo);
     }
     if(line.parentElement!==column||pageTwo.nextElementSibling!==line)pageTwo.after(line);
+    // Preview styles must take precedence over the embedded report's inline layout.
+    const firstPage=doc.getElementById('report');
+    for(const page of [firstPage,pageTwo]){
+      if(!page)continue;
+      page.style.setProperty('border','2px solid #4d6055','important');
+      page.style.setProperty('border-radius','0','important');
+      page.style.setProperty('box-shadow','5px 5px 0 #e8ede7','important');
+      page.style.setProperty('box-sizing','border-box','important');
+    }
     if(doc.getElementById('dss-separated-page-frames'))return;
     const style=doc.createElement('style');
     style.id='dss-separated-page-frames';
