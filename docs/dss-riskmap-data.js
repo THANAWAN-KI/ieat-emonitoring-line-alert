@@ -80,6 +80,31 @@
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
+  let incidentCallout;
+  function updateIncidentCallout(){
+    if(!origin)return;
+    const host=view.container;
+    if(!incidentCallout){
+      const layer=el('div');
+      layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2';
+      const label=el('div');
+      label.style.cssText='position:absolute;top:12px;left:50%;transform:translateX(-50%);max-width:65%;padding:5px 10px;background:#fffdf6;border:1px solid #928b7f;color:#292824;text-align:center;font:600 14px Sarabun,sans-serif';
+      const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
+      svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
+      line.setAttribute('stroke','#6f695f');line.setAttribute('stroke-width','1.5');
+      svg.append(line);layer.append(svg,label);host.append(layer);
+      incidentCallout={layer,label,line};
+      for(const property of ['viewpoint','width','height'])view.watch(property,updateIncidentCallout);
+    }
+    const {label,line}=incidentCallout,point=view.toScreen(origin);
+    label.textContent=name||'จุดเกิดเหตุ';
+    const visible=point&&point.x>=0&&point.x<=view.width&&point.y>=0&&point.y<=view.height;
+    line.style.display=visible?'':'none';
+    if(visible){
+      line.setAttribute('x1',view.width/2);line.setAttribute('y1',12+label.offsetHeight);
+      line.setAttribute('x2',point.x);line.setAttribute('y2',Math.max(0,point.y-32));
+    }
+  }
   const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
   let syncTimer, incidentRevision=0, hasSearched=false;
   const queueReport=()=>{incidentRevision++;clearTimeout(syncTimer);if(hasSearched)syncTimer=setTimeout(()=>syncReport(false),350);};
@@ -113,7 +138,8 @@
     const label = {type:'text',text:name||'จุดเกิดเหตุ',color:'#292824',backgroundColor:fireView?'#fffdf6':'#fff',
       borderLineColor:fireView?'#928b7f':'#d8c8df',borderLineSize:1,
       horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
-    graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
+    if(fireView)updateIncidentCallout();
+    else graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
     return circle;
   }
   async function updateNearby(forReport=false,auxiliary=false){
