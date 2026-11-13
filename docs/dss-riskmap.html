@@ -2698,7 +2698,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
         body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssReportSecondColumn{
           display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.68fr);gap:14px;align-items:start;
         }
-        html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap{
+        html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap:has(> #dssReportSecondColumn){
           grid-template-columns:minmax(0,1fr) minmax(0,1.68fr)!important;
         }
       }
