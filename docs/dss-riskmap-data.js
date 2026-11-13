@@ -376,9 +376,11 @@
       school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#b88b20'),
       cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#51627a':'#24845a',fireView?20:18)
     };
+    const monitoringSymbol=badge('<path d="M4 20h16M9 20V9h6v11M12 9V5m-4 2a5 5 0 0 1 8 0M6 5a8 8 0 0 1 12 0"/><path d="M11 13h2"/>','#55bfba',24);
     const legend=document.querySelector('.riskmap-map-key');
     if(legend){
       const legends=[['นิคมฯ',pin],['ดับเพลิง',supportSymbols.fire],['โรงพยาบาล',supportSymbols.hospital],['หัวจ่ายน้ำ',supportSymbols.hydrant],['ตำรวจ',supportSymbols.police],['ชุมชน',supportSymbols.community],['CCTV',supportSymbols.cctv],['โรงเรียน',supportSymbols.school],['เฝ้าระวังน้ำ',supportSymbols.waterWatch]];
+      if(fireView)legends.push(['สถานี e-Monitoring กนอ.',monitoringSymbol]);
       legend.replaceChildren(...legends.map(([title,symbol])=>{
         const li=el('li'),img=el('img');img.src=symbol.url;img.alt='';li.append(img,el('span',title));return li;
       }));
@@ -502,8 +504,10 @@
       url:'https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json',
       title:'สถานี e-Monitoring กนอ.',
       copyright:'การนิคมอุตสาหกรรมแห่งประเทศไทย',
-      minScale:600000,
-      renderer:{type:'simple',symbol:{type:'simple-marker',size:8,color:'#087e80',outline:{color:'#fff',width:1.5}}},
+      visible:true,
+      renderer:{type:'simple',symbol:monitoringSymbol},
+      featureReduction:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
+        labelingInfo:[{labelPlacement:'center-center',labelExpressionInfo:{expression:'Text($feature.cluster_count)'},symbol:{type:'text',color:'#153a38',font:{size:9,weight:'bold'}}}]},
       popupTemplate:{title:'{StationTH}',content:[{type:'fields',fieldInfos:[
         {fieldName:'IndustryZone',label:'นิคมอุตสาหกรรม'},
         {fieldName:'Type',label:'ประเภทสถานี'},
