@@ -1581,7 +1581,7 @@ async function downloadReportPng(){
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
   const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.after(weather);img.id='dashboardReportMapImage';await img.decode();slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));slot.style.removeProperty('height');
   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 3';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
-  let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
+  let first;try{window.dssFitFirstReportPage?.(firstNode,1485);if(firstNode.scrollHeight>1487)throw Error('เนื้อหาหน้าแรกมากเกิน A4 กรุณาย่อข้อความรายละเอียดก่อนดาวน์โหลด');const firstHeight=1485;first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
   const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const secondNode=document.getElementById('dssPageTwo').cloneNode(true);secondNode.classList.add('dss-page-two-export');secondNode.style.setProperty('width','1050px','important');stage.append(secondNode);document.body.append(stage);
   let second;
@@ -3594,7 +3594,7 @@ function showSupport(data){
  const allowed=new Set(categories.map(c=>c[0])),groups=new Map(),seen=new Set();
  (data.rows||[]).filter(r=>allowed.has(r.sourceId)&&Number(r.distance)<=data.radius*1000).sort((a,b)=>a.distance-b.distance).forEach(row=>{
  const key=row.sourceId,placeKey=[key,row.name,...(['hospital','fire','police'].includes(key)?[]:[Number(row.lat).toFixed(5),Number(row.lon).toFixed(5)])].join('|');
- if(seen.has(placeKey)||(groups.get(key)||[]).length>=3)return;seen.add(placeKey);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row);
+ if(seen.has(placeKey))return;seen.add(placeKey);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row);
  });
  nearby.replaceChildren();nearby.setAttribute('aria-label','ตารางข้อมูลสถานที่สนับสนุนแยกประเภท');
  const heading=document.createElement('h2');heading.textContent='3. ข้อมูลสนับสนุนใกล้เคียงจุดเกิดเหตุ';nearby.append(heading);
@@ -3603,7 +3603,7 @@ function showSupport(data){
  const rows=groups.get(key);if(!rows?.length)return;
  const tr=document.createElement('tr'),type=document.createElement('th'),details=document.createElement('td');type.scope='row';
  const badge=document.createElement('span'),category=document.createElement('span');badge.className='support-category-number';badge.textContent=index+1;category.textContent=label;type.append(badge,category);
- rows.forEach(row=>{
+ rows.slice(0,1).forEach(row=>{
  const entry=document.createElement('div');entry.className='support-place-details';
  const nameLabel=document.createElement('span');nameLabel.className='support-detail-label';nameLabel.textContent='ชื่อสถานที่';
  const button=document.createElement('button');button.type='button';button.textContent=row.name;button.title=row.address||row.name;
@@ -3611,7 +3611,9 @@ function showSupport(data){
  const distanceLabel=document.createElement('span');distanceLabel.className='support-detail-label';distanceLabel.textContent='ระยะเส้นตรง';
  const distance=document.createElement('span');distance.textContent=row.distance<1000?Math.round(row.distance)+' เมตร':(row.distance/1000).toFixed(2)+' กม.';
  distance.className='support-place-distance';distance.setAttribute('aria-label','ระยะเส้นตรง '+distance.textContent);entry.append(button,distance);details.append(entry);
- });tr.append(type,details);body.append(tr);
+ });
+ if(rows.length>1){const more=document.createElement('span');more.className='support-additional-count';more.textContent='มีจุดอื่นในรัศมีอีก '+(rows.length-1)+' แห่ง';details.append(more);}
+ tr.append(type,details);body.append(tr);
  });
  if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.unselected?'ค้นหาโรงงานเพื่อแสดงข้อมูลสนับสนุนใกล้จุดเกิดเหตุ':data.loading?'กำลังค้นหาข้อมูลสนับสนุน…':data.failures?.length?'ยังยืนยันรายการไม่ได้ เนื่องจากบางแหล่งข้อมูลเชื่อมต่อไม่สำเร็จ':'ไม่พบจุดสนับสนุนในรัศมี '+data.radius+' กม. จากข้อมูลที่โหลดสำเร็จ';tr.append(td);body.append(tr)}
  table.append(body);nearby.append(table);
@@ -4170,6 +4172,41 @@ html body #report#report#report#report#report#report#report#report#report#report
  html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 </style>
+<style id="first-report-a4-layout">
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap{aspect-ratio:auto!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;background:#fff!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-fact{padding:6px 8px!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-section{margin:10px 0!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-additional-count{display:block;margin-top:2px;color:#60675d}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-place-details{padding:2px 0!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .dss-page-footer{margin-top:10px!important;padding-top:6px!important}
+</style>
+<script id="first-report-a4-fit">
+(()=>{
+ let queued=false;
+ function fit(page,targetHeight){
+  const brief=page?.querySelector('#dssFieldBrief'),map=page?.querySelector('#fieldBriefMap');
+  if(!brief||!map||!page.clientWidth)return;
+  const style=getComputedStyle(page),padding=(parseFloat(style.paddingTop)||0)+(parseFloat(style.paddingBottom)||0);
+  const target=targetHeight||Math.round(page.clientWidth*297/210);
+  const mapHeight=map.getBoundingClientRect().height;
+  const nonMap=brief.scrollHeight-mapHeight;
+  const available=Math.floor(target-padding-2-nonMap-6);
+  const height=Math.max(120,available),value=height+'px';
+  if(map.style.getPropertyValue('height')!==value)map.style.setProperty('height',value,'important');
+  if(page.style.getPropertyValue('min-height')!==target+'px')page.style.setProperty('min-height',target+'px','important');
+ }
+ window.dssFitFirstReportPage=fit;
+ const schedule=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;fit(document.getElementById('report'));});};
+ const previous=render;render=function(){const result=previous.apply(this,arguments);schedule();return result;};
+ const page=document.getElementById('report'),brief=page?.querySelector('#dssFieldBrief');
+ if(brief&&window.ResizeObserver)new ResizeObserver(schedule).observe(brief);
+ document.getElementById('dashboardReportMapImage')?.addEventListener('load',schedule);
+ document.fonts?.ready.then(schedule);
+ window.addEventListener('resize',schedule);
+ document.addEventListener('DOMContentLoaded',schedule,{once:true});schedule();
+})();
+</script>
 </body></html>
 
 
