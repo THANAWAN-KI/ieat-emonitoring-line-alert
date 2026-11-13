@@ -80,30 +80,50 @@
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
-  let incidentCallout;
-  function updateIncidentCallout(){
-    if(!origin)return;
-    const host=view.container;
+  let incidentCallout, calloutRevision=0;
+  async function updateIncidentCallout(){
+    const revision=++calloutRevision;
+    const surface=view.container?.querySelector('.esri-view-surface');
+    if(!origin||!surface)return;
     if(!incidentCallout){
-      const layer=el('div');
+      const layer=el('div'),label=el('div');
       layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2';
-      const label=el('div');
-      label.style.cssText='position:absolute;top:12px;left:50%;transform:translateX(-50%);max-width:65%;padding:5px 10px;background:#fffdf6;border:1px solid #928b7f;color:#292824;text-align:center;font:600 14px Sarabun,sans-serif';
+      label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:6px 10px;background:#fffdf6;border:2px solid #edb800;color:#292824;text-align:center;font:600 14px Sarabun,sans-serif;overflow-wrap:anywhere';
       const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
       svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
-      line.setAttribute('stroke','#6f695f');line.setAttribute('stroke-width','1.5');
-      svg.append(line);layer.append(svg,label);host.append(layer);
+      line.setAttribute('stroke','#edb800');line.setAttribute('stroke-width','2.5');
+      svg.append(line);layer.append(svg,label);surface.append(layer);
       incidentCallout={layer,label,line};
-      for(const property of ['viewpoint','width','height'])view.watch(property,updateIncidentCallout);
+      for(const property of ['viewpoint','width','height','stationary','updating'])view.watch(property,updateIncidentCallout);
     }
-    const {label,line}=incidentCallout,point=view.toScreen(origin);
+    const {layer,label,line}=incidentCallout,point=view.toScreen(origin);
+    const width=surface.clientWidth,height=surface.clientHeight;
+    layer.hidden=!point||point.x<0||point.y<0||point.x>width||point.y>height||width<80||height<80;
+    if(layer.hidden)return;
     label.textContent=name||'จุดเกิดเหตุ';
-    const visible=point&&point.x>=0&&point.x<=view.width&&point.y>=0&&point.y<=view.height;
-    line.style.display=visible?'':'none';
-    if(visible){
-      line.setAttribute('x1',view.width/2);line.setAttribute('y1',12+label.offsetHeight);
-      line.setAttribute('x2',point.x);line.setAttribute('y2',Math.max(0,point.y-32));
-    }
+    label.style.maxWidth=Math.min(310,width-32)+'px';
+    const w=label.offsetWidth,h=label.offsetHeight;
+    const clamp=(n,min,max)=>Math.max(min,Math.min(n,max));
+    const candidates=[[-w-38,-h-65],[38,-h-65],[-w/2,-h-95],[-w-48,34],[48,34],[-w/2,60]].map(([dx,dy])=>({
+      x:clamp(point.x+dx,12,width-w-12),y:clamp(point.y+dy,12,height-h-12)
+    })).filter(({x,y})=>point.x<x-18||point.x>x+w+18||point.y<y-18||point.y-33>y+h+18);
+    const place=({x,y})=>{
+      label.style.left=x+'px';label.style.top=y+'px';
+      line.setAttribute('x1',clamp(point.x,x+5,x+w-5));
+      line.setAttribute('y1',point.y>=y+h?y+h:y);
+      line.setAttribute('x2',point.x);line.setAttribute('y2',clamp(point.y-23,0,height));
+    };
+    if(!candidates.length){layer.hidden=true;return;}
+    place(candidates[0]);
+    if(!view.stationary||view.updating)return;
+    const include=map.allLayers.filter(item=>item.visible&&(item.geometryType==='point'||item===pinLayer)).toArray();
+    const scores=await Promise.all(candidates.map(async ({x,y})=>{
+      const samples=[];
+      for(let sx=12;sx<w;sx+=24)for(let sy=8;sy<h;sy+=16)samples.push(view.hitTest({x:x+sx,y:y+sy},{include}).then(hit=>Number(hit.results.length>0)).catch(()=>0));
+      const hits=await Promise.all(samples);
+      return hits.reduce((total,count)=>total+count,0)+(x<64||x+w>width-64?2:0);
+    }));
+    if(revision===calloutRevision)place(candidates[scores.indexOf(Math.min(...scores))]);
   }
   const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
   let syncTimer, incidentRevision=0, hasSearched=false;
