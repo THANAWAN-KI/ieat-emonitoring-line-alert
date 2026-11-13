@@ -543,7 +543,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','ea693d5');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','6be985d');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -2712,11 +2712,12 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
         gap:18px!important;
       }
       #dssReportSecondColumn{min-width:0;align-self:start}
-      #dssReportSecondColumn > #riskMapLinePanel{display:grid!important;gap:8px;margin:16px 0 0;padding:14px;border:1px solid #a9b8ad;background:#faf7fc;color:#41483f}
+      #dssReportSecondColumn > #riskMapLinePanel{display:grid!important;gap:8px;margin:16px 0 0;padding:14px;border:2px solid #4d6055;background:#fff;color:#28352c;box-shadow:5px 5px 0 #e8ede7;font-family:Sarabun,Tahoma,sans-serif}
       #riskMapLinePanel :is(h3,p){margin:0}
-      #riskMapLinePanel :is(select,textarea){width:100%;padding:8px;font:inherit;border:1px solid #b6a6c6;background:#fff}
+      #riskMapLinePanel h3{padding:8px 12px;background:#edf3ed;border-left:3px solid #4d6055;color:#34483b}
+      #riskMapLinePanel :is(select,textarea){width:100%;padding:8px;font:inherit;border:1px solid #a6b8aa;background:#f7f9f5}
       #riskMapLinePanel textarea{resize:vertical;box-sizing:border-box}
-      #riskMapLineCopy{justify-self:start;background:#4d6055;color:#fff;padding:8px 12px;border:0;cursor:pointer}
+      #riskMapLineCopy{justify-self:start;background:#eaf3ed;color:#235740;padding:8px 12px;border:1px solid #c6d7c9;cursor:pointer}
       #riskMapLineCopy:disabled{opacity:.55}
       body.dss-edit-exporting #dssReportSecondColumn > #riskMapLinePanel{display:none!important}
       @media(min-width:851px){
