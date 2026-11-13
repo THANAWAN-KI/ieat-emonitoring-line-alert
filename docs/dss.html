@@ -3223,13 +3223,16 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   }
   incident.hidden=!incidentFields.children.length;
   const weather=document.getElementById('fbWeather');weather.replaceChildren(element('strong','สภาพอากาศ'));
-  field(weather,'ลักษณะอากาศ',state.weather);
-  field(weather,'อุณหภูมิ',available(state.temp)?state.temp+' °C':'');
-  field(weather,'ความชื้น',available(state.humidity)?state.humidity+' %':'');
-  field(weather,'ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':'');
-  field(weather,'ลมพัดจาก',available(state.windSpeed)?state.windDir:'');
-  field(weather,'ดึงข้อมูลล่าสุด',state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่');
-  weather.append(element('small','Open-Meteo · ข้อมูลแบบจำลอง','fb-muted'));
+  const table=element('table',undefined,'report-weather-table'),body=element('tbody');
+  const weatherRows=[
+   ['ลักษณะอากาศ',state.weather],['อุณหภูมิ',available(state.temp)?state.temp+' °C':''],
+   ['ความชื้น',available(state.humidity)?state.humidity+' %':''],
+   ['ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':''],
+   ['ลมพัดจาก',available(state.windSpeed)?state.windDir:''],
+   ['ดึงข้อมูลล่าสุด',state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่']
+  ];
+  weatherRows.forEach(([label,value])=>{const row=element('tr'),th=element('th',label);th.scope='row';row.append(th,element('td',valueOf(value)));body.append(row)});
+  table.append(body);weather.append(table);
   const rows=Array.from(document.querySelectorAll('#fbSupport tr'));
   types.forEach(([type,label],index)=>{
    const row=rows[index];if(!row)return;
@@ -3545,7 +3548,7 @@ image.addEventListener('load',()=>{image.style.transform=''});
 
 
 const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
-function fitImage(){if(!image.naturalWidth)return;const height=Math.round(slot.clientWidth*5/8);slot.style.setProperty('height',height+'px','important')}
+function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ratio=image.naturalWidth/image.naturalHeight;slot.style.setProperty('--report-map-aspect',String(ratio));slot.dataset.reportMapRatio=String(1/ratio);slot.style.removeProperty('height')}
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
@@ -3688,7 +3691,7 @@ html body #report#report #reportNearbySupport .support-place-distance{white-spac
 html body #report#report #reportNearbySupport .support-reference-table .support-category-number{width:18px!important;height:18px!important;margin-bottom:0!important}
 </style><script id="initial-and-estate-weather">
 (function(){
-function note(){const weather=document.getElementById('fbWeather');if(!weather)return;let area=weather.querySelector('.weather-reference-area');if(!area){area=document.createElement('small');area.className='weather-reference-area';weather.append(area)}area.textContent='พื้นที่: '+(state.weatherLocation||(state.company!==defaults.company?state.company:'กรุงเทพมหานคร (พื้นที่อ้างอิงเริ่มต้น)'))}
+function note(){document.querySelector('#fbWeather .weather-reference-area')?.remove()}
 const before=render;render=function(){const result=before.apply(this,arguments);note();return result};
 window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='dss:weather-location')return;const {lat,lng,name}=event.data;if(!Number.isFinite(lat)||!Number.isFinite(lng))return;state.lat=lat;state.lng=lng;state.weatherLocation=name;loadWeather()});
 window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='dss:select-epp')state.weatherLocation=''});
@@ -3964,6 +3967,38 @@ html body #report#report#report #fieldBriefMap[data-map-pending="true"]::after{
  else ready();
 })();
 </script>
+<style id="report-map-fill-and-weather-table">
+html body #report#report#report#report#report#report#report #fieldBriefMap{
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:var(--report-map-aspect,1.6)!important;
+}
+html body #report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{
+ display:block!important;width:100%!important;height:100%!important;object-fit:fill!important;position:absolute!important;inset:0!important;
+}
+html body #report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage[hidden]{display:none!important}
+html body #report#report#report#report#report#report#report #fieldBriefMap #fbWeather{
+ width:280px!important;max-width:45%!important;max-height:calc(100% - 20px)!important;right:10px!important;bottom:10px!important;
+ padding:10px!important;background:#fff!important;border:1px solid #4d6055!important;box-shadow:none!important;color:#17201d!important;
+}
+html body #report#report#report#report#report#report#report #fbWeather>strong{
+ display:block!important;background:#f3cf69!important;border:1px solid #4d6055!important;padding:6px 8px!important;color:#4d6055!important;-webkit-text-fill-color:#4d6055!important;
+}
+html body #report#report#report#report#report#report#report #fbWeather .report-weather-arrow{
+ display:block!important;width:76px!important;height:76px!important;margin:12px auto!important;background:#fff0eb!important;border-radius:50%!important;padding:8px!important;box-sizing:border-box!important;
+}
+html body #report#report#report#report#report#report#report #fbWeather .report-weather-arrow svg{width:100%!important;height:100%!important}
+html body #report#report#report#report#report#report#report #fbWeather .report-weather-table{
+ width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;background:#fafbf8!important;margin:0!important;
+}
+html body #report#report#report#report#report#report#report #fbWeather .report-weather-table :is(th,td){
+ border:1px solid #b9c7b8!important;padding:6px!important;text-align:left!important;vertical-align:top!important;white-space:normal!important;overflow-wrap:anywhere!important;font:12px/1.5 Sarabun,sans-serif!important;color:#17201d!important;
+}
+html body #report#report#report#report#report#report#report #fbWeather .report-weather-table th{width:42%!important;background:#edf6f0!important;font-weight:500!important}
+html body #report#report#report#report#report#report#report #fbWeather :is(.weather-reference-area,small,.fb-muted){display:none!important}
+html body #report#report#report#report#report#report#report.dss-field-export #fieldBriefMap{height:auto!important;aspect-ratio:var(--report-map-aspect,1.6)!important}
+@media(max-width:760px){
+html body #report#report#report#report#report#report#report #fieldBriefMap #fbWeather{position:relative!important;inset:auto!important;max-width:100%!important;width:100%!important;margin:0!important}
+}
+</style>
 </body></html>
 
 

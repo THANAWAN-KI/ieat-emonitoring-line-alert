@@ -127,6 +127,15 @@
     }));
     if(revision===calloutRevision)place(candidates[scores.indexOf(Math.min(...scores))]);
   }
+  window.ieatCoverageCalloutSnapshot=async()=>{
+    await updateIncidentCallout();
+    if(!incidentCallout||incidentCallout.layer.hidden)return null;
+    const {label,line}=incidentCallout,css=getComputedStyle(label);
+    return {text:label.textContent,x:label.offsetLeft,y:label.offsetTop,width:label.offsetWidth,height:label.offsetHeight,
+      font:css.fontWeight+' '+css.fontSize+' '+css.fontFamily,color:css.color,background:css.backgroundColor,border:css.borderColor,borderWidth:parseFloat(css.borderWidth)||2,
+      paddingX:parseFloat(css.paddingLeft)||10,paddingY:parseFloat(css.paddingTop)||6,lineHeight:parseFloat(css.lineHeight)||20,
+      line:['x1','y1','x2','y2'].map(key=>Number(line.getAttribute(key)))};
+  };
   const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
   let syncTimer, incidentRevision=0, hasSearched=false;
   const queueReport=()=>{incidentRevision++;clearTimeout(syncTimer);if(hasSearched)syncTimer=setTimeout(()=>syncReport(false),350);};
@@ -709,8 +718,27 @@
       });
       // Capture the entire source viewport so every visible feature is retained.
       const width=1972,height=Math.max(1,Math.round(width*view.height/view.width));
+      const callout=await window.ieatCoverageCalloutSnapshot?.();
       const shot=await view.takeScreenshot({format:'png',width,height});
-      return shot.dataUrl;
+      if(!callout)return shot.dataUrl;
+      // ArcGIS screenshots omit HTML overlays. Paint the same label and leader onto the exported map.
+      const image=new Image();image.src=shot.dataUrl;await image.decode();
+      const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+      const ctx=canvas.getContext('2d');ctx.drawImage(image,0,0,width,height);
+      ctx.save();ctx.scale(width/view.width,height/view.height);
+      ctx.strokeStyle=callout.border;ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.moveTo(callout.line[0],callout.line[1]);ctx.lineTo(callout.line[2],callout.line[3]);ctx.stroke();
+      ctx.fillStyle=callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
+      ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
+      ctx.font=callout.font;ctx.fillStyle=callout.color;ctx.textAlign='center';ctx.textBaseline='top';
+      const max=callout.width-2*(callout.paddingX+callout.borderWidth);
+      const lines=[];let current='';
+      for(const char of Array.from(callout.text)){
+        if(current&&ctx.measureText(current+char).width>max){lines.push(current);current=char;}else current+=char;
+      }
+      if(current)lines.push(current);
+      lines.forEach((line,i)=>ctx.fillText(line,callout.x+callout.width/2,callout.y+callout.paddingY+callout.borderWidth+i*callout.lineHeight));
+      ctx.restore();return canvas.toDataURL('image/png');
     };
     window.ieatSyncCoverageMapPreview=async()=>{
       const context=window.ieatCoverageReport;
