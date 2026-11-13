@@ -3563,7 +3563,7 @@ image.addEventListener('load',()=>{image.style.transform=''});
 
 
 const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
-function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ratio=image.naturalWidth/image.naturalHeight;slot.style.setProperty('--report-map-aspect',String(ratio));slot.dataset.reportMapRatio=String(1/ratio);slot.style.removeProperty('height')}
+function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ratio=image.naturalWidth/image.naturalHeight;slot.style.setProperty('--report-map-aspect',String(ratio));slot.dataset.reportMapRatio=String(1/ratio);if(!window.dssFitFirstReportPage)slot.style.removeProperty('height')}
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
