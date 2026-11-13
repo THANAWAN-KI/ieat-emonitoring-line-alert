@@ -361,7 +361,7 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=24)=>svgMarker(
+    const badge=(drawing,color,size=24)=>fireView?svgMarker('<circle cx="12" cy="12" r="11" fill="'+color+'" stroke="#fff" stroke-width="1.5"/><g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4) scale(.67)">'+drawing+'</g>',size,size):svgMarker(
       '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
     const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>','#cc5257');
@@ -374,7 +374,7 @@
       communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>','#24845a'),
       waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>','#b88b20'),
       school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>','#b88b20'),
-      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>','#24845a',18)
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#51627a':'#24845a',fireView?20:18)
     };
     const legend=document.querySelector('.riskmap-map-key');
     if(legend){
@@ -466,7 +466,7 @@
       item.when(()=>{
         if(item.geometryType!=='point')return;
         item.featureReduction={
-          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:['hydrant','cctv'].includes(def.id)?600:2000,
+          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:fireView?500: ['hydrant','cctv'].includes(def.id)?600:2000,
           symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:1.5}},
           labelingInfo:[{
             deconflictionStrategy:'none',labelPlacement:'center-center',
@@ -493,11 +493,11 @@
       center.labelingInfo=[{minScale:400000,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["สำนักงานนิคมฯ"]'},
         symbol:{type:'text',color:'#30203f',haloColor:'#fff',haloSize:2,backgroundColor:'#fff',borderLineColor:'#171717',borderLineSize:1,yoffset:8,font:{family:'Sarabun',size:12,weight:'bold'}}}];
-      businesses.visible=false;
-      eppZones.visible=false;
       zones.opacity=.42;
     }
-    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]),group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
+    const parcelGroup=group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]);
+    parcelGroup.visible=!fireView;
+    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[parcelGroup,group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     if(fireView)map.add(new GeoJSONLayer({
       url:'https://emonitor.ieat.go.th/call_feed/geog/GeoData/station_all.json',
       title:'สถานี e-Monitoring กนอ.',
