@@ -3238,7 +3238,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
    ['ความชื้น',available(state.humidity)?state.humidity+' %':''],
    ['ความเร็วลม',available(state.windSpeed)?state.windSpeed+' กม./ชม.':''],
    ['ลมพัดจาก',available(state.windSpeed)?state.windDir:''],
-   ['ดึงข้อมูลล่าสุด',state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่']
+   ['ดึงข้อมูลล่าสุด',String(state.weatherTime&&state.weatherFetchedTime||'รอดึงข้อมูลใหม่').replace(/\s*\(เวลาไทย\)/g,'')]
   ];
   weatherRows.forEach(([label,value])=>{const row=element('tr'),th=element('th',label);th.scope='row';row.append(th,element('td',valueOf(value)));body.append(row)});
   table.append(body);weather.append(table);
@@ -3565,7 +3565,7 @@ function paint(){
  weather.querySelector('.report-weather-arrow')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
  if(state.windSpeed!==''&&state.windSpeed!=='—'&&Number.isFinite(speed)&&speed>0&&Number.isFinite(deg)){
- const arrow=document.createElement('span');arrow.className='report-weather-arrow';arrow.innerHTML="<svg viewBox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path fill=\"#ff4025\" d=\"M479.568,159.192H294.751l22.54-96.459c2.094-8.92-1.451-18.198-8.937-23.475c-7.488-5.268-17.419-5.463-25.111-0.496L10.34,235.768C3.846,240.461,0,247.987,0,256.001c0,8.013,3.846,15.539,10.34,20.232L283.243,473.24c7.692,4.965,17.623,4.771,25.111-0.506c7.486-5.267,11.021-14.546,8.937-23.465l-22.54-96.459h184.817c17.905,0,32.432-14.518,32.432-32.433V191.623C512,173.708,497.474,159.192,479.568,159.192z\"/></svg>";arrow.style.transform='rotate('+((deg+270)%360)+'deg)';weather.insertBefore(arrow,weather.children[1]||null);
+ const arrow=document.createElement('span');arrow.className='report-weather-arrow';arrow.innerHTML='<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#2e9df7" stroke="#000" stroke-width="2.5" stroke-linejoin="round" d="M5 32 L30 10 L30 23 L58 23 L58 41 L30 41 L30 54 Z"/></svg>';arrow.style.transform='rotate('+((deg+270)%360)+'deg)';weather.insertBefore(arrow,weather.children[1]||null);
  }
 
 }
@@ -3735,7 +3735,7 @@ html body #report#report#report#report #reportNearbySupport .support-reference-t
 html body #report#report#report#report #reportNearbySupport .support-category-number{background:#5b8f32!important;color:#fff!important}
 html body #report#report#report#report #fbWeather>strong{color:#ff4025!important;-webkit-text-fill-color:#ff4025!important}
 html body #report#report#report#report #fbWeather .report-weather-arrow{background:#ffede9!important}
-html body #report#report#report#report #fbWeather .report-weather-arrow svg path{fill:#ff4025!important}
+html body #report#report#report#report #fbWeather .report-weather-arrow svg path{fill:#2e9df7!important;stroke:#000!important;stroke-width:2.5!important;stroke-linejoin:round!important}
 html body #dssPageTwo#dssPageTwo#dssPageTwo table th{background:#efefef!important;color:#3949ab!important}
 html body #dssPageTwo#dssPageTwo#dssPageTwo table tbody tr:nth-child(even){background:#f7f7fb!important}
 html body #report#report#report#report .report-map-zoom-controls button{color:#3949ab!important}
@@ -3816,11 +3816,12 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
     const brief=document.getElementById('dssFieldBrief');if(!brief)return;
     brief.querySelectorAll('.report-scope').forEach(node=>node.remove());
     const rawPrefix=/^ข้อมูลจาก\s*Dashboard\s*Risk\s*Map/i;
+    const radiusNote=/^ขอบเขตพื้นที่ที่ตรวจสอบรอบจุดเกิดเหตุ\s*:/;
     const cctvNote=/^4\.\s*กล้อง CCTV สังเกตการณ์\s*[·•]\s*ดูตำแหน่ง/;
     for(const node of (document.getElementById('report')||brief).querySelectorAll('div,p,aside')){
       const text=(node.textContent||'').trim();
-      if(!rawPrefix.test(text)&&!cctvNote.test(text))continue;
-      if([...node.children].some(child=>rawPrefix.test((child.textContent||'').trim())||cctvNote.test((child.textContent||'').trim())))continue;
+      if(!rawPrefix.test(text)&&!cctvNote.test(text)&&!radiusNote.test(text))continue;
+      if([...node.children].some(child=>rawPrefix.test((child.textContent||'').trim())||cctvNote.test((child.textContent||'').trim())||radiusNote.test((child.textContent||'').trim())))continue;
       if(!node.querySelector('#fieldBriefMap,table'))node.remove();
     }
     const map=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');
@@ -3992,7 +3993,7 @@ html body #report#report#report#report#report#report#report #fbWeather>strong{
  display:block!important;background:#f3cf69!important;border:1px solid #4d6055!important;padding:6px 8px!important;color:#4d6055!important;-webkit-text-fill-color:#4d6055!important;
 }
 html body #report#report#report#report#report#report#report #fbWeather .report-weather-arrow{
- display:block!important;width:76px!important;height:76px!important;margin:12px auto!important;background:#fff0eb!important;border-radius:50%!important;padding:8px!important;box-sizing:border-box!important;
+ display:block!important;width:76px!important;height:76px!important;margin:12px auto!important;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;box-sizing:border-box!important;
 }
 html body #report#report#report#report#report#report#report #fbWeather .report-weather-arrow svg{width:100%!important;height:100%!important}
 html body #report#report#report#report#report#report#report #fbWeather .report-weather-table{
