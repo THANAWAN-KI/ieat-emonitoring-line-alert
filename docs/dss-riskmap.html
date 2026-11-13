@@ -3372,7 +3372,7 @@ if(document.documentElement.classList.contains('fire-risk-view')){
       if(!doc.getElementById('line-after-page-two')){
         const style=doc.createElement('style');
         style.id='line-after-page-two';
-        style.textContent='#riskMapLinePanel{display:grid!important;gap:8px;margin:16px 0;padding:14px;border:2px solid #4d6055;background:white;color:#28352c}#riskMapLineText{width:100%;box-sizing:border-box}';
+        style.textContent=document.getElementById('riskmap-line-reference-style').textContent;
         doc.head.append(style);
       }
       if(page.nextElementSibling!==panel)page.after(panel);
@@ -3388,5 +3388,42 @@ if(document.documentElement.classList.contains('fire-risk-view')){
   mount();
 })();
 </script>
+<style id="riskmap-line-reference-style">
+/* LINE composer matches the report search reference, including inside the report frame. */
+html body #riskMapLinePanel#riskMapLinePanel{
+ display:grid!important;gap:10px!important;min-width:0!important;box-sizing:border-box!important;
+ margin:16px 0!important;padding:16px!important;border:1px solid #ded8e8!important;
+ border-radius:0!important;background:#fff!important;box-shadow:none!important;
+ color:#17201d!important;font:400 16px/1.65 Sarabun,Tahoma,sans-serif!important;
+}
+html body #riskMapLinePanel#riskMapLinePanel h3{
+ margin:0 0 2px!important;padding:0!important;border:0!important;background:transparent!important;
+ color:#4d6055!important;font:700 22px/1.5 Sarabun,Tahoma,sans-serif!important;
+}
+html body #riskMapLinePanel#riskMapLinePanel label{margin:0!important;color:#17201d!important;font-weight:400!important}
+html body #riskMapLinePanel#riskMapLinePanel :is(select,textarea){
+ display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;
+ border:1px solid #4d6055!important;border-radius:0!important;background:#fafbf8!important;
+ color:#17201d!important;padding:10px 12px!important;font:inherit!important;box-shadow:none!important;
+}
+html body #riskMapLinePanel#riskMapLinePanel select{min-height:48px!important}
+html body #riskMapLinePanel#riskMapLinePanel textarea{min-height:260px!important;resize:vertical!important;line-height:1.75!important}
+html body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy{
+ grid-row:auto!important;justify-self:start!important;width:auto!important;max-width:100%!important;
+ min-height:50px!important;margin:4px 0 0!important;padding:10px 24px!important;
+ border:1px solid #c6d7c9!important;border-radius:0!important;background:#edf6f0!important;
+ color:#235740!important;font:600 16px/1.5 Sarabun,Tahoma,sans-serif!important;
+ box-shadow:none!important;cursor:pointer;
+}
+html body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy:hover:enabled{background:#deeee3!important}
+html body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy:disabled{opacity:.55!important;cursor:default}
+html body #riskMapLinePanel#riskMapLinePanel :is(select,textarea,button):focus-visible{outline:2px solid #24845a!important;outline-offset:3px!important}
+html body #riskMapLinePanel#riskMapLinePanel p{margin:0!important;color:#17201d!important;font-size:14px!important;line-height:1.7!important}
+@media(max-width:560px){
+ html body #riskMapLinePanel#riskMapLinePanel{padding:14px!important;font-size:15px!important}
+ html body #riskMapLinePanel#riskMapLinePanel h3{font-size:20px!important}
+ html body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy{width:100%!important}
+}
+</style>
 </body></html>
 
