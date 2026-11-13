@@ -1571,7 +1571,7 @@ async function downloadReportPng(){
   const firstNode=document.getElementById('report').cloneNode(true);firstNode.classList.add('dss-field-export','dss-two-page-first');firstNode.style.setProperty('width','1050px','important');firstNode.style.setProperty('height','auto','important');firstNode.style.setProperty('padding','32px','important');firstNode.style.setProperty('box-sizing','border-box','important');firstNode.style.setProperty('max-height','none','important');
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief)').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
   const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);img.id='dashboardReportMapImage';await img.decode();slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));slot.style.removeProperty('height');
-  const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 2';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
+  const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / 3';brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
   let first;try{const firstHeight=Math.max(1485,Math.ceil(firstNode.scrollHeight));first=await html2canvas(firstNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:firstHeight,windowWidth:1200,ignoreElements:n=>n.hasAttribute('data-export-exclude')})}finally{firstStage.remove()}
   const stage=document.createElement('div');stage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const secondNode=document.getElementById('dssPageTwo').cloneNode(true);secondNode.classList.add('dss-page-two-export');secondNode.style.setProperty('width','1050px','important');stage.append(secondNode);document.body.append(stage);
@@ -1580,14 +1580,23 @@ async function downloadReportPng(){
    const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
    second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
   }finally{stage.remove()}
+  const thirdSource=document.getElementById('dssPageThree');
+  if(!thirdSource)throw Error('หน้ารายงานสถานียังไม่พร้อม');
+  const thirdStage=document.createElement('div');thirdStage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
+  const thirdNode=thirdSource.cloneNode(true);thirdNode.classList.add('dss-page-three-export');
+  thirdNode.style.setProperty('width','1050px','important');thirdNode.style.setProperty('max-width','none','important');
+  thirdNode.style.setProperty('height','auto','important');thirdNode.style.setProperty('padding','32px','important');
+  thirdNode.querySelectorAll('a[href="#dssPageThree"]').forEach(node=>node.remove());
+  thirdStage.append(thirdNode);document.body.append(thirdStage);
+  let third;try{third=await html2canvas(thirdNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:Math.max(1485,Math.ceil(thirdNode.scrollHeight)),windowWidth:1200});}finally{thirdStage.remove();}
   if(activeReport&&(parent.ieatCoverageReport!==activeReport||activeReport.status!=='ready'))throw Error('เงื่อนไขค้นหาเปลี่ยนระหว่างสร้างภาพ กรุณาค้นหาใหม่');
-  for(const canvas of [first,second]){
-   const context=canvas.getContext('2d'),width=2*exportScale;
+  for(const canvas of [first,second,third]){
+   const context=canvas.getContext('2d'),width=exportScale;
    context.strokeStyle='#4d6055';
    context.lineWidth=width;
    context.strokeRect(width/2,width/2,canvas.width-width,canvas.height-width);
   }
-  const blobs=await Promise.all([first,second].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
+  const blobs=await Promise.all([first,second,third].map(canvas=>new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างภาพรายงานได้')),'image/png'))));
   for(let index=0;index<blobs.length;index++){
    const url=URL.createObjectURL(blobs[index]),name='IEAT-DSS-'+(state.reportNo||Date.now())+'-page-'+(index+1)+'.png';window.ieatReportDownloads.push({url,name});const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();
    if(index===0)await new Promise(resolve=>setTimeout(resolve,500));
@@ -3441,8 +3450,8 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ปริมาตร / แรงดัน','หน่วย'],equipmentRows));
   
   const time=el('div','เวลาสืบค้นข้อมูลสารเคมี: '+value(state.chemicalDataTime));time.className='p2-meta';page.append(time);
-  const footer=el('div','แหล่งข้อมูล: '+(state.chemicalDataSource||'สารเคมี DSS')+' · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 2');footer.className='dss-page-footer';page.append(footer);
-  const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG 2 หน้า';
+  const footer=el('div','แหล่งข้อมูล: '+(state.chemicalDataSource||'สารเคมี DSS')+' · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 3');footer.className='dss-page-footer';page.append(footer);
+  const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG 3 หน้า';
  }
  window.dssRefreshPageTwo=async function(){
   const current=++request,identity=[state.company,state.registration,state.estate].join('|');lastIdentity=identity;equipment=[];equipmentStatus='กำลังโหลดข้อมูล';draw();
@@ -3999,6 +4008,45 @@ html body #report#report#report#report#report#report#report.dss-field-export #fi
 html body #report#report#report#report#report#report#report #fieldBriefMap #fbWeather{position:relative!important;inset:auto!important;max-width:100%!important;width:100%!important;margin:0!important}
 }
 </style>
+<style id="monitoring-page-three-style">
+html body #dssPageThree{width:100%;min-width:0;min-height:500px;box-sizing:border-box;padding:22px;background:#fff;border:1px solid #4d6055;box-shadow:none;border-radius:0;color:#17201d;font:13px/1.6 Sarabun,sans-serif}
+html body .report-wrap>#dssPageThree{grid-column:1/-1;width:calc((100% - 18px)/2);justify-self:start}
+#dssPageThree .p2-header{display:flex;align-items:center;gap:12px;border-bottom:1px solid #5b8f32;padding-bottom:12px;margin-bottom:16px}
+#dssPageThree .p2-header img{width:52px;height:auto}
+#dssPageThree .p2-header h1{font-size:19px;line-height:1.5;margin:0}
+#dssPageThree .p2-header a{color:#17201d}
+#dssPageThreeFacts{padding:10px;border:1px solid #d6ddcf;background:#f6f9f2;margin:12px 0;overflow-wrap:anywhere}
+#reportMonitoringSummary{margin-top:12px;padding:10px;border:1px solid #c6d7c9;background:#f4f8ef}
+#reportMonitoringSummary h3{font-size:14px;margin:0 0 6px;color:#5b8f32}
+#reportMonitoringSummary p{margin:5px 0}
+#reportMonitoringSummary a{color:#477627;text-decoration:underline}
+#dssPageThree .dss-page-footer{margin-top:20px;padding-top:10px;border-top:1px solid #d6ddcf;text-align:right;font-size:11px;color:#60675d}
+@media(max-width:850px){html body .report-wrap>#dssPageThree{width:100%}}
+@media print{html body .report-wrap>#dssPageThree{width:100%;break-before:page}}
+</style>
+<script id="monitoring-page-three">
+(()=>{
+ function mount(){
+  const second=document.getElementById('dssPageTwo'),wrap=second?.closest('.report-wrap');
+  if(!wrap)return;
+  let page=document.getElementById('dssPageThree');
+  if(!page){
+   page=document.createElement('section');page.id='dssPageThree';page.setAttribute('aria-labelledby','dssPageThreeTitle');
+   const header=second.querySelector('.p2-header')?.cloneNode(true)||document.createElement('header');
+   header.className='p2-header';let title=header.querySelector('h1');
+   if(!title){title=document.createElement('h1');header.append(title);}
+   title.id='dssPageThreeTitle';title.textContent='สถานี e-Monitoring ใกล้จุดเกิดเหตุ';
+   const facts=document.createElement('p');facts.id='dssPageThreeFacts';facts.textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูสถานีใกล้จุดเกิดเหตุ';
+   const content=document.createElement('div');content.id='dssPageThreeContent';
+   const empty=document.createElement('p');empty.textContent='รายชื่อสถานี ประเภท ค่าตรวจวัด เวลา และผลเทียบมาตรฐานจะแสดงในหน้านี้เมื่อค้นหาโรงงาน';content.append(empty);
+   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e-Monitoring กนอ. | หน้า 3 / 3';
+   page.append(header,facts,content,footer);
+  }
+  if(page.parentElement!==wrap)wrap.append(page);
+ }
+ mount();document.addEventListener('DOMContentLoaded',mount,{once:true});
+})();
+</script>
 </body></html>
 
 
