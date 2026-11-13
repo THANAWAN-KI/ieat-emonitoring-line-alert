@@ -3,13 +3,128 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-13T09:33:22.866063+00:00",
+    "fetchedAt": "2026-11-13T17:45:26.045598+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1794351921000,
-    "latestEvent": 1794551100000
+    "oldestEvent": 1794445642000,
+    "latestEvent": 1794590224000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17431",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.856,
+          20.004,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.4,
+        "place": "ประเทศเมียนมา",
+        "time": 1794590224000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17431",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17430",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.06,
+          21.884,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.2,
+        "place": "พรมแดนประเทศเมียนมา - ประเทศจีน",
+        "time": 1794574088000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17430",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17429",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.936,
+          20.107,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.5,
+        "place": "ประเทศเมียนมา",
+        "time": 1794568509000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17429",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17428",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.944,
+          20.048,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.2,
+        "place": "ประเทศเมียนมา",
+        "time": 1794566700000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17428",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17427",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.006,
+          19.673,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.9,
+        "place": "ต.เมืองนะ อ.เชียงดาว จ.เชียงใหม่",
+        "time": 1794563009000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17427",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17426",
@@ -118,121 +233,6 @@
         "place": "ต.เชียงของ อ.นาน้อย จ.น่าน",
         "time": 1794445642000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17422",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17421",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.968,
-          20.107,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.1,
-        "place": "ประเทศเมียนมา",
-        "time": 1794442678000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17421",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17420",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.407,
-          18.858,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.8,
-        "place": "ประเทศเมียนมา",
-        "time": 1794399868000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17420",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17419",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.262,
-          19.568,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 4.5,
-        "place": "ประเทศเมียนมา",
-        "time": 1794389832000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17419",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17418",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.696,
-          4.285,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.7,
-        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
-        "time": 1794360427000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17418",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17417",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.593,
-          4.157,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 4.5,
-        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
-        "time": 1794351921000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17417",
         "source": "TMD",
         "types": "",
         "detail": null,
