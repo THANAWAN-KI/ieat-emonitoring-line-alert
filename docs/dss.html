@@ -858,7 +858,7 @@ supportGrid.append(card)});windArrow.style.transform=`rotate(${(Number(state.win
 const mapNode=document.getElementById('map');
 mapNode.style.position='relative';
 const mapImage=document.createElement('img');mapImage.alt='ภาพแผนที่บริเวณเกิดเหตุ';
-mapImage.crossOrigin='anonymous';mapImage.style.cssText='width:100%;height:100%;display:block;object-fit:contain';
+mapImage.crossOrigin='anonymous';mapImage.style.cssText='width:100%;height:100%;display:block;object-fit:cover';
 const bufferOverlay=document.createElement('div');
 bufferOverlay.style.cssText='position:absolute;left:50%;top:50%;border:3px solid #d9273f;background:rgba(217,39,63,.13);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none';
 const locationPin=document.createElement('div');
@@ -3014,7 +3014,7 @@ html body #report.dss-full-view>#dssFieldBrief{display:none!important}
 #dssFieldBrief .fb-map-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:start}
 #dssFieldBrief .fb-map{height:440px;border:1px solid #e2e6ec;background:#f7f8fa;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
 #dssFieldBrief .fb-map button{font-size:13px;color:#8B1E2D;background:#fff;border:1px solid #dedfe3}
-#dssFieldBrief .fb-map img{display:block;width:100%;height:100%;object-fit:contain}
+#dssFieldBrief .fb-map img{display:block;width:100%;height:100%;object-fit:cover}
 #dssFieldBrief .fb-weather{padding:12px;border:1px solid #e2e6ec;background:#fff;margin-bottom:12px}
 #dssFieldBrief .fb-wind{font-size:17px;font-weight:600;margin:5px 0}
 #dssFieldBrief .fb-support{width:100%;border-collapse:collapse;font-size:12px}
@@ -3547,7 +3547,7 @@ html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid{display:
 html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid>div:last-child{display:none!important}
 html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{position:relative!important;display:block!important;width:100%!important;height:440px!important;max-height:none!important;margin:0 auto!important;border:0!important;background:#f3f6f8!important;overflow:hidden!important}
 html body #report#report.dss-field-export #dssFieldBrief #fieldBriefMap{height:480px!important}
-html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;margin:0!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;margin:0!important}
 html body #report#report.dss-field-document #dssFieldBrief #reportMapCanvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:0!important}
 html body #report#report.dss-field-document #dssFieldBrief #fbWeather{display:block!important;position:absolute!important;right:16px!important;bottom:16px!important;z-index:800!important;width:250px!important;max-width:42%!important;padding:12px!important;margin:0!important;box-sizing:border-box!important;border:1px solid #d5dbd0!important;border-radius:4px!important;background:#fffffff5!important;box-shadow:0 2px 10px #0002!important}
 html body #report#report.dss-field-document #dssFieldBrief #fbWeather .report-field{display:grid!important;grid-template-columns:82px 1fr!important;font-size:12px!important;padding:2px 0!important;line-height:1.5!important}
@@ -3652,7 +3652,7 @@ html body #report#report #dssFieldBrief :is(h1,h2,p,small,strong,.fb-muted,.repo
 html body #report#report #dssFieldBrief :is(h1,h2),html body #dssPageTwo#dssPageTwo :is(h1,h2){font-weight:600!important}
 @media(max-width:850px){html body.dss-dashboard-edit.dss-inline-dashboard .report-wrap{grid-template-columns:minmax(0,1fr)!important}}
 </style><style id="linked-report-map-and-nearby">
-html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
 html body #report#report.dss-field-document #dssFieldBrief #fbMapCaption{display:none!important}
 html body #report#report #reportNearbySupport{margin:16px 0 0!important}
 html body #report#report #reportNearbySupport h3{font-size:14px!important;font-weight:600!important;line-height:1.5!important;color:#41483f!important;margin:0 0 8px!important}
@@ -3677,7 +3677,7 @@ html body #report#report #reportNearbySupport th:nth-child(1){width:76%!importan
 html body #report#report #reportNearbySupport th:nth-child(2){width:24%!important;text-align:right!important}
 html body #report#report #reportNearbySupport td:nth-child(2){text-align:right!important;white-space:nowrap!important}
 html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap{background:#f7f9f5!important}
-html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{object-fit:contain!important}
+html body #report#report.dss-field-document #dssFieldBrief #fieldBriefMap>img{object-fit:cover!important}
 </style><style id="formal-nearby-support-table">
 html body #report#report #reportNearbySupport{margin:14px 0 0!important}
 html body #report#report #reportNearbySupport table{width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;font-family:"Sarabun",sans-serif!important;font-size:13px!important;line-height:1.6!important;border:0!important}
@@ -3816,7 +3816,7 @@ html body #report#report #fieldBriefMap #fbWeather{z-index:800!important}
 html body #report#report#report #fieldBriefMap .leaflet-overlay-pane>canvas,html body #report#report#report #fieldBriefMap .leaflet-overlay-pane>svg{max-width:none!important;max-height:none!important}
 html body #report#report#report #fieldBriefMap{height:auto!important;min-height:0!important;aspect-ratio:986/480!important}
 html body #report#report#report.dss-field-export #fieldBriefMap{height:480px!important}
-html body #report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;background:#f3f6f8!important}
+html body #report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:cover!important;background:#f3f6f8!important}
 @media print{@page{size:A4 portrait;margin:10mm}html body #report#report#report #fieldBriefMap{height:90mm!important;break-inside:avoid}}
 </style>
 <style id="embedded-report-only-20261106">
@@ -3958,7 +3958,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
 
 <style id="report-map-proportions-20261106">
 html body #report#report#report#report#report #fieldBriefMap{width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:8/5!important;position:relative!important;overflow:hidden!important;box-sizing:border-box!important;background:#edf1f4!important}
-html body #report#report#report#report#report #fieldBriefMap>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important}
+html body #report#report#report#report#report #fieldBriefMap>img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important}
 html body #report#report#report#report#report #fieldBriefMap>#dssLiveMap{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;margin:0!important}
 html body #report#report#report#report#report #fieldBriefMap .leaflet-tile{max-width:none!important;max-height:none!important}
 html body #report#report#report#report#report #fieldBriefMap #fbWeather{display:block!important;position:absolute!important;left:auto!important;top:auto!important;right:12px!important;bottom:12px!important;width:230px!important;max-width:42%!important;max-height:calc(100% - 24px)!important;overflow:auto!important;margin:0!important;padding:12px!important;background:#fffffff5!important;border:1px solid #dce1e5!important;border-radius:0!important;box-shadow:0 2px 12px #1325381a!important;box-sizing:border-box!important;z-index:1000!important}
@@ -4190,7 +4190,7 @@ html body #report#report#report#report#report#report#report#report#report#report
 </style>
 <style id="first-report-a4-layout">
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap{aspect-ratio:auto!important}
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;background:#fff!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:cover!important;background:#fff!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-fact{padding:6px 8px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-section{margin:10px 0!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-additional-count{display:block;margin-top:2px;color:#60675d}
