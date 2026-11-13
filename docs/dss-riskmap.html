@@ -270,22 +270,25 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 <div class="emcc-gis-header">
 <header class="emcc-gis-brand" id="ieatPortalHeader">
   <a href="https://emcc-gis.pages.dev/">EMCC</a>
-  <span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span>
+  <span lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</span>
 </header>
 <nav class="emcc-gis-nav" aria-label="เมนู EMCC">
   <span lang="en">Environmental Monitoring and Control Center: EMCC</span>
-  <a href="https://emcc-gis.pages.dev/">ภาพรวม</a>
-  <details><summary>ข้อมูล</summary><div>
+  <a href="https://emcc-gis.pages.dev/">Overview</a>
+  <details><summary>Data</summary><div>
     <a href="#riskCoverage">ภาพรวมข้อมูล DSS</a>
     <a href="#coverageMap">แผนที่ความเสี่ยง</a>
     <a href="#emergencyReportPage">จัดทำรายงาน</a>
   </div></details>
-  <a href="#riskMapSection" aria-current="page">Risk map</a>
+  <a href="#riskMapSection" aria-current="page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14m6-12v14"/></svg> Risk map</a>
 </nav>
 </div>
 <style>
 .emcc-gis-header { position: sticky; top: 0; z-index: 1100; font-family: Sarabun, sans-serif; }
 .emcc-gis-brand#ieatPortalHeader { justify-content: flex-start; display: flex; align-items: center; gap: 16px; padding: 8px 24px; min-height: 50px; box-sizing: border-box; background: white; color: #141718; }
+.emcc-gis-brand#ieatPortalHeader { justify-content:flex-start!important; }
+.emcc-gis-brand > span { margin:0; }
+.emcc-gis-nav svg { vertical-align:-2px; }
 .emcc-gis-brand a { color: inherit; text-decoration: none; font-size: 28px; letter-spacing: .1em; }
 .emcc-gis-nav { display: flex; flex-wrap: wrap; align-items: stretch; background: linear-gradient(90deg,#362048,#533273 55%,#643e88); color: white; }
 .emcc-gis-nav > span { flex: 1 1 350px; padding: 14px 24px; }
