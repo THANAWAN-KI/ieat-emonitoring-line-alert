@@ -690,7 +690,7 @@
         if(target)await view.goTo({target,zoom:view.zoom+data.delta},{animate:false});
       }
     };
-    let previewTimer,previewSequence=0;
+    let previewTimer,previewSequence=0,previewBusy=false,previewAgain=false;
     window.ieatCaptureCoverageMap=async()=>{
       if(!view.ready||!window.ieatCoverageReport)return null;
       await view.when();
@@ -703,23 +703,62 @@
         timer=setTimeout(()=>{cleanup();reject(Error('แผนที่ยังโหลดไม่ครบ กรุณารอสักครู่'));},12000);
         ready();
       });
-      const aspect=8/5,areaWidth=Math.min(view.width,view.height*aspect),areaHeight=areaWidth/aspect;
-      const area={x:(view.width-areaWidth)/2,y:(view.height-areaHeight)/2,width:areaWidth,height:areaHeight};
-      const shot=await view.takeScreenshot({format:'png',area,width:1972,height:1232});
+      // Capture the entire source viewport so every visible feature is retained.
+      const width=1972,height=Math.max(1,Math.round(width*view.height/view.width));
+      const shot=await view.takeScreenshot({format:'png',width,height});
       return shot.dataUrl;
     };
     window.ieatSyncCoverageMapPreview=async()=>{
       const context=window.ieatCoverageReport;
-      if(!context?.id||context.status!=='ready'||!view.stationary||view.updating)return;
-      const id=++previewSequence,image=await window.ieatCaptureCoverageMap();
-      if(id!==previewSequence||window.ieatCoverageReport?.id!==context.id)return;
-      const frame=$('emergencyReportFrame');
-      frame?.contentWindow?.dssSetCoverageMapImage?.(image,context.id);
+      if(!context?.id||context.status!=='ready')return;
+      if(previewBusy){previewAgain=true;return;}
+      previewBusy=true;
+      const id=previewSequence;
+      try{
+        const image=await window.ieatCaptureCoverageMap();
+        if(!image||id!==previewSequence||window.ieatCoverageReport?.id!==context.id)return;
+        const frame=$('emergencyReportFrame');
+        frame?.contentWindow?.dssSetCoverageMapImage?.(image,context.id);
+      }finally{
+        previewBusy=false;
+        if(previewAgain){previewAgain=false;schedulePreview();}
+      }
     };
-    const schedulePreview=()=>{clearTimeout(previewTimer);previewTimer=setTimeout(()=>window.ieatSyncCoverageMapPreview().catch(()=>{}),200);};
-    view.watch('stationary',value=>{if(value)schedulePreview();});
-    view.watch('updating',value=>{if(!value)schedulePreview();});
+    const schedulePreview=()=>{
+      ++previewSequence;
+      clearTimeout(previewTimer);
+      previewTimer=setTimeout(()=>window.ieatSyncCoverageMapPreview().catch(error=>console.warn('Report map sync',error)),200);
+    };
+    // Use the ArcGIS source, including group visibility and graphics edits.
+    for(const property of ['stationary','updating','width','height','rotation'])
+      view.watch(property,schedulePreview);
+    const layerHandles=new Map();
+    const bindLayers=()=>{
+      const current=new Set(map.allLayers.toArray());
+      for(const [item,handles] of layerHandles){
+        if(current.has(item))continue;
+        handles.forEach(handle=>handle.remove());layerHandles.delete(item);
+      }
+      for(const item of current){
+        if(layerHandles.has(item))continue;
+        const handles=['visible','opacity','renderer','definitionExpression','minScale','maxScale']
+          .map(property=>item.watch(property,schedulePreview));
+        if(item.graphics)handles.push(item.graphics.on('change',schedulePreview));
+        layerHandles.set(item,handles);
+      }
+      schedulePreview();
+    };
+    map.allLayers.on('change',bindLayers);
+    map.watch('basemap',schedulePreview);
+    view.graphics.on('change',schedulePreview);
+    bindLayers();
     $('coverageBasemap')?.addEventListener('change',schedulePreview);
+    $('emergencyReportFrame')?.addEventListener('load',schedulePreview);
+    window.addEventListener('ieat-coverage-context-updated',schedulePreview);
+    window.addEventListener('message',event=>{
+      if(event.origin===location.origin&&event.source===$('emergencyReportFrame')?.contentWindow&&
+        event.data?.type==='dss:request-dashboard-map')schedulePreview();
+    });
 
     if(fireView){
       const measure=new DistanceMeasurement2D({view});
