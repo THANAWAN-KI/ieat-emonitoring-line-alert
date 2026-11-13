@@ -543,7 +543,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','6be985d');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','b221617');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -2702,7 +2702,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       pageTwo.before(column);
       column.append(pageTwo);
     }
-    if(line.parentElement!==column||pageTwo.nextElementSibling!==line)pageTwo.after(line);
+    if(pageTwo.nextElementSibling!==line)pageTwo.after(line);
     // Preview styles must take precedence over the embedded report's inline layout.
     const firstPage=doc.getElementById('report');
     for(const page of [firstPage,pageTwo]){
@@ -3355,6 +3355,38 @@ if(document.documentElement.classList.contains('fire-risk-view')){
   }
   document.getElementById('coverageFactoryGuide').textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูทรัพยากรใกล้พื้นที่และเตรียมรายงานเหตุไฟไหม้';
 }
+</script>
+<script>
+(() => {
+  const frame=document.getElementById('emergencyReportFrame');
+  const panel=document.getElementById('riskMapLinePanel');
+  if(!frame||!panel)return;
+  let observer;
+  function mount(){
+    observer?.disconnect();
+    const doc=frame.contentDocument;
+    if(!doc?.body)return;
+    function place(){
+      const page=doc.getElementById('dssPageTwo');
+      if(!page)return;
+      if(!doc.getElementById('line-after-page-two')){
+        const style=doc.createElement('style');
+        style.id='line-after-page-two';
+        style.textContent='#riskMapLinePanel{display:grid!important;gap:8px;margin:16px 0;padding:14px;border:2px solid #4d6055;background:white;color:#28352c}#riskMapLineText{width:100%;box-sizing:border-box}';
+        doc.head.append(style);
+      }
+      if(page.nextElementSibling!==panel)page.after(panel);
+      const copy=panel.querySelector('button')||document.getElementById('riskMapLineCopy');
+      if(copy&&copy.parentElement!==panel)panel.append(copy);
+      panel.setAttribute('data-export-exclude','');
+    }
+    observer=new MutationObserver(place);
+    observer.observe(doc.body,{childList:true,subtree:true});
+    place();
+  }
+  frame.addEventListener('load',mount);
+  mount();
+})();
 </script>
 </body></html>
 
