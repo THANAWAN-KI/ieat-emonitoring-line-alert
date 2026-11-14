@@ -3,13 +3,59 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-14T15:06:30.241966+00:00",
+    "fetchedAt": "2026-11-14T20:43:42.174384+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1794551100000,
-    "latestEvent": 1794656000000
+    "oldestEvent": 1794566700000,
+    "latestEvent": 1794685225000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17437",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.868,
+          20.8,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.0,
+        "place": "ประเทศเมียนมา",
+        "time": 1794685225000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17437",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17436",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          97.951,
+          20.041,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.8,
+        "place": "ประเทศเมียนมา",
+        "time": 1794681370000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17436",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17435",
@@ -187,52 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1794566700000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17428",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17427",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.006,
-          19.673,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.9,
-        "place": "ต.เมืองนะ อ.เชียงดาว จ.เชียงใหม่",
-        "time": 1794563009000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17427",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17426",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          107.849,
-          14.839,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.7,
-        "place": "ประเทศเวียดนาม",
-        "time": 1794551100000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17426",
         "source": "TMD",
         "types": "",
         "detail": null,
