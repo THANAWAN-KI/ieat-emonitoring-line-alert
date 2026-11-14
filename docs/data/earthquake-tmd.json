@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-13T23:35:57.984147+00:00",
+    "fetchedAt": "2026-11-14T06:26:10.524525+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1794470141000,
-    "latestEvent": 1794601634000
+    "oldestEvent": 1794477637000,
+    "latestEvent": 1794625169000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17433",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          92.629,
+          3.298,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 5.2,
+        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
+        "time": 1794625169000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17433",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17432",
@@ -210,29 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1794477637000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17424",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17423",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.941,
-          19.366,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.6,
-        "place": "ประเทศเมียนมา",
-        "time": 1794470141000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17423",
         "source": "TMD",
         "types": "",
         "detail": null,
