@@ -1,7 +1,7 @@
 {
-  "report_date": "2026-11-14",
-  "generated_at": "2026-11-14T13:53:21+07:00",
-  "generated_at_th": "14/11/2026 13:53 น.",
+  "report_date": "2026-11-15",
+  "generated_at": "2026-11-15T13:59:03+07:00",
+  "generated_at_th": "15/11/2026 13:59 น.",
   "station_summary": {
     "available": true,
     "total": 183,
@@ -76,11 +76,141 @@
     {
       "source": "แผ่นดินไหว กรมอุตุนิยมวิทยา",
       "url": "https://earthquake.tmd.go.th/inside-info.html",
-      "title": "แผ่นดินไหว ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย (3.298,92.629) ขนาด 5.2 วันที่ 14 พฤศจิกายน 2569 เวลา 09:59 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd",
-      "summary": "2026-11-14 09:59:29 น. Lat. 3.298 , Long. 92.629 ขนาด 5.2",
+      "title": "แผ่นดินไหว ประเทศเมียนมา (20.022,97.839) ขนาด 2.2 วันที่ 15 พฤศจิกายน 2569 เวลา 13:15 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd",
+      "summary": "2026-11-15 13:15:20 น. Lat. 20.022 , Long. 97.839 ขนาด 2.2",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "Sat, 14 Nov 2026 09:59:29 +0700",
+      "published_date": "Sun, 15 Nov 2026 13:15:20 +0700",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://earthquake.tmd.go.th/inside.html",
+      "title": "แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด",
+      "summary": "9pt;\">Tambon Chiang Khong, Amphoe NaNoi, Nan แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด <font style=\"font-family: 'Kanit',",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "กองเฝ้าระวังแผ่นดินไหว",
+      "url": "https://eq.tmd.go.th",
+      "title": "https://eq.tmd.go.th",
+      "summary": "go.th\" target=\"_blank\">https://earthquake.tmd.go.th Website: https://eq.tmd.go.th สายด่วน แผ่นดินไหว 1182 กด 3",
+      "image": "",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "GISTDA Disaster Platform",
+      "url": "https://disaster.gistda.or.th/landing/news",
+      "title": "Disaster Platform | Gistda",
+      "summary": "ระบบสนับสนุนการตัดสินใจเพื่อบริหารจัดการภัยพิบัติ",
+      "image": "https://disaster.gistda.or.th/metadata/landing.png",
+      "category": "แผ่นดินไหวและภัยพิบัติ",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th",
+      "title": "การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand",
+      "summary": "parentNode.insertBefore(s, x); })(); การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand <div class=\"item\"",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-news",
+      "title": "การจัดตั้งนิคมอุตสาหกรรม",
+      "summary": "การจัดตั้งนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieat-law",
+      "title": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "summary": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/industrial-estate-development-establishment",
+      "title": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
+      "summary": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/business-operations-in-the-industrial-estate",
+      "title": "การประกอบกิจการในนิคมอุตสาหกรรม",
+      "summary": "การประกอบกิจการในนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/benefits-in-industrial-estates",
+      "title": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
+      "summary": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/industrial-estate-establishment-process",
+      "title": "กระบวนการจัดตั้งนิคมอุตสาหกรรม",
+      "summary": "กระบวนการจัดตั้งนิคมอุตสาหกรรม <a data-mid=\"8207\" href=\"https://www.ieat.go.th/th/getting-approval-i",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/getting-approval-in-principle",
+      "title": "การขออนุมัติในหลักการ",
+      "summary": "นการจัดตั้งนิคมอุตสาหกรรม การขออนุมัติในหลักการ <a data-mid=\"8206\" href=\"https://www.ieat.go.th/th/manual-of-applicat",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/ieathandbook",
+      "title": "การขอประกอบกิจการในนิคมอุตสาหกรรม",
+      "summary": "้านบริการ การขอประกอบกิจการในนิคมอุตสาหกรรม <a data-mid=\"8194\" href=\"https://www.ieat.go.th/th/se",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
+      "available": true
+    },
+    {
+      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
+      "url": "https://www.ieat.go.th/th/eia-ehia",
+      "title": "โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA",
+      "summary": "ISO 14001 โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA <a data-mid=\"8394\" href=\"https://ehia.ieat.go.th/th\"",
+      "image": "",
+      "category": "นิคมฯ และโรงงาน",
+      "published_date": "2026-11-15",
       "available": true
     },
     {
@@ -230,136 +360,6 @@
       "summary": "ณ วันที่ 14 พฤศจิกายน 2569 เวลา 10.13 น. กองเฝ้าระวังแผ่นดินไหว ดูประกาศทั้งหมด </",
       "image": "",
       "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "กองเฝ้าระวังแผ่นดินไหว",
-      "url": "https://earthquake.tmd.go.th/inside.html",
-      "title": "แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด",
-      "summary": "t> Myanmar แผ่นดินไหวในประเทศและใกล้เคียงทั้งหมด <font style=\"font-family: 'Kanit',",
-      "image": "",
-      "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "กองเฝ้าระวังแผ่นดินไหว",
-      "url": "https://eq.tmd.go.th",
-      "title": "https://eq.tmd.go.th",
-      "summary": "go.th\" target=\"_blank\">https://earthquake.tmd.go.th Website: https://eq.tmd.go.th สายด่วน แผ่นดินไหว 1182 กด 3",
-      "image": "",
-      "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "GISTDA Disaster Platform",
-      "url": "https://disaster.gistda.or.th/landing/news",
-      "title": "Disaster Platform | Gistda",
-      "summary": "ระบบสนับสนุนการตัดสินใจเพื่อบริหารจัดการภัยพิบัติ",
-      "image": "https://disaster.gistda.or.th/metadata/landing.png",
-      "category": "แผ่นดินไหวและภัยพิบัติ",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th",
-      "title": "การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand",
-      "summary": "parentNode.insertBefore(s, x); })(); การนิคมอุตสาหกรรมแห่งประเทศไทย (กนอ.) Industrial Estate Authority of Thailand <div class=\"item\"",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/ieat-news",
-      "title": "การจัดตั้งนิคมอุตสาหกรรม",
-      "summary": "การจัดตั้งนิคมอุตสาหกรรม",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/ieat-law",
-      "title": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "summary": "พระราชบัญญัติการนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/industrial-estate-development-establishment",
-      "title": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
-      "summary": "การจัดตั้ง/พัฒนานิคมอุตสาหกรรม",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/business-operations-in-the-industrial-estate",
-      "title": "การประกอบกิจการในนิคมอุตสาหกรรม",
-      "summary": "การประกอบกิจการในนิคมอุตสาหกรรม",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/benefits-in-industrial-estates",
-      "title": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
-      "summary": "สิทธิประโยชน์ในนิคมอุตสาหกรรม",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/industrial-estate-establishment-process",
-      "title": "กระบวนการจัดตั้งนิคมอุตสาหกรรม",
-      "summary": "กระบวนการจัดตั้งนิคมอุตสาหกรรม <a data-mid=\"8207\" href=\"https://www.ieat.go.th/th/getting-approval-i",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/getting-approval-in-principle",
-      "title": "การขออนุมัติในหลักการ",
-      "summary": "นการจัดตั้งนิคมอุตสาหกรรม การขออนุมัติในหลักการ <a data-mid=\"8206\" href=\"https://www.ieat.go.th/th/manual-of-applicat",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/ieathandbook",
-      "title": "การขอประกอบกิจการในนิคมอุตสาหกรรม",
-      "summary": "้านบริการ การขอประกอบกิจการในนิคมอุตสาหกรรม <a data-mid=\"8194\" href=\"https://www.ieat.go.th/th/se",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
-      "published_date": "2026-11-14",
-      "available": true
-    },
-    {
-      "source": "การนิคมอุตสาหกรรมแห่งประเทศไทย",
-      "url": "https://www.ieat.go.th/th/eia-ehia",
-      "title": "โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA",
-      "summary": "ISO 14001 โครงการนิคมอุตสาหกรรมที่ได้รับความเห็นชอบรายงาน EIA/EHIA <a data-mid=\"8394\" href=\"https://ehia.ieat.go.th/th\"",
-      "image": "",
-      "category": "นิคมฯ และโรงงาน",
       "published_date": "2026-11-14",
       "available": true
     },
@@ -567,11 +567,11 @@
     }
   ],
   "news_total": 46,
-  "new_today": 28,
+  "new_today": 13,
   "categories": {
     "แผ่นดินไหวและภัยพิบัติ": 22,
-    "น้ำและสภาพอากาศ": 12,
     "นิคมฯ และโรงงาน": 10,
+    "น้ำและสภาพอากาศ": 12,
     "ข่าวและประกาศ": 2
   },
   "notice": "รวบรวมอัตโนมัติจากแหล่งข้อมูลสาธารณะของหน่วยงาน โปรดเปิดตรวจสอบรายละเอียดจากแหล่งข่าวต้นทางก่อนนำไปใช้อ้างอิง"
