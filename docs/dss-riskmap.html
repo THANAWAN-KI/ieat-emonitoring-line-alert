@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="th">
 <head>
+<!-- EMCC Risk Map: requested simplified dashboard -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20x%3D%2233.09%22%20y%3D%2222.751%22%20width%3D%2224.55%22%20height%3D%2234.82%22%20rx%3D%222%22%20fill%3D%22%238560a8%22%2F%3E%3Crect%20x%3D%2233.09%22%20y%3D%225.627%22%20width%3D%2224.55%22%20height%3D%2214.27%22%20rx%3D%222%22%20fill%3D%22%23431c69%22%2F%3E%3Crect%20x%3D%225.7%22%20y%3D%2236.451%22%20width%3D%2224.54%22%20height%3D%2221.12%22%20rx%3D%222%22%20fill%3D%22%23431c69%22%2F%3E%3Crect%20x%3D%225.7%22%20y%3D%225.627%22%20width%3D%2224.54%22%20height%3D%2227.93%22%20rx%3D%222%22%20fill%3D%22%238560a8%22%2F%3E%3C%2Fsvg%3E">
+<style id="emcc-riskmap-simplified">
+/* Retain dashboard/map; remove reporting and accident statistics modules */
+#dssBriefWorkflow,#dssBriefReview,#emergencyReportPage,#coverageIncidentForm,#openEmergencyReport,#dashboardCreateReport,.dss-section-link--report,#riskmapRailSteps a[href="#emergencyReportPage"],#riskmapRailSteps a[href="#dssBriefReview"],a[href="#emergencyReportPage"],a[href="#dssBriefReview"]{display:none!important}
+</style>
+
 <meta charset="utf-8">
 <script id="riskmap-first-paint">
 document.documentElement.classList.add('riskmap-booting');
