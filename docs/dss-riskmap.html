@@ -6,6 +6,7 @@
 <style id="emcc-riskmap-simplified">
 /* Retain dashboard/map; remove reporting and accident statistics modules */
 html:not(.fire-risk-view) :is(#dssBriefWorkflow,#dssBriefReview,#emergencyReportPage,#coverageIncidentForm,#openEmergencyReport,#dashboardCreateReport,.dss-section-link--report,#riskmapRailSteps a[href="#emergencyReportPage"],#riskmapRailSteps a[href="#dssBriefReview"],a[href="#emergencyReportPage"],a[href="#dssBriefReview"]){display:none!important}
+.fire-risk-view :is(.riskmap-overview-eyebrow,.riskmap-overview-lead,.riskmap-overview-quicklinks,.riskmap-map-eyebrow,.riskmap-map-description){display:none!important}
 </style>
 
 <meta charset="utf-8">
@@ -3692,6 +3693,7 @@ html body #riskmapReportPanel #emergencyReportPage #dashboardEditReportText[aria
 <script>
 if(document.documentElement.classList.contains('fire-risk-view')){
   document.title='แผนที่ความเสี่ยงไฟไหม้ | EMCC';
+  document.getElementById('coverageMapTitle').textContent='แผนที่นิคมฯ และจุดช่วยเหลือ';
   document.getElementById('riskCoverageTitle').textContent='แผนที่ความเสี่ยงไฟไหม้ในนิคมฯ';
   const incidentType=document.getElementById('coverageIncidentType');
   incidentType.required=false;
