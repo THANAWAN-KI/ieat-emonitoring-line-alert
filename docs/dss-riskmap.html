@@ -654,6 +654,14 @@ const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=r
 #coverageMap .emcc-hazard-scale span:nth-child(5){background:#46985b}
 @media(max-width:740px){#coverageMap .emcc-hazard-scale{width:100%;grid-template-columns:repeat(5,minmax(0,1fr))}#coverageMap .emcc-hazard-scale span{font-size:10px;padding:10px 2px}#coverageMap #coverageMapView{min-height:360px!important}}
 </style>
+
+<script id="fire-report-favicon">
+(()=>{
+ if(new URLSearchParams(location.search).get('hazard')!=='fire')return;
+ const href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23aa2a03%22%3E%3Cpath%20d%3D%22M9.5%2010.0003C9.5%209.20875%208.44722%208.99895%208.16791%209.73957C7.49228%2011.5311%207%2013.1337%207%2014.0002C7%2016.7616%209.23858%2019.0002%2012%2019.0002C14.7614%2019.0002%2017%2016.7616%2017%2014.0002C17%2013.0693%2016.4318%2011.2887%2015.6784%209.33698C14.7026%206.80879%2014.2146%205.54469%2013.6123%205.4766C13.4196%205.45482%2013.2093%205.49399%2013.0374%205.58371C12.5%205.86413%2012.5%207.24285%2012.5%2010.0003C12.5%2010.8287%2011.8284%2011.5003%2011%2011.5003C10.1716%2011.5003%209.5%2010.8287%209.5%2010.0003Z%22%20fill%3D%22%23e24329%22%2F%3E%3C%2Fsvg%3E";
+ document.querySelectorAll('link[rel~="icon"]').forEach(link=>{link.type='image/svg+xml';link.href=href;});
+})();
+</script>
 </head>
 <body>
 <div class="emcc-gis-header">
