@@ -518,21 +518,7 @@ html:not(.fire-risk-view) #coverageMapView{height:clamp(580px,74vh,880px)!import
 @media(max-width:780px){html:not(.fire-risk-view) .riskmap-viz-row{grid-template-columns:1fr}html:not(.fire-risk-view) .riskmap-analysis-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:550px){html:not(.fire-risk-view) .riskmap-viz-card{padding:12px}html:not(.fire-risk-view) .riskmap-donut{width:145px;height:145px}html:not(.fire-risk-view) #riskmapEstateContent>:is(.coverage-support-overview,#dssBriefCoverage,#coverageRiskSection,#dssBriefReadiness){padding:13px!important}}
 </style>
-<script id="riskmap-full-analytics-v3-js">
-(()=>{
-if(document.documentElement.classList.contains('fire-risk-view'))return;
-const colors=['#542577','#8864b2','#39a276','#e6b53b','#d9555b','#63aab5','#a38fae'];
-const num=s=>{const m=String(s||'').replace(/,/g,'').match(/(?:^|[^\\d])([0-9]+(?:\\.[0-9]+)?)(?![\\d])/);return m?Number(m[1]):null};
-const entries=id=>{const el=document.getElementById(id);if(!el)return [];let out=[];for(const child of el.children){const dt=child.querySelector('dt');const dd=child.querySelector('dd');if(dt&&dd){const n=num(dd.textContent);if(n!==null)out.push({label:dt.textContent.trim(),value:n})}else if(child.tagName==='DT'){const next=child.nextElementSibling;if(next?.tagName==='DD'){const n=num(next.textContent);if(n!==null)out.push({label:child.textContent.trim(),value:n})}}else{const txt=child.innerText||'';const lines=txt.split('\\n').map(v=>v.trim()).filter(Boolean);if(lines.length>=2){const n=num(lines.slice(1).join(' '));if(n!==null)out.push({label:lines[0],value:n})}}}return out.filter(e=>e.label&&Number.isFinite(e.value)).slice(0,12)};
-const make=(targetId,sourceId,kind,title)=>{const host=document.getElementById(targetId),source=document.getElementById(sourceId);if(!host||!source)return;const wrap=document.createElement('div');wrap.className='riskmap-viz-card';const h=document.createElement('h3');h.textContent=title;const area=document.createElement('div');area.className='riskmap-viz-area';wrap.append(h,area);host.append(wrap);
-const render=()=>{const data=entries(sourceId).filter(x=>x.value>=0);area.replaceChildren();const total=data.reduce((sum,x)=>sum+x.value,0);if(!data.length||total===0){const p=document.createElement('div');p.className='riskmap-chart-empty';p.textContent='รอข้อมูลตัวเลขจากระบบ DSS';area.append(p);return}if(kind==='donut'){const stops=[];let pos=0;data.forEach((d,i)=>{const end=pos+d.value/total*100;stops.push(colors[i%colors.length]+' '+pos+'% '+end+'%');pos=end});const donut=document.createElement('div');donut.className='riskmap-donut';donut.style.background='conic-gradient('+stops.join(',')+')';const center=document.createElement('div');center.className='riskmap-donut-center';center.textContent=total.toLocaleString('th-TH');const sm=document.createElement('small');sm.textContent='รวมตามรายการ';center.append(sm);donut.append(center);area.append(donut);const key=document.createElement('div');key.className='riskmap-chart-key';data.forEach((d,i)=>{const el=document.createElement('span');el.style.setProperty('--c',colors[i%colors.length]);el.textContent=d.label+' '+d.value.toLocaleString('th-TH');key.append(el)});area.append(key)}else{const bars=document.createElement('div');bars.className='riskmap-bars';const max=Math.max(...data.map(d=>d.value),1);data.forEach((d,i)=>{const row=document.createElement('div');const label=document.createElement('div');label.className='riskmap-bar-label';const name=document.createElement('span');name.textContent=d.label;const value=document.createElement('strong');value.textContent=d.value.toLocaleString('th-TH');label.append(name,value);const track=document.createElement('div');track.className='riskmap-bar-track';const fill=document.createElement('div');fill.className='riskmap-bar-fill';fill.style.setProperty('--w',100*d.value/max+'%');fill.style.setProperty('--c',colors[i%colors.length]);track.append(fill);row.append(label,track);bars.append(row)});area.append(bars)}};
-let queued=false;const observer=new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;render()})});observer.observe(source,{subtree:true,childList:true,characterData:true});render();};
-const boot=()=>{const coverage=document.getElementById('dssBriefCoverage');if(coverage&&!document.getElementById('riskmapCoverageViz')){const section=document.createElement('div');section.id='riskmapCoverageViz';section.className='riskmap-viz-row';const caption=document.createElement('p');caption.className='riskmap-section-caption';caption.textContent='กราฟสรุปจากรายการสถานะในระบบ DSS';section.append(caption);coverage.querySelector('#dssCoverageTotals')?.before(section);make('riskmapCoverageViz','dssBriefDssCards','donut','สัดส่วนสถานะข้อมูลโรงงาน');make('riskmapCoverageViz','dssCoverageTotals','bars','จำนวนตามสถานะข้อมูล')}
-const readiness=document.getElementById('dssBriefReadiness');if(readiness&&!document.getElementById('riskmapReadinessViz')){const section=document.createElement('div');section.id='riskmapReadinessViz';section.className='riskmap-viz-row';readiness.querySelector('#dssResourceChart')?.before(section);make('riskmapReadinessViz','dssResourceSummary','donut','สัดส่วนทรัพยากรตามข้อมูลที่มี');make('riskmapReadinessViz','dssResourceSummary','bars','เปรียบเทียบจำนวนทรัพยากร')}
-const risk=document.getElementById('coverageRiskSection');if(risk&&!document.getElementById('riskmapRiskViz')){const section=document.createElement('div');section.id='riskmapRiskViz';section.className='riskmap-viz-row';risk.querySelector('#coverageRisk')?.before(section);make('riskmapRiskViz','coverageRisk','bars','การกระจายกลุ่มความเสี่ยงตามข้อมูลที่แสดง')}
-};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
-})();
-</script>
+
 
 <style id="riskmap-remove-all-dark-section-outlines-20261116">
 /* Remove heavy black/dark outlines throughout overview dashboard, while keeping card spacing and risk colors. */
@@ -836,7 +822,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
     <button type="submit">ค้นหา</button>
   </form>
   <section id="dssBriefCoverage" class="dss-brief" aria-labelledby="dssBriefCoverageTitle">
-    <h2 id="dssBriefCoverageTitle">สถานะการนำเข้าข้อมูลโรงงานในระบบ DSS</h2><p class="riskmap-color-guide"><span class="status-dot status-green"></span>เขียว: มีข้อมูล / อนุมัติ <span class="status-dot status-yellow"></span>เหลือง: รอตรวจสอบ / รอยืนยัน <span class="status-dot status-red"></span>แดง: ความเสี่ยง / ต้องติดตาม</p>
+    <h2 id="dssBriefCoverageTitle">สถานะการนำเข้าข้อมูลโรงงานในระบบ DSS</h2><p class="riskmap-color-guide"><span class="status-dot status-green"></span>เขียว: อนุมัติข้อมูล <span class="status-dot status-yellow"></span>เหลือง: อยู่ระหว่างดำเนินการ <span class="status-dot status-red"></span>แดง: ต้องติดตามข้อมูลเพิ่มเติม</p>
     <p id="dssBriefEstate"></p>
     <p class="dss-brief-period">ช่วงข้อมูล: 1 มกราคม–30 กันยายน 2569</p>
     <dl id="dssCoverageTotals" class="dss-brief-metrics"></dl>
@@ -3377,6 +3363,129 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
 @media(max-width:560px){.dss-brief-metrics{grid-template-columns:1fr}}
 </style>
 
+<style id="overview-clarity-20261116">html:not(.fire-risk-view) #riskCoverage :is(#overviewScopePanel,.overview-chart,.overview-followup,.overview-summary-card,.overview-followup-item,#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness,#coverageMap,.dss-risk-table-wrap,button,select,input){border-radius:0!important}
+html:not(.fire-risk-view) #overviewScopePanel{background:#fff;border:1px solid #dce3de;padding:18px;margin:16px 0;line-height:1.6}
+html:not(.fire-risk-view) #overviewScopePanel>button{float:right;background:#eef4ef;border:1px solid #b7ccbc;color:#153e27;padding:8px 14px;cursor:pointer}
+html:not(.fire-risk-view) #overviewSummary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;clear:both;padding-top:14px}
+html:not(.fire-risk-view) .overview-summary-card{display:flex;flex-direction:column;gap:5px;padding:16px;background:#f7faf7;border:1px solid #dce5dd;color:#18271e;text-decoration:none}
+html:not(.fire-risk-view) .overview-summary-card strong{font-size:32px;color:#24764b;font-variant-numeric:tabular-nums}
+html:not(.fire-risk-view) .overview-summary-card span{font-size:14px;min-height:42px}
+html:not(.fire-risk-view) .overview-summary-card small{font-size:12px;color:#4d5b52}
+html:not(.fire-risk-view) #overviewSources{font-size:13px;color:#46534a;margin:14px 0 0;clear:both}
+html:not(.fire-risk-view) :is(#overviewDssPlots,#overviewRiskPlot,#overviewResourcePlot,#overviewSupportPlot){display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px;margin:14px 0;min-width:0}
+html:not(.fire-risk-view) #riskCoverage .overview-chart{background:#fff!important;border:1px solid #dce3de!important;box-shadow:none!important;padding:18px!important;margin:0!important;min-width:0!important;color:#19261e!important;overflow:hidden}
+html:not(.fire-risk-view) .overview-chart h3{font-size:19px!important;color:#172a1d!important;margin:0 0 8px!important}
+html:not(.fire-risk-view) .overview-chart-scope{font-size:13px!important;color:#4b5b50!important;margin:0 0 12px!important}
+html:not(.fire-risk-view) .overview-plot{width:100%;height:auto;display:block;min-width:0;max-height:none!important;background:#fff}
+html:not(.fire-risk-view) .overview-plot text{font-family:Sarabun,system-ui,sans-serif;fill:#203026}
+html:not(.fire-risk-view) .overview-chart details{margin-top:10px;font-size:13px;line-height:1.7}
+html:not(.fire-risk-view) .overview-chart summary{cursor:pointer;color:#206d43;font-weight:600}
+html:not(.fire-risk-view) .overview-chart-values{width:100%;border-collapse:collapse;font-size:13px}
+html:not(.fire-risk-view) .overview-chart-values :is(th,td){padding:7px;border-bottom:1px solid #e2e8e3;text-align:left}
+html:not(.fire-risk-view) .overview-chart-values :is(th,td):last-child{text-align:right}
+html:not(.fire-risk-view) .overview-chart-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+html:not(.fire-risk-view) .overview-chart-actions button{background:#eef5ef;border:1px solid #adc9b5;padding:8px 12px;color:#205736;cursor:pointer}
+html:not(.fire-risk-view) :is(.overview-data-note,.overview-risk-definitions){background:#f5f8f5;border-left:3px solid #6f9b7c;padding:12px 14px;font-size:14px;line-height:1.8;color:#263e2e;margin:12px 0}
+html:not(.fire-risk-view) #riskCoverage .overview-followup{background:#fff!important;padding:18px!important;border:1px solid #dce3de!important;grid-column:1/-1!important}
+html:not(.fire-risk-view) #overviewFollowupItems{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html:not(.fire-risk-view) .overview-followup-item{display:flex;flex-direction:column;gap:5px;background:#fff9e9;border:1px solid #e3cf93;border-left:4px solid #b39134;padding:12px;color:#483d20;text-decoration:none}
+html:not(.fire-risk-view) .overview-followup-item small{font-size:13px;line-height:1.6}
+html:not(.fire-risk-view) #riskCoverage :is(#dssCoverageTotals,#dssBriefDssCards,#dssCoverageBar,#dssResourceChart,#coverageRisk,#coverageSupportCards,#riskmapKpiStrip,#riskmapAnalysisStrip,.riskmap-overview-quicklinks){display:none!important}
+html:not(.fire-risk-view) #riskCoverage .dss-risk-table-wrap{max-height:360px!important;overflow:auto!important;overscroll-behavior:contain}
+html:not(.fire-risk-view) #riskCoverage .dss-risk-table thead th{position:sticky;top:0;background:#f0f5f1;z-index:1;color:#203727}
+html:not(.fire-risk-view) #riskCoverage .dss-risk-table :is(td,th){padding:10px 12px;line-height:1.5}
+html:not(.fire-risk-view) #riskCoverage #dssStatsCharts{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+html:not(.fire-risk-view) #riskCoverage .overview-empty{padding:20px;background:#f6f8f6;color:#4e5d53}
+@media(max-width:850px){html:not(.fire-risk-view) #overviewSummary{grid-template-columns:repeat(2,minmax(0,1fr))}html:not(.fire-risk-view) #overviewFollowupItems{grid-template-columns:1fr}}
+@media(max-width:600px){html:not(.fire-risk-view) #riskCoverage .overview-chart{padding:10px!important}html:not(.fire-risk-view) .overview-chart{overflow-x:auto!important}html:not(.fire-risk-view) .overview-plot{min-width:620px!important}html:not(.fire-risk-view) #overviewScopePanel>button{float:none;display:block;margin-top:8px}html:not(.fire-risk-view) .overview-summary-card{padding:10px}html:not(.fire-risk-view) .overview-summary-card strong{font-size:27px}}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness,#coverageMap,.overview-chart,.overview-followup,.overview-summary-card,.overview-followup-item,.dss-risk-table-wrap,.coverage-support-card,.riskmap-overview-heading,.riskmap-overview-left,.riskmap-geo-insights){border-radius:0!important;box-shadow:none!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#dssCoverageTotals,#dssBriefDssCards,#dssCoverageBar,#dssResourceChart,#coverageRisk,#coverageSupportCards){display:none!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#overviewFollowup{order:0!important;grid-column:1/-1!important}
+</style>
+<script id="overview-clarity-logic">(()=>{
+'use strict';
+if(new URLSearchParams(location.search).get('hazard')==='fire')return;
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+const fmt=n=>Number.isFinite(n)?n.toLocaleString('th-TH'):'—';
+const el=(tag,text,cls)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e};
+const svgEl=(tag,attrs,text)=>{const e=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs||{}))e.setAttribute(k,v);if(text!=null)e.textContent=text;return e};
+const colors=['#278454','#d6a52b','#be4c51','#739665','#8b7129','#657d78'];
+function chart(title,entries,unit='ราย',kind='bar',actions=[]){
+ const panel=el('section',null,'overview-chart');panel.append(el('h3',title));
+ const data=entries.map(([label,value])=>({label:String(label),value}));
+ panel.append(el('p','หน่วย: '+unit+' · '+($('coverageEstate')?.value?$('coverageEstate').selectedOptions[0]?.textContent:'ทุกนิคมฯ'),'overview-chart-scope'));
+ const known=data.filter(d=>Number.isFinite(d.value)&&d.value>=0);
+ if(!known.length){panel.append(el('p','ยังไม่มีข้อมูลที่ใช้วาดกราฟได้','overview-empty'));return panel;}
+ const total=known.reduce((a,d)=>a+d.value,0);
+ const donut=kind==='donut'&&total>0&&data.every(d=>Number.isFinite(d.value));
+ const color=(d,i)=>/อนุมัติ|ยืนยันแล้ว|มีชุดข้อมูล/.test(d.label)&&!d.label.includes('ยังไม่มี')?'#278454':/ยังไม่มีชุดข้อมูล/.test(d.label)?'#87938b':/ตรวจสอบ|จัดทำ|รอยืนยัน/.test(d.label)?'#d6a52b':/เพิ่มเติม/.test(d.label)?'#be4c51':colors[i%colors.length];
+ const height=donut?250:Math.max(155,data.length*58+65);
+ const svg=svgEl('svg',{viewBox:`0 0 740 ${height}`,role:'img','aria-label':title+' · '+data.map(d=>d.label+' '+fmt(d.value)+' '+unit).join(' · '),class:'overview-plot'});
+ svg.append(svgEl('title',{},title));
+ if(donut){
+  svg.append(svgEl('circle',{cx:150,cy:125,r:80,fill:'none',stroke:'#edf0ed','stroke-width':34}));let offset=0;
+  known.forEach((d,i)=>{const len=d.value/total*2*Math.PI*80;const ring=svgEl('circle',{cx:150,cy:125,r:80,fill:'none',stroke:color(d,i),'stroke-width':34,'stroke-dasharray':`${len} ${2*Math.PI*80-len}`,'stroke-dashoffset':-offset,transform:'rotate(-90 150 125)'});ring.append(svgEl('title',{},`${d.label}: ${fmt(d.value)} ${unit} (${(d.value/total*100).toFixed(1)}%)`));svg.append(ring);offset+=len;
+   svg.append(svgEl('rect',{x:285,y:30+i*39,width:13,height:13,fill:color(d,i)}),svgEl('text',{x:310,y:42+i*39,'font-size':15},d.label),svgEl('text',{x:715,y:42+i*39,'text-anchor':'end','font-size':15},fmt(d.value)+' · '+(d.value/total*100).toFixed(1)+'%'));
+  });svg.append(svgEl('text',{x:150,y:124,'text-anchor':'middle','font-size':28,'font-weight':700},fmt(total)),svgEl('text',{x:150,y:150,'text-anchor':'middle','font-size':15},unit));
+ }else{
+  const max=Math.max(1,...known.map(d=>d.value));const step=Math.max(1,Math.ceil(max/4));const top=step*4;
+  for(let i=0;i<=4;i++){const x=300+i*90;svg.append(svgEl('line',{x1:x,y1:16,x2:x,y2:height-38,stroke:'#dce3de'}),svgEl('text',{x,y:height-14,'text-anchor':'middle','font-size':13},fmt(step*i)));}
+  data.forEach((d,i)=>{const y=26+i*58;svg.append(svgEl('text',{x:6,y:y+17,'font-size':14},d.label.length>36?d.label.slice(0,35)+'…':d.label));
+   const bar=svgEl('rect',{x:300,y,width:Number.isFinite(d.value)?d.value/top*360:0,height:26,fill:color(d,i)});bar.append(svgEl('title',{},d.label+': '+fmt(d.value)+' '+unit));svg.append(bar,svgEl('text',{x:725,y:y+18,'text-anchor':'end','font-size':15,'font-weight':700},fmt(d.value)));
+  });
+ }
+ panel.append(svg);
+ if(total===0)panel.append(el('p','ค่าที่มีข้อมูลทั้งหมดเป็น 0 '+unit+' จึงไม่มีส่วนกราฟที่มีขนาดมากกว่า 0','overview-empty'));
+ if(data.some(d=>!Number.isFinite(d.value)))panel.append(el('p','— หมายถึงยังไม่มีข้อมูล ไม่ใช่ศูนย์'));
+ const details=el('details');details.append(el('summary','ดูค่าตัวเลขของกราฟ'));const table=el('table',null,'overview-chart-values');const head=table.createTHead().insertRow();head.append(el('th','รายการ'),el('th','จำนวน ('+unit+')'));const body=table.createTBody();data.forEach(d=>{const r=body.insertRow();r.append(el('td',d.label),el('td',fmt(d.value)))});details.append(table);panel.append(details);
+ if(actions.length){const buttons=el('div',null,'overview-chart-actions');actions.forEach(([name,fn])=>{const b=el('button',name);b.type='button';b.onclick=fn;buttons.append(b)});panel.append(buttons)}
+ return panel;
+}
+window.emccOverviewChart=chart;
+let snapshot=window.emccOverviewSnapshot||null;
+const metricEntries=id=>[...($(id)?.children||[])].flatMap(c=>{const dt=c.querySelector('dt'),dd=c.querySelector('dd');if(!dt||!dd)return[];const raw=dd.textContent.replace(/,/g,'').trim();return [[dt.textContent.trim(),/^\d+(\.\d+)?$/.test(raw)?Number(raw):null]]});
+function focus(id){$(id)?.scrollIntoView({behavior:'smooth',block:'start'});$(id)?.focus({preventScroll:true});}
+function update(){
+ const estate=$('coverageEstate'),label=estate?.value?estate.selectedOptions[0]?.textContent:'ทุกนิคมฯ';$('overviewScope').textContent='ขอบเขตที่กำลังดู: '+label;
+ const totals=metricEntries('dssCoverageTotals');const riskButtons=[...($('coverageRisk')?.children||[])];const risk=riskButtons.map(b=>{const raw=b.querySelector('strong')?.textContent.replace(/,/g,'').trim();return[b.querySelector('.coverage-bar-label')?.textContent||'กลุ่มความเสี่ยง',/^\d+$/.test(raw)?Number(raw):null]});
+ $('overviewRiskPlot').replaceChildren(chart('โรงงานที่เข้าข่ายแต่ละกลุ่มความเสี่ยง',risk,'โรงงาน','bar',riskButtons.map((b,i)=>['ดู '+risk[i][0],()=>{b.click();focus('coverageDetail')}])));
+ const support=[...($('coverageSupportCards')?.children||[])].map(c=>{const n=c.querySelector('strong')?.textContent.replace(/,/g,'').trim();return[c.querySelector('h3')?.textContent||'จุดสนับสนุน',/^\d+$/.test(n)?Number(n):null]});
+ $('overviewSupportPlot').replaceChildren(chart('จำนวนจุดสนับสนุนตามประเภท',support,'จุด'));
+ const reg=window.ieatFactoryRegister;const riskCount=reg&&['ready','partial'].includes(reg.status)?reg.rows.filter(r=>['ความเสี่ยง_12_ประเภท','PSM','อัคคีภัยสูง'].some(k=>String(r.attrs?.[k]||'').trim()==='เข้าข่าย')).length:null;
+ const resource=metricEntries('dssResourceSummary')[1]?.[1];
+ const cards=[['โรงงานในรายงาน DSS',totals[0]?.[1],'ราย','dssBriefCoverage'],['มีชุดข้อมูล DSS',totals[1]?.[1],'ราย','dssBriefCoverage'],['โรงงานเข้าข่ายอย่างน้อยหนึ่งกลุ่ม',riskCount,'ราย','coverageRiskSection'],['รายการทรัพยากรตามแผน',resource,'รายการ','dssBriefReadiness']];
+ $('overviewSummary').replaceChildren(...cards.map(([name,value,unit,target])=>{const a=el('a',null,'overview-summary-card');a.href='#'+target;a.append(el('span',name),el('strong',fmt(value)),el('small',unit+(name.includes('อย่างน้อย')?' · นับโรงงานไม่ซ้ำ':name.includes('ทรัพยากร')?' · ยังไม่ใช่จำนวนพร้อมใช้':'')));return a}));
+ if(!snapshot)return;
+ const d=snapshot.dssRow,entries=snapshot.resourceCategories;
+ const statuses=[['อนุมัติ',d?.approved],['อยู่ระหว่างตรวจสอบ',d?.review],['ขอข้อมูลเพิ่มเติม',d?.more],['อยู่ระหว่างจัดทำ',d?.draft],['ยังไม่มีชุดข้อมูล',d?.none]];
+ $('overviewDssPlots').replaceChildren(chart('สัดส่วนสถานะข้อมูล DSS',statuses,'โรงงาน','donut'),chart('ความครอบคลุมของชุดข้อมูล DSS',[['มีชุดข้อมูล',snapshot.imported],['ยังไม่มีชุดข้อมูล',d?.none]],'โรงงาน'));
+ $('overviewResourcePlot').replaceChildren(chart('รายการทรัพยากรตามแผน แยกตามหมวด',entries,'รายการ'));
+ const updated=$('dssCoverageUpdated')?.textContent||'รอข้อมูลวันที่';$('overviewSources').textContent='DSS: 1 ม.ค.–30 ก.ย. 2569 · '+updated+' | ทรัพยากร: '+snapshot.planSource+' · '+(snapshot.planYear||'ไม่ระบุปี')+' · ไม่พบวันตรวจความพร้อมปัจจุบันในชุดข้อมูล | GIS: ดูแหล่งข้อมูลในรายละเอียดชั้นแผนที่';
+ const follow=[['ยังไม่มีชุดข้อมูล DSS',d?.none,'ราย','dssBriefCoverage','ยอดรวมจากรายงาน DSS ยังไม่มีรายชื่อแยกสถานะให้ตรวจรายโรงงาน'],['ข้อมูลอยู่ระหว่างตรวจสอบ',d?.review,'ราย','dssBriefCoverage','เป็นสถานะเอกสาร ไม่ใช่ระดับความเสี่ยง'],['ข้อมูลอยู่ระหว่างจัดทำ',d?.draft,'ราย','dssBriefCoverage','ติดตามการจัดทำชุดข้อมูลตามรอบรายงาน'],['ต้องส่งข้อมูลเพิ่มเติม',d?.more,'ราย','dssBriefCoverage','ประสานผู้ดูแลข้อมูล DSS'],['รายการทรัพยากรที่ต้องยืนยันความพร้อม',snapshot.resourceCount,'รายการ','dssBriefReadiness','ตรวจจำนวนพร้อมใช้ ผู้ดูแล วันตรวจ และช่องทางติดต่อ']];
+ $('overviewFollowupItems').replaceChildren(...follow.map(([name,n,unit,id,note])=>{const a=el('a',null,'overview-followup-item');a.href='#'+id;a.append(el('strong',name+' · '+fmt(n)+' '+unit),el('small',note));return a}));
+ const planStatus=$('dssBriefPlanStatus');planStatus.textContent=snapshot.plansLoaded?'บัญชีตามแผน '+fmt(snapshot.resourceCount)+' รายการ · ยืนยันพร้อมใช้งานปัจจุบัน: ยังไม่มีข้อมูลรับรอง · กรุณาตรวจสอบกับผู้ดูแลก่อนประสานใช้':'โหลดบัญชีทรัพยากรไม่ได้';
+}
+function boot(){
+ if(!$('riskCoverage')||$('overviewSummary'))return;
+ const header=el('section',null,'overview-scope-panel');header.id='overviewScopePanel';const scope=el('strong');scope.id='overviewScope';scope.setAttribute('role','status');const reset=el('button','ดูทุกนิคมฯ');reset.type='button';reset.onclick=()=>{const select=$('coverageEstate');select.value='';$('coverageEstateSearch').value='';select.dispatchEvent(new Event('change',{bubbles:true}));};header.append(scope,reset);
+ const summary=el('div');summary.id='overviewSummary';header.append(summary);const sources=el('p');sources.id='overviewSources';header.append(sources);$('coverageMap').before(header);
+ const add=(id,target)=>{const e=el('div');e.id=id;$(target).prepend(e);};add('overviewDssPlots','dssBriefCoverage');add('overviewRiskPlot','coverageRiskSection');const supportPlot=el('div');supportPlot.id='overviewSupportPlot';$('coverageSupportCards').before(supportPlot);add('overviewResourcePlot','dssBriefReadiness');
+ // Put headings and explanatory text above plots.
+ for(const [plot,title]of [['overviewDssPlots','dssBriefCoverageTitle'],['overviewRiskPlot','coverageRiskHeading'],['overviewResourcePlot','dssBriefReadinessTitle']])$(title)?.after($(plot));
+ const follow=el('section',null,'overview-followup');follow.id='overviewFollowup';follow.append(el('h2','ข้อมูลที่ต้องติดตาม'),el('p','ติดตามความครบถ้วนของข้อมูลและการยืนยันความพร้อม แยกจากระดับความเสี่ยงของโรงงาน'));const items=el('div');items.id='overviewFollowupItems';items.append(el('p','กำลังอ่านข้อมูลจากแหล่งต้นทาง…'));follow.append(items);$('riskmapEstateContent').prepend(follow);
+ const note=el('p','สถานะ DSS บอกขั้นตอนและความครบถ้วนของข้อมูล ไม่ใช่ผลประเมินความเสี่ยงหรือความปลอดภัยของโรงงาน','overview-data-note');$('overviewDssPlots').before(note);
+ const riskNote=el('details',null,'overview-risk-definitions');riskNote.append(el('summary','อ่านความหมายของกลุ่มความเสี่ยง'));riskNote.append(el('p','12 ประเภท: โรงงานที่ถูกระบุในกลุ่มความเสี่ยงสูง 12 ประเภทในทะเบียน กนอ. · PSM: โรงงานที่มีธงกลุ่มการจัดการความปลอดภัยกระบวนการผลิตในทะเบียน · อัคคีภัยสูง: โรงงานที่ถูกระบุธงอัคคีภัยสูงในทะเบียนต้นทาง'));riskNote.append(el('p','โรงงานหนึ่งแห่งอาจอยู่หลายกลุ่ม จึงห้ามบวกจำนวนแต่ละกลุ่มเป็นยอดรวม กลุ่มเหล่านี้ไม่ใช่ระดับสีความเสี่ยง 5 ระดับ และไม่ใช่ผลประเมินเหตุปัจจุบัน'));$('overviewRiskPlot').before(riskNote);
+ const planNote=el('p','แหล่งข้อมูล: บัญชีทรัพยากรตามเอกสารแผนรับมือเหตุ รายการที่มีข้อมูลไม่เท่ากับอุปกรณ์ที่พร้อมใช้ ไม่รวมจำนวนอุปกรณ์ต่างหน่วยเข้าด้วยกัน','overview-data-note');$('overviewResourcePlot').before(planNote);
+ let queued=false;const schedule=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;update()})};
+ for(const id of ['dssCoverageTotals','dssResourceSummary','coverageRisk','coverageDetail']){if($(id))new MutationObserver(schedule).observe($(id),{childList:true,subtree:true,characterData:true});}
+ // Observe only support cards, excluding the generated chart to avoid render loops.
+ new MutationObserver(mutations=>{if(mutations.length)schedule()}).observe($('coverageSupportCards'),{childList:true,subtree:true,characterData:true});
+ $('coverageEstate').addEventListener('change',()=>{snapshot=null;for(const id of ['overviewDssPlots','overviewResourcePlot','overviewFollowupItems'])$(id).replaceChildren(el('p','กำลังปรับข้อมูลตามนิคมฯ ที่เลือก…'));schedule()});
+ window.addEventListener('ieat-overview-data',e=>{snapshot=e.detail;schedule()});window.addEventListener('ieat-factory-register-updated',schedule);update();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+</script>
 <script id="dss-brief-data">
 (() => {
   const get = id => document.getElementById(id);
@@ -3405,6 +3514,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
     return card;
   }));
   function bars(title,entries) {
+    if(window.emccOverviewChart)return window.emccOverviewChart(title,entries,title.includes("เหตุการณ์")?"เหตุการณ์":"รายการ");
     const panel = node('section',null,'dss-chart');
     panel.append(node('h3',title));
     if (!entries.length) panel.append(node('p','ไม่พบรายการในขอบเขตนี้'));
@@ -3431,6 +3541,7 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
   }
   const palette = ['#24845a','#e8ba3f','#cc5257','#87ad69','#9f6b22'];
   function circle(title,entries,half=false) {
+    if(window.emccOverviewChart)return window.emccOverviewChart(title,entries,"เหตุการณ์","donut");
     const panel = node('section',null,'dss-chart');
     panel.append(node('h3',title));
     const total = entries.reduce((sum,[,count]) => sum+count,0);
@@ -3579,6 +3690,8 @@ html body header#ieatPortalHeader#ieatPortalHeader#ieatPortalHeader#ieatPortalHe
       circle('สัดส่วนประเภทเหตุ',types),
       circle('สถานะการยืนยัน',[['ยืนยันแล้ว',confirmed],['รอยืนยันหรือสถานะอื่น',rows.length-confirmed]],true)
     ] : []));
+    window.emccOverviewSnapshot={dssRow,imported,resourceCategories:categories,resourceCount:plans?entries.length:null,plansLoaded:!!plans,planSource:plans?.source||'บัญชีทรัพยากรตามแผน',planYear:plans?.source_year};
+    window.dispatchEvent(new CustomEvent('ieat-overview-data',{detail:window.emccOverviewSnapshot}));
   }
   estate.addEventListener('change', render);
   window.addEventListener('focus', render);
