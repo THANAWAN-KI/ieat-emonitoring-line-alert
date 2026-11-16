@@ -4432,13 +4432,19 @@ async function start(){
   $('coverageEstate')?.addEventListener('change',focusEstate);
   window.addEventListener('resize',resize);document.addEventListener('click',event=>{if(event.target.closest('#emccDashboardViews'))resize()});
   focusFactory=async(row,path='e_PP/FeatureServer/0')=>{if(!row)throw Error('ไม่พบโรงงาน');window.emccShowDashboardView?.('map');resize();const data=await query(path,{objectIds:String(row.id)});const selected=L.geoJSON(data,{style:{color:'#e26943',weight:3},pointToLayer:(f,ll)=>L.circleMarker(ll,{radius:9,color:'#fff',weight:2,fillColor:'#e26943',fillOpacity:1}),onEachFeature:(f,marker)=>marker.bindPopup(textNode('strong',row.name))});if(window.ieatFallbackSelection)fallback.removeLayer(window.ieatFallbackSelection);window.ieatFallbackSelection=selected.addTo(fallback);if(selected.getBounds().isValid())fallback.fitBounds(selected.getBounds(),{maxZoom:16,padding:[35,35]});selected.eachLayer(l=>l.openPopup());};window.ieatOpenFactoryPopup=focusFactory;window.ieatFocusCoverageFactory=async id=>focusFactory(window.ieatFactoryRegister?.rows.find(r=>String(r.id)===String(id)));
-  resize();await focusEstate();await refresh();
+  window.dispatchEvent(new Event('ieat-fallback-map-ready'));resize();await focusEstate();await refresh();
  }catch(error){status('แผนที่เริ่มทำงานไม่ได้: '+error.message);starting=false;}
 }
+window.addEventListener('ieat-map-group-filter',event=>{
+ if(!fallback)return;const selected=event.detail?.group||'all',names={twelve:'โรงงานความเสี่ยงสูง 12 ประเภท',psm:'โรงงาน PSM',fire:'โรงงานอัคคีภัยสูง'};
+ for(const item of layers.filter(x=>x.where)){const visible=selected==='all'||item.name===names[selected];if(visible&&!fallback.hasLayer(item.layer))item.layer.addTo(fallback);else if(!visible&&fallback.hasLayer(item.layer))fallback.removeLayer(item.layer);}
+ refresh();
+});
 function bind(){const context=window.ieatCoverageOverviewMap;if(!context||bound)return;bound=true;context.view.when(()=>{if(!fallback)status('แผนที่พร้อม · เลือกนิคมฯ หรือคลิกสัญลักษณ์เพื่อดูรายละเอียด');},()=>{start();if(focusFactory)window.ieatOpenFactoryPopup=focusFactory;});}
 function init(){bind();window.addEventListener('ieat-coverage-map-created',bind);let supported=false;try{supported=!!document.createElement('canvas').getContext('webgl2');}catch{}if(!supported)start();else setTimeout(()=>{const context=window.ieatCoverageOverviewMap;if(!context?.view?.ready)start();},15000);}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
 </script><style id="dashboard-legibility">html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard{color:#1f2937!important}
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness)>h2{font-size:20px!important;font-weight:600!important;color:#203746!important;line-height:1.6!important}
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-chart h3{font-size:16px!important;font-weight:600!important;color:#233e4e!important;line-height:1.6!important}
@@ -4467,4 +4473,64 @@ html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-das
 @media(max-width:600px){html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row{grid-template-columns:1fr auto}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row>span{grid-column:1/-1}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-bar-scroll>.overview-plot{min-width:500px!important}}
 
 @media(max-width:1450px){html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-circular-chart>.overview-plot{max-width:280px!important;justify-self:center!important}}
-</style></body></html>
+</style><style id="riskmap-focused-layout">html.map-only-page body{background:#fff!important}
+html.map-only-page body #riskmapOverviewPanel .coverage-map-layout{display:block!important;max-width:1800px!important;padding:0 18px!important;box-sizing:border-box}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage{background:#fff!important;padding:0!important;border:0!important;margin:0!important;display:block!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>:not(.riskmap-overview-heading):not(#riskMapOnlyFilters):not(#coverageMap){display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>.riskmap-overview-heading{background:#fff!important;border:0!important;border-bottom:1px solid #e0e6e9!important;box-shadow:none!important;padding:20px 0 15px!important;margin:0 0 15px!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>.riskmap-overview-heading:after{display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only .riskmap-overview-heading h1{font-size:clamp(23px,2vw,31px)!important;color:#1f3743!important;font-weight:600!important;line-height:1.5!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only .riskmap-overview-eyebrow{display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only .riskmap-overview-lead{font-size:12px!important;color:#768991!important;margin:3px 0 0!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters{display:grid!important;grid-template-columns:minmax(300px,1.8fr) minmax(220px,1fr) minmax(230px,1fr) auto!important;gap:20px!important;align-items:end!important;padding:0 0 18px!important;border:0!important;border-bottom:1px solid #edf0f2!important;margin:0 0 16px!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters .map-only-filter{min-width:0!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters label{display:block;font:500 13px/1.7 Sarabun,sans-serif!important;color:#344d5c!important;margin:0 0 5px!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters #coverageEstateForm{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:#fff!important;position:relative!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters #coverageEstateForm:before{display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters #coverageEstateForm>label{margin:0!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters :is(input,select,button){font:14px/1.5 Sarabun,sans-serif!important;min-height:41px!important;border:1px solid #ccd9df!important;border-radius:0!important;background:#fff!important;color:#284555!important;padding:8px 10px!important;box-sizing:border-box!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters :is(input,select){width:100%!important;min-width:0!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters button{cursor:pointer!important;background:#f0f6f8!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters .coverage-estate-results{position:absolute!important;top:100%!important;left:0;right:0;z-index:1100!important;max-height:260px!important;box-shadow:0 3px 9px #20354220!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap{display:flex!important;flex-direction:column!important;width:100%!important;margin:0!important;padding:0!important;background:#fff!important;border:0!important;position:relative!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap>.riskmap-risk-levels{order:0!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:12px!important;margin:0 0 10px!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap>.riskmap-risk-levels .level{height:65px!important;min-height:0!important;box-sizing:border-box!important;padding:12px 8px!important;font:500 14px/1.5 Sarabun,sans-serif!important;border-radius:0!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMapTitle{order:1!important;text-align:center!important;font:500 15px/1.6 Sarabun,sans-serif!important;color:#324a57!important;margin:0 0 8px!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap>.riskmap-risk-explain{order:4!important;font-size:11px!important;color:#687b85!important;line-height:1.6!important;margin:6px 0!important;text-align:left!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMapStatus{order:3!important;font-size:12px!important;line-height:1.7!important;color:#506977!important;margin:7px 0 0!important;clear:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskmapRiskMapWorkspace{order:2!important;display:block!important;width:100%!important;min-width:0!important;margin:0!important;border:1px solid #dbe3e8!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskmapRiskMapWorkspace :is(#coverageMapView,#coverageMapFallback){width:100%!important;height:clamp(480px,65vh,850px)!important;min-height:480px!important;border:0!important;max-height:none!important;box-sizing:border-box!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap.coverage-map-fallback-active #coverageMapView{display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap :is(.coverage-basemap-control,.riskmap-map-key,.coverage-map-note,.riskmap-map-eyebrow,.riskmap-map-description,.riskmap-overview-left,.riskmap-geo-insights,#coverageMapReload){display:none!important}
+html.map-only-page :is(#riskDashboard,#riskmapReportPanel,#riskMapLinePanel,.riskmap-overview-rail,#hub-alert-toast){display:none!important}
+html.map-only-page .riskmap-shared-workspace{display:block!important;max-width:none!important;margin:0!important}
+@media(max-width:1100px){html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}}
+@media(max-width:650px){html.map-only-page body #riskmapOverviewPanel .coverage-map-layout{padding:0 10px!important}html.map-only-page body #riskmapOverviewPanel #riskCoverage #riskMapOnlyFilters{grid-template-columns:minmax(0,1fr)!important}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap>.riskmap-risk-levels{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #coverageMap>.riskmap-risk-levels .level{height:46px!important;font-size:12px!important}}
+</style><script id="riskmap-focused-layout-js">(()=>{
+if(new URLSearchParams(location.search).get('hazard')==='fire')return;
+const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n};
+function init(){requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+ const root=$('riskCoverage'),map=$('coverageMap'),form=$('coverageEstateForm'),base=$('coverageBasemap');if(!root||!map||!form||$('riskMapOnlyFilters'))return;
+ document.documentElement.classList.add('map-only-page');root.classList.add('map-only');
+ for(const id of ['riskDashboard','riskmapReportPanel','riskMapLinePanel']){const node=$(id);if(node){node.hidden=true;node.style.setProperty('display','none','important');}}
+ const heading=$('riskCoverageTitle');if(heading)heading.textContent='แผนที่ความเสี่ยงนิคมอุตสาหกรรม';
+ const lead=root.querySelector('.riskmap-overview-lead');if(lead)lead.textContent='EMCC · Industrial Estate Risk Map';
+ const eyebrow=root.querySelector('.riskmap-overview-eyebrow');if(eyebrow)eyebrow.textContent='RISK MAP';
+ const controls=el('section');controls.id='riskMapOnlyFilters';controls.setAttribute('aria-label','ตัวกรองแผนที่ความเสี่ยง');
+ const estateField=el('div');estateField.className='map-only-filter';const estateLabel=el('label','นิคมอุตสาหกรรม');estateLabel.htmlFor='coverageEstateSearch';estateField.append(estateLabel,form);
+ const riskField=el('div');riskField.className='map-only-filter';const label=el('label','กลุ่มโรงงานที่แสดง');label.htmlFor='riskMapOnlyGroup';const risk=el('select');risk.id='riskMapOnlyGroup';for(const [value,text]of [['all','ทุกกลุ่มความเสี่ยง'],['twelve','ความเสี่ยงสูง 12 ประเภท'],['psm','โรงงาน PSM'],['fire','ความเสี่ยงอัคคีภัยสูง']])risk.append(new Option(text,value));riskField.append(label,risk);
+ const basemapField=el('div');basemapField.className='map-only-filter';const baseLabel=el('label','แผนที่พื้นฐาน');baseLabel.htmlFor='coverageBasemap';if(base)basemapField.append(baseLabel,base);
+ const reset=el('button','แสดงทั่วประเทศ');reset.type='button';reset.className='map-only-reset';reset.onclick=()=>{const select=$('coverageEstate');select.value='';$('coverageEstateSearch').value='';select.dispatchEvent(new Event('change',{bubbles:true}));risk.value='all';apply();};
+ controls.append(estateField,riskField,basemapField,reset);root.append(controls,map);
+ const titles={twelve:'ความเสี่ยงสูง 12 ประเภท',psm:'โรงงาน PSM',fire:'ความเสี่ยงอัคคีภัยสูง'};
+ function apply(){const group=risk.value;window.ieatMapOnlyGroup=group;window.dispatchEvent(new CustomEvent('ieat-map-group-filter',{detail:{group}}));const context=window.ieatCoverageOverviewMap;if(context)for(const layer of context.map.allLayers){if(Object.values(titles).includes(layer.title)){layer.visible=group==='all'||layer.title===titles[group];}}}
+ risk.onchange=apply;window.addEventListener('ieat-coverage-map-created',apply);window.addEventListener('ieat-fallback-map-ready',apply);
+ window.emccShowDashboardView=()=>{root.dataset.dashboardView='map';requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));};window.emccShowDashboardView();
+ // Old section links should still open the map in this focused view.
+ const forceMap=()=>{root.dataset.dashboardView='map';};window.addEventListener('hashchange',forceMap);forceMap();
+ const title=$('coverageMapTitle');if(title)title.textContent='ประเทศไทย';
+ apply();requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
+})));}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script></body></html>
