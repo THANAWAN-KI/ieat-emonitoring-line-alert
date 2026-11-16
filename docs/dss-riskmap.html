@@ -528,6 +528,16 @@ const risk=document.getElementById('coverageRiskSection');if(risk&&!document.get
 };if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 </script>
+
+<style id="riskmap-remove-all-dark-section-outlines-20261116">
+/* Remove heavy black/dark outlines throughout overview dashboard, while keeping card spacing and risk colors. */
+html:not(.fire-risk-view) #riskmapOverviewPanel #riskCoverage :is(.dss-brief,.dss-chart,.coverage-support-overview,#coverageRiskSection,#dssBriefCoverage,#dssBriefReadiness,.riskmap-viz-card,.riskmap-analysis-tile,.riskmap-analysis-strip,.riskmap-risk-legend,#coverageMap,#coverageEstateForm,.dss-risk-table-wrap,.dss-brief-metrics>div,#dssCoverageTotals>div,#dssBriefDssCards>div,#dssResourceSummary>div,.coverage-bar,button.coverage-bar,div.coverage-bar){border-color:#eee8f4!important;border-width:1px!important;outline:0!important;box-shadow:0 3px 14px rgba(67,28,105,.055)!important;border-radius:12px!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #riskCoverage :is(.riskmap-viz-row,.riskmap-risk-legend,.riskmap-analysis-strip){border:0!important;box-shadow:none!important;outline:0!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #riskCoverage :is(.dss-risk-table,table,thead,tbody,tr,td,th){border-color:#eee8f4!important;box-shadow:none!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #riskCoverage :is(input,select,button){border-color:#e4d9ed!important;outline-offset:2px}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading{border:0!important;outline:0!important;box-shadow:0 8px 22px rgba(67,28,105,.08)!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #riskCoverage :is(.coverage-support-overview,#dssBriefCoverage,#coverageRiskSection,#dssBriefReadiness){border:1px solid #eee8f4!important;box-shadow:0 5px 20px rgba(67,28,105,.055)!important;border-radius:16px!important}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
