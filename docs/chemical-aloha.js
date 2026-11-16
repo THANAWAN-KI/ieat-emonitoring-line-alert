@@ -21,11 +21,11 @@ panel.innerHTML=`<header><div><h2>วิเคราะห์พื้นที�
 <label>อุณหภูมิ / ความดันสาร<input name="storage" maxlength="160" placeholder="ระบุพร้อมหน่วย หรือระบุว่าไม่มีข้อมูล"></label>
 <label class="aloha-wide">รายละเอียดถัง ท่อ ช่องรั่ว หรือแอ่งสาร<textarea name="sourceDetail" rows="2" maxlength="1600" placeholder="ขนาด ระดับบรรจุ ขนาดรูรั่ว หรือข้อมูลตามสถานการณ์ที่จำลอง"></textarea></label>
 <label class="aloha-wide">แหล่ง SDS / เลขที่เอกสาร<input name="sds" maxlength="500" placeholder="ชื่อเอกสาร วันที่ปรับปรุง หรือลิงก์ SDS ของสารที่เกี่ยวข้อง"></label>
-</div></fieldset><fieldset><legend>อากาศที่ใช้ในแบบจำลอง (ไม่อัปเดตแทนโดยอัตโนมัติ)</legend><div class="aloha-grid">
+</div></fieldset><fieldset><legend>อากาศสำหรับเตรียมข้อมูล (ตรวจให้ตรงกับผลจำลอง)</legend><div class="aloha-grid">
 <label>ทิศลมพัดจาก (องศาเหนือจริง)<input name="windFrom" type="number" min="0" max="360" step="any" required></label>
 <label>ความเร็วลม<input name="windSpeed" type="number" min="0" step="any" required></label>
 <label>หน่วยความเร็วลม<select name="windUnit"><option>m/s</option><option>km/h</option><option>knots</option></select></label>
-<label>ความสูงที่วัดลม (เมตร)<input name="windHeight" type="number" min="0.1" step="any" required></label>
+<label>ระดับความสูงลมที่ใช้ (เมตร)<input name="windHeight" type="number" min="0.1" step="any" required></label>
 <label>อุณหภูมิอากาศ (°C)<input name="temperature" type="number" step="any" required></label>
 <label>เมฆ / ความเสถียรบรรยากาศ<input name="atmosphere" required maxlength="180" placeholder="ตามข้อมูลที่กรอกใน ALOHA"></label>
 <label>เวลาข้อมูลอากาศ (เวลาไทย)<input name="weatherTime" type="datetime-local" required></label>
@@ -153,7 +153,7 @@ function showFindings(){
 function textLines(){
  if(!valid())return ['สถานะ ALOHA: ยังไม่มีผลจำลองที่ยืนยันสำหรับเงื่อนไขรายงานปัจจุบัน','รัศมีค้นหาทรัพยากรไม่ใช่เขตอันตรายจากสารเคมี'];
  const s=applied,d=s.data;return [
- 'ผลนำเข้าจาก ALOHA · '+s.company,'สาร: '+d.chemical+' · CAS '+d.cas+' · '+d.concentration+' · '+d.state,
+ 'ผลนำเข้าจาก ALOHA · '+s.company,'สารที่ใช้จำลอง: '+d.chemical+' · CAS '+d.cas+' · '+d.concentration+' · '+d.state,
  'ประเภทผล: '+field('hazard').selectedOptions[0].textContent+' · '+d.caseKind,
  'แหล่งรั่ว: '+d.source+' · '+d.release+' · ระยะเวลา '+d.duration,'รายละเอียดแหล่งรั่ว: '+(d.sourceDetail||'ไม่ระบุ')+' · อุณหภูมิ/ความดัน: '+(d.storage||'ไม่ระบุ'),
  'ต้นกำเนิดที่ระบุ: '+d.sourceLat+', '+d.sourceLng+' · เริ่มสถานการณ์ '+d.modelTime+' (เวลาไทย)',
@@ -163,7 +163,7 @@ function textLines(){
  ...s.zones.map(z=>'เขต'+labels[z.level]+' · '+z.name+' · '+z.loc+' '+z.unit+' · เวลาอ้างอิง '+(z.exposure||'ไม่ระบุ')),
  'รายการ GIS ที่โหลดได้ในเขต: '+C.levels.map(k=>labels[k]+' '+s.results.rows.filter(r=>r.level===k).length).join(' / ')+' รายการ',
  ...s.results.notes,'ผู้วิเคราะห์: '+d.analyst+' · ผู้ตรวจทาน: '+d.reviewer+' · ตรวจทาน '+d.reviewTime+' (เวลาไทย)',
- 'SDS: '+(d.sds||'ยังไม่แนบแหล่งอ้างอิง'),'สมมติฐาน/ข้อมูลยังไม่ยืนยัน: '+d.assumptions,
+ 'แหล่งข้อมูลที่เติมอัตโนมัติ: '+(d.automationSource||'ไม่ได้ใช้รายการสารจากการเติมอัตโนมัติ'),'SDS: '+(d.sds||'ยังไม่แนบแหล่งอ้างอิง'),'สมมติฐาน/ข้อมูลยังไม่ยืนยัน: '+d.assumptions,
  'ผลคาดการณ์จากแบบจำลอง ไม่ใช่ค่าตรวจวัดหรือคำสั่งอพยพ ต้องใช้ร่วมกับข้อมูลหน้างานและการประเมินของผู้เชี่ยวชาญ'
  ];
 }
@@ -218,5 +218,91 @@ function installCaptureLegend(){
 }
 window.addEventListener('ieat-chemical-map-ready',installCaptureLegend);installCaptureLegend();
 window.ieatChemicalAloha={getSnapshot:()=>valid()?applied:null,getReportLines:textLines};
+// Prepare inputs from identified sources; never run or fabricate an ALOHA calculation.
+(()=>{
+ const box=el('section');box.id='alohaAutoInputs';box.style.cssText='padding:14px;border:1px solid #b6c5b9;background:#f5f9f5;margin:0 0 16px;display:grid;gap:10px';
+ const title=el('h3','เตรียมข้อมูลอัตโนมัติ');title.style.margin='0';
+ const current=el('p','ค้นหาโรงงานให้รายงานพร้อม ระบบจะเตรียมพิกัดและรายการสารจาก DSS');
+ const chooseLabel=el('label','เลือกสารจากทะเบียน DSS ของโรงงาน (ต้องยืนยันสารที่รั่วจริง)');
+ const choose=el('select');choose.id='alohaDssChemical';choose.disabled=true;choose.append(new Option('รอเลือกโรงงาน',''));chooseLabel.append(choose);
+ const chemicalStatus=el('p');chemicalStatus.id='alohaDssStatus';chemicalStatus.setAttribute('role','status');
+ const inventory=el('p');inventory.id='alohaInventoryNote';inventory.style.cssText='padding:8px;background:#fff8e7;margin:0';inventory.textContent='ปริมาณในทะเบียนเป็นปริมาณจัดเก็บ ไม่ใช่ปริมาณหรืออัตราที่รั่ว';
+ const actions=el('div');actions.className='aloha-actions';actions.style.margin='0';
+ const weatherButton=el('button','ดึงอากาศล่าสุดที่พิกัดโรงงาน');weatherButton.type='button';weatherButton.id='alohaAutoWeather';
+ const refreshButton=el('button','โหลดรายการสาร DSS ใหม่');refreshButton.type='button';refreshButton.id='alohaRefreshChemicals';
+ const draftButton=el('button','ดาวน์โหลดข้อมูลเตรียมจำลอง');draftButton.type='button';draftButton.id='alohaScenarioDraft';
+ actions.append(weatherButton,refreshButton,draftButton);
+ const weatherStatus=el('p');weatherStatus.id='alohaWeatherStatus';weatherStatus.setAttribute('role','status');
+ const engine=el('p','เครื่องคำนวณ ALOHA: ยังไม่ได้เชื่อมต่อ · ยังสั่งโปรแกรม ALOHA จากเว็บไม่ได้ ข้อมูลที่เตรียมนี้ยังไม่ใช่ผลจำลอง');engine.id='alohaEngineStatus';engine.style.cssText='padding:9px;background:#fff8e7;margin:0';
+ const credit=el('p');credit.style.fontSize='13px';credit.append(document.createTextNode('อากาศจากแบบจำลอง '));const creditLink=el('a','Open-Meteo.com (CC BY 4.0)');creditLink.href='https://open-meteo.com/';creditLink.target='_blank';creditLink.rel='noopener';credit.append(creditLink,document.createTextNode(' · ไม่ใช่ค่าตรวจวัดหน้างาน · การเติมอากาศไม่ทำให้เขต ALOHA คำนวณใหม่'));
+ box.append(title,current,chooseLabel,chemicalStatus,inventory,actions,weatherStatus,engine,credit);form.prepend(box);
+ const provenance=el('input');provenance.type='hidden';provenance.name='automationSource';form.append(provenance);
+ let key='',generation=0,loadingKey='',catalogChoices=[],writing=false,weatherRequest=0,weatherController=null;
+ const owned=new Map(),weatherNames=['windFrom','windSpeed','windUnit','windHeight','temperature','atmosphere','weatherTime','weatherSource'];
+ const validContext=()=>{const c=context();return c?.status==='ready'&&c.point&&Number.isFinite(c.point.lat)&&Number.isFinite(c.point.lng)?c:null;};
+ const identity=c=>JSON.stringify([c.company,c.point.lat,c.point.lng,c.summary?.estate||'',c.attributes?.['เลขทะเบียนใหม่']||c.attributes?.['เลขทะเบียนเดิม']||'']);
+ function assign(name,value,force=false){const input=field(name);if(!input)return;const text=String(value);if(!force&&input.value&&input.value!==owned.get(name))return;writing=true;try{if(input.value!==text){input.value=text;input.dispatchEvent(new Event('input',{bubbles:true}));}owned.set(name,text);}finally{writing=false;}}
+ function recordSource(text){if(provenance.value!==text){writing=true;try{provenance.value=text;provenance.dispatchEvent(new Event('input',{bubbles:true}));}finally{writing=false;}}}
+ form.addEventListener('input',event=>{if(writing||!event.target.name)return;const name=event.target.name;owned.delete(name);if(['chemical','cas'].includes(name)){choose.value='';recordSource('');chemicalStatus.textContent='ชื่อสารหรือ CAS ถูกแก้ไขด้วยตนเอง กรุณาตรวจแหล่งอ้างอิง';}if(weatherNames.includes(name)&&name!=='weatherSource'&&field('weatherSource').value&&!field('weatherSource').value.includes('ผู้ใช้ปรับแก้'))assign('weatherSource',field('weatherSource').value+' · ผู้ใช้ปรับแก้ค่าบางส่วน',true);});
+ function clearOwned(){writing=true;try{for(const [name,value] of owned){const input=field(name);if(input&&input.value===value){input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));}}owned.clear();}finally{writing=false;}recordSource('');}
+ function registrations(c){return [...new Set([c.attributes?.['เลขทะเบียนใหม่'],c.attributes?.['เลขทะเบียนเดิม'],c.attributes?.comp_no].filter(v=>v&&v!=='—'))];}
+ async function chemicals(c,version){
+  choose.disabled=true;choose.replaceChildren(new Option('กำลังโหลด DSS…',''));chemicalStatus.textContent='กำลังตรวจชื่อ/เลขทะเบียนและนิคมฯ ให้ตรงกับโรงงาน';
+  try{
+   const service=window.IEATDssChemicalCatalog;if(!service)throw Error('คลังสาร DSS ยังไม่พร้อม');
+   const data=await service.load();if(version!==generation||!validContext()||identity(validContext())!==identity(c))return;
+   const ids=new Set(service.findCompanies(data,c.company,c.summary?.estate||'',registrations(c)));
+   if(!ids.size){catalogChoices=[];choose.replaceChildren(new Option('ไม่พบโรงงานที่จับคู่ได้แน่นอน',''));chemicalStatus.textContent='ยังเติมสารอัตโนมัติไม่ได้: ไม่พบข้อมูลที่ระบุโรงงานได้แน่นอน กรุณาตรวจชื่อ เลขทะเบียน และนิคมฯ หรือกรอกสารเอง';return;}
+   const grouped=new Map();data.rows.forEach((r,i)=>{if(!ids.has(r[0]))return;const name=String(data.names[r[1]]||'').trim(),cas=String(data.cas[r[2]]||'').trim();if(!name)return;const k=name+'|'+cas;if(!grouped.has(k))grouped.set(k,{name,cas,inventory:[],details:[],company:data.companies[r[0]],period:data.period||'ไม่ระบุรอบข้อมูล'});const row=grouped.get(k);if(r[4])row.inventory.push(String(r[4])+' '+String(data.units[r[5]]||''));if(data.rowDetails?.[i])row.details.push(data.rowDetails[i]);});
+   catalogChoices=[...grouped.values()].sort((a,b)=>a.name.localeCompare(b.name,'th'));
+   choose.replaceChildren(new Option('เลือกสารที่ยืนยันว่าเกี่ยวข้องกับเหตุ',''),...catalogChoices.map((r,i)=>new Option(r.name+' · CAS '+(r.cas||'ไม่ระบุ'),String(i))));choose.disabled=!catalogChoices.length;
+   chemicalStatus.textContent='พบ '+catalogChoices.length+' รายการสารที่จับคู่โรงงานได้ · รอบข้อมูล '+(data.period||'ไม่ระบุ')+(data.sourceWarning?' · '+data.sourceWarning:'')+' · รายการจัดเก็บไม่ยืนยันชนิดสารที่รั่ว';
+  }catch(e){if(version!==generation)return;catalogChoices=[];choose.replaceChildren(new Option('โหลด DSS ไม่สำเร็จ',''));chemicalStatus.textContent=e.message+' · กรอกชื่อสารและ CAS เองได้';}
+ }
+ choose.addEventListener('change',()=>{
+  if(choose.value==='')return;const c=validContext(),item=catalogChoices[Number(choose.value)];if(!c||identity(c)!==key||!item)return;
+  assign('chemical',item.name,true);assign('cas',/^\d{2,7}-\d{2}-\d$/.test(item.cas)?item.cas:'',true);
+  inventory.textContent='ปริมาณจัดเก็บตาม DSS: '+([...new Set(item.inventory)].join(' / ')||'ไม่ระบุ')+' · ไม่ได้นำไปใช้เป็นปริมาณหรืออัตราการรั่ว';
+  recordSource('ชื่อสาร/CAS จาก DSS: '+item.company.join(' · ')+' · รอบ '+item.period+' · ผู้ใช้เลือกรายการสารที่เกี่ยวข้องกับเหตุ');
+  chemicalStatus.textContent='เติมชื่อสารและ CAS แล้ว กรุณายืนยันความบริสุทธิ์ สถานะ ภาชนะ และปริมาณ/อัตราที่รั่วจริงเอง';
+ });
+ function blankWeather(){return ['windFrom','windSpeed','temperature','atmosphere','weatherTime','weatherSource'].every(n=>!field(n).value);}
+ async function weather(explicit=false){
+  const c=validContext();if(!c){weatherStatus.textContent='ค้นหาโรงงานให้รายงานพร้อมก่อนดึงอากาศ';return;}
+  if(!explicit&&!blankWeather()){weatherStatus.textContent='คงข้อมูลอากาศที่มีอยู่แล้ว หากต้องการเปลี่ยนทั้งชุด ให้กดดึงอากาศล่าสุดและตรวจให้ตรงกับผลจำลอง';return;}
+  const version=generation,request=++weatherRequest,startValues=Object.fromEntries(weatherNames.map(n=>[n,field(n).value]));weatherController?.abort();weatherController=new AbortController();const controller=weatherController;const timer=setTimeout(()=>controller.abort(),15000);
+  weatherButton.disabled=true;weatherStatus.textContent='กำลังดึงอากาศจากแบบจำลอง Open-Meteo…';
+  try{
+   const url=new URL('https://api.open-meteo.com/v1/forecast');url.search=new URLSearchParams({latitude:String(c.point.lat),longitude:String(c.point.lng),current:'temperature_2m,wind_speed_10m,wind_direction_10m,cloud_cover',wind_speed_unit:'ms',timezone:'Asia/Bangkok'});
+   const response=await fetch(url,{signal:weatherController.signal,cache:'no-store'});if(!response.ok)throw Error('HTTP '+response.status);const data=await response.json();
+   if(version!==generation||request!==weatherRequest||!validContext()||identity(validContext())!==identity(c))return;
+   if(weatherNames.some(n=>field(n).value!==startValues[n]))throw Error('มีการแก้ข้อมูลอากาศระหว่างโหลด จึงไม่ทับข้อมูลที่แก้');
+   const w=data.current,u=data.current_units||{};if(!w||data.utc_offset_seconds!==25200||u.wind_speed_10m!=='m/s'||u.temperature_2m!=='°C'||u.cloud_cover!=='%')throw Error('รูปแบบหรือหน่วยอากาศไม่ตรงกับที่ร้องขอ');
+   if(![w.wind_direction_10m,w.wind_speed_10m,w.temperature_2m,w.cloud_cover].every(Number.isFinite)||w.wind_direction_10m<0||w.wind_direction_10m>360||w.wind_speed_10m<0||w.cloud_cover<0||w.cloud_cover>100)throw Error('ข้อมูลอากาศไม่ครบหรืออยู่นอกช่วง');
+   if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$/.test(w.time||''))throw Error('ไม่พบเวลาข้อมูลอากาศที่ใช้ได้');
+   const age=Date.now()-Date.parse(w.time+'+07:00');if(!Number.isFinite(age)||age>2*3600000||age< -30*60000)throw Error('เวลาข้อมูลอากาศเก่าหรือไม่สอดคล้องกับเวลาปัจจุบัน');
+   const values={windFrom:w.wind_direction_10m,windSpeed:w.wind_speed_10m,windUnit:'m/s',windHeight:'10',temperature:w.temperature_2m,atmosphere:'เมฆ '+w.cloud_cover+'% · ยังไม่ระบุ stability class',weatherTime:w.time.slice(0,16),weatherSource:'Open-Meteo.com · ข้อมูลแบบจำลอง ณ '+c.point.lat.toFixed(5)+','+c.point.lng.toFixed(5)+' (ไม่ใช่สถานีหน้างาน)'};
+   for(const [n,v] of Object.entries(values))assign(n,v,true);
+   weatherStatus.textContent='เติมข้อมูลอากาศแบบจำลองแล้ว · '+w.time.replace('T',' ')+' เวลาไทย · ลมที่ระดับ 10 ม. · ตรวจสอบก่อนใช้ และต้องจำลอง ALOHA ใหม่หากเปลี่ยนอากาศ';
+  }catch(e){if(version===generation&&request===weatherRequest)weatherStatus.textContent='ไม่เติมอากาศ: '+(e.name==='AbortError'?'หมดเวลาหรือยกเลิกการโหลด':e.message)+' · กรอกจากข้อมูลหน้างานได้';}
+  finally{clearTimeout(timer);if(request===weatherRequest)weatherButton.disabled=false;}
+ }
+ function sync(){
+  const c=validContext();if(!c){generation++;loadingKey='';weatherRequest++;weatherController?.abort();weatherButton.disabled=true;refreshButton.disabled=true;draftButton.disabled=true;choose.disabled=true;current.textContent='ค้นหาโรงงานให้รายงานพร้อมก่อนเตรียมข้อมูลอัตโนมัติ';return;}
+  const next=identity(c);weatherButton.disabled=false;refreshButton.disabled=false;draftButton.disabled=false;current.textContent='โรงงาน: '+c.company+' · พิกัด '+c.point.lat.toFixed(6)+', '+c.point.lng.toFixed(6);
+  if(next!==key){generation++;weatherRequest++;weatherController?.abort();clearOwned();catalogChoices=[];choose.disabled=true;inventory.textContent='ปริมาณในทะเบียนเป็นปริมาณจัดเก็บ ไม่ใช่ปริมาณหรืออัตราที่รั่ว';key=next;loadingKey='';}
+  for(const [n,v] of [['sourceLat',c.point.lat],['sourceLng',c.point.lng]]){const input=field(n);if(input.value&&Math.abs(Number(input.value)-v)<1e-7&&!owned.has(n))owned.set(n,input.value);assign(n,Number(v).toFixed(6));}
+  if(loadingKey===next)return;loadingKey=next;const version=generation;chemicals(c,version);weather(false);
+ }
+ weatherButton.onclick=()=>weather(true);refreshButton.onclick=()=>{const c=validContext();if(c)chemicals(c,generation);};
+ draftButton.onclick=()=>{
+  const c=validContext();if(!c){setStatus('ค้นหาโรงงานให้รายงานพร้อมก่อน');return;}
+  const values=metadata();const missing=[...form.querySelectorAll('[required]')].filter(n=>n.type==='checkbox'?!n.checked:!n.value).map(n=>n.name||n.dataset.key||n.id);
+  const payload={schemaVersion:1,kind:'aloha-scenario-input',status:'draft-not-calculated',createdAt:new Date().toISOString(),timezone:'Asia/Bangkok',factory:{company:c.company,point:c.point,estate:c.summary?.estate||'',registrations:registrations(c)},parameters:values,missingFields:[...new Set(missing)],note:'ชุดข้อมูลเตรียมจำลอง ไม่ใช่ผล ALOHA; ต้องตรวจข้อมูลและใช้เครื่องที่ติดตั้ง ALOHA คำนวณก่อน'};
+  const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'})),a=el('a');a.href=url;a.download='ALOHA-scenario-input.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);setStatus('ดาวน์โหลดข้อมูลเตรียมจำลองแล้ว ไฟล์นี้ยังไม่มีผลคำนวณหรือเขตอันตราย');
+ };
+ window.addEventListener('ieat-coverage-context-updated',sync);sync();
+})();
+
 setFieldsFromIncident();refreshReport();
 })();
