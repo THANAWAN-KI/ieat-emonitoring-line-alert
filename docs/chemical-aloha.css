@@ -1,0 +1,38 @@
+#chemicalAloha{box-sizing:border-box;min-width:0;width:100%;padding:20px;margin:18px 0;border:1px solid #b6c5b9;background:#fff;color:#17201d;font:400 15px/1.65 Sarabun,Tahoma,sans-serif}
+#chemicalAloha *{box-sizing:border-box}
+#chemicalAloha header{display:flex;align-items:start;justify-content:space-between;gap:16px;border-bottom:1px solid #dbe3dc;padding-bottom:14px;margin-bottom:14px}
+#chemicalAloha h2{margin:0;font-size:24px;color:#4d6055}
+#chemicalAloha h3{margin:20px 0 8px;font-size:19px;color:#4d6055}
+#chemicalAloha p{margin:8px 0}
+#chemicalAloha #alohaBadge{padding:6px 10px;background:#edf3ed;border:1px solid #c4d3c6;white-space:normal;flex:none;max-width:240px;font-size:13px}
+#chemicalAloha .aloha-note{padding:10px 12px;background:#fff8e7;border-left:3px solid #bb9635;font-size:14px}
+#chemicalAloha details{margin:12px 0;border:1px solid #dbe3dc;padding:0 14px 14px}
+#chemicalAloha summary{cursor:pointer;font-weight:700;font-size:17px;padding:12px 0;color:#4d6055}
+#chemicalAloha fieldset{min-width:0;border:0;border-top:1px solid #dbe3dc;padding:12px 0;margin:8px 0}
+#chemicalAloha legend{padding-right:12px;font-weight:600}
+#chemicalAloha .aloha-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#chemicalAloha label{display:flex;flex-direction:column;gap:5px;min-width:0;font-size:14px}
+#chemicalAloha :is(input,select,textarea){width:100%;min-width:0;min-height:42px;border:1px solid #9cad9f;border-radius:0;padding:8px 10px;background:#fafbf8;color:#17201d;font:inherit}
+#chemicalAloha input[type=file]{padding:7px;font-size:13px;background:#fff}
+#chemicalAloha textarea{resize:vertical}
+#chemicalAloha .aloha-wide{grid-column:span 2}
+#chemicalAloha .aloha-check{display:flex;flex-direction:row;align-items:start;gap:9px;margin:15px 0;font-weight:600}
+#chemicalAloha input[type=checkbox]{width:20px;min-width:20px;min-height:20px;margin:3px 0;accent-color:#24845a}
+#chemicalAloha .aloha-zone-row{display:grid;grid-template-columns:minmax(150px,1.2fr) .7fr 1.3fr .6fr 1fr;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #dbe3dc}
+#chemicalAloha .aloha-zone-row strong{overflow-wrap:anywhere}
+#chemicalAloha .aloha-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+#chemicalAloha button{min-height:44px;padding:9px 15px;background:#edf6f0;border:1px solid #8bab95;border-radius:0;color:#235740;font:600 15px/1.5 Sarabun,Tahoma,sans-serif;cursor:pointer}
+#chemicalAloha button[type=submit]{background:#235740;color:#fff}
+#chemicalAloha button:disabled{opacity:.45;cursor:default}
+#chemicalAloha :is(input,select,textarea,button,a):focus-visible{outline:2px solid #24845a;outline-offset:2px}
+#chemicalAloha .aloha-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
+#chemicalAloha .aloha-counts>div{border:1px solid #dbe3dc;border-left:5px solid;padding:12px;display:grid;gap:5px}
+#chemicalAloha .aloha-table-scroll{max-height:400px;overflow:auto;border:1px solid #dbe3dc}
+#chemicalAloha table{width:100%;border-collapse:collapse;font-size:14px}
+#chemicalAloha :is(th,td){padding:9px 12px;border-bottom:1px solid #dbe3dc;text-align:left;overflow-wrap:anywhere}
+#chemicalAloha th{position:sticky;top:0;background:#edf3ed}
+#chemicalAloha footer{margin-top:18px;font-size:13px;color:#4d6055}
+#chemicalAloha #alohaDownloadLinks{display:flex;flex-wrap:wrap;gap:12px;padding-top:12px}
+#chemicalAloha #alohaStatus{padding:12px;background:#f2f6f2;border:1px solid #dbe3dc;overflow-wrap:anywhere}
+@media(max-width:1100px){#chemicalAloha .aloha-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#chemicalAloha .aloha-zone-row{grid-template-columns:1fr 1fr}#chemicalAloha .aloha-zone-row strong{grid-column:1/-1}}
+@media(max-width:600px){#chemicalAloha{padding:14px}#chemicalAloha header{display:block}#chemicalAloha #alohaBadge{display:inline-block;margin-top:10px}#chemicalAloha .aloha-grid,#chemicalAloha .aloha-zone-row{grid-template-columns:1fr}#chemicalAloha .aloha-wide{grid-column:auto}#chemicalAloha .aloha-actions{display:grid}#chemicalAloha h2{font-size:21px}#chemicalAloha .aloha-counts{gap:5px}#chemicalAloha .aloha-counts>div{padding:7px;font-size:13px}}
