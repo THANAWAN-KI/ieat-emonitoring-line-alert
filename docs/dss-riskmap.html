@@ -288,6 +288,30 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 .fire-risk-view .riskmap-shared-workspace > .riskmap-overview-rail { display: none !important; }
 .fire-risk-view .riskmap-shared-workspace > .riskmap-workspace-body { grid-column: 1; min-width: 0; }
 </style>
+
+<style id="emcc-dashboard-map-bottom-20261116">
+/* Dashboard-first: overview cards and charts span full width; map follows below. */
+html:not(.fire-risk-view) #riskmapOverviewPanel .coverage-map-layout,
+html:not(.fire-risk-view) .coverage-map-layout{display:flex!important;flex-direction:column!important;gap:22px!important;max-width:1600px!important;width:100%!important;align-items:stretch!important}
+html:not(.fire-risk-view) .coverage-map-layout > #riskCoverage,
+html:not(.fire-risk-view) .coverage-map-layout > #coverageMap{width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;grid-column:1/-1!important}
+html:not(.fire-risk-view) .coverage-map-layout > #riskCoverage{order:1!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+html:not(.fire-risk-view) .coverage-map-layout > #coverageMap{order:2!important;position:relative!important;top:auto!important;background:#fff!important;border:1px solid #e9e2ef!important;border-radius:18px!important;padding:20px!important;box-shadow:0 8px 24px rgba(67,28,105,.06)!important}
+html:not(.fire-risk-view) #riskmapEstateContent{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:16px!important;align-items:start!important}
+html:not(.fire-risk-view) #riskmapEstateContent > #coverageEstateHeading,
+html:not(.fire-risk-view) #riskmapEstateContent > #coverageEstateForm{grid-column:1/-1!important}
+html:not(.fire-risk-view) #riskmapEstateContent > #dssBriefCoverage,
+html:not(.fire-risk-view) #riskmapEstateContent > #coverageRiskSection,
+html:not(.fire-risk-view) #riskmapEstateContent > .coverage-support-overview,
+html:not(.fire-risk-view) #riskmapEstateContent > #dssBriefReadiness{grid-column:span 6!important;min-width:0!important;align-self:stretch!important;background:#fff!important;border:1px solid #ebe5f1!important;border-radius:16px!important;padding:18px!important;box-shadow:0 5px 18px rgba(67,28,105,.045)!important}
+html:not(.fire-risk-view) #riskmapEstateContent > :is(#dssBriefWorkflow,#dssBriefReview){display:none!important}
+html:not(.fire-risk-view) #riskmapEstateContent :is(.dss-brief-metrics,#coverageSupportCards){gap:12px!important}
+html:not(.fire-risk-view) #coverageMapView{height:clamp(460px,65vh,760px)!important;width:100%!important;border-radius:12px!important}
+html:not(.fire-risk-view) #riskCoverage h1{color:#431c69!important;font-size:clamp(23px,2.4vw,32px)!important}
+html:not(.fire-risk-view) #riskmapEstateContent h2{color:#431c69!important;font-weight:600!important}
+@media(max-width:1100px){html:not(.fire-risk-view) #riskmapEstateContent > :is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness){grid-column:1/-1!important}}
+@media(max-width:650px){html:not(.fire-risk-view) #riskmapEstateContent{display:block!important}html:not(.fire-risk-view) #riskmapEstateContent > :is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness){margin-bottom:14px!important;padding:12px!important}html:not(.fire-risk-view) .coverage-map-layout > #coverageMap{padding:12px!important}html:not(.fire-risk-view) #coverageMapView{height:430px!important}}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
