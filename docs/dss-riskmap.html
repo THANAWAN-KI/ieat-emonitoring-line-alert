@@ -5,7 +5,7 @@
 <link rel="icon" type="image/svg+xml" sizes="any" href="./assets/riskmap-purple-icon.svg?v=20261116b">
 <style id="emcc-riskmap-simplified">
 /* Retain dashboard/map; remove reporting and accident statistics modules */
-#dssBriefWorkflow,#dssBriefReview,#emergencyReportPage,#coverageIncidentForm,#openEmergencyReport,#dashboardCreateReport,.dss-section-link--report,#riskmapRailSteps a[href="#emergencyReportPage"],#riskmapRailSteps a[href="#dssBriefReview"],a[href="#emergencyReportPage"],a[href="#dssBriefReview"]{display:none!important}
+html:not(.fire-risk-view) :is(#dssBriefWorkflow,#dssBriefReview,#emergencyReportPage,#coverageIncidentForm,#openEmergencyReport,#dashboardCreateReport,.dss-section-link--report,#riskmapRailSteps a[href="#emergencyReportPage"],#riskmapRailSteps a[href="#dssBriefReview"],a[href="#emergencyReportPage"],a[href="#dssBriefReview"]){display:none!important}
 </style>
 
 <meta charset="utf-8">
@@ -3811,7 +3811,7 @@ html:not(.fire-risk-view) #riskmapEstateContent>:is(.coverage-support-overview,#
 @media(max-width:540px){html:not(.fire-risk-view) #riskmapSercFilters{gap:6px}html:not(.fire-risk-view) #coverageMap>.riskmap-risk-levels{grid-template-columns:repeat(3,minmax(0,1fr))!important}html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{height:450px!important;min-height:450px!important}}
 </style>
 <script id="emcc-serc-faithful-layout-js">
-(()=>{const build=()=>{const overview=document.getElementById('riskCoverage'),estate=document.getElementById('riskmapEstateContent'),map=document.getElementById('coverageMap');if(!overview||!estate||!map||document.getElementById('riskmapSercFilters'))return;
+(()=>{if(document.documentElement.classList.contains('fire-risk-view'))return;const build=()=>{const overview=document.getElementById('riskCoverage'),estate=document.getElementById('riskmapEstateContent'),map=document.getElementById('coverageMap');if(!overview||!estate||!map||document.getElementById('riskmapSercFilters'))return;
 const filters=document.createElement('nav');filters.id='riskmapSercFilters';filters.setAttribute('aria-label','หมวดข้อมูล Risk Map');for(const [label,detail,href] of [['ประเภทความเสี่ยง','ภาพรวมทุกประเภท','#coverageRiskHeading'],['ข้อมูลโรงงาน DSS','สถานะข้อมูลโรงงาน','#dssBriefCoverage'],['ข้อมูลสนับสนุน','การรับมือเหตุฉุกเฉิน','#coverageSupportTitle'],['ความพร้อมทรัพยากร','ทรัพยากรตามแผน','#dssBriefReadiness']]){const a=document.createElement('a');a.href=href;const strong=document.createElement('strong');strong.textContent=label;const span=document.createElement('span');span.textContent=detail;a.append(strong,span);filters.append(a)}const heading=overview.querySelector('.riskmap-overview-heading');heading?.after(filters);
 /* The live ArcGIS container remains untouched; only its enclosing section moves above detailed cards. */
 if(map.parentElement!==overview)overview.insertBefore(map,estate);
@@ -3819,4 +3819,3 @@ const levels=map.querySelector('.riskmap-risk-levels');if(levels)levels.setAttri
 };if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build()})();
 </script>
 </body></html>
-
