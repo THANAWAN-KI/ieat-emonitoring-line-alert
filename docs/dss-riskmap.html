@@ -4477,7 +4477,7 @@ html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-das
 </style><style id="riskmap-focused-layout">html.map-only-page body{background:#fff!important}
 html.map-only-page body #riskmapOverviewPanel .coverage-map-layout{display:block!important;max-width:1800px!important;padding:0 18px!important;box-sizing:border-box}
 html.map-only-page body #riskmapOverviewPanel #riskCoverage{background:#fff!important;padding:0!important;border:0!important;margin:0!important;display:block!important}
-html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>:not(.riskmap-overview-heading):not(#riskMapOnlyFilters):not(#coverageMap){display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>:not(.riskmap-overview-heading):not(#riskMapOnlyFilters):not(#coverageMap):not(#riskMapWithSummary){display:none!important}
 html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>.riskmap-overview-heading{background:#fff!important;border:0!important;border-bottom:1px solid #e0e6e9!important;box-shadow:none!important;padding:20px 0 15px!important;margin:0 0 15px!important}
 html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>.riskmap-overview-heading:after{display:none!important}
 html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only .riskmap-overview-heading h1{font-size:clamp(23px,2vw,31px)!important;color:#1f3743!important;font-weight:600!important;line-height:1.5!important}
@@ -4532,6 +4532,43 @@ function init(){requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnima
  const title=$('coverageMapTitle');if(title)title.textContent='ประเทศไทย';
  apply();requestAnimationFrame(()=>{window.dispatchEvent(new Event('resize'));window.dispatchEvent(new Event('ieat-map-layout-ready'));});
 })));}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script><style id="riskmap-summary-card-layout">html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only .riskmap-overview-lead{display:none!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>.riskmap-overview-heading{padding-bottom:14px!important;margin-bottom:15px!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>#riskMapWithSummary{display:grid!important;grid-template-columns:235px minmax(0,1fr)!important;align-items:start!important;gap:20px!important;width:100%!important}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard{background:#fff;border:1px solid #dce4e5;border-top:4px solid #195b57;padding:19px 17px;min-width:0;box-sizing:border-box;border-radius:0;color:#233b3f}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard h2{font:500 15px/1.6 Sarabun,sans-serif;color:#3f8d85;margin:0 0 8px}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardScope{font-size:13px;color:#526d72;line-height:1.7;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid #e4eaea}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardNumber{display:block;font:650 49px/1.15 Sarabun,sans-serif;letter-spacing:-.03em;color:#152f33;margin:0 0 8px;font-variant-numeric:tabular-nums}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardLabel{font-size:15px;font-weight:500;color:#294449;line-height:1.65;margin:0 0 10px}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard .risk-map-card-note{font-size:12px;color:#70878b;line-height:1.85;margin:0 0 10px}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardState{font-size:12px;color:#6f8989;padding-bottom:14px;border-bottom:1px solid #e5ebeb;margin:0 0 16px;line-height:1.7}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard .risk-map-card-hint{padding:12px;background:#f3f7f5;border:1px solid #e0e9e4;margin:0 0 18px}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard .risk-map-card-hint strong{font-size:12px;font-weight:500;color:#3c756e}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard .risk-map-card-hint p{font-size:12px;color:#718782;line-height:1.8;margin:6px 0 0}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard small{font-size:11px;color:#879996;line-height:1.8;display:block}
+html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapWithSummary>#coverageMap{min-width:0!important;width:100%!important}
+@media(max-width:950px){html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>#riskMapWithSummary{grid-template-columns:190px minmax(0,1fr)!important;gap:12px!important}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard{padding:14px 12px}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardNumber{font-size:40px}}
+@media(max-width:650px){html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only>#riskMapWithSummary{grid-template-columns:minmax(0,1fr)!important}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 14px}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard h2{grid-column:1/-1}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardScope{grid-column:1/-1;margin:0 0 6px;padding:0 0 6px}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardNumber{grid-column:1;grid-row:3/5}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardLabel{grid-column:2;margin:0;font-size:13px}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapCardState{grid-column:2;border:0;padding:0;margin:0}html.map-only-page body #riskmapOverviewPanel #riskCoverage.map-only #riskMapSummaryCard :is(.risk-map-card-note,.risk-map-card-hint,small){display:none}}
+</style><script id="riskmap-summary-card-js">(()=>{
+if(new URLSearchParams(location.search).get('hazard')==='fire')return;
+const $=id=>document.getElementById(id),el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n};
+function init(){requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+ const map=$('coverageMap'),root=$('riskCoverage');if(!root?.classList.contains('map-only')||!map||$('riskMapWithSummary'))return;
+ const lead=root.querySelector('.riskmap-overview-lead');if(lead)lead.hidden=true;
+ const layout=el('div');layout.id='riskMapWithSummary';const card=el('aside');card.id='riskMapSummaryCard';card.setAttribute('aria-label','สรุปโรงงานที่เข้าข่ายความเสี่ยง');
+ const title=el('h2','ภาพรวมความเสี่ยง'),scope=el('p','ทั่วประเทศ'),number=el('strong','—'),label=el('p','โรงงานที่เข้าข่ายความเสี่ยง'),note=el('p','นับโรงงานไม่ซ้ำจากทะเบียน e-PP ไม่ใช่จำนวนเหตุการณ์'),state=el('p','กำลังโหลดทะเบียนโรงงาน…'),hint=el('div');
+ scope.id='riskMapCardScope';number.id='riskMapCardNumber';number.setAttribute('aria-live','polite');label.id='riskMapCardLabel';note.className='risk-map-card-note';state.id='riskMapCardState';hint.className='risk-map-card-hint';hint.append(el('strong','สำรวจข้อมูลบนแผนที่'),el('p','คลิกพื้นที่หรือจุดข้อมูล เพื่อดูรายละเอียดของนิคมฯ โรงงาน และจุดสนับสนุน'));
+ card.append(title,scope,number,label,note,state,hint,el('small','แหล่งข้อมูล: ทะเบียนโรงงาน e-PP กนอ.'));map.before(layout);layout.append(card,map);
+ function update(){const selected=$('coverageEstate'),group=$('riskMapOnlyGroup')?.value||'all',register=window.ieatFactoryRegister;scope.textContent=selected?.value?selected.selectedOptions[0]?.textContent:'ทั่วประเทศ';
+ const fields={twelve:'ความเสี่ยง_12_ประเภท',psm:'PSM',fire:'อัคคีภัยสูง'},labels={all:'โรงงานที่เข้าข่ายความเสี่ยงอย่างน้อยหนึ่งกลุ่ม',twelve:'โรงงานความเสี่ยงสูง 12 ประเภท',psm:'โรงงาน PSM',fire:'โรงงานที่เข้าข่ายอัคคีภัยสูง'};label.textContent=labels[group]||labels.all;
+ const available=register&&['ready','partial'].includes(register.status);if(!available){number.textContent='—';state.textContent=register?.status==='error'?'เชื่อมต่อทะเบียนโรงงานไม่ได้':'กำลังโหลดทะเบียนโรงงาน…';return;}
+ const fieldsToCheck=fields[group]?[fields[group]]:Object.values(fields);const identities=new Set(register.rows.filter(row=>fieldsToCheck.some(key=>String(row.attrs?.[key]||'').trim()==='เข้าข่าย')).map(row=>String(row.registration&&row.registration!=='—'?row.registration:row.id).replace(/\s/g,'')));
+ number.textContent=identities.size.toLocaleString('th-TH');state.textContent=register.status==='partial'?'ข้อมูลบางส่วน · จำนวนอาจเปลี่ยนเมื่อโหลดครบ':'แห่ง · ข้อมูลตามทะเบียน';
+ }
+ window.addEventListener('ieat-factory-register-updated',update);window.addEventListener('ieat-map-group-filter',update);$('coverageEstate')?.addEventListener('change',()=>requestAnimationFrame(update));update();requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
+}))));}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script></body></html>
