@@ -580,6 +580,52 @@ const form=document.getElementById('coverageEstateForm');if(form){const filters=
 const firstSection=estate.querySelector('.coverage-support-overview');if(firstSection){estate.insertBefore(map,firstSection)}else{estate.prepend(map)}
 };if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup()})();
 </script>
+
+<style id="emcc-risk-overview-rebuild-20261116">
+/* SERC-inspired overview: filters and risk key, dominant live GIS map, compact side summaries. */
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading{background:#fff!important;border:0!important;box-shadow:none!important;padding:8px 0 14px!important;margin:0!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading h1{font-size:clamp(23px,2.4vw,34px)!important;color:#342146!important;font-weight:600!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading :is(.riskmap-overview-eyebrow,.riskmap-overview-lead){color:#786a85!important}
+html:not(.fire-risk-view) #riskmapAnalysisStrip,html:not(.fire-risk-view) #riskmapRiskGeoFilters,html:not(.fire-risk-view) .riskmap-risk-legend{display:none!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #riskCoverage{order:0!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #coverageMap{order:1!important;margin:0!important;border:0!important;box-shadow:none!important;padding:0!important;background:#fff!important;overflow:visible!important}
+html:not(.fire-risk-view) #riskmapEstateContent{display:block!important;margin:0!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm{margin:0 0 12px!important;border:0!important;box-shadow:none!important;background:#faf9fc!important;border-radius:9px!important;padding:12px!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm:before{content:'พื้นที่วิเคราะห์'!important}
+html:not(.fire-risk-view) #riskmapEstateContent>.coverage-support-overview,html:not(.fire-risk-view) #riskmapEstateContent>#dssBriefCoverage,html:not(.fire-risk-view) #riskmapEstateContent>#coverageRiskSection,html:not(.fire-risk-view) #riskmapEstateContent>#dssBriefReadiness{margin:16px 0!important;border:1px solid #ece8f0!important;border-radius:12px!important;box-shadow:none!important;padding:20px!important}
+html:not(.fire-risk-view) #coverageMap>.riskmap-map-eyebrow,html:not(.fire-risk-view) #coverageMap>.riskmap-map-description{display:none!important}
+html:not(.fire-risk-view) #coverageMapTitle{font-size:17px!important;margin:0 0 8px!important;color:#431c69!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace{display:grid!important;grid-template-columns:minmax(185px,230px) minmax(0,1fr) minmax(205px,270px)!important;gap:0!important;align-items:stretch!important;border:1px solid #ece7f0!important;border-radius:10px!important;overflow:hidden!important;min-height:640px!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{grid-column:2!important;grid-row:1!important;height:clamp(630px,79vh,950px)!important;min-height:630px!important;border-radius:0!important;border-inline:1px solid #eae6ee!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-geo-insights{grid-column:3!important;grid-row:1!important;max-height:clamp(630px,79vh,950px)!important;overflow:auto!important;background:#fff!important;border:0!important;border-radius:0!important;padding:18px!important;display:block!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-overview-left{grid-column:1!important;grid-row:1!important;max-height:clamp(630px,79vh,950px)!important;overflow:auto;background:#fff;padding:17px 13px}
+html:not(.fire-risk-view) .riskmap-overview-left h3{font-size:14px;color:#431c69;margin:0 0 12px}
+html:not(.fire-risk-view) .riskmap-overview-left .riskmap-sidebar-link{display:block;text-decoration:none;color:#493853;background:#f8f5fb;border:1px solid #eee8f4;border-radius:9px;padding:11px;margin-bottom:9px;font-size:12px}
+html:not(.fire-risk-view) .riskmap-overview-left .riskmap-sidebar-link:hover{background:#eee6f6}
+html:not(.fire-risk-view) .riskmap-risk-levels{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin:10px 0 14px}
+html:not(.fire-risk-view) .riskmap-risk-levels .level{padding:14px 5px;text-align:center;font-size:12px;font-weight:600;border-radius:3px;color:#fff;min-width:0}
+html:not(.fire-risk-view) .riskmap-risk-levels .level:nth-child(1){background:#bd1942}
+html:not(.fire-risk-view) .riskmap-risk-levels .level:nth-child(2){background:#eb8b1b}
+html:not(.fire-risk-view) .riskmap-risk-levels .level:nth-child(3){background:#f0cc3d;color:#3d3420}
+html:not(.fire-risk-view) .riskmap-risk-levels .level:nth-child(4){background:#80c782;color:#173e26}
+html:not(.fire-risk-view) .riskmap-risk-levels .level:nth-child(5){background:#4b9854}
+html:not(.fire-risk-view) .riskmap-risk-levels .level:nth-child(6){background:#76b1b2;color:#153e40}
+html:not(.fire-risk-view) .riskmap-risk-explain{color:#766c80;font-size:11px;margin:0 0 12px;line-height:1.6}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-geo-insights .riskmap-geo-status{background:#f7f3fb!important;color:#4b3960!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-geo-insights a{border:0!important;border-bottom:1px solid #f0eaf4!important;border-radius:0!important;box-shadow:none!important}
+@media(max-width:1200px){html:not(.fire-risk-view) #riskmapRiskMapWorkspace{grid-template-columns:180px minmax(0,1fr)!important}html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{grid-column:2!important}html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-geo-insights{grid-column:1/-1!important;grid-row:2!important;max-height:none!important;display:block!important}}
+@media(max-width:750px){html:not(.fire-risk-view) #riskmapRiskMapWorkspace{display:flex!important;flex-direction:column!important;min-height:0!important}html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-overview-left{max-height:none!important}html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{height:490px!important;min-height:490px!important;border:0!important}html:not(.fire-risk-view) .riskmap-risk-levels{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+<script id="emcc-risk-overview-rebuild-js">
+(()=>{const boot=()=>{const map=document.getElementById('coverageMap');const view=document.getElementById('coverageMapView');const estate=document.getElementById('riskmapEstateContent');const workspace=document.getElementById('riskmapRiskMapWorkspace');if(!map||!view||!estate||!workspace||document.getElementById('emccRiskOverviewLeft'))return;
+/* Place the original map first in the overview, retaining its ArcGIS view, data and controls. */
+const form=document.getElementById('coverageEstateForm');if(form&&map.parentElement!==estate){form.after(map)}else if(form&&map.previousElementSibling!==form){form.after(map)}
+const levels=document.createElement('div');levels.className='riskmap-risk-levels';levels.setAttribute('aria-label','ระดับความเสี่ยงที่ใช้เป็นคำอธิบายสี');for(const title of ['สูงมาก','สูง','ปานกลาง','ต่ำ','ต่ำมาก','ไม่มีข้อมูล']){const tile=document.createElement('div');tile.className='level';tile.textContent=title;levels.append(tile)}map.insertBefore(levels,workspace);
+const note=document.createElement('p');note.className='riskmap-risk-explain';note.textContent='สีแสดงเกณฑ์สำหรับการอ่านแผนที่เท่านั้น พื้นที่จะระบายสีตามระดับความเสี่ยงเมื่อมีข้อมูลคะแนนและขอบเขต GIS ที่ตรวจสอบแล้ว';levels.after(note);
+const left=document.createElement('aside');left.id='emccRiskOverviewLeft';left.className='riskmap-overview-left';const title=document.createElement('h3');title.textContent='ข้อมูลภาพรวม Risk Map';left.append(title);for(const [label,target] of [['ข้อมูลสนับสนุนเหตุฉุกเฉิน','coverageSupportTitle'],['สถานะข้อมูลโรงงาน DSS','dssBriefCoverage'],['โรงงานที่เข้าข่ายความเสี่ยง','coverageRiskHeading'],['ความพร้อมของทรัพยากร','dssBriefReadiness']]){const a=document.createElement('a');a.className='riskmap-sidebar-link';a.href='#'+target;a.textContent=label;left.append(a)}const p=document.createElement('p');p.className='riskmap-risk-explain';p.textContent='เลือกนิคมฯ จากช่องค้นหาด้านบน หรือคลิกตำแหน่งบนแผนที่เพื่อดูรายละเอียดจากชั้นข้อมูลจริง';left.append(p);workspace.insertBefore(left,view);
+const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=right.querySelector('h3');if(h)h.textContent='รายละเอียดพื้นที่และข้อมูลสนับสนุน'}
+};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot()})();
+</script>
 </head>
 <body>
 <div class="emcc-gis-header">
