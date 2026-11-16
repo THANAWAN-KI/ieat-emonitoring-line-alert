@@ -914,7 +914,6 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
   </section>
 </section>
 <section id="coverageMap" aria-labelledby="coverageMapTitle">
-  <div id="emccHazardRiskLegend" class="emcc-hazard-legend" aria-label="ระดับความเสี่ยงสำหรับการแสดงผลเชิงพื้นที่"><span class="emcc-hazard-label">ระดับความเสี่ยงบนแผนที่ <small>แนวทางการแสดงผล · ไม่ใช่ผลประเมินจริง</small></span><div class="emcc-hazard-scale"><span>สูงมาก</span><span>สูง</span><span>ปานกลาง</span><span>ต่ำ</span><span>ต่ำมาก</span></div></div>
   <div class="riskmap-map-eyebrow">GEOSPATIAL OVERVIEW</div><h2 id="coverageMapTitle">แผนที่ภาพรวมความเสี่ยงและจุดสนับสนุน</h2><p class="riskmap-map-description">สำรวจตำแหน่งนิคมอุตสาหกรรมและข้อมูลเชิงพื้นที่ประกอบการประเมินความเสี่ยง เลือกพื้นที่หรือเปลี่ยนแผนที่พื้นฐานเพื่อดูรายละเอียด</p>
   <div class="coverage-basemap-control"><label for="coverageBasemap">แผนที่พื้นฐาน</label>
     <select id="coverageBasemap" disabled aria-label="เลือกแผนที่พื้นฐาน">
@@ -3464,7 +3463,10 @@ function update(){
  const d=snapshot.dssRow,entries=snapshot.resourceCategories;
  const statuses=[['อนุมัติ',d?.approved],['อยู่ระหว่างตรวจสอบ',d?.review],['ขอข้อมูลเพิ่มเติม',d?.more],['อยู่ระหว่างจัดทำ',d?.draft],['ยังไม่มีชุดข้อมูล',d?.none]];
  $('overviewDssPlots').replaceChildren(chart('สัดส่วนสถานะข้อมูล DSS',statuses,'โรงงาน','donut'),chart('ความครอบคลุมของชุดข้อมูล DSS',[['มีชุดข้อมูล',snapshot.imported],['ยังไม่มีชุดข้อมูล',d?.none]],'โรงงาน'));
- $('overviewResourcePlot').replaceChildren(chart('รายการทรัพยากรตามแผน แยกตามหมวด',entries,'รายการ'));
+ const resourceCards=el('div',null,'overview-resource-cards');
+ for(const [label,value]of entries){const card=el('article',null,'overview-resource-card');card.append(el('h4',label),el('strong',fmt(value)),el('small','รายการตามแผน · ยังต้องยืนยันความพร้อม'));resourceCards.append(card);}
+ const resourceTitle=el('h3','รายการทรัพยากรตามแผน แยกตามหมวด');
+ $('overviewResourcePlot').replaceChildren(resourceTitle,entries.length?resourceCards:el('p',snapshot.plansLoaded?'ไม่พบรายการทรัพยากรในขอบเขตที่เลือก':'ยังโหลดข้อมูลทรัพยากรไม่ได้','overview-empty'));
  const updated=$('dssCoverageUpdated')?.textContent||'รอข้อมูลวันที่';$('overviewSources').textContent='DSS: 1 ม.ค.–30 ก.ย. 2569 · '+updated+' | ทรัพยากร: '+snapshot.planSource+' · '+(snapshot.planYear||'ไม่ระบุปี')+' · ไม่พบวันตรวจความพร้อมปัจจุบันในชุดข้อมูล | GIS: ดูแหล่งข้อมูลในรายละเอียดชั้นแผนที่';
  const follow=[['ยังไม่มีชุดข้อมูล DSS',d?.none,'ราย','dssBriefCoverage','ยอดรวมจากรายงาน DSS ยังไม่มีรายชื่อแยกสถานะให้ตรวจรายโรงงาน'],['ข้อมูลอยู่ระหว่างตรวจสอบ',d?.review,'ราย','dssBriefCoverage','เป็นสถานะเอกสาร ไม่ใช่ระดับความเสี่ยง'],['ข้อมูลอยู่ระหว่างจัดทำ',d?.draft,'ราย','dssBriefCoverage','ติดตามการจัดทำชุดข้อมูลตามรอบรายงาน'],['ต้องส่งข้อมูลเพิ่มเติม',d?.more,'ราย','dssBriefCoverage','ประสานผู้ดูแลข้อมูล DSS'],['รายการทรัพยากรที่ต้องยืนยันความพร้อม',snapshot.resourceCount,'รายการ','dssBriefReadiness','ตรวจจำนวนพร้อมใช้ ผู้ดูแล วันตรวจ และช่องทางติดต่อ']];
  $('overviewFollowupItems').replaceChildren(...follow.map(([name,n,unit,id,note])=>{const a=el('a',null,'overview-followup-item');a.href='#'+id;a.append(el('strong',name+' · '+fmt(n)+' '+unit),el('small',note));return a}));
@@ -3482,6 +3484,8 @@ function boot(){
  const note=el('p','สถานะ DSS บอกขั้นตอนและความครบถ้วนของข้อมูล ไม่ใช่ผลประเมินความเสี่ยงหรือความปลอดภัยของโรงงาน','overview-data-note');$('overviewDssPlots').before(note);
  const riskNote=el('details',null,'overview-risk-definitions');riskNote.append(el('summary','อ่านความหมายของกลุ่มความเสี่ยง'));riskNote.append(el('p','12 ประเภท: โรงงานที่ถูกระบุในกลุ่มความเสี่ยงสูง 12 ประเภทในทะเบียน กนอ. · PSM: โรงงานที่มีธงกลุ่มการจัดการความปลอดภัยกระบวนการผลิตในทะเบียน · อัคคีภัยสูง: โรงงานที่ถูกระบุธงอัคคีภัยสูงในทะเบียนต้นทาง'));riskNote.append(el('p','โรงงานหนึ่งแห่งอาจอยู่หลายกลุ่ม จึงห้ามบวกจำนวนแต่ละกลุ่มเป็นยอดรวม กลุ่มเหล่านี้ไม่ใช่ระดับสีความเสี่ยง 5 ระดับ และไม่ใช่ผลประเมินเหตุปัจจุบัน'));$('overviewRiskPlot').before(riskNote);
  const planNote=el('p','แหล่งข้อมูล: บัญชีทรัพยากรตามเอกสารแผนรับมือเหตุ รายการที่มีข้อมูลไม่เท่ากับอุปกรณ์ที่พร้อมใช้ ไม่รวมจำนวนอุปกรณ์ต่างหน่วยเข้าด้วยกัน','overview-data-note');$('overviewResourcePlot').before(planNote);
+ const riskPair=el('div',null,'overview-pair');riskPair.id='overviewRiskPair';$('overviewRiskPlot').before(riskPair);riskPair.append($('overviewRiskPlot'),$('coverageDetail'));
+ const supportPair=el('div',null,'overview-pair');supportPair.id='overviewSupportPair';$('overviewSupportPlot').before(supportPair);supportPair.append($('overviewSupportPlot'),$('coverageSupportCards'));
  let queued=false;const schedule=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;update()})};
  for(const id of ['dssCoverageTotals','dssResourceSummary','coverageRisk','coverageDetail']){if($(id))new MutationObserver(schedule).observe($(id),{childList:true,subtree:true,characterData:true});}
  // Observe only support cards, excluding the generated chart to avoid render loops.
@@ -4094,4 +4098,25 @@ html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapRiskM
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapRiskMapWorkspace #riskmapSercFilters{grid-column:1!important;grid-row:2!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 </style>
-</body></html>
+<style id="overview-paired-layout">html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewDssPlots{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;align-items:start!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#overviewRiskPair,#overviewSupportPair){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;align-items:start!important;margin:14px 0!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#overviewRiskPair,#overviewSupportPair)>*{min-width:0!important;margin:0!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewRiskPair #coverageDetail{display:block!important;padding:16px!important;border:1px solid #dce3de!important;background:#fff!important;box-sizing:border-box!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewRiskPair #coverageDetail h3{margin-top:0!important;font-size:18px!important;line-height:1.5!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewRiskPair .dss-risk-table-wrap{max-height:430px!important;overflow:auto!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewSupportPair #coverageSupportCards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;align-content:start!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewSupportPair #coverageSupportCards article{display:flex!important;flex-direction:column!important;align-items:start!important;gap:6px!important;background:#f6faf7!important;border:1px solid #cbdccd!important;border-radius:0!important;padding:16px!important;min-width:0!important;box-shadow:none!important;color:#203b2a!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewSupportPair #coverageSupportCards h3{font-size:15px!important;line-height:1.5!important;margin:0!important;color:#203b2a!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewSupportPair #coverageSupportCards strong{font-size:30px!important;line-height:1.3!important;color:#23764a!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewResourcePlot{display:block!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .overview-resource-cards{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important;gap:14px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .overview-resource-card{display:flex;flex-direction:column;gap:8px;background:#f8faf5;border:1px solid #cddcc7;border-top:3px solid #71966a;padding:18px;border-radius:0!important;min-width:0}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .overview-resource-card h4{font-size:16px;line-height:1.5;margin:0;color:#29422b}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .overview-resource-card strong{font-size:32px;color:#286e43;font-variant-numeric:tabular-nums}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .overview-resource-card small{font-size:12px;line-height:1.6;color:#586651}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewDssPlots .overview-chart{height:100%;box-sizing:border-box}
+@media(max-width:1050px){
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#overviewDssPlots,#overviewRiskPair,#overviewSupportPair){grid-template-columns:minmax(0,1fr)!important}
+}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewSupportPair #coverageSupportCards strong:after{content:' จุด';font-size:13px;font-weight:400}
+</style></body></html>
