@@ -583,7 +583,7 @@
       ]}]}
     }))).catch(error=>console.warn('Monitoring stations',error));
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
-    if(!fireView){window.ieatCoverageOverviewMap={view,map};window.dispatchEvent(new Event('ieat-coverage-map-created'));}
+    window.ieatCoverageOverviewMap={view,map};window.dispatchEvent(new Event('ieat-coverage-map-created'));
     const factorySelection=new GraphicsLayer({title:'โรงงานที่เลือกจากทะเบียน',listMode:'hide'});
     map.add(factorySelection);
     let factorySelectionSequence=0;
@@ -821,6 +821,35 @@
       const failures=results.flatMap((r,i)=>r.status==='rejected'?[layers[i].title]:[]);
       if(failures.length)status.textContent='โหลดบางชั้นไม่ได้ · '+failures.join(' · ');
     });
+    // Filter the visible coverage map with the same records used by the cards.
+    const supportBaseFilters=new Map(support.map(item=>[item,item.definitionExpression||'']));
+    let coverageFilterRevision=0;
+    const updateCoverageFilters=async()=>{
+      const revision=++coverageFilterRevision;
+      const estate=$('coverageEstate').value;
+      await Promise.allSettled(support.map(async(item,index)=>{
+        const def=supportDefinitions[index];
+        await item.load();
+        if(revision!==coverageFilterRevision)return;
+        const ids=def.rows.filter(row=>!estate||normalize(row.estate)===estate).map(row=>Number(row.id)).filter(Number.isFinite);
+        const original=supportBaseFilters.get(item);
+        const filter=estate?item.objectIdField+' IN ('+(ids.length?ids.join(','):'-1')+')':'';
+        item.definitionExpression=[original,filter].filter(Boolean).map(clause=>'('+clause+')').join(' AND ')||null;
+      }));
+    };
+    window.addEventListener('ieat-coverage-data-filtered',updateCoverageFilters);
+    window.addEventListener('ieat-coverage-support-select',async event=>{
+      const index=supportDefinitions.findIndex(def=>def.id===event.detail.id);
+      if(index<0)return;
+      const item=support[index];
+      try{
+        await view.when();await updateCoverageFilters();
+        item.visible=true;
+        const result=await item.queryExtent();
+        if(result.extent)await view.goTo(result.extent.expand(1.3));
+        status.textContent=item.title+' · แสดงตามนิคมฯ ที่เลือก';
+      }catch(error){if(error.name!=='AbortError')status.textContent='เปิดตำแหน่งข้อมูลสนับสนุนไม่ได้ กรุณาลองอีกครั้ง';}
+    });
     let request=0;
     $('coverageEstate').addEventListener('change',async event=>{
       const sequence=++request,select=event.currentTarget;
@@ -903,10 +932,14 @@
     select.value=estates.has(selectedKey)?selectedKey:'';
     renderEstateMatches();
     const key=select.value;
+    window.dispatchEvent(new Event('ieat-coverage-data-filtered'));
     const match=r=>!key||normalize(r.estate)===key;
     const rowsByLayer=supportLayers.map(layer=>({layer,rows:layer.rows.filter(match)}));
     $('coverageSupportCards').replaceChildren(...rowsByLayer.map(({layer,rows})=>{
-      const card=el('article',null,'coverage-support-card');
+      const card=el('button',null,'coverage-support-card');
+      card.type='button';
+      card.setAttribute('aria-label',layer.label+' ดูตำแหน่งบนแผนที่');
+      card.onclick=()=>window.dispatchEvent(new CustomEvent('ieat-coverage-support-select',{detail:{id:layer.id}}));
       const visibleCount=layer.status==='ready'||layer.status==='partial';
       card.append(el('h3',layer.label),el('strong',visibleCount?number(rows.length):'—'));
       if(stateLabel[layer.status])card.append(el('small',stateLabel[layer.status]));
@@ -1334,3 +1367,4 @@ $('searchButton').onclick=()=>{clearTimeout(searchTimer);changed();zoomMatches(t
  }
  fallbackMap();
 })();
+
