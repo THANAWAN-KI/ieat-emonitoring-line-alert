@@ -342,6 +342,64 @@ html:not(.fire-risk-view) #riskmapEstateContent :is(#dssBriefCoverage,#coverageR
 @media(max-width:1100px){html:not(.fire-risk-view) .riskmap-overview-quicklinks{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){html:not(.fire-risk-view) .riskmap-overview-quicklinks{grid-template-columns:1fr 1fr;gap:7px}html:not(.fire-risk-view) .riskmap-overview-quicklinks a{padding:9px;gap:7px;align-items:flex-start}html:not(.fire-risk-view) .riskmap-overview-quicklinks .quick-icon{flex-basis:27px;height:27px;font-size:17px}html:not(.fire-risk-view) .riskmap-overview-quicklinks strong{font-size:11px}html:not(.fire-risk-view) .riskmap-overview-quicklinks small{font-size:10px}html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading{padding:17px!important}}
 </style>
+
+<style id="riskmap-analytics-dashboard-v2">
+/* Analytical dashboard: compact KPI strip, chart panels, full-width geographic drilldown. */
+html:not(.fire-risk-view) .riskmap-shared-workspace{display:block!important;max-width:1580px!important;padding:0 clamp(12px,2vw,28px)!important;box-sizing:border-box!important}
+html:not(.fire-risk-view) .riskmap-shared-workspace>.riskmap-overview-rail{display:none!important}
+html:not(.fire-risk-view) .riskmap-workspace-body{width:100%!important;max-width:none!important;display:block!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel{width:100%!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel .coverage-map-layout{width:100%!important;max-width:none!important;display:flex!important;flex-direction:column!important}
+html:not(.fire-risk-view) #riskmapEstateContent{grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:16px!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#dssBriefCoverage{grid-column:1/span 7!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageRiskSection{grid-column:8/span 5!important}
+html:not(.fire-risk-view) #riskmapEstateContent>.coverage-support-overview{grid-column:1/span 6!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#dssBriefReadiness{grid-column:7/span 6!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading{margin-bottom:16px!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateHeading{display:none!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm{grid-column:1/-1!important;display:flex!important;align-items:center!important;gap:10px!important;position:relative!important;margin:0!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm:before{content:"เลือกพื้นที่วิเคราะห์";font-size:14px;font-weight:600;color:#431c69;white-space:nowrap}
+html:not(.fire-risk-view) #coverageEstateForm label{flex:1 1 250px;min-width:0}
+html:not(.fire-risk-view) #coverageEstateForm input{width:100%;border:1px solid #e5dced!important;border-radius:9px!important;background:#fcfaff!important;min-height:40px}
+html:not(.fire-risk-view) #coverageEstateForm button{background:#542577!important;border-radius:9px!important;min-height:40px!important;padding:0 20px!important}
+html:not(.fire-risk-view) .riskmap-kpi-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px}
+html:not(.fire-risk-view) .riskmap-kpi{display:flex;align-items:center;gap:12px;text-decoration:none!important;color:#342b3d!important;padding:16px 17px;background:#fff;border:1px solid #eae3f0;border-radius:15px;box-shadow:0 3px 16px #431c6909;min-width:0;transition:transform .15s,box-shadow .15s}
+html:not(.fire-risk-view) .riskmap-kpi:hover{transform:translateY(-2px);box-shadow:0 8px 20px #431c6915}
+html:not(.fire-risk-view) .riskmap-kpi-icon{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border-radius:12px;background:#f1e9f8;color:#542577;font-size:21px}
+html:not(.fire-risk-view) .riskmap-kpi-title{font-size:12px;color:#756b7d;display:block;line-height:1.35}
+html:not(.fire-risk-view) .riskmap-kpi-value{font-size:clamp(16px,1.8vw,25px);font-weight:700;line-height:1.4;color:#431c69;display:block;overflow-wrap:anywhere}
+html:not(.fire-risk-view) .riskmap-kpi-note{font-size:11px;color:#82798b;display:block;line-height:1.35}
+html:not(.fire-risk-view) #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness){background:#fff!important;border-radius:18px!important;box-shadow:0 6px 22px #431c690a!important;min-width:0!important;overflow:hidden!important}
+html:not(.fire-risk-view) #riskmapEstateContent :is(#dssCoverageTotals,#dssBriefDssCards,#dssResourceSummary){display:grid!important;grid-template-columns:repeat(auto-fit,minmax(110px,1fr))!important;gap:10px!important}
+html:not(.fire-risk-view) #riskmapEstateContent :is(#dssCoverageTotals,#dssBriefDssCards,#dssResourceSummary)>*{background:#faf7fd!important;border:1px solid #eee7f4!important;padding:10px!important;border-radius:11px!important;min-width:0!important}
+html:not(.fire-risk-view) #riskmapEstateContent .dss-risk-table-wrap{border:1px solid #efeaf3!important;border-radius:12px!important;overflow:auto!important}
+html:not(.fire-risk-view) #riskmapEstateContent table thead{background:#f4eff8!important}
+html:not(.fire-risk-view) #riskmapEstateContent table th{color:#542577!important;font-weight:600!important}
+html:not(.fire-risk-view) #coverageMap{width:100%!important;margin-top:2px!important;padding:clamp(14px,2vw,24px)!important}
+html:not(.fire-risk-view) #coverageMapView{height:clamp(520px,72vh,850px)!important}
+html:not(.fire-risk-view) .riskmap-map-description{max-width:850px}
+@media(max-width:1150px){html:not(.fire-risk-view) #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness){grid-column:1/-1!important}html:not(.fire-risk-view) .riskmap-kpi-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){html:not(.fire-risk-view) .riskmap-kpi-strip{gap:8px}html:not(.fire-risk-view) .riskmap-kpi{padding:11px;gap:7px}html:not(.fire-risk-view) .riskmap-kpi-icon{flex-basis:30px;width:30px;height:30px;font-size:16px}html:not(.fire-risk-view) .riskmap-kpi-value{font-size:16px}html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm:before{width:100%}html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm{flex-wrap:wrap!important}html:not(.fire-risk-view) #coverageMapView{height:440px!important}}
+</style>
+<script id="riskmap-analytics-kpis">
+(()=>{
+if(document.documentElement.classList.contains('fire-risk-view'))return;
+const configs=[
+{title:'ข้อมูลโรงงานในระบบ',icon:'▦',target:'dssBriefCoverage',source:'dssCoverageTotals',note:'สถานะข้อมูล DSS'},
+{title:'โรงงานที่เข้าข่ายความเสี่ยง',icon:'△',target:'coverageRiskHeading',source:'coverageRisk',note:'จำแนกตามข้อมูลความเสี่ยง'},
+{title:'ข้อมูลสนับสนุนเหตุฉุกเฉิน',icon:'✚',target:'coverageSupportTitle',source:'coverageSupportCards',note:'จุดและหน่วยงานสนับสนุน'},
+{title:'ทรัพยากรตามแผน',icon:'◇',target:'dssBriefReadiness',source:'dssResourceSummary',note:'ตรวจสอบความพร้อมเพิ่มเติม'}];
+const create=()=>{
+const anchor=document.getElementById('riskmapEstateContent');if(!anchor||document.getElementById('riskmapKpiStrip'))return;
+const strip=document.createElement('div');strip.id='riskmapKpiStrip';strip.className='riskmap-kpi-strip';strip.setAttribute('aria-label','สรุปข้อมูล Risk Map');
+for(const c of configs){const a=document.createElement('a');a.className='riskmap-kpi';a.href='#'+c.target;const ico=document.createElement('span');ico.className='riskmap-kpi-icon';ico.textContent=c.icon;const body=document.createElement('span');const title=document.createElement('span');title.className='riskmap-kpi-title';title.textContent=c.title;const val=document.createElement('strong');val.className='riskmap-kpi-value';val.textContent='ดูข้อมูล';const note=document.createElement('span');note.className='riskmap-kpi-note';note.textContent=c.note;body.append(title,val,note);a.append(ico,body);strip.append(a);c.valueElement=val;}
+anchor.before(strip);
+};
+const sync=()=>{for(const c of configs){const source=document.getElementById(c.source);if(!source||!c.valueElement)continue;const text=(source.innerText||'').trim();if(!text||/กำลังโหลด/.test(text.slice(0,30)))continue;const numbers=text.match(/(?:^|\\s)([0-9][0-9,]*)(?=\\s|$)/g);if(numbers&&numbers.length===1){c.valueElement.textContent=numbers[0].trim()}else{c.valueElement.textContent='ดูรายละเอียด'}}};
+const boot=()=>{create();sync();let queued=false;const targets=configs.map(c=>document.getElementById(c.source)).filter(Boolean);const observer=new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;sync()})});for(const t of targets)observer.observe(t,{subtree:true,childList:true,characterData:true});};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+</script>
 </head>
 <body>
 <div class="emcc-gis-header">
