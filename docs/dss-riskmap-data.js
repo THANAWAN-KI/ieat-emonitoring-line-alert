@@ -583,6 +583,7 @@
       ]}]}
     }))).catch(error=>console.warn('Monitoring stations',error));
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
+    if(!fireView){window.ieatCoverageOverviewMap={view,map};window.dispatchEvent(new Event('ieat-coverage-map-created'));}
     const factorySelection=new GraphicsLayer({title:'โรงงานที่เลือกจากทะเบียน',listMode:'hide'});
     map.add(factorySelection);
     let factorySelectionSequence=0;
