@@ -3429,13 +3429,13 @@ function chart(title,entries,unit='ราย',kind='bar',actions=[]){
  if(donut){
   svg.append(svgEl('circle',{cx:150,cy:125,r:80,fill:'none',stroke:'#edf0ed','stroke-width':34}));let offset=0;
   known.forEach((d,i)=>{const len=d.value/total*2*Math.PI*80;const ring=svgEl('circle',{cx:150,cy:125,r:80,fill:'none',stroke:color(d,i),'stroke-width':34,'stroke-dasharray':`${len} ${2*Math.PI*80-len}`,'stroke-dashoffset':-offset,transform:'rotate(-90 150 125)'});ring.append(svgEl('title',{},`${d.label}: ${fmt(d.value)} ${unit} (${(d.value/total*100).toFixed(1)}%)`));svg.append(ring);offset+=len;
-   svg.append(svgEl('rect',{x:285,y:30+i*39,width:13,height:13,fill:color(d,i)}),svgEl('text',{x:310,y:42+i*39,'font-size':15},d.label),svgEl('text',{x:715,y:42+i*39,'text-anchor':'end','font-size':15},fmt(d.value)+' · '+(d.value/total*100).toFixed(1)+'%'));
-  });svg.append(svgEl('text',{x:150,y:124,'text-anchor':'middle','font-size':28,'font-weight':700},fmt(total)),svgEl('text',{x:150,y:150,'text-anchor':'middle','font-size':15},unit));
+   svg.append(svgEl('rect',{x:285,y:30+i*39,width:13,height:13,fill:color(d,i)}),svgEl('text',{x:310,y:42+i*39,'font-size':17},d.label),svgEl('text',{x:715,y:42+i*39,'text-anchor':'end','font-size':17},fmt(d.value)+' · '+(d.value/total*100).toFixed(1)+'%'));
+  });svg.append(svgEl('text',{x:150,y:124,'text-anchor':'middle','font-size':32,'font-weight':700},fmt(total)),svgEl('text',{x:150,y:150,'text-anchor':'middle','font-size':17},unit));
  }else{
   const max=Math.max(1,...known.map(d=>d.value));const step=Math.max(1,Math.ceil(max/4));const top=step*4;
-  for(let i=0;i<=4;i++){const x=300+i*90;svg.append(svgEl('line',{x1:x,y1:16,x2:x,y2:height-38,stroke:'#dce3de'}),svgEl('text',{x,y:height-14,'text-anchor':'middle','font-size':13},fmt(step*i)));}
-  data.forEach((d,i)=>{const y=26+i*58;svg.append(svgEl('text',{x:6,y:y+17,'font-size':14},d.label.length>36?d.label.slice(0,35)+'…':d.label));
-   const bar=svgEl('rect',{x:300,y,width:Number.isFinite(d.value)?d.value/top*360:0,height:26,fill:color(d,i)});bar.append(svgEl('title',{},d.label+': '+fmt(d.value)+' '+unit));svg.append(bar,svgEl('text',{x:725,y:y+18,'text-anchor':'end','font-size':15,'font-weight':700},fmt(d.value)));
+  for(let i=0;i<=4;i++){const x=300+i*90;svg.append(svgEl('line',{x1:x,y1:16,x2:x,y2:height-38,stroke:'#dce3de'}),svgEl('text',{x,y:height-14,'text-anchor':'middle','font-size':14},fmt(step*i)));}
+  data.forEach((d,i)=>{const y=26+i*58;svg.append(svgEl('text',{x:6,y:y+17,'font-size':16},d.label.length>36?d.label.slice(0,35)+'…':d.label));
+   const bar=svgEl('rect',{x:300,y,width:Number.isFinite(d.value)?d.value/top*360:0,height:26,fill:color(d,i)});bar.append(svgEl('title',{},d.label+': '+fmt(d.value)+' '+unit));svg.append(bar,svgEl('text',{x:725,y:y+18,'text-anchor':'end','font-size':17,'font-weight':700},fmt(d.value)));
   });
  }
  panel.append(svg);
@@ -4119,4 +4119,61 @@ html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewDssP
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#overviewDssPlots,#overviewRiskPair,#overviewSupportPair){grid-template-columns:minmax(0,1fr)!important}
 }
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewSupportPair #coverageSupportCards strong:after{content:' จุด';font-size:13px;font-weight:400}
+</style><style id="overview-polished-design">/* Overview visual system: square cards, quiet surfaces and legible data. */
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage{--ov-ink:#202923;--ov-muted:#66716a;--ov-line:#e0e7e2;--ov-green:#267b50;--ov-soft:#f5f8f6;color:var(--ov-ink)!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage>.riskmap-overview-heading{padding:28px 18px 22px!important;text-align:left!important;border-bottom:1px solid var(--ov-line)!important;margin-bottom:20px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .riskmap-overview-heading h1{font-size:clamp(24px,2.2vw,34px)!important;font-weight:650!important;letter-spacing:-.02em!important;color:#232c26!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .riskmap-overview-heading .riskmap-overview-lead{font-size:14px!important;color:var(--ov-muted)!important;line-height:1.8!important;margin-top:8px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel{border:1px solid var(--ov-line)!important;background:#fff!important;padding:20px!important;margin:0 0 22px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel #overviewSummary{gap:14px!important;padding-top:18px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card{background:#f5f9f6!important;border:1px solid #dce7df!important;border-top:3px solid #579673!important;padding:18px 20px!important;gap:7px!important;border-radius:0!important;transition:background .15s,border-color .15s}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card:nth-child(3){background:#fff9ed!important;border-color:#eadcb9!important;border-top-color:#b7923e!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card:nth-child(4){background:#f5f7f1!important;border-top-color:#879d68!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card:hover{background:#edf5ef!important;border-color:#8fb59a!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card strong{font-size:38px!important;font-weight:650!important;letter-spacing:-.03em!important;line-height:1.2!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card span{font-size:14px!important;font-weight:500!important;min-height:40px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel #overviewSources{font-size:12px!important;line-height:1.8!important;color:#6d786f!important;padding-top:14px!important;border-top:1px solid #e7ede8!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness,#overviewFollowup){padding:24px!important;margin:22px 0!important;background:#f7f9f7!important;border:1px solid var(--ov-line)!important;border-radius:0!important;box-shadow:none!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness,#overviewFollowup)>h2{font-size:21px!important;line-height:1.5!important;font-weight:650!important;color:#25362a!important;margin:0 0 16px!important;padding:0 0 13px!important;border-bottom:1px solid #dfe7e0!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent :is(#overviewDssPlots,#overviewRiskPair,#overviewSupportPair){gap:20px!important;align-items:stretch!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-chart{padding:20px!important;border:1px solid #dce5de!important;background:#fff!important;box-shadow:0 2px 5px #203a2705!important;border-radius:0!important;box-sizing:border-box}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-chart h3{font-size:18px!important;font-weight:600!important;line-height:1.5!important;margin-bottom:7px!important;color:#24392b!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-chart-scope{font-size:12px!important;color:#748077!important;margin-bottom:18px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-chart details{border-top:1px solid #e7ede8!important;padding-top:11px!important;margin-top:15px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-chart summary{font-size:13px!important;font-weight:500!important;color:#3b6e4e!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent :is(.overview-data-note,.overview-risk-definitions){font-size:13px!important;color:#5e6e62!important;line-height:1.8!important;background:#f0f5f0!important;border-left:3px solid #93b29a!important;padding:11px 14px!important;margin:12px 0 16px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent #overviewRiskPair #coverageDetail{padding:20px!important;border:1px solid #dce5de!important;background:#fff!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .dss-risk-table{border-collapse:collapse!important;font-size:13px!important;background:#fff!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .dss-risk-table :is(td,th){border:0!important;border-bottom:1px solid #e5ebe6!important;padding:11px 13px!important;line-height:1.65!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .dss-risk-table thead th{background:#eef4ef!important;color:#35523f!important;font-size:12px!important;font-weight:600!important;white-space:nowrap!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .dss-risk-table tbody tr:nth-child(even){background:#f8faf8!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .dss-risk-table tbody tr:hover{background:#edf5ef!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .factory-name-link{font-size:13px!important;line-height:1.65!important;color:#286748!important;text-align:left!important;text-decoration:none!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent #overviewSupportPair #coverageSupportCards{gap:14px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent #overviewSupportPair #coverageSupportCards article{padding:20px!important;background:#fff!important;border:1px solid #dce5de!important;border-left:3px solid #7da88a!important;gap:10px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent #overviewSupportPair #coverageSupportCards article:nth-child(3n+2){border-left-color:#c5a45c!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent #overviewSupportPair #coverageSupportCards strong{font-size:36px!important;font-weight:650!important;letter-spacing:-.02em!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent #overviewSupportPair #coverageSupportCards h3{font-size:14px!important;font-weight:500!important;color:#5c6d61!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-resource-cards{gap:16px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-resource-card{padding:20px!important;background:#fff!important;border:1px solid #dce5de!important;border-top:3px solid #89a67c!important;gap:12px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-resource-card h4{font-size:15px!important;font-weight:500!important;color:#4d6453!important;min-height:44px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-resource-card strong{font-size:36px!important;font-weight:650!important;letter-spacing:-.025em!important;color:#34734e!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-resource-card small{font-size:12px!important;color:#7b867e!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-followup-item{background:#fffcf3!important;border:1px solid #e9dfc4!important;border-left:3px solid #c4a35b!important;padding:16px!important;gap:8px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-followup-item strong{font-size:14px!important;font-weight:500!important;color:#695a35!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #coverageMap #riskmapSercFilters{background:#fff!important;border-color:#dfe7e1!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #coverageMap #riskmapSercFilters a{padding:21px 18px!important;transition:background .15s!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #coverageMap #riskmapSercFilters a strong{font-size:14px!important;color:#344638!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #coverageMap #riskmapSercFilters a span{font-size:12px!important;line-height:1.7!important;color:#819085!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent :is(input,select,button){font-family:inherit!important;border-radius:0!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent input{background:#fff!important;border:1px solid #d4dfd6!important;padding:9px 12px!important;min-height:40px!important;box-sizing:border-box}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent :is(button,a,input,summary):focus-visible{outline:2px solid #498a60!important;outline-offset:3px!important}
+@media(max-width:700px){
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness,#overviewFollowup){padding:15px!important;margin:16px 0!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent .overview-chart{padding:14px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel{padding:14px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card{padding:13px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #overviewScopePanel .overview-summary-card strong{font-size:30px!important}
+}
+@media(prefers-reduced-motion:reduce){html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage *{transition:none!important;scroll-behavior:auto!important}}
 </style></body></html>
