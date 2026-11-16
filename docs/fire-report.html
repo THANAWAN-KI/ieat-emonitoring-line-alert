@@ -481,14 +481,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
       <option value="hybrid">ดาวเทียมพร้อมชื่อสถานที่</option>
       <option value="dark-gray-vector">สีเทาเข้ม</option>
     </select>
-<script id="fire-default-satellite">
-if(new URLSearchParams(location.search).get('hazard')==='fire'){
- const basemap=document.getElementById('coverageBasemap');
- if(basemap){for(const option of basemap.options)option.selected=option.defaultSelected=option.value==='satellite';}
-}
-</script>
-
-  </div>
+</div>
   <p id="coverageMapStatus" role="status">กำลังเตรียมแผนที่และชั้นข้อมูล…</p>
   <div id="coverageMapView" aria-label="แผนที่นิคมอุตสาหกรรมและข้อมูลสนับสนุน"></div>
   <ul class="riskmap-map-key" aria-label="คำอธิบายสัญลักษณ์แผนที่"><li style="--key:#c64032">จุดเกิดเหตุ</li><li class="radius">รัศมีค้นหา</li><li style="--key:#7942a0">นิคมฯ</li><li style="--key:#d34a32">ดับเพลิง</li><li style="--key:#c53e58">โรงพยาบาล</li><li style="--key:#167dad">หัวจ่ายน้ำ</li><li style="--key:#365c9d">ตำรวจ</li><li style="--key:#23866b">ชุมชน</li><li style="--key:#365477">CCTV</li></ul>
