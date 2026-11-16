@@ -3776,5 +3776,47 @@ html body #riskMapLinePanel#riskMapLinePanel p{margin:0!important;color:#17201d!
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
 })();
 </script>
+
+<style id="emcc-serc-faithful-layout-20261116">
+/* Final SERC-style overview: slim header, single filter row, risk color tiles, one dominant full-width real GIS map. */
+html:not(.fire-risk-view) body{background:#fff!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel .coverage-map-layout{display:block!important;max-width:1700px!important;margin:0 auto!important;width:100%!important}
+html:not(.fire-risk-view) #riskCoverage{display:block!important;width:100%!important;max-width:none!important;background:#fff!important;padding:0!important;border:0!important;box-shadow:none!important}
+html:not(.fire-risk-view) #riskCoverage>.riskmap-overview-heading{background:#fff!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:15px 8px 9px!important;margin:0!important;text-align:center!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading h1{font:600 clamp(23px,2.3vw,32px)/1.3 Sarabun,Tahoma,sans-serif!important;color:#24212a!important;margin:3px 0 6px!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading .riskmap-overview-eyebrow{color:#735c88!important;font-size:10px!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading .riskmap-overview-lead{color:#756d7c!important;font-size:12px!important;max-width:none!important;margin:0!important}
+html:not(.fire-risk-view) #riskmapAnalysisStrip,html:not(.fire-risk-view) #riskmapRiskGeoFilters,html:not(.fire-risk-view) .riskmap-risk-legend,html:not(.fire-risk-view) .riskmap-overview-quicklinks{display:none!important}
+html:not(.fire-risk-view) #riskmapEstateContent{display:block!important;margin:0!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm{display:flex!important;align-items:center!important;gap:10px!important;background:#fff!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:10px 8px 16px!important;margin:0!important;max-width:100%!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageEstateForm:before{content:'นิคมอุตสาหกรรม'!important;font-size:12px!important;color:#63596c!important}
+html:not(.fire-risk-view) #coverageEstateSearch{min-height:37px!important;border:1px solid #e6e1ea!important;border-radius:4px!important;background:#fff!important}
+html:not(.fire-risk-view) #riskmapOverviewPanel #coverageMap{display:block!important;width:100%!important;max-width:none!important;position:relative!important;order:initial!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;overflow:visible!important}
+html:not(.fire-risk-view) #coverageMapTitle{font-size:15px!important;text-align:center!important;color:#352e3e!important;margin:4px 0 10px!important;font-weight:600!important}
+html:not(.fire-risk-view) #coverageMap>.riskmap-map-eyebrow,html:not(.fire-risk-view) #coverageMap>.riskmap-map-description{display:none!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace{display:block!important;min-height:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;position:relative!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{display:block!important;grid-column:auto!important;grid-row:auto!important;width:100%!important;height:clamp(620px,76vh,980px)!important;min-height:620px!important;border:1px solid #ece8ef!important;border-radius:0!important;box-shadow:none!important;position:relative!important}
+html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-overview-left,html:not(.fire-risk-view) #riskmapRiskMapWorkspace .riskmap-geo-insights{display:none!important}
+html:not(.fire-risk-view) #riskmapSercFilters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:10px 8px 12px}
+html:not(.fire-risk-view) #riskmapSercFilters a{font-size:12px;display:block;color:#5c5264;text-decoration:none;border:0;border-bottom:1px solid #ece8ef;padding:7px 4px 9px}
+html:not(.fire-risk-view) #riskmapSercFilters a strong{display:block;color:#33283d;font-weight:600;font-size:12px}
+html:not(.fire-risk-view) #riskmapSercFilters a span{display:block;font-size:11px;color:#817589;margin-top:3px}
+html:not(.fire-risk-view) #coverageMap>.riskmap-risk-levels{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:12px!important;margin:0 8px 8px!important}
+html:not(.fire-risk-view) #coverageMap>.riskmap-risk-levels .level{padding:20px 4px!important;border-radius:0!important;font-size:12px!important;min-height:62px;display:flex;align-items:center;justify-content:center}
+html:not(.fire-risk-view) #coverageMap>.riskmap-risk-explain{font-size:10px!important;margin:0 8px 8px!important;color:#887f90!important;text-align:right}
+html:not(.fire-risk-view) #coverageMap .coverage-basemap-control{position:relative!important;top:auto!important;right:auto!important;float:right!important;margin:0 8px 6px!important}
+html:not(.fire-risk-view) #coverageMapStatus{clear:both!important;font-size:11px!important;color:#756b80!important;margin:4px 8px!important}
+html:not(.fire-risk-view) #riskmapEstateContent>:is(.coverage-support-overview,#dssBriefCoverage,#coverageRiskSection,#dssBriefReadiness){border:1px solid #eeeaf2!important;box-shadow:none!important;margin:16px 0!important;border-radius:5px!important}
+@media(max-width:850px){html:not(.fire-risk-view) #riskmapSercFilters{grid-template-columns:repeat(2,minmax(0,1fr))}html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{height:550px!important;min-height:550px!important}html:not(.fire-risk-view) #coverageMap>.riskmap-risk-levels{gap:5px!important}html:not(.fire-risk-view) #coverageMap>.riskmap-risk-levels .level{font-size:10px!important;padding:12px 3px!important}}
+@media(max-width:540px){html:not(.fire-risk-view) #riskmapSercFilters{gap:6px}html:not(.fire-risk-view) #coverageMap>.riskmap-risk-levels{grid-template-columns:repeat(3,minmax(0,1fr))!important}html:not(.fire-risk-view) #riskmapRiskMapWorkspace #coverageMapView{height:450px!important;min-height:450px!important}}
+</style>
+<script id="emcc-serc-faithful-layout-js">
+(()=>{const build=()=>{const overview=document.getElementById('riskCoverage'),estate=document.getElementById('riskmapEstateContent'),map=document.getElementById('coverageMap');if(!overview||!estate||!map||document.getElementById('riskmapSercFilters'))return;
+const filters=document.createElement('nav');filters.id='riskmapSercFilters';filters.setAttribute('aria-label','หมวดข้อมูล Risk Map');for(const [label,detail,href] of [['ประเภทความเสี่ยง','ภาพรวมทุกประเภท','#coverageRiskHeading'],['ข้อมูลโรงงาน DSS','สถานะข้อมูลโรงงาน','#dssBriefCoverage'],['ข้อมูลสนับสนุน','การรับมือเหตุฉุกเฉิน','#coverageSupportTitle'],['ความพร้อมทรัพยากร','ทรัพยากรตามแผน','#dssBriefReadiness']]){const a=document.createElement('a');a.href=href;const strong=document.createElement('strong');strong.textContent=label;const span=document.createElement('span');span.textContent=detail;a.append(strong,span);filters.append(a)}const heading=overview.querySelector('.riskmap-overview-heading');heading?.after(filters);
+/* The live ArcGIS container remains untouched; only its enclosing section moves above detailed cards. */
+if(map.parentElement!==overview)overview.insertBefore(map,estate);
+const levels=map.querySelector('.riskmap-risk-levels');if(levels)levels.setAttribute('aria-label','คำอธิบายสีระดับความเสี่ยง ไม่ใช่คะแนนจริง');
+};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build()})();
+</script>
 </body></html>
 
