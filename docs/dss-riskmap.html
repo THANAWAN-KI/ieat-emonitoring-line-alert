@@ -3424,30 +3424,30 @@ function chart(title,entries,unit='ราย',kind='bar',actions=[]){
  const donut=kind==='donut'&&total>0&&data.every(d=>Number.isFinite(d.value));
  const color=(d,i)=>/อนุมัติ|ยืนยันแล้ว|มีชุดข้อมูล/.test(d.label)&&!d.label.includes('ยังไม่มี')?'#009b85':/ยังไม่มีชุดข้อมูล/.test(d.label)?'#87938b':/ตรวจสอบ|จัดทำ|รอยืนยัน/.test(d.label)?'#edb93e':/เพิ่มเติม/.test(d.label)?'#dc656b':colors[i%colors.length];
  const gauge=kind==='gauge'&&total>0&&data.every(d=>Number.isFinite(d.value));
- const height=gauge?280:donut?280:Math.max(210,data.length*58+65);
- const svg=svgEl('svg',{viewBox:`0 0 740 ${height}`,role:'img','aria-label':title+' · '+data.map(d=>d.label+' '+fmt(d.value)+' '+unit).join(' · '),class:'overview-plot'});
+ const height=gauge?250:donut?230:Math.max(160,data.length*72+56);
+ const svg=svgEl('svg',{viewBox:`0 0 ${gauge?340:donut?240:600} ${height}`,role:'img','aria-label':title+' · '+data.map(d=>d.label+' '+fmt(d.value)+' '+unit).join(' · '),class:'overview-plot'});
  svg.append(svgEl('title',{},title));
  if(gauge){
   const pct=known[0].value/total*100;
   const track={d:'M40 190 A130 130 0 0 1 300 190',fill:'none','stroke-width':26,'stroke-linecap':'round',pathLength:100};
-  svg.append(svgEl('path',{...track,stroke:'#e6ece8'}),svgEl('path',{...track,stroke:'#009b85','stroke-dasharray':pct+' '+(100-pct)}));
-  svg.append(svgEl('text',{x:170,y:160,'text-anchor':'middle','font-size':44,'font-weight':700,fill:'#087c6d'},pct.toFixed(1)+'%'),svgEl('text',{x:170,y:193,'text-anchor':'middle','font-size':17},'มีชุดข้อมูล DSS'));
-  svg.append(svgEl('text',{x:38,y:227,'font-size':14},'0%'),svgEl('text',{x:278,y:227,'font-size':14},'100%'));
-  known.forEach((d,i)=>{svg.append(svgEl('rect',{x:355,y:82+i*65,width:12,height:12,fill:i===0?'#009b85':'#a9b6af'}),svgEl('text',{x:380,y:94+i*65,'font-size':17},d.label),svgEl('text',{x:705,y:120+i*65,'font-size':24,'font-weight':650,'text-anchor':'end'},fmt(d.value)+' '+unit));});
-  svg.append(svgEl('text',{x:355,y:248,'font-size':15},'ฐานข้อมูลทั้งหมด '+fmt(total)+' '+unit));
+  svg.append(svgEl('path',{...track,stroke:'#e0e7ec'}),svgEl('path',{...track,stroke:'#008a79','stroke-dasharray':pct+' '+(100-pct)}));
+  svg.append(svgEl('text',{x:170,y:155,'text-anchor':'middle','font-size':43,'font-weight':700},pct.toFixed(1)+'%'),svgEl('text',{x:170,y:188,'text-anchor':'middle','font-size':19},'มีชุดข้อมูล DSS'),svgEl('text',{x:27,y:228,'font-size':17},'0%'),svgEl('text',{x:273,y:228,'font-size':17},'100%'));
  }else if(donut){
-  svg.append(svgEl('circle',{cx:150,cy:125,r:80,fill:'none',stroke:'#edf0ed','stroke-width':34}));let offset=0;
-  known.forEach((d,i)=>{const len=d.value/total*2*Math.PI*80;const ring=svgEl('circle',{cx:150,cy:125,r:80,fill:'none',stroke:color(d,i),'stroke-width':34,'stroke-dasharray':`${len} ${2*Math.PI*80-len}`,'stroke-dashoffset':-offset,transform:'rotate(-90 150 125)'});ring.append(svgEl('title',{},`${d.label}: ${fmt(d.value)} ${unit} (${(d.value/total*100).toFixed(1)}%)`));svg.append(ring);offset+=len;
-   svg.append(svgEl('rect',{x:285,y:30+i*39,width:13,height:13,fill:color(d,i)}),svgEl('text',{x:310,y:42+i*39,'font-size':17},d.label),svgEl('text',{x:715,y:42+i*39,'text-anchor':'end','font-size':17},fmt(d.value)+' · '+(d.value/total*100).toFixed(1)+'%'));
-  });svg.append(svgEl('text',{x:150,y:124,'text-anchor':'middle','font-size':32,'font-weight':700},fmt(total)),svgEl('text',{x:150,y:150,'text-anchor':'middle','font-size':17},unit));
+  svg.append(svgEl('circle',{cx:120,cy:115,r:75,fill:'none',stroke:'#e5eaf0','stroke-width':32}));let offset=0;
+  known.forEach((d,i)=>{const len=d.value/total*2*Math.PI*75;const ring=svgEl('circle',{cx:120,cy:115,r:75,fill:'none',stroke:color(d,i),'stroke-width':32,'stroke-dasharray':`${len} ${2*Math.PI*75-len}`,'stroke-dashoffset':-offset,transform:'rotate(-90 120 115)'});ring.append(svgEl('title',{},`${d.label}: ${fmt(d.value)} ${unit} (${(d.value/total*100).toFixed(1)}%)`));svg.append(ring);offset+=len;});
+  svg.append(svgEl('text',{x:120,y:115,'text-anchor':'middle','font-size':32,'font-weight':700},fmt(total)),svgEl('text',{x:120,y:143,'text-anchor':'middle','font-size':18},unit));
  }else{
-  const max=Math.max(1,...known.map(d=>d.value));const step=Math.max(1,Math.ceil(max/4));const top=step*4;
-  for(let i=0;i<=4;i++){const x=300+i*90;svg.append(svgEl('line',{x1:x,y1:16,x2:x,y2:height-38,stroke:'#dce3de'}),svgEl('text',{x,y:height-14,'text-anchor':'middle','font-size':14},fmt(step*i)));}
-  data.forEach((d,i)=>{const y=26+i*58;svg.append(svgEl('text',{x:6,y:y+17,'font-size':16},d.label.length>36?d.label.slice(0,35)+'…':d.label));
-   const bar=svgEl('rect',{x:300,y,width:Number.isFinite(d.value)?d.value/top*360:0,height:26,fill:color(d,i)});bar.append(svgEl('title',{},d.label+': '+fmt(d.value)+' '+unit));svg.append(bar,svgEl('text',{x:725,y:y+18,'text-anchor':'end','font-size':17,'font-weight':700},fmt(d.value)));
+  const max=Math.max(1,...known.map(d=>d.value)),step=Math.max(1,Math.ceil(max/4)),top=step*4;
+  for(let i=0;i<=4;i++){const x=12+i*140;svg.append(svgEl('line',{x1:x,y1:15,x2:x,y2:height-36,stroke:'#e5eaf0'}),svgEl('text',{x,y:height-10,'text-anchor':i===0?'start':'middle','font-size':17},fmt(step*i)));}
+  data.forEach((d,i)=>{const y=12+i*72;svg.append(svgEl('rect',{x:5,y,width:590,height:64,fill:'#fff'}),svgEl('text',{x:12,y:y+21,'font-size':20},d.label.length>43?d.label.slice(0,42)+'…':d.label),svgEl('text',{x:585,y:y+21,'text-anchor':'end','font-size':22,'font-weight':700},fmt(d.value)));
+   const bar=svgEl('rect',{x:12,y:y+33,width:Number.isFinite(d.value)?d.value/top*560:0,height:20,fill:color(d,i)});bar.append(svgEl('title',{},d.label+': '+fmt(d.value)+' '+unit));svg.append(bar);
   });
  }
- panel.append(svg);
+ if(donut||gauge){
+  const layout=el('div',null,'overview-circular-chart'),legend=el('div',null,'overview-readable-legend');
+  known.forEach((d,i)=>{const row=el('div',null,'overview-readable-legend-row'),label=el('span'),dot=el('i');dot.style.background=gauge?(i===0?'#008a79':'#87938b'):color(d,i);dot.setAttribute('aria-hidden','true');label.append(dot,document.createTextNode(d.label));const value=el('strong',fmt(d.value)+' '+unit),pct=el('small',(d.value/total*100).toFixed(1)+'%');row.append(label,value,pct);legend.append(row);});
+  layout.append(svg,legend);panel.append(layout);
+ }else{const scroll=el('div',null,'overview-bar-scroll');scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label',title+' เลื่อนดูกราฟ');scroll.append(svg);panel.append(scroll);}
  if(total===0)panel.append(el('p','ค่าที่มีข้อมูลทั้งหมดเป็น 0 '+unit+' จึงไม่มีส่วนกราฟที่มีขนาดมากกว่า 0','overview-empty'));
  if(data.some(d=>!Number.isFinite(d.value)))panel.append(el('p','— หมายถึงยังไม่มีข้อมูล ไม่ใช่ศูนย์'));
  const details=el('details');details.append(el('summary','ดูค่าตัวเลขของกราฟ'));const table=el('table',null,'overview-chart-values');const head=table.createTHead().insertRow();head.append(el('th','รายการ'),el('th','จำนวน ('+unit+')'));const body=table.createTBody();data.forEach(d=>{const r=body.insertRow();r.append(el('td',d.label),el('td',fmt(d.value)))});details.append(table);panel.append(details);
@@ -3504,6 +3504,7 @@ function boot(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+
 
 </script>
 <script id="dss-brief-data">
@@ -4438,4 +4439,30 @@ function bind(){const context=window.ieatCoverageOverviewMap;if(!context||bound)
 function init(){bind();window.addEventListener('ieat-coverage-map-created',bind);let supported=false;try{supported=!!document.createElement('canvas').getContext('webgl2');}catch{}if(!supported)start();else setTimeout(()=>{const context=window.ieatCoverageOverviewMap;if(!context?.view?.ready)start();},15000);}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
-</script></body></html>
+</script><style id="dashboard-legibility">html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard{color:#1f2937!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness)>h2{font-size:20px!important;font-weight:600!important;color:#203746!important;line-height:1.6!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-chart h3{font-size:16px!important;font-weight:600!important;color:#233e4e!important;line-height:1.6!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-chart-scope{font-size:13px!important;color:#4a6070!important;line-height:1.7!important;margin:5px 0 13px!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-plot{min-width:0!important;min-height:0!important;max-height:none!important;height:auto!important;margin:0!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-plot text{fill:#1f3343!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-circular-chart{display:grid;grid-template-columns:minmax(160px,.9fr) minmax(0,1.2fr);gap:15px;align-items:center;margin:8px 0 16px}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend{display:grid;gap:10px;min-width:0}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:start;padding:7px 0;border-bottom:1px solid #e5ebf0;font-size:14px;line-height:1.6;color:#253f4f}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row>span{grid-column:1/-1;display:flex;align-items:center;gap:7px}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row i{display:inline-block;width:11px;height:11px;flex:none}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row strong{font-size:17px;font-weight:650;color:#20394a;font-variant-numeric:tabular-nums}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row small{font-size:14px;color:#4d6371;font-variant-numeric:tabular-nums}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-bar-scroll{max-height:450px;overflow:auto;overscroll-behavior:contain;padding-right:8px}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent :is(p,summary,label,.overview-resource-card small,.overview-chart summary){font-size:14px!important;color:#405767!important;line-height:1.75!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-resource-card h4{font-size:15px!important;color:#2e4858!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .overview-resource-card strong{font-size:34px!important;color:#17637e!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #overviewScopePanel .overview-summary-card span{font-size:14px!important;color:#3e5666!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #overviewScopePanel .overview-summary-card small{font-size:13px!important;color:#526b79!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #overviewScopePanel .overview-summary-card strong{font-size:38px!important;color:#164e68!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #strategicDashboardShell #riskmapSercFilters a strong{font-size:15px!important;color:#304d5d!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #strategicDashboardShell #riskmapSercFilters a span{font-size:13px!important;color:#526b79!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .dss-risk-table :is(td,th){font-size:14px!important;color:#293f4e!important;line-height:1.6!important}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard #riskmapEstateContent .factory-name-link{font-size:14px!important;color:#1c6485!important}
+@media(max-width:1450px){html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-circular-chart{grid-template-columns:minmax(0,1fr)}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-circular-chart>.overview-plot{max-width:280px!important;justify-self:center}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row{grid-template-columns:minmax(0,1fr) auto auto;gap:8px}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row>span{grid-column:auto}}
+@media(max-width:600px){html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row{grid-template-columns:1fr auto}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-readable-legend-row>span{grid-column:1/-1}html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage.strategic-dashboard .overview-bar-scroll>.overview-plot{min-width:500px!important}}
+</style></body></html>
