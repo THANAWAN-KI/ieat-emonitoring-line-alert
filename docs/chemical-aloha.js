@@ -56,12 +56,45 @@ $('riskmapReportPanel').before(panel);
 const form=$('alohaScenarioForm'),status=$('alohaStatus'),findings=$('alohaFindings');
 const workspace=el('details'),workspaceTitle=el('summary','เพิ่ม / ตรวจผลวิเคราะห์ ALOHA');workspace.className='aloha-workspace';form.before(workspace);workspace.append(workspaceTitle,form);
 const field=n=>form.elements.namedItem(n),context=()=>window.ieatCoverageReport;
+// Keep the common import workflow short. Missing scenario details are disclosed, not invented.
+form.noValidate=true;
+const requiredNames=new Set(['chemical','cas','hazard','reviewer','sourceLat','sourceLng','confirmed']);
+for(const input of form.querySelectorAll('[name]'))input.required=requiredNames.has(input.name);
+for(const name of ['state','source']){const input=field(name);input.prepend(new Option('ไม่ระบุ',''));input.value='';}
+const oldDetails=[...form.children].filter(n=>n.tagName==='DETAILS');
+const more=el('details');more.id='alohaMoreDetails';more.append(el('summary','ข้อมูลการจำลองเพิ่มเติม (ถ้ามี)'));
+const makeStep=(title)=>{const box=el('fieldset');box.className='aloha-simple-step';box.style.cssText='padding:14px;border:1px solid #b6c5b9;margin:12px 0;background:#fff';box.append(el('legend',title));return box;};
+const move=(name,host)=>{const label=field(name)?.closest('label');if(label)host.append(label);};
+const step1=makeStep('1. ระบุสารที่เกี่ยวข้อง');const basic=el('div');basic.className='aloha-grid';move('chemical',basic);move('cas',basic);step1.append(basic);
+const step2=makeStep('2. เลือกไฟล์ผล ALOHA');const fileGrid=el('div');fileGrid.className='aloha-grid';fileGrid.append($('alohaImport').closest('label'));move('hazard',fileGrid);step2.append(fileGrid,el('p','ใช้ไฟล์ KML หรือ GeoJSON ที่มีเขตอันตรายจากผลจำลอง ระบบไม่สร้างเขตอันตรายแทน ALOHA'));
+const skip=el('button','ยังไม่มีไฟล์ ALOHA → ไปดูรายงานข้อมูลสนับสนุน');skip.type='button';skip.onclick=()=>{setStatus('รายงานข้อมูลสนับสนุนยังใช้ได้ โดยระบุว่ายังไม่มีผล ALOHA');$('emergencyReportPage')?.scrollIntoView({behavior:'smooth',block:'start'});};step2.append(skip);
+const step3=makeStep('3. ตรวจเกณฑ์และยืนยัน');step3.append($('alohaZoneRows'));const reviewerGrid=el('div');reviewerGrid.className='aloha-grid';move('reviewer',reviewerGrid);step3.append(reviewerGrid);const confirm=field('confirmed').closest('label');confirm.lastChild.textContent='ยืนยันสาร พิกัด และเกณฑ์ในไฟล์ตรงกับเหตุนี้ ข้อมูลการจำลองที่ยังไม่มีจะระบุว่า “ไม่ระบุ” ในรายงาน';step3.append(confirm);
+for(const detail of oldDetails){detail.open=false;more.append(detail);}
+const advancedTools=el('div');advancedTools.id='alohaAdvancedTools';more.prepend(advancedTools);
+const actions=form.querySelector('.aloha-actions');form.insertBefore(step1,actions);form.insertBefore(step2,actions);form.insertBefore(step3,actions);form.insertBefore(more,actions);
+const errors=el('div');errors.id='alohaValidationSummary';errors.hidden=true;errors.setAttribute('role','alert');errors.style.cssText='padding:12px;border:1px solid #bb6e53;background:#fff3e9;margin:12px 0';form.insertBefore(errors,step1);
+const names={chemical:'ชื่อสารเคมี',cas:'CAS No. (เช่น 7664-41-7)',hazard:'ประเภทผลจาก ALOHA',reviewer:'ชื่อผู้ตรวจข้อมูลนำเข้า',sourceLat:'ละติจูดต้นกำเนิด',sourceLng:'ลองจิจูดต้นกำเนิด',confirmed:'ติ๊กยืนยันสาร พิกัด และเกณฑ์'};
+function reveal(input){workspace.open=true;let parent=input?.parentElement;while(parent&&parent!==form){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement;}input?.scrollIntoView?.({behavior:'smooth',block:'center'});input?.focus?.();}
+function validateImport(){
+ const missing=[];const ctx=context();if(ctx?.status!=='ready'||!ctx.id||!ctx.point)missing.push(['ค้นหาและเลือกโรงงานในส่วนบนให้รายงานพร้อมก่อน',$('coverageFactoryQuery')]);
+ if(!draft.length)missing.push(['เลือกไฟล์ KML / GeoJSON ผลจำลองก่อน',$('alohaImport')]);
+ if(ctx?.point&&field('sourceLat').value&&field('sourceLng').value&&(Math.abs(Number(field('sourceLat').value)-ctx.point.lat)>.001||Math.abs(Number(field('sourceLng').value)-ctx.point.lng)>.001))missing.push(['ตรวจพิกัดต้นกำเนิดให้ตรงกับจุดเกิดเหตุ (ข้อมูลเพิ่มเติม)',field('sourceLat')]);
+ for(const input of form.elements){if(!input.willValidate||input.disabled||input.validity.valid)continue;const zone=input.closest('.aloha-zone-row');const label=zone?(zone.querySelector('strong')?.textContent+' · '+({level:'เลือกสีเขต',loc:'กรอกชื่อเกณฑ์และค่า LOC',unit:'กรอกหน่วย'}[input.dataset.key]||'ตรวจข้อมูล')):(names[input.name]||input.closest('label')?.firstChild?.textContent?.trim()||'ตรวจค่าที่กรอก');missing.push([label,input]);}
+ if(field('hazard').value==='toxic')for(const input of form.querySelectorAll('[data-key=exposure]'))if(!input.value.trim())missing.push([(input.closest('.aloha-zone-row').querySelector('strong')?.textContent||'เขตอันตราย')+' · กรอกเวลาสัมผัสอ้างอิง',input]);
+ errors.replaceChildren();if(missing.length){workspace.open=true;errors.hidden=false;errors.append(el('strong','ยังใช้ผลไม่ได้ · เหลือ '+missing.length+' รายการ'));const list=el('ul');for(const [message,input] of missing){const item=el('li'),button=el('button',message);button.type='button';button.style.cssText='border:0;background:transparent;min-height:30px;padding:3px;text-align:left;text-decoration:underline;font:inherit;color:#8b3c24';button.onclick=()=>reveal(input);item.append(button);list.append(item);}errors.append(list);setStatus('ยังขาดข้อมูล '+missing.length+' รายการ · กดชื่อรายการด้านบนเพื่อไปแก้ได้');errors.scrollIntoView?.({behavior:'smooth',block:'center'});return false;}
+ errors.hidden=true;if(!field('reviewTime').value)field('reviewTime').value=new Date(Date.now()+7*3600000).toISOString().slice(0,16);return true;
+}
+form.addEventListener('input',()=>{errors.hidden=true;});
+$('alohaApplyHelp')?.remove();
+const help=el('p','กดปุ่มด้านล่างได้เลย ระบบจะบอกสิ่งที่ยังขาดเป็นรายการ ไม่ต้องกรอกข้อมูลเพิ่มเติมทุกช่อง');help.id='alohaApplyHelp';actions.before(help);
+const intro=panel.querySelector('.aloha-intro');if(intro)intro.textContent='เลือกสาร → นำเข้าไฟล์ผล ALOHA → ตรวจเกณฑ์และใช้ผลในรายงาน';
+
 form.addEventListener('invalid',event=>{workspace.open=true;let details=event.target.closest('details');while(details&&form.contains(details)){details.open=true;details=details.parentElement?.closest('details');}},true);
 const valid=()=>applied&&context()?.status==='ready'&&applied.contextId===context()?.id;
 const link=el('a');link.href='#chemicalAloha';link.append(el('span','วิเคราะห์ ALOHA'));$('riskmapRailSteps')?.append(link);
 function metadata(){return Object.fromEntries(new FormData(form).entries());}
 function setStatus(text){status.textContent=text;}
-function invalidate(message){const hadResult=!!applied;revision++;queryRevision++;applied=null;layer?.removeAll();findings.replaceChildren();field('confirmed').checked=false;$('alohaBadge').textContent=draft.length?'รอตรวจสอบผลใหม่':'ยังไม่มีผลจำลอง';$('alohaJson').disabled=true;$('alohaPng').disabled=true;if(message)setStatus(message);refreshReport();window.ieatUpdateRiskMapCase?.();if(hadResult)window.ieatSyncCoverageMapPreview?.().catch(()=>{});}
+function invalidate(message){const hadResult=!!applied;revision++;queryRevision++;const applyButton=form.querySelector('button[type=submit]');if(applyButton){applyButton.disabled=false;applyButton.textContent='ใช้ผลจำลองในแผนที่และรายงาน';}applied=null;layer?.removeAll();findings.replaceChildren();field('confirmed').checked=false;$('alohaBadge').textContent=draft.length?'รอตรวจสอบผลใหม่':'ยังไม่มีผลจำลอง';$('alohaJson').disabled=true;$('alohaPng').disabled=true;if(message)setStatus(message);refreshReport();window.ieatUpdateRiskMapCase?.();if(hadResult)window.ieatSyncCoverageMapPreview?.().catch(()=>{});}
 function setFieldsFromIncident(){const p=context()?.point;if(!p)return;for(const [key,value] of [['sourceLat',p.lat],['sourceLng',p.lng]])if(!field(key).value)field(key).value=Number(value).toFixed(6);}
 function rows(){
  const host=$('alohaZoneRows');host.replaceChildren();
@@ -87,9 +120,9 @@ $('alohaImport').addEventListener('change',async()=>{
 form.addEventListener('input',e=>{if(e.target.id!=='alohaImport'&&e.target.name!=='confirmed')invalidate('ข้อมูลเปลี่ยนแล้ว กรุณาตรวจและใช้ผลจำลองใหม่');});
 form.addEventListener('change',e=>{if(e.target.id!=='alohaImport'&&e.target.type!=='file'&&e.target.name!=='confirmed')invalidate('ข้อมูลเปลี่ยนแล้ว กรุณาตรวจและใช้ผลจำลองใหม่');if(e.target.name==='confirmed'&&!e.target.checked&&applied)invalidate('ยกเลิกการยืนยันผลแล้ว');});
 $('alohaClear').onclick=()=>{draft=[];filename='';form.reset();invalidate('ล้างผลจำลองแล้ว');rows();};
-function modules(names){return new Promise((resolve,reject)=>{if(typeof window.require!=='function')return reject(Error('ระบบแผนที่ยังไม่พร้อม'));window.require(names,(...items)=>resolve(items),reject);});}
+function modules(names){return new Promise((resolve,reject)=>{if(typeof window.require!=='function')return reject(Error('ระบบแผนที่ยังไม่พร้อม'));const timer=setTimeout(()=>reject(Error('โหลดเครื่องมือแผนที่ไม่สำเร็จ กรุณาลองใหม่')),15000);window.require(names,(...items)=>{clearTimeout(timer);resolve(items);},error=>{clearTimeout(timer);reject(error);});});}
 async function mapLayer(){
- const adapter=window.ieatChemicalMap;if(!adapter)throw Error('แผนที่ยังไม่พร้อม กรุณารอให้แผนที่โหลด');await adapter.view.when();
+ const adapter=window.ieatChemicalMap;if(!adapter)throw Error('แผนที่ยังไม่พร้อม กรุณารอให้แผนที่โหลด');await within(adapter.view.when(),15000);
  if(!layer){const [GraphicsLayer]=await modules(['esri/layers/GraphicsLayer']);layer=new GraphicsLayer({title:'เขตอันตรายจากผล ALOHA (นำเข้า)',listMode:'show'});adapter.map.add(layer);}
  return adapter;
 }
@@ -124,22 +157,22 @@ async function receptors(snapshot){
  return {rows:[...found.values()].sort((a,b)=>C.levels.indexOf(a.level)-C.levels.indexOf(b.level)||a.layer.localeCompare(b.layer,'th')),notes:[...notes],time:new Date().toISOString()};
 }
 form.addEventListener('submit',async e=>{
- e.preventDefault();if(!form.reportValidity())return;
+ e.preventDefault();if(!validateImport())return;
  if(!draft.length){setStatus('กรุณานำเข้าไฟล์เขตอันตรายจาก ALOHA ก่อน');return;}
  const ctx=context();if(ctx?.status!=='ready'||!ctx.id||!ctx.point){setStatus('ค้นหาและเลือกโรงงานให้รายงานพร้อมก่อนใช้ผล ALOHA');return;}
  const data=metadata(),zones=zonesFromRows();
  if(data.hazard==='toxic'&&zones.some(z=>!z.exposure)){setStatus('ผลไอพิษต้องระบุระยะเวลาสัมผัสอ้างอิงของเกณฑ์ทุกเขต');return;}
  if(Math.abs(Number(data.sourceLat)-ctx.point.lat)>.001||Math.abs(Number(data.sourceLng)-ctx.point.lng)>.001){setStatus('พิกัดต้นกำเนิดที่กรอกไม่ตรงกับจุดเกิดเหตุ (ต่างเกิน 0.001 องศา) กรุณาตรวจพิกัดส่งออกและตำแหน่งโรงงาน');return;}
- const ticket=++revision;const button=form.querySelector('button[type="submit"]');button.disabled=true;setStatus('กำลังซ้อนขอบเขตและตรวจรายการ GIS ที่ตัดกับแต่ละเขต…');
+ const ticket=++revision;const button=form.querySelector('button[type="submit"]');button.disabled=true;button.textContent='กำลังตรวจและแสดงผล…';setStatus('กำลังซ้อนขอบเขตและตรวจรายการ GIS ที่ตัดกับแต่ละเขต…');
  try{
   applied=null;refreshReport();window.ieatUpdateRiskMapCase?.();await draw(zones,ticket);if(ticket!==revision)return;
   const snapshot={contextId:ctx.id,company:ctx.company,point:{...ctx.point},data,zones,filename,appliedAt:new Date().toISOString(),results:null};
   const result=await receptors(snapshot);if(ticket!==revision||context()?.id!==ctx.id||context()?.status!=='ready')throw Error('จุดเกิดเหตุหรือข้อมูลรายงานเปลี่ยน กรุณาตรวจผลใหม่');
-  snapshot.results=result;applied=snapshot;$('alohaBadge').textContent=result.notes.length?'ผลนำเข้า · ข้อมูล GIS บางส่วนไม่ครบ':'ผลนำเข้าที่ผู้กรอกยืนยันแล้ว';$('alohaJson').disabled=false;$('alohaPng').disabled=false;
+  snapshot.results=result;applied=snapshot;$('alohaBadge').textContent=['release','duration','windFrom','windSpeed','weatherTime','modelTime','modelVersion'].some(k=>!data[k])?'ผลนำเข้า · ข้อมูลการจำลองบางส่วนยังไม่ระบุ':result.notes.length?'ผลนำเข้า · ข้อมูล GIS บางส่วนไม่ครบ':'ผลนำเข้าที่ผู้กรอกยืนยันแล้ว';$('alohaJson').disabled=false;$('alohaPng').disabled=false;
   showFindings();refreshReport();window.ieatUpdateRiskMapCase?.();
   await window.ieatSyncCoverageMapPreview?.();setStatus('ใช้ผลนำเข้าในแผนที่ รายงาน PNG และข้อความ LINE แล้ว · ตรวจข้อจำกัดและข้อมูลที่โหลดไม่ครบก่อนใช้ตัดสินใจ');
  }catch(err){if(ticket===revision)invalidate('ยังใช้ผลไม่ได้: '+err.message);}
- finally{button.disabled=false;}
+ finally{if(ticket===revision){button.disabled=false;button.textContent='ใช้ผลจำลองในแผนที่และรายงาน';}}
 });
 function showFindings(){
  findings.replaceChildren();if(!valid())return;const s=applied;
@@ -152,7 +185,7 @@ function showFindings(){
 }
 function textLines(){
  if(!valid())return ['สถานะ ALOHA: ยังไม่มีผลจำลองที่ยืนยันสำหรับเงื่อนไขรายงานปัจจุบัน','รัศมีค้นหาทรัพยากรไม่ใช่เขตอันตรายจากสารเคมี'];
- const s=applied,d=s.data;return [
+ const s=applied,d={...s.data};for(const key of Object.keys(d))if(d[key]==='')d[key]='ไม่ระบุ';return [
  'ผลนำเข้าจาก ALOHA · '+s.company,'สารที่ใช้จำลอง: '+d.chemical+' · CAS '+d.cas+' · '+d.concentration+' · '+d.state,
  'ประเภทผล: '+field('hazard').selectedOptions[0].textContent+' · '+d.caseKind,
  'แหล่งรั่ว: '+d.source+' · '+d.release+' · ระยะเวลา '+d.duration,'รายละเอียดแหล่งรั่ว: '+(d.sourceDetail||'ไม่ระบุ')+' · อุณหภูมิ/ความดัน: '+(d.storage||'ไม่ระบุ'),
@@ -160,6 +193,7 @@ function textLines(){
  'ลมพัดจาก '+d.windFrom+'° · '+d.windSpeed+' '+d.windUnit+' · ความสูงวัดลม '+d.windHeight+' ม.',
  'อากาศ '+d.temperature+' °C · '+d.atmosphere+' · ข้อมูลเมื่อ '+d.weatherTime+' (เวลาไทย) · '+d.weatherSource,
  'ชุดผลจำลอง: '+d.modelVersion+' · ไฟล์ '+s.filename,
+ 'ข้อมูลประกอบที่ยังไม่ระบุ: '+(['concentration','release','duration','windFrom','windSpeed','weatherTime','modelTime','modelVersion','assumptions'].filter(k=>!s.data[k]).map(k=>({concentration:'ความเข้มข้น',release:'ปริมาณ/อัตราการรั่ว',duration:'ระยะเวลารั่ว',windFrom:'ทิศลม',windSpeed:'ความเร็วลม',weatherTime:'เวลาอากาศ',modelTime:'เวลาเริ่มจำลอง',modelVersion:'รหัสผลจำลอง',assumptions:'สมมติฐาน'})[k]).join(', ')||'บันทึกครบตามแบบฟอร์ม'),
  ...s.zones.map(z=>'เขต'+labels[z.level]+' · '+z.name+' · '+z.loc+' '+z.unit+' · เวลาอ้างอิง '+(z.exposure||'ไม่ระบุ')),
  'รายการ GIS ที่โหลดได้ในเขต: '+C.levels.map(k=>labels[k]+' '+s.results.rows.filter(r=>r.level===k).length).join(' / ')+' รายการ',
  ...s.results.notes,'ผู้วิเคราะห์: '+d.analyst+' · ผู้ตรวจทาน: '+d.reviewer+' · ตรวจทาน '+d.reviewTime+' (เวลาไทย)',
@@ -209,7 +243,7 @@ function installCaptureLegend(){
   const snapshot=valid()?applied:null;const data=await original.apply(this,args);if(!data)return data;
   if((valid()?applied:null)!==snapshot)throw Error('ผล ALOHA เปลี่ยนระหว่างบันทึกแผนที่ กรุณาลองใหม่');
   const lines=['เส้นประ = รัศมีค้นหาทรัพยากร (ไม่ใช่เขตอันตราย)'];
-  if(snapshot){lines.push('ALOHA · ผลนำเข้าที่ผู้กรอกยืนยัน: '+snapshot.data.chemical+' · '+snapshot.data.modelTime+' (เวลาไทย)');for(const k of C.levels){const list=snapshot.zones.filter(z=>z.level===k);if(!list.length)continue;const texts=[...new Set(list.map(z=>z.loc+' '+z.unit+' / '+(z.exposure||'ไม่ระบุเวลาอ้างอิง')))];lines.push('เขต'+labels[k]+' · '+(texts.length===1?texts[0]:'หลายขอบเขต / หลายเกณฑ์ ดูภาคผนวก'));}}
+  if(snapshot){lines.push('ALOHA · ผลนำเข้าที่ผู้กรอกยืนยัน: '+snapshot.data.chemical+' · '+(snapshot.data.modelTime||'ไม่ระบุเวลาเริ่มจำลอง')+' (เวลาไทย)');for(const k of C.levels){const list=snapshot.zones.filter(z=>z.level===k);if(!list.length)continue;const texts=[...new Set(list.map(z=>z.loc+' '+z.unit+' / '+(z.exposure||'ไม่ระบุเวลาอ้างอิง')))];lines.push('เขต'+labels[k]+' · '+(texts.length===1?texts[0]:'หลายขอบเขต / หลายเกณฑ์ ดูภาคผนวก'));}}
   else lines.push('ALOHA: ยังไม่มีผลจำลองที่ยืนยันสำหรับรายงานนี้');
   lines.push('ผลจำลองไม่ใช่ค่าตรวจวัดหรือคำสั่งอพยพ · รายละเอียดและข้อจำกัดในภาคผนวก ALOHA');
   const image=new Image();image.src=data;await image.decode();const canvas=document.createElement('canvas');canvas.width=image.naturalWidth||image.width;const scale=canvas.width/1972,lineHeight=38*scale,padding=22*scale;canvas.height=(image.naturalHeight||image.height)+Math.ceil(lines.length*lineHeight+padding*2);
@@ -235,7 +269,7 @@ window.ieatChemicalAloha={getSnapshot:()=>valid()?applied:null,getReportLines:te
  const weatherStatus=el('p');weatherStatus.id='alohaWeatherStatus';weatherStatus.setAttribute('role','status');
  const engine=el('p','เครื่องคำนวณ ALOHA: ยังไม่ได้เชื่อมต่อ · ยังสั่งโปรแกรม ALOHA จากเว็บไม่ได้ ข้อมูลที่เตรียมนี้ยังไม่ใช่ผลจำลอง');engine.id='alohaEngineStatus';engine.style.cssText='padding:9px;background:#fff8e7;margin:0';
  const credit=el('p');credit.style.fontSize='13px';credit.append(document.createTextNode('อากาศจากแบบจำลอง '));const creditLink=el('a','Open-Meteo.com (CC BY 4.0)');creditLink.href='https://open-meteo.com/';creditLink.target='_blank';creditLink.rel='noopener';credit.append(creditLink,document.createTextNode(' · ไม่ใช่ค่าตรวจวัดหน้างาน · การเติมอากาศไม่ทำให้เขต ALOHA คำนวณใหม่'));
- box.append(title,current,chooseLabel,chemicalStatus,inventory,actions,weatherStatus,engine,credit);form.prepend(box);
+ box.append(title,current,chooseLabel,chemicalStatus,inventory,actions);form.prepend(box);const extra=$('alohaAdvancedTools');if(extra){extra.append(weatherButton,draftButton,weatherStatus,engine,credit);}else box.append(weatherStatus,engine,credit);
  const provenance=el('input');provenance.type='hidden';provenance.name='automationSource';form.append(provenance);
  let key='',generation=0,loadingKey='',catalogChoices=[],writing=false,weatherRequest=0,weatherController=null;
  const owned=new Map(),weatherNames=['windFrom','windSpeed','windUnit','windHeight','temperature','atmosphere','weatherTime','weatherSource'];
@@ -298,6 +332,7 @@ window.ieatChemicalAloha={getSnapshot:()=>valid()?applied:null,getReportLines:te
  draftButton.onclick=()=>{
   const c=validContext();if(!c){setStatus('ค้นหาโรงงานให้รายงานพร้อมก่อน');return;}
   const values=metadata();const missing=[...form.querySelectorAll('[required]')].filter(n=>n.type==='checkbox'?!n.checked:!n.value).map(n=>n.name||n.dataset.key||n.id);
+  missing.push(...['concentration','state','source','release','duration','modelTime','modelVersion','windFrom','windSpeed','windHeight','temperature','atmosphere','weatherTime','weatherSource','sourceDetail','assumptions'].filter(n=>!field(n)?.value));
   const payload={schemaVersion:1,kind:'aloha-scenario-input',status:'draft-not-calculated',createdAt:new Date().toISOString(),timezone:'Asia/Bangkok',factory:{company:c.company,point:c.point,estate:c.summary?.estate||'',registrations:registrations(c)},parameters:values,missingFields:[...new Set(missing)],note:'ชุดข้อมูลเตรียมจำลอง ไม่ใช่ผล ALOHA; ต้องตรวจข้อมูลและใช้เครื่องที่ติดตั้ง ALOHA คำนวณก่อน'};
   const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'})),a=el('a');a.href=url;a.download='ALOHA-scenario-input.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);setStatus('ดาวน์โหลดข้อมูลเตรียมจำลองแล้ว ไฟล์นี้ยังไม่มีผลคำนวณหรือเขตอันตราย');
  };
