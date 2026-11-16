@@ -742,6 +742,28 @@ const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=r
 #riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){border:1px solid #a1afa4!important;border-radius:0!important;box-shadow:none!important}
 @media(max-width:1000px){#riskDashboard .risk-workspace{grid-template-columns:minmax(0,1fr)!important}#riskDashboard .workspace-data,#riskDashboard #riskMapSection{grid-column:1!important}#riskDashboard #riskMapSection{position:static!important}#riskDashboard #map{min-height:420px!important}}
 @media(max-width:540px){#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}#riskDashboard .dss-status-cards .inventory-card,#riskDashboard .dss-status-cards .inventory-card:nth-child(n+4){grid-column:span 1!important}#riskDashboard .emcc-reference-banner{font-size:22px!important}#riskDashboard #map{min-height:360px!important}}
+</style><style id="emcc-serc-palette-20261116">
+/* SERC reference palette applied only to Risk Dashboard surfaces; existing data and map layers unchanged */
+#riskDashboard{--serc-red:#c81036;--serc-orange:#f28b0c;--serc-yellow:#f9d92e;--serc-lightgreen:#85ca80;--serc-green:#4f9c50;--serc-teal:#78b8b3;background:#fff!important;color:#333!important}
+#riskDashboard .emcc-reference-banner{background:#fff!important;color:#222!important;border:0!important;box-shadow:none!important;padding:8px 0 16px!important;font-weight:600!important}
+#riskDashboard .emcc-reference-search label,#riskDashboard .emcc-reference-status-title h2,#riskDashboard .emcc-reference-map-heading{color:#333!important}
+#riskDashboard .emcc-reference-search-row button{background:var(--serc-green)!important;color:white!important;border-color:var(--serc-green)!important}
+#riskDashboard .emcc-reference-status-title,#riskDashboard #dssStatusSection,#riskDashboard #riskMapSection > article{border-color:#e2e2e2!important}
+#riskDashboard .emcc-reference-coverage{background:#fafafa!important;border-color:#ededed!important}
+#riskDashboard .emcc-reference-coverage strong{color:#333!important}
+#riskDashboard .emcc-reference-coverage-bar span{background:var(--serc-green)!important}
+#riskDashboard .dss-status-cards .inventory-card{background:#f6f6f6!important;border-color:#e5e5e5!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+1){background:#fce8ed!important;border-color:var(--serc-red)!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+2){background:#fff0d9!important;border-color:var(--serc-orange)!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+3){background:#fff8ce!important;border-color:var(--serc-yellow)!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+4){background:#eaf7e8!important;border-color:var(--serc-lightgreen)!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+5){background:#e3f2e4!important;border-color:var(--serc-green)!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+6){background:#e8f5f4!important;border-color:var(--serc-teal)!important}
+#riskDashboard .dss-status-cards .inventory-card .card-value strong{color:#333!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+1) .card-value strong{color:var(--serc-red)!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+2) .card-value strong{color:#a95d00!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(6n+5) .card-value strong{color:#337c38!important}
+#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){border-color:#e3e3e3!important}
 </style></head>
 <body>
 <div class="emcc-gis-header">
