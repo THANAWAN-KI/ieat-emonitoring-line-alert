@@ -434,6 +434,52 @@ html:not(.fire-risk-view) .riskmap-overview-quicklinks a{border-color:rgba(255,2
 html:not(.fire-risk-view) #coverageMap{border-radius:18px!important}
 @media(max-width:750px){html:not(.fire-risk-view) #riskmapEstateContent{grid-template-columns:minmax(0,1fr)!important}html:not(.fire-risk-view) #riskmapEstateContent> :is(.coverage-support-overview,#dssBriefCoverage,#coverageRiskSection,#dssBriefReadiness){grid-column:1!important}}
 </style>
+
+<style id="riskmap-reference-analytics-20261116">
+html:not(.fire-risk-view) .riskmap-overview-quicklinks{display:none!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading{padding:20px 26px!important;border-radius:14px!important;background:linear-gradient(110deg,#431c69,#78539b)!important;margin-bottom:16px!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading h1{font-size:clamp(24px,2.3vw,32px)!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-lead{margin-bottom:0!important}
+html:not(.fire-risk-view) #riskmapEstateContent{gap:14px!important}
+html:not(.fire-risk-view) #riskmapEstateContent>.coverage-support-overview{order:1!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#dssBriefCoverage{order:2!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#coverageRiskSection{order:3!important}
+html:not(.fire-risk-view) #riskmapEstateContent>#dssBriefReadiness{order:4!important}
+html:not(.fire-risk-view) #riskmapEstateContent>:is(.coverage-support-overview,#dssBriefCoverage,#coverageRiskSection,#dssBriefReadiness){border:1px solid #eae5f0!important;border-radius:13px!important;box-shadow:0 2px 14px #431c6908!important}
+html:not(.fire-risk-view) .riskmap-analysis-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px}
+html:not(.fire-risk-view) .riskmap-analysis-tile{display:flex;align-items:center;gap:12px;min-width:0;background:#fff;border:1px solid #e9e3ef;border-radius:12px;padding:14px 16px;text-decoration:none;color:#31283a;box-shadow:0 2px 12px #431c6908}
+html:not(.fire-risk-view) .riskmap-analysis-tile:hover{background:#faf7fd}
+html:not(.fire-risk-view) .riskmap-analysis-symbol{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:11px;background:#f1e9f8;color:#542577;font-size:22px}
+html:not(.fire-risk-view) .riskmap-analysis-tile b{display:block;color:#431c69;font-size:clamp(13px,1.3vw,17px);font-weight:600}
+html:not(.fire-risk-view) .riskmap-analysis-tile small{display:block;color:#786d80;font-size:11px;margin-top:3px}
+html:not(.fire-risk-view) .riskmap-risk-legend{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px;align-items:center}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-label{font-size:12px;color:#65596e;font-weight:600;margin-right:6px}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level{display:inline-flex;align-items:center;gap:7px;padding:9px 13px;border-radius:8px;font-size:12px;font-weight:600;color:#fff}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level:nth-of-type(1){background:#b92747}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level:nth-of-type(2){background:#e88721}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level:nth-of-type(3){background:#d7ad2b;color:#31251b}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level:nth-of-type(4){background:#6ebc81;color:#173e26}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level:nth-of-type(5){background:#328755}
+html:not(.fire-risk-view) .riskmap-risk-legend .risk-level:nth-of-type(6){background:#6b9ea6}
+html:not(.fire-risk-view) #coverageMap{border:1px solid #eae5f0!important}
+html:not(.fire-risk-view) #coverageMapView{height:clamp(540px,72vh,850px)!important}
+@media(max-width:1100px){html:not(.fire-risk-view) .riskmap-analysis-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){html:not(.fire-risk-view) .riskmap-analysis-strip{gap:8px}html:not(.fire-risk-view) .riskmap-analysis-tile{padding:10px;gap:7px}html:not(.fire-risk-view) .riskmap-analysis-symbol{flex-basis:30px;width:30px;height:30px;font-size:16px}html:not(.fire-risk-view) .riskmap-analysis-tile b{font-size:12px}}
+</style>
+<script id="riskmap-reference-analytics-ui">
+(()=>{
+if(document.documentElement.classList.contains('fire-risk-view'))return;
+const build=()=>{
+const heading=document.querySelector('#riskCoverage .riskmap-overview-heading');if(!heading||document.getElementById('riskmapAnalysisStrip'))return;
+const strip=document.createElement('nav');strip.id='riskmapAnalysisStrip';strip.className='riskmap-analysis-strip';strip.setAttribute('aria-label','หมวดข้อมูลวิเคราะห์');
+const items=[['✚','ข้อมูลสนับสนุนเหตุฉุกเฉิน','จุดช่วยเหลือและการประสานงาน','#coverageSupportTitle'],['▦','ข้อมูลโรงงาน DSS','ความครอบคลุมข้อมูลโรงงาน','#dssBriefCoverage'],['△','โรงงานที่เข้าข่ายความเสี่ยง','วิเคราะห์กลุ่มความเสี่ยง','#coverageRiskHeading'],['◇','ความพร้อมของทรัพยากร','อุปกรณ์และทรัพยากรตามแผน','#dssBriefReadiness']];
+for(const [icon,title,note,href] of items){const a=document.createElement('a');a.className='riskmap-analysis-tile';a.href=href;const i=document.createElement('span');i.className='riskmap-analysis-symbol';i.textContent=icon;const text=document.createElement('span');const b=document.createElement('b');b.textContent=title;const sm=document.createElement('small');sm.textContent=note;text.append(b,sm);a.append(i,text);strip.append(a)}
+heading.after(strip);
+const legend=document.createElement('div');legend.className='riskmap-risk-legend';legend.setAttribute('aria-label','ตัวอย่างระดับสีความเสี่ยง');const caption=document.createElement('span');caption.className='risk-label';caption.textContent='แนวทางแสดงระดับความเสี่ยง';legend.append(caption);for(const t of ['สูงมาก','สูง','ปานกลาง','ต่ำ','ต่ำมาก','อื่น ๆ']){const span=document.createElement('span');span.className='risk-level';span.textContent=t;legend.append(span)}const info=document.createElement('span');info.className='risk-label';info.textContent='สีเพื่ออธิบายรูปแบบ ไม่ใช่ผลประเมินจริง';legend.append(info);strip.after(legend);
+};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build();
+})();
+</script>
 </head>
 <body>
 <div class="emcc-gis-header">
