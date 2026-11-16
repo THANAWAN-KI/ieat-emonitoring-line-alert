@@ -627,6 +627,33 @@ const left=document.createElement('aside');left.id='emccRiskOverviewLeft';left.c
 const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=right.querySelector('h3');if(h)h.textContent='รายละเอียดพื้นที่และข้อมูลสนับสนุน'}
 };if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot()})();
 </script>
+
+<style id="emcc-hazard-dashboard-reference-20261116">
+/* Scoped visual refinement only: overview and map. Other modules and logic unchanged. */
+#riskCoverage{background:#f8fafc!important;border:1px solid #e8e9ef!important;border-radius:18px!important;padding:clamp(14px,2vw,28px)!important;box-shadow:0 8px 28px rgba(46,29,76,.055)!important}
+#riskCoverage .riskmap-overview-heading{background:#fff!important;border:1px solid #e9e6f0!important;border-radius:16px!important;padding:20px 24px!important;margin-bottom:16px!important}
+#riskCoverage #riskCoverageTitle{color:#392257!important;font-weight:700!important;letter-spacing:-.025em!important}
+#riskCoverage .riskmap-overview-quicklinks{gap:10px!important}
+#riskCoverage .riskmap-overview-quicklinks a{background:#fff!important;border:1px solid #e9e6f0!important;border-radius:12px!important;box-shadow:0 3px 12px rgba(47,31,74,.045)!important}
+#riskCoverage #coverageEstateForm{background:#fff!important;border:1px solid #e7e5ee!important;border-radius:12px!important;padding:12px!important}
+#riskCoverage :is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness){background:#fff!important;border:1px solid #e8e7ef!important;border-radius:14px!important;padding:clamp(14px,1.7vw,22px)!important;box-shadow:0 4px 16px rgba(34,23,61,.035)!important}
+#coverageMap{background:#fff!important;border:1px solid #e6e5ed!important;border-radius:18px!important;padding:clamp(14px,1.7vw,22px)!important;box-shadow:0 8px 28px rgba(46,29,76,.06)!important}
+#coverageMap #coverageMapTitle{color:#392257!important;font-weight:700!important}
+#coverageMap #coverageMapView{border:1px solid #e5e6ec!important;border-radius:14px!important;overflow:hidden!important;min-height:480px!important}
+#coverageMap .coverage-basemap-control{background:#f8f9fc!important;border:1px solid #e8e9f0!important;border-radius:10px!important;padding:9px 12px!important}
+#coverageMap .riskmap-map-key{background:#f8f9fc!important;border:1px solid #e9eaf0!important;border-radius:12px!important;padding:12px!important}
+#coverageMap .emcc-hazard-legend{margin:12px 0 16px;padding:12px;background:#fff;border:1px solid #e8e8f0;border-radius:12px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+#coverageMap .emcc-hazard-label{color:#37234f;font-weight:650;font-size:14px}
+#coverageMap .emcc-hazard-label small{display:block;font-size:11px;color:#737184;font-weight:400;margin-top:3px}
+#coverageMap .emcc-hazard-scale{display:grid;grid-template-columns:repeat(5,minmax(76px,1fr));gap:5px;flex:1;max-width:690px}
+#coverageMap .emcc-hazard-scale span{text-align:center;padding:12px 5px;border-radius:7px;font-size:12px;font-weight:600;color:#fff}
+#coverageMap .emcc-hazard-scale span:nth-child(1){background:#c91e47}
+#coverageMap .emcc-hazard-scale span:nth-child(2){background:#ed8b18}
+#coverageMap .emcc-hazard-scale span:nth-child(3){background:#f1d43c;color:#39332a}
+#coverageMap .emcc-hazard-scale span:nth-child(4){background:#83c981;color:#193b25}
+#coverageMap .emcc-hazard-scale span:nth-child(5){background:#46985b}
+@media(max-width:740px){#coverageMap .emcc-hazard-scale{width:100%;grid-template-columns:repeat(5,minmax(0,1fr))}#coverageMap .emcc-hazard-scale span{font-size:10px;padding:10px 2px}#coverageMap #coverageMapView{min-height:360px!important}}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
@@ -813,6 +840,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
   </section>
 </section>
 <section id="coverageMap" aria-labelledby="coverageMapTitle">
+  <div id="emccHazardRiskLegend" class="emcc-hazard-legend" aria-label="ระดับความเสี่ยงสำหรับการแสดงผลเชิงพื้นที่"><span class="emcc-hazard-label">ระดับความเสี่ยงบนแผนที่ <small>แนวทางการแสดงผล · ไม่ใช่ผลประเมินจริง</small></span><div class="emcc-hazard-scale"><span>สูงมาก</span><span>สูง</span><span>ปานกลาง</span><span>ต่ำ</span><span>ต่ำมาก</span></div></div>
   <div class="riskmap-map-eyebrow">GEOSPATIAL OVERVIEW</div><h2 id="coverageMapTitle">แผนที่ภาพรวมความเสี่ยงและจุดสนับสนุน</h2><p class="riskmap-map-description">สำรวจตำแหน่งนิคมอุตสาหกรรมและข้อมูลเชิงพื้นที่ประกอบการประเมินความเสี่ยง เลือกพื้นที่หรือเปลี่ยนแผนที่พื้นฐานเพื่อดูรายละเอียด</p>
   <div class="coverage-basemap-control"><label for="coverageBasemap">แผนที่พื้นฐาน</label>
     <select id="coverageBasemap" disabled aria-label="เลือกแผนที่พื้นฐาน">
