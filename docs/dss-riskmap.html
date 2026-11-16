@@ -742,46 +742,6 @@ const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=r
 #riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){border:1px solid #a1afa4!important;border-radius:0!important;box-shadow:none!important}
 @media(max-width:1000px){#riskDashboard .risk-workspace{grid-template-columns:minmax(0,1fr)!important}#riskDashboard .workspace-data,#riskDashboard #riskMapSection{grid-column:1!important}#riskDashboard #riskMapSection{position:static!important}#riskDashboard #map{min-height:420px!important}}
 @media(max-width:540px){#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}#riskDashboard .dss-status-cards .inventory-card,#riskDashboard .dss-status-cards .inventory-card:nth-child(n+4){grid-column:span 1!important}#riskDashboard .emcc-reference-banner{font-size:22px!important}#riskDashboard #map{min-height:360px!important}}
-</style><style id="emcc-serc-layout-20261116">
-/* SERC-inspired dashboard layout; scoped to dashboard only. */
-#riskDashboard{--sr:#c81036;--so:#f28b0c;--sy:#f9d92e;--sl:#85ca80;--sg:#4f9c50;--st:#78b8b3;background:#fff!important;color:#292929!important;padding:22px!important;border:0!important;box-shadow:none!important}
-#riskDashboard .emcc-dashboard-intro{background:#fff!important;color:#222!important;border:0!important;box-shadow:none!important;padding:8px 4px 20px!important}
-#riskDashboard .emcc-dashboard-intro h2{color:#222!important;font-size:clamp(23px,2.5vw,34px)!important;font-weight:600!important}
-#riskDashboard .emcc-dashboard-kicker{color:#777!important}
-#riskDashboard .serc-risk-levels{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:4px 0 22px}
-#riskDashboard .serc-risk-levels>div{min-height:68px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 4px;color:#fff;font-size:13px;font-weight:600;border-radius:0;box-shadow:none}
-#riskDashboard .serc-risk-levels>div:nth-child(1){background:var(--sr)}
-#riskDashboard .serc-risk-levels>div:nth-child(2){background:var(--so)}
-#riskDashboard .serc-risk-levels>div:nth-child(3){background:var(--sy);color:#222}
-#riskDashboard .serc-risk-levels>div:nth-child(4){background:var(--sl);color:#222}
-#riskDashboard .serc-risk-levels>div:nth-child(5){background:var(--sg)}
-#riskDashboard .serc-risk-levels>div:nth-child(6){background:var(--st);color:#222}
-#riskDashboard .risk-workspace{display:grid!important;grid-template-columns:minmax(290px,30%) minmax(0,70%)!important;gap:16px!important;align-items:start!important;background:#fff!important}
-#riskDashboard .workspace-data{min-width:0!important;order:1!important;background:#fff!important}
-#riskDashboard .workspace-map{min-width:0!important;order:2!important;position:sticky;top:12px}
-#riskDashboard .emcc-reference-banner{background:#fff!important;color:#252525!important;border:0!important;box-shadow:none!important;font-size:20px!important;padding:8px 0!important}
-#riskDashboard .emcc-reference-search{background:#fff!important;border:0!important;box-shadow:none!important;padding:8px 0 18px!important}
-#riskDashboard .emcc-reference-search label{color:#333!important}
-#riskDashboard .emcc-reference-search-row button{background:var(--sg)!important;border-color:var(--sg)!important;color:#fff!important}
-#riskDashboard .emcc-reference-status-title{background:#fff!important;border:0!important;box-shadow:none!important;padding:8px 0!important}
-#riskDashboard .emcc-reference-status-title h2{color:#333!important}
-#riskDashboard #dssStatusSection{background:#fff!important;border:1px solid #e4e4e4!important;box-shadow:none!important;border-radius:0!important;padding:12px!important}
-#riskDashboard .emcc-reference-coverage{background:#fff!important;border:0!important;box-shadow:none!important}
-#riskDashboard .emcc-reference-coverage strong{color:#333!important}
-#riskDashboard .emcc-reference-coverage-bar span{background:var(--sg)!important}
-#riskDashboard .dss-status-cards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
-#riskDashboard .dss-status-cards .inventory-card{background:#fafafa!important;border:1px solid #ddd!important;box-shadow:none!important;border-radius:0!important;min-width:0!important}
-#riskDashboard .dss-status-cards .inventory-card:nth-child(1){background:#e9f5e9!important;border-color:var(--sg)!important}
-#riskDashboard .dss-status-cards .inventory-card:nth-child(2){background:#fff0d9!important;border-color:var(--so)!important}
-#riskDashboard .dss-status-cards .inventory-card:nth-child(3){background:#fff8d7!important;border-color:var(--sy)!important}
-#riskDashboard .dss-status-cards .inventory-card:nth-child(4){background:#fde8ec!important;border-color:var(--sr)!important}
-#riskDashboard .dss-status-cards .inventory-card:nth-child(5){background:#e8f5f4!important;border-color:var(--st)!important}
-#riskDashboard .dss-status-cards .inventory-card .card-value strong{color:#303030!important}
-#riskDashboard .workspace-map>article{background:#fff!important;border:1px solid #e1e1e1!important;box-shadow:none!important;border-radius:0!important;padding:12px!important}
-#riskDashboard .emcc-reference-map-heading{color:#252525!important}
-#riskDashboard #map{height:min(72vh,800px)!important;min-height:520px!important;border-radius:0!important}
-#riskDashboard .workspace-data .panel{box-shadow:none!important;border-color:#e7e7e7!important}
-@media(max-width:950px){#riskDashboard .risk-workspace{grid-template-columns:1fr!important}#riskDashboard .workspace-map{position:static!important;order:1!important}#riskDashboard .workspace-data{order:2!important}#riskDashboard .serc-risk-levels{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#riskDashboard .serc-risk-levels>div{min-height:54px;font-size:11px}#riskDashboard #map{min-height:420px!important}}
 </style></head>
 <body>
 <div class="emcc-gis-header">
@@ -993,7 +953,7 @@ if(new URLSearchParams(location.search).get('hazard')==='fire'){
   <p class="coverage-map-note">เปิดชั้นข้อมูลเพื่อดูสัญลักษณ์และรายละเอียดของข้อมูลเพิ่มเติม</p>
 </section>
 </div>
-<section id="riskDashboard"><header class="emcc-dashboard-intro"><div><span class="emcc-dashboard-kicker">EMCC / RISK INTELLIGENCE</span><h2>แดชบอร์ดวิเคราะห์ความเสี่ยง</h2><p>ภาพรวมข้อมูล DSS · กลุ่มโรงงานเสี่ยง · ทรัพยากรสนับสนุนและแผนที่</p></div><span class="emcc-dashboard-live">● ข้อมูลตามแหล่งต้นทาง</span></header><div class="serc-risk-levels" aria-label="ระดับความเสี่ยงตามสีอ้างอิง"><div>เสี่ยงสูงมาก</div><div>เสี่ยงสูง</div><div>เสี่ยงปานกลาง</div><div>เสี่ยงต่ำ</div><div>เสี่ยงต่ำมาก</div><div>อื่น ๆ</div></div><div class="risk-workspace"><div class="workspace-data">
+<section id="riskDashboard"><header class="emcc-dashboard-intro"><div><span class="emcc-dashboard-kicker">EMCC / RISK INTELLIGENCE</span><h2>แดชบอร์ดวิเคราะห์ความเสี่ยง</h2><p>ภาพรวมข้อมูล DSS · กลุ่มโรงงานเสี่ยง · ทรัพยากรสนับสนุนและแผนที่</p></div><span class="emcc-dashboard-live">● ข้อมูลตามแหล่งต้นทาง</span></header><div class="risk-workspace"><div class="workspace-data">
 <div class="emcc-reference-banner">แผนที่ความเสี่ยงนิคมฯ</div>
 <div class="emcc-reference-search"><label for="emccReferenceEstate">ค้นหานิคมอุตสาหกรรม</label><div class="emcc-reference-search-row"><input id="emccReferenceEstate" type="search" placeholder="พิมพ์ชื่อนิคมอุตสาหกรรม" autocomplete="off"><button type="button" id="emccReferenceSearchButton">ค้นหา</button></div></div>
 <div class="emcc-reference-status-title"><h2>สถานะการนำเข้าข้อมูลโรงงานในระบบ DSS</h2><p>ข้อมูลสถานะตามระบบ DSS</p></div>
