@@ -704,7 +704,45 @@ const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=r
 @media(max-width:650px){#riskDashboard{padding:10px!important}#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}#riskDashboard .emcc-dashboard-intro{padding:14px!important}#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){padding:12px!important}}
 </style>
 <style id="fire-hide-overview-risk-scale">.fire-risk-view :is(#emccHazardRiskLegend,.riskmap-risk-levels,.riskmap-risk-explain){display:none!important}</style>
-</head>
+<style id="emcc-reference-layout-20261116">
+/* Reference-inspired layout: only the Risk Dashboard, no changes to map logic or other pages. */
+#riskDashboard{background:#fff!important;border-radius:0!important;padding:12px 14px!important;color:#41584a!important}
+#riskDashboard .emcc-dashboard-intro{display:none!important}
+#riskDashboard .risk-workspace{display:grid!important;grid-template-columns:minmax(0, 1.55fr) minmax(380px,1fr)!important;gap:20px!important;align-items:start!important}
+#riskDashboard .workspace-data{width:100%!important;max-width:none!important;min-width:0!important;grid-column:1!important}
+#riskDashboard #riskMapSection{width:100%!important;min-width:0!important;max-width:none!important;grid-column:2!important;position:sticky!important;top:12px!important;align-self:start!important}
+#riskDashboard .emcc-reference-banner{background:#f3d26d!important;color:#53604b!important;font-size:clamp(22px,2.6vw,34px)!important;font-weight:750!important;padding:15px 18px!important;border:1px solid #516957!important;box-shadow:3px 3px 0 #d7d9cc!important;margin-bottom:16px!important;line-height:1.3!important}
+#riskDashboard .emcc-reference-search{margin:0 0 14px!important}
+#riskDashboard .emcc-reference-search label{display:block;font-size:18px!important;font-weight:700!important;color:#4a5f50!important;margin:0 0 9px!important}
+#riskDashboard .emcc-reference-search-row{display:flex;gap:7px}
+#riskDashboard .emcc-reference-search-row input{flex:1;min-width:0;height:43px!important;padding:9px 12px!important;border:1px solid #829387!important;border-radius:0!important;background:#fafbf9!important;color:#374d40!important}
+#riskDashboard .emcc-reference-search-row button{padding:0 15px!important;border:1px solid #cadbd0!important;border-radius:0!important;background:#edf5ef!important;color:#286a4a!important;font-weight:650!important}
+#riskDashboard .emcc-reference-status-title{border:1px solid #8b9c8d;border-bottom:0;padding:14px 13px 0;background:#fff}
+#riskDashboard .emcc-reference-status-title h2{margin:0!important;font-size:19px!important;font-weight:700!important;color:#496253!important}
+#riskDashboard .emcc-reference-status-title p{font-size:12px!important;color:#758176!important;margin:5px 0 0!important}
+#riskDashboard #dssStatusSection{border:1px solid #8b9c8d!important;border-top:0!important;border-radius:0!important;box-shadow:none!important;padding:12px 13px 15px!important}
+#riskDashboard .emcc-reference-coverage{display:flex;align-items:center;gap:12px;justify-content:space-between;margin:0 0 13px!important;padding:10px 12px;background:#f5f7f4;border:1px solid #e0e7df}
+#riskDashboard .emcc-reference-coverage span{font-size:12px;color:#566b5d}
+#riskDashboard .emcc-reference-coverage strong{display:block;font-size:15px;color:#315a43;margin-top:4px}
+#riskDashboard .emcc-reference-coverage-bar{width:35%;height:8px;background:#e2e6e2;border-radius:12px;overflow:hidden}
+#riskDashboard .emcc-reference-coverage-bar span{display:block;height:100%;width:0;background:#27835b;transition:width .3s}
+#riskDashboard .dss-status-cards{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:9px!important}
+#riskDashboard .dss-status-cards .inventory-card{grid-column:span 2!important;border-radius:0!important;background:#f2f5f1!important;border:1px solid #c5d1c7!important;min-height:105px!important;padding:12px!important}
+#riskDashboard .dss-status-cards .inventory-card:nth-child(n+4){grid-column:span 3!important}
+#riskDashboard .dss-status-cards .inventory-card::before{display:none!important}
+#riskDashboard .dss-status-cards .inventory-card.dss-approved{background:#e7f3e9!important;border-color:#8ab79b!important}
+#riskDashboard .dss-status-cards .inventory-card.dss-review,#riskDashboard .dss-status-cards .inventory-card.dss-draft{background:#fbf3d8!important;border-color:#d4bb65!important}
+#riskDashboard .dss-status-cards .inventory-card.dss-none{background:#f9e9e8!important;border-color:#dca29d!important}
+#riskDashboard .dss-status-cards .inventory-card.dss-chemicals{background:#f1eafa!important;border-color:#c9b1df!important}
+#riskDashboard .dss-status-cards .inventory-card .card-value strong{font-size:27px!important;color:#365846!important}
+#riskDashboard .dss-status-cards .inventory-card.dss-none .card-value strong{color:#ae4e4c!important}
+#riskDashboard #riskMapSection > article{border:1px solid #819788!important;border-radius:0!important;box-shadow:none!important;padding:14px!important}
+#riskDashboard .emcc-reference-map-heading{font-size:19px!important;font-weight:700!important;color:#596776!important;margin:4px 0 13px!important}
+#riskDashboard #map{min-height:570px!important;border-radius:0!important}
+#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){border:1px solid #a1afa4!important;border-radius:0!important;box-shadow:none!important}
+@media(max-width:1000px){#riskDashboard .risk-workspace{grid-template-columns:minmax(0,1fr)!important}#riskDashboard .workspace-data,#riskDashboard #riskMapSection{grid-column:1!important}#riskDashboard #riskMapSection{position:static!important}#riskDashboard #map{min-height:420px!important}}
+@media(max-width:540px){#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}#riskDashboard .dss-status-cards .inventory-card,#riskDashboard .dss-status-cards .inventory-card:nth-child(n+4){grid-column:span 1!important}#riskDashboard .emcc-reference-banner{font-size:22px!important}#riskDashboard #map{min-height:360px!important}}
+</style></head>
 <body>
 <div class="emcc-gis-header">
 <header class="emcc-gis-brand" >
@@ -916,6 +954,9 @@ if(new URLSearchParams(location.search).get('hazard')==='fire'){
 </section>
 </div>
 <section id="riskDashboard"><header class="emcc-dashboard-intro"><div><span class="emcc-dashboard-kicker">EMCC / RISK INTELLIGENCE</span><h2>แดชบอร์ดวิเคราะห์ความเสี่ยง</h2><p>ภาพรวมข้อมูล DSS · กลุ่มโรงงานเสี่ยง · ทรัพยากรสนับสนุนและแผนที่</p></div><span class="emcc-dashboard-live">● ข้อมูลตามแหล่งต้นทาง</span></header><div class="risk-workspace"><div class="workspace-data">
+<div class="emcc-reference-banner">แผนที่ความเสี่ยงนิคมฯ</div>
+<div class="emcc-reference-search"><label for="emccReferenceEstate">ค้นหานิคมอุตสาหกรรม</label><div class="emcc-reference-search-row"><input id="emccReferenceEstate" type="search" placeholder="พิมพ์ชื่อนิคมอุตสาหกรรม" autocomplete="off"><button type="button" id="emccReferenceSearchButton">ค้นหา</button></div></div>
+<div class="emcc-reference-status-title"><h2>สถานะการนำเข้าข้อมูลโรงงานในระบบ DSS</h2><p>ข้อมูลสถานะตามระบบ DSS</p></div>
 
 
 
@@ -923,7 +964,7 @@ if(new URLSearchParams(location.search).get('hazard')==='fire'){
 <section id="inventory" class="inventory" aria-label="จำนวนข้อมูลทั้ง 8 ประเภท"></section>
 
 <section id="dssStatusSection" aria-label="ข้อมูล DSS และสารเคมี">
-<div class="inventory dss-status-cards"><article class="inventory-card dss-approved" style="--status-bg:#4F7D32" title="สถานะ DSS 1 ม.ค.–30 ก.ย. 2569"><span class="card-label">อนุมัติแล้ว</span><div class="card-value"><strong id="dssApproved">…</strong></div><small>รายการ</small></article>
+<div class="emcc-reference-coverage"><div><span>สถานะข้อมูลโรงงาน DSS</span><strong id="emccReferenceCoverageValue">กำลังโหลด…</strong></div><div class="emcc-reference-coverage-bar"><span id="emccReferenceCoverageBar"></span></div></div><div class="inventory dss-status-cards"><article class="inventory-card dss-approved" style="--status-bg:#4F7D32" title="สถานะ DSS 1 ม.ค.–30 ก.ย. 2569"><span class="card-label">อนุมัติแล้ว</span><div class="card-value"><strong id="dssApproved">…</strong></div><small>รายการ</small></article>
 <article class="inventory-card dss-review" style="--status-bg:#FFD16A" title="สถานะ DSS 1 ม.ค.–30 ก.ย. 2569"><span class="card-label">อยู่ระหว่างการตรวจสอบ</span><div class="card-value"><strong id="dssReview">…</strong></div><small>รายการ</small></article>
 <article class="inventory-card dss-draft" style="--status-bg:#F5B52E" title="สถานะ DSS 1 ม.ค.–30 ก.ย. 2569"><span class="card-label">อยู่ระหว่างการจัดทำ</span><div class="card-value"><strong id="dssDraft">…</strong></div><small>รายการ</small></article>
 <article class="inventory-card dss-none" style="--status-bg:#D9361E" title="สถานะ DSS 1 ม.ค.–30 ก.ย. 2569"><span class="card-label">ไม่มีชุดข้อมูล</span><div class="card-value"><strong id="dssNone">…</strong></div><small>รายการ</small></article>
@@ -958,7 +999,7 @@ if(new URLSearchParams(location.search).get('hazard')==='fire'){
 </section>
 
 
-</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
+</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><h2 class="emcc-reference-map-heading">แผนที่นิคมฯ และจุดช่วยเหลือ</h2><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
 <section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจตัวอย่างทั้ง 3 หน้า + ภาคผนวก แล้วกด “ดาวน์โหลดรายงาน PNG (3 หน้า + ภาคผนวก)” ด้านล่าง</p><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe>
 <section id="riskMapLinePanel" aria-labelledby="riskMapLineTitle">
   <h3 id="riskMapLineTitle">ข้อความสำหรับส่งทาง LINE</h3>
@@ -3905,4 +3946,18 @@ if(map.parentElement!==overview)overview.insertBefore(map,estate);
 const levels=map.querySelector('.riskmap-risk-levels');if(levels)levels.setAttribute('aria-label','คำอธิบายสีระดับความเสี่ยง ไม่ใช่คะแนนจริง');
 };if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build()})();
 </script>
-</body></html>
+<script id="emcc-reference-layout-20261116-logic">
+(function(){
+ const init=()=>{
+ const input=document.getElementById('emccReferenceEstate'),btn=document.getElementById('emccReferenceSearchButton'),source=document.getElementById('chemicalEstate');
+ const run=()=>{const query=(input?.value||'').trim().toLocaleLowerCase('th');if(!source)return;const options=[...source.options];const match=options.find(o=>o.value&&o.textContent.toLocaleLowerCase('th').includes(query));if(!query){source.value='';source.dispatchEvent(new Event('change',{bubbles:true}));return}if(match){source.value=match.value;source.dispatchEvent(new Event('change',{bubbles:true}))}else{input.setCustomValidity('ไม่พบชื่อนิคมอุตสาหกรรมในรายการ');input.reportValidity();setTimeout(()=>input.setCustomValidity(''),1500)}};
+ btn?.addEventListener('click',run);input?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run()}});
+ const observer=new MutationObserver(()=>{if(!source||!input||document.activeElement===input)return;const selected=source.selectedOptions?.[0];if(selected&&source.value)input.value=selected.textContent.trim()});
+ if(source)observer.observe(source,{attributes:true,childList:true,subtree:true});
+ const coverage=document.getElementById('emccReferenceCoverageValue'),bar=document.getElementById('emccReferenceCoverageBar');
+ const refresh=()=>{const parse=id=>{const t=document.getElementById(id)?.textContent||'';const n=Number(t.replace(/[^\d]/g,''));return /\d/.test(t)?n:null};const approved=parse('dssApproved'),review=parse('dssReview'),draft=parse('dssDraft'),none=parse('dssNone');if([approved,review,draft,none].some(v=>v===null))return;const total=approved+review+draft+none;const pct=total?Math.round(approved/total*1000)/10:0;coverage.textContent='อนุมัติ '+approved.toLocaleString('th-TH')+' จาก '+total.toLocaleString('th-TH')+' รายการ ('+pct+'%)';bar.style.width=pct+'%'};
+ const counts=document.getElementById('dssStatusSection');if(counts)new MutationObserver(refresh).observe(counts,{subtree:true,childList:true,characterData:true});refresh();
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script></body></html>
