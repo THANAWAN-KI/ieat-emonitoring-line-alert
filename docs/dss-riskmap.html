@@ -662,6 +662,43 @@ const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=r
  document.querySelectorAll('link[rel~="icon"]').forEach(link=>{link.type='image/svg+xml';link.href=href;});
 })();
 </script>
+
+<style id="emcc-dashboard-polish-20261116">
+/* Dashboard-only visual system. Preserve data IDs, charts, map, interactions. */
+#riskDashboard{--emcc-purple:#57307d;--emcc-ink:#273044;--emcc-line:#e5e8f0;--emcc-muted:#6c7485;color:var(--emcc-ink)!important;background:#f6f8fc!important;border-radius:20px!important;padding:clamp(12px,2vw,26px)!important}
+#riskDashboard .emcc-dashboard-intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:#fff;border:1px solid var(--emcc-line);border-radius:16px;padding:18px 22px;margin-bottom:18px;box-shadow:0 4px 18px rgba(27,35,59,.035)}
+#riskDashboard .emcc-dashboard-kicker{display:block;font-size:10px;font-weight:750;letter-spacing:.16em;color:#7b56a1;margin-bottom:5px}
+#riskDashboard .emcc-dashboard-intro h2{margin:0!important;color:#35214e!important;font-size:clamp(20px,2vw,27px)!important;font-weight:750!important}
+#riskDashboard .emcc-dashboard-intro p{margin:5px 0 0!important;color:#687186!important;font-size:13px!important}
+#riskDashboard .emcc-dashboard-live{font-size:11px;color:#536578;background:#f3f5f9;border:1px solid #e4e8ef;border-radius:30px;padding:8px 12px;white-space:nowrap}
+#riskDashboard .risk-workspace{gap:16px!important;align-items:start!important}
+#riskDashboard .workspace-data{min-width:0!important}
+#riskDashboard :is(#inventory,#dssStatusSection,.chemical-details-panel,.operating-zone-section,.emergency-support-section,#riskMapSection > article){border:1px solid var(--emcc-line)!important;border-radius:15px!important;background:#fff!important;box-shadow:0 5px 20px rgba(33,39,69,.045)!important;overflow:hidden}
+#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){padding:16px!important;margin-bottom:14px!important}
+#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section) :is(h2,h3){color:#35214e!important;font-weight:700!important;letter-spacing:-.01em}
+#riskDashboard #inventory{padding:12px!important;margin-bottom:14px!important}
+#riskDashboard #dssStatusSection{padding:16px!important;margin-bottom:14px!important}
+#riskDashboard .dss-status-cards{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:9px!important}
+#riskDashboard .dss-status-cards .inventory-card{min-width:0!important;border:1px solid #e7e9ef!important;border-radius:11px!important;background:#fafbfe!important;box-shadow:none!important;padding:13px 11px!important;position:relative!important;overflow:hidden!important;color:#273044!important}
+#riskDashboard .dss-status-cards .inventory-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--status-bg,#76529c)}
+#riskDashboard .dss-status-cards .inventory-card .card-label{font-size:12px!important;font-weight:650!important;color:#4b5264!important;line-height:1.5!important}
+#riskDashboard .dss-status-cards .inventory-card .card-value strong{font-size:clamp(22px,2.1vw,32px)!important;color:#2f2940!important;font-weight:750!important;font-variant-numeric:tabular-nums}
+#riskDashboard .dss-status-cards .inventory-card small{font-size:11px!important;color:#727b8b!important}
+#riskDashboard #dssStatusNote{font-size:11px!important;color:#737b8c!important;margin:10px 0 0!important}
+#riskDashboard .chemical-detail-filters{background:#f8f9fd!important;border:1px solid #e9eaf1!important;border-radius:11px!important;padding:12px!important;gap:10px!important}
+#riskDashboard :is(input,select){border-radius:8px!important;border-color:#dfe3ec!important;background-color:#fff!important}
+#riskDashboard :is(.chemical-detail-table,.matrix){border-collapse:separate!important;border-spacing:0!important;width:100%!important}
+#riskDashboard :is(.chemical-detail-table,.matrix) thead th{background:#f2f0f8!important;color:#493663!important;font-weight:700!important;border-bottom:1px solid #e1dbea!important;padding:11px 10px!important}
+#riskDashboard :is(.chemical-detail-table,.matrix) tbody td{border-bottom:1px solid #edf0f5!important;padding:10px!important;color:#404a5c!important}
+#riskDashboard :is(.chemical-detail-table,.matrix) tbody tr:nth-child(even){background:#fafbfe!important}
+#riskDashboard :is(.chemical-detail-table,.matrix) tbody tr:hover{background:#f3f0fa!important}
+#riskDashboard #riskMapSection > article{padding:12px!important}
+#riskDashboard #map{border-radius:11px!important;overflow:hidden!important}
+#riskDashboard .map-controls{background:#f8f9fd!important;border-radius:10px!important;padding:9px!important;margin-bottom:9px!important}
+#riskDashboard :is(.chemical-detail-pages button,.emergency-support-tools button,.map-toolbar-actions button){border-radius:9px!important}
+@media(max-width:1100px){#riskDashboard .dss-status-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:650px){#riskDashboard{padding:10px!important}#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}#riskDashboard .emcc-dashboard-intro{padding:14px!important}#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){padding:12px!important}}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
@@ -866,7 +903,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
   <p class="coverage-map-note">เปิดชั้นข้อมูลเพื่อดูสัญลักษณ์และรายละเอียดของข้อมูลเพิ่มเติม</p>
 </section>
 </div>
-<section id="riskDashboard"><div class="risk-workspace"><div class="workspace-data">
+<section id="riskDashboard"><header class="emcc-dashboard-intro"><div><span class="emcc-dashboard-kicker">EMCC / RISK INTELLIGENCE</span><h2>แดชบอร์ดวิเคราะห์ความเสี่ยง</h2><p>ภาพรวมข้อมูล DSS · กลุ่มโรงงานเสี่ยง · ทรัพยากรสนับสนุนและแผนที่</p></div><span class="emcc-dashboard-live">● ข้อมูลตามแหล่งต้นทาง</span></header><div class="risk-workspace"><div class="workspace-data">
 
 
 
