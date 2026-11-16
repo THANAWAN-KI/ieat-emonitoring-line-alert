@@ -3401,9 +3401,11 @@ html:not(.fire-risk-view) #riskCoverage .overview-empty{padding:20px;background:
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness,#coverageMap,.overview-chart,.overview-followup,.overview-summary-card,.overview-followup-item,.dss-risk-table-wrap,.coverage-support-card,.riskmap-overview-heading,.riskmap-overview-left,.riskmap-geo-insights){border-radius:0!important;box-shadow:none!important}
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage :is(#dssCoverageTotals,#dssBriefDssCards,#dssCoverageBar,#dssResourceChart,#coverageRisk,#coverageSupportCards){display:none!important}
 html:not(.fire-risk-view) #riskmapEstateContent>#overviewFollowup{order:0!important;grid-column:1/-1!important}
-
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage #riskmapEstateContent>:is(#dssBriefCoverage,#coverageRiskSection,.coverage-support-overview,#dssBriefReadiness){grid-column:1/-1!important}
 html:not(.fire-risk-view) body #riskmapOverviewPanel #riskCoverage .overview-plot{max-width:1000px;margin-inline:auto}
+html:not(.fire-risk-view) body #riskmapOverviewPanel #overviewScopePanel #coverageEstateForm{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;margin:8px 0 14px!important;padding:0!important;border:0!important;background:#fff!important;box-shadow:none!important}
+html:not(.fire-risk-view) #overviewScopePanel #coverageEstateForm:before{display:none!important}
+html:not(.fire-risk-view) #overviewScopePanel #coverageEstateSearch{width:100%;min-width:0;box-sizing:border-box;min-height:44px}
 </style>
 <script id="overview-clarity-logic">(()=>{
 'use strict';
@@ -3472,6 +3474,7 @@ function boot(){
  if(!$('riskCoverage')||$('overviewSummary'))return;
  const header=el('section',null,'overview-scope-panel');header.id='overviewScopePanel';const scope=el('strong');scope.id='overviewScope';scope.setAttribute('role','status');const reset=el('button','ดูทุกนิคมฯ');reset.type='button';reset.onclick=()=>{const select=$('coverageEstate');select.value='';$('coverageEstateSearch').value='';select.dispatchEvent(new Event('change',{bubbles:true}));};header.append(scope,reset);
  const summary=el('div');summary.id='overviewSummary';header.append(summary);const sources=el('p');sources.id='overviewSources';header.append(sources);$('coverageMap').before(header);
+ requestAnimationFrame(()=>{const form=$('coverageEstateForm'),heading=$('coverageEstateHeading');if(heading)header.insertBefore(heading,summary);if(form)header.insertBefore(form,summary);$('coverageMap').before(header);});
  const add=(id,target)=>{const e=el('div');e.id=id;$(target).prepend(e);};add('overviewDssPlots','dssBriefCoverage');add('overviewRiskPlot','coverageRiskSection');const supportPlot=el('div');supportPlot.id='overviewSupportPlot';$('coverageSupportCards').before(supportPlot);add('overviewResourcePlot','dssBriefReadiness');
  // Put headings and explanatory text above plots.
  for(const [plot,title]of [['overviewDssPlots','dssBriefCoverageTitle'],['overviewRiskPlot','coverageRiskHeading'],['overviewResourcePlot','dssBriefReadinessTitle']])$(title)?.after($(plot));
