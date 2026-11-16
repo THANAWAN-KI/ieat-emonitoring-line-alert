@@ -10,6 +10,10 @@ html:not(.fire-risk-view) :is(#dssBriefWorkflow,#dssBriefReview,#emergencyReport
 </style>
 
 <meta charset="utf-8">
+<script id="route-dedicated-fire-report">
+(()=>{if(new URLSearchParams(location.search).get('hazard')!=='fire')return;const url=new URL('./fire-report.html',location.href);url.search=location.search;url.searchParams.set('view','data');url.searchParams.set('hazard','fire');url.hash=location.hash;location.replace(url.href);})();
+</script>
+
 <script id="riskmap-first-paint">
 document.documentElement.classList.add('riskmap-booting');
 document.addEventListener('submit',event=>{
@@ -699,6 +703,7 @@ const right=workspace.querySelector('.riskmap-geo-insights');if(right){const h=r
 @media(max-width:1100px){#riskDashboard .dss-status-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:650px){#riskDashboard{padding:10px!important}#riskDashboard .dss-status-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}#riskDashboard .emcc-dashboard-intro{padding:14px!important}#riskDashboard :is(.chemical-details-panel,.operating-zone-section,.emergency-support-section){padding:12px!important}}
 </style>
+<style id="fire-hide-overview-risk-scale">.fire-risk-view :is(#emccHazardRiskLegend,.riskmap-risk-levels,.riskmap-risk-explain){display:none!important}</style>
 </head>
 <body>
 <div class="emcc-gis-header">
