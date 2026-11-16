@@ -400,6 +400,15 @@ const boot=()=>{create();sync();let queued=false;const targets=configs.map(c=>do
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 </script>
+
+<style id="riskmap-remove-black-outlined-areas">
+/* Remove the heavy framed sidebar and header highlighted in the screenshot. */
+html:not(.fire-risk-view) .riskmap-shared-workspace>.riskmap-overview-rail,
+html:not(.fire-risk-view) .riskmap-overview-rail{display:none!important;border:0!important;box-shadow:none!important}
+html:not(.fire-risk-view) .riskmap-shared-workspace{display:block!important;grid-template-columns:minmax(0,1fr)!important}
+html:not(.fire-risk-view) .riskmap-workspace-body{width:100%!important;grid-column:1/-1!important}
+html:not(.fire-risk-view) #riskCoverage .riskmap-overview-heading{border:0!important;outline:0!important;box-shadow:0 8px 22px rgba(67,28,105,.08)!important}
+</style>
 </head>
 <body>
 <div class="emcc-gis-header">
