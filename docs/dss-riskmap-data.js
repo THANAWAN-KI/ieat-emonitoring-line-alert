@@ -69,8 +69,8 @@
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
  const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30"><path d="M12 28S3 17 3 11a9 9 0 0 1 18 0c0 6-9 17-9 17Z" fill="#e87549" stroke="#26312f" stroke-width="1.6"/><path d="M12 7v6m0 3v.5" stroke="#26312f" stroke-width="2" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
-  const fireView=new URLSearchParams(location.search).get('hazard')==='fire';
-  const chemicalView=document.documentElement.classList.contains('chemical-report-view');
+  // Reuse the fire report's map presentation and layers without changing the incident type.
+  const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
   const form=$('coverageIncidentForm'), matches=$('coverageFactoryMatches'), results=$('coverageNearbyResults');
   if(!form)return;
   const message=$('coverageIncidentStatus'), radius=$('coverageIncidentRadius'), type=$('coverageIncidentType'), keyword=$('coverageSupportQuery');
@@ -163,7 +163,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:chemicalView?[77,96,85,.015]:fireView?[85,56,121,.055]:[184,46,52,.025],outline:chemicalView?{color:'#4d6055',width:1.2,style:'short-dash'}:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
       url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
@@ -417,7 +417,8 @@
   if(typeof window.require!=='function'){status.textContent='โหลดระบบแผนที่ไม่ได้';return;}
   window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel','esri/layers/GeoJSONLayer','esri/widgets/DistanceMeasurement2D'],
     (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel,GeoJSONLayer,DistanceMeasurement2D)=>{
-    const fireView=new URLSearchParams(location.search).get('hazard')==='fire';
+    // Reuse the fire report's map presentation and layers without changing the incident type.
+  const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
     const riskNames=riskFields.map(f=>f.field);
     const marker=(style,color,size=11)=>({type:'simple-marker',style,color,size,outline:{color:'#fff',width:1}});
     const svgMarker=(drawing,width,height,yoffset=0)=>({

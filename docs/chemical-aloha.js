@@ -208,7 +208,7 @@ function installCaptureLegend(){
  const wrapped=async function(...args){
   const snapshot=valid()?applied:null;const data=await original.apply(this,args);if(!data)return data;
   if((valid()?applied:null)!==snapshot)throw Error('ผล ALOHA เปลี่ยนระหว่างบันทึกแผนที่ กรุณาลองใหม่');
-  const lines=['เส้นประสีเขียวเทา = รัศมีค้นหาทรัพยากร (ไม่ใช่เขตอันตราย)'];
+  const lines=['เส้นประ = รัศมีค้นหาทรัพยากร (ไม่ใช่เขตอันตราย)'];
   if(snapshot){lines.push('ALOHA · ผลนำเข้าที่ผู้กรอกยืนยัน: '+snapshot.data.chemical+' · '+snapshot.data.modelTime+' (เวลาไทย)');for(const k of C.levels){const list=snapshot.zones.filter(z=>z.level===k);if(!list.length)continue;const texts=[...new Set(list.map(z=>z.loc+' '+z.unit+' / '+(z.exposure||'ไม่ระบุเวลาอ้างอิง')))];lines.push('เขต'+labels[k]+' · '+(texts.length===1?texts[0]:'หลายขอบเขต / หลายเกณฑ์ ดูภาคผนวก'));}}
   else lines.push('ALOHA: ยังไม่มีผลจำลองที่ยืนยันสำหรับรายงานนี้');
   lines.push('ผลจำลองไม่ใช่ค่าตรวจวัดหรือคำสั่งอพยพ · รายละเอียดและข้อจำกัดในภาคผนวก ALOHA');
