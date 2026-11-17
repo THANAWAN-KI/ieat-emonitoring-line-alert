@@ -300,7 +300,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
   <details><summary>Data</summary><div>
           <div class="dd-group-title" role="presentation">EMCC DASHBOARD</div>
           <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/" target="_blank" rel="noopener" >Estate operators (e-PP)</a>
-          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss.html" target="_blank" rel="noopener" >DSS</a>
+          
           <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" >E-Monitoring: environment</a>
           <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener" >EMCC accident statistics</a>
           <a class="dd-item" role="menuitem" href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Water use: estates / ports</a>
@@ -533,7 +533,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
 </section>
 
 
-</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
+</div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss-report.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
 <section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือสารเคมีรั่วไหล</h2><p id="coverageReportHint">ตรวจตัวอย่างทั้ง 3 หน้า + ภาคผนวก แล้วกด “ดาวน์โหลดรายงาน PNG (3 หน้า + ภาคผนวก)” ด้านล่าง</p><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานสารเคมีรั่วไหล"></iframe>
 <section id="riskMapLinePanel" aria-labelledby="riskMapLineTitle">
   <h3 id="riskMapLineTitle">ข้อความสำหรับส่งทาง LINE</h3>
@@ -560,7 +560,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261113-cleanup-1');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261113-cleanup-1');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
