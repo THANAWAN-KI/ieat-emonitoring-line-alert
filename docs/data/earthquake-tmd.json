@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-18T07:31:04.852704+00:00",
+    "fetchedAt": "2026-11-18T17:16:29.334901+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1794733006000,
-    "latestEvent": 1794886667000
+    "oldestEvent": 1794734415000,
+    "latestEvent": 1794995319000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17452",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.38,
+          22.938,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.3,
+        "place": "มณฑลยูนนาน, ประเทศจีน",
+        "time": 1794995319000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17452",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17451",
@@ -210,29 +233,6 @@
         "place": "ต.หางดง อ.ฮอด จ.เชียงใหม่",
         "time": 1794734415000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17443",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17442",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.213,
-          20.336,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.0,
-        "place": "ประเทศเมียนมา",
-        "time": 1794733006000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17442",
         "source": "TMD",
         "types": "",
         "detail": null,
