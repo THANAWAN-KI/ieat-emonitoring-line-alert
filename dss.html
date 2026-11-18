@@ -18,9 +18,58 @@ main{max-width:1460px;padding:20px 24px 55px}
 .source{margin-top:12px}
 @media(max-width:900px){.decision-shell{grid-template-columns:175px minmax(0,1fr)}.decision-sidebar{padding:12px 8px}.dashboard{grid-template-columns:1fr}}
 @media(max-width:650px){main{padding:14px 10px 35px}.decision-shell{display:block}.decision-sidebar{display:flex;overflow-x:auto;gap:8px;padding:8px;border-right:0;border-bottom:1px solid #e5e7ed}.side-title,.side-group{display:none}.side-link{white-space:nowrap;font-size:11px}.decision-content{padding:10px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.page-intro h1{font-size:22px}}
+</style><style id="dss-reference-header-20261118">
+/* Reference header: white EMCC brand, purple navigation, dark Data panel. */
+.brand{min-height:100px;padding:12px 25px;gap:28px;box-shadow:none}
+.brand a{font-size:34px;letter-spacing:1px;font-weight:400}
+.brand span{font-size:17px}
+.global-nav{min-height:65px;padding:0 25px;background:#4b2b67;position:relative;z-index:30}
+.global-nav .nav-caption{font-size:16px;font-weight:400;margin-right:auto}
+.global-nav .nav-links{display:flex;align-items:stretch;align-self:stretch;gap:4px}
+.global-nav .nav-links>a,.global-nav .nav-links>details>summary{padding:19px 22px;font-size:16px;color:#fff;line-height:27px;text-decoration:none;cursor:pointer;list-style:none}
+.global-nav .nav-links>details>summary::-webkit-details-marker{display:none}
+.global-nav .nav-links>details[open]>summary,.global-nav .nav-links>a:hover,.global-nav .nav-links>details>summary:hover{background:#3f225a}
+.global-nav .nav-data-menu{position:relative;display:flex;align-items:center}
+.global-nav .nav-dropdown{position:absolute;right:-85px;top:100%;width:400px;max-height:min(680px,calc(100vh - 168px));overflow-y:auto;background:#22323f;color:#fff;box-shadow:0 14px 30px #18233233;padding:0 0 14px;z-index:50}
+.global-nav .nav-dropdown .nav-group-title{font-size:13px;font-weight:700;padding:15px 18px 8px;color:#f5f7fb}
+.global-nav .nav-dropdown a{display:block;color:#fff;font-size:16px;line-height:1.45;padding:14px 18px;text-decoration:none}
+.global-nav .nav-dropdown a:hover,.global-nav .nav-dropdown a:focus-visible{background:#344a5b}
+@media(max-width:700px){
+.brand{min-height:auto;padding:12px 14px;display:flex;flex-wrap:wrap;gap:1px 12px}
+.brand a{font-size:26px}.brand span{font-size:11px;flex-basis:100%}
+.global-nav{padding:0 10px;min-height:54px;gap:10px}
+.global-nav .nav-caption{font-size:11px;line-height:1.35;max-width:43%}
+.global-nav .nav-links{gap:0}
+.global-nav .nav-links>a,.global-nav .nav-links>details>summary{font-size:12px;padding:15px 8px;line-height:24px}
+.global-nav .nav-dropdown{position:fixed;right:8px;left:8px;top:112px;width:auto;max-height:calc(100dvh - 120px)}
+.global-nav .nav-dropdown a{font-size:14px;padding:11px 15px}
+}
 </style></head><body>
 <header class="brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</span></header>
-<nav class="global-nav" aria-label="DSS"><span>Environmental Monitoring and Control Center: EMCC</span><span style="padding:17px 20px;font-weight:600">DSS Dashboard</span></nav>
+<nav class="global-nav" aria-label="EMCC navigation">
+  <span class="nav-caption">Environmental Monitoring and Control Center: EMCC</span>
+  <div class="nav-links">
+    <a href="./hub.html">Overview</a>
+    <details class="nav-data-menu"><summary aria-label="เปิดเมนู Data">Data</summary>
+      <div class="nav-dropdown">
+        <div class="nav-group-title">EMCC DASHBOARD</div>
+        <a href="./smart-industry.html">Estate operators (e-PP)</a>
+        <a href="./dss.html" aria-current="page">DSS</a>
+        <a href="./hub.html?view=data">E-Monitoring: environment</a>
+        <a href="./incidents.html">EMCC accident statistics</a>
+        <a href="./docs/information.html#water">Water use: estates / ports</a>
+        <div class="nav-group-title">EMCC RISK MAP</div>
+        <a href="./dss-riskmap.html">Fire</a>
+        <a href="./flood-report.html">Flood</a>
+        <a href="https://emcc-gis.pages.dev/#risk-map">Drought</a>
+        <a href="https://emcc-gis.pages.dev/#risk-map">PM2.5</a>
+        <a href="https://emcc-gis.pages.dev/#risk-map">Earthquake</a>
+        <a href="./dss-riskmap.html">Chemical leaks</a>
+      </div>
+    </details>
+    <a href="./dss-riskmap.html">Risk map</a>
+  </div>
+</nav>
 <main><section class="page-intro"><div><div class="kicker">DECISION SUPPORT SYSTEM · DSS</div><h1><svg width="33" height="33" viewBox="0 0 512 512" style="vertical-align:-7px;margin-right:8px" aria-hidden="true"><path fill="#d33131" d="M19.8 242h14.9v240.2h389v-32.8h29.8v47.7c0 8.2-6.7 14.9-14.9 14.9H19.8C11.6 512 4.9 505.3 4.9 497.1V256.9c0-8.2 6.7-14.9 14.9-14.9Z"/><path fill="#ff9494" d="M19.8 177.1V172L175.6 14.9v162.2ZM196.2 219.4h296v163.7h-296z"/><path fill="#d33131" d="M175.6 0h263c8.2 0 14.9 6.7 14.9 14.9v189.7h38.7c8.2 0 14.9 6.6 14.9 14.9v163.6c0 8.2-6.7 14.9-14.9 14.9H196.2c-8.2 0-14.9-6.7-14.9-14.9V219.4c0-8.2 6.7-14.9 14.9-14.9h227.5V29.8H190.5v147.3c0 8.2-6.7 14.9-14.9 14.9H19.8c-13.3 0-19.9-16-10.6-25.3L165 4.4A15 15 0 0 1 175.6 0ZM50.7 162.2h110V51.1Zm160.3 205.9h266.3V234.3H211Z"/><text x="343" y="333" font-size="84" font-weight="bold" text-anchor="middle" fill="#d33131" font-family="sans-serif">DSS</text></svg>Dashboard ภาพรวมระบบ DSS</h1><p class="lead">ภาพรวมข้อมูลสถานประกอบการและสารเคมีสำหรับสนับสนุนการประเมินความเสี่ยงและการรับมือเหตุฉุกเฉิน</p></div><div class="intro-actions"><button class="btn" id="reload">↻ อัปเดตข้อมูล</button><a class="btn main" href="./docs/dss-report.html">จัดทำรายงาน DSS ↗</a></div></section>
 <div id="status" class="notice"><span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span></div>
 <section class="stats"><div class="stat" style="--accent:#513279"><div class="stat-label">รายการข้อมูลในระบบ DSS</div><div class="stat-value" id="total">—</div><div class="stat-note">ระเบียนที่อ่านได้จากชุดข้อมูล</div></div><div class="stat" style="--accent:#295aab"><div class="stat-label">สถานประกอบการที่ระบุได้</div><div class="stat-value" id="companies">—</div><div class="stat-note">นับชื่อหรือรหัสที่ไม่ซ้ำกัน</div></div><div class="stat" style="--accent:#24b6a4"><div class="stat-label">นิคมอุตสาหกรรมที่ระบุได้</div><div class="stat-value" id="estates">—</div><div class="stat-note">นับชื่อพื้นที่ที่ไม่ซ้ำกัน</div></div><div class="stat" style="--accent:#e55d6d"><div class="stat-label">ประเภทสารเคมีที่ระบุได้</div><div class="stat-value" id="chemicals">—</div><div class="stat-note">นับประเภทที่ไม่ซ้ำกัน</div></div></section>
