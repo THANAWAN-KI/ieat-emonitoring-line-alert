@@ -174,6 +174,21 @@ body{background:#fff;color:#282d33}
 @media(max-width:730px){.dss-workspace{grid-template-columns:1fr}.dss-kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.dss-map-frame{min-height:480px}.dss-bottom-grid{grid-template-columns:1fr}.dss-heatmap-box{grid-column:auto}.dss-main{padding:9px}.dss-map-title{flex-basis:100%}}
 @media(max-width:430px){.dss-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-map-frame{min-height:420px}}
 @media print{.dss-map-frame{min-height:300px}.dss-bottom-grid{grid-template-columns:repeat(2,1fr)}.dss-analytics{break-inside:avoid}.dss-filterbar,.dss-map-open{display:none}}
+</style><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><style id="dss-risk-reference-20261119">
+:root{--purple:#373737;--purple2:#424242;--bg:#fff;--ink:#25272a}
+body{background:#fff!important;color:#292929}.dss-main{background:#fff;padding:20px 32px 48px}
+.dss-workspace{grid-template-columns:minmax(350px,49%) minmax(0,1fr);gap:18px}
+.dss-left-column{gap:18px}.dss-box,.dss-map-column{border:0!important;border-radius:10px!important;box-shadow:0 6px 28px #26334a12!important;background:#fff}
+.dss-box-head{border:0!important;padding:15px 17px 8px}.dss-box-head h1,.dss-box-head h2{font-size:14px!important;font-weight:700!important;color:#252525!important}
+.dss-kpi-grid{gap:7px}.dss-kpi{border:1px solid #eceef0!important;border-radius:5px!important;background:#fafafa}.dss-kpi:first-child{outline:none}.dss-kpi strong{color:#292929}
+.dss-quality-track,.dss-estate-track,.dss-analytics .track{border:0!important;background:#f0f1f3!important;border-radius:2px!important}
+.dss-quality-fill{background:#cc2435!important}.dss-quality-row:nth-child(2) .dss-quality-fill{background:#f4d74e!important;color:#252525}.dss-quality-row:nth-child(3) .dss-quality-fill{background:#44a92c!important}
+.dss-estate-fill{background:#47a72c}.dss-analytics .fill{background:linear-gradient(90deg,#ce2536,#f1d54c,#45aa30)!important}
+.dss-map-frame{background:#f1f2f7;min-height:475px}.dss-map-frame #dssOwnMap{position:absolute;inset:0;z-index:1}.dss-map-message{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:400;background:#ffffffed;padding:14px 18px;border-radius:6px;text-align:center;max-width:85%;color:#5c6270;font-size:12px;box-shadow:0 3px 18px #1112}
+.dss-filterbar{padding:12px 15px}.dss-map-data-label{font-size:11px;color:#85868a}.dss-bottom-grid{gap:16px;margin-top:12px}
+.dss-analytics{min-height:280px}.dss-box-body{padding:12px 16px}.dss-analytics .donut{width:150px;height:150px}
+.dss-kpi-box .dss-box-head{padding:13px 12px 8px}.dss-map-title{font-weight:700}
+@media(max-width:850px){.dss-workspace{grid-template-columns:1fr}.dss-main{padding:12px}.dss-map-frame{min-height:390px}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -229,12 +244,11 @@ body{background:#fff;color:#282d33}
   <section class="dss-map-column" aria-label="แผนที่ DSS">
     <div class="dss-filterbar">
       <span class="dss-map-title">แผนที่ข้อมูล DSS</span>
-      <a href="./dss-riskmap.html?view=data" target="_blank" rel="noopener" class="dss-filter-link">เปิดแผนที่เต็มจอ ↗</a>
+      <span class="dss-map-data-label">แสดงเฉพาะพิกัดจากชุดข้อมูล DSS</span>
       <button id="reload" type="button" class="dss-refresh">↻ อัปเดตข้อมูล</button>
-      <a class="dss-report-link" href="./dss-report.html">รายงาน DSS ↗</a>
+      
     </div>
-    <div class="dss-map-frame"><iframe title="แผนที่ความเสี่ยง DSS" src="./dss-riskmap.html?view=data" loading="lazy"></iframe><a class="dss-map-open" href="./dss-riskmap.html?view=data" target="_blank" rel="noopener">ดูแผนที่ DSS โดยละเอียด ↗</a></div>
-  </section>
+    <div class="dss-map-frame"><div id="dssOwnMap" role="img" aria-label="แผนที่แสดงพิกัดที่พบในชุดข้อมูล DSS"></div><div id="dssMapMessage" class="dss-map-message">กำลังตรวจสอบพิกัดจากข้อมูล DSS…</div></div></section>
 </section>
 <div id="status" class="dss-status"><span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span></div>
 <section class="dss-bottom-grid" aria-label="การวิเคราะห์ข้อมูล DSS">
@@ -261,7 +275,7 @@ body{background:#fff;color:#282d33}
 </section>
 <p class="source" id="source">แหล่งข้อมูล: ชุดข้อมูลระบบ DSS</p>
 </main>
-<script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
 const $=id=>document.getElementById(id), colors=['#295aab','#24b6a4','#82ce4c','#ffd05b','#ef8065','#9e85d2'];
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const nonempty=v=>v!==null&&v!==undefined&&String(v).trim()!==''&&String(v).trim()!=='-';
@@ -283,7 +297,21 @@ function renderEstateBars(est){
 const top=[...est].slice(0,7),max=top.length?top[0][1]:1;
 $('estateBars').innerHTML=top.length?top.map(([name,n])=>'<div class="dss-estate-row"><span class="dss-estate-label" title="'+escapeHTML(name)+'">'+escapeHTML(name)+'</span><span class="dss-estate-value">'+num(n)+'</span><div class="dss-estate-track"><div class="dss-estate-fill" style="width:'+(n/max*100).toFixed(2)+'%"></div></div></div>').join(''):'<div class="empty">ไม่พบชื่อพื้นที่ในชุดข้อมูล DSS</div>';
 }
-function draw(rows){let estateField=field(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','นิคม','ie_name']),companyField=field(rows,['comp_uid','comp_user','merchant_name','mercant_name','company_name','factory_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),chemField=field(rows,['chemical_name','chemical','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','สารเคมี']);const est=counts(rows,estateField),chem=counts(rows,chemField),companies=counts(rows,companyField);assign('total',rows.length);assign('companies',companyField?companies.size:null);assign('estates',estateField?est.size:null);assign('chemicals',chemField?chem.size:null);renderCompleteness(rows,estateField,companyField,chemField);renderEstateBars(est);$('status').innerHTML='<span class="dot ok"></span><span>เชื่อมข้อมูล DSS สำเร็จ · '+num(rows.length)+' ระเบียน · อัปเดตหน้าจอ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+'</span>';
+let dssMap=null,dssMarkers=null;
+function renderDssMap(rows){
+ const notice=$('dssMapMessage');
+ const latitude=field(rows,['latitude','lat','ละติจูด','y_coord','ycoord']);
+ const longitude=field(rows,['longitude','lng','lon','long','ลองจิจูด','x_coord','xcoord']);
+ if(!latitude||!longitude){notice.textContent='ชุดข้อมูล DSS ที่เชื่อมต่อไม่มีฟิลด์พิกัด จึงไม่แสดงจุดสมมติบนแผนที่';return}
+ const points=rows.map(r=>({lat:Number(r[latitude]),lng:Number(r[longitude])})).filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&p.lat>=5&&p.lat<=22&&p.lng>=97&&p.lng<=106);
+ if(!points.length){notice.textContent='ไม่พบพิกัดที่ใช้งานได้ในชุดข้อมูล DSS';return}
+ if(typeof L==='undefined'){notice.textContent='ไม่สามารถโหลดแผนที่ได้';return}
+ if(!dssMap){dssMap=L.map('dssOwnMap',{scrollWheelZoom:false}).setView([13.7,100.7],6);L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap © CARTO',maxZoom:18}).addTo(dssMap);dssMarkers=L.layerGroup().addTo(dssMap)}
+ dssMarkers.clearLayers();const bounds=[];
+ points.slice(0,3000).forEach(p=>{L.circleMarker([p.lat,p.lng],{radius:5,color:'#fff',weight:1,fillColor:'#c92538',fillOpacity:.8}).addTo(dssMarkers);bounds.push([p.lat,p.lng])});
+ dssMap.fitBounds(bounds,{padding:[28,28],maxZoom:11});notice.style.display='none';setTimeout(()=>dssMap.invalidateSize(),200);
+}
+function draw(rows){renderDssMap(rows);let estateField=field(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','นิคม','ie_name']),companyField=field(rows,['comp_uid','comp_user','merchant_name','mercant_name','company_name','factory_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),chemField=field(rows,['chemical_name','chemical','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','สารเคมี']);const est=counts(rows,estateField),chem=counts(rows,chemField),companies=counts(rows,companyField);assign('total',rows.length);assign('companies',companyField?companies.size:null);assign('estates',estateField?est.size:null);assign('chemicals',chemField?chem.size:null);renderCompleteness(rows,estateField,companyField,chemField);renderEstateBars(est);$('status').innerHTML='<span class="dot ok"></span><span>เชื่อมข้อมูล DSS สำเร็จ · '+num(rows.length)+' ระเบียน · อัปเดตหน้าจอ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+'</span>';
 const top=[...est].slice(0,8);$('ranking').innerHTML=top.length?top.map(([k,n],i)=>'<tr><td><span class="rank">'+(i+1)+'</span></td><td title="'+escapeHTML(k)+'">'+escapeHTML(k)+'</td><td>'+num(n)+'</td></tr>').join(''):'<tr><td colspan="3">ไม่พบชื่อพื้นที่ในชุดข้อมูลที่เชื่อมต่อ</td></tr>';
 const entries=[...est].slice(0,5);let other=rows.length-entries.reduce((n,v)=>n+v[1],0);if(other>0)entries.push(['อื่น ๆ / ไม่ระบุ',other]);let start=0;const stops=[];entries.forEach(([k,n],i)=>{let end=start+n/rows.length*100;stops.push(colors[i%colors.length]+' '+start+'% '+end+'%');start=end});$('donut').style.background='conic-gradient('+(stops.join(',')||'#dbe2eb 0 100%')+')';$('donutValue').textContent=num(rows.length);$('legend').innerHTML=entries.map(([k,n],i)=>'<div><i class="swatch" style="background:'+colors[i%colors.length]+'"></i><span title="'+escapeHTML(k)+'">'+escapeHTML(k)+' · '+num(n)+'</span></div>').join('')||'<span>ไม่มีข้อมูลพื้นที่</span>';
 let cb=[...chem].slice(0,7);if(cb.length){const max=cb[0][1];$('bars').className='';$('bars').innerHTML=cb.map(([k,n])=>'<div class="bar-row"><span class="bar-label" title="'+escapeHTML(k)+'">'+escapeHTML(k)+'</span><div class="track"><div class="fill" style="width:'+Math.max(2,n/max*100)+'%"></div></div><strong>'+num(n)+'</strong></div>').join('')}else fallback($('bars'),'ชุดข้อมูลนี้ไม่ระบุชื่อประเภทสารเคมี');
