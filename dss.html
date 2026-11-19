@@ -109,6 +109,71 @@ main{max-width:1480px}
 @media print{.emcc-site-header,.intro-actions,.decision-sidebar,#status{display:none!important}.decision-shell{display:block}.decision-content{padding:0}.dashboard{grid-template-columns:1fr 1fr}.panel{break-inside:avoid}}
 </style><style id="dss-reference-actions-20261119">
 .emcc-brand>details{position:relative;flex:none;margin-left:0}.emcc-brand>details:first-of-type{margin-left:auto}.emcc-brand>details>summary{list-style:none;display:flex;align-items:center;justify-content:center;width:38px;height:40px;cursor:pointer;color:#202b36}.emcc-brand>details>summary::-webkit-details-marker{display:none}.emcc-brand>details>summary svg{width:22px;height:22px}.emcc-brand>details>summary:hover{background:#f2eef6;border-radius:5px}.dashboard-export-panel,.emcc-header-action-panel{position:absolute;right:0;top:100%;z-index:2000;min-width:190px;background:#fff;border:1px solid #e4e5eb;box-shadow:0 10px 26px #16223524;padding:7px;border-radius:6px}.dashboard-export-panel button,.emcc-header-action-panel button{display:block;width:100%;text-align:left;border:0;background:#fff;padding:9px 12px;border-radius:4px;cursor:pointer;color:#273044}.dashboard-export-panel button:hover,.emcc-header-action-panel button:hover{background:#f0eaf5}.emcc-brand .dss-camera{display:none}
+</style><style id="dss-emonitoring-full-layout-20261119">
+/* Emulate the E-Monitoring dashboard's dense boxed two-column overview. */
+body{background:#fff;color:#282d33}
+#dashboardExportStatus{display:none}
+.emcc-site-header{position:relative}
+.dss-main{max-width:none;margin:0;padding:18px 28px 40px;font-size:13px}
+.dss-workspace{display:grid;grid-template-columns:minmax(360px,32.5%) minmax(0,1fr);gap:6px;align-items:stretch}
+.dss-left-column{display:grid;grid-template-rows:auto minmax(0,1fr);gap:6px;min-width:0}
+.dss-box,.dss-map-column{border:1px solid #45484d;background:#fff;border-radius:0;box-shadow:none;min-width:0}
+.dss-box-head{padding:12px 12px 10px;border-bottom:1px solid #d9dce0;min-height:42px;display:flex;align-items:center}
+.dss-box-head h1,.dss-box-head h2{font-size:14px;line-height:1.35;font-weight:600;margin:0;color:#31373c}
+.dss-kpi-box{padding:0 8px 8px}
+.dss-kpi-box .dss-box-head{padding-left:4px;border-bottom:0;min-height:46px}
+.dss-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.dss-kpi{border:1px solid #8d9398;text-align:center;min-height:92px;padding:12px 3px 7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.dss-kpi:first-child{outline:1px solid #45484d;outline-offset:-2px}
+.dss-kpi span{font-size:11px;line-height:1.3;min-height:27px;display:flex;align-items:center;justify-content:center}
+.dss-kpi strong{font-family:Sarabun,sans-serif;font-size:23px;line-height:1.15;color:#263446;font-weight:700;word-break:break-word}
+.dss-kpi small{font-size:10px;color:#626971}
+.dss-quality-box{min-height:232px}
+.dss-quality-body{padding:15px 12px 9px}
+.dss-quality-bars{display:grid;gap:12px}
+.dss-quality-item-head{display:flex;justify-content:space-between;gap:6px;margin-bottom:4px;font-size:12px}
+.dss-quality-track{height:26px;border:1px solid #47515b;background:#edf0f4;display:flex;overflow:hidden}
+.dss-quality-fill{background:#1d83b8;height:100%;display:grid;place-items:center;color:#fff;min-width:0;font-size:11px;font-weight:600}
+.dss-quality-row:nth-child(2) .dss-quality-fill{background:#43a66d}
+.dss-quality-row:nth-child(3) .dss-quality-fill{background:#7b69b5}
+.dss-explain{font-size:11px;line-height:1.4;color:#68727b;margin:0 0 13px}
+.dss-quality-body>.dss-explain{margin:11px 0 0}
+.dss-map-column{display:flex;flex-direction:column}
+.dss-filterbar{display:flex;gap:6px;align-items:center;padding:5px 7px;min-height:49px;flex-wrap:wrap}
+.dss-map-title{font-size:14px;font-weight:600;margin-right:auto;white-space:nowrap}
+.dss-filter-link,.dss-report-link,.dss-refresh{background:#fff;border:1px solid #949a9f;padding:8px 11px;text-decoration:none;color:#363d45;font-size:12px;min-height:35px;cursor:pointer;border-radius:0}
+.dss-report-link{background:#f2f3f5}
+.dss-refresh:hover,.dss-report-link:hover,.dss-filter-link:hover{background:#eeeaf4}
+.dss-map-frame{position:relative;flex:1;min-height:530px;background:#e4edf1;overflow:hidden}
+.dss-map-frame iframe{display:block;width:100%;height:100%;position:absolute;inset:0;border:0;background:#e5ebef}
+.dss-map-open{position:absolute;right:12px;bottom:12px;z-index:2;background:#fff;border:1px solid #7c858d;padding:7px 12px;font-size:12px;text-decoration:none;box-shadow:0 2px 8px #0002}
+.dss-status{display:flex;align-items:center;gap:9px;font-size:11px;color:#5b6470;padding:7px 3px;min-height:32px}
+.dss-bottom-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.dss-analytics{min-height:310px}
+.dss-box-body{padding:12px}
+.dss-estate-bars{display:grid;gap:10px}
+.dss-estate-row{display:grid;grid-template-columns:minmax(0,1fr) 39px;align-items:center;gap:7px;font-size:11px}
+.dss-estate-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.dss-estate-track{grid-column:1 / -1;height:17px;border:1px solid #61707c;background:#edf1f4}
+.dss-estate-fill{height:100%;background:#1785bd}
+.dss-estate-value{font-weight:600;text-align:right}
+.dss-analytics .bar-row{grid-template-columns:minmax(95px,1fr) 1.3fr 37px;gap:7px;margin:14px 0}
+.dss-analytics .track{border-radius:0;height:18px;border:1px solid #78848e}
+.dss-analytics .fill{border-radius:0;background:#22b483}
+.dss-analytics .donut{width:155px;height:155px}
+.dss-analytics .donut:after{inset:34px}
+.dss-analytics .donut-center{inset:37px;font-size:22px}
+.dss-analytics .donut-wrap{gap:15px;flex-wrap:wrap;min-height:200px}
+.dss-analytics .risk-table th{background:#f1f3f5}
+.dss-analytics .risk-table th,.dss-analytics .risk-table td{font-size:11px;padding:7px}
+.dss-heatmap-box{grid-column:span 2}
+.dss-heatmap-box .matrix{table-layout:auto}
+.dss-heatmap-box .matrix td{height:34px}
+.dss-main>.source{font-size:11px;color:#73818c}
+@media(max-width:1100px){.dss-workspace{grid-template-columns:minmax(325px,38%) minmax(0,1fr)}.dss-main{padding:12px}.dss-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-kpi{min-height:75px}.dss-map-frame{min-height:600px}.dss-bottom-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-heatmap-box{grid-column:span 2}}
+@media(max-width:730px){.dss-workspace{grid-template-columns:1fr}.dss-kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.dss-map-frame{min-height:480px}.dss-bottom-grid{grid-template-columns:1fr}.dss-heatmap-box{grid-column:auto}.dss-main{padding:9px}.dss-map-title{flex-basis:100%}}
+@media(max-width:430px){.dss-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-map-frame{min-height:420px}}
+@media print{.dss-map-frame{min-height:300px}.dss-bottom-grid{grid-template-columns:repeat(2,1fr)}.dss-analytics{break-inside:avoid}.dss-filterbar,.dss-map-open{display:none}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -139,15 +204,63 @@ main{max-width:1480px}
   </details>
   <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data" target="_blank" rel="noopener"><svg class="emcc-risk-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"></path><path d="M9 4v14M15 6v14"></path></svg>Risk map</a>
 </nav>
-<main><section class="page-intro"><div><div class="kicker">DECISION SUPPORT SYSTEM · DSS</div><h1><svg width="33" height="33" viewBox="0 0 512 512" style="vertical-align:-7px;margin-right:8px" aria-hidden="true"><path fill="#d33131" d="M19.8 242h14.9v240.2h389v-32.8h29.8v47.7c0 8.2-6.7 14.9-14.9 14.9H19.8C11.6 512 4.9 505.3 4.9 497.1V256.9c0-8.2 6.7-14.9 14.9-14.9Z"/><path fill="#ff9494" d="M19.8 177.1V172L175.6 14.9v162.2ZM196.2 219.4h296v163.7h-296z"/><path fill="#d33131" d="M175.6 0h263c8.2 0 14.9 6.7 14.9 14.9v189.7h38.7c8.2 0 14.9 6.6 14.9 14.9v163.6c0 8.2-6.7 14.9-14.9 14.9H196.2c-8.2 0-14.9-6.7-14.9-14.9V219.4c0-8.2 6.7-14.9 14.9-14.9h227.5V29.8H190.5v147.3c0 8.2-6.7 14.9-14.9 14.9H19.8c-13.3 0-19.9-16-10.6-25.3L165 4.4A15 15 0 0 1 175.6 0ZM50.7 162.2h110V51.1Zm160.3 205.9h266.3V234.3H211Z"/><text x="343" y="333" font-size="84" font-weight="bold" text-anchor="middle" fill="#d33131" font-family="sans-serif">DSS</text></svg>ภาพรวมระบบ DSS</h1><p class="lead">สรุปความครอบคลุมข้อมูลสถานประกอบการ พื้นที่นิคมอุตสาหกรรม และสารเคมีในระบบสนับสนุนการตัดสินใจ เพื่อให้เห็นสถานะข้อมูลจากภาพรวมในหน้าเดียว</p></div><div class="intro-actions"><button class="btn" id="reload">↻ อัปเดตข้อมูล</button><a class="btn main" href="./docs/dss-report.html">จัดทำรายงาน DSS ↗</a></div></section>
-<div id="status" class="notice"><span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span></div>
-<section class="stats"><div class="stat" style="--accent:#513279"><div class="stat-label">รายการข้อมูลในระบบ DSS</div><div class="stat-value" id="total">—</div><div class="stat-note">ระเบียนที่อ่านได้จากชุดข้อมูล</div></div><div class="stat" style="--accent:#295aab"><div class="stat-label">สถานประกอบการที่ระบุได้</div><div class="stat-value" id="companies">—</div><div class="stat-note">นับชื่อหรือรหัสที่ไม่ซ้ำกัน</div></div><div class="stat" style="--accent:#24b6a4"><div class="stat-label">นิคมอุตสาหกรรมที่ระบุได้</div><div class="stat-value" id="estates">—</div><div class="stat-note">นับชื่อพื้นที่ที่ไม่ซ้ำกัน</div></div><div class="stat" style="--accent:#e55d6d"><div class="stat-label">ประเภทสารเคมีที่ระบุได้</div><div class="stat-value" id="chemicals">—</div><div class="stat-note">นับประเภทที่ไม่ซ้ำกัน</div></div></section>
-<div class="decision-shell"><aside class="decision-sidebar" aria-label="เมนูข้อมูล DSS"><div class="side-title">ข้อมูลประกอบการตัดสินใจ</div><div class="side-group">ภาพรวมข้อมูล</div><a href="#total" class="side-link"><span>◉</span> จำนวนรายการข้อมูล</a><a href="#companies" class="side-link"><span>◉</span> สถานประกอบการ</a><a href="#estates" class="side-link"><span>◉</span> นิคมอุตสาหกรรม</a><div class="side-group">การวิเคราะห์</div><a href="#ranking" class="side-link"><span>◉</span> ข้อมูลจำแนกตามพื้นที่</a><a href="#donut" class="side-link"><span>◉</span> สัดส่วนข้อมูล DSS</a><a href="#bars" class="side-link"><span>◉</span> ประเภทสารเคมี</a><a href="#heatmap" class="side-link"><span>◉</span> ความครอบคลุมข้อมูล</a></aside><div class="decision-content"><div class="decision-toolbar"><span><strong>DECISION SUPPORT SYSTEM</strong> / ภาพรวมข้อมูลระบบ DSS</span><span class="toolbar-mark">DSS · EMCC</span></div><section class="dashboard">
-<article class="panel"><div class="panel-top"><div class="heading"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#dceafa"/><path d="M12 33V18l12-7 12 7v15L24 40Z" fill="#295aab"/><path d="M18 30h12M18 25h12M18 20h12" stroke="white" stroke-width="2"/></svg><div><h2>ข้อมูลความเสี่ยงและสถานประกอบการ</h2><div class="en">DSS Data Profile</div></div></div></div><p class="subnote">รายชื่อพื้นที่ที่มีรายการข้อมูลมากที่สุด</p><table class="risk-table"><thead><tr><th>อันดับ</th><th>นิคมอุตสาหกรรม</th><th>รายการ</th></tr></thead><tbody id="ranking"><tr><td colspan="3">กำลังโหลดข้อมูล…</td></tr></tbody></table></article>
-<article class="panel"><div class="panel-top"><div class="heading"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#e4f5df"/><path fill="#6bbd58" d="M13 15h22v18H13z"/><path d="m18 24 4 4 8-9" stroke="white" fill="none" stroke-width="3"/></svg><div><h2>สัดส่วนข้อมูลตามพื้นที่</h2><div class="en">DSS Data Distribution</div></div></div></div><div class="donut-wrap"><div class="donut" id="donut"><div class="donut-center"><span id="donutValue">—</span><small>รายการทั้งหมด</small></div></div><div class="legend" id="legend"></div></div></article>
-<article class="panel"><div class="panel-top"><div class="heading"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#dfebff"/><path d="M12 34V14m0 20h26" stroke="#295aab" stroke-width="3"/><path d="M16 29h7v-8h-7zm10 0h7V16h-7z" fill="#295aab"/></svg><div><h2>ประเภทสารเคมีในข้อมูล DSS</h2><div class="en">Chemical Records</div></div></div></div><div id="bars" class="empty">กำลังโหลดข้อมูล…</div></article>
-<article class="panel"><div class="panel-top"><div class="heading"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#dff7f0"/><path d="M12 13h24v24H12z" fill="#24b6a4"/><path d="M12 21h24M12 29h24M20 13v24M28 13v24" stroke="white" stroke-width="2"/></svg><div><h2>แผนภาพความหนาแน่นของข้อมูล</h2><div class="en">DSS Coverage Heat Map</div></div></div></div><p class="subnote">จำนวนระเบียนจำแนกตามนิคมฯ และประเภทสารเคมี (ไม่ใช่ระดับความรุนแรงของความเสี่ยง)</p><div id="heatmap" class="empty">กำลังโหลดข้อมูล…</div></article>
-</section></div></div><p class="source" id="source">แหล่งข้อมูล: ระบบ DSS · ข้อมูลสารเคมีที่ใช้งานในหน้าเครื่องมือรายงาน DSS</p></main>
+</div>
+<main class="dss-main">
+<section class="dss-workspace" aria-label="ภาพรวม DSS">
+  <div class="dss-left-column">
+    <section class="dss-box dss-kpi-box" aria-labelledby="overview-heading">
+      <div class="dss-box-head"><h1 id="overview-heading">ภาพรวมระบบสนับสนุนการตัดสินใจ (DSS)</h1></div>
+      <div class="dss-kpi-grid">
+        <div class="dss-kpi"><span>รายการข้อมูลทั้งหมด</span><strong id="total">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>สถานประกอบการ</span><strong id="companies">—</strong><small>แห่ง/รหัส</small></div>
+        <div class="dss-kpi"><span>นิคมอุตสาหกรรม</span><strong id="estates">—</strong><small>พื้นที่</small></div>
+        <div class="dss-kpi"><span>ประเภทสารเคมี</span><strong id="chemicals">—</strong><small>ประเภท</small></div>
+        <div class="dss-kpi"><span>มีข้อมูลนิคมฯ</span><strong id="hasEstate">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>มีข้อมูลสถานประกอบการ</span><strong id="hasCompany">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>มีชื่อสารเคมี</span><strong id="hasChemical">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>ข้อมูลครบ 3 ด้าน</span><strong id="hasAll">—</strong><small>ระเบียน</small></div>
+      </div>
+    </section>
+    <section class="dss-box dss-quality-box" aria-labelledby="quality-heading">
+      <div class="dss-box-head"><h2 id="quality-heading">ความครบถ้วนของข้อมูล DSS</h2></div>
+      <div class="dss-quality-body"><div id="qualityBars" class="dss-quality-bars">กำลังโหลดข้อมูล…</div><p class="dss-explain">สัดส่วนระเบียนที่มีค่าระบุในแต่ละหมวด ไม่ใช่สถานะออนไลน์หรือระดับความเสี่ยง</p></div>
+    </section>
+  </div>
+  <section class="dss-map-column" aria-label="แผนที่ DSS">
+    <div class="dss-filterbar">
+      <span class="dss-map-title">แผนที่ข้อมูล DSS</span>
+      <a href="./dss-riskmap.html?view=data" target="_blank" rel="noopener" class="dss-filter-link">เปิดแผนที่เต็มจอ ↗</a>
+      <button id="reload" type="button" class="dss-refresh">↻ อัปเดตข้อมูล</button>
+      <a class="dss-report-link" href="./docs/dss-report.html">รายงาน DSS ↗</a>
+    </div>
+    <div class="dss-map-frame"><iframe title="แผนที่ความเสี่ยง DSS" src="./dss-riskmap.html?view=data" loading="lazy"></iframe><a class="dss-map-open" href="./dss-riskmap.html?view=data" target="_blank" rel="noopener">ดูแผนที่ DSS โดยละเอียด ↗</a></div>
+  </section>
+</section>
+<div id="status" class="dss-status"><span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span></div>
+<section class="dss-bottom-grid" aria-label="การวิเคราะห์ข้อมูล DSS">
+  <article class="dss-box dss-analytics">
+    <div class="dss-box-head"><h2>การกระจายข้อมูลตามนิคมอุตสาหกรรม</h2></div>
+    <div class="dss-box-body"><p class="dss-explain">พื้นที่ที่มีจำนวนระเบียนใน DSS สูงสุด</p><div class="dss-estate-bars" id="estateBars">กำลังโหลดข้อมูล…</div></div>
+  </article>
+  <article class="dss-box dss-analytics">
+    <div class="dss-box-head"><h2>สารเคมีที่ปรากฏในระบบ DSS</h2></div>
+    <div class="dss-box-body"><p class="dss-explain">จำนวนระเบียน จำแนกตามชื่อสารเคมี</p><div id="bars" class="empty">กำลังโหลดข้อมูล…</div></div>
+  </article>
+  <article class="dss-box dss-analytics">
+    <div class="dss-box-head"><h2>สัดส่วนข้อมูลตามนิคมฯ</h2></div>
+    <div class="dss-box-body"><div class="donut-wrap"><div class="donut" id="donut"><div class="donut-center"><span id="donutValue">—</span><small>ระเบียนทั้งหมด</small></div></div><div class="legend" id="legend"></div></div></div>
+  </article>
+  <article class="dss-box dss-analytics">
+    <div class="dss-box-head"><h2>นิคมอุตสาหกรรมที่มีข้อมูลมากที่สุด</h2></div>
+    <div class="dss-box-body"><table class="risk-table"><thead><tr><th>อันดับ</th><th>นิคมอุตสาหกรรม</th><th>ระเบียน</th></tr></thead><tbody id="ranking"><tr><td colspan="3">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
+  </article>
+  <article class="dss-box dss-analytics dss-heatmap-box">
+    <div class="dss-box-head"><h2>ความครอบคลุมข้อมูลตามนิคมฯ และสารเคมี</h2></div>
+    <div class="dss-box-body"><p class="dss-explain">จำนวนระเบียนในแต่ละคู่ข้อมูล ไม่ใช่ระดับความรุนแรงของความเสี่ยง</p><div id="heatmap" class="empty">กำลังโหลดข้อมูล…</div></div>
+  </article>
+</section>
+<p class="source" id="source">แหล่งข้อมูล: ชุดข้อมูลระบบ DSS</p>
+</main>
 <script>
 const $=id=>document.getElementById(id), colors=['#295aab','#24b6a4','#82ce4c','#ffd05b','#ef8065','#9e85d2'];
 const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -158,7 +271,19 @@ function field(rows,candidates){const keys=[...new Set(rows.slice(0,150).flatMap
 function counts(rows,key){let map=new Map;if(!key)return map;for(let r of rows){let v=compact(r[key]);if(nonempty(v))map.set(v,(map.get(v)||0)+1)}return new Map([...map].sort((a,b)=>b[1]-a[1]))}
 function assign(id,n){$(id).textContent=n===null?'ไม่ระบุ':num(n)}
 function fallback(el,message){el.innerHTML='<div class="empty">'+escapeHTML(message)+'</div>'}
-function draw(rows){let estateField=field(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','นิคม','ie_name']),companyField=field(rows,['comp_uid','comp_user','merchant_name','mercant_name','company_name','factory_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),chemField=field(rows,['chemical_name','chemical','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','สารเคมี']);const est=counts(rows,estateField),chem=counts(rows,chemField),companies=counts(rows,companyField);assign('total',rows.length);assign('companies',companyField?companies.size:null);assign('estates',estateField?est.size:null);assign('chemicals',chemField?chem.size:null);$('status').innerHTML='<span class="dot ok"></span><span>เชื่อมข้อมูล DSS สำเร็จ · '+num(rows.length)+' ระเบียน · อัปเดตหน้าจอ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+'</span>';
+function renderCompleteness(rows,estateField,companyField,chemField){
+const fields=[estateField,companyField,chemField];
+const found=fields.map(key=>key?rows.filter(r=>nonempty(compact(r[key]))).length:null);
+const complete=fields.every(Boolean)?rows.filter(r=>fields.every(k=>nonempty(compact(r[k])))).length:null;
+['hasEstate','hasCompany','hasChemical','hasAll'].forEach((id,i)=>assign(id,i<3?found[i]:complete));
+const labels=['ข้อมูลนิคมอุตสาหกรรม','ข้อมูลสถานประกอบการ','ชื่อสารเคมี'];
+$('qualityBars').innerHTML=labels.map((label,i)=>{const n=found[i],pct=n===null?0:(rows.length?n/rows.length*100:0);return '<div class="dss-quality-row"><div class="dss-quality-item-head"><strong>'+label+'</strong><span>'+(n===null?'ไม่พบฟิลด์':num(n)+' / '+num(rows.length)+' · '+pct.toFixed(1)+'%')+'</span></div><div class="dss-quality-track"><div class="dss-quality-fill" style="width:'+pct+'%">'+(pct>=18?pct.toFixed(0)+'%':'')+'</div></div></div>'}).join('');
+}
+function renderEstateBars(est){
+const top=[...est].slice(0,7),max=top.length?top[0][1]:1;
+$('estateBars').innerHTML=top.length?top.map(([name,n])=>'<div class="dss-estate-row"><span class="dss-estate-label" title="'+escapeHTML(name)+'">'+escapeHTML(name)+'</span><span class="dss-estate-value">'+num(n)+'</span><div class="dss-estate-track"><div class="dss-estate-fill" style="width:'+(n/max*100).toFixed(2)+'%"></div></div></div>').join(''):'<div class="empty">ไม่พบชื่อพื้นที่ในชุดข้อมูล DSS</div>';
+}
+function draw(rows){let estateField=field(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','นิคม','ie_name']),companyField=field(rows,['comp_uid','comp_user','merchant_name','mercant_name','company_name','factory_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),chemField=field(rows,['chemical_name','chemical','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','สารเคมี']);const est=counts(rows,estateField),chem=counts(rows,chemField),companies=counts(rows,companyField);assign('total',rows.length);assign('companies',companyField?companies.size:null);assign('estates',estateField?est.size:null);assign('chemicals',chemField?chem.size:null);renderCompleteness(rows,estateField,companyField,chemField);renderEstateBars(est);$('status').innerHTML='<span class="dot ok"></span><span>เชื่อมข้อมูล DSS สำเร็จ · '+num(rows.length)+' ระเบียน · อัปเดตหน้าจอ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+'</span>';
 const top=[...est].slice(0,8);$('ranking').innerHTML=top.length?top.map(([k,n],i)=>'<tr><td><span class="rank">'+(i+1)+'</span></td><td title="'+escapeHTML(k)+'">'+escapeHTML(k)+'</td><td>'+num(n)+'</td></tr>').join(''):'<tr><td colspan="3">ไม่พบชื่อพื้นที่ในชุดข้อมูลที่เชื่อมต่อ</td></tr>';
 const entries=[...est].slice(0,5);let other=rows.length-entries.reduce((n,v)=>n+v[1],0);if(other>0)entries.push(['อื่น ๆ / ไม่ระบุ',other]);let start=0;const stops=[];entries.forEach(([k,n],i)=>{let end=start+n/rows.length*100;stops.push(colors[i%colors.length]+' '+start+'% '+end+'%');start=end});$('donut').style.background='conic-gradient('+(stops.join(',')||'#dbe2eb 0 100%')+')';$('donutValue').textContent=num(rows.length);$('legend').innerHTML=entries.map(([k,n],i)=>'<div><i class="swatch" style="background:'+colors[i%colors.length]+'"></i><span title="'+escapeHTML(k)+'">'+escapeHTML(k)+' · '+num(n)+'</span></div>').join('')||'<span>ไม่มีข้อมูลพื้นที่</span>';
 let cb=[...chem].slice(0,7);if(cb.length){const max=cb[0][1];$('bars').className='';$('bars').innerHTML=cb.map(([k,n])=>'<div class="bar-row"><span class="bar-label" title="'+escapeHTML(k)+'">'+escapeHTML(k)+'</span><div class="track"><div class="fill" style="width:'+Math.max(2,n/max*100)+'%"></div></div><strong>'+num(n)+'</strong></div>').join('')}else fallback($('bars'),'ชุดข้อมูลนี้ไม่ระบุชื่อประเภทสารเคมี');
@@ -166,7 +291,7 @@ if(!estateField||!chemField){fallback($('heatmap'),'ต้องมีชื่�
 let columns=[...chem.keys()].slice(0,6),locations=[...est.keys()].slice(0,6);if(!columns.length||!locations.length){fallback($('heatmap'),'ไม่มีข้อมูลเพียงพอสำหรับแสดงตาราง');return}
 const matrix=new Map;for(let r of rows){let a=compact(r[estateField]),b=compact(r[chemField]);if(locations.includes(a)&&columns.includes(b)){const key=a+'\u0000'+b;matrix.set(key,(matrix.get(key)||0)+1)}}const highest=Math.max(1,...matrix.values());
 $('heatmap').className='';$('heatmap').innerHTML='<div style="overflow:auto"><table class="matrix"><thead><tr><th>นิคมฯ / สารเคมี</th>'+columns.map(v=>'<th title="'+escapeHTML(v)+'">'+escapeHTML(v.length>14?v.slice(0,13)+'…':v)+'</th>').join('')+'</tr></thead><tbody>'+locations.map(a=>'<tr><th title="'+escapeHTML(a)+'">'+escapeHTML(a)+'</th>'+columns.map(b=>{let n=matrix.get(a+'\u0000'+b)||0;let t=n/highest;let col=n===0?'#f1f5f7':t<.25?'#bfe9a8':t<.5?'#f8da70':t<.75?'#f5a04f':'#e66b69';return '<td style="background:'+col+'" title="'+escapeHTML(a+' / '+b+': '+n)+'">'+(n?num(n):'—')+'</td>'}).join('')+'</tr>').join('')+'</tbody></table></div>'}
-async function reload(){let status=$('status');status.innerHTML='<span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span>';let sources=['./docs/dss-data.json','https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json'];for(const url of sources){try{let controller=new AbortController,timeout=setTimeout(()=>controller.abort(),18000);let response;try{response=await fetch(url+'?v='+Date.now(),{signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timeout)}if(!response.ok)throw Error('HTTP '+response.status);let data=await response.json(),items=Array.isArray(data)?data:(data.features||data.records||data.data||[]);if(!Array.isArray(items)||!items.length)throw Error('empty');let rows=items.map(r=>r.properties||r.attributes||r);draw(rows);$('source').textContent='แหล่งข้อมูล: '+(url.startsWith('.')?'ชุดข้อมูล DSS ที่เว็บไซต์ใช้งาน (docs/dss-data.json)':'ระบบ DSS กนอ. (ต้นทาง)')+' · ค่าทั้งหมดคำนวณจากระเบียนที่อ่านได้จริง';return}catch(e){console.warn('DSS source unavailable',url,e)}}status.innerHTML='<span class="dot"></span><span>ไม่สามารถอ่านข้อมูล DSS ได้ในขณะนี้ — กรุณาลองอัปเดตอีกครั้ง</span>';for(const id of ['total','companies','estates','chemicals'])$(id).textContent='—';$('ranking').innerHTML='<tr><td colspan="3">ไม่สามารถโหลดข้อมูลได้</td></tr>';for(const id of ['bars','heatmap'])fallback($(id),'ไม่สามารถโหลดข้อมูล DSS ได้');$('legend').textContent='ไม่มีข้อมูล';}
+async function reload(){let status=$('status');status.innerHTML='<span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span>';let sources=['./docs/dss-data.json','https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json'];for(const url of sources){try{let controller=new AbortController,timeout=setTimeout(()=>controller.abort(),18000);let response;try{response=await fetch(url+'?v='+Date.now(),{signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timeout)}if(!response.ok)throw Error('HTTP '+response.status);let data=await response.json(),items=Array.isArray(data)?data:(data.features||data.records||data.data||[]);if(!Array.isArray(items)||!items.length)throw Error('empty');let rows=items.map(r=>r.properties||r.attributes||r);draw(rows);$('source').textContent='แหล่งข้อมูล: '+(url.startsWith('.')?'ชุดข้อมูล DSS ที่เว็บไซต์ใช้งาน (docs/dss-data.json)':'ระบบ DSS กนอ. (ต้นทาง)')+' · ค่าทั้งหมดคำนวณจากระเบียนที่อ่านได้จริง';return}catch(e){console.warn('DSS source unavailable',url,e)}}status.innerHTML='<span class="dot"></span><span>ไม่สามารถอ่านข้อมูล DSS ได้ในขณะนี้ — กรุณาลองอัปเดตอีกครั้ง</span>';for(const id of ['total','companies','estates','chemicals','hasEstate','hasCompany','hasChemical','hasAll'])$(id).textContent='—';$('ranking').innerHTML='<tr><td colspan="3">ไม่สามารถโหลดข้อมูลได้</td></tr>';for(const id of ['bars','heatmap','qualityBars','estateBars'])fallback($(id),'ไม่สามารถโหลดข้อมูล DSS ได้');$('legend').textContent='ไม่มีข้อมูล';}
 $('reload').addEventListener('click',reload);reload();
 document.getElementById('downloadDashboard')?.addEventListener('click',()=>{document.getElementById('dashboardExportMenu').open=false;window.print()});
 document.querySelectorAll('[data-header-lang]').forEach(btn=>btn.addEventListener('click',()=>{const en=btn.dataset.headerLang==='en';document.querySelectorAll('.emcc-site-header [data-en]').forEach(el=>{if(!el.dataset.th)el.dataset.th=el.textContent;el.textContent=en?el.dataset.en:el.dataset.th});document.querySelectorAll('[data-header-lang]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));document.getElementById('dashboardLanguage').open=false}));
