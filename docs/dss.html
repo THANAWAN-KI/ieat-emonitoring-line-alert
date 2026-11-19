@@ -593,7 +593,188 @@ async function fetchJson(url){const c=new AbortController(),timer=setTimeout(()=
 async function fetchArcgis(itemId,subLayer){
  const meta=await fetchJson('https://www.arcgis.com/sharing/rest/content/items/'+itemId+'?f=json');
  if(meta.error)throw Error(meta.error.message||'ArcGIS item error');
- let base=String(meta.url||'').replace(/\\/$/,'');
+ let base=String(meta.url||'').replace(new RegExp('/+
+ if(!base)throw Error('ArcGIS item ไม่มี service URL');
+ if(!new RegExp('/[0-9]+
+ const rows=[];let offset=0;
+ for(let page=0;page<12;page++){
+  const u=base+'/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&resultOffset='+offset;
+  const data=await fetchJson(u);if(data.error)throw Error(data.error.message||'ArcGIS query error');
+  const part=geoFeatures(data);rows.push(...part);
+  if(part.length<1000||!data.exceededTransferLimit&&part.length===0)break;
+  offset+=part.length;
+ }
+ return {type:'FeatureCollection',features:rows};
+}
+async function fetchFactoryPlan(){// A .js document is not assumed to be valid JSON. Read as text and parse only explicit JSON.
+ const r=await fetch(urls.factoryPlan,{mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);let txt=await r.text();let trimmed=txt.trim();if(trimmed.startsWith('{')||trimmed.startsWith('['))return JSON.parse(trimmed);let match=trimmed.match(/^\s*(?:var|let|const)\s+[\w$]+\s*=\s*([\s\S]*?)\s*;?\s*$/);if(match){let body=match[1].replace(/;\s*$/,'');return JSON.parse(body)}throw Error('รูปแบบ JS ไม่ใช่ JSON ที่อ่านได้โดยตรง')}
+async function reload(){found=[];records={};errors={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
+ const tasks=definitions.map(async([key])=>{try{let data=key==='estates'?await fetchArcgis('4460561209d7404c8254554f0f7aa246',1):key==='operators'?await fetchArcgis('59a7ca3f863c4d70b417a73085f3e64a',0):key==='factoryPlan'?await fetchFactoryPlan():await fetchJson(urls[key]);addRows(key,data)}catch(e){errors[key]=String(e.message||e)}update()});
+ await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:11});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
+function start(){if(typeof L==='undefined'){$('dssLayerStatus').textContent='ไม่สามารถโหลดไลบรารีแผนที่ Leaflet';return}map=L.map('dssOwnMap',{scrollWheelZoom:false,preferCanvas:true}).setView([15.5,101],6);window.dssLeafletMap=map;L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);definitions.forEach(([key])=>layerGroups[key]=L.layerGroup().addTo(map));$('dssMapRefresh').addEventListener('click',reload);
+const estateFilter=$('dssEstateFilter'),typeFilter=$('dssMapTypeFilter'),search=$('dssFactoryMapSearch');
+function applyMapFilter(){const chosen=typeFilter.value;Object.entries(layerGroups).forEach(([key,group])=>{if(chosen==='all'||key===chosen){if(!map.hasLayer(group))group.addTo(map)}else if(map.hasLayer(group))map.removeLayer(group)});if(estateFilter.value==='kaeng')map.setView([14.586,100.998],13);else if(found.length)map.fitBounds(found,{padding:[25,25],maxZoom:11})}
+estateFilter.addEventListener('change',applyMapFilter);typeFilter.addEventListener('change',applyMapFilter);
+search.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=search.value.trim().toLocaleLowerCase('th');if(!q)return;let match=null;layerGroups.operators.eachLayer(layer=>{if(!match&&layer.getPopup()?.getContent()?.toLocaleLowerCase('th').includes(q))match=layer});if(match){typeFilter.value='operators';applyMapFilter();map.setView(match.getLatLng(),16);match.openPopup()}else $('dssLayerStatus').textContent='ไม่พบโรงงานที่ตรงกับคำค้นในข้อมูลที่โหลดได้'});
+$('dssMapAlert').addEventListener('click',()=>{$('dssLayerStatus').scrollIntoView({behavior:'smooth',block:'nearest'})});
+reload()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script><script id="dss-document-cid-lookup">(()=>{'use strict';
+const form=document.getElementById('dssCidForm'),input=document.getElementById('dssCidInput'),tokenInput=document.getElementById('dssDashboardToken'),button=document.getElementById('dssCidButton'),status=document.getElementById('dssCidStatus'),result=document.getElementById('dssCidResult');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+function display(data){
+const entry=data&&typeof data==='object'?data:{};
+let entrepreneur=entry.entrepreneur||entry.company||entry.enterprise||{};
+let doc=entry.documents||entry.document||entry.data||{};
+if(typeof entrepreneur==='string'){try{entrepreneur=JSON.parse(entrepreneur)}catch(_){}}
+if(typeof doc==='string'){try{doc=JSON.parse(doc)}catch(_){doc={}}}
+if(Array.isArray(doc))doc=doc[0]||{};
+const name=entrepreneur.company_name||entrepreneur.factory_name||'—',estate=entrepreneur.estate_name||'—';
+const val=(o,...keys)=>keys.map(k=>o?.[k]).find(v=>v!==null&&v!==undefined&&v!=='')??'—';
+const e=v=>esc(v),date=v=>v&&v!=='—'?String(v).slice(0,10):'—';
+const status=val(doc,'status','document_status','approval_status');
+document.getElementById('refDocRows').innerHTML='<tr><td>'+e(name)+'</td><td>ผู้ประกอบการ</td><td>'+e(estate)+'</td><td>—</td><td>'+e(status)+'</td><td>'+e(date(val(doc,'submitted_at','submission_date')))+'</td></tr>';
+document.getElementById('refDocCount').textContent='แสดงเอกสารของผู้ประกอบการที่เลือก 1 ราย';
+const safeArr=(obj,key)=>{let v=obj?.[key];if(typeof v==='string'){try{v=JSON.parse(v)}catch(_){return []}}return Array.isArray(v)?v:[]};
+const chem=safeArr(doc,'chemicals'),equip=safeArr(doc,'equipment');
+const members=safeArr(doc,'ert_members'),shifts=safeArr(doc,'workforce_shifts');
+const fill=(id,value)=>document.getElementById(id).textContent=value;
+fill('refChemicalKinds',chem.length.toLocaleString('th-TH'));fill('refEquipmentCount',equip.length.toLocaleString('th-TH'));
+fill('refChemicalAmount','—');
+fill('refEquipmentTypes',new Set(equip.map(x=>val(x,'category','equipment_category','type')).filter(x=>x!=='—')).size);
+const chemRows=chem.map(x=>[val(x,'chemical_name','name','substance_name'),val(x,'cas_no','cas','un_no'),val(x,'quantity','amount'),name]);
+const equipRows=equip.map(x=>[val(x,'equipment_name','name'),val(x,'category','type'),val(x,'quantity','count'),name]);
+const teamRows=members.map(x=>[val(x,'ert_role_name','role_name','role','job_title'),name,estate,'มีข้อมูล']);
+if(!teamRows.length&&shifts.length)teamRows.push(...shifts.map(x=>['เจ้าหน้าที่ประจำกะ: '+val(x,'shift_name'),name,estate,'มีข้อมูล']));
+function table(id,rows,filter){const shown=rows.filter(r=>r.some(v=>String(v).toLowerCase().includes(filter.toLowerCase()))).slice(0,150);document.getElementById(id).innerHTML=shown.length?shown.map(r=>'<tr>'+r.map(v=>'<td>'+e(v)+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="4">ไม่มีข้อมูลในเอกสารที่เลือก</td></tr>'}
+const update=()=>{table('refChemRows',chemRows,document.getElementById('refChemSearch').value);table('refEquipRows',equipRows,document.getElementById('refEquipSearch').value);table('refTeamRows',teamRows,'');fill('refChemCount',chemRows.length+' รายการ');fill('refEquipCount',equipRows.length+' รายการ');fill('refTeamCount',teamRows.length+' รายการ')};update();
+document.getElementById('refChemSearch').oninput=update;document.getElementById('refEquipSearch').oninput=update;
+document.getElementById('refChemReset').onclick=()=>{document.getElementById('refChemSearch').value='';update()};
+document.getElementById('refEquipReset').onclick=()=>{document.getElementById('refEquipSearch').value='';update()};
+result.innerHTML='<div class="dss-ref-cardhead"><strong>ข้อมูล DSS ของผู้ประกอบการที่เลือก</strong><span>เชื่อมต่อ API สำเร็จ</span></div><table><tbody>'+[['ชื่อบริษัท',name],['นิคมอุตสาหกรรม',estate],['เลขทะเบียนโรงงาน',val(entrepreneur,'factory_reg_no','registration_no')],['CID',val(entrepreneur,'source_cid','cid')],['สถานะเอกสาร',status],['ปีที่ยื่น',val(doc,'submission_year')],['วันที่อัปเดต',date(val(doc,'updated_at'))]].map(([k,v])=>'<tr><th>'+e(k)+'</th><td>'+e(v)+'</td></tr>').join('')+'</tbody></table>';
+}form.addEventListener('submit',async e=>{e.preventDefault();const cid=input.value.trim(),token=tokenInput.value.trim();if(!/^[A-Za-z0-9._-]{1,120}$/.test(cid)){status.textContent='CID ต้องเป็นตัวอักษร ตัวเลข จุด ขีดกลาง หรือขีดล่างเท่านั้น';return}if(!token){status.textContent='กรุณากรอก Dashboard Access Token ที่ตั้งไว้ใน Cloudflare ก่อนค้นหา';tokenInput.focus();return}button.disabled=true;result.textContent='';status.textContent='กำลังเรียก DSS API ผ่าน Cloudflare Worker…';const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),16000);try{const url='https://ieat-dss-api.thanawankaiyaso.workers.dev/api/v1/documents/'+encodeURIComponent(cid);const response=await fetch(url,{method:'GET',mode:'cors',credentials:'omit',headers:{Accept:'application/json',Authorization:'Bearer '+token},signal:controller.signal});if(!response.ok){let detail='';try{const body=await response.json();detail=body.error||''}catch(_){}throw Error('HTTP '+response.status+(detail?' — '+detail:''))}const type=response.headers.get('content-type')||'';if(!type.includes('json'))throw Error('API ไม่ได้ส่งข้อมูล JSON กลับมา');const data=await response.json();display(data);status.textContent='โหลดข้อมูลจริงจาก DSS สำเร็จ · CID: '+cid}catch(err){status.textContent=err.name==='AbortError'?'การเชื่อมต่อหมดเวลา':err instanceof TypeError?'เชื่อมต่อ Worker ไม่สำเร็จ: ตรวจสอบ URL, CORS และสถานะ Deploy':'ไม่สามารถโหลดข้อมูล: '+err.message;result.textContent='ยังไม่มีข้อมูลที่ยืนยันจาก API — ไม่แสดงข้อมูลสมมติ'}finally{clearTimeout(timer);button.disabled=false}});
+})();</script><script id="dss-map-controls-20261119b">(()=>{function setup(){const m=document.getElementById('dssOwnMap');if(!m||m.dataset.toolsReady)return;m.dataset.toolsReady='1';const wrap=document.createElement('div');wrap.className='dss-map-tools-right';wrap.innerHTML='<button type="button" title="ชั้นข้อมูล" aria-label="ชั้นข้อมูล">▱</button><button type="button" title="ขยายแผนที่เต็มหน้าจอ" aria-label="ขยายแผนที่เต็มหน้าจอ">⛶</button>';m.append(wrap);wrap.children[0].onclick=()=>{const p=document.querySelector('.dss-map-side');if(p){p.hidden=!p.hidden;setTimeout(()=>window.dssLeafletMap?.invalidateSize(),100)}};wrap.children[1].onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else m.requestFullscreen?.();setTimeout(()=>window.dssLeafletMap?.invalidateSize(),350)};const edit=document.createElement('button');edit.type='button';edit.className='dss-map-tool';edit.style.cssText='left:11px;top:12px';edit.title='รีเซ็ตมุมมองแผนที่';edit.textContent='✎';edit.onclick=()=>window.dssLeafletMap?.setView([14.586,100.998],13);m.append(edit)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup()})();</script></body></html>),'');
+ if(!base)throw Error('ArcGIS item ไม่มี service URL');
+ if(!/\\/\\d+$/.test(base))base+='/'+subLayer;
+ const rows=[];let offset=0;
+ for(let page=0;page<12;page++){
+  const u=base+'/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&resultOffset='+offset;
+  const data=await fetchJson(u);if(data.error)throw Error(data.error.message||'ArcGIS query error');
+  const part=geoFeatures(data);rows.push(...part);
+  if(part.length<1000||!data.exceededTransferLimit&&part.length===0)break;
+  offset+=part.length;
+ }
+ return {type:'FeatureCollection',features:rows};
+}
+async function fetchFactoryPlan(){// A .js document is not assumed to be valid JSON. Read as text and parse only explicit JSON.
+ const r=await fetch(urls.factoryPlan,{mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);let txt=await r.text();let trimmed=txt.trim();if(trimmed.startsWith('{')||trimmed.startsWith('['))return JSON.parse(trimmed);let match=trimmed.match(/^\s*(?:var|let|const)\s+[\w$]+\s*=\s*([\s\S]*?)\s*;?\s*$/);if(match){let body=match[1].replace(/;\s*$/,'');return JSON.parse(body)}throw Error('รูปแบบ JS ไม่ใช่ JSON ที่อ่านได้โดยตรง')}
+async function reload(){found=[];records={};errors={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
+ const tasks=definitions.map(async([key])=>{try{let data=key==='estates'?await fetchArcgis('4460561209d7404c8254554f0f7aa246',1):key==='operators'?await fetchArcgis('59a7ca3f863c4d70b417a73085f3e64a',0):key==='factoryPlan'?await fetchFactoryPlan():await fetchJson(urls[key]);addRows(key,data)}catch(e){errors[key]=String(e.message||e)}update()});
+ await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:11});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
+function start(){if(typeof L==='undefined'){$('dssLayerStatus').textContent='ไม่สามารถโหลดไลบรารีแผนที่ Leaflet';return}map=L.map('dssOwnMap',{scrollWheelZoom:false,preferCanvas:true}).setView([15.5,101],6);window.dssLeafletMap=map;L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);definitions.forEach(([key])=>layerGroups[key]=L.layerGroup().addTo(map));$('dssMapRefresh').addEventListener('click',reload);
+const estateFilter=$('dssEstateFilter'),typeFilter=$('dssMapTypeFilter'),search=$('dssFactoryMapSearch');
+function applyMapFilter(){const chosen=typeFilter.value;Object.entries(layerGroups).forEach(([key,group])=>{if(chosen==='all'||key===chosen){if(!map.hasLayer(group))group.addTo(map)}else if(map.hasLayer(group))map.removeLayer(group)});if(estateFilter.value==='kaeng')map.setView([14.586,100.998],13);else if(found.length)map.fitBounds(found,{padding:[25,25],maxZoom:11})}
+estateFilter.addEventListener('change',applyMapFilter);typeFilter.addEventListener('change',applyMapFilter);
+search.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=search.value.trim().toLocaleLowerCase('th');if(!q)return;let match=null;layerGroups.operators.eachLayer(layer=>{if(!match&&layer.getPopup()?.getContent()?.toLocaleLowerCase('th').includes(q))match=layer});if(match){typeFilter.value='operators';applyMapFilter();map.setView(match.getLatLng(),16);match.openPopup()}else $('dssLayerStatus').textContent='ไม่พบโรงงานที่ตรงกับคำค้นในข้อมูลที่โหลดได้'});
+$('dssMapAlert').addEventListener('click',()=>{$('dssLayerStatus').scrollIntoView({behavior:'smooth',block:'nearest'})});
+reload()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script><script id="dss-document-cid-lookup">(()=>{'use strict';
+const form=document.getElementById('dssCidForm'),input=document.getElementById('dssCidInput'),tokenInput=document.getElementById('dssDashboardToken'),button=document.getElementById('dssCidButton'),status=document.getElementById('dssCidStatus'),result=document.getElementById('dssCidResult');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+function display(data){
+const entry=data&&typeof data==='object'?data:{};
+let entrepreneur=entry.entrepreneur||entry.company||entry.enterprise||{};
+let doc=entry.documents||entry.document||entry.data||{};
+if(typeof entrepreneur==='string'){try{entrepreneur=JSON.parse(entrepreneur)}catch(_){}}
+if(typeof doc==='string'){try{doc=JSON.parse(doc)}catch(_){doc={}}}
+if(Array.isArray(doc))doc=doc[0]||{};
+const name=entrepreneur.company_name||entrepreneur.factory_name||'—',estate=entrepreneur.estate_name||'—';
+const val=(o,...keys)=>keys.map(k=>o?.[k]).find(v=>v!==null&&v!==undefined&&v!=='')??'—';
+const e=v=>esc(v),date=v=>v&&v!=='—'?String(v).slice(0,10):'—';
+const status=val(doc,'status','document_status','approval_status');
+document.getElementById('refDocRows').innerHTML='<tr><td>'+e(name)+'</td><td>ผู้ประกอบการ</td><td>'+e(estate)+'</td><td>—</td><td>'+e(status)+'</td><td>'+e(date(val(doc,'submitted_at','submission_date')))+'</td></tr>';
+document.getElementById('refDocCount').textContent='แสดงเอกสารของผู้ประกอบการที่เลือก 1 ราย';
+const safeArr=(obj,key)=>{let v=obj?.[key];if(typeof v==='string'){try{v=JSON.parse(v)}catch(_){return []}}return Array.isArray(v)?v:[]};
+const chem=safeArr(doc,'chemicals'),equip=safeArr(doc,'equipment');
+const members=safeArr(doc,'ert_members'),shifts=safeArr(doc,'workforce_shifts');
+const fill=(id,value)=>document.getElementById(id).textContent=value;
+fill('refChemicalKinds',chem.length.toLocaleString('th-TH'));fill('refEquipmentCount',equip.length.toLocaleString('th-TH'));
+fill('refChemicalAmount','—');
+fill('refEquipmentTypes',new Set(equip.map(x=>val(x,'category','equipment_category','type')).filter(x=>x!=='—')).size);
+const chemRows=chem.map(x=>[val(x,'chemical_name','name','substance_name'),val(x,'cas_no','cas','un_no'),val(x,'quantity','amount'),name]);
+const equipRows=equip.map(x=>[val(x,'equipment_name','name'),val(x,'category','type'),val(x,'quantity','count'),name]);
+const teamRows=members.map(x=>[val(x,'ert_role_name','role_name','role','job_title'),name,estate,'มีข้อมูล']);
+if(!teamRows.length&&shifts.length)teamRows.push(...shifts.map(x=>['เจ้าหน้าที่ประจำกะ: '+val(x,'shift_name'),name,estate,'มีข้อมูล']));
+function table(id,rows,filter){const shown=rows.filter(r=>r.some(v=>String(v).toLowerCase().includes(filter.toLowerCase()))).slice(0,150);document.getElementById(id).innerHTML=shown.length?shown.map(r=>'<tr>'+r.map(v=>'<td>'+e(v)+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="4">ไม่มีข้อมูลในเอกสารที่เลือก</td></tr>'}
+const update=()=>{table('refChemRows',chemRows,document.getElementById('refChemSearch').value);table('refEquipRows',equipRows,document.getElementById('refEquipSearch').value);table('refTeamRows',teamRows,'');fill('refChemCount',chemRows.length+' รายการ');fill('refEquipCount',equipRows.length+' รายการ');fill('refTeamCount',teamRows.length+' รายการ')};update();
+document.getElementById('refChemSearch').oninput=update;document.getElementById('refEquipSearch').oninput=update;
+document.getElementById('refChemReset').onclick=()=>{document.getElementById('refChemSearch').value='';update()};
+document.getElementById('refEquipReset').onclick=()=>{document.getElementById('refEquipSearch').value='';update()};
+result.innerHTML='<div class="dss-ref-cardhead"><strong>ข้อมูล DSS ของผู้ประกอบการที่เลือก</strong><span>เชื่อมต่อ API สำเร็จ</span></div><table><tbody>'+[['ชื่อบริษัท',name],['นิคมอุตสาหกรรม',estate],['เลขทะเบียนโรงงาน',val(entrepreneur,'factory_reg_no','registration_no')],['CID',val(entrepreneur,'source_cid','cid')],['สถานะเอกสาร',status],['ปีที่ยื่น',val(doc,'submission_year')],['วันที่อัปเดต',date(val(doc,'updated_at'))]].map(([k,v])=>'<tr><th>'+e(k)+'</th><td>'+e(v)+'</td></tr>').join('')+'</tbody></table>';
+}form.addEventListener('submit',async e=>{e.preventDefault();const cid=input.value.trim(),token=tokenInput.value.trim();if(!/^[A-Za-z0-9._-]{1,120}$/.test(cid)){status.textContent='CID ต้องเป็นตัวอักษร ตัวเลข จุด ขีดกลาง หรือขีดล่างเท่านั้น';return}if(!token){status.textContent='กรุณากรอก Dashboard Access Token ที่ตั้งไว้ใน Cloudflare ก่อนค้นหา';tokenInput.focus();return}button.disabled=true;result.textContent='';status.textContent='กำลังเรียก DSS API ผ่าน Cloudflare Worker…';const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),16000);try{const url='https://ieat-dss-api.thanawankaiyaso.workers.dev/api/v1/documents/'+encodeURIComponent(cid);const response=await fetch(url,{method:'GET',mode:'cors',credentials:'omit',headers:{Accept:'application/json',Authorization:'Bearer '+token},signal:controller.signal});if(!response.ok){let detail='';try{const body=await response.json();detail=body.error||''}catch(_){}throw Error('HTTP '+response.status+(detail?' — '+detail:''))}const type=response.headers.get('content-type')||'';if(!type.includes('json'))throw Error('API ไม่ได้ส่งข้อมูล JSON กลับมา');const data=await response.json();display(data);status.textContent='โหลดข้อมูลจริงจาก DSS สำเร็จ · CID: '+cid}catch(err){status.textContent=err.name==='AbortError'?'การเชื่อมต่อหมดเวลา':err instanceof TypeError?'เชื่อมต่อ Worker ไม่สำเร็จ: ตรวจสอบ URL, CORS และสถานะ Deploy':'ไม่สามารถโหลดข้อมูล: '+err.message;result.textContent='ยังไม่มีข้อมูลที่ยืนยันจาก API — ไม่แสดงข้อมูลสมมติ'}finally{clearTimeout(timer);button.disabled=false}});
+})();</script><script id="dss-map-controls-20261119b">(()=>{function setup(){const m=document.getElementById('dssOwnMap');if(!m||m.dataset.toolsReady)return;m.dataset.toolsReady='1';const wrap=document.createElement('div');wrap.className='dss-map-tools-right';wrap.innerHTML='<button type="button" title="ชั้นข้อมูล" aria-label="ชั้นข้อมูล">▱</button><button type="button" title="ขยายแผนที่เต็มหน้าจอ" aria-label="ขยายแผนที่เต็มหน้าจอ">⛶</button>';m.append(wrap);wrap.children[0].onclick=()=>{const p=document.querySelector('.dss-map-side');if(p){p.hidden=!p.hidden;setTimeout(()=>window.dssLeafletMap?.invalidateSize(),100)}};wrap.children[1].onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else m.requestFullscreen?.();setTimeout(()=>window.dssLeafletMap?.invalidateSize(),350)};const edit=document.createElement('button');edit.type='button';edit.className='dss-map-tool';edit.style.cssText='left:11px;top:12px';edit.title='รีเซ็ตมุมมองแผนที่';edit.textContent='✎';edit.onclick=()=>window.dssLeafletMap?.setView([14.586,100.998],13);m.append(edit)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup()})();</script></body></html>).test(base))base+='/'+subLayer;
+ const rows=[];let offset=0;
+ for(let page=0;page<12;page++){
+  const u=base+'/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&resultOffset='+offset;
+  const data=await fetchJson(u);if(data.error)throw Error(data.error.message||'ArcGIS query error');
+  const part=geoFeatures(data);rows.push(...part);
+  if(part.length<1000||!data.exceededTransferLimit&&part.length===0)break;
+  offset+=part.length;
+ }
+ return {type:'FeatureCollection',features:rows};
+}
+async function fetchFactoryPlan(){// A .js document is not assumed to be valid JSON. Read as text and parse only explicit JSON.
+ const r=await fetch(urls.factoryPlan,{mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);let txt=await r.text();let trimmed=txt.trim();if(trimmed.startsWith('{')||trimmed.startsWith('['))return JSON.parse(trimmed);let match=trimmed.match(/^\s*(?:var|let|const)\s+[\w$]+\s*=\s*([\s\S]*?)\s*;?\s*$/);if(match){let body=match[1].replace(/;\s*$/,'');return JSON.parse(body)}throw Error('รูปแบบ JS ไม่ใช่ JSON ที่อ่านได้โดยตรง')}
+async function reload(){found=[];records={};errors={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
+ const tasks=definitions.map(async([key])=>{try{let data=key==='estates'?await fetchArcgis('4460561209d7404c8254554f0f7aa246',1):key==='operators'?await fetchArcgis('59a7ca3f863c4d70b417a73085f3e64a',0):key==='factoryPlan'?await fetchFactoryPlan():await fetchJson(urls[key]);addRows(key,data)}catch(e){errors[key]=String(e.message||e)}update()});
+ await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:11});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
+function start(){if(typeof L==='undefined'){$('dssLayerStatus').textContent='ไม่สามารถโหลดไลบรารีแผนที่ Leaflet';return}map=L.map('dssOwnMap',{scrollWheelZoom:false,preferCanvas:true}).setView([15.5,101],6);window.dssLeafletMap=map;L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);definitions.forEach(([key])=>layerGroups[key]=L.layerGroup().addTo(map));$('dssMapRefresh').addEventListener('click',reload);
+const estateFilter=$('dssEstateFilter'),typeFilter=$('dssMapTypeFilter'),search=$('dssFactoryMapSearch');
+function applyMapFilter(){const chosen=typeFilter.value;Object.entries(layerGroups).forEach(([key,group])=>{if(chosen==='all'||key===chosen){if(!map.hasLayer(group))group.addTo(map)}else if(map.hasLayer(group))map.removeLayer(group)});if(estateFilter.value==='kaeng')map.setView([14.586,100.998],13);else if(found.length)map.fitBounds(found,{padding:[25,25],maxZoom:11})}
+estateFilter.addEventListener('change',applyMapFilter);typeFilter.addEventListener('change',applyMapFilter);
+search.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=search.value.trim().toLocaleLowerCase('th');if(!q)return;let match=null;layerGroups.operators.eachLayer(layer=>{if(!match&&layer.getPopup()?.getContent()?.toLocaleLowerCase('th').includes(q))match=layer});if(match){typeFilter.value='operators';applyMapFilter();map.setView(match.getLatLng(),16);match.openPopup()}else $('dssLayerStatus').textContent='ไม่พบโรงงานที่ตรงกับคำค้นในข้อมูลที่โหลดได้'});
+$('dssMapAlert').addEventListener('click',()=>{$('dssLayerStatus').scrollIntoView({behavior:'smooth',block:'nearest'})});
+reload()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script><script id="dss-document-cid-lookup">(()=>{'use strict';
+const form=document.getElementById('dssCidForm'),input=document.getElementById('dssCidInput'),tokenInput=document.getElementById('dssDashboardToken'),button=document.getElementById('dssCidButton'),status=document.getElementById('dssCidStatus'),result=document.getElementById('dssCidResult');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+function display(data){
+const entry=data&&typeof data==='object'?data:{};
+let entrepreneur=entry.entrepreneur||entry.company||entry.enterprise||{};
+let doc=entry.documents||entry.document||entry.data||{};
+if(typeof entrepreneur==='string'){try{entrepreneur=JSON.parse(entrepreneur)}catch(_){}}
+if(typeof doc==='string'){try{doc=JSON.parse(doc)}catch(_){doc={}}}
+if(Array.isArray(doc))doc=doc[0]||{};
+const name=entrepreneur.company_name||entrepreneur.factory_name||'—',estate=entrepreneur.estate_name||'—';
+const val=(o,...keys)=>keys.map(k=>o?.[k]).find(v=>v!==null&&v!==undefined&&v!=='')??'—';
+const e=v=>esc(v),date=v=>v&&v!=='—'?String(v).slice(0,10):'—';
+const status=val(doc,'status','document_status','approval_status');
+document.getElementById('refDocRows').innerHTML='<tr><td>'+e(name)+'</td><td>ผู้ประกอบการ</td><td>'+e(estate)+'</td><td>—</td><td>'+e(status)+'</td><td>'+e(date(val(doc,'submitted_at','submission_date')))+'</td></tr>';
+document.getElementById('refDocCount').textContent='แสดงเอกสารของผู้ประกอบการที่เลือก 1 ราย';
+const safeArr=(obj,key)=>{let v=obj?.[key];if(typeof v==='string'){try{v=JSON.parse(v)}catch(_){return []}}return Array.isArray(v)?v:[]};
+const chem=safeArr(doc,'chemicals'),equip=safeArr(doc,'equipment');
+const members=safeArr(doc,'ert_members'),shifts=safeArr(doc,'workforce_shifts');
+const fill=(id,value)=>document.getElementById(id).textContent=value;
+fill('refChemicalKinds',chem.length.toLocaleString('th-TH'));fill('refEquipmentCount',equip.length.toLocaleString('th-TH'));
+fill('refChemicalAmount','—');
+fill('refEquipmentTypes',new Set(equip.map(x=>val(x,'category','equipment_category','type')).filter(x=>x!=='—')).size);
+const chemRows=chem.map(x=>[val(x,'chemical_name','name','substance_name'),val(x,'cas_no','cas','un_no'),val(x,'quantity','amount'),name]);
+const equipRows=equip.map(x=>[val(x,'equipment_name','name'),val(x,'category','type'),val(x,'quantity','count'),name]);
+const teamRows=members.map(x=>[val(x,'ert_role_name','role_name','role','job_title'),name,estate,'มีข้อมูล']);
+if(!teamRows.length&&shifts.length)teamRows.push(...shifts.map(x=>['เจ้าหน้าที่ประจำกะ: '+val(x,'shift_name'),name,estate,'มีข้อมูล']));
+function table(id,rows,filter){const shown=rows.filter(r=>r.some(v=>String(v).toLowerCase().includes(filter.toLowerCase()))).slice(0,150);document.getElementById(id).innerHTML=shown.length?shown.map(r=>'<tr>'+r.map(v=>'<td>'+e(v)+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="4">ไม่มีข้อมูลในเอกสารที่เลือก</td></tr>'}
+const update=()=>{table('refChemRows',chemRows,document.getElementById('refChemSearch').value);table('refEquipRows',equipRows,document.getElementById('refEquipSearch').value);table('refTeamRows',teamRows,'');fill('refChemCount',chemRows.length+' รายการ');fill('refEquipCount',equipRows.length+' รายการ');fill('refTeamCount',teamRows.length+' รายการ')};update();
+document.getElementById('refChemSearch').oninput=update;document.getElementById('refEquipSearch').oninput=update;
+document.getElementById('refChemReset').onclick=()=>{document.getElementById('refChemSearch').value='';update()};
+document.getElementById('refEquipReset').onclick=()=>{document.getElementById('refEquipSearch').value='';update()};
+result.innerHTML='<div class="dss-ref-cardhead"><strong>ข้อมูล DSS ของผู้ประกอบการที่เลือก</strong><span>เชื่อมต่อ API สำเร็จ</span></div><table><tbody>'+[['ชื่อบริษัท',name],['นิคมอุตสาหกรรม',estate],['เลขทะเบียนโรงงาน',val(entrepreneur,'factory_reg_no','registration_no')],['CID',val(entrepreneur,'source_cid','cid')],['สถานะเอกสาร',status],['ปีที่ยื่น',val(doc,'submission_year')],['วันที่อัปเดต',date(val(doc,'updated_at'))]].map(([k,v])=>'<tr><th>'+e(k)+'</th><td>'+e(v)+'</td></tr>').join('')+'</tbody></table>';
+}form.addEventListener('submit',async e=>{e.preventDefault();const cid=input.value.trim(),token=tokenInput.value.trim();if(!/^[A-Za-z0-9._-]{1,120}$/.test(cid)){status.textContent='CID ต้องเป็นตัวอักษร ตัวเลข จุด ขีดกลาง หรือขีดล่างเท่านั้น';return}if(!token){status.textContent='กรุณากรอก Dashboard Access Token ที่ตั้งไว้ใน Cloudflare ก่อนค้นหา';tokenInput.focus();return}button.disabled=true;result.textContent='';status.textContent='กำลังเรียก DSS API ผ่าน Cloudflare Worker…';const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),16000);try{const url='https://ieat-dss-api.thanawankaiyaso.workers.dev/api/v1/documents/'+encodeURIComponent(cid);const response=await fetch(url,{method:'GET',mode:'cors',credentials:'omit',headers:{Accept:'application/json',Authorization:'Bearer '+token},signal:controller.signal});if(!response.ok){let detail='';try{const body=await response.json();detail=body.error||''}catch(_){}throw Error('HTTP '+response.status+(detail?' — '+detail:''))}const type=response.headers.get('content-type')||'';if(!type.includes('json'))throw Error('API ไม่ได้ส่งข้อมูล JSON กลับมา');const data=await response.json();display(data);status.textContent='โหลดข้อมูลจริงจาก DSS สำเร็จ · CID: '+cid}catch(err){status.textContent=err.name==='AbortError'?'การเชื่อมต่อหมดเวลา':err instanceof TypeError?'เชื่อมต่อ Worker ไม่สำเร็จ: ตรวจสอบ URL, CORS และสถานะ Deploy':'ไม่สามารถโหลดข้อมูล: '+err.message;result.textContent='ยังไม่มีข้อมูลที่ยืนยันจาก API — ไม่แสดงข้อมูลสมมติ'}finally{clearTimeout(timer);button.disabled=false}});
+})();</script><script id="dss-map-controls-20261119b">(()=>{function setup(){const m=document.getElementById('dssOwnMap');if(!m||m.dataset.toolsReady)return;m.dataset.toolsReady='1';const wrap=document.createElement('div');wrap.className='dss-map-tools-right';wrap.innerHTML='<button type="button" title="ชั้นข้อมูล" aria-label="ชั้นข้อมูล">▱</button><button type="button" title="ขยายแผนที่เต็มหน้าจอ" aria-label="ขยายแผนที่เต็มหน้าจอ">⛶</button>';m.append(wrap);wrap.children[0].onclick=()=>{const p=document.querySelector('.dss-map-side');if(p){p.hidden=!p.hidden;setTimeout(()=>window.dssLeafletMap?.invalidateSize(),100)}};wrap.children[1].onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else m.requestFullscreen?.();setTimeout(()=>window.dssLeafletMap?.invalidateSize(),350)};const edit=document.createElement('button');edit.type='button';edit.className='dss-map-tool';edit.style.cssText='left:11px;top:12px';edit.title='รีเซ็ตมุมมองแผนที่';edit.textContent='✎';edit.onclick=()=>window.dssLeafletMap?.setView([14.586,100.998],13);m.append(edit)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup()})();</script></body></html>),'');
  if(!base)throw Error('ArcGIS item ไม่มี service URL');
  if(!/\\/\\d+$/.test(base))base+='/'+subLayer;
  const rows=[];let offset=0;
