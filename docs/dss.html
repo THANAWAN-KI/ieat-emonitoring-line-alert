@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DSS Dashboard | EMCC · GIS Data</title>
+<title>DSS Dashboard | EMCC</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23d33131' d='M8 4h35l13 13v43H8z'/%3E%3Cpath fill='%23ff9494' d='M43 4v13h13'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='sans-serif' font-size='17' font-weight='bold' fill='white'%3EDSS%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -174,26 +174,312 @@ body{background:#fff;color:#282d33}
 @media(max-width:730px){.dss-workspace{grid-template-columns:1fr}.dss-kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.dss-map-frame{min-height:480px}.dss-bottom-grid{grid-template-columns:1fr}.dss-heatmap-box{grid-column:auto}.dss-main{padding:9px}.dss-map-title{flex-basis:100%}}
 @media(max-width:430px){.dss-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-map-frame{min-height:420px}}
 @media print{.dss-map-frame{min-height:300px}.dss-bottom-grid{grid-template-columns:repeat(2,1fr)}.dss-analytics{break-inside:avoid}.dss-filterbar,.dss-map-open{display:none}}
-</style><style id="dss-library-integration-20261119">
-.dss-library-section{margin-top:12px;background:#fff;border:1px solid #dfe4eb;border-radius:10px;overflow:hidden}
-.dss-library-head{padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid #e6eaf0}
-.dss-library-head h2{font-size:18px;color:#483763;margin:0}.dss-library-head p{margin:3px 0 0;color:#6a7684;font-size:13px}
-.dss-library-head a{color:#543578;text-decoration:none;border:1px solid #d8cbe4;border-radius:6px;padding:7px 12px}
-.dss-library-categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:14px 18px}
-.dss-library-cat{border:1px solid #e3e7ee;border-radius:8px;padding:11px 12px;background:#f9fafc}
-.dss-library-cat strong{display:block;color:#493268;font-size:22px}.dss-library-cat span{font-size:12px}.dss-library-cat small{display:block;color:#778390;font-size:11px}
-.dss-library-cat.unavailable strong{font-size:16px;color:#84909d}
-.dss-library-search{padding:12px 18px;display:flex;gap:9px;flex-wrap:wrap;background:#f7f8fb;border-top:1px solid #e8ebef}
-.dss-library-search input,.dss-library-search select{min-height:39px;padding:8px 11px;border:1px solid #cdd5e0;border-radius:6px;background:#fff;min-width:0;font-size:14px}
-.dss-library-search input{flex:2 1 250px}.dss-library-search select{flex:1 1 180px}
-.dss-library-table-wrap{overflow:auto;max-height:480px}
-.dss-library-table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}
-.dss-library-table th{position:sticky;top:0;background:#f0edf6;color:#46345e;z-index:1;white-space:nowrap}
-.dss-library-table td,.dss-library-table th{padding:10px 11px;border-bottom:1px solid #e9edf1;vertical-align:top}
-.dss-library-table td{max-width:270px;overflow-wrap:anywhere}
-.dss-library-foot{padding:11px 18px;color:#667483;font-size:12px;border-top:1px solid #e8ebef}
-@media(max-width:760px){.dss-library-categories{grid-template-columns:repeat(2,minmax(0,1fr));padding:10px}.dss-library-head{padding:13px}.dss-library-search{padding:10px}}
-</style><style id="dss-map-gis-polish">.dss-map-frame{min-height:690px;flex:1}.dss-map-column{min-height:780px}.dss-map-data-legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:9px 12px;background:#f8f9fc;border-bottom:1px solid #e5e7ee;font-size:12px}.dss-map-data-legend span{display:inline-flex;align-items:center;gap:5px}.dss-map-data-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}.dss-map-title{white-space:normal}@media(max-width:730px){.dss-map-frame{min-height:560px}.dss-map-column{min-height:620px}}</style><style id="dss-real-data-polish">.dss-quality-box{min-height:360px}.dss-quality-bars{gap:9px}.dss-library-cat{background:#fff;border-color:#d9dfe8}.dss-library-cat strong{color:#4a2b66}.dss-box,.dss-map-column{border-color:#d7dce5}.dss-kpi{border-color:#d8dce4}.dss-kpi:first-child{outline:none}.dss-estate-track,.dss-quality-track{border-color:#d9e0e8}.dss-analytics .track{border-color:#d9e0e8}</style></head><body>
+.dss-operations{background:#f7f8fb!important}.dss-reference-dashboard{display:grid;gap:20px;margin-top:22px}.dss-ref-title h2{margin:0;font-size:20px;color:#25344a}.dss-ref-title p{margin:2px 0 0;color:#8b96a7}.dss-ref-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.dss-ref-card{background:#fff;border:1px solid #e1e5ed;border-radius:18px;padding:22px;box-shadow:0 8px 26px #1e2c4510;min-width:0}.dss-ref-kpis .dss-ref-card{display:flex;flex-direction:column;gap:3px;min-height:122px}.dss-ref-kpis strong{font-size:32px;line-height:1.2;color:#7540c6}.dss-ref-kpis .green strong{color:#4eb35b}.dss-ref-kpis .orange strong{color:#ff8b00}.dss-ref-kpis .red strong{color:#f24a4a}.dss-ref-kpis .slate strong{color:#64748b}.dss-ref-kpis span,.dss-ref-card h3{color:#34445e;font-weight:600}.dss-ref-kpis small,.dss-ref-note{color:#8a97aa;font-size:12px}.dss-ref-cardhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.dss-ref-cardhead h3{margin:0;font-size:17px}.dss-ref-cardhead span{color:#8a97aa;font-size:12px}.dss-ref-scroll{overflow-x:auto}.dss-ref-scroll table{width:100%;border-collapse:collapse;text-align:left}.dss-ref-scroll th{background:#f1f3f7;color:#40506b;font-weight:600;white-space:nowrap}.dss-ref-scroll th,.dss-ref-scroll td{padding:12px 14px;border-bottom:1px solid #edf0f5;font-size:13px}.dss-ref-scroll td{overflow-wrap:anywhere}.dss-ref-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.dss-ref-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.dss-ref-mini>div{padding:14px 8px;text-align:center;border-radius:12px;background:#f4eefe}.dss-ref-mini>div:nth-child(2){background:#e7f5ea}.dss-ref-mini>div:nth-child(3){background:#fff2df}.dss-ref-mini strong{display:block;font-size:24px;color:#7540c6}.dss-ref-mini>div:nth-child(2) strong{color:#4eb35b}.dss-ref-mini>div:nth-child(3) strong{color:#ff8b00}.dss-ref-mini span{font-size:12px;color:#7a869a}.dss-ref-placeholder{min-height:145px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#9aa6b8;background:#fafbfe;border-radius:12px;border:1px dashed #e2e6ed}.dss-ref-stat{display:flex;flex-direction:column;gap:6px}.dss-ref-stat strong{font-size:30px;color:#7540c6}.dss-ref-filters{display:flex;gap:12px;margin-bottom:15px}.dss-ref-filters input{flex:1;min-width:0;padding:12px;border:1px solid #e4e7ef;background:#f8f9fb;border-radius:9px}.dss-ref-filters button{border:0;background:#ececf1;padding:10px 15px;border-radius:9px;cursor:pointer}@media(max-width:1050px){.dss-ref-kpis{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.dss-ref-kpis{grid-template-columns:repeat(2,1fr)}.dss-ref-grid{grid-template-columns:1fr}.dss-ref-card{padding:14px}.dss-ref-kpis strong{font-size:25px}}</style><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><style id="dss-risk-reference-20261119">
+:root{--purple:#373737;--purple2:#424242;--bg:#fff;--ink:#25272a}
+body{background:#fff!important;color:#292929}.dss-main{background:#fff;padding:20px 32px 48px}
+.dss-workspace{grid-template-columns:minmax(350px,49%) minmax(0,1fr);gap:18px}
+.dss-left-column{gap:18px}.dss-box,.dss-map-column{border:0!important;border-radius:10px!important;box-shadow:0 6px 28px #26334a12!important;background:#fff}
+.dss-box-head{border:0!important;padding:15px 17px 8px}.dss-box-head h1,.dss-box-head h2{font-size:14px!important;font-weight:700!important;color:#252525!important}
+.dss-kpi-grid{gap:7px}.dss-kpi{border:1px solid #eceef0!important;border-radius:5px!important;background:#fafafa}.dss-kpi:first-child{outline:none}.dss-kpi strong{color:#292929}
+.dss-quality-track,.dss-estate-track,.dss-analytics .track{border:0!important;background:#f0f1f3!important;border-radius:2px!important}
+.dss-quality-fill{background:#cc2435!important}.dss-quality-row:nth-child(2) .dss-quality-fill{background:#f4d74e!important;color:#252525}.dss-quality-row:nth-child(3) .dss-quality-fill{background:#44a92c!important}
+.dss-estate-fill{background:#47a72c}.dss-analytics .fill{background:linear-gradient(90deg,#ce2536,#f1d54c,#45aa30)!important}
+.dss-map-frame{background:#f1f2f7;min-height:475px}.dss-map-frame #dssOwnMap{position:absolute;inset:0;z-index:1}.dss-map-message{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:400;background:#ffffffed;padding:14px 18px;border-radius:6px;text-align:center;max-width:85%;color:#5c6270;font-size:12px;box-shadow:0 3px 18px #1112}
+.dss-filterbar{padding:12px 15px}.dss-map-data-label{font-size:11px;color:#85868a}.dss-bottom-grid{gap:16px;margin-top:12px}
+.dss-analytics{min-height:280px}.dss-box-body{padding:12px 16px}.dss-analytics .donut{width:150px;height:150px}
+.dss-kpi-box .dss-box-head{padding:13px 12px 8px}.dss-map-title{font-weight:700}
+@media(max-width:850px){.dss-workspace{grid-template-columns:1fr}.dss-main{padding:12px}.dss-map-frame{min-height:390px}}
+</style><style id="dss-operations-screenshot-20261119">
+body{background:#fafafa!important;color:#3b3b3b!important}.dss-operations{max-width:none;padding:6px 8px 30px;margin:0;font-family:Sarabun,sans-serif}.dss-top,.dss-lower{display:grid;gap:6px}.dss-top{grid-template-columns:32% 31% minmax(0,1fr);margin-bottom:6px}.dss-lower{grid-template-columns:26% 44% minmax(0,1fr)}.op-panel{background:#fff;border:1px solid #e0e0e0;min-width:0;overflow:hidden}.op-panel>h2{font-size:12px;font-weight:600;color:#55436e;text-align:center;margin:0;min-height:30px;padding:7px 5px 5px;border-bottom:1px solid #e9e9e9}.op-panel>h2.yellow-head{background:#fff179;color:#403838;min-height:43px}.op-panel>h2.salmon-head{background:#f39b8e;color:#5c3c35}.status-mosaic{display:grid;grid-template-columns:22% 78%;height:260px;color:#fff;text-align:center}.status-mosaic span{font-size:11px;font-weight:600;line-height:1.25}.status-mosaic strong{font-size:31px;font-weight:700;line-height:1.2}.status-mosaic small{font-size:11px}.mosaic-total{background:#e93675;display:flex;flex-direction:column;justify-content:center}.mosaic-right{display:grid;grid-template-rows:50% 50%;min-width:0}.mosaic-big{display:grid;grid-template-columns:1fr 1fr}.mosaic-big>div,.mosaic-small>div{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 2px;border:1px solid #ffffff60;min-width:0}.mosaic-missing{background:#bf382d}.mosaic-imported{background:#008341}.mosaic-small{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.mosaic-small strong{font-size:22px}.mosaic-small span{font-size:9px}.chart-pad{display:grid;grid-template-columns:minmax(0,1fr) 110px;align-items:center;gap:7px;padding:16px 8px 8px;min-height:260px}.chart-plot{height:226px;display:flex;align-items:flex-end;justify-content:space-around;gap:12px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:20px 8px 0;background:repeating-linear-gradient(to top,transparent 0,transparent calc(25% - 1px),#e8e8e8 calc(25% - 1px),#e8e8e8 25%)}.chart-group{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:3px;height:100%;position:relative;min-width:0}.chart-bar{min-width:9px;max-width:23px;flex:1;position:relative;min-height:1px}.chart-bar b{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:9px;font-weight:400;color:#777}.chart-label{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%) rotate(-23deg);transform-origin:top center;font-size:9px;white-space:nowrap;color:#737373}.legend-side{display:grid;gap:12px;font-size:10px}.legend-side div{display:flex;align-items:center;gap:6px}.legend-dot{width:11px;height:11px;border-radius:50%;flex:none}.ranking-plot{padding:16px 12px;display:grid;gap:17px;min-height:310px}.rank-row{display:grid;grid-template-columns:90px minmax(0,1fr) 25px;align-items:center;gap:5px;font-size:11px;color:#737373}.rank-row label{text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rank-track{height:29px;background:#f4f4f4}.rank-fill{background:#ff896b;height:100%}.table-caption{font-size:11px;background:#fff48b;text-align:center;font-weight:600;padding:7px 4px}.table-scroll{overflow:auto;max-height:310px}.dss-table{width:100%;border-collapse:collapse;font-size:10px;white-space:nowrap}.dss-table th{background:#9e80c6;color:#fff;text-align:left;font-weight:500}.dss-table th,.dss-table td{padding:6px 8px;border:1px solid #d5d5d5}.dss-table td:nth-child(4){background:#58bb4d;color:#fff}.dss-table td:nth-child(5){background:#e75a94;color:#fff}.monthly-chart{min-height:310px;padding:20px 18px;display:flex;align-items:flex-end;gap:5px;border-bottom:1px solid #ddd}.monthly-pair{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:4px;height:235px;position:relative}.monthly-pair .chart-bar{max-width:32px}.monthly-pair .chart-label{transform:translateX(-50%) rotate(-35deg)}.dss-load-state{font-size:11px;color:#7b7b7b;padding:8px}.source{font-size:10px;margin:0 8px;color:#888}.no-data{font-size:12px;color:#888;align-self:center;text-align:center;padding:20px}.dss-operations .chart-bar{border-radius:0}.dss-operations .chart-bar[title]{cursor:help}@media(max-width:1150px){.dss-top{grid-template-columns:1fr 1fr}.dss-top .op-panel:first-child{grid-column:1/-1}.dss-lower{grid-template-columns:1fr 1fr}.dss-lower .op-panel:nth-child(2){grid-column:1/-1;grid-row:2}}@media(max-width:650px){.dss-top,.dss-lower{display:block}.op-panel{margin-bottom:8px}.chart-pad{grid-template-columns:minmax(0,1fr) 95px}.status-mosaic{height:230px}.mosaic-small strong{font-size:18px}}
+</style><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><style id="dss-own-gis-map-20261119">
+.dss-geoview{margin-bottom:8px}.dss-map-heading{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #ececec;gap:12px}.dss-map-heading h2{font-size:15px;font-weight:700;margin:0;color:#292929}.dss-map-heading p{font-size:11px;color:#7a7a7a;margin:3px 0}.dss-map-heading button{border:1px solid #ddd;background:white;padding:8px 12px;cursor:pointer;white-space:nowrap}.dss-map-layout{display:grid;grid-template-columns:260px minmax(0,1fr)}.dss-map-side{padding:15px;border-right:1px solid #e8e8e8;background:#fff}.dss-map-side h3{font-size:12px;margin:0 0 12px}.dss-layer-row{display:flex;align-items:flex-start;gap:8px;margin:9px 0;font-size:11px}.dss-layer-row input{margin-top:3px;accent-color:#389a38}.dss-layer-row span{display:block;color:#888;font-size:10px}.dss-layer-dot{width:10px;height:10px;border-radius:50%;flex:none;margin-top:3px}.dss-map-canvas{height:460px;min-width:0;background:#eef0f5}.dss-map-disclaimer{font-size:10px;color:#888;line-height:1.6}.dss-map-side #dssLayerStatus{font-size:10px;color:#7a7a7a;margin-top:16px;line-height:1.6}.dss-own-popup{font:12px Sarabun,sans-serif;max-width:270px}.dss-own-popup strong{display:block;margin-bottom:5px}.dss-own-popup p{margin:3px 0}@media(max-width:760px){.dss-map-layout{grid-template-columns:1fr}.dss-map-side{border-right:0;border-bottom:1px solid #ddd}.dss-map-canvas{height:380px}.dss-map-heading{flex-wrap:wrap}}
+</style><style id="dss-documents-api-ui">.dss-api-panel{margin-bottom:8px;padding:0 15px 14px}.dss-api-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 8px;border-bottom:1px solid #eee}.dss-api-heading h2{margin:0;font-size:14px;font-weight:700;color:#292929}.dss-api-heading p{margin:3px 0 0;font-size:11px;color:#888}.dss-api-pill{background:#e9edf7;color:#56548a;padding:4px 9px;border-radius:15px;font-size:10px}.dss-api-form{display:flex;align-items:center;gap:9px;margin-top:13px}.dss-api-form label{font-size:12px;font-weight:600}.dss-api-form input{flex:1;min-width:80px;border:1px solid #d4d6dd;border-radius:5px;padding:10px;font:12px Sarabun,sans-serif}.dss-api-form button{background:#573887;border:0;border-radius:5px;color:white;padding:10px 16px;font:12px Sarabun,sans-serif;cursor:pointer}.dss-api-form button:disabled{opacity:.55;cursor:wait}.dss-api-help{font-size:10px;color:#858585;margin:8px 0}.dss-api-status{font-size:11px;color:#5d6272;padding:9px 10px;background:#f5f6f9;border-radius:4px}.dss-api-result{margin-top:8px;max-height:300px;overflow:auto}.dss-api-result table{border-collapse:collapse;width:100%;font-size:11px}.dss-api-result td,.dss-api-result th{border:1px solid #e4e4e4;padding:7px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.dss-api-result th{background:#f1edf8}.dss-api-result pre{font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere}.dss-api-result details{padding:8px 0}@media(max-width:650px){.dss-api-form{flex-wrap:wrap}.dss-api-form label{width:100%}}</style><style id="dss-reference-layout-fix">
+:root{--purple:#6c3ac1;--purple2:#7542c8;--bg:#f7f8fb;--ink:#2e405b}
+body{background:#f7f8fb!important;color:#2e405b!important}
+.dss-operations{background:#f7f8fb!important;max-width:1600px!important;margin:0 auto!important;padding:24px 22px 55px!important}
+.dss-reference-dashboard{margin-top:0!important;gap:26px!important}
+.dss-ref-title{margin:8px 0 -8px!important}.dss-ref-title h2{font-size:22px!important;font-weight:700!important;color:#283c5b!important}
+.dss-ref-kpis{gap:24px!important}.dss-ref-card{border-radius:20px!important;box-shadow:0 9px 30px rgba(28,43,77,.045)!important;border:1px solid #dfe5ed!important}
+.dss-ref-kpis .dss-ref-card{min-height:135px!important;padding:28px!important;justify-content:center}
+.dss-ref-kpis strong{font-size:34px!important}.dss-ref-kpis span{font-size:15px!important}
+.dss-ref-table-card{min-height:210px}.dss-ref-grid{gap:24px!important}.dss-ref-mini{margin:12px 0 22px}
+.dss-ref-placeholder{min-height:240px!important;border:0!important;background:linear-gradient(to top,#f3f5f8 1px,transparent 1px) 0 0/100% 48px!important}
+.dss-ref-scroll th{background:#f1f3f7!important;color:#42546c!important;padding:17px 14px!important}
+.dss-ref-cardhead h3{font-size:18px!important}.dss-ref-stat{min-height:145px}
+.dss-api-panel{border-radius:18px!important;padding:18px 22px!important;margin:0!important;box-shadow:0 8px 26px #1e2c4510!important;border:1px solid #e1e5ed!important}
+.dss-api-heading h2{font-size:17px!important;color:#34445e!important}.dss-api-heading p{color:#8390a2!important}
+.dss-geoview{margin-top:28px!important;border-radius:18px!important;box-shadow:0 8px 26px #1e2c4510!important;border:1px solid #e1e5ed!important}
+.dss-map-heading h2{font-size:18px!important;color:#34445e!important}
+.dss-api-result{overflow-x:auto}.dss-api-result table{width:100%;table-layout:auto}
+@media(max-width:1050px){.dss-ref-kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:720px){.dss-operations{padding:12px!important}.dss-ref-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.dss-ref-grid{grid-template-columns:1fr!important}.dss-ref-kpis .dss-ref-card{padding:15px!important;min-height:110px!important}.dss-map-layout{grid-template-columns:1fr!important}}
+</style><style id="dss-risk-reference-palette">
+/* Risk dashboard reference: neutral canvas, red/yellow/green signals, muted lavender map */
+body,.dss-operations{background:#fafafa!important;color:#292d33!important}
+.dss-reference-dashboard{gap:22px!important}
+.dss-ref-title h2{color:#20252b!important;font-weight:700!important}
+.dss-ref-title p,.dss-ref-note{color:#818893!important}
+.dss-ref-card,.dss-api-panel,.dss-geoview{background:#fff!important;border:1px solid #f0f1f3!important;border-radius:13px!important;box-shadow:0 7px 24px rgba(30,35,48,.065)!important}
+.dss-ref-kpis .dss-ref-card{min-height:120px!important;padding:22px!important}
+.dss-ref-kpis strong,.dss-ref-stat strong,.dss-ref-mini strong{color:#292d33!important}
+.dss-ref-kpis .green strong,.dss-ref-mini>div:nth-child(2) strong{color:#4cae29!important}
+.dss-ref-kpis .orange strong,.dss-ref-mini>div:nth-child(3) strong{color:#e3bd32!important}
+.dss-ref-kpis .red strong{color:#b8292c!important}
+.dss-ref-kpis .slate strong{color:#69717c!important}
+.dss-ref-mini>div{background:#f4f5f6!important;border-radius:7px!important}
+.dss-ref-mini>div:nth-child(2){background:#e8f5e5!important}
+.dss-ref-mini>div:nth-child(3){background:#fff8dc!important}
+.dss-ref-scroll th{background:#f4f5f6!important;color:#42484f!important}
+.dss-ref-scroll td{color:#404750!important}
+.dss-ref-placeholder{background:repeating-linear-gradient(to bottom,#fff 0px,#fff 47px,#f0f1f3 48px)!important;color:#9299a2!important}
+.dss-ref-filters input{background:#f5f6f7!important;border-color:#e8eaed!important}
+.dss-ref-filters button{background:#eceef0!important;color:#444b53!important}
+.dss-api-panel button[type="submit"],.dss-select-cid{background:#34383e!important;color:#fff!important}
+.dss-map-heading h2,.dss-api-heading h2,.dss-ref-cardhead h3{color:#292d33!important}
+.dss-ref-cardhead span{color:#818893!important}
+.dss-map-sidebar{background:#fff!important}
+.dss-map-legend{color:#34383e!important}
+</style><style id="dss-monitoring-reference-layout">
+.dss-operations{max-width:none!important;padding:16px 24px 40px!important}
+.dss-reference-dashboard{gap:10px!important}
+.dss-reference-dashboard>.dss-ref-title:first-child{margin:0 0 6px!important}
+.dss-monitoring-top{display:grid;grid-template-columns:minmax(320px,34%) minmax(0,66%);gap:8px;align-items:stretch;min-height:530px}
+.dss-monitoring-left{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dss-monitoring-subtitle{font-size:15px;font-weight:700;margin:0;padding:13px 12px 9px;border-bottom:1px solid #e3e5e9}
+.dss-monitoring-left>.dss-ref-kpis{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;border:1px solid #cbd1d7;padding:8px!important;background:#fff}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{min-height:76px!important;padding:9px!important;border-radius:0!important;box-shadow:none!important;border:1px solid #9daaa8!important;display:flex;align-items:center;justify-content:center;text-align:center;gap:0!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:1/-1}
+.dss-monitoring-left>.dss-ref-kpis strong{font-size:24px!important}
+.dss-monitoring-left>.dss-ref-kpis span{font-size:12px!important}
+.dss-monitoring-left>.dss-ref-kpis small{font-size:10px!important}
+.dss-monitoring-connection{border:1px solid #cbd1d7;background:#fff;flex:1;min-height:160px}
+.dss-monitoring-status{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px 12px}
+.dss-monitoring-status>div{min-height:110px;border:1px solid #e1e6eb;border-top:7px solid #2795c5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;gap:10px}
+.dss-monitoring-status>div:nth-child(2){border-top-color:#4cae29}
+.dss-monitoring-status span{font-size:13px}.dss-monitoring-status strong{font-size:13px;color:#394a5e}
+.dss-monitoring-map-slot{min-width:0;min-height:530px}
+.dss-monitoring-map-slot .dss-geoview{height:100%;margin:0!important;border-radius:0!important;display:flex;flex-direction:column;overflow:hidden}
+.dss-monitoring-map-slot .dss-map-heading{padding:10px 12px!important}
+.dss-monitoring-map-slot .dss-map-layout{flex:1;min-height:440px;display:flex!important;flex-direction:column-reverse}
+.dss-monitoring-map-slot .dss-map-side{display:flex!important;flex-wrap:wrap;gap:8px;padding:8px!important;align-items:center;max-height:125px;overflow:auto}
+.dss-monitoring-map-slot .dss-map-side h3,.dss-monitoring-map-slot .dss-map-disclaimer{display:none}
+.dss-monitoring-map-slot .dss-map-canvas{width:100%!important;min-height:390px!important;flex:1}
+.dss-monitoring-map-slot #dssLayerControls{display:flex;flex-wrap:wrap;gap:8px}
+.dss-monitoring-map-slot #dssLayerStatus{font-size:11px}
+.dss-reference-dashboard>.dss-api-panel{margin-top:16px!important}
+.dss-reference-dashboard>.dss-ref-grid,.dss-reference-dashboard>.dss-ref-card{margin-top:10px}
+.dss-ref-card,.dss-api-panel{border-radius:0!important;box-shadow:none!important;border:1px solid #d6dbe0!important}
+.dss-ref-title h2{font-size:18px!important}
+@media(max-width:900px){.dss-monitoring-top{grid-template-columns:1fr}.dss-monitoring-map-slot{min-height:430px}.dss-monitoring-map-slot .dss-map-layout{min-height:390px}}
+</style><style id="dss-monitoring-finish">
+.dss-monitoring-left>.dss-ref-kpis{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{grid-column:span 2!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 4!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(2){border-top:4px solid #4cae29!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(3){border-top:4px solid #e6c536!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4){border-top:4px solid #b8292c!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(5){border-top:4px solid #78818b!important}
+.dss-connection-bars{padding:10px 14px;display:grid;gap:13px}
+.dss-connection-bars>div{display:grid;grid-template-columns:1fr 1.3fr;gap:5px 12px;align-items:center}
+.dss-connection-bars span{font-size:12px;color:#34435b}
+.dss-connection-bars strong{grid-column:2;font-size:11px;font-weight:500;color:#64748b}
+.dss-connection-track{height:15px;background:#e8ebef;border:1px solid #d6dce3;overflow:hidden}
+.dss-connection-track i{display:block;height:100%;transition:width .3s}
+.dss-monitoring-status{padding:8px 14px!important;gap:6px!important}
+.dss-monitoring-status>div{min-height:55px!important;border-top-width:4px!important}
+.dss-monitoring-map-slot .dss-map-layout{min-height:480px!important}
+.dss-monitoring-map-slot .dss-map-canvas{min-height:420px!important}
+@media(max-width:900px){.dss-monitoring-map-slot .dss-map-layout{min-height:410px!important}}
+</style><style id="dss-hide-cid-search-panel">#dssDocumentsPanel{display:none!important} .dss-reference-dashboard>.dss-ref-title:first-child{margin-bottom:12px!important}</style><style id="dss-kpi-reference-cards">
+/* Five KPI cards styled after supplied reference; retain actual values from API only */
+.dss-monitoring-left>.dss-ref-kpis{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:14px!important;border:0!important;background:transparent!important;padding:0!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 1!important;position:relative!important;min-height:126px!important;border:1px solid #e1e5eb!important;border-radius:19px!important;box-shadow:0 8px 24px rgba(25,35,55,.04)!important;padding:22px 18px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;text-align:left!important;gap:5px!important;background:#fff!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card strong{font-size:30px!important;line-height:1.12!important;font-weight:700!important;color:#7542c8!important;order:0}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card span{font-size:13px!important;color:#62708a!important;order:1}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card small{display:none!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{content:"▤";position:absolute;right:16px;top:50%;transform:translateY(-50%);width:45px;height:45px;border-radius:50%;background:#f4efff;color:#7542c8;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:400}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green strong{color:#4db461!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green::after{content:"✓";background:#e9f6eb;color:#4db461}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange strong{color:#ff8b00!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange::after{content:"◷";background:#fff2df;color:#ff8b00}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red strong{color:#f04444!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red::after{content:"↻";background:#ffedf0;color:#f04444}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate strong{color:#697c99!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate::after{content:"✎";background:#f0f2f5;color:#697c99}
+@media(min-width:1101px){.dss-monitoring-top{display:flex!important;flex-direction:column!important;min-height:0!important}.dss-monitoring-left{display:contents!important}.dss-monitoring-left>.dss-monitoring-subtitle{order:0}.dss-monitoring-left>.dss-ref-kpis{order:1}.dss-monitoring-map-slot{order:2;min-height:500px!important}.dss-monitoring-connection{order:3;min-height:0!important}.dss-monitoring-map-slot .dss-geoview{min-height:500px!important}}
+@media(max-width:1100px){.dss-monitoring-left>.dss-ref-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{grid-column:span 1!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 1!important}}
+@media(max-width:600px){.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{min-height:105px!important;padding:14px!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{right:10px;width:32px;height:32px;font-size:18px}}
+</style><style id="dss-kpi-compact-risk-layout">
+/* Reference 1: compact rectangular summary panel; reference 2: neutral/red/yellow/green palette */
+@media(min-width:901px){
+.dss-monitoring-top{display:grid!important;grid-template-columns:minmax(350px,34%) minmax(0,66%)!important;gap:8px!important;align-items:stretch!important;min-height:520px!important}
+.dss-monitoring-left{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important}
+.dss-monitoring-map-slot{order:initial!important;min-height:520px!important}
+.dss-monitoring-left>.dss-monitoring-subtitle{order:initial!important}
+.dss-monitoring-left>.dss-ref-kpis{order:initial!important}
+.dss-monitoring-connection{order:initial!important}
+}
+.dss-monitoring-left>.dss-monitoring-subtitle{border:1px solid #d5d9dd!important;border-bottom:0!important;background:#fff!important;padding:13px 12px 10px!important;margin:0!important;color:#2e3439!important}
+.dss-monitoring-left>.dss-ref-kpis{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;background:#fff!important;border:1px solid #d5d9dd!important;border-top:0!important;padding:8px!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 2!important;min-height:88px!important;border:1px solid #aab3b5!important;border-radius:0!important;box-shadow:none!important;padding:10px 7px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:3px!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 4!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{display:none!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card strong{order:1!important;font-size:24px!important;color:#252c33!important;font-weight:700!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card span{order:0!important;font-size:12px!important;color:#444e56!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card small{display:block!important;order:2!important;font-size:10px!important;color:#7b848b!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(1){border-left:5px solid #a6a3df!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(2){border-left:5px solid #4bae21!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(3){border-left:5px solid #f4d44d!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4){border-left:5px solid #b71c1c!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(5){border-left:5px solid #9ca3af!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate strong{color:#252c33!important}
+@media(max-width:900px){.dss-monitoring-left>.dss-ref-kpis{grid-template-columns:repeat(4,minmax(0,1fr))!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 4!important}}
+</style><style id="dss-summary-black-outline-color-fill">
+/* Black outlines for summary panel and every tile; tinted fills matching status stripes */
+.dss-monitoring-left>.dss-monitoring-subtitle{border:1px solid #202020!important;border-bottom:0!important;background:#fff!important}
+.dss-monitoring-left>.dss-ref-kpis{border:1px solid #202020!important;border-top:0!important;background:#fff!important;gap:6px!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{border:1px solid #202020!important;border-left:5px solid #a6a3df!important;background:#f0effb!important;box-shadow:none!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(2){border:1px solid #202020!important;border-left:5px solid #4bae21!important;background:#e9f6e7!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(3){border:1px solid #202020!important;border-left:5px solid #e7c62b!important;background:#fff8d9!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4){border:1px solid #202020!important;border-left:5px solid #b71c1c!important;background:#fbeaea!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(5){border:1px solid #202020!important;border-left:5px solid #78818b!important;background:#eef0f2!important}
+</style><style id="dss-import-graphs-style">
+.dss-import-graphs{margin:8px 0 12px}.dss-import-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px}.dss-import-head h2{font-size:16px;margin:0;color:#1f2937}.dss-import-head span{font-size:11px;color:#68788d}
+.dss-import-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.dss-import-card{background:#fff;border:1px solid #202020;padding:13px 12px 9px;min-width:0}.dss-import-card h3{text-align:center;margin:0 0 8px;font-size:17px;color:#111;font-weight:600}
+.dss-import-plot{width:100%;overflow-x:auto}.dss-import-plot svg{display:block;width:100%;height:auto;min-width:430px}
+.dss-import-plot text{font-family:Sarabun,Arial,sans-serif;fill:#111}.dss-import-plot .axis-label{font-size:12px}.dss-import-plot .value-label{font-size:11px}.dss-import-plot .category-label{font-size:11px}
+@media(max-width:950px){.dss-import-grid{grid-template-columns:1fr}}@media(max-width:650px){.dss-import-head{flex-direction:column;gap:3px}}
+</style><style id="dss-remove-requested-sections">
+.dss-monitoring-connection{display:none!important}
+.dss-reference-dashboard>.dss-ref-table-card{display:none!important}
+.dss-reference-dashboard>.dss-ref-grid:has(#refOperatorAll){display:none!important}
+</style><style id="dss-summary-deep-status-fills">
+/* Saturated status colors for the five summary tiles; keep black outlines */
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{background:#55449d!important;border:1px solid #171717!important;border-left:5px solid #392d79!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(2){background:#217d3a!important;border-left:5px solid #135a28!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(3){background:#b48a00!important;border-left:5px solid #8c6900!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4){background:#a62c35!important;border-left:5px solid #7e1820!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(5){background:#4e5967!important;border-left:5px solid #333e4a!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card span,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card small{color:#fff!important}
+</style><style id="dss-estate-rank-style">
+.dss-estate-rank-card{background:#fff;border:1px solid #252525;padding:13px 12px 10px;min-width:0;flex:1;min-height:270px}
+.dss-estate-rank-card h3{text-align:center;font-size:13px;line-height:1.5;margin:0 0 4px;color:#222;font-weight:600}
+.dss-estate-rank-card p{margin:0 0 5px;text-align:center;font-size:10px;color:#748094}
+.dss-estate-rank-chart{overflow-x:auto}.dss-estate-rank-chart svg{display:block;width:100%;height:auto;min-width:360px}
+.dss-estate-rank-chart text{font-family:Sarabun,Arial,sans-serif}
+@media(max-width:900px){.dss-estate-rank-card{min-height:250px}}
+</style><style id="dss-summary-reference-palette-20261119">
+/* Colors sampled visually from user reference: lavender, green, yellow, red, light gray */
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{background:#a5a0df!important;border:1px solid #202020!important;border-left:5px solid #8d86cb!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(2){background:#49ad22!important;border-left:5px solid #328619!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(3){background:#f6d64c!important;border-left:5px solid #d4b42e!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4){background:#b51b20!important;border-left:5px solid #8f1216!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(5){background:#e8ebef!important;border-left:5px solid #c4cbd2!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card span,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card small,
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate strong{color:#17212d!important;background:transparent!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4) span,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4) strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4) small{color:#fff!important;background:transparent!important}
+</style><style id="dss-center-overview-title">.dss-monitoring-left>.dss-monitoring-subtitle{text-align:center!important}</style><style id="dss-hide-map-action-button">#dssMapRefresh{display:none!important}</style><style id="dss-hide-removed-lower-panels">
+/* Requested removal from visible dashboard; retain DOM for existing data handlers */
+.dss-import-graphs,
+.dss-reference-dashboard>.dss-ref-card,
+.dss-reference-dashboard>.dss-ref-grid,
+.dss-reference-dashboard>.dss-ref-title,
+.dss-reference-dashboard>.dss-ref-note{display:none!important}
+</style><style id="dss-expanded-map-layout-20261119">
+/* Keep the DSS map in the dashboard's right column, filling its allotted area. */
+.dss-monitoring-map-slot{min-width:0;min-height:620px;display:flex;flex-direction:column;overflow:hidden}
+.dss-monitoring-map-slot>.dss-geoview{flex:1;min-height:620px;margin:0;display:flex;flex-direction:column;border:0;background:#fff}
+.dss-monitoring-map-slot .dss-map-heading{display:none!important}
+.dss-monitoring-map-slot .dss-map-layout{display:flex;flex:1;min-height:580px;flex-direction:column}
+.dss-monitoring-map-slot .dss-map-canvas{height:auto!important;min-height:560px;flex:1;width:100%}
+.dss-monitoring-map-slot .dss-map-side{order:2;display:block;padding:7px 10px;border:0;border-top:1px solid #ddd}
+.dss-monitoring-map-slot .dss-map-side h3,.dss-monitoring-map-slot .dss-map-disclaimer{display:none}
+.dss-monitoring-map-slot #dssLayerControls{display:flex;gap:6px 14px;align-items:center;flex-wrap:wrap}
+.dss-monitoring-map-slot .dss-layer-row{margin:2px 0;align-items:center}
+.dss-monitoring-map-slot .dss-layer-row span{font-size:10px}
+.dss-monitoring-map-slot .dss-map-side #dssLayerStatus{margin:3px 0 0}
+@media(max-width:850px){.dss-monitoring-map-slot,.dss-monitoring-map-slot>.dss-geoview{min-height:460px}.dss-monitoring-map-slot .dss-map-canvas{min-height:420px}}
+</style><style id="dss-extra-charts-20261119">.dss-extra-charts{margin:12px 0 16px;font-family:Sarabun,sans-serif}.dss-extra-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}.dss-extra-head h2{font-size:16px;margin:0}.dss-extra-head span{font-size:11px;color:#667085}.dss-extra-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.dss-extra-card{border:1px solid #252525;background:white;min-width:0;padding:14px 16px}.dss-extra-card h3{margin:0 0 10px;text-align:center;font-size:14px;font-weight:600;color:#242424}.dss-extra-wide{grid-column:1/-1}.dss-donut-area{display:flex;align-items:center;justify-content:center;gap:30px;min-height:190px}.dss-donut{width:146px;height:146px;flex:none;border-radius:50%;background:var(--parts);position:relative;border:2px solid #202020}.dss-donut:after{content:"";position:absolute;inset:31%;background:#fff;border:2px solid #202020;border-radius:50%}.dss-donut-legend{display:grid;gap:12px;font-size:12px}.dss-donut-legend span,.dss-extra-key span{display:flex;gap:7px;align-items:center}.dss-donut-legend i,.dss-extra-key i{width:11px;height:11px;display:inline-block;flex:none}.dss-extra-plot{width:100%;min-height:225px}.dss-extra-plot svg{width:100%;height:auto;display:block}.dss-extra-key{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;font-size:11px;margin-top:6px}@media(max-width:760px){.dss-extra-grid{grid-template-columns:1fr}.dss-extra-wide{grid-column:auto}.dss-donut-area{gap:12px}.dss-donut{width:112px;height:112px}.dss-extra-head{align-items:flex-start;flex-direction:column}}</style><style id="dss-decision-panels-20261119">.dss-decision{margin:12px 18px 18px}.dss-decision>h2{font-size:17px;margin:0 0 10px}.dss-decision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.dss-decision-card{border:1px solid #222;background:#fff;min-width:0}.dss-decision-card h3{margin:0;padding:10px 14px;background:#f1f0f8;border-bottom:1px solid #222;font-size:14px;text-align:center}.dss-decision-body{padding:15px}.dss-decision-body p{margin:5px 0;color:#64748b;font-size:12px}.dss-decision-progress{height:17px;background:#e5e7eb;border:1px solid #999;margin:10px 0}.dss-decision-placeholder{background:#f7f8fa;padding:14px;color:#667085;text-align:center}.dss-decision-table{width:100%;border-collapse:collapse;font-size:12px}.dss-decision-table th,.dss-decision-table td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left}.dss-decision-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.dss-decision-metrics div{border:1px solid #cbd5e1;padding:10px 5px;text-align:center}.dss-decision-metrics strong{display:block;font-size:19px;color:#4a2b66}.dss-decision-note{font-size:11px;color:#64748b;margin-top:10px}@media(max-width:850px){.dss-decision-grid{grid-template-columns:1fr}.dss-decision-metrics{grid-template-columns:repeat(2,1fr)}}</style><style id="dss-extra-three-column-20261119">.dss-extra-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.dss-extra-grid>.dss-extra-card{grid-column:span 2;padding:12px 10px}.dss-extra-grid>.dss-extra-card:nth-child(n+4){grid-column:span 2}.dss-extra-grid .dss-donut-area{gap:12px;min-height:205px}.dss-extra-grid .dss-donut{width:132px;height:132px}.dss-extra-grid .dss-donut-legend{font-size:11px}@media(max-width:1050px){.dss-extra-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-extra-grid>.dss-extra-card,.dss-extra-grid>.dss-extra-card:nth-child(n+4){grid-column:auto}.dss-extra-grid>.dss-extra-card:nth-child(3){grid-column:1/-1}}@media(max-width:650px){.dss-extra-grid{grid-template-columns:1fr}.dss-extra-grid>.dss-extra-card,.dss-extra-grid>.dss-extra-card:nth-child(3){grid-column:auto}}</style><style id="dss-decision-three-column-20261119">.dss-decision-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dss-decision-grid>.dss-decision-card:nth-child(4){grid-column:1/-1}.dss-decision-grid .dss-decision-body{padding:12px}.dss-decision-grid .dss-decision-card h3{min-height:46px;display:flex;align-items:center;justify-content:center}@media(max-width:1050px){.dss-decision-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-decision-grid>.dss-decision-card:nth-child(4){grid-column:auto}}@media(max-width:650px){.dss-decision-grid{grid-template-columns:1fr}}</style><style id="dss-decision-chart-row-20261119">.dss-decision-grid>.dss-decision-card:nth-child(4){grid-column:auto}.dss-decision-grid>.dss-decision-chart{min-width:0;overflow:hidden}.dss-decision-chart .dss-extra-plot{min-height:190px;overflow:hidden}.dss-decision-chart .dss-extra-plot svg{max-width:100%;height:auto}.dss-decision-chart .dss-extra-key{flex-wrap:wrap}@media(max-width:1050px){.dss-decision-grid>.dss-decision-card:nth-child(4){grid-column:auto}}</style><style id="dss-map-reference-style-20261119">
+.dss-geoview{border:1px solid #bbc5cc!important;background:#fff!important}
+.dss-geoview .dss-map-heading{display:none!important}
+.dss-geoview .dss-map-layout{display:flex!important;flex-direction:column!important}
+.dss-geoview .dss-map-side{order:2!important;border:0!important;border-top:1px solid #d9dfe5!important;padding:7px 12px!important}
+.dss-geoview .dss-map-side h3{display:none!important}
+.dss-geoview #dssLayerControls{display:flex!important;flex-wrap:wrap!important;gap:6px 14px!important;align-items:center!important}
+.dss-geoview .dss-layer-row{margin:0!important;align-items:center!important}
+.dss-geoview .dss-layer-row span{font-size:9px!important}
+.dss-geoview .dss-map-disclaimer{margin:4px 0!important}
+.dss-geoview .dss-map-canvas{order:1!important;height:560px!important;background:#f4f6f8!important}
+.dss-geoview .dss-map-filterbar{display:grid;grid-template-columns:1fr 1.2fr .85fr .85fr auto;gap:5px;padding:6px;background:#fff;border-bottom:1px solid #9ca9b2}
+.dss-geoview .dss-map-filterbar select,.dss-geoview .dss-map-filterbar input{width:100%;min-width:0;min-height:43px;border:1px solid #73837b;background:#f7f9f8;padding:7px 10px;font:14px Sarabun,sans-serif;color:#142331}
+.dss-geoview .dss-map-filterbar .dss-map-alert{border:1px solid #333;background:#f24b50;color:#111;font-weight:700;padding:0 14px;white-space:nowrap}
+.dss-geoview .leaflet-container{font-family:Sarabun,sans-serif;background:#f4f6f8}
+.dss-geoview .leaflet-control-zoom a{border:1px solid #6f8a95!important;background:#fff!important;color:#0b2231!important}
+@media(max-width:850px){.dss-geoview .dss-map-filterbar{grid-template-columns:repeat(2,minmax(0,1fr))}.dss-geoview .dss-map-filterbar .dss-map-alert{grid-column:1/-1;min-height:40px}.dss-geoview .dss-map-canvas{height:440px!important}}
+</style><style id="dss-map-refinement-20261119b">
+.dss-monitoring-map-slot,.dss-geoview,.dss-geoview .dss-map-layout{min-width:0!important;width:100%!important}
+.dss-monitoring-map-slot .dss-geoview{height:100%;margin:0!important}
+.dss-monitoring-map-slot .dss-map-canvas{height:clamp(470px,57vh,760px)!important}
+.dss-geoview .dss-map-side #dssLayerStatus{margin-top:4px!important}
+.dss-geoview .dss-map-side .dss-map-disclaimer{display:none!important}
+.dss-geoview .dss-map-filterbar{grid-template-columns:1fr 1.2fr .8fr .8fr auto!important}
+.dss-geoview .dss-map-filterbar .dss-map-alert{background:#f24b50!important}
+.dss-geoview .dss-map-tool{position:absolute;z-index:700;background:white;border:1px solid #71808a;width:35px;height:35px;display:grid;place-items:center;cursor:pointer;font-size:19px;box-shadow:0 1px 4px #0002}
+.dss-geoview .dss-map-tools-right{position:absolute;right:11px;top:12px;z-index:700;display:flex;flex-direction:column;gap:7px}
+.dss-geoview .dss-map-tools-right button{background:white;border:1px solid #71808a;width:35px;height:35px;cursor:pointer;font-size:19px}
+.dss-geoview .dss-map-layout{position:relative}
+@media(max-width:850px){.dss-geoview .dss-map-filterbar{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dss-geoview .dss-map-filterbar .dss-map-alert{grid-column:1/-1}}
+
+/* DSS status cards: exact reference palette, 19 Nov 2026 */
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:nth-child(1){background:#a5a0df!important;border-color:#202020!important;border-left:5px solid #8d86cb!important}
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:nth-child(2){background:#49ad22!important;border-color:#202020!important;border-left:5px solid #328619!important}
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:nth-child(3){background:#f6d64c!important;border-color:#202020!important;border-left:5px solid #d4b42e!important}
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:nth-child(4){background:#b51b20!important;border-color:#202020!important;border-left:5px solid #8f1216!important}
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:nth-child(5){background:#e8ebef!important;border-color:#202020!important;border-left:5px solid #c4cbd2!important}
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:not(:nth-child(4)) :is(span,strong,small){color:#17212d!important}
+.dss-monitoring-left .dss-ref-kpis .dss-ref-card:nth-child(4) :is(span,strong,small){color:#fff!important}
+
+/* Keep only estate selector and factory-name search in DSS map toolbar */
+.dss-map-filterbar #dssMapTypeFilter,.dss-map-filterbar #dssMapStatusFilter,.dss-map-filterbar #dssMapAlert{display:none!important}
+.dss-map-filterbar{display:grid!important;grid-template-columns:minmax(160px,1fr) minmax(220px,2fr)!important;gap:8px!important}
+@media(max-width:640px){.dss-map-filterbar{grid-template-columns:1fr!important}}
+</style><style id="dss-gis-recovery-20261119">
+.dss-monitoring-map-slot{display:block!important;min-height:580px!important}
+.dss-monitoring-map-slot .dss-geoview{display:flex!important;visibility:visible!important;min-height:580px!important}
+.dss-monitoring-map-slot .dss-map-layout{display:flex!important;flex:1!important;min-height:480px!important}
+.dss-monitoring-map-slot #dssOwnMap{display:block!important;position:relative!important;min-height:460px!important;height:clamp(460px,55vh,710px)!important;width:100%!important}
+.dss-gis-live-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:6px;background:#fff}
+.dss-gis-stat{min-width:0;border:1px solid #cbd2db;padding:4px 7px;display:flex;justify-content:space-between;gap:4px;align-items:center;font-size:10px}
+.dss-gis-stat span{border-left:3px solid;padding-left:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dss-gis-stat strong{white-space:nowrap;font-size:11px}
+@media(max-width:850px){.dss-gis-live-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><style id="dss-gis-layout-fix-20261119">
+.dss-geoview .dss-map-heading{display:none!important}
+.dss-geoview .dss-map-layout{display:block!important;width:100%!important}
+.dss-geoview .dss-map-side{display:none!important}
+.dss-geoview .dss-map-canvas{width:100%!important;min-width:0!important;height:clamp(460px,55vw,650px)!important;min-height:460px!important}
+.dss-geoview .dss-map-filterbar{display:grid!important;grid-template-columns:1.1fr 1.45fr 1fr 1fr auto!important;gap:6px!important}
+.dss-geoview .dss-map-filterbar>*{min-width:0!important;max-width:100%!important}
+.dss-geoview .dss-gis-live-stats{display:none!important}
+.dss-geoview .dss-map-layout .leaflet-container{background:#eaf0f3!important}
+.dss-select-cid{margin-top:7px;padding:7px 10px;border:0;border-radius:5px;background:#573887;color:#fff;cursor:pointer}
+@media(max-width:850px){.dss-geoview .dss-map-filterbar{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dss-geoview .dss-map-canvas{height:480px!important}}
+</style><style id="dss-map-dashboard-polish-20261119">
+/* Match the compact, square-edged DSS dashboard cards. */
+#dssMapSlot{display:flex;align-self:stretch;min-width:0;min-height:0;height:100%;overflow:hidden;background:#fff}
+#dssMapSlot .dss-geoview{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;border:1px solid #202020!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;overflow:hidden!important}
+#dssMapSlot .dss-map-filterbar{flex:0 0 auto!important;display:grid!important;grid-template-columns:minmax(100px,1.05fr) minmax(140px,1.35fr) minmax(100px,.95fr) minmax(95px,.95fr) auto!important;gap:6px!important;padding:8px!important;background:#f4f5f7!important;border-bottom:1px solid #1d1d1d!important;margin:0!important}
+#dssMapSlot .dss-map-filterbar select,#dssMapSlot .dss-map-filterbar input{width:100%!important;min-width:0!important;height:40px!important;border:1px solid #64717c!important;border-radius:0!important;background:#fff!important;color:#18283c!important;font-size:13px!important;padding:6px 9px!important}
+#dssMapSlot .dss-map-filterbar .dss-map-alert{height:40px!important;border-radius:0!important;white-space:nowrap!important}
+#dssMapSlot .dss-map-layout{display:flex!important;flex:1 1 auto!important;flex-direction:column!important;min-height:0!important;width:100%!important;overflow:hidden!important}
+#dssMapSlot .dss-map-side{display:none!important}
+#dssMapSlot .dss-map-canvas{display:block!important;flex:1 1 auto!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;border:0!important;background:#e9eef2!important}
+#dssMapSlot .leaflet-container{width:100%!important;height:100%!important;font-family:Sarabun,Arial,sans-serif!important}
+#dssMapSlot .leaflet-control-zoom a{border-radius:0!important}
+@media(max-width:850px){#dssMapSlot{min-height:490px;height:auto}#dssMapSlot .dss-map-filterbar{grid-template-columns:repeat(2,minmax(0,1fr))!important}#dssMapSlot .dss-map-filterbar .dss-map-alert{grid-column:span 2}#dssMapSlot .dss-map-canvas{min-height:410px!important}}
+</style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
   <div class="emcc-header-action-panel"><button type="button" data-header-lang="th" aria-pressed="true">ไทย</button><button type="button" data-header-lang="en" aria-pressed="false">EN</button></div>
@@ -224,159 +510,206 @@ body{background:#fff;color:#282d33}
   <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data" target="_blank" rel="noopener"><svg class="emcc-risk-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"></path><path d="M9 4v14M15 6v14"></path></svg>Risk map</a>
 </nav>
 </div>
-<main class="dss-main">
-<section class="dss-workspace" aria-label="ภาพรวม DSS">
-  <div class="dss-left-column">
-    <section class="dss-box dss-kpi-box" aria-labelledby="overview-heading">
-      <div class="dss-box-head"><h1 id="overview-heading">ภาพรวมระบบสนับสนุนการตัดสินใจ (DSS)</h1></div>
-      <div class="dss-kpi-grid">
-        <div class="dss-kpi"><span>รายการสารเคมีอันตราย</span><strong id="total">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>สถานประกอบการทั้งหมด</span><strong id="companies">—</strong><small>แห่ง/รหัส</small></div>
-        <div class="dss-kpi"><span>นิคมอุตสาหกรรมที่มีข้อมูล</span><strong id="estates">—</strong><small>พื้นที่</small></div>
-        <div class="dss-kpi"><span>ประเภทสารเคมี</span><strong id="chemicals">—</strong><small>ประเภท</small></div>
-        <div class="dss-kpi"><span>มีเลข CAS</span><strong id="hasEstate">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>มีเลข UN</span><strong id="hasCompany">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>มีปริมาณจัดเก็บ</span><strong id="hasChemical">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>มีข้อมูลการระงับเหตุ</span><strong id="hasAll">—</strong><small>ระเบียน</small></div>
-      </div>
-    </section>
-    <section class="dss-box dss-quality-box" aria-labelledby="quality-heading">
-      <div class="dss-box-head"><h2 id="quality-heading">ความพร้อมใช้ของข้อมูลสารเคมี</h2></div>
-      <div class="dss-quality-body"><div id="qualityBars" class="dss-quality-bars">กำลังโหลดข้อมูล…</div><p class="dss-explain">สัดส่วนระเบียนที่มีข้อมูลสำคัญสำหรับการค้นหาและสนับสนุนการรับมือเหตุ</p></div>
-    </section>
-  </div>
-  <section class="dss-map-column" aria-label="แผนที่ DSS">
-    <div class="dss-filterbar">
-      <span class="dss-map-title">แผนที่ DSS — โรงงาน นิคมฯ และทรัพยากรรับมือเหตุ</span>
-      <a href="./dss-riskmap.html?view=data" target="_blank" rel="noopener" class="dss-filter-link">เปิดแผนที่เต็มจอ ↗</a>
-      <button id="reload" type="button" class="dss-refresh">↻ อัปเดตข้อมูล</button>
-      <a class="dss-report-link" href="./dss-report.html">รายงาน DSS ↗</a>
-    </div>
-    <div class="dss-map-data-legend" aria-label="ข้อมูลที่แสดงบนแผนที่"><span><i style="background:#5073a0"></i>นิคมฯ</span><span><i style="background:#7896a5"></i>โรงงาน</span><span><i style="background:#c34e69"></i>โรงพยาบาล</span><span><i style="background:#dd793e"></i>ดับเพลิง</span><span><i style="background:#3c9cb6"></i>หัวจ่ายน้ำ</span><span><i style="background:#74798f"></i>CCTV</span></div><div class="dss-map-frame"><iframe title="แผนที่ข้อมูล GIS สำหรับ DSS" src="./dss-riskmap.html?view=data" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe><a class="dss-map-open" href="./dss-riskmap.html?view=data" target="_blank" rel="noopener">ดูแผนที่ DSS โดยละเอียด ↗</a></div>
-  </section>
-</section>
-<div id="status" class="dss-status"><span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span></div>
-<section class="dss-bottom-grid" aria-label="การวิเคราะห์ข้อมูล DSS">
-  <article class="dss-box dss-analytics">
-    <div class="dss-box-head"><h2>จำนวนรายการสารเคมีตามนิคมอุตสาหกรรม</h2></div>
-    <div class="dss-box-body"><p class="dss-explain">นิคมฯ ที่มีรายการสารเคมีบันทึกไว้มากที่สุด</p><div class="dss-estate-bars" id="estateBars">กำลังโหลดข้อมูล…</div></div>
-  </article>
-  <article class="dss-box dss-analytics">
-    <div class="dss-box-head"><h2>สารเคมีที่มีการบันทึกมากที่สุด</h2></div>
-    <div class="dss-box-body"><p class="dss-explain">จำนวนระเบียน จำแนกตามชื่อสารเคมี</p><div id="bars" class="empty">กำลังโหลดข้อมูล…</div></div>
-  </article>
-  <article class="dss-box dss-analytics">
-    <div class="dss-box-head"><h2>สัดส่วนรายการสารเคมีแยกตามนิคมฯ</h2></div>
-    <div class="dss-box-body"><div class="donut-wrap"><div class="donut" id="donut"><div class="donut-center"><span id="donutValue">—</span><small>ระเบียนทั้งหมด</small></div></div><div class="legend" id="legend"></div></div></div>
-  </article>
-  <article class="dss-box dss-analytics">
-    <div class="dss-box-head"><h2>อันดับนิคมฯ ตามจำนวนรายการสารเคมี</h2></div>
-    <div class="dss-box-body"><table class="risk-table"><thead><tr><th>อันดับ</th><th>นิคมอุตสาหกรรม</th><th>ระเบียน</th></tr></thead><tbody id="ranking"><tr><td colspan="3">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
-  </article>
-  <article class="dss-box dss-analytics dss-heatmap-box">
-    <div class="dss-box-head"><h2>ตารางไขว้รายการสารเคมีรายนิคมฯ</h2></div>
-    <div class="dss-box-body"><p class="dss-explain">แสดงจำนวนรายการสารเคมีที่บันทึกไว้ในแต่ละนิคมฯ ไม่ใช่คะแนนความเสี่ยง</p><div id="heatmap" class="empty">กำลังโหลดข้อมูล…</div></div>
-  </article>
-</section>
-<section class="dss-library-section" id="dssLibrary" aria-labelledby="dssLibraryTitle">
-<div class="dss-library-head"><div><h2 id="dssLibraryTitle">รายละเอียดข้อมูล DSS ที่ตรวจสอบได้</h2><p>ค้นหาข้อมูลสารเคมีและสถานประกอบการที่มีอยู่จริงในชุดข้อมูลที่เชื่อมต่อได้</p></div><a href="https://ieat-dss-library.thanawankaiyaso321.chatgpt.site/" target="_blank" rel="noopener">เปิดคลังข้อมูล DSS ↗</a></div>
-<div class="dss-library-categories" aria-label="ข้อมูลที่มีอยู่ในคลัง DSS">
-<div class="dss-library-cat"><span>รายการสารเคมีที่อ่านได้</span><strong id="libraryChemicalCount">—</strong><small>ระเบียน</small></div>
-<div class="dss-library-cat"><span>สถานประกอบการที่พบ</span><strong id="libraryCompanyCount">—</strong><small>แห่ง/รหัส</small></div>
-<div class="dss-library-cat"><span>นิคมฯ ที่มีข้อมูล</span><strong id="libraryEstateCount">—</strong><small>พื้นที่</small></div>
-<div class="dss-library-cat"><span>มีข้อมูล CAS</span><strong id="libraryCasCount">—</strong><small>รายการ</small></div>
-<div class="dss-library-cat"><span>มีข้อมูล UN</span><strong id="libraryUnCount">—</strong><small>รายการ</small></div>
+<main class="dss-operations">
+<section class="dss-reference-dashboard" id="dssOverview">
+
+<section class="op-panel dss-api-panel" id="dssDocumentsPanel"><div class="dss-api-heading"><div><h2>ค้นหาผู้ประกอบการและเอกสาร DSS</h2><p>เชื่อมต่อ API เอกสารตามรหัส CID ของผู้ประกอบการ</p></div><span class="dss-api-pill">DSS API v1</span></div><div class="dss-api-help">เลือกจุดผู้ประกอบการบนแผนที่แล้วกด “ใช้ CID ค้นหาเอกสาร” หรือกรอก CID เอง</div><form id="dssCidForm" class="dss-api-form"><label for="dssCidInput">รหัส CID</label><input id="dssCidInput" type="text" autocomplete="off" maxlength="120" placeholder="กรอก CID ที่ได้รับจากระบบ DSS" required><button type="submit" id="dssCidButton">ค้นหาข้อมูล</button></form><div class="dss-api-form"><label for="dssDashboardToken">รหัสเข้าใช้งาน Dashboard</label><input id="dssDashboardToken" type="password" autocomplete="off" placeholder="กรอก Dashboard Access Token สำหรับรอบการใช้งานนี้" aria-label="Dashboard access token"></div><p class="dss-api-help">Token นี้เก็บในหน่วยความจำหน้าเว็บเท่านั้น ไม่บันทึกลง GitHub หรือ localStorage · เส้นทาง API: <code>/api/v1/documents/{cid}</code> · ไม่เก็บหรือส่ง API Key จากหน้าเว็บสาธารณะ</p><div id="dssCidStatus" role="status" class="dss-api-status">กรอก CID แล้วกดค้นหาเพื่อเรียกข้อมูลจริงจากระบบ DSS</div><div id="dssCidResult" class="dss-api-result"></div></section><div class="dss-monitoring-top"><div class="dss-monitoring-left"><h3 class="dss-monitoring-subtitle">ภาพรวมข้อมูล DSS ที่มีในระบบ</h3><div class="dss-ref-kpis">
+<article class="dss-ref-card"><span>รายการสารเคมี</span><strong id="refTotal">—</strong><small>ข้อมูลสารเคมีจากชุดข้อมูล DSS</small></article>
+<article class="dss-ref-card green"><span>สถานประกอบการ</span><strong id="refApproved">—</strong><small>จำนวนสถานประกอบการที่มีข้อมูล</small></article>
+<article class="dss-ref-card orange"><span>นิคมอุตสาหกรรม</span><strong id="refReview">—</strong><small>จำนวนพื้นที่ที่พบข้อมูล</small></article>
+<article class="dss-ref-card red"><span>อุปกรณ์ระงับเหตุ</span><strong id="refRevision">—</strong><small>รายการอุปกรณ์ที่มีข้อมูล</small></article>
+<article class="dss-ref-card slate"><span>บุคลากรระงับเหตุ</span><strong id="refDraft">—</strong><small>รายการบุคลากรที่มีข้อมูล</small></article>
+</div><section class="dss-estate-rank-card" aria-label="กราฟอันดับนิคมอุตสาหกรรม"><h3>นิคมอุตสาหกรรมที่มีรายการข้อมูลมากที่สุด (10 อันดับ)</h3><p></p><div class="dss-estate-rank-chart" id="dssEstateRankChart"></div></section><div class="dss-monitoring-connection"><h3 class="dss-monitoring-subtitle">สถานะข้อมูลและการเชื่อมต่อ</h3><div class="dss-connection-bars"><div><span>ArcGIS ผู้ประกอบการ</span><div class="dss-connection-track"><i id="dssArcgisBar" style="width:0%;background:#207cb5"></i></div><strong id="dssArcgisLabel">รอข้อมูลแผนที่</strong></div><div><span>DSS เอกสารราย CID</span><div class="dss-connection-track"><i id="dssApiBar" style="width:0%;background:#4cae29"></i></div><strong id="dssApiLabel">รอค้นหาข้อมูล</strong></div></div><div class="dss-monitoring-status"><div><span>ArcGIS Online</span><strong>ชั้นข้อมูลผู้ประกอบการ</strong></div><div><span>DSS API</span><strong id="dssLiveConnection">รอการค้นหาด้วย CID</strong></div></div></div></div><div class="dss-monitoring-map-slot" id="dssMapSlot"></div></div>
+<section class="dss-import-graphs" aria-label="กราฟจำนวนโรงงานนำเข้าข้อมูล DSS"><div class="dss-import-head"><h2>การนำเข้าข้อมูลโรงงานในระบบ DSS</h2><span>ข้อมูลอ้างอิงจากภาพตัวอย่าง · ยังไม่ใช่ข้อมูล API แบบเรียลไทม์</span></div><div class="dss-import-grid"><article class="dss-import-card"><h3>จำนวนโรงงาน (ราย)</h3><div id="dssImportCountGraph" class="dss-import-plot"></div></article><article class="dss-import-card"><h3>จำนวนโรงงาน (ร้อยละ)</h3><div id="dssImportPercentGraph" class="dss-import-plot"></div></article></div></section><div class="dss-ref-card dss-ref-table-card"><div class="dss-ref-cardhead"><h3>รายชื่อสถานะเอกสาร</h3><span id="refDocCount">เลือกผู้ประกอบการเพื่อดูข้อมูล</span></div><div class="dss-ref-scroll"><table><thead><tr><th>สถานประกอบการ</th><th>ประเภท</th><th>นิคมอุตสาหกรรม</th><th>ความเสี่ยง 12 ประเภท</th><th>สถานะเอกสาร</th><th>วันที่ยื่น</th></tr></thead><tbody id="refDocRows"><tr><td colspan="6">เลือกผู้ประกอบการจากแผนที่และค้นหาด้วย CID</td></tr></tbody></table></div></div>
+<div class="dss-ref-grid">
+<article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>สถานะเอกสารผู้ประกอบการ ปี 2569</h3></div><div class="dss-ref-mini"><div><strong id="refOperatorAll">—</strong><span>ทั้งหมด</span></div><div><strong id="refOperatorSubmitted">—</strong><span>ยื่นแล้ว</span></div><div><strong id="refOperatorPending">—</strong><span>รอ/ยังไม่ยื่น</span></div></div><p class="dss-ref-note">เปรียบเทียบรายสายปฏิบัติการ</p><div class="dss-ref-placeholder" id="refOperatorChart">ยังไม่มี API สถิติภาพรวมรายสายปฏิบัติการ</div></article>
+<article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>สถานะเอกสารเจ้าหน้าที่นิคม ปี 2569</h3></div><div class="dss-ref-mini"><div><strong>—</strong><span>ทั้งหมด</span></div><div><strong>—</strong><span>ยื่นแล้ว</span></div><div><strong>—</strong><span>รอ/ยังไม่ยื่น</span></div></div><p class="dss-ref-note">เปรียบเทียบรายสายปฏิบัติการ</p><div class="dss-ref-placeholder">ยังไม่มี API สถิติเอกสารเจ้าหน้าที่นิคม</div></article>
 </div>
-<div class="dss-library-search"><input id="libraryQuery" type="search" placeholder="ค้นหาชื่อโรงงาน สารเคมี เลขทะเบียน CAS หรือ UN" aria-label="ค้นหาข้อมูล DSS"><select id="libraryEstate" aria-label="กรองนิคมอุตสาหกรรม"><option value="">ทุกนิคมอุตสาหกรรม</option></select></div>
-<div class="dss-library-table-wrap"><table class="dss-library-table"><thead><tr><th>สถานประกอบการ / เลขทะเบียน</th><th>นิคมอุตสาหกรรม</th><th>สารเคมี / CAS / UN</th><th>ปริมาณและภาชนะจัดเก็บ</th><th>แนวทาง / ทรัพยากรระงับเหตุ</th></tr></thead><tbody id="libraryRows"><tr><td colspan="5">กำลังโหลดข้อมูล…</td></tr></tbody></table></div>
-<div class="dss-library-foot" id="libraryFoot">ข้อมูลจาก DSS · แสดงเฉพาะระเบียนที่อ่านได้จริง</div>
+<article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>แนวโน้มการยื่นเอกสารรายเดือน ปี 2569</h3></div><div class="dss-ref-placeholder">ต้องเชื่อม API รายการเอกสารพร้อมวันที่ยื่นทั้งระบบก่อนสร้างกราฟรายเดือน</div></article>
+<div class="dss-ref-title"><h2>สารเคมีและวัตถุอันตราย</h2><p>ข้อมูลรายการสารเคมีจากเอกสาร DSS ของผู้ประกอบการที่เลือก</p></div>
+<div class="dss-ref-grid"><article class="dss-ref-card dss-ref-stat"><strong id="refChemicalKinds">—</strong><span>จำนวนรายการสารเคมีในเอกสารที่เลือก</span></article><article class="dss-ref-card dss-ref-stat"><strong id="refChemicalAmount">—</strong><span>ปริมาณสารเคมีรวม (เฉพาะรายการที่มีหน่วยตรงกัน)</span></article></div>
+<article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>บัญชีรายการสารเคมี</h3><span id="refChemCount">—</span></div><div class="dss-ref-filters"><input id="refChemSearch" type="search" placeholder="ค้นหาชื่อสารเคมี / CAS / UN" aria-label="ค้นหารายการสารเคมี"><button id="refChemReset" type="button">ล้างตัวกรอง</button></div><div class="dss-ref-scroll"><table><thead><tr><th>สารเคมี</th><th>CAS / UN</th><th>ปริมาณ</th><th>สถานประกอบการ</th></tr></thead><tbody id="refChemRows"><tr><td colspan="4">ยังไม่ได้เลือกผู้ประกอบการ</td></tr></tbody></table></div></article>
+<div class="dss-ref-title"><h2>อุปกรณ์สนับสนุนการระงับเหตุ</h2><p>รายการอุปกรณ์ที่ปรากฏในเอกสาร DSS ของผู้ประกอบการที่เลือก</p></div>
+<div class="dss-ref-grid"><article class="dss-ref-card dss-ref-stat"><strong id="refEquipmentCount">—</strong><span>รายการอุปกรณ์ระงับเหตุ</span></article><article class="dss-ref-card dss-ref-stat"><strong id="refEquipmentTypes">—</strong><span>หมวดอุปกรณ์ที่ระบุได้</span></article></div>
+<article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>รายการอุปกรณ์ระงับเหตุ</h3><span id="refEquipCount">—</span></div><div class="dss-ref-filters"><input id="refEquipSearch" type="search" placeholder="ค้นหาชื่ออุปกรณ์ / หมวดหมู่" aria-label="ค้นหารายการอุปกรณ์"><button id="refEquipReset" type="button">ล้างตัวกรอง</button></div><div class="dss-ref-scroll"><table><thead><tr><th>อุปกรณ์</th><th>หมวดหมู่</th><th>จำนวน</th><th>สถานประกอบการ</th></tr></thead><tbody id="refEquipRows"><tr><td colspan="4">ยังไม่ได้เลือกผู้ประกอบการ</td></tr></tbody></table></div></article>
+<div class="dss-ref-title"><h2>ทีมสนับสนุนการระงับเหตุ</h2></div>
+<article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>ทีม ERT และบุคลากรระงับเหตุ</h3><span id="refTeamCount">—</span></div><div class="dss-ref-scroll"><table><thead><tr><th>บทบาท / ตำแหน่ง</th><th>สถานประกอบการ</th><th>นิคมอุตสาหกรรม</th><th>สถานะข้อมูล</th></tr></thead><tbody id="refTeamRows"><tr><td colspan="4">ยังไม่ได้เลือกผู้ประกอบการ</td></tr></tbody></table></div><p class="dss-ref-note">ไม่แสดงชื่อและเบอร์โทรศัพท์ส่วนบุคคลบนเว็บไซต์สาธารณะ</p></article>
+<p class="dss-ref-note">หมายเหตุ: ตัวเลขในภาพตัวอย่างไม่ใช่ข้อมูลจาก API จึงไม่ถูกนำมาแสดงเป็นยอดรวมจริง หาก API คืนรายการว่างจะแสดง 0 เฉพาะผู้ประกอบการที่เลือก</p>
 </section>
-<p class="source" id="source">แหล่งข้อมูล: ชุดข้อมูลระบบ DSS</p>
-</main>
-<script>
-const $=id=>document.getElementById(id), colors=['#295aab','#24b6a4','#82ce4c','#ffd05b','#ef8065','#9e85d2'];
-const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const nonempty=v=>v!==null&&v!==undefined&&String(v).trim()!==''&&String(v).trim()!=='-';
-const compact=s=>String(s||'').trim().replace(/\s+/g,' ');
-const num=n=>Number(n||0).toLocaleString('th-TH');
-function field(rows,candidates){const keys=[...new Set(rows.slice(0,150).flatMap(r=>Object.keys(r)))];const exact=keys.find(k=>candidates.some(c=>k.toLowerCase()===c.toLowerCase()));return exact||keys.find(k=>candidates.some(c=>k.toLowerCase().includes(c.toLowerCase())))||null}
-function counts(rows,key){let map=new Map;if(!key)return map;for(let r of rows){let v=compact(r[key]);if(nonempty(v))map.set(v,(map.get(v)||0)+1)}return new Map([...map].sort((a,b)=>b[1]-a[1]))}
-function assign(id,n){$(id).textContent=n===null?'ไม่ระบุ':num(n)}
-function fallback(el,message){el.innerHTML='<div class="empty">'+escapeHTML(message)+'</div>'}
-function actualField(rows,names){const keys=[...new Set(rows.slice(0,200).flatMap(r=>Object.keys(r)))];return keys.find(k=>names.some(n=>k.toLowerCase()===n.toLowerCase()))||null}
-function actualDataFields(rows){
-return {
-estate:field(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','นิคม','ie_name']),
-company:field(rows,['comp_uid','comp_user','merchant_name','mercant_name','company_name','factory_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),
-chemical:field(rows,['chemical_name','chemical','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','สารเคมี']),
-cas:actualField(rows,['cas','cas_no','cas_number','casno','cas_num','เลข cas','เลขทะเบียน cas']),
-un:actualField(rows,['un','un_no','un_number','unno','un_num','เลข un']),
-amount:actualField(rows,['storage_quantity','quantity','amount','storage_amount','chemical_quantity','ปริมาณจัดเก็บ','ปริมาณสารเคมี']),
-response:actualField(rows,['fire_fighting','firefighting','extinguish','emergency_response','fire_extinguisher','แนวทางระงับเหตุ','วิธีระงับเหตุ','สารดับเพลิง'])
-};}
-function countPresent(rows,key){return key?rows.filter(r=>nonempty(r[key])).length:null}
-function renderCompleteness(rows){
-const fields=actualDataFields(rows);
-const labels=[['สถานประกอบการ',fields.company],['นิคมอุตสาหกรรม',fields.estate],['ชื่อสารเคมี',fields.chemical],['เลข CAS',fields.cas],['เลข UN',fields.un],['ปริมาณจัดเก็บ',fields.amount],['ข้อมูลระงับเหตุ',fields.response]];
-$('qualityBars').innerHTML=labels.map(([label,key])=>{const n=countPresent(rows,key),pct=n===null?0:(rows.length?n/rows.length*100:0);return '<div class="dss-quality-row"><div class="dss-quality-item-head"><strong>'+label+'</strong><span>'+(n===null?'ไม่มีฟิลด์ข้อมูล':num(n)+' / '+num(rows.length)+' · '+pct.toFixed(1)+'%')+'</span></div><div class="dss-quality-track"><div class="dss-quality-fill" style="width:'+pct+'%">'+(pct>=18?pct.toFixed(0)+'%':'')+'</div></div></div>'}).join('');
-}
-function updateMeaningfulKpis(rows){
-const keys=actualDataFields(rows);
-for(const [id,key] of [['hasEstate',keys.cas],['hasCompany',keys.un],['hasChemical',keys.amount],['hasAll',keys.response]]){
- const el=$(id),n=countPresent(rows,key);el.textContent=n===null?'—':num(n);el.nextElementSibling.textContent=n===null?'ไม่มีฟิลด์ข้อมูล':'รายการ';
-}
-$('libraryCasCount').textContent=countPresent(rows,keys.cas)===null?'—':num(countPresent(rows,keys.cas));
-$('libraryUnCount').textContent=countPresent(rows,keys.un)===null?'—':num(countPresent(rows,keys.un));
-$('libraryCompanyCount').textContent=keys.company?num(counts(rows,keys.company).size):'—';
-$('libraryEstateCount').textContent=keys.estate?num(counts(rows,keys.estate).size):'—';
-}
+<section class="dss-decision" aria-label="ข้อมูลสนับสนุนการตัดสินใจ DSS"><div class="dss-decision-grid"><article class="dss-decision-card"><h3>ความคืบหน้าการนำเข้าข้อมูล DSS</h3><div class="dss-decision-body"><div class="dss-decision-placeholder">รอข้อมูลจำนวนโรงงานทั้งหมดและจำนวนที่นำเข้าจริงจาก API สถิติรวม</div><div class="dss-decision-progress" aria-label="ยังไม่มีข้อมูลความคืบหน้าที่ตรวจสอบได้"></div><p>นำเข้าแล้ว — &nbsp;|&nbsp; ยังไม่ได้นำเข้า — &nbsp;|&nbsp; ความสำเร็จ —</p></div></article><article class="dss-decision-card"><h3>นิคมอุตสาหกรรมที่ต้องติดตามเร่งด่วน (10 อันดับ)</h3><div class="dss-decision-body"><table class="dss-decision-table"><thead><tr><th>นิคมอุตสาหกรรม</th><th>ยังไม่ครบ</th><th>ความคืบหน้า</th></tr></thead><tbody><tr><td colspan="3" style="text-align:center;color:#64748b">รอข้อมูลรายนิคมฯ จาก API เพื่อจัดอันดับจริง</td></tr></tbody></table><p>เรียงตามจำนวนโรงงานที่ยังไม่ได้นำเข้าข้อมูล โดยไม่ใช้ตัวเลขตัวอย่าง</p></div></article><article class="dss-decision-card"><h3>ความพร้อมของข้อมูลสนับสนุนการระงับเหตุ</h3><div class="dss-decision-body"><div class="dss-decision-metrics"><div><strong>—</strong>สารเคมี</div><div><strong>—</strong>อุปกรณ์ระงับเหตุ</div><div><strong>—</strong>ทีม ERT</div><div><strong>—</strong>แผนโรงงาน</div></div><p>แสดงสัดส่วนความครบถ้วนเมื่อมีข้อมูลจำนวนโรงงานที่ต้องจัดส่งและจำนวนที่ส่งแล้วจากระบบ DSS</p></div></article><article class="dss-decision-card"><h3>ความเคลื่อนไหวและความทันสมัยของข้อมูล</h3><div class="dss-decision-body"><table class="dss-decision-table"><thead><tr><th>รายการติดตาม</th><th>จำนวน</th></tr></thead><tbody><tr><td>เอกสารที่ปรับปรุงใน 7 วัน</td><td>—</td></tr><tr><td>เอกสารที่ไม่มีการปรับปรุงเกิน 90 วัน</td><td>—</td></tr><tr><td>รายการที่ต้องติดตามการแก้ไข</td><td>—</td></tr></tbody></table><p>ต้องใช้วันที่ปรับปรุงล่าสุดและสถานะเอกสารจาก API รายการรวม</p></div></article><article class="dss-decision-card dss-decision-chart"><h3>แสดงข้อมูลตามสายปฏิบัติการ</h3><div class="dss-extra-plot" id="dssBranchExample"></div></article><article class="dss-decision-card dss-decision-chart"><h3>สถานะข้อมูลแบ่งตามสายปฏิบัติการ</h3><div class="dss-extra-plot" id="dssStackedExample"></div><div class="dss-extra-key"><span><i style="background:#ff8b20"></i>รอข้อมูลเพิ่มเติม</span><span><i style="background:#56cb8b"></i>อนุมัติแล้ว</span><span><i style="background:#7cdde4"></i>อยู่ระหว่างจัดทำ</span></div></article></div></section><section class="dss-extra-charts" aria-label="กราฟข้อมูล DSS ตามภาพอ้างอิง">
 
-function renderEstateBars(est){
-const top=[...est].slice(0,7),max=top.length?top[0][1]:1;
-$('estateBars').innerHTML=top.length?top.map(([name,n])=>'<div class="dss-estate-row"><span class="dss-estate-label" title="'+escapeHTML(name)+'">'+escapeHTML(name)+'</span><span class="dss-estate-value">'+num(n)+'</span><div class="dss-estate-track"><div class="dss-estate-fill" style="width:'+(n/max*100).toFixed(2)+'%"></div></div></div>').join(''):'<div class="empty">ไม่พบชื่อพื้นที่ในชุดข้อมูล DSS</div>';
-}
-function draw(rows){let estateField=field(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','นิคม','ie_name']),companyField=field(rows,['comp_uid','comp_user','merchant_name','mercant_name','company_name','factory_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),chemField=field(rows,['chemical_name','chemical','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','สารเคมี']);const est=counts(rows,estateField),chem=counts(rows,chemField),companies=counts(rows,companyField);assign('total',rows.length);assign('companies',companyField?companies.size:null);assign('estates',estateField?est.size:null);assign('chemicals',chemField?chem.size:null);renderCompleteness(rows);renderEstateBars(est);$('status').innerHTML='<span class="dot ok"></span><span>เชื่อมข้อมูล DSS สำเร็จ · '+num(rows.length)+' ระเบียน · อัปเดตหน้าจอ '+new Date().toLocaleString('th-TH',{timeZone:'Asia/Bangkok'})+'</span>';
-const top=[...est].slice(0,8);$('ranking').innerHTML=top.length?top.map(([k,n],i)=>'<tr><td><span class="rank">'+(i+1)+'</span></td><td title="'+escapeHTML(k)+'">'+escapeHTML(k)+'</td><td>'+num(n)+'</td></tr>').join(''):'<tr><td colspan="3">ไม่พบชื่อพื้นที่ในชุดข้อมูลที่เชื่อมต่อ</td></tr>';
-const entries=[...est].slice(0,5);let other=rows.length-entries.reduce((n,v)=>n+v[1],0);if(other>0)entries.push(['อื่น ๆ / ไม่ระบุ',other]);let start=0;const stops=[];entries.forEach(([k,n],i)=>{let end=start+n/rows.length*100;stops.push(colors[i%colors.length]+' '+start+'% '+end+'%');start=end});$('donut').style.background='conic-gradient('+(stops.join(',')||'#dbe2eb 0 100%')+')';$('donutValue').textContent=num(rows.length);$('legend').innerHTML=entries.map(([k,n],i)=>'<div><i class="swatch" style="background:'+colors[i%colors.length]+'"></i><span title="'+escapeHTML(k)+'">'+escapeHTML(k)+' · '+num(n)+'</span></div>').join('')||'<span>ไม่มีข้อมูลพื้นที่</span>';
-let cb=[...chem].slice(0,7);if(cb.length){const max=cb[0][1];$('bars').className='';$('bars').innerHTML=cb.map(([k,n])=>'<div class="bar-row"><span class="bar-label" title="'+escapeHTML(k)+'">'+escapeHTML(k)+'</span><div class="track"><div class="fill" style="width:'+Math.max(2,n/max*100)+'%"></div></div><strong>'+num(n)+'</strong></div>').join('')}else fallback($('bars'),'ชุดข้อมูลนี้ไม่ระบุชื่อประเภทสารเคมี');
-if(!estateField||!chemField){fallback($('heatmap'),'ต้องมีชื่อพื้นที่และชื่อสารเคมีจึงจะแสดงตารางไขว้ได้');return}
-let columns=[...chem.keys()].slice(0,6),locations=[...est.keys()].slice(0,6);if(!columns.length||!locations.length){fallback($('heatmap'),'ไม่มีข้อมูลเพียงพอสำหรับแสดงตาราง');return}
-const matrix=new Map;for(let r of rows){let a=compact(r[estateField]),b=compact(r[chemField]);if(locations.includes(a)&&columns.includes(b)){const key=a+'\u0000'+b;matrix.set(key,(matrix.get(key)||0)+1)}}const highest=Math.max(1,...matrix.values());
-$('heatmap').className='';$('heatmap').innerHTML='<div style="overflow:auto"><table class="matrix"><thead><tr><th>นิคมฯ / สารเคมี</th>'+columns.map(v=>'<th title="'+escapeHTML(v)+'">'+escapeHTML(v.length>14?v.slice(0,13)+'…':v)+'</th>').join('')+'</tr></thead><tbody>'+locations.map(a=>'<tr><th title="'+escapeHTML(a)+'">'+escapeHTML(a)+'</th>'+columns.map(b=>{let n=matrix.get(a+'\u0000'+b)||0;let t=n/highest;let col=n===0?'#f1f5f7':t<.25?'#bfe9a8':t<.5?'#f8da70':t<.75?'#f5a04f':'#e66b69';return '<td style="background:'+col+'" title="'+escapeHTML(a+' / '+b+': '+n)+'">'+(n?num(n):'—')+'</td>'}).join('')+'</tr>').join('')+'</tbody></table></div>'}
+<div class="dss-extra-grid">
+<article class="dss-extra-card"><h3>กราฟแสดงสถานะภาพการนำเข้าข้อมูล (คิดเป็น %)</h3><div class="dss-donut-area"><div class="dss-donut" style="--parts:conic-gradient(#52cbb1 0 55.1%,#ed5252 55.1% 100%)"></div><div class="dss-donut-legend"><span><i style="background:#52cbb1"></i>นำเข้าข้อมูลแล้ว <b>55.1%</b></span><span><i style="background:#ed5252"></i>ยังไม่ได้นำเข้าข้อมูล <b>44.9%</b></span></div></div></article>
+<article class="dss-extra-card"><h3>ชุดข้อมูลที่มีการนำเข้าระบบแล้ว แบ่งออกเป็น</h3><div class="dss-donut-area"><div class="dss-donut" style="--parts:conic-gradient(#54c98b 0 57%,#ffc45c 57% 88.6%,#9ca3af 88.6% 100%)"></div><div class="dss-donut-legend"><span><i style="background:#54c98b"></i>อนุมัติแล้ว <b>57%</b></span><span><i style="background:#ffc45c"></i>รอข้อมูลเพิ่มเติม <b>31.6%</b></span><span><i style="background:#9ca3af"></i>อยู่ระหว่างจัดทำ <b>11.4%</b></span></div></div></article>
+<article class="dss-extra-card"><h3>กราฟเปรียบเทียบการนำเข้าข้อมูลรายเดือน</h3><div class="dss-extra-plot" id="dssMonthlyExample"></div></article>
 
-// Additional DSS library table: use the same verified source rows as the overview.
-let libraryData=[];
-function libraryField(rows,names){return field(rows,names)}
-function renderLibrary(rows){
-const keys={
-estate:libraryField(rows,['estate_name','estate','industrial_estate','นิคมอุตสาหกรรม','ชื่อพื้นที่','ie_name']),
-company:libraryField(rows,['company_name','factory_name','merchant_name','mercant_name','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ','comp_user']),
-registration:libraryField(rows,['factory_registration','factory_no','factory_number','registration_number','เลขทะเบียน','เลขอ้างอิง','reg_no']),
-chemical:libraryField(rows,['chemical_name','chem_name','hazardous_name','ชื่อสารเคมี','ชื่อสาร','chemical']),
-cas:libraryField(rows,['cas_no','cas_number','cas','เลข cas']),
-un:libraryField(rows,['un_no','un_number','un_number','เลข un']),
-amount:libraryField(rows,['storage_quantity','quantity','amount','ปริมาณจัดเก็บ','ปริมาณ']),
-unit:libraryField(rows,['unit','หน่วย']),
-container:libraryField(rows,['container','packaging','ภาชนะ','บรรจุ']),
-response:libraryField(rows,['fire_fighting','firefighting','extinguish','emergency_response','แนวทาง','ระงับเหตุ','สารดับเพลิง'])
+
+</div></section><section class="dss-geoview op-panel" aria-label="แผนที่ข้อมูลระบบ DSS">
+<div class="dss-map-heading"><div><h2>แผนที่ข้อมูลระบบ DSS</h2><p>ตำแหน่งนิคมอุตสาหกรรม ผู้ประกอบการ และข้อมูลสนับสนุนการระงับเหตุ</p></div><button type="button" id="dssMapRefresh">↻ โหลดข้อมูลแผนที่</button></div>
+<div id="dssGisLiveStats" class="dss-gis-live-stats" aria-live="polite"></div><div class="dss-map-filterbar" aria-label="ตัวกรองแผนที่ DSS"><select id="dssEstateFilter" aria-label="เลือกนิคมอุตสาหกรรม"><option value="all">ทุกนิคมฯ</option><option value="kaeng">แก่งคอย</option></select><input id="dssFactoryMapSearch" aria-label="ค้นหารายชื่อโรงงาน" placeholder="ค้นหารายชื่อโรงงาน" autocomplete="off"><select id="dssMapTypeFilter" aria-label="ประเภทข้อมูล"><option value="all">ทุกประเภท</option><option value="estates">นิคมอุตสาหกรรม</option><option value="operators">ผู้ประกอบการ</option><option value="chemicals">สารเคมี</option><option value="equipment">อุปกรณ์ระงับเหตุ</option></select><select id="dssMapStatusFilter" aria-label="สถานะข้อมูล"><option value="all">ทุกสถานะ</option><option value="available">มีข้อมูลพิกัด</option></select><button type="button" class="dss-map-alert" id="dssMapAlert" title="แสดงสถานะข้อมูลแผนที่">♧ แจ้งเตือน <span id="dssMapAlertCount">—</span></button></div><div class="dss-map-layout"><aside class="dss-map-side"><h3>ชั้นข้อมูลแผนที่</h3><div id="dssLayerControls"></div><div id="dssLayerStatus" aria-live="polite">กำลังเตรียมแผนที่…</div><p class="dss-map-disclaimer">แสดงเฉพาะข้อมูลที่มีพิกัดจริง ไม่สร้างตำแหน่งสมมติ และไม่ฝังหน้า Risk Map อื่น</p></aside><div class="dss-map-canvas" id="dssOwnMap" aria-label="แผนที่ GIS ของระบบ DSS"></div></div>
+</section>
+<script id="dss-move-map-into-dashboard">(()=>{const slot=document.getElementById('dssMapSlot'),panel=document.querySelector('.dss-geoview');if(slot&&panel){slot.replaceChildren(panel);requestAnimationFrame(()=>{if(window.dssLeafletMap&&typeof window.dssLeafletMap.invalidateSize==='function')window.dssLeafletMap.invalidateSize()})}})();</script>
+</main><script id="dss-extra-chart-render-20261119">(()=>{const ns='http://www.w3.org/2000/svg';function el(t,a={},txt){const n=document.createElementNS(ns,t);Object.entries(a).forEach(([k,v])=>n.setAttribute(k,v));if(txt!==undefined)n.textContent=txt;return n}function chart(id,series,labels,colors,max){const root=document.getElementById(id);if(!root)return;const svg=el('svg',{viewBox:'0 0 660 285',role:'img','aria-label':root.closest('article').querySelector('h3').textContent});const L=52,T=18,W=580,H=202;for(let i=0;i<=4;i++){const y=T+H-i*H/4;svg.appendChild(el('line',{x1:L,y1:y,x2:L+W,y2:y,stroke:'#d9dfe5'}));svg.appendChild(el('text',{x:L-8,y:y+4,'text-anchor':'end','font-size':11,fill:'#555'},String(Math.round(max*i/4))))}const slot=W/labels.length;labels.forEach((lab,j)=>{let acc=0;const barW=Math.min(57,slot*.65);series.forEach((values,k)=>{const v=values[j]||0,h=v/max*H,y=T+H-(acc+v)/max*H;svg.appendChild(el('rect',{x:L+j*slot+(slot-barW)/2,y,width:barW,height:h,fill:colors[k],stroke:'#555','stroke-width':'.5'}));if(v>0&&h>19)svg.appendChild(el('text',{x:L+j*slot+slot/2,y:y+h/2+4,'text-anchor':'middle','font-size':11,fill:'#28323d'},v.toLocaleString('th-TH')));acc+=v});if(series.length===1){const v=series[0][j];svg.appendChild(el('text',{x:L+j*slot+slot/2,y:T+H-v/max*H-6,'text-anchor':'middle','font-size':11,fill:'#333'},v.toLocaleString('th-TH')))}svg.appendChild(el('text',{x:L+j*slot+slot/2,y:T+H+22,'text-anchor':'middle','font-size':11,fill:'#343434'},lab))});root.appendChild(svg)}
+chart('dssMonthlyExample',[[23,36,47,85,226,74,54,44]],['กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน'],['#f3d640'],260);
+chart('dssBranchExample',[[1723,3117,252]],['สายปฏิบัติการ 1','สายปฏิบัติการ 2','สายปฏิบัติการ 3'],['#b5b8be'],3500);
+chart('dssStackedExample',[[307,519,0],[506,1010,0],[0,0,0]],['สายปฏิบัติการ 1','สายปฏิบัติการ 2','สายปฏิบัติการ 3'],['#ff8b20','#56cb8b','#7cdde4'],1800);
+})();</script><script id="dss-estate-rank-render">
+(()=>{const root=document.getElementById('dssEstateRankChart');if(!root)return;const values=[606,261,249,150,133,128,96,93,82,73];const ns='http://www.w3.org/2000/svg';const node=(tag,attrs={},value)=>{const e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,String(v));if(value!==undefined)e.textContent=value;return e};const svg=node('svg',{viewBox:'0 0 610 270',role:'img','aria-label':'กราฟแท่ง 10 อันดับนิคมอุตสาหกรรมที่นำเข้าข้อมูล DSS'});const left=54,top=16,w=538,h=174,max=800;for(let tick=0;tick<=800;tick+=200){const y=top+h-tick/max*h;svg.appendChild(node('line',{x1:left,y1:y,x2:left+w,y2:y,stroke:'#d5d5d5','stroke-width':'.8'}));svg.appendChild(node('text',{x:left-9,y:y+4,'text-anchor':'end','font-size':11,fill:'#555'},String(tick)))}const slot=w/values.length,barW=Math.min(34,slot*.68);values.forEach((v,i)=>{const x=left+i*slot+(slot-barW)/2,y=top+h-v/max*h,height=top+h-y;svg.appendChild(node('rect',{x,y,width:barW,height,fill:'#49ad22',stroke:'#2e7f1d','stroke-width':.9,rx:2}));svg.appendChild(node('text',{x:x+barW/2,y:y-7,'text-anchor':'middle','font-size':11,fill:'#303030'},String(v)));const tx=left+i*slot+slot/2,ty=top+h+14;svg.appendChild(node('text',{x:tx,y:ty,'text-anchor':'end','font-size':10,fill:'#666',transform:'rotate(-40 '+tx+' '+ty+')'},'อันดับ '+(i+1)))});svg.appendChild(node('text',{x:16,y:top+h/2,transform:'rotate(-90 16 '+(top+h/2)+')','text-anchor':'middle','font-size':12,fill:'#333'},'จำนวน (ราย)'));svg.appendChild(node('text',{x:left+w/2,y:260,'text-anchor':'middle','font-size':12,fill:'#333'},'นิคมอุตสาหกรรม (เรียงตามอันดับ)'));root.replaceChildren(svg)})();
+</script><script id="dss-import-graphs-render">
+(()=>{const labels=['สายปฏิบัติการ 1','สายปฏิบัติการ 2','สายปฏิบัติการ 3','รวม'],imported=[1119,1735,179,3033],pending=[972,1848,80,2900];const ns='http://www.w3.org/2000/svg';function el(name,attrs={},txt){const n=document.createElementNS(ns,name);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,String(v));if(txt!==undefined)n.textContent=txt;return n}function draw(id,percent){const root=document.getElementById(id);if(!root)return;const W=640,H=405,left=65,top=24,bottom=123,right=16,plotW=W-left-right,plotH=H-top-bottom,max=percent?100:3500,step=percent?20:500;const svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':percent?'ร้อยละโรงงานที่นำเข้าข้อมูลและยังไม่นำเข้า DSS แยกตามสายปฏิบัติการ':'จำนวนโรงงานที่นำเข้าข้อมูลและยังไม่นำเข้า DSS แยกตามสายปฏิบัติการ'});for(let t=0;t<=max;t+=step){const y=top+plotH-(t/max)*plotH;svg.appendChild(el('line',{x1:left,y1:y,x2:W-right,y2:y,stroke:t===0?'#222':'#e5e7eb','stroke-width':t===0?1.2:.7}));svg.appendChild(el('text',{x:left-9,y:y+4,'text-anchor':'end','font-size':11},percent?t.toFixed(2):t.toLocaleString('en-US')))}const groupW=plotW/4,barW=34;for(let i=0;i<4;i++){const total=imported[i]+pending[i],a=percent?imported[i]/total*100:imported[i],b=percent?pending[i]/total*100:pending[i];for(const [j,val,color]of [[0,a,'#00ad51'],[1,b,'#ff1111']]){const x=left+i*groupW+groupW/2+(j===0?-barW-2:2),height=val/max*plotH,y=top+plotH-height;svg.appendChild(el('rect',{x,y,width:barW,height,fill:color,stroke:'#111','stroke-width':1.2}));svg.appendChild(el('text',{x:x+barW/2,y:y-6,'text-anchor':'middle',class:'value-label'},percent?val.toFixed(2):val.toLocaleString('en-US')))}const center=left+i*groupW+groupW/2;svg.appendChild(el('rect',{x:left+i*groupW,y:top+plotH,width:groupW,height:32,fill:'#fff',stroke:'#111','stroke-width':.7}));const lab=el('text',{x:center,y:top+plotH+13,'text-anchor':'middle',class:'category-label'});if(i===3)lab.textContent='รวม';else{lab.appendChild(el('tspan',{x:center},'สายปฏิบัติการ'));lab.appendChild(el('tspan',{x:center,dy:13},String(i+1)))}svg.appendChild(lab)}const tableY=top+plotH+32,rowH=30;for(let j=0;j<2;j++){const y=tableY+j*rowH;svg.appendChild(el('rect',{x:0,y,width:left,height:rowH,fill:'#fff',stroke:'#111','stroke-width':.8}));svg.appendChild(el('rect',{x:6,y:y+10,width:11,height:11,fill:j===0?'#00ad51':'#ff1111',stroke:'#111'}));svg.appendChild(el('text',{x:22,y:y+19,'font-size':10},j===0?'นำเข้าข้อมูล DSS':'ยังไม่นำเข้าข้อมูล'));for(let i=0;i<4;i++){const val=percent?(j===0?imported[i]:pending[i])/(imported[i]+pending[i])*100:(j===0?imported[i]:pending[i]);svg.appendChild(el('rect',{x:left+i*groupW,y,width:groupW,height:rowH,fill:'#fff',stroke:'#111','stroke-width':.8}));svg.appendChild(el('text',{x:left+i*groupW+groupW/2,y:y+19,'text-anchor':'middle','font-size':11},percent?val.toFixed(2):val.toLocaleString('en-US')))}}root.replaceChildren(svg)}draw('dssImportCountGraph',false);draw('dssImportPercentGraph',true)})();
+</script><script id="dss-monitoring-layout-init">(()=>{const slot=document.getElementById('dssMapSlot'),map=document.querySelector('section.dss-geoview');if(slot&&map)slot.appendChild(map);const mapStatus=document.getElementById('dssLayerStatus'),arcLabel=document.getElementById('dssArcgisLabel'),arcBar=document.getElementById('dssArcgisBar');if(mapStatus&&arcLabel){const refresh=()=>{const t=mapStatus.textContent||'';const match=t.match(/ผู้ประกอบการ[^0-9]*([0-9,]+)/);const count=match?Number(match[1].replace(/,/g,'')):0;arcLabel.textContent=count>0?count.toLocaleString('th-TH')+' จุดที่โหลดได้':'ตรวจสอบชั้นข้อมูลแผนที่';arcBar.style.width=count>0?'100%':'0%'};new MutationObserver(refresh).observe(mapStatus,{childList:true,subtree:true,characterData:true});refresh()}const status=document.getElementById('dssCidStatus'),label=document.getElementById('dssLiveConnection');if(status&&label){new MutationObserver(()=>{label.textContent=status.textContent.includes('สำเร็จ')?'เชื่อมต่อสำเร็จ':status.textContent.includes('ไม่สามารถ')?'เชื่อมต่อไม่สำเร็จ':'รอ/กำลังค้นหาข้อมูล';document.getElementById('dssApiLabel').textContent=label.textContent;document.getElementById('dssApiBar').style.width=status.textContent.includes('สำเร็จ')?'100%':'0%'}).observe(status,{childList:true,characterData:true,subtree:true})}})();</script><script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clean=v=>String(v??'').trim(),valid=v=>clean(v)!==''&&clean(v)!=='-'&&clean(v).toLowerCase()!=='null';
+const fmt=n=>Number(n).toLocaleString('th-TH');
+function keyFor(rows,terms){const keys=[...new Set(rows.slice(0,200).flatMap(r=>Object.keys(r)))];return keys.find(k=>terms.some(t=>k.toLowerCase()===t.toLowerCase()))||keys.find(k=>terms.some(t=>k.toLowerCase().includes(t.toLowerCase())))}
+function classify(v){let s=clean(v).toLowerCase();if(!s)return 'unknown';if(/อนุมัติ|approved|complete|สำเร็จ|นำเข้าแล้ว|เรียบร้อย/.test(s))return 'approved';if(/ขอข้อมูลเพิ่ม|รอข้อมูล|ข้อมูลเพิ่มเติม|need.more/.test(s))return 'more';if(/ไม่ครบ|incomplete/.test(s))return 'incomplete';if(/ระหว่าง|กำลังจัดทำ|pending|processing/.test(s))return 'pending';if(/ยังไม่|ไม่ได้นำเข้า|not.imported/.test(s))return 'missing';return 'unknown'}
+const cats=[['missing','ยังไม่ได้นำเข้าข้อมูล','#c53a2f'],['more','รอข้อมูลเพิ่ม','#e8b910'],['approved','อนุมัติแล้ว','#16947c'],['pending','อยู่ระหว่างจัดทำ','#7b4199']];
+function tally(rows,k){const m=new Map();if(!k)return m;rows.forEach(r=>{let v=clean(r[k]);if(valid(v))m.set(v,(m.get(v)||0)+1)});return new Map([...m].sort((a,b)=>b[1]-a[1]))}
+function bars(el,groups){if(!groups.length){$(el).innerHTML='<div class="no-data">ไม่พบข้อมูลสำหรับกราฟนี้</div>';return}
+let max=Math.max(1,...groups.flatMap(g=>g.counts));$(el).innerHTML=groups.map(g=>'<div class="chart-group">'+g.counts.map((n,i)=>'<div class="chart-bar" style="height:'+Math.max(n/max*88,n?2:0)+'%;background:'+cats[i][2]+'" title="'+esc(cats[i][1])+': '+fmt(n)+'">'+(n?'<b>'+fmt(n)+'</b>':'')+'</div>').join('')+'<span class="chart-label">'+esc(g.name)+'</span></div>').join('')}
+function legend(id){$(id).innerHTML=cats.map(c=>'<div><span class="legend-dot" style="background:'+c[2]+'"></span>'+c[1]+'</div>').join('')}
+function render(rows){const status=keyFor(rows,['status','data_status','approval_status','สถานะข้อมูล','สถานะการนำเข้า','สถานะ']),operation=keyFor(rows,['operation_line','operation','division','สายปฏิบัติการ','สายงาน']),estate=keyFor(rows,['estate_name','industrial_estate','estate','นิคมอุตสาหกรรม','นิคม']),company=keyFor(rows,['company_name','factory_name','merchant_name','mercant_name','comp_user','ชื่อบริษัท','ชื่อโรงงาน','ผู้ประกอบการ']),registration=keyFor(rows,['registration_no','registration','เลขทะเบียน','เลขที่ทะเบียน']),chemical=keyFor(rows,['chemical_name','chem_name','chemical','ชื่อสารเคมี','สารเคมี']),date=keyFor(rows,['import_date','created_at','updated_at','date','วันที่นำเข้า','วันที่']);
+const sc={approved:0,more:0,incomplete:0,pending:0,missing:0,unknown:0};rows.forEach(r=>sc[classify(status?r[status]:'')]++);const imported=sc.approved+sc.more+sc.incomplete+sc.pending;
+Object.entries({total:rows.length,notImported:sc.missing,imported,needMore:sc.more,incomplete:sc.incomplete,pending:sc.pending,approved:sc.approved}).forEach(([id,n])=>$(id).textContent=status?fmt(n):id==='total'?fmt(n):'—');
+const ops=tally(rows,operation);const group=operation?[...ops].slice(0,6).map(([name])=>({name,counts:cats.map(([c])=>rows.filter(r=>clean(r[operation])===name&&classify(status?r[status]:'')===c).length)})):[];bars('operationsChart',status?group:[]);legend('operationsLegend');
+const years=date?rows.map(r=>new Date(r[date])).filter(d=>!isNaN(d)).map(d=>d.getFullYear()):[];const year=years.length?Math.max(...years):null;$('yearTitle').textContent=year?String(year+543):'—';
+const yrGroups=year&&operation?[...ops].slice(0,6).map(([name])=>({name,counts:cats.map(([c])=>rows.filter(r=>clean(r[operation])===name&&new Date(r[date]).getFullYear()===year&&classify(status?r[status]:'')===c).length)})):[];bars('yearChart',status?yrGroups:[]);legend('yearLegend');
+const estates=tally(rows,estate),top=[...estates].slice(0,5),max=top.length?top[0][1]:1;$('estateRanking').innerHTML=top.length?top.map(([name,n])=>'<div class="rank-row"><label title="'+esc(name)+'">'+esc(name)+'</label><div class="rank-track"><div class="rank-fill" style="width:'+n/max*100+'%"></div></div><span>'+fmt(n)+'</span></div>').join(''):'<div class="no-data">ไม่มีฟิลด์ชื่อนิคมฯ ในชุดข้อมูล DSS</div>';
+$('operatorRows').innerHTML=rows.slice(0,80).map(r=>'<tr>'+[operation,company,registration,status,chemical].map(k=>'<td>'+esc(k&&valid(r[k])?r[k]:'—')+'</td>').join('')+'</tr>').join('')||'<tr><td colspan="5">ไม่พบข้อมูล</td></tr>';
+if(!date||!status){$('monthlyChart').innerHTML='<div class="no-data">ไม่พบฟิลด์วันที่และสถานะที่ใช้สร้างกราฟรายเดือน</div>'}else{const monthly=Array.from({length:12},(_,i)=>({m:i,yes:0,no:0}));rows.forEach(r=>{let d=new Date(r[date]);if(!isNaN(d)&&d.getFullYear()===year){let item=monthly[d.getMonth()];if(classify(r[status])==='missing')item.no++;else item.yes++}});const high=Math.max(1,...monthly.flatMap(m=>[m.yes,m.no]));$('monthlyChart').innerHTML=monthly.map(m=>'<div class="monthly-pair"><div class="chart-bar" style="background:#0b8c49;height:'+m.yes/high*90+'%" title="นำเข้าข้อมูล '+fmt(m.yes)+'"></div><div class="chart-bar" style="background:#c83a2e;height:'+m.no/high*90+'%" title="ยังไม่ได้นำเข้า '+fmt(m.no)+'"></div><span class="chart-label">'+['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'][m.m]+'</span></div>').join('')}}
+$('status').textContent='ข้อมูล DSS '+fmt(rows.length)+' ระเบียน'+(!status?' · ไม่พบฟิลด์สถานะ จึงไม่แสดงตัวเลขสถานะสมมติ':'')+(!operation?' · ไม่พบฟิลด์สายปฏิบัติการ':'');}
+async function load(){document.getElementById('status')?.remove();document.getElementById('source')?.remove()}
+load();
+document.querySelectorAll('[data-header-lang]').forEach(btn=>btn.addEventListener('click',()=>{let en=btn.dataset.headerLang==='en';document.querySelectorAll('.emcc-site-header [data-en]').forEach(el=>{if(!el.dataset.th)el.dataset.th=el.textContent;el.textContent=en?el.dataset.en:el.dataset.th});document.getElementById('dashboardLanguage').open=false}));
+document.getElementById('downloadDashboard')?.addEventListener('click',()=>window.print());
+</script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script id="dss-gis-only">
+(()=>{'use strict';
+const urls={
+ staff:'https://emonitor.ieat.go.th/envisys/gis/file/officedgkChDvhp5W8MoKB0iXh6DlKi98gp41zsmCTTAFU3rdgkJg3z9Ms8BYYJ4z2TomW.json',
+ chemical:'https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json',
+ equipment:'https://emonitor.ieat.go.th/envisys/gis/file/equimentPQbOLMB5TIGSziiCggBx77R8ITBd2aCRPaybDRoqZBejLTEQ4SICTxC1Vay15xIG.json',
+ personnelPlan:'https://emonitor.ieat.go.th/envisys/gis/file/plotplanPFdxm48K5k8oWuAg8G3Av0yjyWEOLrmiVifKJiyF5d5vL4EM6gCDw3tKEhmvKT9q.json',
+ factoryPlan:'https://emonitor.ieat.go.th/envisys/gis/file/chartXGGEz35P2ksHhyywS7A4SzLddPpt8fqqVTCoaR1i18T2Bt5OMxIsUgvzGMUu5gAb.js'
 };
-libraryData=rows.map(r=>({estate:compact(r[keys.estate]),company:compact(r[keys.company]),registration:compact(r[keys.registration]),chemical:compact(r[keys.chemical]),cas:compact(r[keys.cas]),un:compact(r[keys.un]),amount:compact(r[keys.amount]),unit:compact(r[keys.unit]),container:compact(r[keys.container]),response:compact(r[keys.response])}));
-$('libraryChemicalCount').textContent=num(rows.length);
-const estates=[...new Set(libraryData.map(x=>x.estate).filter(nonempty))].sort((a,b)=>a.localeCompare(b,'th'));
-$('libraryEstate').innerHTML='<option value="">ทุกนิคมอุตสาหกรรม</option>'+estates.map(x=>'<option value="'+escapeHTML(x)+'">'+escapeHTML(x)+'</option>').join('');
-drawLibraryRows();
+const definitions=[
+ ['estates','ตำแหน่งนิคมอุตสาหกรรม','#7543a6'],
+ ['operators','ผู้ประกอบการในนิคมฯ','#1f80c0'],
+ ['staff','บุคลากรระงับเหตุ','#229a64'],
+ ['chemical','สารเคมี','#d43a3a'],
+ ['equipment','อุปกรณ์ระงับเหตุ','#e3a900'],
+ ['personnelPlan','แผนผังบุคลากร','#9c5ac0'],
+ ['factoryPlan','แผนโรงงาน','#e06d5b']
+];
+const $=id=>document.getElementById(id);
+let map,layerGroups={},found=[],records={},errors={};
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function objectRows(data){if(Array.isArray(data))return data;if(!data||typeof data!=='object')return [];for(const key of ['features','records','data','items','results','rows']){if(Array.isArray(data[key]))return data[key];if(data[key]&&typeof data[key]==='object'){const x=objectRows(data[key]);if(x.length)return x}}return []}
+function validLatLng(lat,lng){return Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=5&&lat<=22&&lng>=97&&lng<=106}
+function latlng(row){const geom=row.geometry||row.geom||row;let xy=geom?.coordinates;if(geom?.type==='Point'&&Array.isArray(xy)&&validLatLng(Number(xy[1]),Number(xy[0])))return [Number(xy[1]),Number(xy[0])];if(geom&&validLatLng(Number(geom.y),Number(geom.x)))return [Number(geom.y),Number(geom.x)];const props=row.properties||row.attributes||row;const keys=Object.keys(props);const find=(names)=>keys.find(k=>names.some(n=>k.toLowerCase()===n.toLowerCase()));let la=find(['latitude','lat','ละติจูด','y_coord','ycoord']),lo=find(['longitude','lng','lon','long','ลองจิจูด','x_coord','xcoord']);let lat=Number(props[la]),lng=Number(props[lo]);return la&&lo&&validLatLng(lat,lng)?[lat,lng]:null}
+function geoFeatures(data){if(data?.type==='FeatureCollection')return data.features||[];if(data?.type==='Feature')return [data];return objectRows(data)}
+function popup(row,label){let props=row.properties||row.attributes||row;return '<div class="dss-own-popup"><strong>'+esc(label)+'</strong>'+Object.entries(props).filter(([k,v])=>v!=null&&typeof v!=='object'&&String(v).trim()!=='').slice(0,9).map(([k,v])=>'<p><b>'+esc(k)+':</b> '+esc(String(v).slice(0,180))+'</p>').join('')+'</div>'}
+function addRows(key,data){
+ const rows=geoFeatures(data),color=definitions.find(d=>d[0]===key)[2];let count=0;
+ for(const row of rows.slice(0,12000)){
+  const geom=row.geometry||row.geom;
+  const props=row.properties||row.attributes||row;
+  const cid=props.CID??props.cid??props.Cid;
+  const usable=key==='operators'&&cid!=null&&/^[A-Za-z0-9._-]{1,120}$/.test(String(cid));
+  const content=popup(row,definitions.find(d=>d[0]===key)[1])+(usable?'<button type="button" class="dss-select-cid">ใช้ CID ค้นหาเอกสาร</button>':'');
+  let feature=null;
+  if(geom&&['Polygon','MultiPolygon','LineString','MultiLineString'].includes(geom.type)){
+   try{feature=L.geoJSON(row,{style:{color:key==='estates'?'#76469a':color,weight:key==='estates'?2:1.5,fillColor:key==='estates'?'#b8a4d2':color,fillOpacity:key==='estates'?.19:.1}});feature.bindPopup(content)}catch(e){}
+  }else{
+   const point=latlng(row);
+   if(!point)continue;
+   feature=L.circleMarker(point,{radius:key==='estates'?7:5,weight:1.5,color:'#fff',fillColor:color,fillOpacity:.9}).bindPopup(content);
+   found.push(point);
+  }
+  if(!feature)continue;
+  if(usable)feature.on('popupopen',e=>{const btn=e.popup.getElement()?.querySelector('.dss-select-cid');if(btn)btn.addEventListener('click',()=>{const input=document.getElementById('dssCidInput');if(input)input.value=String(cid);document.getElementById('dssDocumentsPanel')?.scrollIntoView({behavior:'smooth',block:'start'});},{once:true})});
+  feature.addTo(layerGroups[key]);count++;
+ }
+ records[key]={total:rows.length,points:count};return count;
 }
-function drawLibraryRows(){
-const q=compact($('libraryQuery').value).toLowerCase(),estate=$('libraryEstate').value;
-const matched=libraryData.filter(x=>(!estate||x.estate===estate)&&(!q||[x.company,x.registration,x.chemical,x.cas,x.un].some(v=>v.toLowerCase().includes(q))));
-$('libraryRows').innerHTML=matched.length?matched.slice(0,100).map(x=>'<tr><td><strong>'+escapeHTML(x.company||'ไม่ระบุ')+'</strong><br><small>'+escapeHTML(x.registration||'—')+'</small></td><td>'+escapeHTML(x.estate||'—')+'</td><td>'+escapeHTML(x.chemical||'—')+'<br><small>CAS: '+escapeHTML(x.cas||'—')+' · UN: '+escapeHTML(x.un||'—')+'</small></td><td>'+escapeHTML([x.amount,x.unit].filter(nonempty).join(' ')||'—')+'<br><small>'+escapeHTML(x.container||'—')+'</small></td><td>'+escapeHTML(x.response||'ไม่ระบุ')+'</td></tr>').join(''):'<tr><td colspan="5">ไม่พบข้อมูลตามเงื่อนไขค้นหา</td></tr>';
-$('libraryFoot').textContent='พบ '+num(matched.length)+' ระเบียน · แสดง '+num(Math.min(matched.length,100))+' รายการแรก · รายการนี้เป็นข้อมูลสนับสนุน ไม่ใช่การจัดอันดับความเสี่ยง';
+function updateOverviewFromRealData(){
+ const mapping=[['refTotal','chemical'],['refApproved','operators'],['refReview','estates'],['refRevision','equipment'],['refDraft','staff']];
+ for(const [id,key] of mapping){const el=document.getElementById(id);if(el)el.textContent=records[key]?records[key].total.toLocaleString('th-TH'):errors[key]?'—':'…';}
 }
-$('libraryQuery').addEventListener('input',drawLibraryRows);
-$('libraryEstate').addEventListener('change',drawLibraryRows);
-async function reload(){let status=$('status');status.innerHTML='<span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span>';let sources=['./dss-data.json','https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json'];for(const url of sources){try{let controller=new AbortController,timeout=setTimeout(()=>controller.abort(),18000);let response;try{response=await fetch(url+'?v='+Date.now(),{signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timeout)}if(!response.ok)throw Error('HTTP '+response.status);let data=await response.json(),items=Array.isArray(data)?data:(data.features||data.records||data.data||[]);if(!Array.isArray(items)||!items.length)throw Error('empty');let rows=items.map(r=>r.properties||r.attributes||r);draw(rows);renderLibrary(rows);updateMeaningfulKpis(rows);$('source').textContent='แหล่งข้อมูล: '+(url.startsWith('.')?'ชุดข้อมูล DSS ที่เว็บไซต์ใช้งาน (docs/dss-data.json)':'ระบบ DSS กนอ. (ต้นทาง)')+' · ค่าทั้งหมดคำนวณจากระเบียนที่อ่านได้จริง';return}catch(e){console.warn('DSS source unavailable',url,e)}}libraryData=[];for(const id of ['libraryChemicalCount','libraryCompanyCount','libraryEstateCount','libraryCasCount','libraryUnCount'])$(id).textContent='—';$('libraryRows').innerHTML='<tr><td colspan="5">ไม่สามารถโหลดข้อมูล DSS ได้</td></tr>';status.innerHTML='<span class="dot"></span><span>ไม่สามารถอ่านข้อมูล DSS ได้ในขณะนี้ — กรุณาลองอัปเดตอีกครั้ง</span>';for(const id of ['total','companies','estates','chemicals','hasEstate','hasCompany','hasChemical','hasAll'])$(id).textContent='—';$('ranking').innerHTML='<tr><td colspan="3">ไม่สามารถโหลดข้อมูลได้</td></tr>';for(const id of ['bars','heatmap','qualityBars','estateBars'])fallback($(id),'ไม่สามารถโหลดข้อมูล DSS ได้');$('legend').textContent='ไม่มีข้อมูล';}
-$('reload').addEventListener('click',reload);reload();
-document.getElementById('downloadDashboard')?.addEventListener('click',()=>{document.getElementById('dashboardExportMenu').open=false;window.print()});
-document.querySelectorAll('[data-header-lang]').forEach(btn=>btn.addEventListener('click',()=>{const en=btn.dataset.headerLang==='en';document.querySelectorAll('.emcc-site-header [data-en]').forEach(el=>{if(!el.dataset.th)el.dataset.th=el.textContent;el.textContent=en?el.dataset.en:el.dataset.th});document.querySelectorAll('[data-header-lang]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));document.getElementById('dashboardLanguage').open=false}));
-document.addEventListener('click',e=>{document.querySelectorAll('.emcc-brand>details,.emcc-global-nav>details').forEach(el=>{if(!el.contains(e.target))el.open=false})});
-</script></body></html>
+function update(){const controls=$('dssLayerControls');controls.innerHTML=definitions.map(([key,name,color])=>{let d=records[key],note=errors[key]?'โหลดไม่ได้':d?d.points+' จุดจาก '+d.total+' รายการ':'กำลังโหลด';return '<label class="dss-layer-row"><input type="checkbox" data-layer="'+key+'" '+(map.hasLayer(layerGroups[key])?'checked':'')+'><i class="dss-layer-dot" style="background:'+color+'"></i><div>'+name+'<span>'+note+'</span></div></label>'}).join('');controls.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{const l=layerGroups[input.dataset.layer];input.checked?l.addTo(map):map.removeLayer(l)}));$('dssLayerStatus').textContent='พิกัดที่อ่านได้ '+found.length.toLocaleString('th-TH')+' จุด'+(Object.keys(errors).length?' · โหลดไม่สำเร็จ: '+Object.keys(errors).map(k=>definitions.find(d=>d[0]===k)?.[1]).join(', '):'');
+ updateOverviewFromRealData();const stats=document.getElementById('dssGisLiveStats');if(stats){stats.innerHTML=definitions.map(([key,name,color])=>'<div class="dss-gis-stat"><span style="border-color:'+color+'">'+name+'</span><strong>'+(records[key]?records[key].points.toLocaleString('th-TH')+' จุด':errors[key]?'ไม่พร้อม':'…')+'</strong></div>').join('');}}
+async function fetchJson(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),16000);try{let r=await fetch(url,{signal:c.signal,mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(timer)}}
+async function fetchArcgis(itemId,subLayer){
+ const meta=await fetchJson('https://www.arcgis.com/sharing/rest/content/items/'+itemId+'?f=json');
+ if(meta.error)throw Error(meta.error.message||'ArcGIS item error');
+ let base=String(meta.url||'').trim();
+ if(!base)throw Error('ArcGIS item ไม่มี service URL');
+ while(base.endsWith('/'))base=base.slice(0,-1);
+ if(!/[\/][0-9]+$/.test(base))base+='/'+subLayer;
+ const rows=[];let offset=0;
+ for(let page=0;page<12;page++){
+  const u=base+'/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=1000&resultOffset='+offset;
+  const data=await fetchJson(u);if(data.error)throw Error(data.error.message||'ArcGIS query error');
+  const part=geoFeatures(data);rows.push(...part);
+  if(part.length<1000)break;
+  offset+=part.length;
+ }
+ return {type:'FeatureCollection',features:rows};
+}
+async function fetchFactoryPlan(){// A .js document is not assumed to be valid JSON. Read as text and parse only explicit JSON.
+ const r=await fetch(urls.factoryPlan,{mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);let txt=await r.text();let trimmed=txt.trim();if(trimmed.startsWith('{')||trimmed.startsWith('['))return JSON.parse(trimmed);let match=trimmed.match(/^\s*(?:var|let|const)\s+[\w$]+\s*=\s*([\s\S]*?)\s*;?\s*$/);if(match){let body=match[1].replace(/;\s*$/,'');return JSON.parse(body)}throw Error('รูปแบบ JS ไม่ใช่ JSON ที่อ่านได้โดยตรง')}
+async function reload(){found=[];records={};errors={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
+ const tasks=definitions.map(async([key])=>{try{let data=key==='estates'?await fetchArcgis('4460561209d7404c8254554f0f7aa246',1):key==='operators'?await fetchArcgis('59a7ca3f863c4d70b417a73085f3e64a',0):key==='factoryPlan'?await fetchFactoryPlan():await fetchJson(urls[key]);addRows(key,data)}catch(e){errors[key]=String(e.message||e)}update()});
+ await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:10});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
+function start(){if(typeof L==='undefined'){$('dssLayerStatus').textContent='ไม่สามารถโหลดไลบรารีแผนที่ Leaflet';return}map=L.map('dssOwnMap',{scrollWheelZoom:false,preferCanvas:true}).setView([15.5,101],6);window.dssLeafletMap=map;L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);definitions.forEach(([key])=>layerGroups[key]=L.layerGroup().addTo(map));$('dssMapRefresh').addEventListener('click',reload);
+const estateFilter=$('dssEstateFilter'),typeFilter=$('dssMapTypeFilter'),search=$('dssFactoryMapSearch');
+function applyMapFilter(){const chosen=typeFilter.value==='chemicals'?'chemical':typeFilter.value;Object.entries(layerGroups).forEach(([key,group])=>{if(chosen==='all'||key===chosen){if(!map.hasLayer(group))group.addTo(map)}else if(map.hasLayer(group))map.removeLayer(group)});if(estateFilter.value==='kaeng')map.setView([14.586,100.998],13);else if(found.length)map.fitBounds(found,{padding:[25,25],maxZoom:11})}
+estateFilter.addEventListener('change',applyMapFilter);typeFilter.addEventListener('change',applyMapFilter);
+search.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=search.value.trim().toLocaleLowerCase('th');if(!q)return;let match=null;layerGroups.operators.eachLayer(layer=>{if(!match&&layer.getPopup()?.getContent()?.toLocaleLowerCase('th').includes(q))match=layer});if(match){typeFilter.value='operators';applyMapFilter();map.setView(match.getLatLng(),16);match.openPopup()}else $('dssLayerStatus').textContent='ไม่พบโรงงานที่ตรงกับคำค้นในข้อมูลที่โหลดได้'});
+$('dssMapAlert').addEventListener('click',()=>{$('dssLayerStatus').scrollIntoView({behavior:'smooth',block:'nearest'})});
+reload()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
+</script><script id="dss-document-cid-lookup">(()=>{'use strict';
+const form=document.getElementById('dssCidForm'),input=document.getElementById('dssCidInput'),tokenInput=document.getElementById('dssDashboardToken'),button=document.getElementById('dssCidButton'),status=document.getElementById('dssCidStatus'),result=document.getElementById('dssCidResult');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+function display(data){
+const entry=data&&typeof data==='object'?data:{};
+let entrepreneur=entry.entrepreneur||entry.company||entry.enterprise||{};
+let doc=entry.documents||entry.document||entry.data||{};
+if(typeof entrepreneur==='string'){try{entrepreneur=JSON.parse(entrepreneur)}catch(_){}}
+if(typeof doc==='string'){try{doc=JSON.parse(doc)}catch(_){doc={}}}
+if(Array.isArray(doc))doc=doc[0]||{};
+const name=entrepreneur.company_name||entrepreneur.factory_name||'—',estate=entrepreneur.estate_name||'—';
+const val=(o,...keys)=>keys.map(k=>o?.[k]).find(v=>v!==null&&v!==undefined&&v!=='')??'—';
+const e=v=>esc(v),date=v=>v&&v!=='—'?String(v).slice(0,10):'—';
+const status=val(doc,'status','document_status','approval_status');
+document.getElementById('refDocRows').innerHTML='<tr><td>'+e(name)+'</td><td>ผู้ประกอบการ</td><td>'+e(estate)+'</td><td>—</td><td>'+e(status)+'</td><td>'+e(date(val(doc,'submitted_at','submission_date')))+'</td></tr>';
+document.getElementById('refDocCount').textContent='แสดงเอกสารของผู้ประกอบการที่เลือก 1 ราย';
+const safeArr=(obj,key)=>{let v=obj?.[key];if(typeof v==='string'){try{v=JSON.parse(v)}catch(_){return []}}return Array.isArray(v)?v:[]};
+const chem=safeArr(doc,'chemicals'),equip=safeArr(doc,'equipment');
+const members=safeArr(doc,'ert_members'),shifts=safeArr(doc,'workforce_shifts');
+const fill=(id,value)=>document.getElementById(id).textContent=value;
+fill('refChemicalKinds',chem.length.toLocaleString('th-TH'));fill('refEquipmentCount',equip.length.toLocaleString('th-TH'));
+fill('refChemicalAmount','—');
+fill('refEquipmentTypes',new Set(equip.map(x=>val(x,'category','equipment_category','type')).filter(x=>x!=='—')).size);
+const chemRows=chem.map(x=>[val(x,'chemical_name','name','substance_name'),val(x,'cas_no','cas','un_no'),val(x,'quantity','amount'),name]);
+const equipRows=equip.map(x=>[val(x,'equipment_name','name'),val(x,'category','type'),val(x,'quantity','count'),name]);
+const teamRows=members.map(x=>[val(x,'ert_role_name','role_name','role','job_title'),name,estate,'มีข้อมูล']);
+if(!teamRows.length&&shifts.length)teamRows.push(...shifts.map(x=>['เจ้าหน้าที่ประจำกะ: '+val(x,'shift_name'),name,estate,'มีข้อมูล']));
+function table(id,rows,filter){const shown=rows.filter(r=>r.some(v=>String(v).toLowerCase().includes(filter.toLowerCase()))).slice(0,150);document.getElementById(id).innerHTML=shown.length?shown.map(r=>'<tr>'+r.map(v=>'<td>'+e(v)+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="4">ไม่มีข้อมูลในเอกสารที่เลือก</td></tr>'}
+const update=()=>{table('refChemRows',chemRows,document.getElementById('refChemSearch').value);table('refEquipRows',equipRows,document.getElementById('refEquipSearch').value);table('refTeamRows',teamRows,'');fill('refChemCount',chemRows.length+' รายการ');fill('refEquipCount',equipRows.length+' รายการ');fill('refTeamCount',teamRows.length+' รายการ')};update();
+document.getElementById('refChemSearch').oninput=update;document.getElementById('refEquipSearch').oninput=update;
+document.getElementById('refChemReset').onclick=()=>{document.getElementById('refChemSearch').value='';update()};
+document.getElementById('refEquipReset').onclick=()=>{document.getElementById('refEquipSearch').value='';update()};
+result.innerHTML='<div class="dss-ref-cardhead"><strong>ข้อมูล DSS ของผู้ประกอบการที่เลือก</strong><span>เชื่อมต่อ API สำเร็จ</span></div><table><tbody>'+[['ชื่อบริษัท',name],['นิคมอุตสาหกรรม',estate],['เลขทะเบียนโรงงาน',val(entrepreneur,'factory_reg_no','registration_no')],['CID',val(entrepreneur,'source_cid','cid')],['สถานะเอกสาร',status],['ปีที่ยื่น',val(doc,'submission_year')],['วันที่อัปเดต',date(val(doc,'updated_at'))]].map(([k,v])=>'<tr><th>'+e(k)+'</th><td>'+e(v)+'</td></tr>').join('')+'</tbody></table>';
+}form.addEventListener('submit',async e=>{e.preventDefault();const cid=input.value.trim(),token=tokenInput.value.trim();if(!/^[A-Za-z0-9._-]{1,120}$/.test(cid)){status.textContent='CID ต้องเป็นตัวอักษร ตัวเลข จุด ขีดกลาง หรือขีดล่างเท่านั้น';return}if(!token){status.textContent='กรุณากรอก Dashboard Access Token ที่ตั้งไว้ใน Cloudflare ก่อนค้นหา';tokenInput.focus();return}button.disabled=true;result.textContent='';status.textContent='กำลังเรียก DSS API ผ่าน Cloudflare Worker…';const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),16000);try{const url='https://ieat-dss-api.thanawankaiyaso.workers.dev/api/v1/documents/'+encodeURIComponent(cid);const response=await fetch(url,{method:'GET',mode:'cors',credentials:'omit',headers:{Accept:'application/json',Authorization:'Bearer '+token},signal:controller.signal});if(!response.ok){let detail='';try{const body=await response.json();detail=body.error||''}catch(_){}throw Error('HTTP '+response.status+(detail?' — '+detail:''))}const type=response.headers.get('content-type')||'';if(!type.includes('json'))throw Error('API ไม่ได้ส่งข้อมูล JSON กลับมา');const data=await response.json();display(data);status.textContent='โหลดข้อมูลจริงจาก DSS สำเร็จ · CID: '+cid}catch(err){status.textContent=err.name==='AbortError'?'การเชื่อมต่อหมดเวลา':err instanceof TypeError?'เชื่อมต่อ Worker ไม่สำเร็จ: ตรวจสอบ URL, CORS และสถานะ Deploy':'ไม่สามารถโหลดข้อมูล: '+err.message;result.textContent='ยังไม่มีข้อมูลที่ยืนยันจาก API — ไม่แสดงข้อมูลสมมติ'}finally{clearTimeout(timer);button.disabled=false}});
+})();</script><script id="dss-map-controls-20261119b">(()=>{function setup(){const m=document.getElementById('dssOwnMap');if(!m||m.dataset.toolsReady)return;m.dataset.toolsReady='1';const wrap=document.createElement('div');wrap.className='dss-map-tools-right';wrap.innerHTML='<button type="button" title="ชั้นข้อมูล" aria-label="ชั้นข้อมูล">▱</button><button type="button" title="ขยายแผนที่เต็มหน้าจอ" aria-label="ขยายแผนที่เต็มหน้าจอ">⛶</button>';m.append(wrap);wrap.children[0].onclick=()=>{const p=document.querySelector('.dss-map-side');if(p){p.hidden=!p.hidden;setTimeout(()=>window.dssLeafletMap?.invalidateSize(),100)}};wrap.children[1].onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else m.requestFullscreen?.();setTimeout(()=>window.dssLeafletMap?.invalidateSize(),350)};const edit=document.createElement('button');edit.type='button';edit.className='dss-map-tool';edit.style.cssText='left:11px;top:12px';edit.title='รีเซ็ตมุมมองแผนที่';edit.textContent='✎';edit.onclick=()=>window.dssLeafletMap?.setView([14.586,100.998],13);m.append(edit)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup()})();</script><script id="dss-map-resize-fix-20261119">(()=>{
+function init(){const slot=document.getElementById('dssMapSlot');if(!slot)return;
+const resize=()=>{const map=window.dssLeafletMap;if(map&&map._container&&map._container.isConnected)map.invalidateSize({pan:false,animate:false})};
+if(typeof ResizeObserver!=='undefined'){new ResizeObserver(resize).observe(slot);const canvas=slot.querySelector('#dssOwnMap');if(canvas)new ResizeObserver(resize).observe(canvas)}
+window.addEventListener('resize',resize,{passive:true});
+setTimeout(resize,300);setTimeout(resize,1400);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();</script></body></html>
