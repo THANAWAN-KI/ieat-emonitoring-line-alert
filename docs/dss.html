@@ -239,6 +239,38 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 .dss-ref-cardhead span{color:#818893!important}
 .dss-map-sidebar{background:#fff!important}
 .dss-map-legend{color:#34383e!important}
+</style><style id="dss-monitoring-reference-layout">
+.dss-operations{max-width:none!important;padding:16px 24px 40px!important}
+.dss-reference-dashboard{gap:10px!important}
+.dss-reference-dashboard>.dss-ref-title:first-child{margin:0 0 6px!important}
+.dss-monitoring-top{display:grid;grid-template-columns:minmax(320px,34%) minmax(0,66%);gap:8px;align-items:stretch;min-height:530px}
+.dss-monitoring-left{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dss-monitoring-subtitle{font-size:15px;font-weight:700;margin:0;padding:13px 12px 9px;border-bottom:1px solid #e3e5e9}
+.dss-monitoring-left>.dss-ref-kpis{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;border:1px solid #cbd1d7;padding:8px!important;background:#fff}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{min-height:76px!important;padding:9px!important;border-radius:0!important;box-shadow:none!important;border:1px solid #9daaa8!important;display:flex;align-items:center;justify-content:center;text-align:center;gap:0!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:1/-1}
+.dss-monitoring-left>.dss-ref-kpis strong{font-size:24px!important}
+.dss-monitoring-left>.dss-ref-kpis span{font-size:12px!important}
+.dss-monitoring-left>.dss-ref-kpis small{font-size:10px!important}
+.dss-monitoring-connection{border:1px solid #cbd1d7;background:#fff;flex:1;min-height:160px}
+.dss-monitoring-status{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px 12px}
+.dss-monitoring-status>div{min-height:110px;border:1px solid #e1e6eb;border-top:7px solid #2795c5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;gap:10px}
+.dss-monitoring-status>div:nth-child(2){border-top-color:#4cae29}
+.dss-monitoring-status span{font-size:13px}.dss-monitoring-status strong{font-size:13px;color:#394a5e}
+.dss-monitoring-map-slot{min-width:0;min-height:530px}
+.dss-monitoring-map-slot .dss-geoview{height:100%;margin:0!important;border-radius:0!important;display:flex;flex-direction:column;overflow:hidden}
+.dss-monitoring-map-slot .dss-map-heading{padding:10px 12px!important}
+.dss-monitoring-map-slot .dss-map-layout{flex:1;min-height:440px;display:flex!important;flex-direction:column-reverse}
+.dss-monitoring-map-slot .dss-map-side{display:flex!important;flex-wrap:wrap;gap:8px;padding:8px!important;align-items:center;max-height:125px;overflow:auto}
+.dss-monitoring-map-slot .dss-map-side h3,.dss-monitoring-map-slot .dss-map-disclaimer{display:none}
+.dss-monitoring-map-slot .dss-map-canvas{width:100%!important;min-height:390px!important;flex:1}
+.dss-monitoring-map-slot #dssLayerControls{display:flex;flex-wrap:wrap;gap:8px}
+.dss-monitoring-map-slot #dssLayerStatus{font-size:11px}
+.dss-reference-dashboard>.dss-api-panel{margin-top:16px!important}
+.dss-reference-dashboard>.dss-ref-grid,.dss-reference-dashboard>.dss-ref-card{margin-top:10px}
+.dss-ref-card,.dss-api-panel{border-radius:0!important;box-shadow:none!important;border:1px solid #d6dbe0!important}
+.dss-ref-title h2{font-size:18px!important}
+@media(max-width:900px){.dss-monitoring-top{grid-template-columns:1fr}.dss-monitoring-map-slot{min-height:430px}.dss-monitoring-map-slot .dss-map-layout{min-height:390px}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -273,13 +305,13 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 <main class="dss-operations">
 <section class="dss-reference-dashboard" id="dssOverview">
 <div class="dss-ref-title"><h2>ภาพรวมข้อมูลระบบสนับสนุนการระงับเหตุ DSS</h2><p>ข้อมูลจาก DSS API ตาม CID ที่เลือก · สถิติทั้งระบบแสดงเมื่อมีแหล่งข้อมูลภาพรวมที่ตรวจสอบได้</p></div>
-<section class="op-panel dss-api-panel" id="dssDocumentsPanel"><div class="dss-api-heading"><div><h2>ค้นหาผู้ประกอบการและเอกสาร DSS</h2><p>เชื่อมต่อ API เอกสารตามรหัส CID ของผู้ประกอบการ</p></div><span class="dss-api-pill">DSS API v1</span></div><div class="dss-api-help">เลือกจุดผู้ประกอบการบนแผนที่แล้วกด “ใช้ CID ค้นหาเอกสาร” หรือกรอก CID เอง</div><form id="dssCidForm" class="dss-api-form"><label for="dssCidInput">รหัส CID</label><input id="dssCidInput" type="text" autocomplete="off" maxlength="120" placeholder="กรอก CID ที่ได้รับจากระบบ DSS" required><button type="submit" id="dssCidButton">ค้นหาข้อมูล</button></form><div class="dss-api-form"><label for="dssDashboardToken">รหัสเข้าใช้งาน Dashboard</label><input id="dssDashboardToken" type="password" autocomplete="off" placeholder="กรอก Dashboard Access Token สำหรับรอบการใช้งานนี้" aria-label="Dashboard access token"></div><p class="dss-api-help">Token นี้เก็บในหน่วยความจำหน้าเว็บเท่านั้น ไม่บันทึกลง GitHub หรือ localStorage · เส้นทาง API: <code>/api/v1/documents/{cid}</code> · ไม่เก็บหรือส่ง API Key จากหน้าเว็บสาธารณะ</p><div id="dssCidStatus" role="status" class="dss-api-status">กรอก CID แล้วกดค้นหาเพื่อเรียกข้อมูลจริงจากระบบ DSS</div><div id="dssCidResult" class="dss-api-result"></div></section><div class="dss-ref-kpis">
+<section class="op-panel dss-api-panel" id="dssDocumentsPanel"><div class="dss-api-heading"><div><h2>ค้นหาผู้ประกอบการและเอกสาร DSS</h2><p>เชื่อมต่อ API เอกสารตามรหัส CID ของผู้ประกอบการ</p></div><span class="dss-api-pill">DSS API v1</span></div><div class="dss-api-help">เลือกจุดผู้ประกอบการบนแผนที่แล้วกด “ใช้ CID ค้นหาเอกสาร” หรือกรอก CID เอง</div><form id="dssCidForm" class="dss-api-form"><label for="dssCidInput">รหัส CID</label><input id="dssCidInput" type="text" autocomplete="off" maxlength="120" placeholder="กรอก CID ที่ได้รับจากระบบ DSS" required><button type="submit" id="dssCidButton">ค้นหาข้อมูล</button></form><div class="dss-api-form"><label for="dssDashboardToken">รหัสเข้าใช้งาน Dashboard</label><input id="dssDashboardToken" type="password" autocomplete="off" placeholder="กรอก Dashboard Access Token สำหรับรอบการใช้งานนี้" aria-label="Dashboard access token"></div><p class="dss-api-help">Token นี้เก็บในหน่วยความจำหน้าเว็บเท่านั้น ไม่บันทึกลง GitHub หรือ localStorage · เส้นทาง API: <code>/api/v1/documents/{cid}</code> · ไม่เก็บหรือส่ง API Key จากหน้าเว็บสาธารณะ</p><div id="dssCidStatus" role="status" class="dss-api-status">กรอก CID แล้วกดค้นหาเพื่อเรียกข้อมูลจริงจากระบบ DSS</div><div id="dssCidResult" class="dss-api-result"></div></section><div class="dss-monitoring-top"><div class="dss-monitoring-left"><h3 class="dss-monitoring-subtitle">ภาพรวมสถานะเอกสาร DSS</h3><div class="dss-ref-kpis">
 <article class="dss-ref-card"><span>เอกสารทั้งหมด</span><strong id="refTotal">—</strong><small>ข้อมูลภาพรวมทั้งระบบ</small></article>
 <article class="dss-ref-card green"><span>อนุมัติแล้ว</span><strong id="refApproved">—</strong><small>เอกสารผ่านการอนุมัติ</small></article>
 <article class="dss-ref-card orange"><span>รอตรวจสอบ</span><strong id="refReview">—</strong><small>เอกสารที่รอการพิจารณา</small></article>
 <article class="dss-ref-card red"><span>ตีกลับ / แก้ไข</span><strong id="refRevision">—</strong><small>เอกสารที่ต้องปรับปรุง</small></article>
 <article class="dss-ref-card slate"><span>อยู่ระหว่างจัดทำ</span><strong id="refDraft">—</strong><small>เอกสารที่ยังไม่ยื่น</small></article>
-</div>
+</div><div class="dss-monitoring-connection"><h3 class="dss-monitoring-subtitle">สถานะข้อมูลและการเชื่อมต่อ</h3><div class="dss-monitoring-status"><div><span>ArcGIS Online</span><strong>ชั้นข้อมูลผู้ประกอบการ</strong></div><div><span>DSS API</span><strong id="dssLiveConnection">รอการค้นหาด้วย CID</strong></div></div></div></div><div class="dss-monitoring-map-slot" id="dssMapSlot"></div></div>
 <div class="dss-ref-card dss-ref-table-card"><div class="dss-ref-cardhead"><h3>รายชื่อสถานะเอกสาร</h3><span id="refDocCount">เลือกผู้ประกอบการเพื่อดูข้อมูล</span></div><div class="dss-ref-scroll"><table><thead><tr><th>สถานประกอบการ</th><th>ประเภท</th><th>นิคมอุตสาหกรรม</th><th>ความเสี่ยง 12 ประเภท</th><th>สถานะเอกสาร</th><th>วันที่ยื่น</th></tr></thead><tbody id="refDocRows"><tr><td colspan="6">เลือกผู้ประกอบการจากแผนที่และค้นหาด้วย CID</td></tr></tbody></table></div></div>
 <div class="dss-ref-grid">
 <article class="dss-ref-card"><div class="dss-ref-cardhead"><h3>สถานะเอกสารผู้ประกอบการ ปี 2569</h3></div><div class="dss-ref-mini"><div><strong id="refOperatorAll">—</strong><span>ทั้งหมด</span></div><div><strong id="refOperatorSubmitted">—</strong><span>ยื่นแล้ว</span></div><div><strong id="refOperatorPending">—</strong><span>รอ/ยังไม่ยื่น</span></div></div><p class="dss-ref-note">เปรียบเทียบรายสายปฏิบัติการ</p><div class="dss-ref-placeholder" id="refOperatorChart">ยังไม่มี API สถิติภาพรวมรายสายปฏิบัติการ</div></article>
@@ -300,7 +332,7 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 <div class="dss-map-heading"><div><h2>แผนที่ข้อมูลระบบ DSS</h2><p>ตำแหน่งนิคมอุตสาหกรรม ผู้ประกอบการ และข้อมูลสนับสนุนการระงับเหตุ</p></div><button type="button" id="dssMapRefresh">↻ โหลดข้อมูลแผนที่</button></div>
 <div class="dss-map-layout"><aside class="dss-map-side"><h3>ชั้นข้อมูลแผนที่</h3><div id="dssLayerControls"></div><div id="dssLayerStatus" aria-live="polite">กำลังเตรียมแผนที่…</div><p class="dss-map-disclaimer">แสดงเฉพาะข้อมูลที่มีพิกัดจริง ไม่สร้างตำแหน่งสมมติ และไม่ฝังหน้า Risk Map อื่น</p></aside><div class="dss-map-canvas" id="dssOwnMap" aria-label="แผนที่ GIS ของระบบ DSS"></div></div>
 </section>
-</main><script>
+</main><script id="dss-monitoring-layout-init">(()=>{const slot=document.getElementById('dssMapSlot'),map=document.querySelector('section.dss-geoview');if(slot&&map)slot.appendChild(map);const status=document.getElementById('dssCidStatus'),label=document.getElementById('dssLiveConnection');if(status&&label){new MutationObserver(()=>{label.textContent=status.textContent.includes('สำเร็จ')?'เชื่อมต่อสำเร็จ':status.textContent.includes('ไม่สามารถ')?'เชื่อมต่อไม่สำเร็จ':'รอ/กำลังค้นหาข้อมูล'}).observe(status,{childList:true,characterData:true,subtree:true})}})();</script><script>
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clean=v=>String(v??'').trim(),valid=v=>clean(v)!==''&&clean(v)!=='-'&&clean(v).toLowerCase()!=='null';
