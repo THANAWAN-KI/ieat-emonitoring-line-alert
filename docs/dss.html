@@ -515,8 +515,8 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 
 <section class="op-panel dss-api-panel" id="dssDocumentsPanel"><div class="dss-api-heading"><div><h2>ค้นหาผู้ประกอบการและเอกสาร DSS</h2><p>เชื่อมต่อ API เอกสารตามรหัส CID ของผู้ประกอบการ</p></div><span class="dss-api-pill">DSS API v1</span></div><div class="dss-api-help">เลือกจุดผู้ประกอบการบนแผนที่แล้วกด “ใช้ CID ค้นหาเอกสาร” หรือกรอก CID เอง</div><form id="dssCidForm" class="dss-api-form"><label for="dssCidInput">รหัส CID</label><input id="dssCidInput" type="text" autocomplete="off" maxlength="120" placeholder="กรอก CID ที่ได้รับจากระบบ DSS" required><button type="submit" id="dssCidButton">ค้นหาข้อมูล</button></form><div class="dss-api-form"><label for="dssDashboardToken">รหัสเข้าใช้งาน Dashboard</label><input id="dssDashboardToken" type="password" autocomplete="off" placeholder="กรอก Dashboard Access Token สำหรับรอบการใช้งานนี้" aria-label="Dashboard access token"></div><p class="dss-api-help">Token นี้เก็บในหน่วยความจำหน้าเว็บเท่านั้น ไม่บันทึกลง GitHub หรือ localStorage · เส้นทาง API: <code>/api/v1/documents/{cid}</code> · ไม่เก็บหรือส่ง API Key จากหน้าเว็บสาธารณะ</p><div id="dssCidStatus" role="status" class="dss-api-status">กรอก CID แล้วกดค้นหาเพื่อเรียกข้อมูลจริงจากระบบ DSS</div><div id="dssCidResult" class="dss-api-result"></div></section><div class="dss-monitoring-top"><div class="dss-monitoring-left"><h3 class="dss-monitoring-subtitle">ภาพรวมข้อมูล DSS ที่มีในระบบ</h3><div class="dss-ref-kpis">
 <article class="dss-ref-card"><span>รายการสารเคมี</span><strong id="refTotal">—</strong><small>ข้อมูลสารเคมีจากชุดข้อมูล DSS</small></article>
-<article class="dss-ref-card green"><span>สถานประกอบการ</span><strong id="refApproved">—</strong><small>จำนวนสถานประกอบการที่มีข้อมูล</small></article>
-<article class="dss-ref-card orange"><span>นิคมอุตสาหกรรม</span><strong id="refReview">—</strong><small>จำนวนพื้นที่ที่พบข้อมูล</small></article>
+<article class="dss-ref-card green"><span>สถานประกอบการ</span><strong id="refApproved">—</strong><small>จำนวนสถานประกอบการที่ไม่ซ้ำ</small></article>
+<article class="dss-ref-card orange"><span>นิคมอุตสาหกรรม</span><strong id="refReview">—</strong><small>จำนวนนิคมฯ ที่ไม่ซ้ำ</small></article>
 <article class="dss-ref-card red"><span>อุปกรณ์ระงับเหตุ</span><strong id="refRevision">—</strong><small>รายการอุปกรณ์ที่มีข้อมูล</small></article>
 <article class="dss-ref-card slate"><span>บุคลากรระงับเหตุ</span><strong id="refDraft">—</strong><small>รายการบุคลากรที่มีข้อมูล</small></article>
 </div><section class="dss-estate-rank-card" aria-label="กราฟอันดับนิคมอุตสาหกรรม"><h3>นิคมอุตสาหกรรมที่มีรายการข้อมูลมากที่สุด (10 อันดับ)</h3><p></p><div class="dss-estate-rank-chart" id="dssEstateRankChart"></div></section><div class="dss-monitoring-connection"><h3 class="dss-monitoring-subtitle">สถานะข้อมูลและการเชื่อมต่อ</h3><div class="dss-connection-bars"><div><span>ArcGIS ผู้ประกอบการ</span><div class="dss-connection-track"><i id="dssArcgisBar" style="width:0%;background:#207cb5"></i></div><strong id="dssArcgisLabel">รอข้อมูลแผนที่</strong></div><div><span>DSS เอกสารราย CID</span><div class="dss-connection-track"><i id="dssApiBar" style="width:0%;background:#4cae29"></i></div><strong id="dssApiLabel">รอค้นหาข้อมูล</strong></div></div><div class="dss-monitoring-status"><div><span>ArcGIS Online</span><strong>ชั้นข้อมูลผู้ประกอบการ</strong></div><div><span>DSS API</span><strong id="dssLiveConnection">รอการค้นหาด้วย CID</strong></div></div></div></div><div class="dss-monitoring-map-slot" id="dssMapSlot"></div></div>
@@ -602,7 +602,7 @@ const definitions=[
  ['factoryPlan','แผนโรงงาน','#e06d5b']
 ];
 const $=id=>document.getElementById(id);
-let map,layerGroups={},found=[],records={},errors={};
+let map,layerGroups={},found=[],records={},errors={},sourceRows={};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function objectRows(data){if(Array.isArray(data))return data;if(!data||typeof data!=='object')return [];for(const key of ['features','records','data','items','results','rows']){if(Array.isArray(data[key]))return data[key];if(data[key]&&typeof data[key]==='object'){const x=objectRows(data[key]);if(x.length)return x}}return []}
 function validLatLng(lat,lng){return Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=5&&lat<=22&&lng>=97&&lng<=106}
@@ -610,7 +610,7 @@ function latlng(row){const geom=row.geometry||row.geom||row;let xy=geom?.coordin
 function geoFeatures(data){if(data?.type==='FeatureCollection')return data.features||[];if(data?.type==='Feature')return [data];return objectRows(data)}
 function popup(row,label){let props=row.properties||row.attributes||row;return '<div class="dss-own-popup"><strong>'+esc(label)+'</strong>'+Object.entries(props).filter(([k,v])=>v!=null&&typeof v!=='object'&&String(v).trim()!=='').slice(0,9).map(([k,v])=>'<p><b>'+esc(k)+':</b> '+esc(String(v).slice(0,180))+'</p>').join('')+'</div>'}
 function addRows(key,data){
- const rows=geoFeatures(data),color=definitions.find(d=>d[0]===key)[2];let count=0;
+ const rows=geoFeatures(data),color=definitions.find(d=>d[0]===key)[2];sourceRows[key]=rows;let count=0;
  for(const row of rows.slice(0,12000)){
   const geom=row.geometry||row.geom;
   const props=row.properties||row.attributes||row;
@@ -632,9 +632,27 @@ function addRows(key,data){
  }
  records[key]={total:rows.length,points:count};return count;
 }
+function countUnique(rows,keys){
+ const set=new Set();for(const row of rows||[]){const p=row.properties||row.attributes||row;const k=Object.keys(p).find(x=>keys.some(n=>x.toLowerCase()===n.toLowerCase()));const value=k?String(p[k]??'').trim():'';if(value)set.add(value.toLowerCase());}return set.size;
+}
 function updateOverviewFromRealData(){
- const mapping=[['refTotal','chemical'],['refApproved','operators'],['refReview','estates'],['refRevision','equipment'],['refDraft','staff']];
- for(const [id,key] of mapping){const el=document.getElementById(id);if(el)el.textContent=records[key]?records[key].total.toLocaleString('th-TH'):errors[key]?'—':'…';}
+ const mapping=[
+ ['refTotal','chemical',null],
+ ['refApproved','operators',['CID','cid','factory_id','registration_no','เลขทะเบียน','ชื่อโรงงาน','factory_name','company_name']],
+ ['refReview','estates',['estate_id','estate_name','name','ชื่อ นิคมอุตสาหกรรม','นิคมอุตสาหกรรม']],
+ ['refRevision','equipment',null],
+ ['refDraft','staff',null]
+ ];
+ for(const [id,key,uniqueKeys] of mapping){
+  const el=document.getElementById(id);if(!el)continue;
+  const rows=sourceRows[key];
+  const n=rows?(uniqueKeys?countUnique(rows,uniqueKeys):rows.length):null;
+  el.textContent=n===null?(errors[key]?'ไม่พร้อม':'…'):n.toLocaleString('th-TH');
+ }
+ const groups=new Map();
+ for(const row of sourceRows.chemical||[]){const p=row.properties||row.attributes||row;const k=Object.keys(p).find(x=>/estate_name|industrial_estate|นิคมอุตสาหกรรม|นิคม/i.test(x));const name=k?String(p[k]??'').trim():'';if(name)groups.set(name,(groups.get(name)||0)+1);}
+ const chart=document.getElementById('dssEstateRankChart');
+ if(chart){const top=[...groups].sort((a,b)=>b[1]-a[1]).slice(0,10);chart.innerHTML=top.length?top.map(([name,n],i)=>'<div style="display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px"><span style="flex:0 0 38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(name)+'">'+esc(name)+'</span><div style="flex:1;background:#f0edf5;border-radius:6px;height:13px"><div style="height:100%;width:'+(n/top[0][1]*100)+'%;background:#7543a6;border-radius:6px"></div></div><b>'+n.toLocaleString('th-TH')+'</b></div>').join(''):'<div class="no-data">ไม่พบชื่อนิคมฯ ในชุดข้อมูลสารเคมีที่โหลดได้</div>';}
 }
 function update(){const controls=$('dssLayerControls');controls.innerHTML=definitions.map(([key,name,color])=>{let d=records[key],note=errors[key]?'โหลดไม่ได้':d?d.points+' จุดจาก '+d.total+' รายการ':'กำลังโหลด';return '<label class="dss-layer-row"><input type="checkbox" data-layer="'+key+'" '+(map.hasLayer(layerGroups[key])?'checked':'')+'><i class="dss-layer-dot" style="background:'+color+'"></i><div>'+name+'<span>'+note+'</span></div></label>'}).join('');controls.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{const l=layerGroups[input.dataset.layer];input.checked?l.addTo(map):map.removeLayer(l)}));$('dssLayerStatus').textContent='พิกัดที่อ่านได้ '+found.length.toLocaleString('th-TH')+' จุด'+(Object.keys(errors).length?' · โหลดไม่สำเร็จ: '+Object.keys(errors).map(k=>definitions.find(d=>d[0]===k)?.[1]).join(', '):'');
  updateOverviewFromRealData();const stats=document.getElementById('dssGisLiveStats');if(stats){stats.innerHTML=definitions.map(([key,name,color])=>'<div class="dss-gis-stat"><span style="border-color:'+color+'">'+name+'</span><strong>'+(records[key]?records[key].points.toLocaleString('th-TH')+' จุด':errors[key]?'ไม่พร้อม':'…')+'</strong></div>').join('');}}
@@ -658,7 +676,7 @@ async function fetchArcgis(itemId,subLayer){
 }
 async function fetchFactoryPlan(){// A .js document is not assumed to be valid JSON. Read as text and parse only explicit JSON.
  const r=await fetch(urls.factoryPlan,{mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);let txt=await r.text();let trimmed=txt.trim();if(trimmed.startsWith('{')||trimmed.startsWith('['))return JSON.parse(trimmed);let match=trimmed.match(/^\s*(?:var|let|const)\s+[\w$]+\s*=\s*([\s\S]*?)\s*;?\s*$/);if(match){let body=match[1].replace(/;\s*$/,'');return JSON.parse(body)}throw Error('รูปแบบ JS ไม่ใช่ JSON ที่อ่านได้โดยตรง')}
-async function reload(){found=[];records={};errors={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
+async function reload(){found=[];records={};errors={};sourceRows={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
  const tasks=definitions.map(async([key])=>{try{let data=key==='estates'?await fetchArcgis('4460561209d7404c8254554f0f7aa246',1):key==='operators'?await fetchArcgis('59a7ca3f863c4d70b417a73085f3e64a',0):key==='factoryPlan'?await fetchFactoryPlan():await fetchJson(urls[key]);addRows(key,data)}catch(e){errors[key]=String(e.message||e)}update()});
  await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:10});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
 function start(){if(typeof L==='undefined'){$('dssLayerStatus').textContent='ไม่สามารถโหลดไลบรารีแผนที่ Leaflet';return}map=L.map('dssOwnMap',{scrollWheelZoom:false,preferCanvas:true}).setView([15.5,101],6);window.dssLeafletMap=map;L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);definitions.forEach(([key])=>layerGroups[key]=L.layerGroup().addTo(map));$('dssMapRefresh').addEventListener('click',reload);
