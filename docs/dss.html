@@ -455,6 +455,17 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 .dss-gis-stat span{border-left:3px solid;padding-left:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dss-gis-stat strong{white-space:nowrap;font-size:11px}
 @media(max-width:850px){.dss-gis-live-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style><style id="dss-gis-layout-fix-20261119">
+.dss-geoview .dss-map-heading{display:none!important}
+.dss-geoview .dss-map-layout{display:block!important;width:100%!important}
+.dss-geoview .dss-map-side{display:none!important}
+.dss-geoview .dss-map-canvas{width:100%!important;min-width:0!important;height:clamp(460px,55vw,650px)!important;min-height:460px!important}
+.dss-geoview .dss-map-filterbar{display:grid!important;grid-template-columns:1.1fr 1.45fr 1fr 1fr auto!important;gap:6px!important}
+.dss-geoview .dss-map-filterbar>*{min-width:0!important;max-width:100%!important}
+.dss-geoview .dss-gis-live-stats{display:none!important}
+.dss-geoview .dss-map-layout .leaflet-container{background:#eaf0f3!important}
+.dss-select-cid{margin-top:7px;padding:7px 10px;border:0;border-radius:5px;background:#573887;color:#fff;cursor:pointer}
+@media(max-width:850px){.dss-geoview .dss-map-filterbar{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dss-geoview .dss-map-canvas{height:480px!important}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -585,8 +596,29 @@ function validLatLng(lat,lng){return Number.isFinite(lat)&&Number.isFinite(lng)&
 function latlng(row){const geom=row.geometry||row.geom||row;let xy=geom?.coordinates;if(geom?.type==='Point'&&Array.isArray(xy)&&validLatLng(Number(xy[1]),Number(xy[0])))return [Number(xy[1]),Number(xy[0])];if(geom&&validLatLng(Number(geom.y),Number(geom.x)))return [Number(geom.y),Number(geom.x)];const props=row.properties||row.attributes||row;const keys=Object.keys(props);const find=(names)=>keys.find(k=>names.some(n=>k.toLowerCase()===n.toLowerCase()));let la=find(['latitude','lat','ละติจูด','y_coord','ycoord']),lo=find(['longitude','lng','lon','long','ลองจิจูด','x_coord','xcoord']);let lat=Number(props[la]),lng=Number(props[lo]);return la&&lo&&validLatLng(lat,lng)?[lat,lng]:null}
 function geoFeatures(data){if(data?.type==='FeatureCollection')return data.features||[];if(data?.type==='Feature')return [data];return objectRows(data)}
 function popup(row,label){let props=row.properties||row.attributes||row;return '<div class="dss-own-popup"><strong>'+esc(label)+'</strong>'+Object.entries(props).filter(([k,v])=>v!=null&&typeof v!=='object'&&String(v).trim()!=='').slice(0,9).map(([k,v])=>'<p><b>'+esc(k)+':</b> '+esc(String(v).slice(0,180))+'</p>').join('')+'</div>'}
-function addRows(key,data){let rows=geoFeatures(data),color=definitions.find(d=>d[0]===key)[2],count=0;
-for(const row of rows.slice(0,12000)){let point=latlng(row);if(!point)continue;{const props=row.properties||row.attributes||row;const cid=props.CID??props.cid??props.Cid;const usable=key==='operators'&&cid!==null&&cid!==undefined&&/^[A-Za-z0-9._-]{1,120}$/.test(String(cid));const marker=L.circleMarker(point,{radius:key==='estates'?7:5,weight:1,color:'#fff',fillColor:color,fillOpacity:.85});const content=popup(row,definitions.find(d=>d[0]===key)[1])+(usable?'<button type="button" class="dss-select-cid" style="margin-top:7px;padding:7px 10px;border:0;border-radius:5px;background:#573887;color:#fff;cursor:pointer">ใช้ CID ค้นหาเอกสาร</button>':'');marker.bindPopup(content);if(usable)marker.on('popupopen',e=>{const btn=e.popup.getElement()?.querySelector('.dss-select-cid');if(btn)btn.addEventListener('click',()=>{const input=document.getElementById('dssCidInput');input.value=String(cid);document.getElementById('dssDocumentsPanel').scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('dssCidStatus').textContent='เลือก CID จากผู้ประกอบการแล้ว กดค้นหาข้อมูลเพื่อเรียก DSS API';},{once:true})});marker.addTo(layerGroups[key]);}found.push(point);count++}records[key]={total:rows.length,points:count};return count}
+function addRows(key,data){
+ const rows=geoFeatures(data),color=definitions.find(d=>d[0]===key)[2];let count=0;
+ for(const row of rows.slice(0,12000)){
+  const geom=row.geometry||row.geom;
+  const props=row.properties||row.attributes||row;
+  const cid=props.CID??props.cid??props.Cid;
+  const usable=key==='operators'&&cid!=null&&/^[A-Za-z0-9._-]{1,120}$/.test(String(cid));
+  const content=popup(row,definitions.find(d=>d[0]===key)[1])+(usable?'<button type="button" class="dss-select-cid">ใช้ CID ค้นหาเอกสาร</button>':'');
+  let feature=null;
+  if(geom&&['Polygon','MultiPolygon','LineString','MultiLineString'].includes(geom.type)){
+   try{feature=L.geoJSON(row,{style:{color:key==='estates'?'#76469a':color,weight:key==='estates'?2:1.5,fillColor:key==='estates'?'#b8a4d2':color,fillOpacity:key==='estates'?.19:.1}});feature.bindPopup(content)}catch(e){}
+  }else{
+   const point=latlng(row);
+   if(!point)continue;
+   feature=L.circleMarker(point,{radius:key==='estates'?7:5,weight:1.5,color:'#fff',fillColor:color,fillOpacity:.9}).bindPopup(content);
+   found.push(point);
+  }
+  if(!feature)continue;
+  if(usable)feature.on('popupopen',e=>{const btn=e.popup.getElement()?.querySelector('.dss-select-cid');if(btn)btn.addEventListener('click',()=>{const input=document.getElementById('dssCidInput');if(input)input.value=String(cid);document.getElementById('dssDocumentsPanel')?.scrollIntoView({behavior:'smooth',block:'start'});},{once:true})});
+  feature.addTo(layerGroups[key]);count++;
+ }
+ records[key]={total:rows.length,points:count};return count;
+}
 function update(){const controls=$('dssLayerControls');controls.innerHTML=definitions.map(([key,name,color])=>{let d=records[key],note=errors[key]?'โหลดไม่ได้':d?d.points+' จุดจาก '+d.total+' รายการ':'กำลังโหลด';return '<label class="dss-layer-row"><input type="checkbox" data-layer="'+key+'" '+(map.hasLayer(layerGroups[key])?'checked':'')+'><i class="dss-layer-dot" style="background:'+color+'"></i><div>'+name+'<span>'+note+'</span></div></label>'}).join('');controls.querySelectorAll('input').forEach(input=>input.addEventListener('change',()=>{const l=layerGroups[input.dataset.layer];input.checked?l.addTo(map):map.removeLayer(l)}));$('dssLayerStatus').textContent='พิกัดที่อ่านได้ '+found.length.toLocaleString('th-TH')+' จุด'+(Object.keys(errors).length?' · โหลดไม่สำเร็จ: '+Object.keys(errors).map(k=>definitions.find(d=>d[0]===k)?.[1]).join(', '):'');
  const stats=document.getElementById('dssGisLiveStats');if(stats){stats.innerHTML=definitions.map(([key,name,color])=>'<div class="dss-gis-stat"><span style="border-color:'+color+'">'+name+'</span><strong>'+(records[key]?records[key].points.toLocaleString('th-TH')+' จุด':errors[key]?'ไม่พร้อม':'…')+'</strong></div>').join('');}}
 async function fetchJson(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),16000);try{let r=await fetch(url,{signal:c.signal,mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(timer)}}
@@ -611,10 +643,10 @@ async function fetchFactoryPlan(){// A .js document is not assumed to be valid J
  const r=await fetch(urls.factoryPlan,{mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);let txt=await r.text();let trimmed=txt.trim();if(trimmed.startsWith('{')||trimmed.startsWith('['))return JSON.parse(trimmed);let match=trimmed.match(/^\s*(?:var|let|const)\s+[\w$]+\s*=\s*([\s\S]*?)\s*;?\s*$/);if(match){let body=match[1].replace(/;\s*$/,'');return JSON.parse(body)}throw Error('รูปแบบ JS ไม่ใช่ JSON ที่อ่านได้โดยตรง')}
 async function reload(){found=[];records={};errors={};Object.values(layerGroups).forEach(g=>g.clearLayers());update();
  const tasks=definitions.map(async([key])=>{try{let data=key==='estates'?await fetchArcgis('4460561209d7404c8254554f0f7aa246',1):key==='operators'?await fetchArcgis('59a7ca3f863c4d70b417a73085f3e64a',0):key==='factoryPlan'?await fetchFactoryPlan():await fetchJson(urls[key]);addRows(key,data)}catch(e){errors[key]=String(e.message||e)}update()});
- await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:11});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
+ await Promise.allSettled(tasks);if(found.length){map.fitBounds(L.latLngBounds(found),{padding:[24,24],maxZoom:10});}else{map.setView([15.5,101],6)}update();setTimeout(()=>map.invalidateSize(),150);}
 function start(){if(typeof L==='undefined'){$('dssLayerStatus').textContent='ไม่สามารถโหลดไลบรารีแผนที่ Leaflet';return}map=L.map('dssOwnMap',{scrollWheelZoom:false,preferCanvas:true}).setView([15.5,101],6);window.dssLeafletMap=map;L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap contributors © CARTO'}).addTo(map);definitions.forEach(([key])=>layerGroups[key]=L.layerGroup().addTo(map));$('dssMapRefresh').addEventListener('click',reload);
 const estateFilter=$('dssEstateFilter'),typeFilter=$('dssMapTypeFilter'),search=$('dssFactoryMapSearch');
-function applyMapFilter(){const chosen=typeFilter.value;Object.entries(layerGroups).forEach(([key,group])=>{if(chosen==='all'||key===chosen){if(!map.hasLayer(group))group.addTo(map)}else if(map.hasLayer(group))map.removeLayer(group)});if(estateFilter.value==='kaeng')map.setView([14.586,100.998],13);else if(found.length)map.fitBounds(found,{padding:[25,25],maxZoom:11})}
+function applyMapFilter(){const chosen=typeFilter.value==='chemicals'?'chemical':typeFilter.value;Object.entries(layerGroups).forEach(([key,group])=>{if(chosen==='all'||key===chosen){if(!map.hasLayer(group))group.addTo(map)}else if(map.hasLayer(group))map.removeLayer(group)});if(estateFilter.value==='kaeng')map.setView([14.586,100.998],13);else if(found.length)map.fitBounds(found,{padding:[25,25],maxZoom:11})}
 estateFilter.addEventListener('change',applyMapFilter);typeFilter.addEventListener('change',applyMapFilter);
 search.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const q=search.value.trim().toLocaleLowerCase('th');if(!q)return;let match=null;layerGroups.operators.eachLayer(layer=>{if(!match&&layer.getPopup()?.getContent()?.toLocaleLowerCase('th').includes(q))match=layer});if(match){typeFilter.value='operators';applyMapFilter();map.setView(match.getLatLng(),16);match.openPopup()}else $('dssLayerStatus').textContent='ไม่พบโรงงานที่ตรงกับคำค้นในข้อมูลที่โหลดได้'});
 $('dssMapAlert').addEventListener('click',()=>{$('dssLayerStatus').scrollIntoView({behavior:'smooth',block:'nearest'})});
