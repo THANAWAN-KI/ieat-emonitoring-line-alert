@@ -310,6 +310,31 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 @media(min-width:1101px){.dss-monitoring-top{display:flex!important;flex-direction:column!important;min-height:0!important}.dss-monitoring-left{display:contents!important}.dss-monitoring-left>.dss-monitoring-subtitle{order:0}.dss-monitoring-left>.dss-ref-kpis{order:1}.dss-monitoring-map-slot{order:2;min-height:500px!important}.dss-monitoring-connection{order:3;min-height:0!important}.dss-monitoring-map-slot .dss-geoview{min-height:500px!important}}
 @media(max-width:1100px){.dss-monitoring-left>.dss-ref-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{grid-column:span 1!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 1!important}}
 @media(max-width:600px){.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{min-height:105px!important;padding:14px!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{right:10px;width:32px;height:32px;font-size:18px}}
+</style><style id="dss-kpi-compact-risk-layout">
+/* Reference 1: compact rectangular summary panel; reference 2: neutral/red/yellow/green palette */
+@media(min-width:901px){
+.dss-monitoring-top{display:grid!important;grid-template-columns:minmax(350px,34%) minmax(0,66%)!important;gap:8px!important;align-items:stretch!important;min-height:520px!important}
+.dss-monitoring-left{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important}
+.dss-monitoring-map-slot{order:initial!important;min-height:520px!important}
+.dss-monitoring-left>.dss-monitoring-subtitle{order:initial!important}
+.dss-monitoring-left>.dss-ref-kpis{order:initial!important}
+.dss-monitoring-connection{order:initial!important}
+}
+.dss-monitoring-left>.dss-monitoring-subtitle{border:1px solid #d5d9dd!important;border-bottom:0!important;background:#fff!important;padding:13px 12px 10px!important;margin:0!important;color:#2e3439!important}
+.dss-monitoring-left>.dss-ref-kpis{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;background:#fff!important;border:1px solid #d5d9dd!important;border-top:0!important;padding:8px!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 2!important;min-height:88px!important;border:1px solid #aab3b5!important;border-radius:0!important;box-shadow:none!important;padding:10px 7px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:3px!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 4!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{display:none!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card strong{order:1!important;font-size:24px!important;color:#252c33!important;font-weight:700!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card span{order:0!important;font-size:12px!important;color:#444e56!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card small{display:block!important;order:2!important;font-size:10px!important;color:#7b848b!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(1){border-left:5px solid #a6a3df!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(2){border-left:5px solid #4bae21!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(3){border-left:5px solid #f4d44d!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(4){border-left:5px solid #b71c1c!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:nth-child(5){border-left:5px solid #9ca3af!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red strong,.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate strong{color:#252c33!important}
+@media(max-width:900px){.dss-monitoring-left>.dss-ref-kpis{grid-template-columns:repeat(4,minmax(0,1fr))!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 4!important}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
