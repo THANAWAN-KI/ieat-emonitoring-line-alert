@@ -290,7 +290,27 @@ body,.dss-operations{background:#fafafa!important;color:#292d33!important}
 .dss-monitoring-map-slot .dss-map-layout{min-height:480px!important}
 .dss-monitoring-map-slot .dss-map-canvas{min-height:420px!important}
 @media(max-width:900px){.dss-monitoring-map-slot .dss-map-layout{min-height:410px!important}}
-</style><style id="dss-hide-cid-search-panel">#dssDocumentsPanel{display:none!important} .dss-reference-dashboard>.dss-ref-title:first-child{margin-bottom:12px!important}</style></head><body>
+</style><style id="dss-hide-cid-search-panel">#dssDocumentsPanel{display:none!important} .dss-reference-dashboard>.dss-ref-title:first-child{margin-bottom:12px!important}</style><style id="dss-kpi-reference-cards">
+/* Five KPI cards styled after supplied reference; retain actual values from API only */
+.dss-monitoring-left>.dss-ref-kpis{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:14px!important;border:0!important;background:transparent!important;padding:0!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card,
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 1!important;position:relative!important;min-height:126px!important;border:1px solid #e1e5eb!important;border-radius:19px!important;box-shadow:0 8px 24px rgba(25,35,55,.04)!important;padding:22px 18px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:flex-start!important;text-align:left!important;gap:5px!important;background:#fff!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card strong{font-size:30px!important;line-height:1.12!important;font-weight:700!important;color:#7542c8!important;order:0}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card span{font-size:13px!important;color:#62708a!important;order:1}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card small{display:none!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{content:"▤";position:absolute;right:16px;top:50%;transform:translateY(-50%);width:45px;height:45px;border-radius:50%;background:#f4efff;color:#7542c8;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:400}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green strong{color:#4db461!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.green::after{content:"✓";background:#e9f6eb;color:#4db461}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange strong{color:#ff8b00!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.orange::after{content:"◷";background:#fff2df;color:#ff8b00}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red strong{color:#f04444!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.red::after{content:"↻";background:#ffedf0;color:#f04444}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate strong{color:#697c99!important}
+.dss-monitoring-left>.dss-ref-kpis .dss-ref-card.slate::after{content:"✎";background:#f0f2f5;color:#697c99}
+@media(min-width:1101px){.dss-monitoring-top{display:flex!important;flex-direction:column!important;min-height:0!important}.dss-monitoring-left{display:contents!important}.dss-monitoring-left>.dss-monitoring-subtitle{order:0}.dss-monitoring-left>.dss-ref-kpis{order:1}.dss-monitoring-map-slot{order:2;min-height:500px!important}.dss-monitoring-connection{order:3;min-height:0!important}.dss-monitoring-map-slot .dss-geoview{min-height:500px!important}}
+@media(max-width:1100px){.dss-monitoring-left>.dss-ref-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{grid-column:span 1!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card:first-child{grid-column:span 1!important}}
+@media(max-width:600px){.dss-monitoring-left>.dss-ref-kpis .dss-ref-card{min-height:105px!important;padding:14px!important}.dss-monitoring-left>.dss-ref-kpis .dss-ref-card::after{right:10px;width:32px;height:32px;font-size:18px}}
+</style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
   <div class="emcc-header-action-panel"><button type="button" data-header-lang="th" aria-pressed="true">ไทย</button><button type="button" data-header-lang="en" aria-pressed="false">EN</button></div>
