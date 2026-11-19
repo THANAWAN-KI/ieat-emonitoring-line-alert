@@ -230,14 +230,14 @@ body{background:#fff;color:#282d33}
     <section class="dss-box dss-kpi-box" aria-labelledby="overview-heading">
       <div class="dss-box-head"><h1 id="overview-heading">ภาพรวมระบบสนับสนุนการตัดสินใจ (DSS)</h1></div>
       <div class="dss-kpi-grid">
-        <div class="dss-kpi"><span>รายการข้อมูลทั้งหมด</span><strong id="total">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>สถานประกอบการ</span><strong id="companies">—</strong><small>แห่ง/รหัส</small></div>
-        <div class="dss-kpi"><span>นิคมอุตสาหกรรม</span><strong id="estates">—</strong><small>พื้นที่</small></div>
+        <div class="dss-kpi"><span>รายการสารเคมีอันตราย</span><strong id="total">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>สถานประกอบการทั้งหมด</span><strong id="companies">—</strong><small>แห่ง/รหัส</small></div>
+        <div class="dss-kpi"><span>นิคมอุตสาหกรรมที่มีข้อมูล</span><strong id="estates">—</strong><small>พื้นที่</small></div>
         <div class="dss-kpi"><span>ประเภทสารเคมี</span><strong id="chemicals">—</strong><small>ประเภท</small></div>
-        <div class="dss-kpi"><span>มีข้อมูลนิคมฯ</span><strong id="hasEstate">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>มีข้อมูลสถานประกอบการ</span><strong id="hasCompany">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>มีชื่อสารเคมี</span><strong id="hasChemical">—</strong><small>ระเบียน</small></div>
-        <div class="dss-kpi"><span>ข้อมูลครบ 3 ด้าน</span><strong id="hasAll">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>มีเลข CAS</span><strong id="hasEstate">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>มีเลข UN</span><strong id="hasCompany">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>มีปริมาณจัดเก็บ</span><strong id="hasChemical">—</strong><small>ระเบียน</small></div>
+        <div class="dss-kpi"><span>มีข้อมูลการระงับเหตุ</span><strong id="hasAll">—</strong><small>ระเบียน</small></div>
       </div>
     </section>
     <section class="dss-box dss-quality-box" aria-labelledby="quality-heading">
@@ -311,6 +311,25 @@ const complete=fields.every(Boolean)?rows.filter(r=>fields.every(k=>nonempty(com
 const labels=['ข้อมูลนิคมอุตสาหกรรม','ข้อมูลสถานประกอบการ','ชื่อสารเคมี'];
 $('qualityBars').innerHTML=labels.map((label,i)=>{const n=found[i],pct=n===null?0:(rows.length?n/rows.length*100:0);return '<div class="dss-quality-row"><div class="dss-quality-item-head"><strong>'+label+'</strong><span>'+(n===null?'ไม่พบฟิลด์':num(n)+' / '+num(rows.length)+' · '+pct.toFixed(1)+'%')+'</span></div><div class="dss-quality-track"><div class="dss-quality-fill" style="width:'+pct+'%">'+(pct>=18?pct.toFixed(0)+'%':'')+'</div></div></div>'}).join('');
 }
+
+function updateMeaningfulKpis(rows){
+ const findExact=(names)=>{const keys=[...new Set(rows.slice(0,200).flatMap(r=>Object.keys(r)))];return keys.find(k=>names.some(n=>k.toLowerCase()===n.toLowerCase()))||null};
+ const cas=findExact(['cas','cas_no','cas_number','casno','cas_num','เลข cas','เลขทะเบียน cas']);
+ const un=findExact(['un','un_no','un_number','unno','un_num','เลข un']);
+ const amount=findExact(['storage_quantity','quantity','amount','storage_amount','chemical_quantity','ปริมาณจัดเก็บ','ปริมาณสารเคมี']);
+ const response=findExact(['fire_fighting','firefighting','extinguish','emergency_response','fire_extinguisher','แนวทางระงับเหตุ','วิธีระงับเหตุ','สารดับเพลิง']);
+ const present=(key)=>key?rows.filter(r=>nonempty(r[key])).length:null;
+ const update=(id,value,unit)=>{const el=$(id);el.textContent=value===null?'—':num(value);el.nextElementSibling.textContent=value===null?'ไม่มีฟิลด์ข้อมูล':unit};
+ update('hasEstate',present(cas),'รายการ');
+ update('hasCompany',present(un),'รายการ');
+ update('hasChemical',present(amount),'รายการ');
+ update('hasAll',present(response),'รายการ');
+ $('total').previousElementSibling.textContent='รายการสารเคมีอันตราย';
+ $('companies').nextElementSibling.textContent='แห่ง/รหัส';
+ $('estates').nextElementSibling.textContent='พื้นที่';
+ $('chemicals').nextElementSibling.textContent='ประเภท';
+}
+
 function renderEstateBars(est){
 const top=[...est].slice(0,7),max=top.length?top[0][1]:1;
 $('estateBars').innerHTML=top.length?top.map(([name,n])=>'<div class="dss-estate-row"><span class="dss-estate-label" title="'+escapeHTML(name)+'">'+escapeHTML(name)+'</span><span class="dss-estate-value">'+num(n)+'</span><div class="dss-estate-track"><div class="dss-estate-fill" style="width:'+(n/max*100).toFixed(2)+'%"></div></div></div>').join(''):'<div class="empty">ไม่พบชื่อพื้นที่ในชุดข้อมูล DSS</div>';
@@ -354,7 +373,7 @@ $('libraryFoot').textContent='พบ '+num(matched.length)+' ระเบีย�
 }
 $('libraryQuery').addEventListener('input',drawLibraryRows);
 $('libraryEstate').addEventListener('change',drawLibraryRows);
-async function reload(){let status=$('status');status.innerHTML='<span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span>';let sources=['./docs/dss-data.json','https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json'];for(const url of sources){try{let controller=new AbortController,timeout=setTimeout(()=>controller.abort(),18000);let response;try{response=await fetch(url+'?v='+Date.now(),{signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timeout)}if(!response.ok)throw Error('HTTP '+response.status);let data=await response.json(),items=Array.isArray(data)?data:(data.features||data.records||data.data||[]);if(!Array.isArray(items)||!items.length)throw Error('empty');let rows=items.map(r=>r.properties||r.attributes||r);draw(rows);renderLibrary(rows);$('source').textContent='แหล่งข้อมูล: '+(url.startsWith('.')?'ชุดข้อมูล DSS ที่เว็บไซต์ใช้งาน (docs/dss-data.json)':'ระบบ DSS กนอ. (ต้นทาง)')+' · ค่าทั้งหมดคำนวณจากระเบียนที่อ่านได้จริง';return}catch(e){console.warn('DSS source unavailable',url,e)}}libraryData=[];$('libraryChemicalCount').textContent='—';$('libraryRows').innerHTML='<tr><td colspan="5">ไม่สามารถโหลดข้อมูล DSS ได้</td></tr>';status.innerHTML='<span class="dot"></span><span>ไม่สามารถอ่านข้อมูล DSS ได้ในขณะนี้ — กรุณาลองอัปเดตอีกครั้ง</span>';for(const id of ['total','companies','estates','chemicals','hasEstate','hasCompany','hasChemical','hasAll'])$(id).textContent='—';$('ranking').innerHTML='<tr><td colspan="3">ไม่สามารถโหลดข้อมูลได้</td></tr>';for(const id of ['bars','heatmap','qualityBars','estateBars'])fallback($(id),'ไม่สามารถโหลดข้อมูล DSS ได้');$('legend').textContent='ไม่มีข้อมูล';}
+async function reload(){let status=$('status');status.innerHTML='<span class="dot"></span><span>กำลังอ่านข้อมูลจากชุดข้อมูล DSS…</span>';let sources=['./docs/dss-data.json','https://emonitor.ieat.go.th/envisys/gis/file/hazardous8H8j51DukSmv9Opd4Z6dCVbuB5saueSIz2ErixyZp7lOdfcZX1t44oIdouDxWESk.json'];for(const url of sources){try{let controller=new AbortController,timeout=setTimeout(()=>controller.abort(),18000);let response;try{response=await fetch(url+'?v='+Date.now(),{signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timeout)}if(!response.ok)throw Error('HTTP '+response.status);let data=await response.json(),items=Array.isArray(data)?data:(data.features||data.records||data.data||[]);if(!Array.isArray(items)||!items.length)throw Error('empty');let rows=items.map(r=>r.properties||r.attributes||r);draw(rows);renderLibrary(rows);updateMeaningfulKpis(rows);$('source').textContent='แหล่งข้อมูล: '+(url.startsWith('.')?'ชุดข้อมูล DSS ที่เว็บไซต์ใช้งาน (docs/dss-data.json)':'ระบบ DSS กนอ. (ต้นทาง)')+' · ค่าทั้งหมดคำนวณจากระเบียนที่อ่านได้จริง';return}catch(e){console.warn('DSS source unavailable',url,e)}}libraryData=[];$('libraryChemicalCount').textContent='—';$('libraryRows').innerHTML='<tr><td colspan="5">ไม่สามารถโหลดข้อมูล DSS ได้</td></tr>';status.innerHTML='<span class="dot"></span><span>ไม่สามารถอ่านข้อมูล DSS ได้ในขณะนี้ — กรุณาลองอัปเดตอีกครั้ง</span>';for(const id of ['total','companies','estates','chemicals','hasEstate','hasCompany','hasChemical','hasAll'])$(id).textContent='—';$('ranking').innerHTML='<tr><td colspan="3">ไม่สามารถโหลดข้อมูลได้</td></tr>';for(const id of ['bars','heatmap','qualityBars','estateBars'])fallback($(id),'ไม่สามารถโหลดข้อมูล DSS ได้');$('legend').textContent='ไม่มีข้อมูล';}
 $('reload').addEventListener('click',reload);reload();
 document.getElementById('downloadDashboard')?.addEventListener('click',()=>{document.getElementById('dashboardExportMenu').open=false;window.print()});
 document.querySelectorAll('[data-header-lang]').forEach(btn=>btn.addEventListener('click',()=>{const en=btn.dataset.headerLang==='en';document.querySelectorAll('.emcc-site-header [data-en]').forEach(el=>{if(!el.dataset.th)el.dataset.th=el.textContent;el.textContent=en?el.dataset.en:el.dataset.th});document.querySelectorAll('[data-header-lang]').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));document.getElementById('dashboardLanguage').open=false}));
