@@ -821,8 +821,7 @@ html body #report#report#report#report #dssFieldBrief :is(.fb-header,.fb-head),
 html body #dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:var(--fire-report-frame, #4d6055)!important}
 </style>
 <script>
-const fireReportLayout=new URLSearchParams(location.search).get('theme')==='fire-purple';
-if(fireReportLayout){
+if(new URLSearchParams(location.search).get('theme')==='fire-purple'){
  document.documentElement.setAttribute('data-report-theme','fire-purple');
 }
 </script>
@@ -1586,14 +1585,13 @@ async function downloadReportPng(){
    mapImage=(await html2canvas(window.dssLeafletMap?.getContainer()||document.getElementById('map'),{backgroundColor:'#f7f8fa',scale:2,useCORS:true,allowTaint:false,logging:false,ignoreElements:e=>e.classList?.contains('leaflet-control-container')})).toDataURL('image/png');
   }
   const mapRaster=new Image();await new Promise((resolve,reject)=>{mapRaster.onload=resolve;mapRaster.onerror=reject;mapRaster.src=mapImage});
-  const mainPageCount=fireReportLayout?2:3;
-  const supportPages=window.dssBuildSupportAppendix?.(mainPageCount,state.reportNo);
+  const supportPages=window.dssBuildSupportAppendix?.();
   if(!supportPages?.length)throw Error('ภาคผนวกข้อมูลสนับสนุนยังไม่พร้อม');
-  const totalPages=mainPageCount+supportPages.length;
+  const totalPages=3+supportPages.length;
   const firstStage=document.createElement('div');firstStage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
   const firstNode=document.getElementById('report').cloneNode(true);firstNode.classList.add('dss-field-export','dss-two-page-first');firstNode.style.setProperty('width','1050px','important');firstNode.style.setProperty('height','auto','important');firstNode.style.setProperty('padding','32px','important');firstNode.style.setProperty('box-sizing','border-box','important');firstNode.style.setProperty('max-height','none','important');
   firstNode.querySelectorAll(':scope > :not(#dssFieldBrief),[data-export-exclude]').forEach(n=>n.remove());const brief=firstNode.querySelector('#dssFieldBrief');brief.style.setProperty('width','986px','important');brief.style.setProperty('max-width','none','important');brief.style.setProperty('transform','none','important');brief.querySelectorAll(':scope > .fb-section').forEach((n,i)=>{if(i===2)n.remove()});brief.querySelector('.fb-footer')?.remove();
-  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather){if(fireReportLayout)slot.after(weather);else slot.append(weather);}img.id='dashboardReportMapImage';await img.decode();slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));slot.style.removeProperty('height');
+  const slot=firstNode.querySelector('#fieldBriefMap'),weather=firstNode.querySelector('#fbWeather');slot.replaceChildren();const img=document.createElement('img');img.src=mapImage;img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';slot.append(img);if(weather)slot.append(weather);img.id='dashboardReportMapImage';await img.decode();slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));slot.style.removeProperty('height');
   const footer=document.createElement('div');footer.className='dss-page-footer';footer.textContent='แหล่งข้อมูล: e_PP · DSS · Open-Meteo | '+(state.reportNo||'')+' | หน้า 1 / '+totalPages;brief.append(footer);firstStage.append(firstNode);document.body.append(firstStage);
   let first;
   try{
@@ -1623,8 +1621,6 @@ async function downloadReportPng(){
    const secondHeight=Math.max(1485,Math.ceil(secondNode.scrollHeight));
    second=await html2canvas(secondNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:secondHeight,windowWidth:1200});
   }finally{stage.remove()}
-  let third;
-  if(!fireReportLayout){
   const thirdSource=document.getElementById('dssPageThree');
   if(!thirdSource)throw Error('หน้ารายงานสถานียังไม่พร้อม');
   const thirdStage=document.createElement('div');thirdStage.style.cssText='position:absolute;left:-100000px;top:0;width:1050px;pointer-events:none';
@@ -1633,8 +1629,7 @@ async function downloadReportPng(){
   thirdNode.style.setProperty('height','auto','important');thirdNode.style.setProperty('padding','32px','important');
   thirdNode.querySelectorAll('a[href="#dssPageThree"]').forEach(node=>node.remove());
   thirdStage.append(thirdNode);document.body.append(thirdStage);
-  try{third=await html2canvas(thirdNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:Math.max(1485,Math.ceil(thirdNode.scrollHeight)),windowWidth:1200});}finally{thirdStage.remove();}
-  }
+  let third;try{third=await html2canvas(thirdNode,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:Math.max(1485,Math.ceil(thirdNode.scrollHeight)),windowWidth:1200});}finally{thirdStage.remove();}
   if(activeReport&&(parent.ieatCoverageReport!==activeReport||activeReport.status!=='ready'))throw Error('เงื่อนไขค้นหาเปลี่ยนระหว่างสร้างภาพ กรุณาค้นหาใหม่');
   const appendixCanvases=[];
   for(const page of supportPages){
@@ -1642,7 +1637,7 @@ async function downloadReportPng(){
    try{appendixCanvases.push(await html2canvas(page,{backgroundColor:'#fff',scale:exportScale,useCORS:true,allowTaint:false,logging:false,width:1050,height:1485,windowWidth:1200}));}finally{appendixStage.remove();}
   }
   if(activeReport&&(parent.ieatCoverageReport!==activeReport||activeReport.status!=='ready'))throw Error('เงื่อนไขค้นหาเปลี่ยนระหว่างสร้างภาคผนวก กรุณาค้นหาใหม่');
-  const reportCanvases=[first,second,...(third?[third]:[]),...appendixCanvases];
+  const reportCanvases=[first,second,third,...appendixCanvases];
   for(const canvas of reportCanvases){
    const context=canvas.getContext('2d'),width=exportScale;
    context.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--fire-report-frame').trim() || '#4d6055';
@@ -3347,7 +3342,7 @@ html body #report #dssFieldBrief .fb-qr[hidden]{display:none!important}
   if(full){full.textContent=selected?'เปิดรายงานตาราง DSS':'ไม่พบข้อมูลโรงงาน';if(!selected)full.removeAttribute('href')}
   const title=document.querySelector('#dssFieldBrief .fb-footer strong');if(title)title.textContent='รายงานข้อมูล DSS รายโรงงาน';
   const headings=document.querySelectorAll('#dssFieldBrief > .fb-section > h2');
-  ['1. สถานประกอบการและข้อมูลรับแจ้ง',(fireReportLayout?'3.':'2.')+' แผนที่และสภาพอากาศ','3. สารเคมีและอุปกรณ์ในฐานข้อมูล'].forEach((text,index)=>{if(headings[index])headings[index].textContent=text});
+  ['1. สถานประกอบการและข้อมูลรับแจ้ง','2. แผนที่และสภาพอากาศ','3. สารเคมีและอุปกรณ์ในฐานข้อมูล'].forEach((text,index)=>{if(headings[index])headings[index].textContent=text});
   document.querySelectorAll('#report [data-out]').forEach(node=>{
    if(node.children.length)return;
    if(!available(node.textContent))node.textContent=missing;
@@ -3480,12 +3475,10 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   table.append(body);scroll.append(table);return scroll;
  }
  function draw(){
-  const selected=state.company&&state.company!==defaults.company;
-  const monitoring=fireReportLayout?document.getElementById('fireReportMonitoring'):null;
-  page.replaceChildren();
+  const selected=state.company&&state.company!==defaults.company;page.replaceChildren();
   const header=el('header');header.className='p2-header';
   const logo=document.querySelector('#dssFieldBrief .fb-logo')?.cloneNode();if(logo)header.append(logo);
-  const heading=el('div');heading.append(el('h1',fireReportLayout?'ข้อมูลโรงงานและการตรวจวัด':'รายละเอียดข้อมูล DSS รายโรงงาน'));
+  const heading=el('div');heading.append(el('h1','รายละเอียดข้อมูล DSS รายโรงงาน'));
   const meta=el('div');meta.className='p2-meta';const unitLink=el('a','ศูนย์เฝ้าระวังสิ่งแวดล้อม และความปลอดภัย');unitLink.href='https://oc.ieat.go.th/th';unitLink.target='_blank';unitLink.rel='noopener';unitLink.style.cssText='color:inherit;text-decoration:none';meta.append(unitLink);heading.append(meta);header.append(heading);page.append(header);
   const company=el('div',selected?state.company:missing);company.className='p2-company';page.append(company);
   const facts=el('div');facts.className='p2-facts';
@@ -3494,8 +3487,7 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   page.append(el('h2',(chemicalIncident?'1. สารเคมีที่ได้รับแจ้งว่ารั่วไหล · ':'1. สารเคมีในฐานข้อมูลโรงงาน · ')+catalog.length+' รายการ'));if(chemicalIncident&&!catalog.length)page.append(el('p',state.leakChemical||'ยังไม่ได้เลือกสารที่เกี่ยวข้องกับเหตุ'));
   const chemicalRows=catalog.map((item,index)=>[index+1,item.name,item.cas,item.un,item.volume,item.unit]);if(chemicalIncident&&!chemicalRows.length&&!/กำลังโหลด|ไม่สำเร็จ/.test(String(state.chemical)))chemicalRows.push([state.leakChemical||'ยังไม่ได้เลือกสารที่เกี่ยวข้องกับเหตุ','','','','','']);
   if(!chemicalRows.length&&/ไม่สำเร็จ|กำลังโหลด/.test(String(state.chemical)))chemicalRows.push([/ไม่สำเร็จ/.test(state.chemical)?'เชื่อมต่อข้อมูลสารเคมีไม่สำเร็จ':'กำลังโหลดข้อมูล','','','','','']);
-  if(fireReportLayout&&!chemicalRows.length)page.append(el('p',selected?'ไม่พบรายการสารเคมีในชุดข้อมูล DSS ที่สืบค้น':'เลือกโรงงานเพื่อดูรายการสารเคมี'));
-  else page.append(table(['ลำดับ','ชื่อสารเคมี','CAS No.','UN No.','ปริมาณจัดเก็บ','หน่วย'],chemicalRows));
+  page.append(table(['ลำดับ','ชื่อสารเคมี','CAS No.','UN No.','ปริมาณจัดเก็บ','หน่วย'],chemicalRows));
   const note=el('p',(state.chemicalDataSource||'ข้อมูลสารเคมี DSS')+' · รายการในฐานข้อมูลโรงงาน ไม่ใช่การยืนยันสารที่เกี่ยวข้องกับเหตุ');note.className='p2-note';page.append(note);
   page.append(el('h2','2. อุปกรณ์ระงับเหตุในฐานข้อมูลโรงงาน · '+equipment.length+' รายการ'));
   const equipmentRows=selected?equipment.map((item,index)=>[index+1,item.name,item.type,item.amount,item.amountUnit,item.volume,item.volumeUnit]):[];
@@ -3503,9 +3495,8 @@ html body #dssPageTwo.dss-page-two-export table{font-size:13px!important}
   page.append(table(['ลำดับ','รายการอุปกรณ์','ประเภท','จำนวน','หน่วย','ขนาด / ปริมาตร / แรงดัน','หน่วย'],equipmentRows));
   
   const time=el('div','เวลาสืบค้นข้อมูลสารเคมี: '+value(state.chemicalDataTime));time.className='p2-meta';page.append(time);
-  if(monitoring)page.append(monitoring);
-  const footer=el('div','แหล่งข้อมูล: '+(state.chemicalDataSource||'สารเคมี DSS')+' · ข้อมูลอุปกรณ์ DSS'+(fireReportLayout?' · e-Monitoring กนอ.':'')+' | '+(state.reportNo||'')+' | หน้า 2 / '+(fireReportLayout?2:3));footer.className='dss-page-footer';page.append(footer);
-  const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG '+(fireReportLayout?2:3)+' หน้า + ภาคผนวก';
+  const footer=el('div','แหล่งข้อมูล: '+(state.chemicalDataSource||'สารเคมี DSS')+' · ข้อมูลอุปกรณ์ DSS | '+(state.reportNo||'')+' | หน้า 2 / 3');footer.className='dss-page-footer';page.append(footer);
+  const button=document.getElementById('pngBtn');if(button)button.textContent='ดาวน์โหลด PNG 3 หน้า + ภาคผนวก';
  }
  window.dssRefreshPageTwo=async function(){
   const current=++request,identity=[state.company,state.registration,state.estate].join('|');lastIdentity=identity;equipment=[];equipmentStatus='กำลังโหลดข้อมูล';draw();
@@ -3594,8 +3585,7 @@ html body #report#report.dss-field-document #dssFieldBrief #fbWeather :is(small,
 .report-weather-arrow svg{display:block;width:100%;height:100%}
 </style><script id="report-full-map-preview">
 (function(){
-const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');
-if(fireReportLayout)slot.after(weather);else slot.append(weather);
+const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.append(weather);
 const image=document.createElement('img');image.id='dashboardReportMapImage';image.alt='แผนที่จาก Dashboard ตามมุมมองปัจจุบัน';slot.prepend(image);
 const zoomTools=document.createElement('div');zoomTools.className='report-map-zoom-controls';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่รายงาน');
 [['+','ซูมเข้าแผนที่รายงาน',1],['−','ซูมออกแผนที่รายงาน',-1]].forEach(([text,label,delta])=>{const button=document.createElement('button');button.type='button';button.textContent=text;button.setAttribute('aria-label',label);button.title=label;button.onclick=()=>parent.postMessage({type:'dss:report-map-zoom',delta},location.origin);zoomTools.append(button)});
@@ -3611,14 +3601,12 @@ image.addEventListener('pointerup',finishDrag);image.addEventListener('pointerca
 image.addEventListener('load',()=>{image.style.transform=''});
 
 
-const nearby=document.createElement('section');nearby.id='reportNearbySupport';
-if(fireReportLayout)slot.closest('.fb-section').before(nearby);else slot.after(nearby);
+const nearby=document.createElement('section');nearby.id='reportNearbySupport';slot.after(nearby);
 function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ratio=image.naturalWidth/image.naturalHeight;slot.style.setProperty('--report-map-aspect',String(ratio));slot.dataset.reportMapRatio=String(1/ratio);if(!window.dssFitFirstReportPage)slot.style.removeProperty('height')}
 image.addEventListener('load',fitImage);
 function paint(){
- const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent=(fireReportLayout?'3.':'2.')+' แผนที่และสภาพอากาศ';
- if(fireReportLayout){if(slot.nextElementSibling!==weather)slot.after(weather);}
- else if(weather.parentElement!==slot)slot.append(weather);
+ const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
+ if(weather.parentElement!==slot)slot.append(weather);
  weather.querySelector('.report-weather-arrow')?.remove();
  weather.querySelector('.report-wind-direction')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
@@ -3642,7 +3630,6 @@ function refreshCoverageSupport(){
 }
 function showSupport(data){
  const categories=[['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']];
- if(fireReportLayout)categories.splice(1,2,categories[2],categories[1]);
  const allowed=new Set(categories.map(c=>c[0])),groups=new Map(),seen=new Set();
  (data.rows||[]).filter(r=>allowed.has(r.sourceId)&&Number(r.distance)<=data.radius*1000).sort((a,b)=>a.distance-b.distance).forEach(row=>{
  const key=row.sourceId,placeKey=[key,row.name,...(['hospital','fire','police'].includes(key)?[]:[Number(row.lat).toFixed(5),Number(row.lon).toFixed(5)])].join('|');
@@ -3651,12 +3638,12 @@ function showSupport(data){
  window.dssSupportReportData={...data,company:state.company,contextId:state.coverageContextId,rows:categories.flatMap(([key])=>groups.get(key)||[])};
  window.dssUpdateSupportDialog?.(window.dssSupportReportData);
  nearby.replaceChildren();nearby.setAttribute('aria-label','ตารางข้อมูลสถานที่สนับสนุนแยกประเภท');
- const heading=document.createElement('h2');heading.textContent=(fireReportLayout?'2.':'3.')+' ข้อมูลสนับสนุนใกล้เคียงจุดเกิดเหตุ';nearby.append(heading);
+ const heading=document.createElement('h2');heading.textContent='3. ข้อมูลสนับสนุนใกล้เคียงจุดเกิดเหตุ';nearby.append(heading);
  const table=document.createElement('table');table.className='grouped-support-table support-reference-table';const body=document.createElement('tbody');
  categories.forEach(([key,label],index)=>{
  const rows=groups.get(key);if(!rows?.length)return;
  const tr=document.createElement('tr'),type=document.createElement('th'),details=document.createElement('td');type.scope='row';
- const badge=document.createElement('span'),category=document.createElement('span');badge.className='support-category-number';badge.textContent=index+1;category.textContent=label;if(!fireReportLayout)type.append(badge);type.append(category);
+ const badge=document.createElement('span'),category=document.createElement('span');badge.className='support-category-number';badge.textContent=index+1;category.textContent=label;type.append(badge,category);
  rows.slice(0,1).forEach(row=>{
  const entry=document.createElement('div');entry.className='support-place-details';
  const nameLabel=document.createElement('span');nameLabel.className='support-detail-label';nameLabel.textContent='ชื่อสถานที่';
@@ -3665,8 +3652,6 @@ function showSupport(data){
  const distanceLabel=document.createElement('span');distanceLabel.className='support-detail-label';distanceLabel.textContent='ระยะเส้นตรง';
  const distance=document.createElement('span');distance.textContent=row.distance<1000?Math.round(row.distance)+' เมตร':(row.distance/1000).toFixed(2)+' กม.';
  distance.className='support-place-distance';distance.setAttribute('aria-label','ระยะเส้นตรง '+distance.textContent);entry.append(button,distance);details.append(entry);
- const phone=String(row.phone||'').trim();
- if(fireReportLayout&&/\d/.test(phone))details.append(document.createTextNode('โทร '+phone));
  });
  if(rows.length>1){const more=document.createElement('span');more.className='support-additional-count';more.textContent='มีจุดอื่นในรัศมีอีก '+(rows.length-1)+' แห่ง';details.append(more);}
  tr.append(type,details);body.append(tr);
@@ -3675,7 +3660,7 @@ function showSupport(data){
  table.append(body);nearby.append(table);
  const allButton=document.createElement('button');allButton.type='button';allButton.className='support-all-button';allButton.textContent='ดูข้อมูลสนับสนุนทั้งหมด';allButton.disabled=!!data.unselected||!!data.loading;
  allButton.setAttribute('data-export-exclude','');allButton.onclick=()=>window.dssOpenAllSupport?.();nearby.append(allButton);
- const appendixNote=document.createElement('p');appendixNote.className='support-appendix-reference';appendixNote.textContent=(fireReportLayout?'ระยะทางเส้นตรงจากจุดเกิดเหตุ · ':'')+'รายชื่อและเบอร์ติดต่อทั้งหมดอยู่ในภาคผนวกข้อมูลสนับสนุน';nearby.append(appendixNote);
+ const appendixNote=document.createElement('p');appendixNote.className='support-appendix-reference';appendixNote.textContent='รายชื่อและเบอร์ติดต่อทั้งหมดอยู่ในภาคผนวกข้อมูลสนับสนุน';nearby.append(appendixNote);
 
  if(data.failures?.some(id=>allowed.has(id))){const p=document.createElement('p');p.className='report-nearby-note';p.textContent='บางกลุ่มเชื่อมต่อข้อมูลไม่สำเร็จ';nearby.append(p)}
 }
@@ -3814,7 +3799,7 @@ new MutationObserver(()=>{document.querySelectorAll('#dssPageTwo>table').forEach
 html body #report#report#report#report #dssFieldBrief :is(.fb-section>h2,#reportNearbySupport>h2),html body #dssPageTwo#dssPageTwo#dssPageTwo h2{background:#efefef!important;border-left-color:var(--fire-report-accent, #5b8f32)!important;color:#4d4f53!important;-webkit-text-fill-color:#4d4f53!important}
 html body #report#report#report#report #dssFieldBrief :is(.fb-header,.fb-head),html body #dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:var(--fire-report-accent, #5b8f32)!important}
 html body #report#report#report#report #reportNearbySupport .support-reference-table tbody th{background:#efefef!important;color:var(--fire-report-ink, #5b8f32)!important}
-html body #report#report#report#report #reportNearbySupport .support-category-number{background:var(--fire-report-accent, #5b8f32)!important;color:#fff!important}
+html body #report#report#report#report #reportNearbySupport .support-category-number{background:var(--fire-report-ink, #5b8f32)!important;color:#fff!important}
 html body #report#report#report#report #fbWeather>strong{color:#ff4025!important;-webkit-text-fill-color:#ff4025!important}
 html body #report#report#report#report #fbWeather .report-weather-arrow{background:#ffede9!important}
 html body #report#report#report#report #fbWeather .report-weather-arrow svg path{fill:#2e9df7!important;stroke:#000!important;stroke-width:2.5!important;stroke-linejoin:round!important}
@@ -3909,7 +3894,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
     const map=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');
     if(map&&weather&&weather.parentElement!==map)map.append(weather);
     const title=map?.closest('.fb-section')?.querySelector('h2');
-    const text=(fireReportLayout?'3.':'2.')+' แผนที่และสภาพอากาศ · รัศมี '+getBufferRadii().join(' / ')+' กม.';
+    const text='2. แผนที่และสภาพอากาศ · รัศมี '+getBufferRadii().join(' / ')+' กม.';
     if(title&&title.textContent!==text)title.textContent=text;
     // Map sizing is handled by its ResizeObserver, not unrelated report text changes.
   }
@@ -4025,7 +4010,7 @@ html body #report#report#report#report#report #dssFieldBrief :is(.fb-header,.fb-
 html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:var(--fire-report-accent, #5b8f32)!important;border-bottom-width:1px!important}
 html body #report#report#report#report#report #dssFieldBrief h2,
 html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo h2{border-left-color:var(--fire-report-accent, #5b8f32)!important;border-left-width:1px!important}
-html body #report#report#report#report#report #reportNearbySupport .support-category-number{background:var(--fire-report-accent, #5b8f32)!important}
+html body #report#report#report#report#report #reportNearbySupport .support-category-number{background:var(--fire-report-ink, #5b8f32)!important}
 html body #report#report#report#report#report #reportNearbySupport .support-reference-table tbody th{color:var(--fire-report-ink, #5b8f32)!important}
 html body #report#report#report #fieldBriefMap[data-map-pending="true"]::after{
  content:"ค้นหาโรงงานเพื่อแสดงแผนที่เดียวกับแผนที่หลัก";position:absolute;inset:40% 12px auto;text-align:center;color:var(--fire-report-muted, #526147);font:14px/1.6 Sarabun,sans-serif;
@@ -4102,15 +4087,6 @@ html body .report-wrap>#dssPageThree{grid-column:1/-1;width:calc((100% - 18px)/2
   const second=document.getElementById('dssPageTwo'),wrap=second?.closest('.report-wrap');
   if(!wrap)return;
   let page=document.getElementById('dssPageThree');
-  if(fireReportLayout){
-   if(document.getElementById('fireReportMonitoring'))return;
-   page=document.createElement('section');page.id='fireReportMonitoring';
-   const content=document.createElement('div');content.id='dssPageThreeContent';
-   content.textContent='ค้นหาโรงงานและกำหนดรัศมี เพื่อดูสถานีใกล้จุดเกิดเหตุ';
-   page.append(content);
-   second.querySelector('.dss-page-footer').before(page);
-   return;
-  }
   if(!page){
    page=document.createElement('section');page.id='dssPageThree';page.setAttribute('aria-labelledby','dssPageThreeTitle');
    const header=second.querySelector('.p2-header')?.cloneNode(true)||document.createElement('header');
@@ -4270,7 +4246,7 @@ html body #report#report#report#report#report#report#report#report#report#report
 })();
 </script>
 <link rel="stylesheet" href="./dss-support-appendix.css?v=20261113">
-<script src="./dss-support-appendix.js?v=20261120-fire-layout"></script>
+<script src="./dss-support-appendix.js?v=20261113"></script>
 <style id="weather-overlay-restored">
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap{position:relative!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather{
@@ -4289,38 +4265,13 @@ html body #report#report#report#report#report#report#report#report#report#report
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics dt{border-bottom:0!important;border-right:1px solid var(--fire-report-grid, #b9c7b8)!important;padding:5px 6px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics dd{padding:5px 6px!important}
 </style>
-<style id="fire-report-layout">
-html[data-report-theme="fire-purple"] body #dssPageTwo > #fireReportMonitoring{
- width:100%!important;min-height:0!important;margin:12px 0 0!important;padding:0!important;border:0!important;
-}
-html[data-report-theme="fire-purple"] #reportMonitoringSupport{margin-top:0}
-html[data-report-theme="fire-purple"] #fbWeather{
- display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 0;padding:8px;
- background:#fafafa;border:1px solid var(--fire-report-rule);color:#424046;
-}
-html[data-report-theme="fire-purple"] #fbWeather .report-weather-wind{
- display:flex;align-items:center;gap:6px;flex-wrap:wrap;
-}
-html[data-report-theme="fire-purple"] #fbWeather .report-weather-arrow{width:30px;height:30px;display:inline-block}
-html[data-report-theme="fire-purple"] #fbWeather .report-weather-arrow svg{width:100%;height:100%}
-html[data-report-theme="fire-purple"] #fbWeather .report-weather-metrics{display:flex;flex-wrap:wrap;gap:8px;margin:0}
-html[data-report-theme="fire-purple"] #fbWeather :is(dt,dd,p){margin:0}
-html[data-report-theme="fire-purple"] #fbWeather .report-weather-metrics>div{display:flex;gap:4px}
-html[data-report-theme="fire-purple"] .dss-support-appendix{
- display:flex;flex-direction:column;padding:22px!important;border-color:var(--fire-report-frame)!important;color:#424046!important;
-}
+<style id="fire-report-appendix-colors">
+html[data-report-theme="fire-purple"] .dss-support-appendix{border-color:var(--fire-report-frame)!important;color:#424046!important}
 html[data-report-theme="fire-purple"] .support-appendix-header{border-color:var(--fire-report-accent)}
 html[data-report-theme="fire-purple"] .support-appendix-header h1{color:var(--fire-report-accent)}
 html[data-report-theme="fire-purple"] .support-appendix-meta{background:#fafafa;border-color:var(--fire-report-rule)}
 html[data-report-theme="fire-purple"] .dss-support-appendix th{background:#f2f2f3}
 html[data-report-theme="fire-purple"] .dss-support-appendix :is(th,td,.dss-page-footer){border-color:var(--fire-report-rule)}
-html[data-report-theme="fire-purple"] .dss-support-appendix .dss-page-footer{
- margin-top:auto;font-size:11px!important;min-height:0;
-}
-html[data-report-theme="fire-purple"] #dssPageTwo.dss-page-two-export.dss-page-two-export{
- display:flex!important;flex-direction:column;min-height:1485px!important;
-}
-html[data-report-theme="fire-purple"] #dssPageTwo.dss-page-two-export > .dss-page-footer{margin-top:auto!important}
 </style>
 </body></html>
 
