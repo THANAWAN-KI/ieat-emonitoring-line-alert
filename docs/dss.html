@@ -112,6 +112,12 @@ main{max-width:1480px}
 </style><style id="dss-emonitoring-full-layout-20261119">
 /* Emulate the E-Monitoring dashboard's dense boxed two-column overview. */
 body{background:#fff;color:#282d33}
+.dashboard-export-panel{box-sizing:border-box;width:min(306px,calc(100vw - 32px));min-width:0;padding:0;border:1px solid #4c5a51;border-radius:0;background:#f5f6f1;box-shadow:-6px 5px 0 #56396d}
+.dashboard-export-panel #downloadDashboard{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 14px;border-radius:0;background:transparent;color:#17221b;font:400 16px/1.35 Sarabun,sans-serif}
+.dashboard-export-panel #downloadDashboard::after{content:"";flex:none;width:10px;height:10px;margin:0 2px 5px 0;border:solid #4c5a51;border-width:0 1px 1px 0;transform:rotate(45deg)}
+.dashboard-export-panel #downloadDashboard:hover{background:#eaeee6}
+.dashboard-export-panel #downloadDashboard:focus-visible{outline:2px solid #56396d;outline-offset:-3px}
+@media(max-width:650px){.emcc-brand{position:relative}.emcc-brand>#dashboardExportMenu{position:static}.dashboard-export-panel{right:14px}.dashboard-export-panel #downloadDashboard{font-size:15px}}
 #dashboardExportStatus{display:none}
 .emcc-site-header{position:relative}
 .dss-main{max-width:none;margin:0;padding:18px 28px 40px;font-size:13px}
