@@ -71,13 +71,14 @@
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
+  const dragFirePin=document.documentElement.classList.contains('fire-risk-view');
   const form=$('coverageIncidentForm'), matches=$('coverageFactoryMatches'), results=$('coverageNearbyResults');
   if(!form)return;
   const message=$('coverageIncidentStatus'), radius=$('coverageIncidentRadius'), type=$('coverageIncidentType'), keyword=$('coverageSupportQuery');
   const graphics=new GraphicsLayer({title:'จุดเกิดเหตุและรัศมีค้นหา',listMode:'hide'});
   const pinLayer=new GraphicsLayer({title:'หมุดจุดเกิดเหตุ',listMode:'hide'});
   map.addMany([graphics,pinLayer]);
-  const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:true,defaultUpdateOptions:{tool:'move',enableRotation:false,enableScaling:false}});
+  const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:!dragFirePin,defaultUpdateOptions:{tool:'move',enableRotation:false,enableScaling:false}});
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
@@ -230,7 +231,7 @@
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
-    message.textContent='จุดเกิดเหตุ · '+name+' · คลิกหมุดแล้วลากเพื่อย้ายจุด';
+    message.textContent='จุดเกิดเหตุ · '+name+(dragFirePin?' · ลากหมุดเพื่อย้ายจุด':' · คลิกหมุดแล้วลากเพื่อย้ายจุด');
   }
   sketch.on('update',event=>{
     const moved=event.graphics[0];
@@ -238,6 +239,33 @@
     if(event.state==='active'||event.state==='complete'){origin=moved.geometry;draw();}
     if(event.state==='complete'){updateNearby();queueReport();}
   });
+  if(dragFirePin){
+    let drag=null;
+    view.on('drag',event=>{
+      if(event.action==='start'){
+        drag=null;
+        if(!pin||picking||event.button>0)return;
+        const screen=view.toScreen(pin.geometry),start=event.origin||event;
+        if(!screen||Math.abs(start.x-screen.x)>17||start.y<screen.y-35||start.y>screen.y+6)return;
+        drag={pin,offsetX:screen.x-start.x,offsetY:screen.y-start.y};
+        incidentRevision++;nearbyId++;auxiliaryId++;clearTimeout(syncTimer);
+        if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
+        window.dispatchEvent(new Event('ieat-coverage-context-updated'));
+        view.closePopup();
+        message.textContent='กำลังย้ายหมุดจุดเกิดเหตุ';
+      }
+      if(!drag||drag.pin!==pin)return;
+      event.stopPropagation();
+      const point=view.toMap({x:event.x+drag.offsetX,y:event.y+drag.offsetY});
+      if(point){pin.geometry=point;origin=point;publishPoint();draw();}
+      if(event.action==='end'){
+        drag=null;
+        message.textContent='ย้ายจุดเกิดเหตุแล้ว · กำลังอัปเดตข้อมูลตามพิกัดใหม่';
+        if(!hasSearched)updateNearby();
+        queueReport();
+      }
+    });
+  }
   $('coveragePickIncident').onclick=()=>{picking=true;message.textContent='คลิกบนแผนที่เพื่อกำหนดจุดเกิดเหตุ';$('coverageMap').scrollIntoView({block:'nearest'});};
   view.on('click',event=>{
     if(!picking||!event.mapPoint)return;
