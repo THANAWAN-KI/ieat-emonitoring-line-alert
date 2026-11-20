@@ -218,7 +218,7 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 .risk-detail-box input,.risk-detail-box button{padding:7px 10px;border:1px solid #bec5d1;background:#fff}
 .risk-detail-box button{background:#f3edf8;color:#4d3470;cursor:pointer}
 .risk-detail-box [hidden]{display:none}
-.risk-detail-scroll,#reportPreview{max-height:310px;overflow:auto}
+.risk-detail-scroll{max-height:310px;overflow:auto}
 .risk-detail-box table{border-collapse:collapse;width:100%;min-width:590px;text-align:left}
 .risk-detail-box th,.risk-detail-box td{padding:8px;vertical-align:top;border-bottom:1px solid #dfe5eb}
 .risk-detail-box th{position:sticky;top:0;background:#f2edf8}
@@ -226,9 +226,7 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 .risk-detail-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .risk-detail-metrics>div{display:grid;padding:10px;border:1px solid #d9e0eb;background:#f8f6fb}
 .risk-detail-metrics strong{font-size:25px}
-#reportMatches{display:flex;flex-wrap:wrap;gap:6px}
 @media(max-width:550px){.risk-detail-box{padding:12px}.risk-detail-metrics{grid-template-columns:1fr}}
-@media print{body.printing-risk-detail>:not(main),body.printing-risk-detail main>:not(#riskFactoryReport),body.printing-risk-detail #riskFactoryReport>:not(h2,#reportPreview){display:none!important}body.printing-risk-detail #reportPreview table{min-width:0}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span data-en="Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates">ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -286,8 +284,8 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 <section class="risk-detail-box"><h2>รายละเอียดโรงงานที่เข้าข่ายความเสี่ยง</h2><form id="scopeForm"><label>นิคมอุตสาหกรรม <input id="detailEstate" list="estateOptions" placeholder="ทุกนิคมฯ"></label> <button>แสดงข้อมูล</button></form><p id="factoryDetailStatus" role="status"></p><div id="factoryDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section>
 
 
-<section class="risk-detail-box"><h2>เบอร์ติดต่อหน่วยงานสนับสนุน</h2><p id="contactDetailStatus" role="status"></p><div id="contactDetailsRows" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section><section class="risk-detail-box"><h2>ความพร้อมของทรัพยากร</h2><p>ข้อมูลตามเอกสารแผนรับมือเหตุ · โปรดยืนยันความพร้อมปัจจุบันกับผู้ดูแล</p><div id="planMetrics" class="risk-detail-metrics"></div><h3>บัญชีทรัพยากรตามแผน</h3><label>ค้นหาทรัพยากร <input id="planSearch" type="search" placeholder="ชื่ออุปกรณ์ / หมวด / นิคมฯ"></label><p id="planDetailStatus" role="status"></p><div id="planDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section><section class="risk-detail-box" id="riskFactoryReport"><h2>จัดทำรายงานโรงงานที่เข้าข่ายความเสี่ยง</h2><form id="riskReportForm"><label>ชื่อโรงงานหรือเลขทะเบียน <input id="riskReportQuery" type="search" required></label> <button>ค้นหาโรงงานเพื่อทำรายงาน</button></form><p id="reportDetailStatus" role="status"></p><div id="reportMatches"></div><div id="reportPreview"></div><button id="reportPrint" type="button" hidden>พิมพ์ / บันทึก PDF</button></section><section class="risk-detail-box"><h2>เก็บข้อมูลสถิติ</h2><p id="incidentDetailStatus" role="status"></p><div id="incidentMetrics" class="risk-detail-metrics"></div><a href="./incidents.html">บันทึกและดูทะเบียนเหตุการณ์</a></section></main><footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
-<script src="./incident-store.js?v=20261022"></script><script src="./assets/vendor/leaflet-1.9.4.js"></script><script>
+<section class="risk-detail-box"><h2>เบอร์ติดต่อหน่วยงานสนับสนุน</h2><p id="contactDetailStatus" role="status"></p><div id="contactDetailsRows" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section><section class="risk-detail-box"><h2>ความพร้อมของทรัพยากร</h2><p>ข้อมูลตามเอกสารแผนรับมือเหตุ · โปรดยืนยันความพร้อมปัจจุบันกับผู้ดูแล</p><div id="planMetrics" class="risk-detail-metrics"></div><h3>บัญชีทรัพยากรตามแผน</h3><label>ค้นหาทรัพยากร <input id="planSearch" type="search" placeholder="ชื่ออุปกรณ์ / หมวด / นิคมฯ"></label><p id="planDetailStatus" role="status"></p><div id="planDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section></main><footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
+<script src="./assets/vendor/leaflet-1.9.4.js"></script><script>
 (()=>{
 'use strict';if(new URLSearchParams(location.search).get('hazard')==='fire')return;
 const $=id=>document.getElementById(id),base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/',flags={twelve:'ความเสี่ยง_12_ประเภท',psm:'PSM',fire:'อัคคีภัยสูง'},riskPath='e_PP/FeatureServer/0';
@@ -431,7 +429,7 @@ const isDetailEstate=value=>!selectedEstate||normalize(value)===normalize(select
 const detailName=row=>row['ชื่อบริษัทภาษาไทย']||row['ชื่อบริษัทภาษาอังกฤษ']||'—';
 const detailNumber=row=>row['เลขทะเบียนใหม่']||row['เลขทะเบียนเดิม']||'—';
 const detailCells=row=>[detailName(row),row['นิคมอุตสาหกรรม'],detailNumber(row),...detailFields.map(key=>flagged(row[key])?'เข้าข่าย':'ไม่ระบุว่าเข้าข่าย')];
-let detailPlans,detailIncidents;
+let detailPlans;
 function detailTable(id,head,rows){
  const host=$(id);
  if(!rows.length){host.replaceChildren(node('p','ยังไม่มีรายการในขอบเขตนี้'));return;}
@@ -470,19 +468,13 @@ function renderPlanDetails(){
  $('planDetailStatus').textContent=detailPlans===undefined?'กำลังโหลดบัญชีทรัพยากร…':detailPlans===null?'โหลดบัญชีทรัพยากรไม่ได้':(selectedEstate||'ทั่วประเทศ')+' · พบ '+fmt(shown.length)+' จาก '+fmt(items.length)+' รายการ';
  detailTable('planDetails',['ทรัพยากร','หมวด','จำนวนตามแผน','หน่วย','นิคมฯ','แหล่งอ้างอิง'],shown.map(({item,plan})=>[item.name,item.category,item.amount,item.unit,plan.zone,(plan.source_file||detailPlans.source)+(item.page?' · หน้า '+item.page:'')]));
 }
-function renderIncidentDetails(){
- const rows=(detailIncidents||[]).filter(row=>isDetailEstate(row.estate));
- const confirmed=rows.filter(row=>row.verification==='ยืนยันโดยเจ้าหน้าที่พื้นที่').length;
- $('incidentDetailStatus').textContent=detailIncidents?'ทะเบียนเหตุการณ์ในเบราว์เซอร์นี้ · '+(selectedEstate||'ทุกนิคมฯ')+' · รวมรายการเก็บเข้าคลัง':detailIncidents===null?'อ่านทะเบียนเหตุการณ์ไม่ได้':'กำลังอ่านทะเบียนเหตุการณ์…';
- showDetailMetrics('incidentMetrics',[['เหตุการณ์ทั้งหมด',detailIncidents?rows.length:null],['ยืนยันแล้ว',detailIncidents?confirmed:null],['รอยืนยันหรือสถานะอื่น',detailIncidents?rows.length-confirmed:null]]);
-}
 function renderExpandedDetails(){
  $('detailEstate').value=selectedEstate;
  const group=$('group').value,fields=flags[group]?[flags[group]]:detailFields;
  const rows=(registry||[]).filter(row=>isDetailEstate(row['นิคมอุตสาหกรรม'])&&fields.some(field=>flagged(row[field])));
  $('factoryDetailStatus').textContent=(selectedEstate||'ทั่วประเทศ')+' · '+(registry?fmt(rows.length)+' รายการทะเบียน':$('countState').textContent);
  detailTable('factoryDetails',detailHead,rows.map(detailCells));
- renderContactDetails();renderPlanDetails();renderIncidentDetails();
+ renderContactDetails();renderPlanDetails();
 }
 function bindExpandedDetails(){
  $('scopeForm').onsubmit=event=>{
@@ -494,21 +486,7 @@ function bindExpandedDetails(){
  };
  $('detailEstate').oninput=()=> $('detailEstate').setCustomValidity('');
  $('planSearch').oninput=renderPlanDetails;
- const readIncidents=async()=>{try{detailIncidents=await window.IEATIncidentStore.list();}catch{detailIncidents=null;}renderIncidentDetails();};
- window.addEventListener('focus',readIncidents);readIncidents();
  json('./data/estate-emergency-equipment-2026.json').then(data=>{detailPlans=Array.isArray(data.records)?data:null;}).catch(()=>{detailPlans=null;}).finally(renderPlanDetails);
- $('riskReportForm').onsubmit=event=>{
-   event.preventDefault();const term=normalize($('riskReportQuery').value), container=$('reportMatches');
-   container.replaceChildren();$('reportPreview').replaceChildren();$('reportPrint').hidden=true;if(!term)return;
-   const rows=(registry||[]).filter(row=>isDetailEstate(row['นิคมอุตสาหกรรม'])&&[detailName(row),row['เลขทะเบียนใหม่'],row['เลขทะเบียนเดิม']].some(value=>normalize(value).includes(term)));
-   $('reportDetailStatus').textContent=registry?'พบ '+fmt(rows.length)+' รายการ'+(rows.length>30?' · แสดง 30 รายการแรก':''):'ทะเบียนโรงงานยังไม่พร้อม';
-   for(const row of rows.slice(0,30)){
-     const button=node('button',detailName(row)+' · '+detailNumber(row));button.type='button';
-     button.onclick=()=>{detailTable('reportPreview',detailHead,[detailCells(row)]);$('reportPrint').hidden=false;};
-     container.append(button);
-   }
- };
- $('reportPrint').onclick=()=>{document.body.classList.add('printing-risk-detail');try{window.print();}finally{document.body.classList.remove('printing-risk-detail');}};
  renderExpandedDetails();
 }
 function init(){if(!window.L){$('mapLoading').textContent='เครื่องมือแผนที่ยังโหลดไม่สำเร็จ กรุณาโหลดหน้านี้ใหม่';return;}
