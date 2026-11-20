@@ -440,9 +440,9 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
 @media(max-width:360px){.safety-grid .safety-chart-layout{grid-template-columns:minmax(0,1fr)}}
 
 .safety-grid>.risk-region-column{display:flex;flex-direction:column;align-self:stretch}
-.safety-grid>.risk-region-column .risk-region-picker{flex:1;grid-template-rows:repeat(3,minmax(120px,1fr))}
+.safety-grid>.risk-region-column .risk-region-picker{flex:1;grid-template-rows:repeat(6,minmax(100px,1fr))}
 .safety-grid>.risk-region-column .risk-region-picker button{grid-template-rows:auto minmax(0,1fr)}
-.safety-grid>.risk-region-column .risk-region-preview{height:auto;min-height:88px}
+.safety-grid>.risk-region-column .risk-region-preview{height:auto;min-height:64px}
 @media(max-width:550px){
  .safety-grid>.risk-region-column .risk-region-picker{grid-template-rows:auto}
  .safety-grid>.risk-region-column .risk-region-preview{min-height:76px}
@@ -514,7 +514,7 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
 
 
 
-<section class="safety-dashboard" aria-label="EMCC Risk Map"><div class="safety-grid"><div class="risk-region-column"><h2>แผนที่รายภาค</h2><section class="risk-region-picker" aria-label="เลือกมุมมองแผนที่รายภูมิภาค"><button type="button" data-risk-region="north"><span>ภาคเหนือ</span><span class="risk-region-preview" id="riskPreview-north" aria-hidden="true"></span></button><button type="button" data-risk-region="east"><span>ภาคตะวันออก</span><span class="risk-region-preview" id="riskPreview-east" aria-hidden="true"></span></button><button type="button" data-risk-region="south"><span>ภาคใต้</span><span class="risk-region-preview" id="riskPreview-south" aria-hidden="true"></span></button></section></div><div class="safety-map-panel"><h2 class="safety-map-heading">แผนที่ความเสี่ยงนิคมอุตสาหกรรม</h2>
+<section class="safety-dashboard" aria-label="EMCC Risk Map"><div class="safety-grid"><div class="risk-region-column"><h2>แผนที่รายภาค</h2><section class="risk-region-picker" aria-label="เลือกมุมมองแผนที่รายภูมิภาค"><button type="button" data-risk-region="north"><span>ภาคเหนือ</span><span class="risk-region-preview" id="riskPreview-north" aria-hidden="true"></span></button><button type="button" data-risk-region="central"><span>ภาคกลาง</span><span class="risk-region-preview" id="riskPreview-central" aria-hidden="true"></span></button><button type="button" data-risk-region="east"><span>ภาคตะวันออก</span><span class="risk-region-preview" id="riskPreview-east" aria-hidden="true"></span></button><button type="button" data-risk-region="west"><span>ภาคตะวันตก</span><span class="risk-region-preview" id="riskPreview-west" aria-hidden="true"></span></button><button type="button" data-risk-region="northeast"><span>ภาคตะวันออกเฉียงเหนือ</span><span class="risk-region-preview" id="riskPreview-northeast" aria-hidden="true"></span></button><button type="button" data-risk-region="south"><span>ภาคใต้</span><span class="risk-region-preview" id="riskPreview-south" aria-hidden="true"></span></button></section></div><div class="safety-map-panel"><h2 class="safety-map-heading">แผนที่ความเสี่ยงนิคมอุตสาหกรรม</h2>
 <section class="map-panel" id="coverageMap" aria-label="แผนที่ความเสี่ยง"><h2 class="map-title" id="mapTitle" hidden>ประเทศไทย</h2>
 <p class="map-context-note">ไอคอนพร้อมตัวเลขแสดงกลุ่มจุดข้อมูล · ซูมเข้าเพื่อดูแต่ละจุดและโรงงานทั่วไป · เปิด–ปิดขอบเขตจังหวัดและชั้นข้อมูลได้มุมขวาบน</p><div class="map-wrap"><div id="map" role="region" aria-label="แผนที่ประเทศไทยและข้อมูลความเสี่ยง"></div><div id="mapLoading" class="map-loading">กำลังโหลดภาพแผนที่…</div></div><div class="map-status"><span id="status" role="status">กำลังเตรียมแผนที่…</span><button id="retry" type="button">โหลดข้อมูลใหม่</button></div></section></div><aside class="safety-side" aria-label="แจ้งเตือนและข้อมูลสรุป">
 <section class="safety-panel safety-alert"><h2>แจ้งเตือนล่าสุด</h2><div class="safety-alert-body"><ul class="safety-alert-types" aria-label="ประเภทแจ้งเตือน"><li><span aria-hidden="true">⛑️</span><b>อุปกรณ์ป้องกันไม่ครบ</b></li><li><span aria-hidden="true">⚡</span><b>ความเสี่ยงไฟฟ้า</b></li><li><span aria-hidden="true">⚠️</span><b>สะดุดหกล้ม</b></li><li><span aria-hidden="true">⬇️</span><b>วัตถุตกหล่น</b></li></ul><p>ยังไม่ได้เชื่อมแหล่งแจ้งเตือนสด</p></div></section>
@@ -560,13 +560,19 @@ function renderContextSymbols(def){const symbols=def.risk?def.markers:def.symbol
 const provinceThai={'amnatcharoen':'อำนาจเจริญ','angthong':'อ่างทอง','bangkok':'กรุงเทพมหานคร','bangkokmetropolis':'กรุงเทพมหานคร','buengkan':'บึงกาฬ','buriram':'บุรีรัมย์','chachoengsao':'ฉะเชิงเทรา','chainat':'ชัยนาท','chaiyaphum':'ชัยภูมิ','chanthaburi':'จันทบุรี','chiangmai':'เชียงใหม่','chiangrai':'เชียงราย','chonburi':'ชลบุรี','chumphon':'ชุมพร','kalasin':'กาฬสินธุ์','kamphaengphet':'กำแพงเพชร','kanchanaburi':'กาญจนบุรี','khonkaen':'ขอนแก่น','krabi':'กระบี่','lampang':'ลำปาง','lamphun':'ลำพูน','loei':'เลย','lopburi':'ลพบุรี','maehongson':'แม่ฮ่องสอน','mahasarakham':'มหาสารคาม','mukdahan':'มุกดาหาร','nakhonnayok':'นครนายก','nakhonpathom':'นครปฐม','nakhonphanom':'นครพนม','nakhonratchasima':'นครราชสีมา','nakhonsawan':'นครสวรรค์','nakhonsithammarat':'นครศรีธรรมราช','nan':'น่าน','narathiwat':'นราธิวาส','nongbualamphu':'หนองบัวลำภู','nongkhai':'หนองคาย','nonthaburi':'นนทบุรี','pathumthani':'ปทุมธานี','pattani':'ปัตตานี','phangnga':'พังงา','phatthalung':'พัทลุง','phayao':'พะเยา','phetchabun':'เพชรบูรณ์','phetchaburi':'เพชรบุรี','phichit':'พิจิตร','phitsanulok':'พิษณุโลก','phranakhonsiayutthaya':'พระนครศรีอยุธยา','phrae':'แพร่','phuket':'ภูเก็ต','prachinburi':'ปราจีนบุรี','prachuapkhirikhan':'ประจวบคีรีขันธ์','ranong':'ระนอง','ratchaburi':'ราชบุรี','rayong':'ระยอง','roiet':'ร้อยเอ็ด','sakaeo':'สระแก้ว','sakonnakhon':'สกลนคร','samutprakan':'สมุทรปราการ','samutsakhon':'สมุทรสาคร','samutsongkhram':'สมุทรสงคราม','saraburi':'สระบุรี','satun':'สตูล','singburi':'สิงห์บุรี','sisaket':'ศรีสะเกษ','songkhla':'สงขลา','sukhothai':'สุโขทัย','suphanburi':'สุพรรณบุรี','suratthani':'สุราษฎร์ธานี','surin':'สุรินทร์','tak':'ตาก','trang':'ตรัง','trat':'ตราด','ubonratchathani':'อุบลราชธานี','udonthani':'อุดรธานี','uthaithani':'อุทัยธานี','uttaradit':'อุตรดิตถ์','yala':'ยะลา','yasothon':'ยโสธร'};
 
 const riskRegions = {
- north: [[16.5,97.3],[20.55,101.4]],
+ north: [[15.7,97.3],[20.55,101.4]],
+ central: [[13.3,99.7],[16.4,101.8]],
  east: [[11.55,100.65],[14.6,103.1]],
+ west: [[10.9,98],[17.9,100.2]],
+ northeast: [[14.1,100.8],[18.5,105.7]],
  south: [[5.55,97.55],[11.4,102.35]]
 };
 const riskRegionProvinces = {
- north:new Set('เชียงใหม่ เชียงราย ลำปาง ลำพูน แม่ฮ่องสอน น่าน พะเยา แพร่ อุตรดิตถ์'.split(' ')),
+ north:new Set('เชียงใหม่ เชียงราย ลำปาง ลำพูน แม่ฮ่องสอน น่าน พะเยา แพร่ อุตรดิตถ์ พิจิตร'.split(' ')),
+ central:new Set('กรุงเทพมหานคร นนทบุรี ปทุมธานี พระนครศรีอยุธยา สมุทรปราการ สมุทรสาคร สมุทรสงคราม นครปฐม สระบุรี ลพบุรี สิงห์บุรี อ่างทอง ชัยนาท สุพรรณบุรี นครสวรรค์ อุทัยธานี นครนายก'.split(' ')),
  east:new Set('ฉะเชิงเทรา ชลบุรี ระยอง จันทบุรี ตราด ปราจีนบุรี สระแก้ว'.split(' ')),
+ west:new Set('ตาก กาญจนบุรี ราชบุรี เพชรบุรี ประจวบคีรีขันธ์'.split(' ')),
+ northeast:new Set('กาฬสินธุ์ ขอนแก่น ชัยภูมิ นครพนม นครราชสีมา บึงกาฬ บุรีรัมย์ มหาสารคาม มุกดาหาร ยโสธร ร้อยเอ็ด เลย ศรีสะเกษ สกลนคร สุรินทร์ หนองคาย หนองบัวลำภู อำนาจเจริญ อุดรธานี อุบลราชธานี'.split(' ')),
  south:new Set('ชุมพร ระนอง สุราษฎร์ธานี พังงา ภูเก็ต กระบี่ นครศรีธรรมราช ตรัง พัทลุง สตูล สงขลา ปัตตานี ยะลา นราธิวาส'.split(' '))
 };
 const riskPreviews = new Map();
