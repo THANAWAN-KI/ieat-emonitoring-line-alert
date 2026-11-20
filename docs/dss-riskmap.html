@@ -359,6 +359,34 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
 @media(max-width:1000px){.safety-grid{grid-template-columns:110px minmax(0,1fr)}.safety-grid>.safety-side{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:550px){.safety-grid{grid-template-columns:minmax(0,1fr)}.safety-grid>.risk-region-column .risk-region-picker{grid-template-columns:repeat(3,minmax(0,1fr))}.safety-grid>.safety-side{grid-template-columns:1fr}}
 .safety-counts h2{background:#fff}
+
+.risk-detail-box{
+ --detail-padding:clamp(12px,1.2vw,20px);
+ margin:14px 8px;padding:0 var(--detail-padding) var(--detail-padding);
+ border:2px solid #292923;border-radius:3px 1px 4px 2px;
+ color:#202a2d;background:#fcf6e7
+}
+.risk-detail-box>h2{
+ margin:0 calc(-1 * var(--detail-padding)) 14px;padding:9px 12px;
+ border-bottom:2px solid #292923;background:#8ed5c5;
+ background-image:repeating-linear-gradient(157deg,#fff4 0 1px,transparent 1px 5px,#342c1712 5px 6px,transparent 6px 9px);
+ font-size:clamp(15px,1.5vw,22px);font-weight:650;line-height:1.45
+}
+.risk-detail-box>p,.risk-detail-box>form{margin:0 0 12px}
+.risk-detail-box form,.risk-detail-box form label{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.risk-detail-box input,.risk-detail-box button{min-height:36px;border-color:#625d4c}
+.risk-detail-box input{max-width:100%;background:#fffdf7}
+.risk-detail-box button{background:#c5e4d5;color:#203e35;font-weight:600}
+.risk-detail-box button:hover{background:#a9d7c8}
+.risk-detail-box :is(input,button,a):focus-visible{outline:2px solid #366b5c;outline-offset:2px}
+.risk-detail-box .risk-detail-scroll{border:1px solid #746e5e;background:#fffdf7}
+.risk-detail-box .risk-detail-scroll>p{margin:10px}
+.risk-detail-box :is(th,td){border-bottom-color:#e0d9c7}
+.risk-detail-box th{background:#e1efe7}
+.risk-detail-box tbody tr:nth-child(even){background:#f4f1e5}
+.risk-detail-box .risk-detail-metrics>div{border-color:#625d4c;background:#f1eddb}
+.risk-detail-box a{color:#24574a}
+@media(max-width:520px){.risk-detail-box{margin-inline:5px}}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span data-en="Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates">ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
