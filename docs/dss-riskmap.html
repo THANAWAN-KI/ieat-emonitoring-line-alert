@@ -165,12 +165,6 @@ body{background:#fff;color:#282d33}
 
 main>.title{margin:22px 0 18px;padding:0;text-align:center}
 main>.title h1{margin:0;color:#263349;font-size:clamp(22px,3vw,32px);font-weight:600}
-main>.risk-map-categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 18px}
-.risk-map-categories button{display:grid;place-items:center;min-height:67px;padding:10px 12px;background:var(--map-category);color:#151820;border:1px solid #000;border-radius:0;text-align:center;font-weight:600;cursor:pointer}
-.risk-map-categories button[data-map-risk="all"]{color:#fff}
-.risk-map-categories button[aria-pressed="true"]{box-shadow:inset 0 -4px rgb(0 0 0/.38)}
-.risk-map-categories button:hover{filter:brightness(.95)}
-.risk-map-categories button:focus-visible{outline:2px solid #263349;outline-offset:2px}
 main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 .risk-region-column{display:grid;gap:12px}
 .risk-region-picker{display:grid;gap:9px}
@@ -184,7 +178,6 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
  .risk-region-column{grid-row:2}
  .risk-region-picker{grid-template-columns:repeat(3,minmax(0,1fr))}
  .risk-region-preview{height:72px}
- main>.risk-map-categories{grid-template-columns:repeat(2,minmax(0,1fr))}
  .workspace #map{height:460px;min-height:0}
 }
 
@@ -259,7 +252,6 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 </nav></div>
 <main aria-label="แผนที่ความเสี่ยงนิคมอุตสาหกรรม">
 <form class="filters" id="filters" hidden><div class="field"><label for="estate">นิคมอุตสาหกรรม</label><div class="search-row"><input id="estate" list="estateOptions" placeholder="พิมพ์ชื่อนิคมฯ" autocomplete="off"><datalist id="estateOptions"></datalist><button type="submit">ค้นหา</button></div></div><div class="field"><label for="group">กลุ่มโรงงานที่แสดง</label><select id="group"><option value="all">ทุกกลุ่มความเสี่ยง</option><option value="twelve">ความเสี่ยงสูง 12 ประเภท</option><option value="psm">โรงงาน PSM</option><option value="fire">ความเสี่ยงอัคคีภัยสูง</option></select></div><div class="field"><label for="basemap">แผนที่พื้นฐาน</label><select id="basemap"><option value="gray">สีเทาอ่อน · โทนแดชบอร์ด</option><option value="streets">ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option></select></div><button type="button" id="reset">แสดงทั่วประเทศ</button></form>
-<nav class="risk-map-categories" aria-label="ตัวกรองและคำอธิบายสีกลุ่มความเสี่ยง"><button type="button" data-map-risk="all" aria-pressed="true" style="--map-category:#4d3470">ทุกกลุ่มความเสี่ยง</button><button type="button" data-map-risk="twelve" aria-pressed="false" style="--map-category:#25a078">ความเสี่ยงสูง 12 ประเภท</button><button type="button" data-map-risk="psm" aria-pressed="false" style="--map-category:#dda72b">โรงงาน PSM</button><button type="button" data-map-risk="fire" aria-pressed="false" style="--map-category:#d45a61">อัคคีภัยสูง</button></nav>
 <section id="riskGlassSummary" class="risk-glass-summary" aria-labelledby="riskGlassTitle"><div class="risk-glass-heading"><div><h2 id="riskGlassTitle">ข้อมูลความเสี่ยงในพื้นที่</h2><p id="riskGlassScope">ทั่วประเทศ · กดการ์ดเพื่อแสดงกลุ่มโรงงานบนแผนที่</p></div><span class="risk-glass-source">ทะเบียน e-PP กนอ.</span></div><div class="risk-glass-grid">
 <button type="button" class="risk-glass-card" data-risk-group="all" aria-pressed="true" style="--glass-accent:#286d74"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 3V8l6 3V4h6v17zM7 17h1m4 0h1m4 0h1"/></svg></span><span class="risk-glass-label">เข้าข่ายอย่างน้อยหนึ่งกลุ่ม</span></span><strong id="glassCountAll">—</strong><span class="risk-glass-unit">โรงงาน · นับไม่ซ้ำ</span><span class="risk-kpi-progress" aria-hidden="true"><span></span></span><span class="risk-kpi-share">กำลังโหลดสัดส่วน…</span><span class="risk-glass-action">ดูทุกกลุ่ม <svg class="risk-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M7 5h12v12"/></svg></span></button>
 <button type="button" class="risk-glass-card" data-risk-group="twelve" aria-pressed="false" style="--glass-accent:#25a078"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 10 18H2zM12 9v5m0 3v.5"/></svg></span><span class="risk-glass-label">ความเสี่ยงสูง 12 ประเภท</span></span><strong id="glassCountTwelve">—</strong><span class="risk-glass-unit">โรงงาน</span><span class="risk-kpi-progress" aria-hidden="true"><span></span></span><span class="risk-kpi-share">กำลังโหลดสัดส่วน…</span><span class="risk-glass-action">แสดงบนแผนที่ <svg class="risk-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M7 5h12v12"/></svg></span></button>
@@ -365,10 +357,6 @@ function bindRiskMapNavigation() {
    schedule();
    if (window.matchMedia('(max-width:760px)').matches) $('coverageMap').scrollIntoView({block:'start'});
  }));
- document.querySelectorAll('[data-map-risk]').forEach(button => button.addEventListener('click', () => {
-   $('group').value = button.dataset.mapRisk;
-   $('group').dispatchEvent(new Event('change',{bubbles:true}));
- }));
 }
 async function loadProvinceBoundaries(){const def=overlays.find(d=>d.local);if(!def)return;try{const data=await json('./assets/thailand-provinces-expo.geojson');for(const feature of data.features||[]){const name=feature.properties?.name||'';const key=name.replace(/Province|Chang Wat/gi,'').replace(/[^a-z]/gi,'').toLowerCase();feature.properties={...feature.properties,'จังหวัด':provinceThai[key]||name};}drawContext(def,data.features||[]);drawRiskPreviews(data.features||[]);map.attributionControl.addAttribution('ขอบเขตจังหวัด: geoBoundaries 2017 (ODbL)');errors.delete('ขอบเขตจังหวัด');}catch{errors.add('ขอบเขตจังหวัด');}showStatus();}
 
@@ -383,7 +371,7 @@ async function loadSupportCounts(){const defs=overlays.filter(d=>d.supportKey);l
 function bindSupportCards(){for(const button of document.querySelectorAll('[data-support]'))button.addEventListener('click',()=>{const def=overlays.find(d=>d.supportKey===button.dataset.support);if(!def)return;if(map.hasLayer(def.layer))map.removeLayer(def.layer);else def.layer.addTo(map);updateSupportCards();});updateSupportCards();loadSupportCounts();}
 
 function updateGlassCards(){
- const group=$('group').value;document.querySelectorAll('[data-map-risk]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mapRisk===group)));const scope=selectedEstate||'ทั่วประเทศ';$('riskGlassScope').textContent=scope+' · กดการ์ดเพื่อแสดงกลุ่มโรงงานบนแผนที่';
+ const group=$('group').value;const scope=selectedEstate||'ทั่วประเทศ';$('riskGlassScope').textContent=scope+' · กดการ์ดเพื่อแสดงกลุ่มโรงงานบนแผนที่';
  const areaRows=registry?registry.filter(a=>!selectedEstate||normalize(a['นิคมอุตสาหกรรม'])===normalize(selectedEstate)):null;
  const riskyRows=areaRows?.filter(a=>Object.values(flags).some(field=>flagged(a[field])));const riskTotal=riskyRows?new Set(riskyRows.map(a=>String(a['เลขทะเบียนใหม่']||a['เลขทะเบียนเดิม']||a.__id).replace(/\s/g,''))).size:null;
  for(const [key,id]of [['all','glassCountAll'],['twelve','glassCountTwelve'],['psm','glassCountPsm'],['fire','glassCountFire']]){
