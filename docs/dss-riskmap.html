@@ -438,6 +438,15 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
 .safety-grid .safety-bar{grid-template-rows:auto clamp(92px,12vh,136px) auto}
 .safety-grid .safety-chart-key li{min-width:0;overflow-wrap:anywhere}
 @media(max-width:360px){.safety-grid .safety-chart-layout{grid-template-columns:minmax(0,1fr)}}
+
+.safety-grid>.risk-region-column{display:flex;flex-direction:column;align-self:stretch}
+.safety-grid>.risk-region-column .risk-region-picker{flex:1;grid-template-rows:repeat(3,minmax(120px,1fr))}
+.safety-grid>.risk-region-column .risk-region-picker button{grid-template-rows:auto minmax(0,1fr)}
+.safety-grid>.risk-region-column .risk-region-preview{height:auto;min-height:88px}
+@media(max-width:550px){
+ .safety-grid>.risk-region-column .risk-region-picker{grid-template-rows:auto}
+ .safety-grid>.risk-region-column .risk-region-preview{min-height:76px}
+}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span data-en="Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates">ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -523,20 +532,34 @@ const riskRegions = {
  east: [[11.55,100.65],[14.6,103.1]],
  south: [[5.55,97.55],[11.4,102.35]]
 };
+const riskRegionProvinces = {
+ north:new Set('เชียงใหม่ เชียงราย ลำปาง ลำพูน แม่ฮ่องสอน น่าน พะเยา แพร่ อุตรดิตถ์'.split(' ')),
+ east:new Set('ฉะเชิงเทรา ชลบุรี ระยอง จันทบุรี ตราด ปราจีนบุรี สระแก้ว'.split(' ')),
+ south:new Set('ชุมพร ระนอง สุราษฎร์ธานี พังงา ภูเก็ต กระบี่ นครศรีธรรมราช ตรัง พัทลุง สตูล สงขลา ปัตตานี ยะลา นราธิวาส'.split(' '))
+};
 const riskPreviews = new Map();
 function drawRiskPreviews(features) {
- for (const [key, bounds] of Object.entries(riskRegions)) {
+ for (const [key, provinces] of Object.entries(riskRegionProvinces)) {
    if (riskPreviews.has(key)) continue;
-   const preview = L.map('riskPreview-'+key, {
-     attributionControl:false, zoomControl:false, dragging:false, scrollWheelZoom:false,
-     touchZoom:false, boxZoom:false, doubleClickZoom:false, keyboard:false, zoomSnap:0
+   const regionalFeatures=features.filter(feature=>provinces.has(feature.properties?.['จังหวัด']));
+   const regionLayer=L.geoJSON(regionalFeatures,{interactive:false,style:{color:'#527c74',weight:1,fillColor:'#9bcfc0',fillOpacity:.68}});
+   const bounds=regionLayer.getBounds();
+   if(!bounds.isValid())continue;
+   const preview=L.map('riskPreview-'+key,{
+     attributionControl:false,zoomControl:false,dragging:false,scrollWheelZoom:false,
+     touchZoom:false,boxZoom:false,doubleClickZoom:false,keyboard:false,zoomSnap:0
    });
-   L.geoJSON(features,{interactive:false,style:{color:'#8a779f',weight:1,fillColor:'#cabbdc',fillOpacity:.55}}).addTo(preview);
-   const fit = () => { preview.invalidateSize({pan:false}); preview.fitBounds(bounds,{padding:[4,4]}); };
+   regionLayer.addTo(preview);
+   const fit=()=>{
+     const container=preview.getContainer();
+     if(!container.clientWidth||!container.clientHeight)return;
+     preview.invalidateSize({pan:false});
+     preview.fitBounds(bounds,{padding:[8,8],animate:false});
+   };
    fit();
-   const observer = new ResizeObserver(fit);
+   const observer=new ResizeObserver(fit);
    observer.observe(preview.getContainer());
-   riskPreviews.set(key, preview);
+   riskPreviews.set(key,{preview,bounds});
  }
 }
 function bindRiskMapNavigation() {
@@ -546,7 +569,8 @@ function bindRiskMapNavigation() {
    $('estate').setCustomValidity('');
    $('mapTitle').textContent = button.querySelector('span').textContent;
    count();
-   map.fitBounds(riskRegions[button.dataset.riskRegion], {padding:[18,18]});
+   const region=button.dataset.riskRegion;
+   map.fitBounds(riskPreviews.get(region)?.bounds||riskRegions[region], {padding:[24,24]});
    schedule();
    if (window.matchMedia('(max-width:760px)').matches) $('coverageMap').scrollIntoView({block:'start'});
  }));
