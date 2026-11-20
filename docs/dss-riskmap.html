@@ -282,7 +282,7 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 .safety-dashboard{
  --paper:#fff;--ink:#292923;
  --pencil:repeating-linear-gradient(157deg,#fff4 0 1px,transparent 1px 5px,#342c1712 5px 6px,transparent 6px 9px);
- padding:12px;background:var(--paper);color:var(--ink)
+ padding:12px;color:var(--ink)
 }
 .safety-grid{grid-template-columns:minmax(0,2.2fr) minmax(270px,1fr);gap:16px}
 .safety-map-panel,.safety-panel{background:var(--paper);border:1px solid #000}
@@ -351,7 +351,14 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 .safety-side .risk-region-preview{height:68px}
 @media(max-width:820px){.safety-side .risk-region-column{grid-column:1/-1}}
 
-main{max-width:none;padding:12px clamp(8px,1vw,18px)}
+main{
+ --panel-shadow:0 4px 9px rgba(94,47,8,.18);
+ max-width:none;padding:12px clamp(8px,1vw,18px);
+ background:#f9c583 linear-gradient(155deg,#ffdfb4,#f5ae60)
+}
+main :is(.safety-map-panel,.safety-panel,.safety-grid>.risk-region-column,.risk-detail-box){
+ box-shadow:var(--panel-shadow)
+}
 .safety-dashboard{margin:0 0 18px;padding:8px}
 .safety-grid{align-items:stretch;gap:12px}
 .safety-map-panel,.safety-map-panel .map-panel{display:flex;flex-direction:column}
@@ -414,9 +421,9 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
 .safety-grid>.risk-region-column .risk-region-preview{background:#edf6f3}
 
 .risk-combined-cards :is(#riskGlassSummary,#supportGlassSummary) .risk-glass-grid button.risk-glass-card{
- border:1px solid #453b2d!important;
+ border:1px solid #000!important;
  background-image:var(--pencil)!important;
- box-shadow:none!important
+ box-shadow:var(--panel-shadow)!important
 }
 .risk-combined-cards :is(#riskGlassSummary,#supportGlassSummary) .risk-glass-grid button.risk-glass-card::after{display:none!important}
 .risk-combined-cards :is(#riskGlassSummary,#supportGlassSummary) .risk-glass-grid button.risk-glass-card[aria-pressed="true"]::before{
