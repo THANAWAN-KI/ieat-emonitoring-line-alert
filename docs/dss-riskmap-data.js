@@ -734,13 +734,13 @@
       ctx.fillStyle=callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
       ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
       ctx.font=callout.font;ctx.fillStyle=callout.color;ctx.textAlign='center';ctx.textBaseline='top';
-      const max=callout.width-2*(callout.paddingX+callout.borderWidth);
-      const lines=[];let current='';
-      for(const char of Array.from(callout.text)){
-        if(current&&ctx.measureText(current+char).width>max){lines.push(current);current=char;}else current+=char;
-      }
-      if(current)lines.push(current);
-      lines.forEach((line,i)=>ctx.fillText(line,callout.x+callout.width/2,callout.y+callout.paddingY+callout.borderWidth+i*callout.lineHeight));
+      const textWidth=callout.width-2*(callout.paddingX+callout.borderWidth);
+      const measuredWidth=ctx.measureText(callout.text).width;
+      const textScale=Math.min(1,textWidth/measuredWidth);
+      ctx.translate(callout.x+callout.width/2,callout.y+callout.height/2);
+      ctx.scale(textScale,textScale);
+      ctx.textBaseline='middle';
+      ctx.fillText(callout.text,0,0);
       ctx.restore();return canvas.toDataURL('image/png');
     };
     window.ieatSyncCoverageMapPreview=async()=>{
