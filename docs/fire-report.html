@@ -558,7 +558,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261120-report-map');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261120-fire-report-purple');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -1353,7 +1353,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  window.ieatOpenDashboardPanel?.('report');
  const frame=document.getElementById('emergencyReportFrame');let doc,png;
  let feedback=document.getElementById('dashboardExportFeedback');if(!feedback){feedback=document.createElement('div');feedback.id='dashboardExportFeedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');download.closest('.report-download-toolbar').after(feedback)}
- feedback.replaceChildren();feedback.textContent='กำลังเตรียมรายงาน…';download.disabled=true;download.textContent='กำลังสร้างภาพ…';
+ feedback.classList.remove('export-error');feedback.setAttribute('role','status');feedback.textContent='กำลังเตรียมรายงาน…';download.disabled=true;download.textContent='กำลังสร้างภาพ…';
  let preview=false,two=false;
  try{
  for(let attempt=0;attempt<100;attempt++){doc=frame.contentDocument;png=doc?.getElementById('pngBtn');if(png&&typeof png.onclick==='function'&&!png.disabled)break;await new Promise(resolve=>setTimeout(resolve,150))}
@@ -1365,8 +1365,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  const error=doc.getElementById('dssExportError'),files=frame.contentWindow.ieatReportDownloads;
  if(error)throw Error(error.textContent.replace(/^ส่งออกรายงานไม่สำเร็จ:\s*/,''));
  if(!files?.length)throw Error('ยังสร้างไฟล์รายงานไม่สำเร็จ กรุณาลองอีกครั้ง');
- feedback.replaceChildren();const note=document.createElement('p');note.textContent='สร้างรายงานสำเร็จ หากไฟล์ไม่เริ่มดาวน์โหลด ให้กดดาวน์โหลดแต่ละหน้าด้านล่าง';feedback.append(note);
- files.forEach((file,index)=>{const link=document.createElement('a');link.href=file.url;link.download=file.name;link.textContent='ดาวน์โหลดหน้า '+(index+1)+' (PNG)';feedback.append(link)});
+ feedback.remove();
  }catch(error){feedback.replaceChildren();feedback.textContent=error.message==='กรุณาเลือกโรงงานก่อนดาวน์โหลด'?'กรุณาค้นหาและเลือกโรงงานที่เกิดเหตุก่อนดาวน์โหลดรายงาน':error.message;feedback.classList.add('export-error');feedback.setAttribute('role','alert')}
  finally{if(doc){if(preview)doc.body.classList.add('dss-dashboard-preview');if(two)doc.body.classList.add('dss-dashboard-preview-two')}delete dashboard.dataset.exporting;download.disabled=window.ieatCoverageReport?.status!=='ready';download.textContent='ดาวน์โหลดรายงาน PNG (3 หน้า + ภาคผนวก)';window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'))}
  });
@@ -2076,10 +2075,7 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 }
 </style><style id="report-download-feedback">
 html body #dashboardExportFeedback{padding:10px 12px;margin:0 0 10px;background:#f2f6ed;color:#4d4f53;border-radius:10px;font:13px/1.6 "Sarabun",sans-serif}
-html body #dashboardExportFeedback p{margin:0 0 8px}
-html body #dashboardExportFeedback a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;margin:0 8px 4px 0;background:#d9361e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600}
 html body #dashboardExportFeedback.export-error{background:#fff0ed;color:#a62513}
-@media(max-width:760px){html body #dashboardExportFeedback a{display:flex;width:100%;box-sizing:border-box}}
 </style><style id="hub-review-usability-20261020">
 /* Keep search, incident type and radius together; give search usable width. */
 @media(min-width:761px) and (max-width:1500px){
@@ -2145,7 +2141,6 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard :is(button,input,select,a):focus-visible{outline-color:#ff9c2a!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .field-report-wind>div{color:#ff4025!important;-webkit-text-fill-color:#ff4025!important}
 html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-dashboard .field-wind-arrow svg path{fill:#ff4025!important}
-html body #dashboardExportFeedback a{background:#ff4025!important;color:#fff!important}
 html body #dashboardExportFeedback{background:#efefef!important;color:#4d4f53!important}
 html body #dashboardExportFeedback.export-error{background:#ffede9!important;color:#b12813!important}
 </style><style id="fire-theme-active-controls">
@@ -2726,7 +2721,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     const firstPage=doc.getElementById('report');
     for(const page of [firstPage,pageTwo]){
       if(!page)continue;
-      page.style.setProperty('border','1px solid #4d6055','important');
+      page.style.setProperty('border','1px solid #713c98','important');
       page.style.setProperty('border-radius','0','important');
       page.style.setProperty('box-shadow','none','important');
       page.style.setProperty('box-sizing','border-box','important');
@@ -2748,7 +2743,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
         body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssReportSecondColumn{grid-area:1 / 2}
       }
       html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap :is(#report#report#report,#dssReportSecondColumn > #dssPageTwo#dssPageTwo){
-        border:1px solid #4d6055!important;border-radius:0!important;box-shadow:none!important;
+        border:1px solid #713c98!important;border-radius:0!important;box-shadow:none!important;
       }
     `;
     doc.head.append(style);
@@ -2836,7 +2831,6 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
 #riskmapOverviewPanel .report-search-actions>button{white-space:normal!important}
 #riskmapOverviewPanel .report-search-actions>button:disabled{opacity:.5;cursor:default}
 #riskmapOverviewPanel #riskMapLineCopy{border:1px solid #a889be;background:#fff;color:#54246f}
-html body #dashboardExportFeedback a{background:#713c98!important}
 #riskmapReportPanel #dashboardEditReportText{padding:8px 14px;margin-bottom:8px}
 .riskmap-map-key{display:flex;flex-wrap:wrap;gap:7px 13px;padding:9px 0 0;margin:0;list-style:none;font-size:12px}
 .riskmap-map-key li{display:flex;align-items:center;gap:5px}

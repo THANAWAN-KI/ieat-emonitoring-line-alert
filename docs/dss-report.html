@@ -816,9 +816,30 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <style>
 body :is(#report #dssFieldBrief,#dssPageTwo){font-family:Sarabun,Tahoma,sans-serif!important;color:#28352c!important}
 html body #report#report#report#report #dssFieldBrief :is(.fb-section>h2,#reportNearbySupport>h2),
-html body #dssPageTwo#dssPageTwo#dssPageTwo h2{background:#edf3ed!important;border-left-color:#4d6055!important;color:#34483b!important;-webkit-text-fill-color:#34483b!important}
+html body #dssPageTwo#dssPageTwo#dssPageTwo h2{background:var(--fire-report-heading, #edf3ed)!important;border-left-color:var(--fire-report-frame, #4d6055)!important;color:var(--fire-report-ink, #34483b)!important;-webkit-text-fill-color:var(--fire-report-ink, #34483b)!important}
 html body #report#report#report#report #dssFieldBrief :is(.fb-header,.fb-head),
-html body #dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:#4d6055!important}
+html body #dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:var(--fire-report-frame, #4d6055)!important}
+</style>
+<script>
+if(new URLSearchParams(location.search).get('theme')==='fire-purple'){
+ document.documentElement.setAttribute('data-report-theme','fire-purple');
+}
+</script>
+<style>
+html[data-report-theme="fire-purple"]{
+ --fire-report-accent:#713c98;
+ --fire-report-frame:#713c98;
+ --fire-report-rule:#ded1e8;
+ --fire-report-surface:#faf6fd;
+ --fire-report-tint:#f0e5f7;
+ --fire-report-soft:#f3eaf9;
+ --fire-report-grid:#d4c1e0;
+ --fire-report-paper:#fcf9fd;
+ --fire-report-heading:#f0e5f7;
+ --fire-report-ink:#54246f;
+ --fire-report-muted:#65536e;
+ --fire-report-footer:#65536e;
+ }
 </style>
 </head>
 <body>
@@ -1619,7 +1640,7 @@ async function downloadReportPng(){
   const reportCanvases=[first,second,third,...appendixCanvases];
   for(const canvas of reportCanvases){
    const context=canvas.getContext('2d'),width=exportScale;
-   context.strokeStyle='#4d6055';
+   context.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--fire-report-frame').trim() || '#4d6055';
    context.lineWidth=width;
    context.strokeRect(width/2,width/2,canvas.width-width,canvas.height-width);
   }
@@ -3547,8 +3568,8 @@ button[aria-label="กลับมุมมองเริ่มต้น"],butt
 </style><style id="report-four-color-theme">
 html body #report#report #dssFieldBrief,html body #dssPageTwo#dssPageTwo{color:#000!important}
 html body #report#report #dssFieldBrief :is(h1,h2,p,small,strong,.fb-muted,.report-field-label,.report-field,.report-support-field),html body #dssPageTwo#dssPageTwo :is(h1,h2,p,small,strong,th,td,.p2-muted){color:#000!important;-webkit-text-fill-color:#000!important}
-html body #report#report #dssFieldBrief .fb-header,html body #dssPageTwo#dssPageTwo .p2-header{border-bottom-color:#5b8f32!important}
-html body #report#report #dssFieldBrief h2,html body #dssPageTwo#dssPageTwo h2{border-left-color:#5b8f32!important;background:#f3f6ef!important}
+html body #report#report #dssFieldBrief .fb-header,html body #dssPageTwo#dssPageTwo .p2-header{border-bottom-color:var(--fire-report-accent, #5b8f32)!important}
+html body #report#report #dssFieldBrief h2,html body #dssPageTwo#dssPageTwo h2{border-left-color:var(--fire-report-accent, #5b8f32)!important;background:var(--fire-report-heading, #f3f6ef)!important}
 html body #dssPageTwo#dssPageTwo th{background:#edf3e8!important;color:#000!important}
 </style><style id="centered-report-map-weather">
 html body #report#report.dss-field-document #dssFieldBrief .fb-map-grid{display:block!important;grid-template-columns:1fr!important}
@@ -3775,10 +3796,10 @@ html body.dss-inline-dashboard #dssPageTwo#dssPageTwo table{min-width:600px!impo
 document.querySelectorAll('#dssPageTwo table').forEach(table=>{if(table.parentElement.classList.contains('mobile-report-table-scroll'))return;const wrap=document.createElement('div');wrap.className='mobile-report-table-scroll';wrap.tabIndex=0;wrap.setAttribute('aria-label','เลื่อนดูตารางรายละเอียด DSS');table.before(wrap);wrap.append(table)});
 new MutationObserver(()=>{document.querySelectorAll('#dssPageTwo>table').forEach(table=>{const wrap=document.createElement('div');wrap.className='mobile-report-table-scroll';wrap.tabIndex=0;wrap.setAttribute('aria-label','เลื่อนดูตารางรายละเอียด DSS');table.before(wrap);wrap.append(table)})}).observe(document.getElementById('dssPageTwo'),{childList:true});
 </script><style id="fire-report-theme-20261020">
-html body #report#report#report#report #dssFieldBrief :is(.fb-section>h2,#reportNearbySupport>h2),html body #dssPageTwo#dssPageTwo#dssPageTwo h2{background:#efefef!important;border-left-color:#5b8f32!important;color:#4d4f53!important;-webkit-text-fill-color:#4d4f53!important}
-html body #report#report#report#report #dssFieldBrief :is(.fb-header,.fb-head),html body #dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:#5b8f32!important}
-html body #report#report#report#report #reportNearbySupport .support-reference-table tbody th{background:#efefef!important;color:#5b8f32!important}
-html body #report#report#report#report #reportNearbySupport .support-category-number{background:#5b8f32!important;color:#fff!important}
+html body #report#report#report#report #dssFieldBrief :is(.fb-section>h2,#reportNearbySupport>h2),html body #dssPageTwo#dssPageTwo#dssPageTwo h2{background:#efefef!important;border-left-color:var(--fire-report-accent, #5b8f32)!important;color:#4d4f53!important;-webkit-text-fill-color:#4d4f53!important}
+html body #report#report#report#report #dssFieldBrief :is(.fb-header,.fb-head),html body #dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:var(--fire-report-accent, #5b8f32)!important}
+html body #report#report#report#report #reportNearbySupport .support-reference-table tbody th{background:#efefef!important;color:var(--fire-report-accent, #5b8f32)!important}
+html body #report#report#report#report #reportNearbySupport .support-category-number{background:var(--fire-report-accent, #5b8f32)!important;color:#fff!important}
 html body #report#report#report#report #fbWeather>strong{color:#ff4025!important;-webkit-text-fill-color:#ff4025!important}
 html body #report#report#report#report #fbWeather .report-weather-arrow{background:#ffede9!important}
 html body #report#report#report#report #fbWeather .report-weather-arrow svg path{fill:#2e9df7!important;stroke:#000!important;stroke-width:2.5!important;stroke-linejoin:round!important}
@@ -3982,26 +4003,26 @@ html body #report#report#report#report#report.dss-field-export #fbWeather{width:
 <style id="report-leaf-and-thin-frame">
 html body #report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage[hidden]{display:none!important}
 html body :is(#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo){
- border:1px solid #4d6055!important;outline:none!important;border-radius:0!important;box-shadow:none!important;
- --green:#5b8f32;--report-leaf:#5b8f32;
+ border:1px solid var(--fire-report-frame, #4d6055)!important;outline:none!important;border-radius:0!important;box-shadow:none!important;
+ --green:var(--fire-report-accent, #5b8f32);--report-leaf:var(--fire-report-accent, #5b8f32);
 }
 html body #report#report#report#report#report #dssFieldBrief :is(.fb-header,.fb-head),
-html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:#5b8f32!important;border-bottom-width:1px!important}
+html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo .p2-header{border-color:var(--fire-report-accent, #5b8f32)!important;border-bottom-width:1px!important}
 html body #report#report#report#report#report #dssFieldBrief h2,
-html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo h2{border-left-color:#5b8f32!important;border-left-width:1px!important}
-html body #report#report#report#report#report #reportNearbySupport .support-category-number{background:#5b8f32!important}
-html body #report#report#report#report#report #reportNearbySupport .support-reference-table tbody th{color:#5b8f32!important}
+html body #dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo h2{border-left-color:var(--fire-report-accent, #5b8f32)!important;border-left-width:1px!important}
+html body #report#report#report#report#report #reportNearbySupport .support-category-number{background:var(--fire-report-accent, #5b8f32)!important}
+html body #report#report#report#report#report #reportNearbySupport .support-reference-table tbody th{color:var(--fire-report-accent, #5b8f32)!important}
 html body #report#report#report #fieldBriefMap[data-map-pending="true"]::after{
- content:"ค้นหาโรงงานเพื่อแสดงแผนที่เดียวกับแผนที่หลัก";position:absolute;inset:40% 12px auto;text-align:center;color:#526147;font:14px/1.6 Sarabun,sans-serif;
+ content:"ค้นหาโรงงานเพื่อแสดงแผนที่เดียวกับแผนที่หลัก";position:absolute;inset:40% 12px auto;text-align:center;color:var(--fire-report-muted, #526147);font:14px/1.6 Sarabun,sans-serif;
 }
-#reportMonitoringSupport{margin-top:16px;padding-top:12px;border-top:1px solid #4d6055;color:#17201d;font:12px/1.55 Sarabun,sans-serif}
-#reportMonitoringSupport h3{font-size:15px;color:#5b8f32;margin:0 0 8px}
+#reportMonitoringSupport{margin-top:16px;padding-top:12px;border-top:1px solid var(--fire-report-frame, #4d6055);color:#17201d;font:12px/1.55 Sarabun,sans-serif}
+#reportMonitoringSupport h3{font-size:15px;color:var(--fire-report-accent, #5b8f32);margin:0 0 8px}
 #reportMonitoringSupport h4{font-size:13px;margin:0 0 5px;color:#17201d}
 #reportMonitoringSupport p{margin:5px 0;overflow-wrap:anywhere}
-#reportMonitoringSupport .monitoring-station{margin:12px 0;padding:10px;border:1px solid #4d6055;break-inside:avoid}
+#reportMonitoringSupport .monitoring-station{margin:12px 0;padding:10px;border:1px solid var(--fire-report-frame, #4d6055);break-inside:avoid}
 #reportMonitoringSupport table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11px}
-#reportMonitoringSupport :is(th,td){border:1px solid #d6ddcf;padding:5px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
-#reportMonitoringSupport th{background:#eef5e8;color:#17201d}
+#reportMonitoringSupport :is(th,td){border:1px solid var(--fire-report-rule, #d6ddcf);padding:5px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+#reportMonitoringSupport th{background:var(--fire-report-tint, #eef5e8);color:#17201d}
 #reportMonitoringSupport .monitoring-normal{color:#5b8f32!important;font-weight:700}
 #reportMonitoringSupport .monitoring-exceeded{color:#b63232!important;font-weight:700}
 #reportMonitoringSupport .monitoring-exceeded-row{background:#fff0ee}
@@ -4033,10 +4054,10 @@ html body #report#report#report#report#report#report#report #fieldBriefMap>#dash
 html body #report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage[hidden]{display:none!important}
 html body #report#report#report#report#report#report#report #fieldBriefMap #fbWeather{
  width:280px!important;max-width:45%!important;max-height:calc(100% - 20px)!important;right:10px!important;bottom:10px!important;
- padding:10px!important;background:#fff!important;border:1px solid #4d6055!important;box-shadow:none!important;color:#17201d!important;
+ padding:10px!important;background:#fff!important;border:1px solid var(--fire-report-frame, #4d6055)!important;box-shadow:none!important;color:#17201d!important;
 }
 html body #report#report#report#report#report#report#report #fbWeather>strong{
- display:block!important;background:#f3cf69!important;border:1px solid #4d6055!important;padding:6px 8px!important;color:#4d6055!important;-webkit-text-fill-color:#4d6055!important;
+ display:block!important;background:#f3cf69!important;border:1px solid var(--fire-report-frame, #4d6055)!important;padding:6px 8px!important;color:var(--fire-report-frame, #4d6055)!important;-webkit-text-fill-color:var(--fire-report-frame, #4d6055)!important;
 }
 html body #report#report#report#report#report#report#report #fbWeather .report-weather-arrow{
  display:block!important;width:76px!important;height:76px!important;margin:12px auto!important;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;box-sizing:border-box!important;
@@ -4049,14 +4070,14 @@ html body #report#report#report#report#report#report#report #fieldBriefMap #fbWe
 }
 </style>
 <style id="monitoring-page-three-style">
-html body #dssPageThree{width:100%;min-width:0;min-height:500px;box-sizing:border-box;padding:22px;background:#fff;border:1px solid #4d6055;box-shadow:none;border-radius:0;color:#17201d;font:13px/1.6 Sarabun,sans-serif}
+html body #dssPageThree{width:100%;min-width:0;min-height:500px;box-sizing:border-box;padding:22px;background:#fff;border:1px solid var(--fire-report-frame, #4d6055);box-shadow:none;border-radius:0;color:#17201d;font:13px/1.6 Sarabun,sans-serif}
 html body .report-wrap>#dssPageThree{grid-column:1/-1;width:calc((100% - 18px)/2);justify-self:start}
-#dssPageThree .p2-header{display:flex;align-items:center;gap:12px;border-bottom:1px solid #5b8f32;padding-bottom:12px;margin-bottom:16px}
+#dssPageThree .p2-header{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--fire-report-accent, #5b8f32);padding-bottom:12px;margin-bottom:16px}
 #dssPageThree .p2-header img{width:52px;height:auto}
 #dssPageThree .p2-header h1{font-size:19px;line-height:1.5;margin:0}
 #dssPageThree .p2-header a{color:#17201d}
-#dssPageThreeFacts{padding:10px;border:1px solid #d6ddcf;background:#f6f9f2;margin:12px 0;overflow-wrap:anywhere}
-#dssPageThree .dss-page-footer{margin-top:20px;padding-top:10px;border-top:1px solid #d6ddcf;text-align:right;font-size:11px;color:#60675d}
+#dssPageThreeFacts{padding:10px;border:1px solid var(--fire-report-rule, #d6ddcf);background:var(--fire-report-surface, #f6f9f2);margin:12px 0;overflow-wrap:anywhere}
+#dssPageThree .dss-page-footer{margin-top:20px;padding-top:10px;border-top:1px solid var(--fire-report-rule, #d6ddcf);text-align:right;font-size:11px;color:var(--fire-report-footer, #60675d)}
 @media(max-width:850px){html body .report-wrap>#dssPageThree{width:100%}}
 @media print{html body .report-wrap>#dssPageThree{width:100%;break-before:page}}
 </style>
@@ -4100,10 +4121,10 @@ html body #report#report#report#report#report#report#report #fbWeather .report-w
 </style>
 <style id="shared-three-page-report-theme">
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree){
- padding:22px!important;border:1px solid #4d6055!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;color:#17201d!important;
+ padding:22px!important;border:1px solid var(--fire-report-frame, #4d6055)!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;color:#17201d!important;
 }
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-header,.fb-head,.p2-header){
- display:flex!important;align-items:center!important;gap:12px!important;padding-bottom:12px!important;margin:0 0 16px!important;border:0!important;border-bottom:1px solid #5b8f32!important;background:transparent!important;
+ display:flex!important;align-items:center!important;gap:12px!important;padding-bottom:12px!important;margin:0 0 16px!important;border:0!important;border-bottom:1px solid var(--fire-report-accent, #5b8f32)!important;background:transparent!important;
 }
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-header,.fb-head,.p2-header) img{
  width:52px!important;height:auto!important;max-height:64px!important;object-fit:contain!important;flex:none!important;
@@ -4111,19 +4132,19 @@ html body :is(#report#report#report#report#report#report#report#report#report#re
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) h1{font:700 19px/1.5 Sarabun,sans-serif!important;margin:0!important;color:#17201d!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-header,.fb-head,.p2-header) :is(div,p,small,a){font-size:13px!important;line-height:1.6!important;color:#17201d!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(h2,h3){
- font:600 15px/1.6 Sarabun,sans-serif!important;color:#5b8f32!important;-webkit-text-fill-color:#5b8f32!important;background:transparent!important;border:0!important;padding:0!important;margin:16px 0 8px!important;
+ font:600 15px/1.6 Sarabun,sans-serif!important;color:var(--fire-report-accent, #5b8f32)!important;-webkit-text-fill-color:var(--fire-report-accent, #5b8f32)!important;background:transparent!important;border:0!important;padding:0!important;margin:16px 0 8px!important;
 }
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-fact,.p2-facts>div,#dssPageThreeFacts){
- border:1px solid #d6ddcf!important;border-radius:0!important;background:#f6f9f2!important;padding:10px!important;box-shadow:none!important;
+ border:1px solid var(--fire-report-rule, #d6ddcf)!important;border-radius:0!important;background:var(--fire-report-surface, #f6f9f2)!important;padding:10px!important;box-shadow:none!important;
 }
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-section,.monitoring-station){margin:16px 0!important}
-html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(table){border-collapse:collapse!important;border-color:#d6ddcf!important}
-html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(th,td){border:1px solid #d6ddcf!important;padding:6px!important;vertical-align:top!important;line-height:1.6!important}
-html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) thead th{background:#eef5e8!important;color:#17201d!important}
+html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(table){border-collapse:collapse!important;border-color:var(--fire-report-rule, #d6ddcf)!important}
+html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(th,td){border:1px solid var(--fire-report-rule, #d6ddcf)!important;padding:6px!important;vertical-align:top!important;line-height:1.6!important}
+html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) thead th{background:var(--fire-report-tint, #eef5e8)!important;color:#17201d!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) tbody td{background:#fff!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) .monitoring-exceeded-row td{background:#fff0ee!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) .dss-page-footer{
- margin-top:20px!important;padding-top:10px!important;border-top:1px solid #d6ddcf!important;text-align:right!important;color:#60675d!important;
+ margin-top:20px!important;padding-top:10px!important;border-top:1px solid var(--fire-report-rule, #d6ddcf)!important;text-align:right!important;color:var(--fire-report-footer, #60675d)!important;
 }
 html body #reportMonitoringSummary{display:none!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree):is(.dss-field-export,.dss-page-two-export,.dss-page-three-export){padding:32px!important}
@@ -4135,11 +4156,11 @@ html body #report#report#report#report#report#report#report#report#report#report
  position:static!important;inset:auto!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,2fr)!important;
  width:100%!important;max-width:none!important;height:auto!important;min-height:0!important;max-height:none!important;
  margin:10px 0 14px!important;padding:10px 12px!important;overflow:visible!important;
- border:1px solid #d6ddcf!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;box-sizing:border-box!important;gap:6px 12px!important;
+ border:1px solid var(--fire-report-rule, #d6ddcf)!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;box-sizing:border-box!important;gap:6px 12px!important;
 }
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather>strong{
  grid-column:1/-1!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;
- color:#5b8f32!important;-webkit-text-fill-color:#5b8f32!important;text-align:left!important;
+ color:var(--fire-report-accent, #5b8f32)!important;-webkit-text-fill-color:var(--fire-report-accent, #5b8f32)!important;text-align:left!important;
 }
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-arrow{
@@ -4151,12 +4172,12 @@ html body #report#report#report#report#report#report#report#report#report#report
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{
  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding:0!important;align-items:center!important;
 }
-html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{padding:0 8px!important;border-left:1px solid #d6ddcf!important;min-width:0!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{padding:0 8px!important;border-left:1px solid var(--fire-report-rule, #d6ddcf)!important;min-width:0!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics :is(dt,dd){margin:0!important;overflow-wrap:anywhere!important;line-height:1.6!important}
-html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dt{color:#60675d!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dt{color:var(--fire-report-footer, #60675d)!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dd{font-weight:600!important;color:#17201d!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-updated{
- grid-column:1/-1!important;margin:2px 0 0!important;text-align:right!important;color:#60675d!important;
+ grid-column:1/-1!important;margin:2px 0 0!important;text-align:right!important;color:var(--fire-report-footer, #60675d)!important;
 }
 @media(max-width:650px){
  html body #report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{grid-template-columns:1fr!important}
@@ -4164,26 +4185,26 @@ html body #report#report#report#report#report#report#report#report#report#report
 }
 </style>
 <style id="weather-independent-cells">
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{gap:8px!important;border:1px solid #4d6055!important;padding:10px!important;grid-template-columns:minmax(0,1.3fr) minmax(0,2.7fr)!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{gap:8px!important;border:1px solid var(--fire-report-frame, #4d6055)!important;padding:10px!important;grid-template-columns:minmax(0,1.3fr) minmax(0,2.7fr)!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather>strong{
- padding:7px 10px!important;background:#f3cf69!important;border:1px solid #4d6055!important;text-align:center!important;
- color:#4d6055!important;-webkit-text-fill-color:#4d6055!important;
+ padding:7px 10px!important;background:#f3cf69!important;border:1px solid var(--fire-report-frame, #4d6055)!important;text-align:center!important;
+ color:var(--fire-report-frame, #4d6055)!important;-webkit-text-fill-color:var(--fire-report-frame, #4d6055)!important;
 }
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind{
  display:grid!important;grid-template-columns:56px minmax(0,1fr)!important;gap:0!important;
- border:1px solid #b9c7b8!important;background:#fafbf8!important;align-content:start!important;align-items:center!important;
+ border:1px solid var(--fire-report-grid, #b9c7b8)!important;background:var(--fire-report-paper, #fafbf8)!important;align-content:start!important;align-items:center!important;
 }
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind-label{
- grid-column:1/-1!important;background:#edf6f0!important;border-bottom:1px solid #b9c7b8!important;padding:6px 8px!important;font-weight:500!important;
+ grid-column:1/-1!important;background:var(--fire-report-soft, #edf6f0)!important;border-bottom:1px solid var(--fire-report-grid, #b9c7b8)!important;padding:6px 8px!important;font-weight:500!important;
 }
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-arrow{margin:8px 4px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-wind-direction{padding:8px!important;font-weight:500!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;align-items:stretch!important}
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{padding:0!important;border:1px solid #b9c7b8!important;background:#fafbf8!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{padding:0!important;border:1px solid var(--fire-report-grid, #b9c7b8)!important;background:var(--fire-report-paper, #fafbf8)!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dt{
- background:#edf6f0!important;border-bottom:1px solid #b9c7b8!important;padding:6px 8px!important;color:#17201d!important;
+ background:var(--fire-report-soft, #edf6f0)!important;border-bottom:1px solid var(--fire-report-grid, #b9c7b8)!important;padding:6px 8px!important;color:#17201d!important;
 }
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dd{padding:8px!important;background:#fafbf8!important;font-weight:500!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics dd{padding:8px!important;background:var(--fire-report-paper, #fafbf8)!important;font-weight:500!important}
 @media(max-width:650px){
  html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{grid-template-columns:1fr!important}
  html body #report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}
@@ -4194,7 +4215,7 @@ html body #report#report#report#report#report#report#report#report#report#report
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:cover!important;background:#fff!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-fact{padding:6px 8px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-section{margin:10px 0!important}
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-additional-count{display:block;margin-top:2px;color:#60675d}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-additional-count{display:block;margin-top:2px;color:var(--fire-report-footer, #60675d)}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-place-details{padding:2px 0!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .dss-page-footer{margin-top:10px!important;padding-top:6px!important}
 </style>
@@ -4233,7 +4254,7 @@ html body #report#report#report#report#report#report#report#report#report#report
  display:grid!important;grid-template-columns:1fr!important;gap:6px!important;
  width:260px!important;max-width:44%!important;min-width:0!important;margin:0!important;padding:8px!important;
  max-height:calc(100% - 16px)!important;height:auto!important;overflow:auto!important;
- background:#fff!important;border:1px solid #4d6055!important;box-shadow:none!important;z-index:1000!important;
+ background:#fff!important;border:1px solid var(--fire-report-frame, #4d6055)!important;box-shadow:none!important;z-index:1000!important;
 }
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather>strong{padding:5px 8px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-wind{grid-template-columns:56px minmax(0,1fr)!important}
@@ -4241,7 +4262,7 @@ html body #report#report#report#report#report#report#report#report#report#report
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-wind-direction{padding:6px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics{grid-template-columns:1fr!important;gap:6px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics>div{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)!important}
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics dt{border-bottom:0!important;border-right:1px solid #b9c7b8!important;padding:5px 6px!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics dt{border-bottom:0!important;border-right:1px solid var(--fire-report-grid, #b9c7b8)!important;padding:5px 6px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap #fbWeather .report-weather-metrics dd{padding:5px 6px!important}
 </style>
 </body></html>
