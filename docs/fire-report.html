@@ -3307,11 +3307,19 @@ html body #riskmapOverviewPanel #riskCoverage button:hover{filter:brightness(.97
 html body #riskmapOverviewPanel #coverageMap .esri-widget--button:hover{background:#edf3ed!important}
 </style><style id="riskmap-incident-focus">
 .riskmap-shared-workspace,.riskmap-shared-workspace #riskmapOverviewPanel .coverage-map-layout{max-width:none}
+html body #riskmapOverviewPanel #riskCoverage #dssStatsCharts > .dss-chart:first-child{
+  box-sizing:border-box;
+  inline-size:min(100%,605px);
+  border:1px solid #000!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
 @media(min-width:1051px){
-  .riskmap-shared-workspace #riskmapOverviewPanel .coverage-map-layout{grid-template-columns:minmax(0,min(46%,605px)) minmax(0,1fr)}
+  .riskmap-shared-workspace #riskmapOverviewPanel .coverage-map-layout{grid-template-columns:minmax(0,min(633px,calc(100% - 340px))) minmax(0,1fr)}
   #riskmapOverviewPanel #coverageMapView{height:clamp(490px,calc(100dvh - 180px),960px)}
-  #riskmapOverviewPanel #dssStatsCards + #dssStatsCharts > .dss-chart:first-child{
-    min-block-size:372px;
+  #riskmapOverviewPanel #dssStatsCharts > .dss-chart:first-child{
+    block-size:372px;
+    overflow:auto;
   }
 }
 </style>
