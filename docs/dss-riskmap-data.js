@@ -71,14 +71,13 @@
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
-  const dragFirePin=document.documentElement.classList.contains('fire-risk-view');
   const form=$('coverageIncidentForm'), matches=$('coverageFactoryMatches'), results=$('coverageNearbyResults');
   if(!form)return;
   const message=$('coverageIncidentStatus'), radius=$('coverageIncidentRadius'), type=$('coverageIncidentType'), keyword=$('coverageSupportQuery');
   const graphics=new GraphicsLayer({title:'จุดเกิดเหตุและรัศมีค้นหา',listMode:'hide'});
   const pinLayer=new GraphicsLayer({title:'หมุดจุดเกิดเหตุ',listMode:'hide'});
   map.addMany([graphics,pinLayer]);
-  const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:!dragFirePin,defaultUpdateOptions:{tool:'move',enableRotation:false,enableScaling:false}});
+  const sketch=new SketchViewModel({view,layer:pinLayer,updateOnGraphicClick:!fireView,defaultUpdateOptions:{tool:'move',enableRotation:false,enableScaling:false}});
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
@@ -231,7 +230,7 @@
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
-    message.textContent='จุดเกิดเหตุ · '+name+(dragFirePin?' · ลากหมุดเพื่อย้ายจุด':' · คลิกหมุดแล้วลากเพื่อย้ายจุด');
+    message.textContent='จุดเกิดเหตุ · '+name+(fireView?' · ลากหมุดเพื่อย้ายจุด':' · คลิกหมุดแล้วลากเพื่อย้ายจุด');
   }
   sketch.on('update',event=>{
     const moved=event.graphics[0];
@@ -239,7 +238,7 @@
     if(event.state==='active'||event.state==='complete'){origin=moved.geometry;draw();}
     if(event.state==='complete'){updateNearby();queueReport();}
   });
-  if(dragFirePin){
+  if(fireView){
     let drag=null;
     view.on('drag',event=>{
       if(event.action==='start'){
