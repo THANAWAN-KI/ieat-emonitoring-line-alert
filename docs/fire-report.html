@@ -444,7 +444,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
     <button id="coveragePickIncident" type="button">ปักหมุดบนแผนที่</button>
     <button id="coverageOpenReport" type="button" disabled>ค้นหาโรงงาน</button>
   </div>
-  <p id="coverageIncidentStatus" role="status">หากพบหลายโรงงาน ให้เลือกจากผลค้นหา เมื่อรายงานพร้อม ให้ตรวจตัวอย่างก่อนดาวน์โหลดภาพ 3 หน้า + ภาคผนวกหรือคัดลอกข้อความ LINE</p>
+  <p id="coverageIncidentStatus" role="status">หากพบหลายโรงงาน ให้เลือกจากผลค้นหา เมื่อรายงานพร้อม ให้ตรวจตัวอย่างก่อนดาวน์โหลดภาพ 2 หน้า + ภาคผนวกหรือคัดลอกข้อความ LINE</p>
   <div id="coverageFactoryMatches"></div>
   <div id="coverageNearbyResults" hidden></div>
 </form>
@@ -532,7 +532,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
 
 
 </div><div id="riskMapSection" class="workspace-map" aria-label="แผนที่ความเสี่ยง"><article class="panel"><div class="map-controls"><div class="map-toolbar-actions"><button id="incidentPickButton" class="incident-pick-button" type="button" disabled>กำหนดจุดเกิดเหตุ</button><select id="basemap" aria-label="แผนที่พื้นฐาน"><option value="gray-vector" selected>แผนที่สีอ่อน</option><option value="streets-vector">แผนที่ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option><option value="topo-vector">ภูมิประเทศ</option></select><a class="report-button" id="openEmergencyReport" href="./dss-report.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>เปิดหน้าจัดทำรายงานเหตุฉุกเฉิน</a></div></div><div id="map" role="region" aria-label="แผนที่ Risk Map"></div><div id="mapStatus" class="map-footer" role="status">กำลังโหลดแผนที่…</div></article></div></div></section>
-<section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจตัวอย่างทั้ง 3 หน้า + ภาคผนวก แล้วกด “ดาวน์โหลดรายงาน PNG (3 หน้า + ภาคผนวก)” ด้านล่าง</p><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe>
+<section id="emergencyReportPage" aria-labelledby="coverageReportTitle" hidden><h2 id="coverageReportTitle">รายงานข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="coverageReportHint">ตรวจตัวอย่างทั้ง 2 หน้า + ภาคผนวก แล้วกด “ดาวน์โหลดรายงาน PNG (2 หน้า + ภาคผนวก)” ด้านล่าง</p><iframe id="emergencyReportFrame" class="other-frame" title="จัดทำรายงานเหตุฉุกเฉิน"></iframe>
 <section id="riskMapLinePanel" aria-labelledby="riskMapLineTitle">
   <h3 id="riskMapLineTitle">ข้อความสำหรับส่งทาง LINE</h3>
   <label for="riskMapCase">กรณีจัดทำรายงาน</label>
@@ -558,7 +558,7 @@ document.querySelector('.emcc-gis-nav details').addEventListener('click', functi
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261120-fire-report-purple');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261120-fire-report-layout');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -1345,8 +1345,8 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
 (function(){
  const dashboard=document.getElementById('riskDashboard'),filters=dashboard.querySelector('.chemical-detail-filters'),results=document.getElementById('unifiedCompanyResults');
  const duplicate=filters.querySelector('label[for="chemicalEstate"]');if(duplicate)duplicate.hidden=true;
- const download=document.createElement('button');download.type='button';download.id='dashboardDownloadImage';download.className='dashboard-download-image';download.title='ดาวน์โหลดรายงาน PNG 3 หน้า + ภาคผนวก';
- download.textContent='ดาวน์โหลดรายงาน PNG (3 หน้า + ภาคผนวก)';
+ const download=document.createElement('button');download.type='button';download.id='dashboardDownloadImage';download.className='dashboard-download-image';download.title='ดาวน์โหลดรายงาน PNG 2 หน้า + ภาคผนวก';
+ download.textContent='ดาวน์โหลดรายงาน PNG (2 หน้า + ภาคผนวก)';
  download.addEventListener('click',async()=>{
  if(window.ieatCoverageReport?.status!=='ready')return;
  window.ieatUpdateRiskMapCase?.();
@@ -1359,7 +1359,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  for(let attempt=0;attempt<100;attempt++){doc=frame.contentDocument;png=doc?.getElementById('pngBtn');if(png&&typeof png.onclick==='function'&&!png.disabled)break;await new Promise(resolve=>setTimeout(resolve,150))}
  if(!png||typeof png.onclick!=='function'||png.disabled)throw Error('รายงานยังโหลดไม่เสร็จ กรุณารอสักครู่แล้วลองอีกครั้ง');
  dashboard.dataset.exporting='true';preview=doc.body.classList.contains('dss-dashboard-preview');two=doc.body.classList.contains('dss-dashboard-preview-two');doc.body.classList.remove('dss-dashboard-preview','dss-dashboard-preview-two');
- feedback.textContent='กำลังสร้างภาพรายงาน 3 หน้า + ภาคผนวก กรุณารอสักครู่…';
+ feedback.textContent='กำลังสร้างภาพรายงาน 2 หน้า + ภาคผนวก กรุณารอสักครู่…';
  window.ieatCompleteRiskMapReport?.();
  await png.onclick.call(png,new Event('click'));
  const error=doc.getElementById('dssExportError'),files=frame.contentWindow.ieatReportDownloads;
@@ -1367,7 +1367,7 @@ html body #riskDashboard .incident-search-popover .chemical-detail-filters>label
  if(!files?.length)throw Error('ยังสร้างไฟล์รายงานไม่สำเร็จ กรุณาลองอีกครั้ง');
  feedback.remove();
  }catch(error){feedback.replaceChildren();feedback.textContent=error.message==='กรุณาเลือกโรงงานก่อนดาวน์โหลด'?'กรุณาค้นหาและเลือกโรงงานที่เกิดเหตุก่อนดาวน์โหลดรายงาน':error.message;feedback.classList.add('export-error');feedback.setAttribute('role','alert')}
- finally{if(doc){if(preview)doc.body.classList.add('dss-dashboard-preview');if(two)doc.body.classList.add('dss-dashboard-preview-two')}delete dashboard.dataset.exporting;download.disabled=window.ieatCoverageReport?.status!=='ready';download.textContent='ดาวน์โหลดรายงาน PNG (3 หน้า + ภาคผนวก)';window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'))}
+ finally{if(doc){if(preview)doc.body.classList.add('dss-dashboard-preview');if(two)doc.body.classList.add('dss-dashboard-preview-two')}delete dashboard.dataset.exporting;download.disabled=window.ieatCoverageReport?.status!=='ready';download.textContent='ดาวน์โหลดรายงาน PNG (2 หน้า + ภาคผนวก)';window.dispatchEvent(new CustomEvent('ieat-dashboard-fit-refresh'))}
  });
  const querybar=document.createElement('div');querybar.className='dashboard-querybar';querybar.setAttribute('aria-label','ค้นหาและดาวน์โหลดข้อมูล');querybar.classList.add('direct-querybar');querybar.append(filters,download);if(results){results.classList.add('direct-query-results');querybar.append(results)}dashboard.querySelector('.workspace-data').prepend(querybar);
 })();
@@ -2721,7 +2721,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
     const firstPage=doc.getElementById('report');
     for(const page of [firstPage,pageTwo]){
       if(!page)continue;
-      page.style.setProperty('border','1px solid #713c98','important');
+      page.style.setProperty('border','1px solid #a2a0a5','important');
       page.style.setProperty('border-radius','0','important');
       page.style.setProperty('box-shadow','none','important');
       page.style.setProperty('box-sizing','border-box','important');
@@ -2743,7 +2743,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
         body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap > #dssReportSecondColumn{grid-area:1 / 2}
       }
       html body.dss-dashboard-edit:not(.dss-edit-exporting) .report-wrap :is(#report#report#report,#dssReportSecondColumn > #dssPageTwo#dssPageTwo){
-        border:1px solid #713c98!important;border-radius:0!important;box-shadow:none!important;
+        border:1px solid #a2a0a5!important;border-radius:0!important;box-shadow:none!important;
       }
     `;
     doc.head.append(style);
