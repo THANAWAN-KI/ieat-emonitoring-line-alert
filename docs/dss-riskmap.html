@@ -95,9 +95,103 @@ button.risk-glass-card[aria-pressed="true"]{outline:1px solid var(--glass-accent
 #supportGlassSummary button[aria-pressed="true"] .risk-glass-action:before{background:#7a638e!important}
 @media(max-width:600px){:is(#riskGlassSummary,#supportGlassSummary) button.risk-glass-card{padding:14px!important;min-height:205px!important}:is(#riskGlassSummary,#supportGlassSummary) .kpi-card-head{min-height:50px!important;gap:7px!important}:is(#riskGlassSummary,#supportGlassSummary) .risk-glass-card>strong{font-size:30px!important}#supportGlassSummary button.risk-glass-card{min-height:164px!important}}
 
+#dssDataSummary .dss-data-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#dssDataSummary .dss-data-card{display:grid;gap:4px;padding:16px 18px;border:1px solid #e0e5eb;background:#fff;color:#354d59}
+#dssDataSummary strong{font-size:30px;font-weight:600;color:#263544;font-variant-numeric:tabular-nums}
+#dssDataSummary small{color:#596978}
+@media(max-width:720px){#dssDataSummary .dss-data-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.emcc-site-header{position:relative;z-index:1600;background:#fff;color:#121618;font:400 16px/1.45 Sarabun,sans-serif;color-scheme:light}
+.emcc-site-header *{box-sizing:border-box}
+.emcc-brand{display:flex;align-items:center;gap:14px;min-height:52px;padding:0 24px;border-bottom:1px solid #e5e7e9}
+.emcc-brand > a{color:inherit;text-decoration:none;font-size:30px;font-weight:500;line-height:1.15;letter-spacing:.12em}
+.emcc-brand > span{min-width:0;font-weight:500;line-height:1.4}
+.emcc-global-nav{display:flex;align-items:stretch;min-height:50px;padding-left:24px;background:linear-gradient(90deg,#362048,#533273 55%,#643e88);color:#fff;font-weight:300}
+.emcc-global-nav > span{align-self:center;margin-inline-end:auto;padding:10px 16px 10px 0}
+.emcc-global-nav > a,.emcc-global-nav > details > summary{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:10px 24px;color:inherit;text-decoration:none;white-space:nowrap;cursor:pointer;list-style:none}
+.emcc-global-nav > a{background:#45235f}
+.emcc-global-nav > a:last-child{padding-inline:10px;margin-inline-start:2px}
+.emcc-global-nav > a:hover{background:#2c143c}
+.emcc-global-nav > details{position:relative}
+.emcc-global-nav > details > summary::-webkit-details-marker{display:none}
+.emcc-global-nav > details > summary:hover,.emcc-global-nav > details[open] > summary{background:#4b286a}
+.emcc-risk-icon,.emcc-nav-chevron{flex:none}
+.emcc-risk-icon{width:16px;height:16px}
+.emcc-nav-chevron{width:12px;height:12px}
+.emcc-global-nav details[open] .emcc-nav-chevron{transform:rotate(180deg)}
+.emcc-data-menu{position:absolute;right:0;top:100%;width:min(340px,calc(100vw - 24px));max-height:calc(100dvh - 102px);overflow:auto;overscroll-behavior:contain;background:#10202ce8;color:#fff;border:1px solid #ffffff24;border-radius:5px;padding:5px;box-shadow:0 12px 34px #10202c44}
+.emcc-data-menu h2{margin:0;padding:9px 12px 4px;color:#d5e1ea;font-size:11px;font-weight:600}
+.emcc-data-menu h2:not(:first-child){border-top:1px solid #ffffff26;margin-top:4px}
+.emcc-data-menu a{display:block;padding:10px 12px;border-radius:4px;color:inherit;text-decoration:none;font-size:14px;font-weight:300;line-height:1.5}
+.emcc-data-menu a.emcc-all-systems{background:#ffffff14}
+.emcc-data-menu a:is(:hover,:focus-visible){background:#ffffff26}
+.emcc-site-header :is(a,button,summary):focus-visible{outline:2px solid #68418f;outline-offset:-2px}
+.emcc-global-nav :is(a,summary):focus-visible{outline-color:#fff}
+@media(max-width:900px){.emcc-brand > span{font-size:14px}.emcc-brand{padding-inline:14px}}
+@media(max-width:650px){
+  .emcc-brand > a{font-size:24px}
+  .emcc-brand > span{display:none}
+  .emcc-global-nav{position:relative;flex-wrap:wrap;justify-content:flex-end;padding:4px 0 0}
+  .emcc-global-nav > span{flex-basis:100%;padding:10px 12px}
+  .emcc-global-nav > details{position:static}
+  .emcc-global-nav > a,.emcc-global-nav > details > summary{min-height:42px;padding-inline:10px;font-size:14px}
+  .emcc-data-menu{right:12px;max-height:calc(100dvh - 155px)}
+}
+@media print{.emcc-site-header{display:none}}
+</style><style id="dss-overview-refresh-20261119">
+.emcc-brand>details{position:relative;flex:none;margin-left:0}.emcc-brand>details:first-of-type{margin-left:auto}.emcc-brand>details>summary{list-style:none;display:flex;align-items:center;justify-content:center;width:38px;height:40px;cursor:pointer;color:#202b36}.emcc-brand>details>summary::-webkit-details-marker{display:none}.emcc-brand>details>summary svg{width:22px;height:22px}.emcc-brand>details>summary:hover{background:#f2eef6;border-radius:5px}.dashboard-export-panel,.emcc-header-action-panel{position:absolute;right:0;top:100%;z-index:2000;min-width:190px;background:#fff;border:1px solid #e4e5eb;box-shadow:0 10px 26px #16223524;padding:7px;border-radius:6px}.dashboard-export-panel button,.emcc-header-action-panel button{display:block;width:100%;text-align:left;border:0;background:#fff;padding:9px 12px;border-radius:4px;cursor:pointer;color:#273044}.dashboard-export-panel button:hover,.emcc-header-action-panel button:hover{background:#f0eaf5}.emcc-brand .dss-camera{display:none}
+</style><style id="dss-emonitoring-full-layout-20261119">
+/* Emulate the E-Monitoring dashboard's dense boxed two-column overview. */
+body{background:#fff;color:#282d33}
+.dashboard-export-panel{box-sizing:border-box;width:min(306px,calc(100vw - 32px));min-width:0;padding:0;border:1px solid #4c5a51;border-radius:0;background:#f5f6f1;box-shadow:-6px 5px 0 #56396d}
+.dashboard-export-panel #downloadDashboard{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:0 14px;border-radius:0;background:transparent;color:#17221b;font:400 16px/1.35 Sarabun,sans-serif}
+.dashboard-export-panel #downloadDashboard::after{content:"";flex:none;width:10px;height:10px;margin:0 2px 5px 0;border:solid #4c5a51;border-width:0 1px 1px 0;transform:rotate(45deg)}
+.dashboard-export-panel #downloadDashboard:hover{background:#eaeee6}
+.dashboard-export-panel #downloadDashboard:focus-visible{outline:2px solid #56396d;outline-offset:-3px}
+@media(max-width:650px){.emcc-brand{position:relative}.emcc-brand>#dashboardExportMenu{position:static}.dashboard-export-panel{right:14px}.dashboard-export-panel #downloadDashboard{font-size:15px}}
+
+.emcc-brand{min-height:70px;padding-inline:28px;gap:18px}
+.emcc-brand>a{font-size:36px}
+.emcc-brand>span{font-size:18px}
+.emcc-global-nav{min-height:57px;padding-inline-start:28px;font-size:18px;font-weight:400}
+.emcc-global-nav>a,.emcc-global-nav>details>summary{min-height:57px;padding-inline:28px}
+.emcc-global-nav>details>summary{background:#593777}
+.emcc-global-nav>a:last-child{padding-inline:12px}
+.emcc-brand>#riskSignOut>summary{width:auto;padding:0 9px;gap:8px;font-size:14px}
+.emcc-brand>#riskSignOut>summary svg{width:13px;height:13px}
+#riskSignOut a{display:block;padding:8px;color:inherit;text-decoration:none;white-space:nowrap;font-size:14px}
+#riskSignOut a:hover{background:#f0eaf5}
+@media(max-width:900px){.emcc-brand{padding-inline:14px}.emcc-brand>span{font-size:14px}}
+@media(max-width:650px){.emcc-brand{min-height:56px;gap:8px}.emcc-brand>a{font-size:26px}.emcc-global-nav{padding-inline-start:0;font-size:14px}.emcc-global-nav>a,.emcc-global-nav>details>summary{min-height:42px;padding-inline:12px}}
 </style></head><body>
-<header class="brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span>Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</span></header>
-<nav class="global-nav" aria-label="เมนู EMCC"><span>Environmental Monitoring and Control Center: EMCC</span><a href="https://emcc-gis.pages.dev/">Overview</a><details><summary>Data</summary><div><a href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/" target="_blank" rel="noopener">Estate operators (e-PP)</a><a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss.html" target="_blank" rel="noopener">DSS</a><a href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener">E-Monitoring: environment</a><a href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener">EMCC accident statistics</a><a href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener">Water use: estates / ports</a><a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data&amp;hazard=fire#riskCoverage" target="_blank" rel="noopener">Fire</a><a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-dashboard.html" target="_blank" rel="noopener">Flood</a><a href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener">Drought</a><a href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener">PM2.5</a><a href="https://tmd-earthquake.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener">Earthquake</a><a href="./chemical-report.html?view=data" target="_blank" rel="noopener">Chemical leaks</a><a href="https://emcc-gis.pages.dev/#systems" target="_blank" rel="noopener">View all systems ↓</a></div></details><a href="./dss-riskmap.html?view=data">Risk map</a></nav>
+<div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span data-en="Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates">ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
+  <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
+  <div class="emcc-header-action-panel"><button type="button" data-header-lang="th" aria-pressed="true">ไทย</button><button type="button" data-header-lang="en" aria-pressed="false">EN</button></div>
+</details>
+<details id="riskSignOut"><summary><span data-en="Sign out">ออกจากระบบ</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary><div class="emcc-header-action-panel"><a href="https://emcc-gis.pages.dev/" data-en="Go to EMCC to sign out">ไปหน้า EMCC เพื่อออกจากระบบ</a></div></details></header>
+<nav class="emcc-global-nav" aria-label="เมนูหลัก">
+  <span>Environmental Monitoring and Control Center: EMCC</span>
+  <a href="https://emcc-gis.pages.dev/" data-en="Overview">ภาพรวม</a>
+  <details id="dashboardDataMenu">
+    <summary><span data-en="Data">ข้อมูล</span><svg class="emcc-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+    <div class="emcc-data-menu">
+    <h2>EMCC DASHBOARD</h2>
+    <a href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/" target="_blank" rel="noopener" data-en="Estate operators (e-PP)">ผู้ประกอบการในนิคมฯ (e-PP)</a>
+    <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss.html" target="_blank" rel="noopener" data-en="DSS">DSS</a>
+    <a href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" data-en="E-Monitoring: environment">E-Monitoring สิ่งแวดล้อม</a>
+    <a href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener" data-en="EMCC accident statistics">สถิติอุบัติเหตุ EMCC</a>
+    <a href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" data-en="Water use: estates / ports">การใช้น้ำ นิคมฯ / ท่าเรือฯ</a>
+    <h2>EMCC RISK MAP</h2>
+    <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data&amp;hazard=fire#riskCoverage" target="_blank" rel="noopener" data-en="Fire">ไฟไหม้</a>
+    <a href="./flood-dashboard.html" target="_blank" rel="noopener" data-en="Flood">น้ำท่วม</a>
+    <a href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" data-en="Drought">ภัยแล้ง</a>
+    <a href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" data-en="PM2.5">ฝุ่น PM2.5</a>
+    <a href="https://tmd-earthquake.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" data-en="Earthquake">แผ่นดินไหว</a>
+    <a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/chemical-report.html?view=data" target="_blank" rel="noopener" data-en="Chemical leaks">สารเคมีรั่วไหล</a>
+    <a class="emcc-all-systems" href="https://emcc-gis.pages.dev/#systems" data-en="View all systems ↓">ดูระบบทั้งหมด ↓</a>
+    </div>
+  </details>
+  <a href="./dss-riskmap.html?view=data" aria-current="page"><svg class="emcc-risk-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"></path><path d="M9 4v14M15 6v14"></path></svg>Risk map</a>
+</nav></div>
 <main><header class="title"><small>RISK MAP</small><h1>แผนที่ความเสี่ยงนิคมอุตสาหกรรม</h1></header>
 <form class="filters" id="filters"><div class="field"><label for="estate">นิคมอุตสาหกรรม</label><div class="search-row"><input id="estate" list="estateOptions" placeholder="พิมพ์ชื่อนิคมฯ" autocomplete="off"><datalist id="estateOptions"></datalist><button type="submit">ค้นหา</button></div></div><div class="field"><label for="group">กลุ่มโรงงานที่แสดง</label><select id="group"><option value="all">ทุกกลุ่มความเสี่ยง</option><option value="twelve">ความเสี่ยงสูง 12 ประเภท</option><option value="psm">โรงงาน PSM</option><option value="fire">ความเสี่ยงอัคคีภัยสูง</option></select></div><div class="field"><label for="basemap">แผนที่พื้นฐาน</label><select id="basemap"><option value="gray">สีเทาอ่อน · โทนแดชบอร์ด</option><option value="streets">ถนน</option><option value="satellite">ภาพถ่ายดาวเทียม</option></select></div><button type="button" id="reset">แสดงทั่วประเทศ</button></form>
 <div class="workspace"><aside class="summary" aria-label="สรุปโรงงานที่เข้าข่ายความเสี่ยง"><h2>ภาพรวมความเสี่ยง</h2><p id="scope" class="scope">ทั่วประเทศ</p><strong id="number" class="number" aria-live="polite">—</strong><p id="countLabel" class="label">โรงงานที่เข้าข่ายความเสี่ยงอย่างน้อยหนึ่งกลุ่ม</p><p class="note">นับโรงงานไม่ซ้ำจากทะเบียน e-PP ไม่ใช่จำนวนเหตุการณ์</p><p id="countState" class="state">กำลังโหลดทะเบียนโรงงาน…</p><div class="hint">คลิกพื้นที่หรือจุดข้อมูลบนแผนที่ เพื่อดูรายละเอียดของนิคมฯ โรงงาน และจุดสนับสนุน</div><small>แหล่งข้อมูล: ทะเบียนโรงงาน e-PP กนอ.</small></aside>
@@ -108,6 +202,10 @@ button.risk-glass-card[aria-pressed="true"]{outline:1px solid var(--glass-accent
 <button type="button" class="risk-glass-card" data-risk-group="psm" aria-pressed="false" style="--glass-accent:#977728"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6zM9 12l2 2 4-4"/></svg></span><span class="risk-glass-label">โรงงาน PSM</span></span><strong id="glassCountPsm">—</strong><span class="risk-glass-unit">โรงงาน</span><span class="risk-kpi-progress" aria-hidden="true"><span></span></span><span class="risk-kpi-share">กำลังโหลดสัดส่วน…</span><span class="risk-glass-action">แสดงบนแผนที่ <svg class="risk-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M7 5h12v12"/></svg></span></button>
 <button type="button" class="risk-glass-card" data-risk-group="fire" aria-pressed="false" style="--glass-accent:#a75060"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3c2 4-1 6 1 9 1-1 2-3 2-4 4 5 5 11-3 13C5 22 3 16 7 10c0 2 1 4 3 4-2-5 0-8 3-11z"/></svg></span><span class="risk-glass-label">ความเสี่ยงอัคคีภัยสูง</span></span><strong id="glassCountFire">—</strong><span class="risk-glass-unit">โรงงาน</span><span class="risk-kpi-progress" aria-hidden="true"><span></span></span><span class="risk-kpi-share">กำลังโหลดสัดส่วน…</span><span class="risk-glass-action">แสดงบนแผนที่ <svg class="risk-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M7 5h12v12"/></svg></span></button>
 </div><p id="riskGlassNote" class="risk-glass-note" role="status">กำลังโหลดทะเบียนโรงงาน…</p></section>
+<section id="dssDataSummary" class="risk-glass-summary" aria-labelledby="dssDataTitle">
+<div class="risk-glass-heading"><div><h2 id="dssDataTitle">ภาพรวมข้อมูล DSS</h2><p>ทั่วประเทศ · นับจากทะเบียน GIS กนอ.</p></div></div>
+<div class="dss-data-grid"><div class="dss-data-card"><span>นิคมอุตสาหกรรม</span><strong id="dssTotal-estates">—</strong><small>นิคมฯ</small><small id="dssState-estates">กำลังโหลด</small></div><div class="dss-data-card"><span>ทะเบียนผู้ประกอบการ</span><strong id="dssTotal-operators">—</strong><small>รายการ</small><small id="dssState-operators">กำลังโหลด</small></div><div class="dss-data-card"><span>อุปกรณ์ระงับเหตุ</span><strong id="dssTotal-equipment">—</strong><small>รายการ</small><small id="dssState-equipment">กำลังโหลด</small></div><div class="dss-data-card"><span>บุคลากรระงับเหตุ</span><strong id="dssTotal-staff">—</strong><small>รายการ</small><small id="dssState-staff">กำลังโหลด</small></div></div>
+</section>
 <section id="supportGlassSummary" class="risk-glass-summary support-glass-summary" aria-labelledby="supportGlassTitle"><div class="risk-glass-heading"><div><h2 id="supportGlassTitle">ข้อมูลสนับสนุนการรับมือเหตุฉุกเฉิน</h2><p id="supportGlassScope">ทั่วประเทศ · กดการ์ดเพื่อเปิดหรือปิดจุดข้อมูลบนแผนที่</p></div><span class="risk-glass-source">ข้อมูล GIS กนอ.</span></div><div class="risk-glass-grid support-glass-grid">
 <button type="button" class="risk-glass-card" data-support="hospital" aria-pressed="false" style="--glass-accent:#bb5267"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span><span class="risk-glass-label">โรงพยาบาล</span></span><strong id="supportCountHospital">—</strong><span class="risk-glass-unit">จุดข้อมูล</span><span class="risk-glass-action">เปิดบนแผนที่</span></button>
 <button type="button" class="risk-glass-card" data-support="fire" aria-pressed="false" style="--glass-accent:#c98136"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3c2 4-1 6 1 9 1-1 2-3 2-4 4 5 5 11-3 13C5 22 3 16 7 10c0 2 1 4 3 4-2-5 0-8 3-11z"/></svg></span><span class="risk-glass-label">สถานีดับเพลิง</span></span><strong id="supportCountFire">—</strong><span class="risk-glass-unit">จุดข้อมูล</span><span class="risk-glass-action">เปิดบนแผนที่</span></button>
@@ -126,6 +224,32 @@ const node=(tag,text)=>{const e=document.createElement(tag);e.textContent=text;r
 let selectedEstate='',registry=null,estateData=[],map,revision=0,reloadTimer,baseLayer,baseLoaded=false,baseFallback=false;const overlays=[],errors=new Set(),activeRequests=new Set();
 async function json(url,signal){const c=new AbortController(),t=setTimeout(()=>c.abort(),18000);if(signal)signal.addEventListener('abort',()=>c.abort(),{once:true});try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw Error('HTTP '+r.status);const d=await r.json();if(d.error)throw Error(d.error.message);return d;}finally{clearTimeout(t);}}
 function query(path,params={},signal){return json(base+encodeURI(path)+'/query?'+new URLSearchParams({f:'geojson',where:'1=1',outFields:'*',returnGeometry:'true',outSR:'4326',resultRecordCount:'1000',...params}),signal);}
+const dssTotals = {
+ operators: () => query('ข้อมูลผู้ประกอบการ_e_PP/FeatureServer/0', {f:'json',returnCountOnly:'true',returnGeometry:'false'})
+   .then(data => data.count),
+ equipment: () => json("https://emonitor.ieat.go.th/envisys/gis/file/equimentPQbOLMB5TIGSziiCggBx77R8ITBd2aCRPaybDRoqZBejLTEQ4SICTxC1Vay15xIG.json").then(dssRowCount),
+ staff: () => json("https://emonitor.ieat.go.th/envisys/gis/file/officedgkChDvhp5W8MoKB0iXh6DlKi98gp41zsmCTTAFU3rdgkJg3z9Ms8BYYJ4z2TomW.json").then(dssRowCount)
+};
+function dssRowCount(payload) {
+ if (Array.isArray(payload)) return payload.length;
+ if (!payload || typeof payload !== 'object') return null;
+ for (const key of ['features','records','data','items','results','rows']) {
+   const count = dssRowCount(payload[key]);
+   if (count !== null) return count;
+ }
+ return null;
+}
+function showDssTotal(key, count) {
+ const available = Number.isSafeInteger(count) && count >= 0;
+ $('dssTotal-'+key).textContent = available ? count.toLocaleString('th-TH') : '—';
+ $('dssState-'+key).textContent = available ? '' : 'โหลดข้อมูลไม่ได้';
+}
+async function loadDssTotals() {
+ await Promise.all(Object.entries(dssTotals).map(async ([key, load]) => {
+   $('dssState-'+key).textContent = 'กำลังโหลด';
+   try { showDssTotal(key, await load()); } catch { showDssTotal(key, null); }
+ }));
+}
 function showStatus(){const failure=[...errors];$('status').textContent=failure.length?'แผนที่พร้อม · บางชั้นข้อมูลเชื่อมต่อไม่ได้: '+failure.join(' · '):activeRequests.size?'แผนที่พร้อม · กำลังโหลดชั้นข้อมูล…':'คลิกจุดข้อมูลเพื่อดูรายละเอียด · เปิดชั้นข้อมูลเพิ่มได้มุมขวาบน';}
 function popup(feature,layer,title,names){const a=feature.properties||{},box=document.createElement('div');box.append(node('strong',names.map(k=>a[k]).find(Boolean)||title),node('p',title));const estate=['นิคมอุตสาหกรรม','IEAT','สำนักงานนิคมฯ'].map(k=>a[k]).find(Boolean);if(estate)box.append(node('p',estate));const registration=a['เลขทะเบียนใหม่']||a['เลขทะเบียนเดิม'];if(registration)box.append(node('p','เลขทะเบียน: '+registration));const telephone=Object.entries(a).filter(([k,v])=>v&&/โทร|phone|telephone/i.test(k)).map(([,v])=>String(v)).join(' · ');if(telephone)box.append(node('p','โทร: '+telephone));if(Object.values(flags).some(k=>flagged(a[k]))){const tags=document.createElement('div');tags.className='risk-memberships';for(const def of Object.values(riskStyles)){if(flagged(a[def.field])){const tag=node('span',def.title);tag.style.setProperty('--risk-color',def.color);tags.append(tag);}}box.append(tags);const hint=node('p','สัญลักษณ์เป็นตำแหน่งตัวแทนขอบเขตโรงงาน · ซูมเข้าเพื่อดูพื้นที่จริง');hint.className='risk-map-symbol-note';box.append(hint);}layer.bindPopup(box);}
 const riskStyles={twelve:{title:'ความเสี่ยงสูง 12 ประเภท',field:flags.twelve,color:'#25a078',radius:9,width:6},psm:{title:'โรงงาน PSM',field:flags.psm,color:'#dda72b',radius:6.5,width:3.5},fire:{title:'ความเสี่ยงอัคคีภัยสูง',field:flags.fire,color:'#d45a61',radius:4.5,width:1.4}};
@@ -164,7 +288,7 @@ function updateGlassCards(){
 
 function count(){updateGlassCards();updateSupportCards();const group=$('group').value;const labels={all:'โรงงานที่เข้าข่ายความเสี่ยงอย่างน้อยหนึ่งกลุ่ม',twelve:'โรงงานความเสี่ยงสูง 12 ประเภท',psm:'โรงงาน PSM',fire:'โรงงานที่เข้าข่ายอัคคีภัยสูง'};$('countLabel').textContent=labels[group];$('scope').textContent=selectedEstate||'ทั่วประเทศ';if(!registry){$('number').textContent='—';return;}const keys=flags[group]?[flags[group]]:Object.values(flags);const rows=registry.filter(a=>(!selectedEstate||normalize(a['นิคมอุตสาหกรรม'])===normalize(selectedEstate))&&keys.some(k=>flagged(a[k])));const ids=new Set(rows.map(a=>String(a['เลขทะเบียนใหม่']||a['เลขทะเบียนเดิม']||a.__id).replace(/\s/g,'')));$('number').textContent=fmt(ids.size);$('countState').textContent='แห่ง · ข้อมูลตามทะเบียน';}
 async function loadRegistry(){registry=null;$('countState').textContent='กำลังโหลดทะเบียนโรงงาน…';try{const meta=await json(base+riskPath+'?f=json'),idField=meta.objectIdField||'OBJECTID',available=new Set((meta.fields||[]).map(f=>f.name));const fields=[idField,'นิคมอุตสาหกรรม','เลขทะเบียนใหม่','เลขทะเบียนเดิม',...Object.values(flags)].filter(x=>available.has(x));const where=Object.values(flags).map(k=>k+" = 'เข้าข่าย'").join(' OR ');const rows=[];let complete=false;for(let offset=0;offset<20000;offset+=1000){const d=await query(riskPath,{f:'json',where,returnGeometry:'false',outFields:fields.join(','),orderByFields:idField+' ASC',resultOffset:String(offset)});if(!Array.isArray(d.features))throw Error('ทะเบียนไม่ถูกต้อง');rows.push(...d.features.map(f=>({...f.attributes,__id:f.attributes[idField]})));if(!d.exceededTransferLimit&&d.features.length<1000){complete=true;break;}}if(!complete)throw Error('ทะเบียนยังโหลดไม่ครบ');registry=rows;count();}catch{$('countState').textContent='โหลดทะเบียนไม่สำเร็จ · กด “โหลดข้อมูลใหม่” เพื่อลองอีกครั้ง';$('number').textContent='—';updateGlassCards();}}
-async function loadEstates(){try{const d=await query('e_PP_2025/FeatureServer/1');estateData=d.features||[];$('estateOptions').replaceChildren(...[...new Set(estateData.map(f=>f.properties?.['สำนักงานนิคมฯ']).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th')).map(name=>{const o=document.createElement('option');o.value=name;return o}));}catch{errors.add('รายชื่อนิคมฯ');showStatus();}}
+async function loadEstates(){try{const d=await query('e_PP_2025/FeatureServer/1');estateData=d.features||[];showDssTotal('estates',new Set(estateData.map(f=>normalize(f.properties?.['สำนักงานนิคมฯ'])).filter(Boolean)).size);$('estateOptions').replaceChildren(...[...new Set(estateData.map(f=>f.properties?.['สำนักงานนิคมฯ']).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th')).map(name=>{const o=document.createElement('option');o.value=name;return o}));}catch{showDssTotal('estates',null);errors.add('รายชื่อนิคมฯ');showStatus();}}
 async function refresh(){if(!map)return;const current=++revision;const group=$('group').value;const bounds=map.getBounds(),geometry=JSON.stringify({xmin:bounds.getWest(),ymin:bounds.getSouth(),xmax:bounds.getEast(),ymax:bounds.getNorth(),spatialReference:{wkid:4326}});
  for(const d of overlays.filter(d=>d.minZoom&&map.getZoom()<d.minZoom)){d.request?.abort();d.shapes.clearLayers();d.symbols.clearLayers();d.features=[];}const riskTask=refreshRisk(current,geometry);
  await Promise.all(overlays.filter(d=>!d.risk&&!d.local&&map.hasLayer(d.layer)&&(!d.minZoom||map.getZoom()>=d.minZoom)).map(async def=>{const request=new AbortController();if(def.request)def.request.abort();def.request=request;activeRequests.add(def.title);showStatus();try{let where=def.risk?(flags[group]?flags[group]+" = 'เข้าข่าย'":Object.values(flags).map(k=>k+" = 'เข้าข่าย'").join(' OR ')):'1=1';let features=[],limited=false;for(let offset=0;offset<5000;offset+=1000){const d=await query(def.path,{where:'('+where+')',geometry,geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',resultOffset:String(offset)},request.signal);if(current!==revision)return;features.push(...(d.features||[]));if(!d.exceededTransferLimit&&(d.features||[]).length<1000)break;if(offset===4000)limited=true;}if(current!==revision)return;if(def.risk&&selectedEstate)features=features.filter(f=>normalize(f.properties?.['นิคมอุตสาหกรรม'])===normalize(selectedEstate));drawContext(def,features);errors.delete(def.title);if(limited)errors.add(def.title+' (ซูมเข้าเพื่อดูข้อมูลครบขึ้น)');}catch(e){if(current===revision&&e.name!=='AbortError')errors.add(def.title);}finally{if(def.request===request)activeRequests.delete(def.title);if(current===revision)showStatus();}}));await riskTask;showStatus();}
@@ -176,13 +300,34 @@ function init(){if(!window.L){$('mapLoading').textContent='เครื่อง
  map=L.map('map',{preferCanvas:true,zoomControl:true}).setView([13,101],5);map.createPane('provinceBoundaries');map.getPane('provinceBoundaries').style.zIndex=350;L.control.scale({imperial:false}).addTo(map);changeBase();
  const defs=[{title:'ขอบเขตจังหวัด',local:true,names:['จังหวัด','name'],color:'#81989f',visible:true},{title:'เขตประกอบการภายในนิคมฯ (ซูมเข้าเพื่อดู)',path:'Map/FeatureServer/10',names:['นิค','ชื_1','เขต'],color:'#7b6c9f',boundary:true,minZoom:9,visible:true},{title:'โรงงานทั่วไป (ซูมเข้าเพื่อดู)',path:'ข้อมูลผู้ประกอบการ_e_PP/FeatureServer/0',names:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','Name_Parcel_1'],color:'#7896a5',iconKey:'business',minZoom:9,visible:true},{title:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1',names:['Name'],iconKey:'school',color:'#5898b6',visible:true},{title:'จุดเฝ้าระวังระดับน้ำ',path:'Risk_Map_WFL1/FeatureServer/0',names:['Name'],iconKey:'waterWatch',color:'#239cba',visible:true},{title:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2',names:['Name'],iconKey:'communityRisk',color:'#a17850',visible:true},{title:'นิคมอุตสาหกรรม',path:'e_PP_2025/FeatureServer/1',names:['สำนักงานนิคมฯ'],color:'#5073a0',visible:true},...Object.entries(riskStyles).map(([riskKey,style])=>({title:style.title,path:riskPath,names:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ'],color:style.color,iconKey:'business',risk:true,riskKey,visible:true})),{title:'โรงพยาบาล',supportKey:'hospital',countId:'supportCountHospital',path:'Hospital_Locations/FeatureServer/0',names:['โรงพยาบาล'],color:'#c34e69',visible:true},{title:'สถานีดับเพลิง',supportKey:'fire',countId:'supportCountFire',path:'Risk_Map_WFL1/FeatureServer/3',names:['Name'],color:'#dd793e',visible:true},{title:'สถานีตำรวจ',supportKey:'police',countId:'supportCountPolice',path:'Risk_Map_WFL1/FeatureServer/5',names:['Name'],color:'#5763a1',visible:true},{title:'ชุมชน',supportKey:'community',countId:'supportCountCommunity',path:'Map/FeatureServer/1',names:['Name'],color:'#58a17c',visible:true},{title:'หัวจ่ายน้ำ',supportKey:'hydrant',countId:'supportCountHydrant',path:'Risk_Map_WFL1/FeatureServer/4',names:['Name'],color:'#3c9cb6',visible:true},{title:'CCTV',supportKey:'cctv',countId:'supportCountCctv',path:'ตำแหน่งกล้องCCTV/FeatureServer/7',names:['Name'],color:'#74798f',visible:true}];const controls={};for(const def of defs){def.layer=geoLayer(def);overlays.push(def);controls[def.title]=def.layer;if(def.visible)def.layer.addTo(map);}L.control.layers({},controls,{collapsed:true}).addTo(map);
  map.on('moveend',schedule);map.on('zoomend',()=>{updateRiskSymbols();for(const d of overlays.filter(x=>!x.risk&&x.features))renderContextSymbols(d);});map.on('overlayadd overlayremove',()=>{if(!syncing)schedule();updateSupportCards();});$('basemap').onchange=()=>{baseFallback=false;changeBase()};$('group').onchange=()=>{syncRiskLayers();count();refresh()};$('filters').onsubmit=event=>{event.preventDefault();const text=$('estate').value.trim();const names=estateData.map(f=>f.properties?.['สำนักงานนิคมฯ']).filter(Boolean);const exact=names.find(name=>normalize(name)===normalize(text));const matches=names.filter(name=>normalize(name).includes(normalize(text)));if(!text)selectedEstate='';else if(exact)selectedEstate=exact;else if(new Set(matches).size===1)selectedEstate=matches[0];else{$('estate').setCustomValidity('เลือกชื่อนิคมฯ จากรายการที่แนะนำ');$('estate').reportValidity();return;}$('estate').value=selectedEstate;count();$('mapTitle').textContent=selectedEstate||'ประเทศไทย';focusEstate();};$('estate').oninput=()=>{$('estate').setCustomValidity('');if(!$('estate').value){selectedEstate='';count();focusEstate()}};
- $('reset').onclick=()=>{selectedEstate='';$('estate').value='';$('estate').setCustomValidity('');$('group').value='all';syncRiskLayers();$('mapTitle').textContent='ประเทศไทย';count();focusEstate()};$('retry').onclick=()=>{errors.clear();if(!baseLoaded){baseFallback=false;changeBase()}if(!registry)loadRegistry();if(!estateData.length)loadEstates();loadSupportCounts();if(errors.has('ขอบเขตจังหวัด'))loadProvinceBoundaries();refresh()};window.addEventListener('resize',()=>map.invalidateSize({pan:true}));
+ $('reset').onclick=()=>{selectedEstate='';$('estate').value='';$('estate').setCustomValidity('');$('group').value='all';syncRiskLayers();$('mapTitle').textContent='ประเทศไทย';count();focusEstate()};$('retry').onclick=()=>{errors.clear();if(!baseLoaded){baseFallback=false;changeBase()}if(!registry)loadRegistry();if(!estateData.length)loadEstates();loadDssTotals();loadSupportCounts();if(errors.has('ขอบเขตจังหวัด'))loadProvinceBoundaries();refresh()};window.addEventListener('resize',()=>map.invalidateSize({pan:true}));
  for(const card of document.querySelectorAll('[data-risk-group]'))card.addEventListener('click',()=>{$('group').value=card.dataset.riskGroup;$('group').dispatchEvent(new Event('change',{bubbles:true}));});
- bindSupportCards();showStatus();loadProvinceBoundaries();loadEstates();loadRegistry();refresh();
+ bindSupportCards();showStatus();loadProvinceBoundaries();loadEstates();loadDssTotals();loadRegistry();refresh();
 }
 init();
 })();
 
 
 
+</script><script>
+(() => {
+ const header = document.querySelector('.emcc-site-header');
+ const menus = header.querySelectorAll('.emcc-brand > details, .emcc-global-nav > details');
+ const language = header.querySelector('#dashboardLanguage');
+ const translations = [...header.querySelectorAll('[data-en]')].map(element => [element, element.textContent]);
+ const choices = header.querySelectorAll('[data-header-lang]');
+ choices.forEach(button => button.addEventListener('click', () => {
+   const english = button.dataset.headerLang === 'en';
+   for (const [element, thai] of translations) element.textContent = english ? element.dataset.en : thai;
+   choices.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
+   language.open = false;
+ }));
+ header.querySelector('#downloadDashboard').addEventListener('click', () => {
+   header.querySelector('#dashboardExportMenu').open = false;
+   window.print();
+ });
+ document.addEventListener('click', event => {
+   menus.forEach(menu => { if (!menu.contains(event.target)) menu.open = false; });
+ });
+})();
 </script></body></html>
