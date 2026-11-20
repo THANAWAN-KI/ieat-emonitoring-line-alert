@@ -447,6 +447,21 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
  .safety-grid>.risk-region-column .risk-region-picker{grid-template-rows:auto}
  .safety-grid>.risk-region-column .risk-region-preview{min-height:76px}
 }
+
+.risk-detail-box>h2{text-align:center}
+.risk-detail-search{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:10px;font-weight:600}
+.risk-detail-box input{width:min(280px,100%);font-weight:400}
+.risk-detail-box [role="status"]{font-size:13px;color:#455a55}
+.risk-detail-box :is(th,td){padding:9px 10px}
+.risk-detail-box tbody tr:nth-child(even){background:#f5f8f7}
+.risk-detail-box tbody tr:hover{background:#eef5f2}
+#factoryDetails td:first-child,#contactDetailsRows td:first-child,#planDetails td:first-child{font-weight:600}
+#factoryDetails td:nth-child(3){white-space:nowrap;font-variant-numeric:tabular-nums}
+.risk-detail-badge{display:inline-block;padding:2px 6px;background:#f0f2f2;color:#51605d;font-size:12px}
+.risk-detail-badge.is-flagged{background:#fae9ce;color:#694719;font-weight:600}
+#contactDetailsRows a[href^="tel:"]{display:inline-block;padding:2px 5px;background:#e7f2ed;font-weight:600}
+.risk-detail-box .risk-detail-metrics>div{text-align:center;border-color:#89a29a}
+.risk-detail-box .risk-detail-metrics strong{font-variant-numeric:tabular-nums}
 </style></head><body>
 <div class="emcc-site-header"><header class="emcc-brand"><a href="https://emcc-gis.pages.dev/">EMCC</a><span data-en="Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates">ระบบสารสนเทศภูมิศาสตร์เพื่อการติดตามสถานการณ์และเฝ้าระวังความเสี่ยงในนิคมอุตสาหกรรม</span><details id="dashboardExportMenu" data-html2canvas-ignore><summary aria-label="เมนูดาวน์โหลดภาพ" title="ดาวน์โหลดภาพ"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><title>camera</title><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="1.5" d="M3.25 9.25a2 2 0 0 1 2-2h2.1l1.1-1.85a1.5 1.5 0 0 1 1.3-.75h4.5a1.5 1.5 0 0 1 1.3.75l1.1 1.85h2.1a2 2 0 0 1 2 2v8.5a2.5 2.5 0 0 1-2.5 2.5H5.75a2.5 2.5 0 0 1-2.5-2.5Z"/><circle cx="12" cy="13.25" r="3.5" stroke-width="1.5"/><path stroke-width="2" d="M17.25 10.5h.01"/></g></svg></summary><div class="dashboard-export-panel"><button id="downloadDashboard" type="button">ดาวน์โหลดภาพแดชบอร์ด</button></div></details><details id="dashboardLanguage" class="emcc-header-picker" data-html2canvas-ignore>
   <summary aria-label="เลือกภาษาส่วนหัว / Header language" title="เลือกภาษาส่วนหัว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></svg></summary>
@@ -501,10 +516,10 @@ main{max-width:none;padding:12px clamp(8px,1vw,18px)}
 <button type="button" class="risk-glass-card" data-support="cctv" aria-pressed="false" style="--glass-accent:#637d8d"><span class="kpi-card-head"><span class="support-card-symbol" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 6 14 4-3 8L2 14zM18 12l4-1-2 6-3-1M9 16v5h9"/><circle cx="7" cy="11" r="1"/></svg></span><span class="risk-glass-label">CCTV</span></span><strong id="supportCountCctv">—</strong><span class="risk-glass-unit">จุดกล้องในทะเบียน</span><span class="risk-glass-action">เปิดบนแผนที่</span></button>
 <button type="button" class="risk-glass-card" data-support="waterWatch" style="--glass-accent:#766093" aria-pressed="false"><span class="kpi-card-head"><span class="risk-glass-label">จุดเฝ้าระวังระดับน้ำ</span></span><strong id="supportCount-waterWatch">—</strong><span class="risk-glass-unit">จุดข้อมูล</span><span class="risk-glass-action">เปิดบนแผนที่</span></button><button type="button" class="risk-glass-card" data-support="school" style="--glass-accent:#766093" aria-pressed="false"><span class="kpi-card-head"><span class="risk-glass-label">โรงเรียน</span></span><strong id="supportCount-school">—</strong><span class="risk-glass-unit">จุดข้อมูล</span><span class="risk-glass-action">เปิดบนแผนที่</span></button><button type="button" class="risk-glass-card" data-support="communityRisk" style="--glass-accent:#766093" aria-pressed="false"><span class="kpi-card-head"><span class="risk-glass-label">พื้นที่ชุมชน (ชุด Risk Map)</span></span><strong id="supportCount-communityRisk">—</strong><span class="risk-glass-unit">รายการพื้นที่</span><span class="risk-glass-action">เปิดบนแผนที่</span></button></div></section></div></section>
 
-<section class="risk-detail-box"><h2>รายละเอียดโรงงานที่เข้าข่ายความเสี่ยง</h2><form id="scopeForm"><label>นิคมอุตสาหกรรม <input id="detailEstate" list="estateOptions" placeholder="ทุกนิคมฯ"></label> <button>แสดงข้อมูล</button></form><p id="factoryDetailStatus" role="status"></p><div id="factoryDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section>
+<section class="risk-detail-box"><h2>รายละเอียดโรงงานที่เข้าข่ายความเสี่ยง</h2><form id="scopeForm"><label>นิคมอุตสาหกรรม <input id="detailEstate" list="estateOptions" placeholder="ทุกนิคมฯ"></label> <button>แสดงข้อมูล</button></form><label class="risk-detail-search" for="factoryDetailSearch">ค้นหาโรงงาน <input id="factoryDetailSearch" type="search" placeholder="ชื่อโรงงาน / เลขทะเบียน"></label><p id="factoryDetailStatus" role="status"></p><div id="factoryDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section>
 
 
-<section class="risk-detail-box"><h2>เบอร์ติดต่อหน่วยงานสนับสนุน</h2><p id="contactDetailStatus" role="status"></p><div id="contactDetailsRows" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section><section class="risk-detail-box"><h2>ความพร้อมของทรัพยากร</h2><p>ข้อมูลตามเอกสารแผนรับมือเหตุ · โปรดยืนยันความพร้อมปัจจุบันกับผู้ดูแล</p><div id="planMetrics" class="risk-detail-metrics"></div><h3>บัญชีทรัพยากรตามแผน</h3><label>ค้นหาทรัพยากร <input id="planSearch" type="search" placeholder="ชื่ออุปกรณ์ / หมวด / นิคมฯ"></label><p id="planDetailStatus" role="status"></p><div id="planDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section></main><footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
+<section class="risk-detail-box"><h2>เบอร์ติดต่อหน่วยงานสนับสนุน</h2><label class="risk-detail-search" for="contactDetailSearch">ค้นหาหน่วยงาน <input id="contactDetailSearch" type="search" placeholder="ชื่อหน่วยงาน / นิคมฯ / เบอร์โทร"></label><p id="contactDetailStatus" role="status"></p><div id="contactDetailsRows" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section><section class="risk-detail-box"><h2>ความพร้อมของทรัพยากร</h2><p>ข้อมูลตามเอกสารแผนรับมือเหตุ · โปรดยืนยันความพร้อมปัจจุบันกับผู้ดูแล</p><div id="planMetrics" class="risk-detail-metrics"></div><h3>บัญชีทรัพยากรตามแผน</h3><label class="risk-detail-search">ค้นหาทรัพยากร <input id="planSearch" type="search" placeholder="ชื่ออุปกรณ์ / หมวด / นิคมฯ"></label><p id="planDetailStatus" role="status"></p><div id="planDetails" class="risk-detail-scroll" tabindex="0" aria-label="ตารางข้อมูล"></div></section></main><footer>ศูนย์เฝ้าระวังสิ่งแวดล้อมและความปลอดภัย กนอ. · EMCC GIS</footer>
 <script src="./assets/vendor/leaflet-1.9.4.js"></script><script>
 (()=>{
 'use strict';if(new URLSearchParams(location.search).get('hazard')==='fire')return;
@@ -676,7 +691,10 @@ function renderContactDetails(){
  }));
  contacts.sort((a,b)=>Number(b.info.verified)-Number(a.info.verified)||a.name.localeCompare(b.name,'th'));
  $('contactDetailStatus').textContent=(selectedEstate||'ทั่วประเทศ')+' · '+(layers.some(def=>def.supportFailed)?'บางชั้นข้อมูลโหลดไม่ได้':layers.some(def=>!def.supportRows)?'กำลังโหลดทะเบียน':fmt(contacts.length)+' รายการจากทะเบียน GIS');
- detailTable('contactDetailsRows',['หน่วยงาน','นิคมฯ','เบอร์ติดต่อ','แหล่งอ้างอิง'],contacts.map(({name,estate,info})=>{
+ const term=normalize($('contactDetailSearch').value);
+ const shown=contacts.filter(({name,estate,info})=>normalize([name,estate,...info.phones.flat()].join(' ')).includes(term));
+ if(term)$('contactDetailStatus').textContent+=' · ตรงคำค้น '+fmt(shown.length)+' รายการ';
+ detailTable('contactDetailsRows',['หน่วยงาน','นิคมฯ','เบอร์ติดต่อ','แหล่งอ้างอิง'],shown.map(({name,estate,info})=>{
    const phone=document.createElement('td'),source=document.createElement('td');
    for(const [label,number] of info.phones){const link=node('a',label+' '+number),line=document.createElement('div');link.href='tel:'+number.replace(/[^+\d]/g,'');line.append(link);phone.append(line);}
    phone.append(node('small',info.verified?'ตรวจจากเว็บไซต์ทางการ · '+info.checked:info.phones.length?info.note:'ยังไม่มีเบอร์ที่ยืนยันได้'));
@@ -695,13 +713,23 @@ function renderPlanDetails(){
  $('planDetailStatus').textContent=detailPlans===undefined?'กำลังโหลดบัญชีทรัพยากร…':detailPlans===null?'โหลดบัญชีทรัพยากรไม่ได้':(selectedEstate||'ทั่วประเทศ')+' · พบ '+fmt(shown.length)+' จาก '+fmt(items.length)+' รายการ';
  detailTable('planDetails',['ทรัพยากร','หมวด','จำนวนตามแผน','หน่วย','นิคมฯ','แหล่งอ้างอิง'],shown.map(({item,plan})=>[item.name,item.category,item.amount,item.unit,plan.zone,(plan.source_file||detailPlans.source)+(item.page?' · หน้า '+item.page:'')]));
 }
-function renderExpandedDetails(){
- $('detailEstate').value=selectedEstate;
+function renderFactoryDetails(){
  const group=$('group').value,fields=flags[group]?[flags[group]]:detailFields;
  const rows=(registry||[]).filter(row=>isDetailEstate(row['นิคมอุตสาหกรรม'])&&fields.some(field=>flagged(row[field])));
  $('factoryDetailStatus').textContent=(selectedEstate||'ทั่วประเทศ')+' · '+(registry?fmt(rows.length)+' รายการทะเบียน':registryStatus);
- detailTable('factoryDetails',detailHead,rows.map(detailCells));
- renderContactDetails();renderPlanDetails();
+ const term=normalize($('factoryDetailSearch').value);
+ const shown=rows.filter(row=>[detailName(row),row['เลขทะเบียนใหม่'],row['เลขทะเบียนเดิม']].some(value=>normalize(value).includes(term)));
+ if(term&&registry)$('factoryDetailStatus').textContent+=' · ตรงคำค้น '+fmt(shown.length)+' รายการ';
+ detailTable('factoryDetails',detailHead,shown.map(row=>detailCells(row).map((value,index)=>{
+   if(index<3)return value;
+   const cell=document.createElement('td'),badge=node('span',value);
+   badge.className=value==='เข้าข่าย'?'risk-detail-badge is-flagged':'risk-detail-badge';
+   cell.append(badge);return cell;
+ })));
+}
+function renderExpandedDetails(){
+ if(document.activeElement!==$('detailEstate'))$('detailEstate').value=selectedEstate;
+ renderFactoryDetails();renderContactDetails();renderPlanDetails();
 }
 function bindExpandedDetails(){
  $('scopeForm').onsubmit=event=>{
@@ -709,9 +737,11 @@ function bindExpandedDetails(){
    const names=[...new Set(estateData.map(f=>f.properties?.['สำนักงานนิคมฯ']).filter(Boolean))];
    const match=names.find(name=>normalize(name)===term),partial=names.filter(name=>normalize(name).includes(term));
    if(term&&!match&&partial.length!==1){input.setCustomValidity('เลือกชื่อนิคมฯ จากรายการที่แนะนำ');input.reportValidity();return;}
-   selectedEstate=term?(match||partial[0]):'';$('estate').value=selectedEstate;$('mapTitle').textContent=selectedEstate||'ประเทศไทย';count();focusEstate();
+   selectedEstate=term?(match||partial[0]):'';input.value=selectedEstate;$('estate').value=selectedEstate;$('mapTitle').textContent=selectedEstate||'ประเทศไทย';count();focusEstate();
  };
  $('detailEstate').oninput=()=> $('detailEstate').setCustomValidity('');
+ $('factoryDetailSearch').oninput=renderFactoryDetails;
+ $('contactDetailSearch').oninput=renderContactDetails;
  $('planSearch').oninput=renderPlanDetails;
  json('./data/estate-emergency-equipment-2026.json').then(data=>{detailPlans=Array.isArray(data.records)?data:null;}).catch(()=>{detailPlans=null;}).finally(renderPlanDetails);
  renderExpandedDetails();
