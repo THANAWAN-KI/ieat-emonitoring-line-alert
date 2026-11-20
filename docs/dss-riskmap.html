@@ -336,7 +336,17 @@ main>.workspace{grid-template-columns:minmax(170px,20%) minmax(0,1fr);gap:14px}
 .risk-combined-cards #riskGlassSummary .risk-glass-grid button.risk-glass-card[data-risk-group]{
  min-height:89px!important;background-image:var(--pencil)!important;border:1px solid #453b2d!important
 }
-.risk-combined-cards #supportGlassSummary .support-glass-grid button.risk-glass-card{border-color:#625d4c!important;background:#fff!important}
+.risk-combined-cards #supportGlassSummary .support-glass-grid button.risk-glass-card{
+ border-color:#453b2d!important;
+ background-color:color-mix(in srgb,var(--glass-accent) 60%,#fff)!important;
+ background-image:var(--pencil)!important;
+ color:#151820
+}
+.risk-combined-cards #supportGlassSummary .support-glass-grid .risk-glass-card :is(.risk-glass-label,strong,.risk-glass-unit){color:#151820!important}
+.risk-combined-cards #supportGlassSummary .support-glass-grid button.risk-glass-card:hover{filter:brightness(.96)}
+.risk-combined-cards #supportGlassSummary .support-glass-grid button.risk-glass-card[data-support="waterWatch"]{--glass-accent:#43a6ae!important}
+.risk-combined-cards #supportGlassSummary .support-glass-grid button.risk-glass-card[data-support="school"]{--glass-accent:#b49bd0!important}
+.risk-combined-cards #supportGlassSummary .support-glass-grid button.risk-glass-card[data-support="communityRisk"]{--glass-accent:#b59268!important}
 @media(max-width:950px){.risk-combined-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:550px){.risk-combined-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .safety-side .risk-region-picker{grid-template-columns:repeat(3,minmax(0,1fr))}
