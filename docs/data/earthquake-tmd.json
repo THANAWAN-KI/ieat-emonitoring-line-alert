@@ -3,13 +3,36 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-20T21:49:48.155795+00:00",
+    "fetchedAt": "2026-11-21T03:14:07.726842+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1795099693000,
-    "latestEvent": 1795186629000
+    "oldestEvent": 1795107388000,
+    "latestEvent": 1795220614000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17468",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.391,
+          22.508,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.7,
+        "place": "ประเทศเมียนมา",
+        "time": 1795220614000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17468",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17467",
@@ -210,29 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1795107388000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17459",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17458",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          100.576,
-          19.479,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.8,
-        "place": "ต.ร่มเย็น อ.เชียงคำ จ.พะเยา",
-        "time": 1795099693000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17458",
         "source": "TMD",
         "types": "",
         "detail": null,
