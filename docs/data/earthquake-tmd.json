@@ -3,13 +3,151 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-21T03:14:07.726842+00:00",
+    "fetchedAt": "2026-11-21T12:40:49.938690+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1795107388000,
-    "latestEvent": 1795220614000
+    "oldestEvent": 1795153092000,
+    "latestEvent": 1795260326000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17474",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.579,
+          18.979,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.2,
+        "place": "ประเทศลาว",
+        "time": 1795260326000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17474",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17473",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.427,
+          19.471,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.4,
+        "place": "ประเทศลาว",
+        "time": 1795257731000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17473",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17472",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.943,
+          19.916,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 1.9,
+        "place": "ประเทศลาว",
+        "time": 1795257722000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17472",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17471",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.872,
+          15.174,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 4.1,
+        "place": "ประเทศเวียดนาม",
+        "time": 1795246391000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17471",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17470",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.749,
+          14.904,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.3,
+        "place": "ประเทศเวียดนาม",
+        "time": 1795241315000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17470",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17469",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.309,
+          20.99,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.4,
+        "place": "ประเทศเมียนมา",
+        "time": 1795234997000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17469",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17468",
@@ -95,144 +233,6 @@
         "place": "ต.แม่สูน อ.ฝาง จ.เชียงใหม่",
         "time": 1795153092000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17465",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17464",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.142,
-          21.966,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 3.5,
-        "place": "ประเทศเมียนมา",
-        "time": 1795131283000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17464",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17463",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.992,
-          21.205,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.9,
-        "place": "ประเทศเมียนมา",
-        "time": 1795130458000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17463",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17462",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.389,
-          21.152,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.8,
-        "place": "ประเทศเมียนมา",
-        "time": 1795120420000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17462",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17461",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.16,
-          19.823,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.6,
-        "place": "ต.แม่สูน อ.ฝาง จ.เชียงใหม่",
-        "time": 1795115914000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17461",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17460",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          99.153,
-          19.817,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.2,
-        "place": "ต.แม่สูน อ.ฝาง จ.เชียงใหม่",
-        "time": 1795115757000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17460",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17459",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          96.344,
-          18.988,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.7,
-        "place": "ประเทศเมียนมา",
-        "time": 1795107388000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17459",
         "source": "TMD",
         "types": "",
         "detail": null,
