@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "period": "48h",
-  "date": "2026-11-22",
-  "time": "22:00:00",
+  "date": "2026-11-23",
+  "time": "04:00:00",
   "type": "พื้นที่เฝ้าระวังพิเศษ ล่วงหน้า 48 ชม. เสี่ยงน้ำท่วมจากฝนตกสะสม",
   "source_url": "https://api.hii.or.th/v2/4UQaYnf0Bx4fXPYyCdDRbqHyXH9Ixvd2nVUjaN1cLBY=/warning/flashflood-48h",
   "area_count": 10,
@@ -18,8 +18,8 @@
       "station": "ทต.บาเจาะ",
       "latitude": 6.51914,
       "longitude": 101.65873,
-      "sum_rainfall_mm": 150.2,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 150.00000000000003,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -149,8 +149,8 @@
       "station": "โครงการฟาร์มตัวอย่างฯ บ้านป่าตาเขียว",
       "latitude": 6.84301,
       "longitude": 101.4945,
-      "sum_rainfall_mm": 208.0,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 208.4,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -256,8 +256,8 @@
       "station": "อบต.บานา",
       "latitude": 6.89117,
       "longitude": 101.26469,
-      "sum_rainfall_mm": 157.60000000000002,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 159.8,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -399,8 +399,8 @@
       "station": "ที่ว่าการอำเภอไม้แก่น",
       "latitude": 6.61046,
       "longitude": 101.66753,
-      "sum_rainfall_mm": 229.0,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 226.00000000000003,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -634,8 +634,8 @@
       "station": "ปตร.พรุสนอ",
       "latitude": 6.86288,
       "longitude": 101.37754,
-      "sum_rainfall_mm": 201.59999999999997,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 204.40000000000003,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -809,8 +809,8 @@
       "station": "อบต.มะนังดาลำ",
       "latitude": 6.67271,
       "longitude": 101.60943,
-      "sum_rainfall_mm": 177.39999999999998,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 170.59999999999997,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -976,8 +976,8 @@
       "station": "อบต.คลองเฉลิม",
       "latitude": 7.38226,
       "longitude": 99.98037,
-      "sum_rainfall_mm": 168.6,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 159.79999999999995,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1451,8 +1451,8 @@
       "station": "หน่วยพิทักษ์ป่าอ่าวท่ายาง",
       "latitude": 7.42019,
       "longitude": 100.33263,
-      "sum_rainfall_mm": 205.4,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 197.80000000000004,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1546,8 +1546,8 @@
       "station": "ทม.พัทลุง",
       "latitude": 7.61829,
       "longitude": 100.07377,
-      "sum_rainfall_mm": 153.60000000000005,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 150.80000000000004,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1677,8 +1677,8 @@
       "station": "รพสต.บ้านเขาปู่",
       "latitude": 7.70951,
       "longitude": 99.83803,
-      "sum_rainfall_mm": 169.2,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 168.00000000000003,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -1970,8 +1970,8 @@
       "station": "บ้านกาเยาะมาตี",
       "latitude": 6.550472,
       "longitude": 101.644607,
-      "sum_rainfall_mm": 7.5,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 0.5,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2061,8 +2061,8 @@
       "station": "โรงเรียนบาเจาะ",
       "latitude": 6.510644,
       "longitude": 101.65275,
-      "sum_rainfall_mm": 121.5,
-      "observed_at": "2026-11-22T21:00:00+07:00",
+      "sum_rainfall_mm": 121.0,
+      "observed_at": "2026-11-23T03:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2192,8 +2192,8 @@
       "station": "บ้านกาบุ๊",
       "latitude": 6.603082,
       "longitude": 101.600351,
-      "sum_rainfall_mm": 73.5,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 70.5,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2371,8 +2371,8 @@
       "station": "บ้านบือราแง",
       "latitude": 6.489536,
       "longitude": 101.663857,
-      "sum_rainfall_mm": 34.0,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 29.5,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2471,7 +2471,7 @@
       "latitude": 6.844561,
       "longitude": 101.265785,
       "sum_rainfall_mm": 0.0,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2533,8 +2533,8 @@
       "station": "บ้านตะบิ้ง*",
       "latitude": 6.700474,
       "longitude": 101.607109,
-      "sum_rainfall_mm": 52.5,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 52.0,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2708,8 +2708,8 @@
       "station": "บ้านเตราะบอน",
       "latitude": 6.687275,
       "longitude": 101.533633,
-      "sum_rainfall_mm": 70.0,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 67.5,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2803,8 +2803,8 @@
       "station": "บ้านแป้น",
       "latitude": 6.740221,
       "longitude": 101.546681,
-      "sum_rainfall_mm": 48.0,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 44.0,
+      "observed_at": "2026-11-23T01:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -2894,8 +2894,8 @@
       "station": "บ้านลำสินธุ์เหนือ*",
       "latitude": 7.511499,
       "longitude": 99.935121,
-      "sum_rainfall_mm": 50.5,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 51.0,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3137,8 +3137,8 @@
       "station": "บ้านคู*",
       "latitude": 7.429384,
       "longitude": 99.988724,
-      "sum_rainfall_mm": 38.5,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 38.0,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -3612,8 +3612,8 @@
       "station": "บ้านสี่แยกบ้านพูด*",
       "latitude": 7.375393,
       "longitude": 99.982661,
-      "sum_rainfall_mm": 50.0,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 48.0,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4087,8 +4087,8 @@
       "station": "บ้านไสยาง",
       "latitude": 7.629327,
       "longitude": 100.025012,
-      "sum_rainfall_mm": 71.0,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 70.5,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
@@ -4194,8 +4194,8 @@
       "station": "บ้านควนใหม่",
       "latitude": 7.631379,
       "longitude": 99.998546,
-      "sum_rainfall_mm": 51.5,
-      "observed_at": "2026-11-22T20:00:00+07:00",
+      "sum_rainfall_mm": 50.5,
+      "observed_at": "2026-11-23T02:00:00+07:00",
       "geometry": {
         "rings": [
           [
