@@ -68,7 +68,7 @@
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
  const blueMapBadge='<defs><linearGradient id="blue" x2="0%" y2="100%"><stop stop-color="#53a4ff"/><stop offset="1" stop-color="#1763dc"/></linearGradient></defs><circle cx="12" cy="12" r="10.5" fill="url(#blue)" stroke="#fff" stroke-width="1.7"/>';
- const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+blueMapBadge+'<path d="M12 6.5v6.5m0 3.4v.6" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/></svg>');
+ const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48"><defs><linearGradient id="pinBlue" x2="0%" y2="100%"><stop stop-color="#53a4ff"/><stop offset="1" stop-color="#165cda"/></linearGradient></defs><rect x="3" y="2" width="34" height="34" rx="8" fill="url(#pinBlue)" stroke="#fff" stroke-width="2.4"/><path d="M14 34h12l-6 6Z" fill="#fff"/><circle cx="20" cy="43" r="3" fill="#216de4" stroke="#fff" stroke-width="1.6"/><path d="M20 11v10m0 4v1" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
@@ -227,7 +227,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:29,height:29}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:41,yoffset:16}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
