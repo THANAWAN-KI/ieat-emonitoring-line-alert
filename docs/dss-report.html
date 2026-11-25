@@ -4242,9 +4242,12 @@ html body #report#report#report#report#report#report#report#report#report#report
   const naturalHeight=image?.naturalWidth?Math.round(mapWidth*image.naturalHeight/image.naturalWidth):Infinity;
   const nonMap=brief.scrollHeight-mapHeight;
   const available=Math.floor(target-padding-2-nonMap-6);
-  // Keep the report map landscape even when the source viewport is tall.
   const landscapeHeight=Math.round(mapWidth*9/16);
-  const height=Math.min(naturalHeight,landscapeHeight,Math.max(120,available)),value=height+'px';
+  const fireReport=document.documentElement.dataset.reportTheme==='fire-purple';
+  // The preview can grow with the image. PNG export still needs space for the other A4 sections.
+  const preferredHeight=fireReport&&Number.isFinite(naturalHeight)?naturalHeight:Math.min(naturalHeight,landscapeHeight);
+  const height=fireReport&&!targetHeight?preferredHeight:Math.min(preferredHeight,Math.max(120,available));
+  const value=height+'px';
   if(map.style.getPropertyValue('height')!==value)map.style.setProperty('height',value,'important');
   if(page.style.getPropertyValue('min-height')!==target+'px')page.style.setProperty('min-height',target+'px','important');
  }
