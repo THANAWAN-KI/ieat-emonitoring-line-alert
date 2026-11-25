@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "status": "ok",
+  "status": "stale",
   "generated_at": "2026-11-25T04:13:40+07:00",
   "methodology": {
     "watch_radius_km": 30.0,
@@ -21968,12 +21968,15 @@
     "warning_summary": "",
     "warning_url": "https://tmd.go.th/warning-and-events/warning-storm"
   },
-  "errors": [],
+  "errors": [
+    "URLError: <urlopen error _ssl.c:994: The handshake operation timed out>"
+  ],
   "coverage": {
     "stations_complete": true,
     "station_count": 1183,
     "estate_location_source": "ArcGIS geometry in EPSG:4326"
   },
+  "last_attempt_at": "2026-11-25T11:16:07+07:00",
   "flash_flood": {
     "24h": {
       "period": "24h",
