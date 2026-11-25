@@ -67,7 +67,8 @@
   {id:'school',label:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1'},
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
- const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30"><path d="M12 28S3 17 3 11a9 9 0 0 1 18 0c0 6-9 17-9 17Z" fill="#b83239" stroke="#fff" stroke-width="1.8"/><path d="M12 7v6m0 3v.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>');
+ const blueMapBadge='<defs><linearGradient id="blue" x2="0%" y2="100%"><stop stop-color="#53a4ff"/><stop offset="1" stop-color="#1763dc"/></linearGradient></defs><circle cx="12" cy="12" r="10.5" fill="url(#blue)" stroke="#fff" stroke-width="1.7"/>';
+ const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+blueMapBadge+'<path d="M12 6.5v6.5m0 3.4v.6" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
@@ -226,7 +227,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:24,height:30,yoffset:15}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:29,height:29}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
@@ -453,7 +454,7 @@
       width,height,yoffset
     });
     const badge=(drawing,color,size=24)=>svgMarker(fireView
-      ? '<circle cx="12" cy="12" r="10.5" fill="#242135" stroke="#fff" stroke-width="1.5"/><g fill="none" stroke="'+color+'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
+      ? blueMapBadge+'<g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
       : '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
     const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#ff9b9e':'#cc5257');
@@ -757,12 +758,12 @@
       const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
       const ctx=canvas.getContext('2d');ctx.drawImage(image,0,0,width,height);
       ctx.save();ctx.scale(width/view.width,height/view.height);
-      ctx.strokeStyle=fireView?'#fff':callout.border;ctx.lineWidth=2.5;
+      ctx.strokeStyle=fireView?'#286ed2':callout.border;ctx.lineWidth=2.5;
       ctx.beginPath();ctx.moveTo(callout.line[0],callout.line[1]);ctx.lineTo(callout.line[2],callout.line[3]);ctx.stroke();
-      if(fireView)ctx.strokeStyle='#e7d9f2';
-      ctx.fillStyle=fireView?'#42245a':callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
+      if(fireView)ctx.strokeStyle='#80b4f4';
+      ctx.fillStyle=fireView?'#fff':callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
       ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
-      ctx.font=callout.font;ctx.fillStyle=fireView?'#fff':callout.color;ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.font=callout.font;ctx.fillStyle=fireView?'#000':callout.color;ctx.textAlign='center';ctx.textBaseline='top';
       const textWidth=callout.width-2*(callout.paddingX+callout.borderWidth);
       const measuredWidth=ctx.measureText(callout.text).width;
       const textScale=Math.min(1,textWidth/measuredWidth);
