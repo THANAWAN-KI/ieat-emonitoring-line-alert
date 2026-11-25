@@ -67,7 +67,8 @@
   {id:'school',label:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1'},
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
- const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48"><defs><linearGradient id="incidentRed" x2="0%" y2="100%"><stop stop-color="#ed655c"/><stop offset="1" stop-color="#b4232d"/></linearGradient></defs><rect x="3" y="2" width="34" height="34" rx="8" fill="url(#incidentRed)" stroke="#fff" stroke-width="2.4"/><path d="M14 34h12l-6 6Z" fill="#fff"/><circle cx="20" cy="43" r="3" fill="#b4232d" stroke="#fff" stroke-width="1.6"/><path d="M20 11v10m0 4v1" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>');
+ const mapIconRing=color=>'<circle cx="12" cy="12" r="11.5" fill="#000" fill-opacity=".18"/><circle cx="12" cy="12" r="9.7" fill="'+color+'" stroke="#fff" stroke-width="2.5"/>';
+ const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+mapIconRing('#b4232d')+'<path d="M12 6.3v6.5m0 3.4v.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
@@ -226,7 +227,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:41,yoffset:16}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
@@ -453,9 +454,9 @@
       width,height,yoffset
     });
     const badge=(drawing,color,size=24)=>svgMarker(fireView
-      ? '<circle cx="12" cy="12" r="10.5" fill="'+color+'" stroke="#fff" stroke-width="1.7"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
+      ? mapIconRing(color)+'<g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
       : '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
-    const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
+    const pin=fireView?badge('<path d="M3 20v-9l6 3v-4l6 3V4h6v16H3Zm4-3h1m3 0h1m4 0h1"/>','#8b6200'):svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
     const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#a43d12':'#cc5257');
     const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#a2224c':'#cc5257');
     const supportSymbols={
@@ -563,7 +564,7 @@
         if(item.geometryType!=='point')return;
         item.featureReduction={
           type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:fireView?500: ['hydrant','cctv'].includes(def.id)?600:2000,
-          symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:1.5}},
+          symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:fireView?2.5:1.5}},
           labelingInfo:[{
             deconflictionStrategy:'none',labelPlacement:'center-center',
             labelExpressionInfo:{expression:"Text($feature.cluster_count, '#,###')"},
