@@ -67,7 +67,7 @@
   {id:'school',label:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1'},
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
- const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30"><path d="M12 28S3 17 3 11a9 9 0 0 1 18 0c0 6-9 17-9 17Z" fill="#e87549" stroke="#26312f" stroke-width="1.6"/><path d="M12 7v6m0 3v.5" stroke="#26312f" stroke-width="2" stroke-linecap="round"/></svg>');
+ const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30"><path d="M12 28S3 17 3 11a9 9 0 0 1 18 0c0 6-9 17-9 17Z" fill="#b83239" stroke="#fff" stroke-width="1.8"/><path d="M12 7v6m0 3v.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
@@ -452,20 +452,21 @@
       type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+drawing+'</svg>'),
       width,height,yoffset
     });
-    const badge=(drawing,color,size=24)=>svgMarker(
-      '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
+    const badge=(drawing,color,size=24)=>svgMarker(fireView
+      ? '<circle cx="12" cy="12" r="10.5" fill="#242135" stroke="#fff" stroke-width="1.5"/><g fill="none" stroke="'+color+'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
+      : '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
-    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#d95661':'#cc5257');
-    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#d65fa4':'#cc5257');
+    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#ff9b9e':'#cc5257');
+    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#ffb2df':'#cc5257');
     const supportSymbols={
       fire:fireStation,hospital,
-      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>',fireView?'#4388ce':'#24845a'),
-      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>',fireView?'#7658bb':'#24845a'),
-      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#4b9e65':'#24845a'),
-      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#9c7460':'#24845a'),
-      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#37a5ce':'#b88b20'),
-      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#c49138':'#b88b20'),
-      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#51627a':'#24845a',fireView?20:18)
+      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>',fireView?'#8edaff':'#24845a'),
+      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>',fireView?'#d3bbff':'#24845a'),
+      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#a9e9a5':'#24845a'),
+      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#f1baa1':'#24845a'),
+      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#9ee7ee':'#b88b20'),
+      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#ffdc87':'#b88b20'),
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#f4dd96':'#24845a',fireView?20:18)
     };
     const monitoringSymbol=badge('<path d="M4 20h16M9 20V9h6v11M12 9V5m-4 2a5 5 0 0 1 8 0M6 5a8 8 0 0 1 12 0"/><path d="M11 13h2"/>','#55bfba',24);
     const legend=document.querySelector('.riskmap-map-key');
@@ -709,7 +710,7 @@
       const baseSize=view.scale>100000?18:view.scale>20000?21:view.scale>5000?24:27;
       support.forEach((item,index)=>{
         if(item.renderer?.symbol?.type!=='picture-marker')return;
-        const def=supportDefinitions[index],size=Math.max(9,baseSize-(['hydrant','cctv'].includes(def.id)?7:3));
+        const def=supportDefinitions[index],size=fireView?baseSize:Math.max(9,baseSize-(['hydrant','cctv'].includes(def.id)?7:3));
         if(Number(item.renderer.symbol.width)===size)return;
         const renderer=item.renderer.clone();renderer.symbol.width=size;renderer.symbol.height=size;item.renderer=renderer;
       });
@@ -756,11 +757,12 @@
       const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
       const ctx=canvas.getContext('2d');ctx.drawImage(image,0,0,width,height);
       ctx.save();ctx.scale(width/view.width,height/view.height);
-      ctx.strokeStyle=callout.border;ctx.lineWidth=2.5;
+      ctx.strokeStyle=fireView?'#fff':callout.border;ctx.lineWidth=2.5;
       ctx.beginPath();ctx.moveTo(callout.line[0],callout.line[1]);ctx.lineTo(callout.line[2],callout.line[3]);ctx.stroke();
-      ctx.fillStyle=callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
+      if(fireView)ctx.strokeStyle='#e7d9f2';
+      ctx.fillStyle=fireView?'#42245a':callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
       ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
-      ctx.font=callout.font;ctx.fillStyle=callout.color;ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.font=callout.font;ctx.fillStyle=fireView?'#fff':callout.color;ctx.textAlign='center';ctx.textBaseline='top';
       const textWidth=callout.width-2*(callout.paddingX+callout.borderWidth);
       const measuredWidth=ctx.measureText(callout.text).width;
       const textScale=Math.min(1,textWidth/measuredWidth);
