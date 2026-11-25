@@ -67,8 +67,7 @@
   {id:'school',label:'โรงเรียน',path:'Risk_Map_WFL1/FeatureServer/1'},
   {id:'communityRisk',label:'พื้นที่ชุมชน (ชุด Risk Map)',path:'Risk_Map_WFL1/FeatureServer/2'}
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
- const blueMapBadge='<defs><linearGradient id="blue" x2="0%" y2="100%"><stop stop-color="#53a4ff"/><stop offset="1" stop-color="#1763dc"/></linearGradient></defs><circle cx="12" cy="12" r="10.5" fill="url(#blue)" stroke="#fff" stroke-width="1.7"/>';
- const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48"><defs><linearGradient id="pinBlue" x2="0%" y2="100%"><stop stop-color="#53a4ff"/><stop offset="1" stop-color="#165cda"/></linearGradient></defs><rect x="3" y="2" width="34" height="34" rx="8" fill="url(#pinBlue)" stroke="#fff" stroke-width="2.4"/><path d="M14 34h12l-6 6Z" fill="#fff"/><circle cx="20" cy="43" r="3" fill="#216de4" stroke="#fff" stroke-width="1.6"/><path d="M20 11v10m0 4v1" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>');
+ const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 48"><defs><linearGradient id="incidentRed" x2="0%" y2="100%"><stop stop-color="#ed655c"/><stop offset="1" stop-color="#b4232d"/></linearGradient></defs><rect x="3" y="2" width="34" height="34" rx="8" fill="url(#incidentRed)" stroke="#fff" stroke-width="2.4"/><path d="M14 34h12l-6 6Z" fill="#fff"/><circle cx="20" cy="43" r="3" fill="#b4232d" stroke="#fff" stroke-width="1.6"/><path d="M20 11v10m0 4v1" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>');
  function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
@@ -454,22 +453,22 @@
       width,height,yoffset
     });
     const badge=(drawing,color,size=24)=>svgMarker(fireView
-      ? blueMapBadge+'<g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
+      ? '<circle cx="12" cy="12" r="10.5" fill="'+color+'" stroke="#fff" stroke-width="1.7"/><g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3) scale(.75)">'+drawing+'</g>'
       : '<g fill="'+color+'" fill-opacity=".75" stroke="#26312f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(1 1) scale(.92)">'+drawing+'</g>',size,size);
     const pin=svgMarker('<path fill="#e8ba3f" stroke="#26312f" stroke-width="1.3" d="M2 21V10l6 3V8l6 3V3h7v18H2Z"/><path fill="none" stroke="#26312f" stroke-width="1.5" d="M5 17h2m3 0h2m4 0h2M16 6h3"/>',21,21,0);
-    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#ff9b9e':'#cc5257');
-    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#ffb2df':'#cc5257');
+    const fireStation=badge('<path d="M13 3c2 5-2 6 0 9 1-2 3-3 4-4 4 6 3 12-5 13C4 20 3 14 8 8c0 3 1 4 2 4-1-4 2-5 3-9Z"/>',fireView?'#a43d12':'#cc5257');
+    const hospital=badge('<path d="M9 5h6v4h4v6h-4v4H9v-4H5V9h4Z"/>',fireView?'#a2224c':'#cc5257');
     const supportSymbols={
       fire:fireStation,hospital,
-      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>',fireView?'#8edaff':'#24845a'),
-      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>',fireView?'#d3bbff':'#24845a'),
-      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#a9e9a5':'#24845a'),
-      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#f1baa1':'#24845a'),
-      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#9ee7ee':'#b88b20'),
-      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#ffdc87':'#b88b20'),
-      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#f4dd96':'#24845a',fireView?20:18)
+      hydrant:badge('<path d="M9 18V9a3 3 0 0 1 6 0v9M7 18h10M8 10H6v4h3m7-4h2v4h-3M9 7h6M12 4v2"/><circle cx="12" cy="12" r="1.6"/>',fireView?'#0864aa':'#24845a'),
+      police:badge('<path d="m12 4 7 3v5c0 4-7 8-7 8s-7-4-7-8V7l7-3Z"/><path d="m12 8 1.1 2.2 2.4.3-1.8 1.8.4 2.5-2.1-1.2-2.1 1.2.4-2.5-1.8-1.8 2.4-.3Z"/>',fireView?'#253d80':'#24845a'),
+      community:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#237440':'#24845a'),
+      communityRisk:badge('<path d="m4 12 5-4 5 4m-8-1v7h6v-7m0-3 3-3 5 4m-6 0v9h4V9M8 18v-3h2"/>',fireView?'#955826':'#24845a'),
+      waterWatch:badge('<path d="M12 4s-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z"/><path d="M5 19h14m-8-6h2m-2 3h2"/>',fireView?'#007080':'#b88b20'),
+      school:badge('<path d="m4 9 8-4 8 4-8 4-8-4Zm4 2v5c3 2 5 2 8 0v-5m4-2v6"/>',fireView?'#8b6200':'#b88b20'),
+      cctv:badge('<path d="m5 7 12 3-2 7L3 14l2-7Zm12 5 4-1-2 6-3-2M9 16v3h7"/><circle cx="7" cy="11" r="1"/>',fireView?'#67449e':'#24845a',fireView?20:18)
     };
-    const monitoringSymbol=badge('<path d="M4 20h16M9 20V9h6v11M12 9V5m-4 2a5 5 0 0 1 8 0M6 5a8 8 0 0 1 12 0"/><path d="M11 13h2"/>','#55bfba',24);
+    const monitoringSymbol=badge('<path d="M4 20h16M9 20V9h6v11M12 9V5m-4 2a5 5 0 0 1 8 0M6 5a8 8 0 0 1 12 0"/><path d="M11 13h2"/>',fireView?'#08705b':'#55bfba',24);
     const legend=document.querySelector('.riskmap-map-key');
     if(legend){
       const legends=[['นิคมฯ',pin],['ดับเพลิง',supportSymbols.fire],['โรงพยาบาล',supportSymbols.hospital],['หัวจ่ายน้ำ',supportSymbols.hydrant],['ตำรวจ',supportSymbols.police],['ชุมชน',supportSymbols.community],['CCTV',supportSymbols.cctv],['โรงเรียน',supportSymbols.school],['เฝ้าระวังน้ำ',supportSymbols.waterWatch]];
@@ -537,7 +536,9 @@
     const supportColors={fire:'#cc5257',hospital:'#cc5257',hydrant:'#24845a',police:'#24845a',community:'#24845a',communityRisk:'#24845a',waterWatch:'#b88b20',school:'#b88b20',cctv:'#24845a'};
     const supportDefinitions=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport);
     support.forEach((item,index)=>{
-      const def=supportDefinitions[index],color=supportColors[def.id]||'#586b7f';
+      const def=supportDefinitions[index];
+      const fireClusterColors={fire:'#a43d12',hospital:'#a2224c',hydrant:'#0864aa',police:'#253d80',community:'#237440',communityRisk:'#955826',waterWatch:'#007080',school:'#8b6200',cctv:'#67449e'};
+      const color=(fireView?fireClusterColors:supportColors)[def.id]||'#586b7f';
       if(['hospital','fire','police'].includes(def.id)){
         item.outFields=['*'];item.popupEnabled=true;
         item.popupTemplate={title:'{'+def.names[0]+'}',outFields:['*'],content:feature=>{
