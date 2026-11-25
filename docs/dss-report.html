@@ -4231,7 +4231,9 @@ html body #report#report#report#report#report#report#report#report#report#report
   const naturalHeight=image?.naturalWidth?Math.round(mapWidth*image.naturalHeight/image.naturalWidth):Infinity;
   const nonMap=brief.scrollHeight-mapHeight;
   const available=Math.floor(target-padding-2-nonMap-6);
-  const height=Math.min(naturalHeight,Math.max(120,available)),value=height+'px';
+  // Keep the report map landscape even when the source viewport is tall.
+  const landscapeHeight=Math.round(mapWidth*9/16);
+  const height=Math.min(naturalHeight,landscapeHeight,Math.max(120,available)),value=height+'px';
   if(map.style.getPropertyValue('height')!==value)map.style.setProperty('height',value,'important');
   if(page.style.getPropertyValue('min-height')!==target+'px')page.style.setProperty('min-height',target+'px','important');
  }
