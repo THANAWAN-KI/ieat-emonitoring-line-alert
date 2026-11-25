@@ -1599,10 +1599,7 @@ async function downloadReportPng(){
   img.src=mapImage;
   img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';
   slot.replaceChildren(img);
-  if(weather){
-   if(document.documentElement.dataset.reportTheme==='fire-purple')slot.after(weather);
-   else slot.append(weather);
-  }
+  if(weather)slot.append(weather);
   await img.decode();
   slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));
   slot.style.removeProperty('height');
@@ -3619,9 +3616,7 @@ function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ra
 image.addEventListener('load',fitImage);
 function paint(){
  const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
- if(document.documentElement.dataset.reportTheme==='fire-purple'){
-  if(slot.nextElementSibling!==weather)slot.after(weather);
- }else if(weather.parentElement!==slot)slot.append(weather);
+ if(weather.parentElement!==slot)slot.append(weather);
  weather.querySelector('.report-weather-arrow')?.remove();
  weather.querySelector('.report-wind-direction')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
@@ -4316,7 +4311,7 @@ html[data-report-theme="fire-purple"] body #report#report#report#report#report#r
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-reference-table :is(th,td) span{background-color:transparent!important}
 </style>
 <style id="fire-weather-compact">
-html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{position:static!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)!important;width:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;gap:5px 14px!important;padding:7px 9px!important;margin:6px 0 0!important;background:#fff!important;border:1px solid var(--fire-report-rule)!important}
+html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather{position:absolute!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:244px!important;max-width:calc(100% - 16px)!important;max-height:calc(100% - 16px)!important;overflow:auto!important;gap:4px!important;padding:7px 9px!important;margin:0!important;background:#fff!important;border:1px solid var(--fire-report-rule)!important}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather>strong{grid-column:1 / -1!important;padding:0 0 4px!important;background:transparent!important;border-bottom:1px solid var(--fire-report-rule)!important;border-radius:0!important;text-align:left!important}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind{grid-template-columns:30px minmax(0,1fr)!important;border:0!important;background:transparent!important;gap:0 5px!important}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-wind-label{grid-column:2!important;grid-row:1!important;background:transparent!important;border:0!important;padding:0!important;text-align:left!important;font-weight:700!important}
