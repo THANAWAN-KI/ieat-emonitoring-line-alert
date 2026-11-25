@@ -1599,16 +1599,15 @@ async function downloadReportPng(){
    window.dssFitFirstReportPage?.(firstNode,firstHeight);
    if(firstNode.scrollHeight>1487)throw Error('เนื้อหาหน้าแรกมากเกิน A4 กรุณาย่อข้อความรายละเอียดก่อนดาวน์โหลด');
 
-   // Rasterize the centered cover crop because html2canvas stretches replaced images.
+   // Bake the fit into the raster because html2canvas does not apply object-fit.
    const {width,height}=slot.getBoundingClientRect();
    const mapCanvas=document.createElement('canvas');
    mapCanvas.width=Math.round(width*exportScale);
    mapCanvas.height=Math.round(height*exportScale);
-   const coverScale=Math.max(mapCanvas.width/mapRaster.naturalWidth,mapCanvas.height/mapRaster.naturalHeight);
-   const cropWidth=mapCanvas.width/coverScale,cropHeight=mapCanvas.height/coverScale;
+   const fitScale=Math.min(mapCanvas.width/mapRaster.naturalWidth,mapCanvas.height/mapRaster.naturalHeight);
+   const imageWidth=mapRaster.naturalWidth*fitScale,imageHeight=mapRaster.naturalHeight*fitScale;
    mapCanvas.getContext('2d').drawImage(mapRaster,
-    (mapRaster.naturalWidth-cropWidth)/2,(mapRaster.naturalHeight-cropHeight)/2,cropWidth,cropHeight,
-    0,0,mapCanvas.width,mapCanvas.height);
+    (mapCanvas.width-imageWidth)/2,(mapCanvas.height-imageHeight)/2,imageWidth,imageHeight);
    img.src=mapCanvas.toDataURL('image/png');
    await img.decode();
 
@@ -4127,7 +4126,7 @@ html body :is(#report#report#report#report#report#report#report#report#report#re
  display:flex!important;align-items:center!important;gap:12px!important;padding-bottom:12px!important;margin:0 0 16px!important;border:0!important;border-bottom:1px solid var(--fire-report-accent, #5b8f32)!important;background:transparent!important;
 }
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-header,.fb-head,.p2-header) img{
- width:52px!important;height:auto!important;max-height:64px!important;object-fit:contain!important;flex:none!important;
+ width:auto!important;height:64px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;flex:none!important;
 }
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) h1{font:700 19px/1.5 Sarabun,sans-serif!important;margin:0!important;color:var(--fire-report-accent, #17201d)!important}
 html body :is(#report#report#report#report#report#report#report#report#report#report#report,#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo#dssPageTwo,#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree#dssPageThree) :is(.fb-header,.fb-head,.p2-header) :is(div,p,small,a){font-size:13px!important;line-height:1.6!important;color:#17201d!important}
@@ -4212,7 +4211,7 @@ html body #report#report#report#report#report#report#report#report#report#report
 </style>
 <style id="first-report-a4-layout">
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap{aspect-ratio:auto!important}
-html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:cover!important;background:#fff!important}
+html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;background:#fff!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-fact{padding:6px 8px!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #dssFieldBrief .fb-section{margin:10px 0!important}
 html body #report#report#report#report#report#report#report#report#report#report#report#report#report#report #reportNearbySupport .support-additional-count{display:block;margin-top:2px;color:var(--fire-report-footer, #60675d)}
@@ -4227,10 +4226,12 @@ html body #report#report#report#report#report#report#report#report#report#report
   if(!brief||!map||!page.clientWidth)return;
   const style=getComputedStyle(page),padding=(parseFloat(style.paddingTop)||0)+(parseFloat(style.paddingBottom)||0);
   const target=targetHeight||Math.round(page.clientWidth*297/210);
-  const mapHeight=map.getBoundingClientRect().height;
+  const {width:mapWidth,height:mapHeight}=map.getBoundingClientRect();
+  const image=map.querySelector('#dashboardReportMapImage');
+  const naturalHeight=image?.naturalWidth?Math.round(mapWidth*image.naturalHeight/image.naturalWidth):Infinity;
   const nonMap=brief.scrollHeight-mapHeight;
   const available=Math.floor(target-padding-2-nonMap-6);
-  const height=Math.max(120,available),value=height+'px';
+  const height=Math.min(naturalHeight,Math.max(120,available)),value=height+'px';
   if(map.style.getPropertyValue('height')!==value)map.style.setProperty('height',value,'important');
   if(page.style.getPropertyValue('min-height')!==target+'px')page.style.setProperty('min-height',target+'px','important');
  }
