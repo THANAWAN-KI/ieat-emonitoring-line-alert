@@ -331,7 +331,7 @@
       windLayer.removeAll();
       if(moving&&origin){
         const direction=(from+180)%360;
-        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:33,height:41,yoffset:-39,
+        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:39,height:76,yoffset:-77,
           url:'data:image/svg+xml,'+encodeURIComponent(fireSources.windArrow||'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M18 4 28 28 18 23 8 28Z" fill="#2257c8" stroke="#fff" stroke-width="2"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
       }
@@ -347,7 +347,11 @@
       detail.textContent=known&&speed===0?(weather.time||''):'';
     }
   }
-  if(windBox){if(!fireAnalysis)view.container.append(windBox);windBox.hidden=false;showWind();}
+  if(windBox){
+    if(fireSources?.windArrow)windBox.querySelector('svg').outerHTML=fireSources.windArrow;
+    if(!fireAnalysis)view.container.append(windBox);
+    windBox.hidden=false;showWind();
+  }
   if(fireSources)view.watch('rotation',()=>{if(windWeather)showWind(windWeather);});
   let incidentCallout, calloutRevision=0;
   async function updateIncidentCallout(){
@@ -610,14 +614,21 @@
       if(!doc?.getElementById('pngBtn')?.onclick||!doc.getElementById('bufferKm1'))throw Error('รายงานยังโหลดไม่เสร็จ');
       if(revision!==incidentRevision)return;
       window.ieatIncidentChosen=true;
-      const context={id:String(Date.now())+'-'+revision,company:name,point,km,incidentType,rows,attributes:attrs,independentLocation:independent,status:'loading'};
+      const context={id:String(Date.now())+'-'+revision,company:name,point,km,incidentType,rows,attributes:attrs,independentLocation:independent,windReading:fireSources?windWeather:null,status:'loading'};
       window.ieatCoverageReport=context;
       window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(typeof frame.contentWindow.dssApplyIncidentContext!=='function')throw Error('รายงานเวอร์ชันใหม่ยังไม่พร้อม กรุณารีเฟรชหน้า');
       const summary=await frame.contentWindow.dssApplyIncidentContext(context);
       if(revision!==incidentRevision||!summary)return;
       context.summary=summary;
-      if(!fireSources)showWind(summary.weather);
+      if(fireReportPage&&fireSources&&!windWeather&&summary.weather){
+        const reading=summary.weather,windSpeed=Number(reading.windSpeed),windDegrees=Number(reading.windDegrees);
+        if(reading.windSpeed!==''&&reading.windSpeed!=null&&Number.isFinite(windSpeed)&&
+            (windSpeed===0||(reading.windDegrees!=null&&reading.windDegrees!==''&&Number.isFinite(windDegrees)))){
+          windWeather={windSpeed,windDegrees,time:reading.time};
+          showWind(windWeather);
+        }
+      }else if(!fireSources)showWind(summary.weather);
       await window.ieatMonitoringReport?.update(context);
       if(revision!==incidentRevision)return;
       context.status='rendering-map';
@@ -681,7 +692,8 @@
         sessionStorage.setItem(sessionKey,JSON.stringify({
           name,independent,attributes:selectedFactory,lat:origin.latitude,lng:origin.longitude,
           radius:radius.value,type:type.value,basemap:$('coverageBasemap').value,
-          center:view.center?.toJSON(),scale:view.scale,rotation:view.rotation
+          center:view.center?.toJSON(),scale:view.scale,rotation:view.rotation,
+          windReading:windKey===origin.latitude.toFixed(5)+','+origin.longitude.toFixed(5)?windWeather:null
         }));
         return true;
       }catch{
@@ -726,6 +738,13 @@
       (independent?placeInput:$('coverageFactoryQuery')).value=saved.name;
       place(new Point({latitude:saved.lat,longitude:saved.lng}),saved.name);
       hasSearched=true;
+      if(saved.windReading&&Number.isFinite(saved.windReading.windSpeed)){
+        windKey=origin.latitude.toFixed(5)+','+origin.longitude.toFixed(5);
+        windWeather=saved.windReading;
+        windRequest=new AbortController();
+        windRequest.pending=Promise.resolve(windWeather);
+        showWind(windWeather);
+      }
       const basemap=$('coverageBasemap');
       basemap.value=saved.basemap;
       basemap.dispatchEvent(new Event('change',{bubbles:true}));
