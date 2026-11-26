@@ -1,24 +1,30 @@
 (() => {
   const categories = [
-    ['hospital','โรงพยาบาล / คลินิก','#a4255c','M12 5v14M5 12h14','amenity','hospital|clinic'],
-    ['fire','สถานีดับเพลิง','#ad4a11','M4 8h10v9H4zM14 11h4l3 3v3h-7M8 19v1m10-1v1M7 5h4','amenity','fire_station'],
-    ['police','สถานีตำรวจ','#284f99','M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6ZM12 8v6m-3-3h6','amenity','police'],
-    ['community','ชุมชน','#276944','m3 11 9-7 9 7M6 10v10h12V10m-8 10v-5h4v5','place','city|town|village|hamlet|suburb|neighbourhood'],
-    ['school','สถานศึกษา','#7043a4','m2 9 10-5 10 5-10 5ZM6 11v5q6 5 12 0v-5','amenity','school|kindergarten|college|university'],
-    ['hydrant','หัวจ่ายน้ำ','#00738d','M12 3c-2 4-6 8-6 12a6 6 0 0 0 12 0c0-4-4-8-6-12Z','emergency','fire_hydrant'],
-    ['cctv','กล้อง CCTV','#52417d','M3 7h12v10H3zM15 10l6-3v10l-6-3','man_made','surveillance'],
-    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#846014','m3 20 1-9 5 3v-4l5 3V7h4l3 13Z'],
-    ['business','โรงงาน / ผู้ประกอบการ','#475569','M3 20V9l6 3V8l6 3V4h5v16ZM6 16h2m3 0h2m3 0h2'],
-    ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#197568','M12 20V9m0 5C5 14 4 10 4 6q8 0 8 8m0-1q0-9 8-9 0 8-8 9']
+    ['hospital','โรงพยาบาล / คลินิก','#a82b63','M5 8h14v11H5zM9 8V5h6v3m-3 2v7m-3-3.5h6','amenity','hospital|clinic'],
+    ['fire','สถานีดับเพลิง','#b44a13','M3 9h11v8H3zM14 11h4l3 4v2h-7M5 9V6h5m0 5H5m3 6v2m10-2v2','amenity','fire_station'],
+    ['police','สถานีตำรวจ','#274daa','M12 4 18 7l1 1v4q0 5-7 8-7-3-7-8V8Zm0 5 1 2 2 .3-1.5 1.5.3 2.2-1.8-1-1.8 1 .3-2.2L9 11.3l2-.3Z','amenity','police'],
+    ['community','ชุมชน','#257353','m3 12 5-4 5 4m-9-1v8h8v-8m0-1 4-4 5 4m-1-1v10h-6m-7 0v-4h2v4','place','city|town|village|hamlet|suburb|neighbourhood'],
+    ['school','สถานศึกษา','#773caa','M5 5h12a2 2 0 0 1 2 2v12H7a2 2 0 0 1-2-2Zm0 11h14M9 9h6m-6 3h4','amenity','school|kindergarten|college|university'],
+    ['hydrant','หัวจ่ายน้ำ','#00758b','M8 18h8M9 18v-8a3 3 0 0 1 6 0v8M8 11H5v4h4m7-4h3v4h-4m-6-8h6m-3-2v2','emergency','fire_hydrant'],
+    ['cctv','กล้อง CCTV','#574692','M4 7h15v8H4zM19 8l2 1v4l-2 1m-9 1v4h7M7 10h6','man_made','surveillance'],
+    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#926214','M4 20V7h8v13m0-9h8v9H4M7 10h2m-2 4h2m6 0h2m-2 3h2'],
+    ['business','โรงงาน / ผู้ประกอบการ','#52637b','M4 20V10l5 3V9l5 3V6h4l2 14ZM7 17h1m3 0h1m3 0h1'],
+    ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#207561','M4 17h16M7 14v-3m5 3V8m5 6V5'],
+    ['waterWatch','จุดเฝ้าระวังระดับน้ำ','#086a9d','M12 4c-2 4-5 7-5 10a5 5 0 0 0 10 0c0-3-3-6-5-10Zm-4 11h4'],
+    ['wastewater','ระบบบำบัดน้ำเสีย','#167e81','M4 8h16v10H4zM4 12q4-2 8 0t8 0M8 5v3m8-3v3'],
+    ['airWatch','สถานีตรวจวัดคุณภาพอากาศ','#327394','M4 8h11a2 2 0 1 0-2-2M4 12h14a2 2 0 1 1-2 2M4 16h7'],
+    ['waste','สถานที่รวบรวมและจัดการขยะ','#727528','M5 8h14m-11 0 1 11h6l1-11M9 8V5h6v3m-4 3v5m2-5v5']
   ].map(([id,label,color,path,key,pattern])=>({id,label,color,path,key,pattern}));
-  const incident={id:'incident',color:'#be202c',path:'M12 3c0 5-6 6-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11ZM12 12v5'};
+  const incident={id:'incident',color:'#c12436',path:'M12 4c1 4 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4 3-6 0 2 1 3 2 3 1-3 0-5 0-7Z'};
+  const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="#fff" stroke="#c9daf8"/><path d="M18 7 27 26 18 21 9 26Z" fill="#2257c8" stroke="#163d93" stroke-linejoin="round"/></svg>';
+
   function badge({id,color,path}){
-    const isIncident=id==='incident';
-    const frame=isIncident
-      ? '<path d="M18 34S4 24 4 16a14 14 0 0 1 28 0c0 8-14 18-14 18Z" fill="'+color+'" stroke="#fff" stroke-width="2"/>'
-      : '<circle cx="18" cy="18" r="15" fill="#fff" stroke="'+color+'" stroke-width="2.3"/>';
+    const marker=id==='incident';
+    const frame=marker
+      ? '<path d="M18 34C14 30 3 23 3 16a15 15 0 1 1 30 0c0 7-11 14-15 18Z" fill="'+color+'" stroke="#fff" stroke-width="2"/>'
+      : '<rect x="3" y="3" width="30" height="30" rx="10" fill="#fff" stroke="'+color+'" stroke-width="2"/>';
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+frame+
-      '<path transform="translate(6 '+(isIncident?4:6)+') " d="'+path+'" fill="none" stroke="'+(isIncident?'#fff':color)+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      '<path transform="translate(6 '+(marker?4:6)+')" d="'+path+'" fill="none" stroke="'+(marker?'#fff':color)+'" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
 
   async function getJSON(url, signal) {
@@ -74,5 +80,5 @@
     };
   }
 
-  window.ieatFireAnalysisSources = { categories, incident, badge, distanceKm, nearby, wind };
+  window.ieatFireAnalysisSources = { categories, incident, windArrow, badge, distanceKm, nearby, wind };
 })();
