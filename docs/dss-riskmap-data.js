@@ -566,6 +566,7 @@
     }
     if(independent)window.ieatIncidentChosen=true;
     if(!fireSources)showWind();
+    if(fireReportPage)$('fireReportStatus').textContent=name+' · รัศมี '+km+' กม. · กำลังจัดทำรายงาน…';
     button.disabled=true;
     window.ieatCoverageReport={company:name,point,km,incidentType,status:'loading'};
     window.dispatchEvent(new Event('ieat-coverage-context-updated'));
@@ -662,6 +663,9 @@
         message.textContent='ส่งข้อมูลไปหน้ารายงานไม่ได้ กรุณาตรวจสอบการจัดเก็บข้อมูลของเบราว์เซอร์';
         return false;
       }
+    };
+    if(fireReportPage)window.ieatSaveFireReportView=()=>{
+      if(origin&&form.checkValidity())saveIncident();
     };
     window.ieatOpenFireDocument=(allowEmpty=false)=>{
       const empty=allowEmpty&&!origin;
