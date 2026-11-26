@@ -108,7 +108,7 @@
   }
   const categoryById=id=>fireSources.categories.find(category=>category.id===id);
   const iconUrl=category=>'data:image/svg+xml,'+encodeURIComponent(fireSources.badge(category));
-  const markerSymbol=(category,size=27)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size});
+  const markerSymbol=(category,size=29)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size});
   let bufferRecords=[], activeCategory='';
   const connectionLayer=fireAnalysis&&new GraphicsLayer({title:'ระยะเส้นตรงจากจุดเกิดเหตุ',listMode:'hide'});
   if(connectionLayer)map.add(connectionLayer,Math.max(0,map.layers.indexOf(externalLayer)));
@@ -122,7 +122,7 @@
     if(scroll)bufferButtons.get(row)?.scrollIntoView({block:'nearest'});
     connectionLayer.add(new Graphic({
       geometry:{type:'polyline',paths:[[[origin.longitude,origin.latitude],[row.lng,row.lat]]],spatialReference:{wkid:4326}},
-      symbol:{type:'simple-line',color:'#5de5cb',width:2.75,style:'short-dash'}
+      symbol:{type:'simple-line',color:'#245dd5',width:2.75,style:'short-dash'}
     }));
   }
   if(fireAnalysis)view.on('click',async event=>{
@@ -271,8 +271,8 @@
       windLayer.removeAll();
       if(moving&&origin){
         const direction=(from+180)%360;
-        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:36,height:39,yoffset:-36,
-          url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50"><path d="M20 3 37 26H26v19H14V26H3z" fill="#0692ae" stroke="white" stroke-width="3"/></svg>')};
+        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:33,height:41,yoffset:-39,
+          url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50"><path d="M20 3 36 39 20 32 4 39Z" fill="#245dd5" stroke="white" stroke-width="3" stroke-linejoin="round"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
       }
     }
