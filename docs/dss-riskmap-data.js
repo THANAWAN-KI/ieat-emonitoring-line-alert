@@ -272,7 +272,7 @@
       if(moving&&origin){
         const direction=(from+180)%360;
         const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:33,height:41,yoffset:-39,
-          url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50"><path d="M20 3 36 39 20 32 4 39Z" fill="#245dd5" stroke="white" stroke-width="3" stroke-linejoin="round"/></svg>')};
+          url:'data:image/svg+xml,'+encodeURIComponent(fireSources.windArrow||'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M18 4 28 28 18 23 8 28Z" fill="#2257c8" stroke="#fff" stroke-width="2"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
       }
     }
@@ -866,8 +866,14 @@
       risk.watch('visible',syncRiskCards);
     });
     syncRiskCards();
+    const fireMapIcons=document.documentElement.classList.contains('fire-analysis-page')?window.ieatFireAnalysisSources:null;
+    const supplementalKinds=['waterWatch','wastewater','airWatch','waste'];
+    function firePointSymbol(kind,size=26){
+      const category=fireMapIcons?.categories.find(item=>item.id===kind);
+      return category?{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category)),width:size,height:size}:null;
+    }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
-      visible:['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:supportSymbols[d.id],
+      visible:['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
     }));
     const supportColors={fire:'#cc5257',hospital:'#cc5257',hydrant:'#24845a',police:'#24845a',community:'#24845a',communityRisk:'#24845a',waterWatch:'#b88b20',school:'#b88b20',cctv:'#24845a'};
@@ -875,7 +881,7 @@
     support.forEach((item,index)=>{
       const def=supportDefinitions[index];
       const fireClusterColors={fire:'#a43d12',hospital:'#a2224c',hydrant:'#0864aa',police:'#253d80',community:'#237440',communityRisk:'#955826',waterWatch:'#007080',school:'#8b6200',cctv:'#67449e'};
-      const color=(fireView?fireClusterColors:supportColors)[def.id]||'#586b7f';
+      const color=fireMapIcons?.categories.find(item=>item.id===(def.id==='communityRisk'?'community':def.id))?.color||(fireView?fireClusterColors:supportColors)[def.id]||'#586b7f';
       if(['hospital','fire','police'].includes(def.id)){
         item.outFields=['*'];item.popupEnabled=true;
         item.popupTemplate={title:'{'+def.names[0]+'}',outFields:['*'],content:feature=>{
@@ -918,10 +924,10 @@
       badge('<path d="M5 8h10a2 2 0 1 0-2-2M5 12h14a2 2 0 1 1-2 2M5 16h5"/>','#388578'),
       badge('<path d="M7 8h10l-1 11H8L7 8Zm-2 0h14M9 8V5h6v3m-4 3v5m3-5v5"/>','#768338')
     ];
-    supplemental.forEach((item,index)=>item.when(()=>{if(item.geometryType==='point')item.renderer={type:'simple',symbol:extraSymbols[index]};}).catch(()=>{}));
+    supplemental.forEach((item,index)=>item.when(()=>{if(item.geometryType==='point')item.renderer={type:'simple',symbol:firePointSymbol(supplementalKinds[index])||extraSymbols[index]};}).catch(()=>{}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
     if(fireView){
-      center.renderer={type:'simple',symbol:svgMarker('<path d="M12 2v7" stroke="#6f695f" stroke-width="1.2"/><path fill="#edb552" stroke="#383630" stroke-width="1.3" d="M3 22V12l6 3v-4l6 3V8h6v14Z"/><path d="M6 19h2m3 0h2m3 0h2" stroke="#383630" stroke-width="1.3"/>',22,22,0)};
+      center.renderer={type:'simple',symbol:firePointSymbol('estate',29)||svgMarker('<path d="M12 2v7" stroke="#6f695f" stroke-width="1.2"/><path fill="#edb552" stroke="#383630" stroke-width="1.3" d="M3 22V12l6 3v-4l6 3V8h6v14Z"/><path d="M6 19h2m3 0h2m3 0h2" stroke="#383630" stroke-width="1.3"/>',22,22,0)};
       center.labelsVisible=true;
       center.labelingInfo=[{minScale:400000,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["สำนักงานนิคมฯ"]'},
@@ -1229,8 +1235,8 @@
     view.when(()=>bindIncidentSearch(view,map,factory,[
       {layer:factory,kind:'business',fields:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','เลขทะเบียนใหม่','เลขทะเบียนเดิม']},
       ...(window.ieatFireAnalysisSources?[{layer:center,kind:'estate',fields:['สำนักงานนิคมฯ']},{layer:zones,kind:'estate',fields:['สำนักงานนิคมฯ','Name']}]:[]),
-      ...support.map((item,i)=>({layer:item,kind:({communityRisk:'community',waterWatch:'environment'})[supportData[i].id]||supportData[i].id,fields:supportData[i].names})),
-      ...supplemental.map(item=>({layer:item,kind:'environment',source:'GISTDA',fields:['Name','name','ชื่อ']}))
+      ...support.map((item,i)=>({layer:item,kind:({communityRisk:'community'})[supportData[i].id]||supportData[i].id,fields:supportData[i].names})),
+      ...supplemental.map((item,i)=>({layer:item,kind:supplementalKinds[i],source:'GISTDA',fields:['Name','name','ชื่อ']}))
     ],GraphicsLayer,Graphic,Circle,SketchViewModel,Point)).catch(()=>{});
     const layers=[center,zones,businesses,eppZones,...support,...risks,...supplemental];
     view.when(()=>{status.textContent='ซูมเข้าหรือเลือกนิคมฯ เพื่อดูเขตประกอบการและทรัพยากรใกล้เคียง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
