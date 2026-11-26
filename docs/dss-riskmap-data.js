@@ -358,7 +358,7 @@
       const layer=el('div'),label=el('div');
       layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3';
       label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:7px 11px;background:#fff;border:2px solid '+(fireSources?'#be202c':'#edb800')+';border-radius:9px;color:#172437;text-align:center;font:700 14px Sarabun,sans-serif;overflow-wrap:anywhere';
-      if(fireAnalysis)Object.assign(label.style,{background:'transparent',border:'0',padding:'0',color:fireSources.incident.color,textShadow:'-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 0 3px #fff'});
+      if(fireAnalysis)Object.assign(label.style,{background:'transparent',border:'0',padding:'0',color:'#20252b',font:'700 15px/1.35 Sarabun,sans-serif',webkitTextStroke:'3px #fff',paintOrder:'stroke fill',textShadow:'-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 0 3px #fff'});
       const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
       svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
       line.setAttribute('stroke',fireSources?'#be202c':'#edb800');line.setAttribute('stroke-width','2.5');
@@ -377,6 +377,12 @@
     label.style.maxWidth=Math.min(310,width-32)+'px';
     const w=label.offsetWidth,h=label.offsetHeight;
     const clamp=(n,min,max)=>Math.max(min,Math.min(n,max));
+    if(fireAnalysis){
+      const below=point.y+8;
+      label.style.left=clamp(point.x-w/2,8,width-w-8)+'px';
+      label.style.top=clamp(below+h<=height-8?below:point.y-h-48,8,height-h-8)+'px';
+      return;
+    }
     const candidates=[[-w-38,-h-65],[38,-h-65],[-w/2,-h-95],[-w-48,34],[48,34],[-w/2,60]].map(([dx,dy])=>({
       x:clamp(point.x+dx,12,width-w-12),y:clamp(point.y+dy,12,height-h-12)
     })).filter(({x,y})=>point.x<x-18||point.x>x+w+18||point.y<y-18||point.y-33>y+h+18);
@@ -433,7 +439,26 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireAnalysis?[17,129,130,.09]:fireView?[37,79,194,.10]:[184,46,52,.025],outline:fireAnalysis?{color:'#127e80',width:2.5,style:'short-dash'}:fireView?{color:'#3155d4',width:2.5,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    if(fireAnalysis){
+      const zones=[
+        {fraction:1,fill:[39,153,85,.13],outline:'#218247'},
+        {fraction:2/3,fill:[255,151,44,.17],outline:'#dc741e'},
+        {fraction:1/3,fill:[245,43,52,.18],outline:'#db2034'}
+      ];
+      const boundaries=zones.map(({fraction})=>fraction===1?circle:new Circle({
+        center:origin,radius:Number(radius.value)*fraction,radiusUnit:'kilometers',geodesic:true
+      }));
+      zones.forEach(({fill,outline},index)=>{
+        const outer=boundaries[index],inner=boundaries[index+1];
+        const geometry=inner?{type:'polygon',spatialReference:outer.spatialReference,
+          rings:[...outer.rings,...inner.rings.map(ring=>ring.slice().reverse())]}:outer;
+        graphics.add(new Graphic({geometry,symbol:{type:'simple-fill',color:fill,
+          outline:{color:outline,width:2,style:'short-dash'}}}));
+      });
+    }else{
+      graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[37,79,194,.10]:[184,46,52,.025],
+        outline:fireView?{color:'#3155d4',width:2.5,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    }
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
       url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
