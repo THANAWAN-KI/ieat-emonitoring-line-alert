@@ -930,6 +930,53 @@
     }
     const parcelGroup=group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]);
     parcelGroup.visible=!fireView;
+    const referenceBasemap='streets-navigation-vector';
+    const useReferencePalette=document.documentElement.classList.contains('fire-analysis-page');
+    async function styleNavigationBasemap(basemap){
+      await basemap.load();
+      const palette={
+        background:'#f1efe8', land:'#f1efe8', buildings:'#e5e2da', parks:'#d2dfad',
+        water:'#93bfdf', highway:'#a3a8b2', major:'#aeb2ba', local:'#d6d5d1',
+        roadOutline:'#c2c3c4', text:'#454950', halo:'#f5f3ec'
+      };
+      await Promise.all([...basemap.baseLayers.toArray(),...basemap.referenceLayers.toArray()].map(async layer=>{
+        if(layer.type!=='vector-tile')return;
+        await layer.load();
+        for(const style of layer.currentStyleInfo?.style?.layers||[]){
+          const id=(style.id+' '+(style['source-layer']||'')).toLowerCase();
+          const paint=style.paint||{};
+          let changes;
+          if(style.type==='background')changes={'background-color':palette.background};
+          if(style.type==='fill'){
+            const color=/water|river|ocean|lake/.test(id)?palette.water:
+              /park|forest|grass|garden|cemetery|recreation|wood|green/.test(id)?palette.parks:
+              /building/.test(id)?palette.buildings:
+              /(?:^|[ /_-])(land|urban|developed)(?:$|[ /_-])/.test(id)?palette.land:null;
+            if(color)changes={'fill-color':color};
+          }
+          if(style.type==='line'){
+            const isRoad=/road|street|highway|motorway|freeway|expressway|ramp/.test(id);
+            const highway=/highway|motorway|freeway|expressway|interstate/.test(id);
+            const major=/major|primary|arterial|trunk|secondary/.test(id);
+            const color=isRoad?(/casing|outline|tunnel/.test(id)?palette.roadOutline:
+              highway?palette.highway:major?palette.major:palette.local):
+              /river|stream|canal|waterway/.test(id)?palette.water:null;
+            if(color)changes={'line-color':color};
+          }
+          if(style.type==='symbol'&&style.layout?.['text-field']&&/road|street|highway|place|settlement/.test(id)){
+            changes={'text-color':palette.text,'text-halo-color':palette.halo};
+          }
+          if(changes)layer.setPaintProperties(style.id,{...paint,...changes});
+        }
+      }));
+    }
+    let styledBasemap;
+    function applyReferencePalette(map){
+      const basemap=map.basemap;
+      if(!useReferencePalette||$('coverageBasemap')?.value!==referenceBasemap||!basemap||basemap===styledBasemap)return;
+      styledBasemap=basemap;
+      styleNavigationBasemap(basemap).catch(error=>console.warn('Fire navigation basemap palette:',error));
+    }
     const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[parcelGroup,group('ความเสี่ยงโรงงาน กนอ.',risks),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     if(fireView)window.ieatMonitoringReport.load().then(dataset=>map.add(new GeoJSONLayer({
       url:URL.createObjectURL(new Blob([JSON.stringify({type:'FeatureCollection',features:dataset.features})],{type:'application/json'})),
@@ -1060,7 +1107,8 @@
     const basemapSelect=$('coverageBasemap');
     if(basemapSelect){
       basemapSelect.disabled=false;
-      basemapSelect.onchange=()=>{map.basemap=basemapSelect.value;};
+      basemapSelect.onchange=()=>{map.basemap=basemapSelect.value;applyReferencePalette(map);};
+      applyReferencePalette(map);
     }
     window.ieatCoverageMapNavigate=async data=>{
       if(!view.ready)return;
