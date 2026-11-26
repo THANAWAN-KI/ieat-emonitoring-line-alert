@@ -118,20 +118,47 @@
   function updateBufferVisibility(){
     if(!bufferLabels)return;
     bufferLabels.removeAll();
+    externalLayer.removeMany([...bufferClusters.keys()]);
+    bufferClusters.clear();
     if(!externalLayer.visible)return;
-    const occupied=[];
+    const groups=[];
+    const gap=view.scale>28000?60:43;
     for(const [graphic,row] of recordByGraphic){
-      const inScale=view.scale<=firePointScale(row.category.id);
-      graphic.visible=inScale;
-      if(!inScale||view.scale>Math.min(28000,firePointScale(row.category.id)))continue;
+      graphic.visible=row===selectedBufferRow;
+      if(graphic.visible||view.scale>firePointScale(row.category.id))continue;
       const screen=view.toScreen(graphic.geometry);
-      if(!screen||screen.x<0||screen.y<30||screen.x>view.width||screen.y>view.height)continue;
-      const name=row.name.length>36?row.name.slice(0,35)+'…':row.name;
-      const width=name.length*7;
-      const box={left:screen.x+16,right:screen.x+16+width,top:screen.y-27,bottom:screen.y-7};
-      if(box.right>view.width||occupied.some(other=>box.left<other.right&&box.right>other.left&&box.top<other.bottom&&box.bottom>other.top))continue;
-      occupied.push(box);
-      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel(row.category.color),text:name,horizontalAlignment:'left',xoffset:14,yoffset:15}}));
+      if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height)continue;
+      const group=groups.find(item=>Math.hypot(item.screen.x-screen.x,item.screen.y-screen.y)<gap);
+      if(group)group.members.push({graphic,row});
+      else groups.push({screen,members:[{graphic,row}]});
+    }
+    const incidentScreen=origin&&view.toScreen(origin);
+    for(const {screen,members} of groups){
+      const {graphic,row}=members[0], count=members.length;
+      if(count===1){
+        graphic.visible=!incidentScreen||Math.hypot(screen.x-incidentScreen.x,screen.y-incidentScreen.y)>34;
+        if(graphic.visible&&view.scale<=9500&&groups.length<=12){
+          bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel(row.category.color),
+            text:row.name.length>27?row.name.slice(0,26)+'…':row.name,xoffset:13,yoffset:15,horizontalAlignment:'left'}}));
+        }
+        continue;
+      }
+      const cluster=new Graphic({geometry:graphic.geometry,symbol:{type:'simple-marker',size:count>99?32:28,
+        color:'#254f63',outline:{color:'#fff',width:2.5}},
+        popupTemplate:{title:number(count)+' จุดใกล้กัน',content:()=>{
+          const box=el('div'),list=el('ul');
+          for(const member of members.slice(0,12)){
+            const item=el('li'),button=el('button',member.row.name);button.type='button';
+            button.onclick=()=>focusBufferRow(member.row,member.graphic);
+            item.append(button);list.append(item);
+          }
+          box.append(list);
+          if(count>12)box.append(el('p','ค้นหาชื่อในรายการเพื่อเลือกจุดอื่น'));
+          return box;
+        }}});
+      bufferClusters.set(cluster,members);externalLayer.add(cluster);
+      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{type:'text',text:count>999?'999+':String(count),
+        color:'#fff',yoffset:-4,font:{family:'Sarabun',size:10,weight:'bold'}}}));
     }
   }
   if(bufferLabels){
@@ -140,11 +167,12 @@
   }
   const connectionLayer=fireAnalysis&&new GraphicsLayer({title:'ระยะเส้นตรงจากจุดเกิดเหตุ',listMode:'hide'});
   if(connectionLayer)map.add(connectionLayer,Math.max(0,map.layers.indexOf(externalLayer)));
-  const bufferButtons=new Map();
+  const bufferButtons=new Map(),bufferClusters=new Map();
+  let selectedBufferRow=null;
   let recordByGraphic=new Map();
   function selectBufferRecord(row,scroll=false){
     if(!connectionLayer)return;
-    connectionLayer.removeAll();
+    connectionLayer.removeAll();selectedBufferRow=row||null;
     for(const [item,button] of bufferButtons)button.setAttribute('aria-pressed',String(item===row));
     if(!row||!origin)return;
     if(scroll)bufferButtons.get(row)?.scrollIntoView({block:'nearest'});
@@ -156,11 +184,20 @@
   if(fireAnalysis)view.on('click',async event=>{
     if(picking||!recordByGraphic.size)return;
     const hit=await view.hitTest(event,{include:[externalLayer]}).catch(()=>null);
-    const row=hit?.results.map(result=>recordByGraphic.get(result.graphic)).find(Boolean);
-    selectBufferRecord(row,true);
+    const feature=hit?.results.find(result=>recordByGraphic.has(result.graphic)||bufferClusters.has(result.graphic))?.graphic;
+    if(feature&&bufferClusters.has(feature))return;
+    selectBufferRecord(recordByGraphic.get(feature),true);
+    updateBufferVisibility();
   });
+  async function focusBufferRow(row,graphic){
+    selectBufferRecord(row);
+    updateBufferVisibility();
+    await view.goTo({target:graphic.geometry,zoom:Math.max(view.zoom,16)},{animate:false}).catch(()=>{});
+    if(matchMedia('(max-width:850px)').matches)$('coverageMap').scrollIntoView({block:'nearest'});
+    view.openPopup({features:[graphic],location:graphic.geometry});
+  }
   function paintBuffer(){
-    externalLayer.removeAll();
+    externalLayer.removeAll();bufferClusters.clear();
     selectBufferRecord(null);bufferButtons.clear();
     const list=$('fireExternalList'), fragment=document.createDocumentFragment();
     const term=$('fireBufferFilter').value.trim().toLocaleLowerCase('th');
@@ -191,12 +228,7 @@
       const detail=el('span');
       detail.append(el('strong',row.name),el('small',row.category.label+' · '+row.source));
       button.type='button';button.setAttribute('aria-pressed','false');bufferButtons.set(row,button);button.append(image,detail,el('small',row.intersection?'ตัดวงรัศมี':row.distance.toFixed(2)+' กม.'));
-      button.onclick=async()=>{
-        selectBufferRecord(row);
-        await view.goTo({target:position(row),zoom:Math.max(view.zoom,16)},{animate:false}).catch(()=>{});
-        if(matchMedia('(max-width:850px)').matches)$('coverageMap').scrollIntoView({block:'nearest'});
-        view.openPopup({features:[graphicsByRow.get(row)],location:position(row)});
-      };
+      button.onclick=()=>focusBufferRow(row,graphicsByRow.get(row));
       fragment.append(button);
     }
     if(!visible.length)fragment.append(el('p','ไม่มีผลตรงกับตัวกรอง'));
@@ -251,7 +283,7 @@
     externalRequest?.abort();
     const request=new AbortController();
     externalRequest=request;
-    externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();
+    externalLayer.removeAll();bufferClusters.clear();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();
     const panel=$('fireExternalPlaces'), status=$('fireExternalStatus'), list=$('fireExternalList');
     const circle=draw(), point=origin, km=Number(radius.value);
     panel.hidden=false;
@@ -315,7 +347,7 @@
       detail.textContent=known&&speed===0?(weather.time||''):'';
     }
   }
-  if(windBox){view.container.append(windBox);windBox.hidden=false;showWind();}
+  if(windBox){if(!fireAnalysis)view.container.append(windBox);windBox.hidden=false;showWind();}
   if(fireSources)view.watch('rotation',()=>{if(windWeather)showWind(windWeather);});
   let incidentCallout, calloutRevision=0;
   async function updateIncidentCallout(){
@@ -490,7 +522,7 @@
         if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
         window.dispatchEvent(new Event('ieat-coverage-context-updated'));
         view.closePopup();
-        if(fireSources){externalRequest?.abort();externalRequest=null;externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กำลังย้ายจุดเกิดเหตุ…';windRequest?.abort();windRequest=null;windWeather=null;}
+        if(fireSources){externalRequest?.abort();externalRequest=null;externalLayer.removeAll();bufferClusters.clear();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กำลังย้ายจุดเกิดเหตุ…';windRequest?.abort();windRequest=null;windWeather=null;}
         showWind();message.textContent='กำลังย้ายหมุดจุดเกิดเหตุ';
       }
       if(!drag||drag.pin!==pin)return;
@@ -576,7 +608,7 @@
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
-  radius.onchange=()=>{if(fireSources){nearbyId++;externalRequest?.abort();externalRequest=null;externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กดอัปเดตรัศมีเพื่อค้นหาใหม่';}incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent=fireSources?'กดอัปเดตรัศมีเพื่อค้นหาตามระยะใหม่':'กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
+  radius.onchange=()=>{if(fireSources){nearbyId++;externalRequest?.abort();externalRequest=null;externalLayer.removeAll();bufferClusters.clear();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กดอัปเดตรัศมีเพื่อค้นหาใหม่';}incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent=fireSources?'กดอัปเดตรัศมีเพื่อค้นหาตามระยะใหม่':'กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
   type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
   $('coverageSearchSupport').onclick=()=>{if(origin&&(selectedFactory||independent))updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
@@ -950,10 +982,9 @@
         if(fireMapIcons){
           const field=item.fields.find(field=>field.name===def.names[0])?.name||item.displayField;
           if(field)applyFirePointLabels(item,def.id==='communityRisk'?'community':def.id,'$feature['+JSON.stringify(field)+']');
-          return;
         }
         item.featureReduction={
-          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:fireView?500: ['hydrant','cctv'].includes(def.id)?600:2000,
+          type:'cluster',clusterRadius:(def.id==='hydrant'?'65px':'55px'),clusterMinSize:'18px',clusterMaxSize:'25px',maxScale:fireMapIcons?4500:fireView?500: ['hydrant','cctv'].includes(def.id)?600:2000,
           symbol:{type:'simple-marker',style:'circle',color,outline:{color:'#fff',width:fireView?2.5:1.5}},
           labelingInfo:[{
             deconflictionStrategy:'none',labelPlacement:'center-center',
@@ -988,7 +1019,11 @@
     }
     const parcelGroup=group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]);
     parcelGroup.visible=!fireView||!!fireMapIcons;
-    if(fireMapIcons)applyFirePointLabels(center,'estate','$feature["สำนักงานนิคมฯ"]');
+    if(fireMapIcons){
+      applyFirePointLabels(center,'estate','$feature["สำนักงานนิคมฯ"]');
+      center.featureReduction={type:'cluster',clusterRadius:'50px',maxScale:5000,
+        popupTemplate:{title:'นิคมฯ / ท่าเรือฯ · {cluster_count} จุด',content:'ซูมเข้าเพื่อแสดงตำแหน่งรายจุด'}};
+    }
     const referenceBasemap='streets-navigation-vector';
     const useReferencePalette=document.documentElement.classList.contains('fire-analysis-page');
     async function styleNavigationBasemap(basemap){
