@@ -407,8 +407,8 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
     if (collapsed) systems.open = false;
   }
 
-  setCollapsed(compact.matches);
-  compact.addEventListener('change', event => setCollapsed(event.matches));
+  setCollapsed(compact.matches||document.documentElement.classList.contains('fire-analysis-page'));
+  compact.addEventListener('change', event => setCollapsed(event.matches||document.documentElement.classList.contains('fire-analysis-page')));
   toggle.addEventListener('click', () => setCollapsed(!document.body.classList.contains('fire-rail-collapsed')));
   dashboard.addEventListener('click', () => {
     if (document.body.classList.contains('fire-rail-collapsed')) setCollapsed(false);
@@ -3609,8 +3609,8 @@ html.fire-analysis-page #riskmapOverviewPanel .report-search-actions{grid-templa
 <style id="fire-analysis-layout">
 html.fire-analysis-page body{background:#eef2f7;color:#172538}
 html.fire-analysis-page #riskmapOverviewPanel .coverage-map-layout{
-  max-width:1680px!important;margin-inline:auto!important;
-  grid-template-columns:minmax(280px,345px) minmax(0,1fr)!important;
+  max-width:none!important;margin-inline:auto!important;
+  grid-template-columns:minmax(320px,min(32vw,440px)) minmax(0,1fr)!important;
   gap:16px!important;align-items:start;
 }
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage{
