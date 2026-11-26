@@ -110,8 +110,30 @@
   const iconUrl=category=>'data:image/svg+xml,'+encodeURIComponent(fireSources.badge(category));
   const markerSymbol=(category,size=27)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size});
   let bufferRecords=[], activeCategory='';
+  const connectionLayer=fireAnalysis&&new GraphicsLayer({title:'ระยะเส้นตรงจากจุดเกิดเหตุ',listMode:'hide'});
+  if(connectionLayer)map.add(connectionLayer,Math.max(0,map.layers.indexOf(externalLayer)));
+  const bufferButtons=new Map();
+  let recordByGraphic=new Map();
+  function selectBufferRecord(row,scroll=false){
+    if(!connectionLayer)return;
+    connectionLayer.removeAll();
+    for(const [item,button] of bufferButtons)button.setAttribute('aria-pressed',String(item===row));
+    if(!row||!origin)return;
+    if(scroll)bufferButtons.get(row)?.scrollIntoView({block:'nearest'});
+    connectionLayer.add(new Graphic({
+      geometry:{type:'polyline',paths:[[[origin.longitude,origin.latitude],[row.lng,row.lat]]],spatialReference:{wkid:4326}},
+      symbol:{type:'simple-line',color:'#5de5cb',width:2.75,style:'short-dash'}
+    }));
+  }
+  if(fireAnalysis)view.on('click',async event=>{
+    if(picking||!recordByGraphic.size)return;
+    const hit=await view.hitTest(event,{include:[externalLayer]}).catch(()=>null);
+    const row=hit?.results.map(result=>recordByGraphic.get(result.graphic)).find(Boolean);
+    selectBufferRecord(row,true);
+  });
   function paintBuffer(){
     externalLayer.removeAll();
+    selectBufferRecord(null);bufferButtons.clear();
     const list=$('fireExternalList'), fragment=document.createDocumentFragment();
     const term=$('fireBufferFilter').value.trim().toLocaleLowerCase('th');
     const visible=bufferRecords.filter(row=>(!activeCategory||row.category.id===activeCategory)&&
@@ -131,6 +153,7 @@
       const graphic=new Graphic({geometry:position(row),symbol:markerSymbol(row.category),popupTemplate:{title:row.category.label,content:()=>popup(row)}});
       graphicsByRow.set(row,graphic);
     }
+    recordByGraphic=new Map(Array.from(graphicsByRow,([row,graphic])=>[graphic,row]));
     externalLayer.addMany([...graphicsByRow.values()]);
     const limit=50;
     for(const row of visible.slice(0,limit)){
@@ -138,10 +161,11 @@
       image.src=iconUrl(row.category);image.alt='';image.width=30;image.height=30;
       const detail=el('span');
       detail.append(el('strong',row.name),el('small',row.category.label+' · '+row.source));
-      button.type='button';button.append(image,detail,el('small',row.intersection?'ตัดวงรัศมี':row.distance.toFixed(2)+' กม.'));
+      button.type='button';button.setAttribute('aria-pressed','false');bufferButtons.set(row,button);button.append(image,detail,el('small',row.intersection?'ตัดวงรัศมี':row.distance.toFixed(2)+' กม.'));
       button.onclick=async()=>{
+        selectBufferRecord(row);
         await view.goTo({target:position(row),zoom:Math.max(view.zoom,15)},{animate:false}).catch(()=>{});
-        $('coverageMap').scrollIntoView({block:'nearest'});
+        if(matchMedia('(max-width:850px)').matches)$('coverageMap').scrollIntoView({block:'nearest'});
         view.openPopup({features:[graphicsByRow.get(row)],location:position(row)});
       };
       fragment.append(button);
@@ -198,7 +222,7 @@
     externalRequest?.abort();
     const request=new AbortController();
     externalRequest=request;
-    externalLayer.removeAll();
+    externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();
     const panel=$('fireExternalPlaces'), status=$('fireExternalStatus'), list=$('fireExternalList');
     const circle=draw(), point=origin, km=Number(radius.value);
     panel.hidden=false;
@@ -436,7 +460,7 @@
         if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
         window.dispatchEvent(new Event('ieat-coverage-context-updated'));
         view.closePopup();
-        if(fireSources){externalRequest?.abort();externalRequest=null;externalLayer.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กำลังย้ายจุดเกิดเหตุ…';windRequest?.abort();windRequest=null;windWeather=null;}
+        if(fireSources){externalRequest?.abort();externalRequest=null;externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กำลังย้ายจุดเกิดเหตุ…';windRequest?.abort();windRequest=null;windWeather=null;}
         showWind();message.textContent='กำลังย้ายหมุดจุดเกิดเหตุ';
       }
       if(!drag||drag.pin!==pin)return;
@@ -522,7 +546,7 @@
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
-  radius.onchange=()=>{if(fireSources){nearbyId++;externalRequest?.abort();externalRequest=null;externalLayer.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กดอัปเดตรัศมีเพื่อค้นหาใหม่';}incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent=fireSources?'กดอัปเดตรัศมีเพื่อค้นหาตามระยะใหม่':'กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
+  radius.onchange=()=>{if(fireSources){nearbyId++;externalRequest?.abort();externalRequest=null;externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กดอัปเดตรัศมีเพื่อค้นหาใหม่';}incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent=fireSources?'กดอัปเดตรัศมีเพื่อค้นหาตามระยะใหม่':'กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
   type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
   $('coverageSearchSupport').onclick=()=>{if(origin&&(selectedFactory||independent))updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
