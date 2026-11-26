@@ -38,13 +38,80 @@
   const incident={id:'incident',color:'#c12436'};
   const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="#fff" stroke="#b3cafa"/><g transform="translate(7 7) scale(.6875)" fill="#2257c8">'+glyphs.windArrow+'</g></svg>';
 
+  const pinColors = {
+  "hospital": [
+    "#ff5d9c",
+    "#d90030"
+  ],
+  "fire": [
+    "#ffad5e",
+    "#c34a0d"
+  ],
+  "police": [
+    "#6e91ff",
+    "#204bc2"
+  ],
+  "community": [
+    "#61d696",
+    "#138346"
+  ],
+  "school": [
+    "#bb88fb",
+    "#7133b0"
+  ],
+  "hydrant": [
+    "#52cce3",
+    "#007b99"
+  ],
+  "cctv": [
+    "#9f8be7",
+    "#5941a0"
+  ],
+  "estate": [
+    "#ffcb62",
+    "#a76a0d"
+  ],
+  "business": [
+    "#92a8c4",
+    "#465a75"
+  ],
+  "environment": [
+    "#66d5b3",
+    "#14836d"
+  ],
+  "waterWatch": [
+    "#63c8ff",
+    "#0879b8"
+  ],
+  "wastewater": [
+    "#5cd3d0",
+    "#147d80"
+  ],
+  "airWatch": [
+    "#75bce9",
+    "#2b709d"
+  ],
+  "waste": [
+    "#c2c85f",
+    "#74782b"
+  ],
+  "incident": [
+    "#ff7866",
+    "#bf142d"
+  ]
+};
+
   function badge({id,color}){
-    const marker=id==='incident';
-    const frame=marker
-      ? '<path d="M18 34C14 30 3 23 3 16a15 15 0 1 1 30 0c0 7-11 14-15 18Z" fill="'+color+'" stroke="#fff" stroke-width="2"/>'
-      : '<path d="M18 34C14 30 5 23 5 15a13 13 0 1 1 26 0c0 8-9 15-13 19Z" fill="#fff" stroke="'+color+'" stroke-width="2" stroke-linejoin="round"/>';
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+frame+
-      '<g transform="translate(9 6) scale(.5625)" fill="'+(marker?'#fff':color)+'">'+glyphs[id]+'</g></svg>';
+    const [top,bottom]=pinColors[id]||[color,color];
+    const glyph=id==='hospital'
+      ? '<path d="M14 6h4v8h8v4h-8v8h-4v-8H6v-4h8z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>'
+      : glyphs[id];
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
+      '<defs><linearGradient id="pin-fill" x1="0" y1="0" x2="0" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="'+top+'"/><stop offset="1" stop-color="'+bottom+'"/></linearGradient></defs>'+
+      '<path d="M18 30c-1.9 0-1.2-2.5-5.6-4.1a12.8 12.8 0 1 1 11.2 0C19.2 27.5 19.9 30 18 30Z" fill="#fff"/>'+
+      '<circle cx="18" cy="14" r="11.8" fill="url(#pin-fill)"/>'+
+      '<g transform="translate(10 6) scale(.5)" fill="#fff">'+glyph+'</g>'+
+      '<circle cx="18" cy="34" r="1.8" fill="'+bottom+'" stroke="#fff" stroke-width="1.25"/></svg>';
   }
 
   async function getJSON(url, signal) {
