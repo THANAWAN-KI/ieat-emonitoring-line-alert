@@ -150,7 +150,7 @@
     if(scroll)bufferButtons.get(row)?.scrollIntoView({block:'nearest'});
     connectionLayer.add(new Graphic({
       geometry:{type:'polyline',paths:[[[origin.longitude,origin.latitude],[row.lng,row.lat]]],spatialReference:{wkid:4326}},
-      symbol:{type:'simple-line',color:'#245dd5',width:2.75,style:'short-dash'}
+      symbol:{type:'simple-line',color:'#b06825',width:2.75,style:'short-dash'}
     }));
   }
   if(fireAnalysis)view.on('click',async event=>{
@@ -326,7 +326,7 @@
       const layer=el('div'),label=el('div');
       layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3';
       label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:7px 11px;background:#fff;border:2px solid '+(fireSources?'#be202c':'#edb800')+';border-radius:9px;color:#172437;text-align:center;font:700 14px Sarabun,sans-serif;overflow-wrap:anywhere';
-      if(fireAnalysis)Object.assign(label.style,{background:'transparent',border:'0',padding:'0',color:'#b52538',textShadow:'-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 0 3px #fff'});
+      if(fireAnalysis)Object.assign(label.style,{background:'transparent',border:'0',padding:'0',color:fireSources.incident.color,textShadow:'-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 0 3px #fff'});
       const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
       svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
       line.setAttribute('stroke',fireSources?'#be202c':'#edb800');line.setAttribute('stroke-width','2.5');
@@ -401,7 +401,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireAnalysis?[119,86,183,.075]:fireView?[37,79,194,.10]:[184,46,52,.025],outline:fireAnalysis?{color:'#7656b7',width:2.5,style:'short-dash'}:fireView?{color:'#3155d4',width:2.5,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireAnalysis?[17,129,130,.09]:fireView?[37,79,194,.10]:[184,46,52,.025],outline:fireAnalysis?{color:'#127e80',width:2.5,style:'short-dash'}:fireView?{color:'#3155d4',width:2.5,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
       url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
@@ -1046,7 +1046,7 @@
       renderer:{type:'simple',symbol:firePointSymbol('environment',26)||monitoringSymbol},
       labelingInfo:[{minScale:fireMapIcons?28000:150000,labelPlacement:fireMapIcons?'center-right':'above-center',
         labelExpressionInfo:{expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', 'สถานี e-Monitoring')"},
-        symbol:fireMapIcons?{...fireLabel('#207561'),xoffset:12,yoffset:13}:fireLabel('#153a38')}],
+        symbol:fireMapIcons?{...fireLabel('#356831'),xoffset:12,yoffset:13}:fireLabel('#153a38')}],
       featureReduction:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
         labelingInfo:[{labelPlacement:'center-center',labelExpressionInfo:{expression:'Text($feature.cluster_count)'},symbol:{type:'text',color:'#153a38',font:{size:9,weight:'bold'}}}]},
       popupTemplate:{title:'{StationTH}',expressionInfos:[{name:'stationCategory',title:'ประเภทสถานี',expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', DefaultValue($feature.Type, 'ไม่ระบุ'))"}],content:[{type:'fields',fieldInfos:[
