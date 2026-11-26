@@ -84,6 +84,80 @@
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
   const placeInput=$('coveragePlaceQuery'), windBox=$('coverageWind');
   let independent=false;
+  const fireSources=window.ieatFireAnalysisSources;
+  const fireReportPage=document.documentElement.classList.contains('fire-document-page');
+  const fireAnalysis=fireSources&&!fireReportPage;
+  const externalLayer=fireSources&&new GraphicsLayer({title:'สถานที่ใกล้เคียง · OpenStreetMap'});
+  const windLayer=fireSources&&new GraphicsLayer({title:'ลูกศรทิศทางลม',listMode:'hide'});
+  if(fireSources){map.add(externalLayer);map.add(windLayer);map.reorder(pinLayer,map.layers.length-1);}
+  let externalRequest, windRequest, windKey, windWeather;
+  function refreshFireWind() {
+    const latitude=origin.latitude,longitude=origin.longitude;
+    const key=latitude.toFixed(5)+','+longitude.toFixed(5);
+    if(key===windKey&&windRequest)return windRequest.pending;
+    windKey=key;
+    windRequest?.abort();
+    const request=new AbortController();
+    windRequest=request;
+    windWeather=null;
+    showWind();
+    request.pending=fireSources.wind(latitude,longitude,AbortSignal.any([request.signal,AbortSignal.timeout(12000)]))
+      .then(weather=>{if(windRequest===request){windWeather=weather;showWind(weather);}})
+      .catch(()=>{if(windRequest===request){windRequest=null;windWeather=null;showWind({});}});
+    return request.pending;
+  }
+  async function refreshExternal() {
+    externalRequest?.abort();
+    const request=new AbortController();
+    externalRequest=request;
+    externalLayer.removeAll();
+    const panel=$('fireExternalPlaces'), status=$('fireExternalStatus'), list=$('fireExternalList');
+    panel.hidden=!independent;
+    list.replaceChildren();
+    if(!independent)return;
+    status.textContent='กำลังค้นหาสถานที่ในรัศมี '+radius.value+' กม.…';
+    try{
+      const rows=await fireSources.nearby(origin.latitude,origin.longitude,Number(radius.value),
+        AbortSignal.any([request.signal,AbortSignal.timeout(25000)]));
+      if(externalRequest!==request)return;
+      const visible=fireSources.categories.flatMap(category=>rows.filter(row=>row.category===category).slice(0,30));
+      status.textContent=rows.length?'พบ '+number(rows.length)+' จุด · เรียงตามระยะเส้นตรงในแต่ละประเภท'+
+        (visible.length<rows.length?' · แสดง 30 จุดใกล้ที่สุดต่อประเภท':''):
+        'ไม่พบสถานที่ที่มีชื่อใน OpenStreetMap ภายในรัศมี '+radius.value+' กม.';
+      for(const category of fireSources.categories){
+        const points=visible.filter(row=>row.category===category);
+        if(!points.length)continue;
+        const group=el('details'), items=el('ol');
+        group.open=true;
+        group.append(el('summary',category.label+' ('+number(rows.filter(row=>row.category===category).length)+')'));
+        for(const row of points){
+          const label=row.name+' · '+row.distance.toFixed(2)+' กม.';
+          const target=new Point({latitude:row.lat,longitude:row.lng});
+          const popup=()=>{
+            const content=el('div');
+            const link=el('a','ดูใน OpenStreetMap');
+            link.href=row.url;link.target='_blank';link.rel='noopener';
+            content.append(el('p',category.label+' · '+row.distance.toFixed(2)+' กม. จากจุดเกิดเหตุ'),link);
+            return content;
+          };
+          const graphic=new Graphic({geometry:target,symbol:{type:'simple-marker',size:10,color:category.color,outline:{color:'#fff',width:1.5}},
+            popupTemplate:{title:category.label,content:()=>{const box=popup();box.prepend(el('strong',row.name));return box;}}});
+          externalLayer.add(graphic);
+          const item=el('li'), button=el('button',label);
+          button.type='button';button.style.setProperty('--poi-color',category.color);
+          button.onclick=async()=>{
+            await view.goTo({target,zoom:Math.max(view.zoom,15)},{animate:false}).catch(()=>{});
+            $('coverageMap').scrollIntoView({block:'nearest'});
+            view.openPopup({features:[graphic],location:target});
+          };
+          item.append(button);items.append(item);
+        }
+        group.append(items);list.append(group);
+      }
+    }catch(error){
+      if(externalRequest===request)status.textContent='โหลดข้อมูล OpenStreetMap ไม่สำเร็จ กดอัปเดตรัศมีเพื่อลองอีกครั้ง';
+    }
+  }
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
   const direction=deg=>compass[Math.round(deg/45)%8];
   function showWind(weather){
@@ -92,6 +166,15 @@
     const speed=Number(weather?.windSpeed), from=weather?.windDegrees;
     const known=weather?.windSpeed!==''&&weather?.windSpeed!=null&&Number.isFinite(speed)&&speed>=0;
     const moving=known&&speed>0&&Number.isFinite(from);
+    if(windLayer){
+      windLayer.removeAll();
+      if(moving&&origin){
+        const direction=(from+180)%360;
+        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:31,height:39,yoffset:-29,
+          url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50"><path d="M20 3 37 26H26v19H14V26H3z" fill="#b4232d" stroke="white" stroke-width="3"/></svg>')};
+        windLayer.add(new Graphic({geometry:origin,symbol}));
+      }
+    }
     arrow.toggleAttribute('hidden',!moving);
     if(moving){
       const to=(from+180)%360;
@@ -104,6 +187,7 @@
     }
   }
   if(windBox){view.container.append(windBox);windBox.hidden=false;showWind();}
+  if(fireSources)view.watch('rotation',()=>{if(windWeather)showWind(windWeather);});
   let incidentCallout, calloutRevision=0;
   async function updateIncidentCallout(){
     const revision=++calloutRevision;
@@ -253,7 +337,7 @@
     pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();if(!independent)updateNearby();queueReport();
-    view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
+    if(!fireSources)view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
     message.textContent='จุดเกิดเหตุ · '+name+(fireView?' · ลากหมุดเพื่อย้ายจุด':' · คลิกหมุดแล้วลากเพื่อย้ายจุด');
   }
   sketch.on('update',event=>{
@@ -275,6 +359,7 @@
         if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
         window.dispatchEvent(new Event('ieat-coverage-context-updated'));
         view.closePopup();
+        if(fireSources){externalRequest?.abort();externalRequest=null;externalLayer.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กำลังย้ายจุดเกิดเหตุ…';windRequest?.abort();windRequest=null;windWeather=null;}
         showWind();message.textContent='กำลังย้ายหมุดจุดเกิดเหตุ';
       }
       if(!drag||drag.pin!==pin)return;
@@ -303,12 +388,27 @@
     const point={lat:origin.latitude,lng:origin.longitude},attrs={...selectedFactory};
     const km=Number(radius.value),incidentType=type.value;
     const revision=incidentRevision;
+    let externalReady;
+    if(fireSources){
+      window.ieatIncidentChosen=true;
+      externalReady=Promise.allSettled([refreshFireWind(),refreshExternal()]);
+      if(fireAnalysis){
+        const extent=draw().extent;
+        if(manual)await view.goTo(extent.expand(1.22),{animate:false}).catch(()=>{});
+        if(revision!==incidentRevision)return;
+        const rows=await updateNearby(true);
+        if(revision===incidentRevision&&rows)message.textContent='จุดเกิดเหตุ · '+name+' · รัศมี '+km+' กม.';
+        return;
+      }
+    }
     if(independent)window.ieatIncidentChosen=true;
-    showWind();button.disabled=true;
+    if(!fireSources)showWind();
+    button.disabled=true;
     window.ieatCoverageReport={company:name,point,km,incidentType,status:'loading'};
     window.dispatchEvent(new Event('ieat-coverage-context-updated'));
     try{
       const rows=await updateNearby(true);
+      if(externalReady)await externalReady;
       if(revision!==incidentRevision)return;
       if(!rows)throw Error('จุดเกิดเหตุหรือเงื่อนไขค้นหาเปลี่ยน กรุณาเปิดรายงานอีกครั้ง');
       window.ieatCoverageReport={company:name,point,km,incidentType,rows,status:'loading'};
@@ -328,7 +428,7 @@
       const summary=await frame.contentWindow.dssApplyIncidentContext(context);
       if(revision!==incidentRevision||!summary)return;
       context.summary=summary;
-      showWind(summary.weather);
+      if(!fireSources)showWind(summary.weather);
       await window.ieatMonitoringReport?.update(context);
       if(revision!==incidentRevision)return;
       context.status='rendering-map';
@@ -340,11 +440,12 @@
       window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(manual)$('dashboardDownloadImage')?.focus({preventScroll:true});
       message.textContent='อัปเดตจุดเกิดเหตุ รัศมี แผนที่ รายงาน และข้อความ LINE แล้ว';
-    }catch(error){if(revision===incidentRevision){showWind({});if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}}
+      if(fireReportPage)$('fireReportStatus').textContent='รายงานพร้อม · '+name+' · รัศมี '+km+' กม.';
+    }catch(error){if(revision===incidentRevision){showWind({});if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';if(fireReportPage)$('fireReportStatus').textContent=message.textContent;}}
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
-  radius.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
+  radius.onchange=()=>{if(fireSources){nearbyId++;externalRequest?.abort();externalRequest=null;externalLayer.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กดอัปเดตรัศมีเพื่อค้นหาใหม่';}incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent=fireSources?'กดอัปเดตรัศมีเพื่อค้นหาตามระยะใหม่':'กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
   type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
   $('coverageSearchSupport').onclick=()=>{if(origin&&(selectedFactory||independent))updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
@@ -382,6 +483,62 @@
       if(data.exceededTransferLimit||data.features.length===30)matches.append(el('p','แสดงไม่เกิน 30 รายการ โปรดระบุชื่อหรือเลขทะเบียนเพิ่ม'));
     }catch(error){if(id===searchId)message.textContent='ค้นหาทะเบียนโรงงานไม่ได้ กรุณาลองอีกครั้ง';}
   };
+  if(fireSources){
+    const sessionKey='ieat-fire-analysis-v1';
+    const saveIncident=()=>{
+      if(!origin||(!independent&&!selectedFactory)){message.textContent='เลือกจุดเกิดเหตุก่อนเปิดรายงาน';return false;}
+      if(!form.reportValidity())return false;
+      try{
+        sessionStorage.setItem(sessionKey,JSON.stringify({
+          name,independent,attributes:selectedFactory,lat:origin.latitude,lng:origin.longitude,
+          radius:radius.value,type:type.value,basemap:$('coverageBasemap').value,
+          center:view.center?.toJSON(),scale:view.scale,rotation:view.rotation
+        }));
+        return true;
+      }catch{
+        message.textContent='ส่งข้อมูลไปหน้ารายงานไม่ได้ กรุณาตรวจสอบการจัดเก็บข้อมูลของเบราว์เซอร์';
+        return false;
+      }
+    };
+    window.ieatOpenFireDocument=()=>{
+      if(!saveIncident())return;
+      const url=new URL(location.href);
+      url.searchParams.set('workspace','report');
+      url.hash='';
+      location.assign(url);
+    };
+    $('fireApplyRadius').onclick=()=>{
+      if(!origin){message.textContent='เลือกจุดเกิดเหตุก่อนอัปเดตรัศมี';return;}
+      if(!form.reportValidity())return;
+      hasSearched=true;incidentRevision++;
+      void syncReport(true);
+    };
+    $('fireApplyRadius').disabled=false;
+    queueMicrotask(async()=>{
+      const params=new URLSearchParams(location.search);
+      if(!fireReportPage&&!params.has('restoreFire'))return;
+      let saved;
+      try{saved=JSON.parse(sessionStorage.getItem(sessionKey)||'null');}catch{}
+      if(!saved||!validCoordinates(saved.lat,saved.lng)){
+        if(fireReportPage)$('fireReportStatus').textContent='ยังไม่มีจุดเกิดเหตุ กรุณากลับไปเลือกสถานที่ในหน้าวิเคราะห์';
+        return;
+      }
+      radius.value=saved.radius;type.value=saved.type;
+      if(!form.checkValidity())return;
+      independent=saved.independent;selectedFactory=saved.attributes;
+      (independent?placeInput:$('coverageFactoryQuery')).value=saved.name;
+      place(new Point({latitude:saved.lat,longitude:saved.lng}),saved.name);
+      hasSearched=true;
+      const basemap=$('coverageBasemap');
+      basemap.value=saved.basemap;
+      basemap.dispatchEvent(new Event('change',{bubbles:true}));
+      if(saved.center&&Number.isFinite(saved.scale)){
+        await view.goTo({target:new Point(saved.center),scale:saved.scale,rotation:saved.rotation},{animate:false}).catch(()=>{});
+      }
+      void syncReport(false);
+    });
+  }
+
   const validCoordinates=(lat,lng)=>Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=5&&lat<=22&&lng>=97&&lng<=106;
   function selectPlace(point,label){
     if(!validCoordinates(point.latitude,point.longitude)){
