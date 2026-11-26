@@ -601,10 +601,13 @@
         return false;
       }
     };
-    window.ieatOpenFireDocument=()=>{
-      if(!saveIncident())return;
+    window.ieatOpenFireDocument=(allowEmpty=false)=>{
+      const empty=allowEmpty&&!origin;
+      if(!empty&&!saveIncident())return;
       const url=new URL(location.href);
       url.searchParams.set('workspace','report');
+      url.searchParams.delete('emptyReport');
+      if(empty)url.searchParams.set('emptyReport','1');
       url.hash='';
       location.assign(url);
     };
@@ -619,7 +622,9 @@
       const params=new URLSearchParams(location.search);
       if(!fireReportPage&&!params.has('restoreFire'))return;
       let saved;
-      try{saved=JSON.parse(sessionStorage.getItem(sessionKey)||'null');}catch{}
+      if(!params.has('emptyReport')){
+        try{saved=JSON.parse(sessionStorage.getItem(sessionKey)||'null');}catch{}
+      }
       if(!saved||!validCoordinates(saved.lat,saved.lng)){
         if(fireReportPage)$('fireReportStatus').textContent='ยังไม่มีจุดเกิดเหตุ กรุณากลับไปเลือกสถานที่ในหน้าวิเคราะห์';
         return;
@@ -1224,7 +1229,11 @@
       view.ui.add(tool,'top-right');
     }
     view.ui.add(new Home({view}),'top-left');
-    view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่'}),'top-right');
+    if(document.documentElement.classList.contains('fire-analysis-page')){
+      const picker=$('coverageBasemap')?.closest('.coverage-basemap-control');
+      if(picker)view.ui.add(new Expand({view,content:picker,expandIcon:'basemap',expandTooltip:'แผนที่พื้นฐาน',collapseTooltip:'ปิดตัวเลือกแผนที่พื้นฐาน',group:'fire-map-tools'}),'top-right');
+    }
+    view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
     view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
     const factory=layer('e_PP/FeatureServer/0','โรงงานใกล้เคียง');
     if(document.documentElement.classList.contains('chemical-report-view')){
