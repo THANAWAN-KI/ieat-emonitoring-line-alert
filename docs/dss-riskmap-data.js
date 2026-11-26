@@ -108,7 +108,7 @@
   }
   const categoryById=id=>fireSources.categories.find(category=>category.id===id);
   const iconUrl=category=>'data:image/svg+xml,'+encodeURIComponent(fireSources.badge(category));
-  const markerSymbol=(category,size=29)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size});
+  const markerSymbol=(category,size=29)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size,yoffset:size*4/9});
   let bufferRecords=[], activeCategory='';
   const connectionLayer=fireAnalysis&&new GraphicsLayer({title:'ระยะเส้นตรงจากจุดเกิดเหตุ',listMode:'hide'});
   if(connectionLayer)map.add(connectionLayer,Math.max(0,map.layers.indexOf(externalLayer)));
@@ -875,7 +875,7 @@
     const supplementalKinds=['waterWatch','wastewater','airWatch','waste'];
     function firePointSymbol(kind,size=26){
       const category=fireMapIcons?.categories.find(item=>item.id===kind);
-      return category?{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category)),width:size,height:size}:null;
+      return category?{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category)),width:size,height:size,yoffset:size*4/9}:null;
     }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
       visible:['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
@@ -1109,7 +1109,7 @@
         if(item.renderer?.symbol?.type!=='picture-marker')return;
         const def=supportDefinitions[index],size=fireView?baseSize:Math.max(9,baseSize-(['hydrant','cctv'].includes(def.id)?7:3));
         if(Number(item.renderer.symbol.width)===size)return;
-        const renderer=item.renderer.clone();renderer.symbol.width=size;renderer.symbol.height=size;item.renderer=renderer;
+        const renderer=item.renderer.clone();renderer.symbol.width=size;renderer.symbol.height=size;if(fireMapIcons)renderer.symbol.yoffset=size*4/9;item.renderer=renderer;
       });
     }
     view.watch('stationary',stationary=>{if(stationary)resizeSupportSymbols();});

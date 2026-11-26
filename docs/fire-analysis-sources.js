@@ -42,9 +42,9 @@
     const marker=id==='incident';
     const frame=marker
       ? '<path d="M18 34C14 30 3 23 3 16a15 15 0 1 1 30 0c0 7-11 14-15 18Z" fill="'+color+'" stroke="#fff" stroke-width="2"/>'
-      : '<rect x="2" y="2" width="32" height="32" rx="11" fill="#fff" stroke="'+color+'" stroke-width="1.7"/>';
+      : '<path d="M18 34C14 30 5 23 5 15a13 13 0 1 1 26 0c0 8-9 15-13 19Z" fill="#fff" stroke="'+color+'" stroke-width="2" stroke-linejoin="round"/>';
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+frame+
-      '<g transform="translate(7 '+(marker?5:7)+') scale(.6875)" fill="'+(marker?'#fff':color)+'">'+glyphs[id]+'</g></svg>';
+      '<g transform="translate(9 6) scale(.5625)" fill="'+(marker?'#fff':color)+'">'+glyphs[id]+'</g></svg>';
   }
 
   async function getJSON(url, signal) {
