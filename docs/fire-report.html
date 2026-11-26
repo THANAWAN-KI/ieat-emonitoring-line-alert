@@ -285,60 +285,147 @@ html body #riskDashboard#riskDashboard#riskDashboard#riskDashboard.continuous-da
 .fire-risk-view .riskmap-shared-workspace > .riskmap-overview-rail { display: none !important; }
 .fire-risk-view .riskmap-shared-workspace > .riskmap-workspace-body { grid-column: 1; min-width: 0; }
 </style>
+<style id="fire-navigation-style">
+body { --fire-rail-width:288px; --fire-rail-inset:var(--fire-rail-width); }
+body.fire-rail-collapsed { --fire-rail-width:60px; }
+body > main.page { margin-inline-start:var(--fire-rail-inset); width:auto; min-width:0; }
+html.riskmap-booting body::after { inset-inline-start:var(--fire-rail-inset); top:24px; }
+#fireNavigation {
+  position:fixed; inset:0 auto 0 0; z-index:1100; box-sizing:border-box;
+  width:var(--fire-rail-width); height:100dvh; overflow:auto; overscroll-behavior:contain;
+  display:flex; flex-direction:column; gap:10px; padding:18px 14px 28px;
+  border-inline-end:1px solid #e5e7eb; background:#fff; color:#18201c;
+  font:400 15px/1.4 Sarabun,sans-serif;
+}
+.fire-rail-heading { display:flex; align-items:center; gap:16px; min-height:48px; margin-bottom:10px; padding-inline:12px; }
+.fire-rail-brand { font-size:22px; font-weight:800; white-space:nowrap; }
+#fireRailToggle { display:grid; place-items:center; flex:none; width:42px; height:42px; padding:0; border:0; border-radius:10px; background:transparent; color:#334155; cursor:pointer; }
+#fireNavigation > a, #fireNavigation > button, #fireNavigation summary, #fireAlertSlot #hub-alert-button {
+  box-sizing:border-box; display:flex; align-items:center; gap:11px; width:100%; min-height:50px;
+  padding:8px 11px; border:1px solid transparent; border-radius:999px; background:#fff;
+  font:inherit; color:#26352e; text-decoration:none; white-space:nowrap; text-align:start; cursor:pointer;
+}
+#fireNavigation summary { list-style:none; border-color:#dccbff; background:#f3eeff; color:#5a37c3; }
+#fireNavigation summary::-webkit-details-marker { display:none; }
+#fireNavigation :is(a,button,summary):focus-visible { outline:2px solid #754bff; outline-offset:-2px; }
+#fireNavigation > a:hover, #fireNavigation > button:hover, #fireRailToggle:hover { background:#f4f1fa; }
+.fire-reference-icon, #fireAlertSlot .alert-button-flower {
+  display:grid; place-items:center; flex:0 0 29px; width:29px; height:29px;
+  border-radius:9px; color:var(--icon-ink,#fff); background:var(--icon-color,#d62828);
+}
+.fire-reference-icon svg, #fireAlertSlot .alert-button-flower img { width:18px; height:18px; }
+.fire-reference-icon svg, .fire-shortcut-panel svg { fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.fire-shortcut-panel { margin:8px 0 4px; padding:8px; border-radius:14px; background:#f8f6fc; }
+.fire-system-tree { list-style:none; margin:4px 0 0; padding:0; }
+.fire-tree-label, .fire-system-tree a { display:flex; align-items:center; gap:8px; padding:7px; border-radius:8px; color:inherit; text-decoration:none; }
+.fire-tree-label { font-weight:700; }
+.fire-system-tree a:hover, .fire-system-tree [aria-current] { background:#eee6ff; color:#5a37c3; }
+.fire-shortcut-panel svg { width:16px; height:16px; flex:none; }
+#fireAlertSlot { margin-top:auto; }
+html body #fireAlertSlot #hub-alert-button { background:#fff!important; color:#26352e!important; -webkit-text-fill-color:currentColor!important; border-color:transparent!important; box-shadow:none!important; animation:none!important; }
+html body #fireAlertSlot #hub-alert-button:hover { background:#f4f1fa!important; }
+html body #fireAlertSlot #hub-alert-button .alert-count { margin-inline-start:auto; padding:0; background:transparent!important; color:#5a37c3!important; -webkit-text-fill-color:currentColor!important; font-size:12px; }
+.fire-rail-collapsed #fireNavigation { padding-inline:5px; }
+.fire-rail-collapsed #fireNavigation :is(.fire-rail-brand,.fire-nav-label,.fire-shortcut-panel,.alert-count) { display:none; }
+.fire-rail-collapsed #fireNavigation :is(.fire-rail-heading,summary) { justify-content:center; padding-inline:0; }
+.fire-rail-collapsed #fireNavigation > :is(a,button), .fire-rail-collapsed #fireAlertSlot #hub-alert-button { justify-content:center; padding-inline:0; gap:0; }
+html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
+@media (max-width:900px) {
+  body { --fire-rail-inset:60px; --fire-rail-width:min(288px,85vw); }
+  body:not(.fire-rail-collapsed) #fireNavigation { box-shadow:10px 0 32px #20173533; }
+}
+@media print {
+  #fireNavigation { display:none; }
+  body > main.page { margin-inline-start:0; }
+}
+</style>
 </head>
 <body>
-<div class="emcc-gis-header">
-<header class="emcc-gis-brand" >
-  <a href="https://emcc-gis.pages.dev/">EMCC</a>
-  <span lang="en">Geographic Information System for Situation Monitoring and Risk Surveillance in Industrial Estates</span>
-</header>
-<nav class="emcc-gis-nav" aria-label="เมนู EMCC">
-  <span lang="en">Environmental Monitoring and Control Center: EMCC</span>
-  <a href="https://emcc-gis.pages.dev/">Overview</a>
-  <details><summary>Data</summary><div>
-          <div class="dd-group-title" role="presentation">EMCC DASHBOARD</div>
-          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/" target="_blank" rel="noopener" >Estate operators (e-PP)</a>
-          
-          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" >E-Monitoring: environment</a>
-          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener" >EMCC accident statistics</a>
-          <a class="dd-item" role="menuitem" href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Water use: estates / ports</a>
-          <div class="dd-group-title" role="presentation">EMCC RISK MAP</div>
-          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss-riskmap.html?view=data&amp;hazard=fire#riskCoverage" target="_blank" rel="noopener" >Fire</a>
-          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/flood-dashboard.html" target="_blank" rel="noopener" >Flood</a>
-          <a class="dd-item" role="menuitem" href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Drought</a>
-          <a class="dd-item" role="menuitem" href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener" >PM2.5</a>
-          <a class="dd-item" role="menuitem" href="https://tmd-earthquake.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener" >Earthquake</a>
-          <a class="dd-item" role="menuitem" href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/chemical-report.html?view=data" target="_blank" rel="noopener" >Chemical leaks</a>
-          <a class="dd-item dd-all" role="menuitem" href="https://emcc-gis.pages.dev/#systems" >View all systems ↓</a>
-        </div></details>
-  <a href="#riskMapSection" aria-current="page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14m6-12v14"/></svg> Risk map</a>
+<nav id="fireNavigation" class="fire-rail" aria-label="เมนูรายงานไฟไหม้" data-html2canvas-ignore>
+  <div class="fire-rail-heading">
+    <button type="button" id="fireRailToggle" aria-controls="fireNavigation" aria-expanded="true" aria-label="ย่อเมนูด้านข้าง" title="ย่อเมนูด้านข้าง">
+      <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="fire-rail-brand">GIS IEAT EMCC</div>
+  </div>
+  <a href="https://emcc-gis.pages.dev/" title="หน้าแรก EMCC"><span class="fire-reference-icon" style="--icon-color:#000000" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7M5 9v11h14V9m-9 11v-6h4v6"/></svg></span><span class="fire-nav-label">หน้าแรก EMCC</span></a>
+  <details class="fire-shortcut-menu"><summary aria-label="Dashboard" title="Dashboard"><span class="fire-reference-icon" style="--icon-color:#5A37C3" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="fire-nav-label">Dashboard</span></summary><div class="fire-shortcut-panel fire-all-systems">
+      <div class="fire-tree-label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="14" cy="10" r="7"/><path d="M5 11a7 7 0 0 0 7 9"/></svg><span>ระบบทั้งหมด</span></div>
+      <ul class="fire-system-tree">
+      <li><a href="https://nawakonnakhonchai-wq.github.io/WeatherForecastDaily/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M4 12h16m-8-8a12 12 0 0 1 0 16m0-16a12 12 0 0 0 0 16"/></svg><span>สภาพอากาศ 77 จังหวัด</span></a></li>
+      <li><a href="https://nawakonnakhonchai-wq.github.io/epp_dashboard/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16m-11 4h6"/></svg><span title="ผู้ประกอบการในนิคมฯ (e-PP)">ผู้ประกอบการ (e-PP)</span></a></li>
+      <li><a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/dss.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-5 3 2 5-6"/></svg><span>DSS</span></a></li>
+      <li><a href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h5l2-5 4 10 2-5h5"/></svg><span title="E-Monitoring สิ่งแวดล้อม">E-Monitoring</span></a></li>
+      <li><a href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M4 12h16m-8-8a12 12 0 0 1 0 16m0-16a12 12 0 0 0 0 16"/></svg><span>สถิติอุบัติเหตุ EMCC</span></a></li>
+      <li><a href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16m-11 4h6"/></svg><span title="การใช้น้ำ นิคมฯ / ท่าเรือฯ">การใช้น้ำ</span></a></li>
+      <li><a href="#riskCoverage" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-5 3 2 5-6"/></svg><span>ไฟไหม้</span></a></li>
+      <li><a href="https://nawakonnakhonchai-wq.github.io/rid-geojson-bot/#overview" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h5l2-5 4 10 2-5h5"/></svg><span>น้ำท่วม</span></a></li>
+      <li><a href="https://water-used-dashboard.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M4 12h16m-8-8a12 12 0 0 1 0 16m0-16a12 12 0 0 0 0 16"/></svg><span>ภัยแล้ง</span></a></li>
+      <li><a href="https://nawakonnakhonchai-wq.github.io/E-Monitoring_Dashboard/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16m-11 4h6"/></svg><span>ฝุ่น PM2.5</span></a></li>
+      <li><a href="https://tmd-earthquake.nawakonnakhonchai.workers.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-5 3 2 5-6"/></svg><span>แผ่นดินไหว</span></a></li>
+      <li><a href="https://thanawan-ki.github.io/ieat-emonitoring-line-alert/chemical-report.html?view=data" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h5l2-5 4 10 2-5h5"/></svg><span>สารเคมีรั่วไหล</span></a></li>
+          </ul>
+    </div></details>
+  <div id="fireAlertSlot"></div>
+  <button type="button" class="fire-download" id="fireDownload" aria-label="ดาวน์โหลดรายงาน PNG" title="ดาวน์โหลดรายงาน PNG">
+    <span class="fire-reference-icon" style="--icon-color:#71951E" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11m-4-4 4 4 4-4M4 16v4h16v-4"/></svg></span>
+    <span class="fire-nav-label">ดาวน์โหลดข้อมูล</span>
+  </button>
+  <a href="https://emcc-gis.pages.dev/" target="_blank" rel="noopener" title="ผู้ช่วย EMCC"><span class="fire-reference-icon" style="--icon-color:#F4E022;--icon-ink:#171717" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-8 8H5l1.5-3.5A8 8 0 1 1 20 11.5Z"/><path d="M9 10h6m-6 4h4"/></svg></span><span class="fire-nav-label">ผู้ช่วย EMCC</span></a>
 </nav>
-</div>
-<style>
-.emcc-gis-header { position: sticky; top: 0; z-index: 1100; font-family: Sarabun, sans-serif; }
-.emcc-gis-brand { justify-content: flex-start; display: flex; align-items: center; gap: 16px; padding: 8px 24px; min-height: 50px; box-sizing: border-box; background: white; color: #141718; }
-.emcc-gis-brand { justify-content:flex-start!important; }
-.emcc-gis-brand > span { margin:0; }
-.emcc-gis-nav svg { vertical-align:-2px; }
-.emcc-gis-brand a { color: inherit; text-decoration: none; font-size: 28px; letter-spacing: .1em; }
-.emcc-gis-nav { display: flex; flex-wrap: wrap; align-items: stretch; background: linear-gradient(90deg,#362048,#533273 55%,#643e88); color: white; }
-.emcc-gis-nav > span { flex: 1 1 350px; padding: 14px 24px; }
-.emcc-gis-nav a, .emcc-gis-nav summary { display: block; padding: 14px 18px; color: white; text-decoration: none; cursor: pointer; }
-.emcc-gis-nav > a { background: #45235f; }
-.emcc-gis-nav details { position: relative; }
-.emcc-gis-nav summary::after { content: " ⌄"; }
-.emcc-gis-nav details > div { position: absolute; right: 0; min-width: 180px; background: #10202ce8; width:min(320px,90vw); max-height:75dvh; overflow:auto; padding:5px; }
-.emcc-gis-nav .dd-group-title{padding:8px 12px;color:#d5e1ea;font-size:11px;font-weight:600}
-.emcc-gis-nav .dd-item{padding:9px 12px;font-size:14px;font-weight:300}
-.emcc-gis-nav .dd-all{background:#ffffff14}
-.emcc-gis-nav a:hover, .emcc-gis-nav summary:hover { background: #643e88; }
+<script id="fire-navigation">
+(() => {
+  const rail = document.getElementById('fireNavigation');
+  const toggle = document.getElementById('fireRailToggle');
+  const systems = rail.querySelector('details');
+  const dashboard = systems.querySelector('summary');
+  const compact = matchMedia('(max-width:900px)');
 
-@media(max-width:640px){ .emcc-gis-brand { padding-inline:12px; font-size:13px; } .emcc-gis-nav > span { flex-basis:100%; padding:8px 12px; }  }
-</style>
-<script>
-document.querySelector('.emcc-gis-nav details').addEventListener('click', function(event) {
-  if (event.target.closest('a')) this.open = false;
-});
+  function setCollapsed(collapsed) {
+    document.body.classList.toggle('fire-rail-collapsed', collapsed);
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.title = collapsed ? 'ขยายเมนูด้านข้าง' : 'ย่อเมนูด้านข้าง';
+    toggle.setAttribute('aria-label', toggle.title);
+    if (collapsed) systems.open = false;
+  }
+
+  setCollapsed(compact.matches);
+  compact.addEventListener('change', event => setCollapsed(event.matches));
+  toggle.addEventListener('click', () => setCollapsed(!document.body.classList.contains('fire-rail-collapsed')));
+  dashboard.addEventListener('click', () => {
+    if (document.body.classList.contains('fire-rail-collapsed')) setCollapsed(false);
+  });
+  rail.addEventListener('click', event => {
+    if (!event.target.closest('a')) return;
+    systems.open = false;
+    if (compact.matches) setCollapsed(true);
+  });
+  rail.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    if (systems.open) {
+      systems.open = false;
+      dashboard.focus();
+    } else if (compact.matches && !document.body.classList.contains('fire-rail-collapsed')) {
+      setCollapsed(true);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const alerts = document.getElementById('hub-alert-button');
+    if (alerts) document.getElementById('fireAlertSlot').append(alerts);
+  }, { once:true });
+
+  document.getElementById('fireDownload').addEventListener('click', () => {
+    if (compact.matches) setCollapsed(true);
+    const download = document.getElementById('dashboardDownloadImage');
+    if (download && !download.disabled) {
+      download.click();
+    } else {
+      document.getElementById('emergencyReportPage')?.scrollIntoView({ block:'start' });
+    }
+  });
+})();
 </script>
 
 <div hidden style="display:none!important">
