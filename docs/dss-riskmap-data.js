@@ -106,58 +106,135 @@
       .catch(()=>{if(windRequest===request){windRequest=null;windWeather=null;showWind({});}});
     return request.pending;
   }
+  const categoryById=id=>fireSources.categories.find(category=>category.id===id);
+  const iconUrl=category=>'data:image/svg+xml,'+encodeURIComponent(fireSources.badge(category));
+  const markerSymbol=(category,size=27)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size});
+  let bufferRecords=[], activeCategory='';
+  function paintBuffer(){
+    externalLayer.removeAll();
+    const list=$('fireExternalList'), fragment=document.createDocumentFragment();
+    const term=$('fireBufferFilter').value.trim().toLocaleLowerCase('th');
+    const visible=bufferRecords.filter(row=>(!activeCategory||row.category.id===activeCategory)&&
+      [row.name,row.category.label,row.source].some(value=>value.toLocaleLowerCase('th').includes(term)));
+    const position=row=>new Point({latitude:row.lat,longitude:row.lng});
+    const popup=row=>{
+      const box=el('div');
+      box.append(el('strong',row.name),el('p',(row.intersection?'พื้นที่ตัดผ่านวงรัศมี':row.distance.toFixed(2)+' กม. จากจุดเกิดเหตุ')+' · '+row.source));
+      if(row.url){
+        const link=el('a','ดูใน OpenStreetMap');
+        link.href=row.url;link.target='_blank';link.rel='noopener';box.append(link);
+      }
+      return box;
+    };
+    const graphicsByRow=new Map();
+    for(const row of visible){
+      const graphic=new Graphic({geometry:position(row),symbol:markerSymbol(row.category),popupTemplate:{title:row.category.label,content:()=>popup(row)}});
+      graphicsByRow.set(row,graphic);
+    }
+    externalLayer.addMany([...graphicsByRow.values()]);
+    const limit=50;
+    for(const row of visible.slice(0,limit)){
+      const button=el('button',null,'fire-result-row'), image=el('img');
+      image.src=iconUrl(row.category);image.alt='';image.width=30;image.height=30;
+      const detail=el('span');
+      detail.append(el('strong',row.name),el('small',row.category.label+' · '+row.source));
+      button.type='button';button.append(image,detail,el('small',row.intersection?'ตัดวงรัศมี':row.distance.toFixed(2)+' กม.'));
+      button.onclick=async()=>{
+        await view.goTo({target:position(row),zoom:Math.max(view.zoom,15)},{animate:false}).catch(()=>{});
+        $('coverageMap').scrollIntoView({block:'nearest'});
+        view.openPopup({features:[graphicsByRow.get(row)],location:position(row)});
+      };
+      fragment.append(button);
+    }
+    if(!visible.length)fragment.append(el('p','ไม่มีผลตรงกับตัวกรอง'));
+    if(visible.length>limit)fragment.append(el('p','รายการแสดง '+limit+' อันดับแรก · หมุดบนแผนที่ '+number(visible.length)+' จุด'));
+    list.replaceChildren(fragment);
+  }
+  function renderCategories(){
+    const host=$('fireBufferCategories');
+    const counts=new Map();
+    for(const row of bufferRecords)counts.set(row.category.id,(counts.get(row.category.id)||0)+1);
+    host.replaceChildren();
+    for(const category of [null,...fireSources.categories]){
+      const count=category?counts.get(category.id)||0:bufferRecords.length;
+      if(!count&&category)continue;
+      const button=el('button'), id=category?.id||'';
+      button.type='button';button.setAttribute('aria-pressed',String(activeCategory===id));
+      if(category){const icon=el('img');icon.src=iconUrl(category);icon.alt='';icon.width=22;icon.height=22;button.append(icon);}
+      button.append(el('span',(category?.label||'ทั้งหมด')+' '+number(count)));
+      button.onclick=()=>{activeCategory=id;renderCategories();paintBuffer();};
+      host.append(button);
+    }
+  }
+  async function queryBufferLayer(source,circle,point,km,signal){
+    const {layer,fields}=source;
+    await layer.load();
+    const available=new Set(layer.fields.map(field=>field.name));
+    const names=[...new Set([...fields,layer.displayField])].filter(field=>available.has(field)&&field!==layer.objectIdField);
+    const query=layer.createQuery();
+    query.geometry=circle;query.spatialRelationship='intersects';
+    const ids=await layer.queryObjectIds(query,{signal})||[];
+    const rows=[];
+    const category=categoryById(source.kind)||categoryById('environment');
+    for(let start=0;start<ids.length;start+=150){
+      const batch=layer.createQuery();
+      batch.objectIds=ids.slice(start,start+150);batch.outFields=[layer.objectIdField,...names];
+      batch.returnGeometry=true;batch.outSpatialReference={wkid:4326};
+      const response=await layer.queryFeatures(batch,{signal});
+      for(const feature of response.features){
+        const geometry=feature.geometry;
+        const anchor=geometry?.type==='point'?geometry:geometry?.centroid||geometry?.extent?.center;
+        if(!Number.isFinite(anchor?.latitude)||!Number.isFinite(anchor?.longitude))continue;
+        const distance=fireSources.distanceKm(point.latitude,point.longitude,anchor.latitude,anchor.longitude);
+        const intersection=geometry.type!=='point'&&distance>km;
+        if(geometry.type==='point'&&distance>km)continue;
+        rows.push({category,name:names.map(field=>feature.attributes[field]).find(value=>String(value??'').trim())?.toString()||layer.title+' '+feature.attributes[layer.objectIdField],
+          distance,intersection,source:source.source||'กนอ.',lat:anchor.latitude,lng:anchor.longitude});
+      }
+    }
+    return rows;
+  }
   async function refreshExternal() {
     externalRequest?.abort();
     const request=new AbortController();
     externalRequest=request;
     externalLayer.removeAll();
     const panel=$('fireExternalPlaces'), status=$('fireExternalStatus'), list=$('fireExternalList');
-    panel.hidden=!independent;
-    list.replaceChildren();
-    if(!independent)return;
-    status.textContent='กำลังค้นหาสถานที่ในรัศมี '+radius.value+' กม.…';
-    try{
-      const rows=await fireSources.nearby(origin.latitude,origin.longitude,Number(radius.value),
-        AbortSignal.any([request.signal,AbortSignal.timeout(25000)]));
-      if(externalRequest!==request)return;
-      const visible=fireSources.categories.flatMap(category=>rows.filter(row=>row.category===category).slice(0,30));
-      status.textContent=rows.length?'พบ '+number(rows.length)+' จุด · เรียงตามระยะเส้นตรงในแต่ละประเภท'+
-        (visible.length<rows.length?' · แสดง 30 จุดใกล้ที่สุดต่อประเภท':''):
-        'ไม่พบสถานที่ที่มีชื่อใน OpenStreetMap ภายในรัศมี '+radius.value+' กม.';
-      for(const category of fireSources.categories){
-        const points=visible.filter(row=>row.category===category);
-        if(!points.length)continue;
-        const group=el('details'), items=el('ol');
-        group.open=true;
-        group.append(el('summary',category.label+' ('+number(rows.filter(row=>row.category===category).length)+')'));
-        for(const row of points){
-          const label=row.name+' · '+row.distance.toFixed(2)+' กม.';
-          const target=new Point({latitude:row.lat,longitude:row.lng});
-          const popup=()=>{
-            const content=el('div');
-            const link=el('a','ดูใน OpenStreetMap');
-            link.href=row.url;link.target='_blank';link.rel='noopener';
-            content.append(el('p',category.label+' · '+row.distance.toFixed(2)+' กม. จากจุดเกิดเหตุ'),link);
-            return content;
-          };
-          const graphic=new Graphic({geometry:target,symbol:{type:'simple-marker',size:10,color:category.color,outline:{color:'#fff',width:1.5}},
-            popupTemplate:{title:category.label,content:()=>{const box=popup();box.prepend(el('strong',row.name));return box;}}});
-          externalLayer.add(graphic);
-          const item=el('li'), button=el('button',label);
-          button.type='button';button.style.setProperty('--poi-color',category.color);
-          button.onclick=async()=>{
-            await view.goTo({target,zoom:Math.max(view.zoom,15)},{animate:false}).catch(()=>{});
-            $('coverageMap').scrollIntoView({block:'nearest'});
-            view.openPopup({features:[graphic],location:target});
-          };
-          item.append(button);items.append(item);
+    const circle=draw(), point=origin, km=Number(radius.value);
+    panel.hidden=false;
+    if(fireAnalysis)for(const {layer,kind} of sources){if(kind!=='estate')layer.visible=false;}
+    bufferRecords=[];activeCategory='';
+    $('fireBufferCategories').replaceChildren();list.replaceChildren();
+    status.textContent='กำลังค้นหาข้อมูล กนอ. และแหล่งภายนอก ในรัศมี '+km+' กม.…';
+    const signal=AbortSignal.any([request.signal,AbortSignal.timeout(35000)]);
+    const providers=[...sources.map(source=>({label:source.layer.title,load:()=>queryBufferLayer(source,circle,point,km,signal)})),
+      {label:'OpenStreetMap',load:()=>fireSources.nearby(point.latitude,point.longitude,km,signal)}];
+    const failures=[], byName=new Map();
+    const normalizeName=value=>value.normalize('NFKC').replace(/[\s\p{P}]+/gu,'').toLocaleLowerCase('th');
+    await Promise.all(providers.map(async provider=>{
+      try{
+        const rows=await provider.load();
+        if(externalRequest!==request)return;
+        for(const row of rows){
+          const key=row.category.id+'|'+normalizeName(row.name);
+          const candidates=byName.get(key)||[];
+          const index=candidates.findIndex(other=>fireSources.distanceKm(row.lat,row.lng,other.lat,other.lng)<.08);
+          if(index<0)candidates.push(row);
+          else if(candidates[index].source==='OpenStreetMap'&&row.source!=='OpenStreetMap')candidates[index]=row;
+          byName.set(key,candidates);
         }
-        group.append(items);list.append(group);
+        bufferRecords=[...byName.values()].flat();
+        bufferRecords.sort((a,b)=>a.distance-b.distance);
+        renderCategories();paintBuffer();
+      }catch{
+        if(externalRequest===request)failures.push(provider.label);
       }
-    }catch(error){
-      if(externalRequest===request)status.textContent='โหลดข้อมูล OpenStreetMap ไม่สำเร็จ กดอัปเดตรัศมีเพื่อลองอีกครั้ง';
-    }
+    }));
+    if(externalRequest!==request)return;
+    status.textContent='รัศมี '+km+' กม. · พบ '+number(bufferRecords.length)+' รายการ'+
+      (failures.length?' · โหลดไม่ได้: '+failures.join(', '):'');
   }
+  if(fireSources)$('fireBufferFilter').addEventListener('input',paintBuffer);
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
   const direction=deg=>compass[Math.round(deg/45)%8];
   function showWind(weather){
@@ -170,8 +247,8 @@
       windLayer.removeAll();
       if(moving&&origin){
         const direction=(from+180)%360;
-        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:31,height:39,yoffset:-29,
-          url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50"><path d="M20 3 37 26H26v19H14V26H3z" fill="#b4232d" stroke="white" stroke-width="3"/></svg>')};
+        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:36,height:39,yoffset:-36,
+          url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 50"><path d="M20 3 37 26H26v19H14V26H3z" fill="#0692ae" stroke="white" stroke-width="3"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
       }
     }
@@ -196,10 +273,10 @@
     if(!incidentCallout){
       const layer=el('div'),label=el('div');
       layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3';
-      label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:6px 10px;background:#fffdf6;border:2px solid #edb800;color:#292824;text-align:center;font:600 14px Sarabun,sans-serif;overflow-wrap:anywhere';
+      label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:7px 11px;background:#fff;border:2px solid '+(fireSources?'#be202c':'#edb800')+';border-radius:9px;color:#172437;text-align:center;font:700 14px Sarabun,sans-serif;overflow-wrap:anywhere';
       const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
       svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
-      line.setAttribute('stroke','#edb800');line.setAttribute('stroke-width','2.5');
+      line.setAttribute('stroke',fireSources?'#be202c':'#edb800');line.setAttribute('stroke-width','2.5');
       svg.append(line);layer.append(svg,label);
       if(getComputedStyle(surface).position==='static')surface.style.position='relative';
       surface.append(layer);
@@ -210,7 +287,7 @@
     const width=surface.clientWidth,height=surface.clientHeight;
     layer.hidden=!point||point.x<0||point.y<0||point.x>width||point.y>height||width<80||height<80;
     if(layer.hidden)return;
-    label.textContent=name||'จุดเกิดเหตุ';
+    label.textContent=fireSources&&name&&!name.startsWith('จุดเกิดเหตุ')?'จุดเกิดเหตุ · '+name:name||'จุดเกิดเหตุ';
     label.style.maxWidth=Math.min(310,width-32)+'px';
     const w=label.offsetWidth,h=label.offsetHeight;
     const clamp=(n,min,max)=>Math.max(min,Math.min(n,max));
@@ -270,7 +347,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[85,56,121,.055]:[184,46,52,.025],outline:fireView?{color:'#553879',width:2,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
+    graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[37,79,194,.10]:[184,46,52,.025],outline:fireView?{color:'#3155d4',width:2.5,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
     const cue = {type:'simple-marker',style:'circle',size:24,color:[198,64,50,.08],outline:{color:[198,64,50,.5],width:1}};
     const leader = {type:'picture-marker',width:5,height:13,yoffset:37,
       url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 13"><path d="M2.5 1v11" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M2.5 1v11" stroke="#6f695f" stroke-width="1.4" stroke-linecap="round"/></svg>')};
@@ -334,9 +411,9 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireSources?markerSymbol(fireSources.incident,40):fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
-    view.closePopup();draw();if(!independent)updateNearby();queueReport();
+    view.closePopup();draw();if(!independent&&!fireSources)updateNearby();queueReport();
     if(!fireSources)view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
     message.textContent='จุดเกิดเหตุ · '+name+(fireView?' · ลากหมุดเพื่อย้ายจุด':' · คลิกหมุดแล้วลากเพื่อย้ายจุด');
   }
@@ -396,8 +473,8 @@
         const extent=draw().extent;
         if(manual)await view.goTo(extent.expand(1.22),{animate:false}).catch(()=>{});
         if(revision!==incidentRevision)return;
-        const rows=await updateNearby(true);
-        if(revision===incidentRevision&&rows)message.textContent='จุดเกิดเหตุ · '+name+' · รัศมี '+km+' กม.';
+        await externalReady;
+        if(revision===incidentRevision)message.textContent='จุดเกิดเหตุ · '+name+' · รัศมี '+km+' กม.';
         return;
       }
     }
@@ -1078,9 +1155,10 @@
     }
     const supportData=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport);
     view.when(()=>bindIncidentSearch(view,map,factory,[
-      {layer:factory,fields:['ชื่อบริษัทภาษาไทย','เลขทะเบียนใหม่','เลขทะเบียนเดิม']},
-      ...support.map((item,i)=>({layer:item,fields:supportData[i].names})),
-      ...supplemental.map(item=>({layer:item,fields:[]}))
+      {layer:factory,kind:'business',fields:['ชื่อบริษัทภาษาไทย','ชื่อบริษัทภาษาอังกฤษ','เลขทะเบียนใหม่','เลขทะเบียนเดิม']},
+      ...(window.ieatFireAnalysisSources?[{layer:center,kind:'estate',fields:['สำนักงานนิคมฯ']},{layer:zones,kind:'estate',fields:['สำนักงานนิคมฯ','Name']}]:[]),
+      ...support.map((item,i)=>({layer:item,kind:({communityRisk:'community',waterWatch:'environment'})[supportData[i].id]||supportData[i].id,fields:supportData[i].names})),
+      ...supplemental.map(item=>({layer:item,kind:'environment',source:'GISTDA',fields:['Name','name','ชื่อ']}))
     ],GraphicsLayer,Graphic,Circle,SketchViewModel,Point)).catch(()=>{});
     const layers=[center,zones,businesses,eppZones,...support,...risks,...supplemental];
     view.when(()=>{status.textContent='ซูมเข้าหรือเลือกนิคมฯ เพื่อดูเขตประกอบการและทรัพยากรใกล้เคียง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
