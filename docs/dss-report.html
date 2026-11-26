@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <script id="embedded-report-boot">
-if(new URLSearchParams(location.search).get('embedded')==='dashboard'){
- document.documentElement.classList.add('dss-embedded-report','dss-report-booting');
+{
+ const params=new URLSearchParams(location.search);
+ if(params.get('embedded')==='dashboard'){
+  const root=document.documentElement;
+  root.classList.add('dss-embedded-report','dss-report-booting');
+  if(params.get('reportMapFit')==='cover')root.dataset.reportMapFit='cover';
+ }
 }
 </script>
 <style id="embedded-report-first-paint">
@@ -1615,7 +1620,10 @@ async function downloadReportPng(){
    const mapCanvas=document.createElement('canvas');
    mapCanvas.width=Math.round(width*exportScale);
    mapCanvas.height=Math.round(height*exportScale);
-   const fitScale=Math.min(mapCanvas.width/mapRaster.naturalWidth,mapCanvas.height/mapRaster.naturalHeight);
+   const widthScale=mapCanvas.width/mapRaster.naturalWidth;
+   const heightScale=mapCanvas.height/mapRaster.naturalHeight;
+   const fillMap=document.documentElement.dataset.reportMapFit==='cover';
+   const fitScale=fillMap?Math.max(widthScale,heightScale):Math.min(widthScale,heightScale);
    const imageWidth=mapRaster.naturalWidth*fitScale,imageHeight=mapRaster.naturalHeight*fitScale;
    mapCanvas.getContext('2d').drawImage(mapRaster,
     (mapCanvas.width-imageWidth)/2,(mapCanvas.height-imageHeight)/2,imageWidth,imageHeight);
@@ -4325,7 +4333,8 @@ html[data-report-theme="fire-purple"] body #report#report#report#report#report#r
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div{display:block!important;border:0!important;background:transparent!important}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div+div{border-left:1px solid var(--fire-report-rule)!important}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics :is(dt,dd){padding:0 3px!important;border:0!important;background:transparent!important;text-align:center!important;line-height:1.35!important}
-html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:contain!important;object-position:center!important}
+html[data-report-map-fit="cover"]{--report-map-image-fit:cover}
+html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:var(--report-map-image-fit,contain)!important;object-position:center!important}
 @media(max-width:520px){html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap+#fbWeather{grid-template-columns:1fr!important}}
 </style>
 </body></html>
