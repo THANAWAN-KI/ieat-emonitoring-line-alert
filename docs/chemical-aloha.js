@@ -242,16 +242,19 @@ function installCaptureLegend(){
  const wrapped=async function(...args){
   const snapshot=valid()?applied:null;const data=await original.apply(this,args);if(!data)return data;
   if((valid()?applied:null)!==snapshot)throw Error('ผล ALOHA เปลี่ยนระหว่างบันทึกแผนที่ กรุณาลองใหม่');
+  return data;
+ };wrapped.alohaLegend=true;window.ieatCaptureCoverageMap=wrapped;
+}
+function getMapLegendLines(){
+  const snapshot=valid()?applied:null;
   const lines=['เส้นประ = รัศมีค้นหาทรัพยากร (ไม่ใช่เขตอันตราย)'];
   if(snapshot){lines.push('ALOHA · ผลนำเข้าที่ผู้กรอกยืนยัน: '+snapshot.data.chemical+' · '+(snapshot.data.modelTime||'ไม่ระบุเวลาเริ่มจำลอง')+' (เวลาไทย)');for(const k of C.levels){const list=snapshot.zones.filter(z=>z.level===k);if(!list.length)continue;const texts=[...new Set(list.map(z=>z.loc+' '+z.unit+' / '+(z.exposure||'ไม่ระบุเวลาอ้างอิง')))];lines.push('เขต'+labels[k]+' · '+(texts.length===1?texts[0]:'หลายขอบเขต / หลายเกณฑ์ ดูภาคผนวก'));}}
   else lines.push('ALOHA: ยังไม่มีผลจำลองที่ยืนยันสำหรับรายงานนี้');
   lines.push('ผลจำลองไม่ใช่ค่าตรวจวัดหรือคำสั่งอพยพ · รายละเอียดและข้อจำกัดในภาคผนวก ALOHA');
-  const image=new Image();image.src=data;await image.decode();const canvas=document.createElement('canvas');canvas.width=image.naturalWidth||image.width;const scale=canvas.width/1972,lineHeight=38*scale,padding=22*scale;canvas.height=(image.naturalHeight||image.height)+Math.ceil(lines.length*lineHeight+padding*2);
-  const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0);ctx.fillStyle='#17201d';ctx.font=(25*scale)+'px Sarabun,Tahoma,sans-serif';ctx.textBaseline='top';for(const [i,line] of lines.entries()){const text=line.length>180?line.slice(0,175)+'… ดูภาคผนวก':line;ctx.fillText(text,padding,(image.naturalHeight||image.height)+padding+i*lineHeight,canvas.width-2*padding);}return canvas.toDataURL('image/png');
- };wrapped.alohaLegend=true;window.ieatCaptureCoverageMap=wrapped;
+  return lines;
 }
 window.addEventListener('ieat-chemical-map-ready',installCaptureLegend);installCaptureLegend();
-window.ieatChemicalAloha={getSnapshot:()=>valid()?applied:null,getReportLines:textLines};
+window.ieatChemicalAloha={getSnapshot:()=>valid()?applied:null,getReportLines:textLines,getMapLegendLines};
 // Prepare inputs from identified sources; never run or fabricate an ALOHA calculation.
 (()=>{
  const box=el('section');box.id='alohaAutoInputs';box.style.cssText='padding:14px;border:1px solid #b6c5b9;background:#f5f9f5;margin:0 0 16px;display:grid;gap:10px';

@@ -1569,6 +1569,19 @@ function reportText(ctx,text,x,y,maxWidth,lineHeight){
   words.forEach(word=>{const next=line?line+' '+word:word;if(ctx.measureText(next).width>maxWidth&&line){lines.push(line);line=word}else line=next});
   lines.push(line);lines.slice(0,3).forEach((part,i)=>ctx.fillText(part,x,y+i*lineHeight));
 }
+function updateChemicalMapLegend(slot){
+ if(document.documentElement.dataset.reportMapFit!=='cover'||parent===window)return;
+ const lines=parent.ieatChemicalAloha?.getMapLegendLines?.();
+ if(!lines?.length)return;
+ let legend=slot.nextElementSibling;
+ if(!legend?.classList.contains('dss-chemical-map-legend')){
+  legend=document.createElement('div');
+  legend.className='dss-chemical-map-legend';
+  slot.after(legend);
+ }
+ const text=lines.join('\n');
+ if(legend.textContent!==text)legend.textContent=text;
+}
 async function downloadReportPng(){
  document.getElementById('dssExportError')?.remove();window.ieatReportDownloads?.forEach(item=>URL.revokeObjectURL(item.url));window.ieatReportDownloads=[];const exportScale=2;loading.classList.add('show');pngBtn.disabled=true;
  try{
@@ -1605,6 +1618,7 @@ async function downloadReportPng(){
   img.alt='แผนที่ Dashboard ตามมุมมองที่เลือก';
   slot.replaceChildren(img);
   if(weather)slot.append(weather);
+  updateChemicalMapLegend(slot);
   await img.decode();
   slot.style.setProperty('--report-map-aspect',String(img.naturalWidth/img.naturalHeight));
   slot.style.removeProperty('height');
@@ -1616,7 +1630,7 @@ async function downloadReportPng(){
    if(firstNode.scrollHeight>1487)throw Error('เนื้อหาหน้าแรกมากเกิน A4 กรุณาย่อข้อความรายละเอียดก่อนดาวน์โหลด');
 
    // Bake the fit into the raster because html2canvas does not apply object-fit.
-   const {width,height}=slot.getBoundingClientRect();
+   const width=slot.clientWidth,height=slot.clientHeight;
    const mapCanvas=document.createElement('canvas');
    mapCanvas.width=Math.round(width*exportScale);
    mapCanvas.height=Math.round(height*exportScale);
@@ -4247,6 +4261,7 @@ html body #report#report#report#report#report#report#report#report#report#report
   const target=targetHeight||Math.round(page.clientWidth*297/210);
   const {width:mapWidth,height:mapHeight}=map.getBoundingClientRect();
   const image=map.querySelector('#dashboardReportMapImage');
+  if(image?.naturalWidth)updateChemicalMapLegend(map);
   const naturalHeight=image?.naturalWidth?Math.round(mapWidth*image.naturalHeight/image.naturalWidth):Infinity;
   const nonMap=brief.scrollHeight-mapHeight;
   const available=Math.floor(target-padding-2-nonMap-6);
@@ -4334,6 +4349,7 @@ html[data-report-theme="fire-purple"] body #report#report#report#report#report#r
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics>div+div{border-left:1px solid var(--fire-report-rule)!important}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fbWeather .report-weather-metrics :is(dt,dd){padding:0 3px!important;border:0!important;background:transparent!important;text-align:center!important;line-height:1.35!important}
 html[data-report-map-fit="cover"]{--report-map-image-fit:cover}
+.dss-chemical-map-legend{padding:5px 0 0;color:#17201d;font-size:12px;line-height:1.4;white-space:pre-line;overflow-wrap:anywhere}
 html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap>#dashboardReportMapImage{object-fit:var(--report-map-image-fit,contain)!important;object-position:center!important}
 @media(max-width:520px){html[data-report-theme="fire-purple"] body #report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report #fieldBriefMap+#fbWeather{grid-template-columns:1fr!important}}
 </style>
