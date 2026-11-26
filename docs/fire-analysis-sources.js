@@ -1,11 +1,20 @@
 (() => {
   const categories = [
-    { key: 'amenity', pattern: 'hospital|clinic', label: 'โรงพยาบาล / คลินิก', color: '#bf2444' },
-    { key: 'amenity', pattern: 'fire_station', label: 'สถานีดับเพลิง', color: '#b84b0b' },
-    { key: 'amenity', pattern: 'police', label: 'สถานีตำรวจ', color: '#2456a2' },
-    { key: 'amenity', pattern: 'school|kindergarten|college|university', label: 'สถานศึกษา', color: '#7744a5' },
-    { key: 'place', pattern: 'city|town|village|hamlet|suburb|neighbourhood', label: 'ชุมชน', color: '#147466' }
-  ];
+    ['hospital','โรงพยาบาล / คลินิก','#a4255c','M12 5v14M5 12h14','amenity','hospital|clinic'],
+    ['fire','สถานีดับเพลิง','#ad4a11','M12 3c0 5-6 6-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11Z','amenity','fire_station'],
+    ['police','สถานีตำรวจ','#284f99','M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6ZM12 8v6m-3-3h6','amenity','police'],
+    ['community','ชุมชน','#276944','m3 11 9-7 9 7M6 10v10h12V10m-8 10v-5h4v5','place','city|town|village|hamlet|suburb|neighbourhood'],
+    ['school','สถานศึกษา','#7043a4','m2 9 10-5 10 5-10 5ZM6 11v5q6 5 12 0v-5','amenity','school|kindergarten|college|university'],
+    ['hydrant','หัวจ่ายน้ำ','#00738d','M12 3c-2 4-6 8-6 12a6 6 0 0 0 12 0c0-4-4-8-6-12Z','emergency','fire_hydrant'],
+    ['cctv','กล้อง CCTV','#52417d','M3 7h12v10H3zM15 10l6-3v10l-6-3','man_made','surveillance'],
+    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#846014','m3 20 1-9 5 3v-4l5 3V7h4l3 13Z'],
+    ['business','โรงงาน / ผู้ประกอบการ','#475569','M3 20V9l6 3V8l6 3V4h5v16ZM6 16h2m3 0h2m3 0h2'],
+    ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#197568','M12 20V9m0 5C5 14 4 10 4 6q8 0 8 8m0-1q0-9 8-9 0 8-8 9']
+  ].map(([id,label,color,path,key,pattern])=>({id,label,color,path,key,pattern}));
+  const incident={color:'#be202c',path:'M12 3c0 5-6 6-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11ZM12 12v5'};
+  function badge({color,path}){
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="'+color+'" stroke="white" stroke-width="2.5"/><path transform="translate(6 6)" d="'+path+'" fill="none" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
 
   async function getJSON(url, signal) {
     const response = await fetch(url, { signal });
@@ -23,8 +32,8 @@
   async function nearby(lat, lng, km, signal) {
     if (![lat, lng, km].every(Number.isFinite) || km < 0.1 || km > 50) throw Error('Invalid search radius');
     const area = '(around:' + km * 1000 + ',' + lat.toFixed(6) + ',' + lng.toFixed(6) + ')';
-    const query = '[out:json][timeout:20];(' + categories.map(({ key, pattern }) =>
-      'nwr' + area + '["' + key + '"~"^(' + pattern + ')$"]["name"];'
+    const query = '[out:json][timeout:20];(' + categories.filter(item=>item.key).map(({ key, pattern }) =>
+      'nwr' + area + '["' + key + '"~"^(' + pattern + ')$"]'+(key==='man_made'?'["surveillance:type"="camera"]':'')+';'
     ).join('') + ');out tags center;';
     const url = new URL('https://overpass-api.de/api/interpreter');
     url.searchParams.set('data', query);
@@ -34,12 +43,12 @@
     for (const item of data.elements) {
       const coords = item.center || item;
       if (![coords.lat, coords.lon].every(Number.isFinite)) continue;
-      const category = categories.find(({ key, pattern }) => new RegExp('^(' + pattern + ')$').test(item.tags?.[key] || ''));
-      const name = item.tags?.['name:th'] || item.tags?.name;
+      const category = categories.find(({ key, pattern }) => key && new RegExp('^(' + pattern + ')$').test(item.tags?.[key] || ''));
+      const name = item.tags?.['name:th'] || item.tags?.name || category?.label;
       const distance = distanceKm(lat, lng, coords.lat, coords.lon);
       if (!category || !name || distance > km) continue;
       const key = JSON.stringify([category.label, name, coords.lat.toFixed(4), coords.lon.toFixed(4)]);
-      seen.set(key, { category, name, distance, lat: coords.lat, lng: coords.lon, url: 'https://www.openstreetmap.org/' + item.type + '/' + item.id });
+      seen.set(key, { category, name, distance, source:'OpenStreetMap', lat: coords.lat, lng: coords.lon, url: 'https://www.openstreetmap.org/' + item.type + '/' + item.id });
     }
     return [...seen.values()].sort((a, b) => a.distance - b.distance);
   }
@@ -60,5 +69,5 @@
     };
   }
 
-  window.ieatFireAnalysisSources = { categories, nearby, wind };
+  window.ieatFireAnalysisSources = { categories, incident, badge, distanceKm, nearby, wind };
 })();
