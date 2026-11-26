@@ -1,19 +1,19 @@
 (() => {
   const categories = [
-    ['hospital','โรงพยาบาล / คลินิก','#a82b63','amenity','hospital|clinic'],
-    ['fire','สถานีดับเพลิง','#b44a13','amenity','fire_station'],
-    ['police','สถานีตำรวจ','#274daa','amenity','police'],
-    ['community','ชุมชน','#257353','place','city|town|village|hamlet|suburb|neighbourhood'],
-    ['school','สถานศึกษา','#773caa','amenity','school|kindergarten|college|university'],
-    ['hydrant','หัวจ่ายน้ำ','#00758b','emergency','fire_hydrant'],
-    ['cctv','กล้อง CCTV','#574692','man_made','surveillance'],
-    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#926214'],
-    ['business','โรงงาน / ผู้ประกอบการ','#52637b'],
-    ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#207561'],
-    ['waterWatch','จุดเฝ้าระวังระดับน้ำ','#086a9d'],
-    ['wastewater','ระบบบำบัดน้ำเสีย','#167e81'],
-    ['airWatch','สถานีตรวจวัดคุณภาพอากาศ','#327394'],
-    ['waste','สถานที่รวบรวมและจัดการขยะ','#727528']
+    ['hospital','โรงพยาบาล / คลินิก','#922653','amenity','hospital|clinic'],
+    ['fire','สถานีดับเพลิง','#a43c21','amenity','fire_station'],
+    ['police','สถานีตำรวจ','#284d96','amenity','police'],
+    ['community','ชุมชน','#186449','place','city|town|village|hamlet|suburb|neighbourhood'],
+    ['school','สถานศึกษา','#693489','amenity','school|kindergarten|college|university'],
+    ['hydrant','หัวจ่ายน้ำ','#076576','emergency','fire_hydrant'],
+    ['cctv','กล้อง CCTV','#4b3884','man_made','surveillance'],
+    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#80530e'],
+    ['business','โรงงาน / ผู้ประกอบการ','#3e5160'],
+    ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#356831'],
+    ['waterWatch','จุดเฝ้าระวังระดับน้ำ','#16688e'],
+    ['wastewater','ระบบบำบัดน้ำเสีย','#24645d'],
+    ['airWatch','สถานีตรวจวัดคุณภาพอากาศ','#465a92'],
+    ['waste','สถานที่รวบรวมและจัดการขยะ','#666020']
   ].map(([id,label,color,key,pattern])=>({id,label,color,key,pattern}));
   // IBM Carbon Design icons, Apache-2.0. Source: carbon-design-system/carbon, packages/icons/src/svg/32.
   // Adapted for the map with category colors and marker backgrounds. See fire-map-carbon-license.txt.
@@ -35,71 +35,26 @@
   "incident": "<path d=\"M24.832,16.9688c-.2724-.6465-.5815-1.38-.8833-2.2852-.79-2.3682,1.7344-4.9522,1.7583-4.9766L24.293,8.293c-.1407.1406-3.4234,3.4775-2.2417,7.0234.3261.978.6513,1.749.938,2.43A9.3812,9.3812,0,0,1,24,22a6.24,6.24,0,0,1-4.1892,5.293,8.52,8.52,0,0,0-2.1038-8l-1.0444-1.0445-.5815,1.3575C14.2449,23.89,12.06,25.76,10.7747,26.54A5.8437,5.8437,0,0,1,8,22a9.6239,9.6239,0,0,1,.9287-3.6289A11.3329,11.3329,0,0,0,10,14V12.2217c.8735.36,2,1.3037,2,3.7783v2.6035l1.7432-1.9341c3.1118-3.4546,2.4624-7.5678,1.206-10.3081A4.4859,4.4859,0,0,1,18,11h2c0-5.5371-4.5786-7-7-7H11l1.1992,1.5986c.1377.1856,2.8628,3.9278,1.3535,7.688A4.9426,4.9426,0,0,0,9,10H8v4a9.6239,9.6239,0,0,1-.9287,3.6289A11.3329,11.3329,0,0,0,6,22c0,3.8477,3.8232,8,10,8s10-4.1523,10-8A11.3771,11.3771,0,0,0,24.832,16.9688ZM12.8352,27.5264a16.4987,16.4987,0,0,0,4.3665-5.5987,6.1053,6.1053,0,0,1,.2573,5.9717A11.3213,11.3213,0,0,1,16,28,10.3278,10.3278,0,0,1,12.8352,27.5264Z\"/>",
   "windArrow": "<polygon points=\"16 4 6 14 7.41 15.41 15 7.83 15 28 17 28 17 7.83 24.59 15.41 26 14 16 4\"/>"
 };
-  const incident={id:'incident',color:'#c12436'};
-  const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="#fff" stroke="#b3cafa"/><g transform="translate(7 7) scale(.6875)" fill="#2257c8">'+glyphs.windArrow+'</g></svg>';
+  const incident={id:'incident',color:'#aa243a'};
+  const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="#fff" stroke="#bce7e4"/><g transform="translate(7 7) scale(.6875)" fill="#087c77">'+glyphs.windArrow+'</g></svg>';
 
   const pinColors = {
-  "hospital": [
-    "#ff5d9c",
-    "#d90030"
-  ],
-  "fire": [
-    "#ffad5e",
-    "#c34a0d"
-  ],
-  "police": [
-    "#6e91ff",
-    "#204bc2"
-  ],
-  "community": [
-    "#61d696",
-    "#138346"
-  ],
-  "school": [
-    "#bb88fb",
-    "#7133b0"
-  ],
-  "hydrant": [
-    "#52cce3",
-    "#007b99"
-  ],
-  "cctv": [
-    "#9f8be7",
-    "#5941a0"
-  ],
-  "estate": [
-    "#ffcb62",
-    "#a76a0d"
-  ],
-  "business": [
-    "#92a8c4",
-    "#465a75"
-  ],
-  "environment": [
-    "#66d5b3",
-    "#14836d"
-  ],
-  "waterWatch": [
-    "#63c8ff",
-    "#0879b8"
-  ],
-  "wastewater": [
-    "#5cd3d0",
-    "#147d80"
-  ],
-  "airWatch": [
-    "#75bce9",
-    "#2b709d"
-  ],
-  "waste": [
-    "#c2c85f",
-    "#74782b"
-  ],
-  "incident": [
-    "#ff7866",
-    "#bf142d"
-  ]
-};
+    hospital: ['#ec73a5','#922653'],
+    fire: ['#f49a63','#a43c21'],
+    police: ['#7ba4f4','#284d96'],
+    community: ['#65b89e','#186449'],
+    school: ['#bc8cdd','#693489'],
+    hydrant: ['#67c8d8','#076576'],
+    cctv: ['#9d91d9','#4b3884'],
+    estate: ['#efbe63','#80530e'],
+    business: ['#a0a9b9','#3e5160'],
+    environment: ['#83bd68','#356831'],
+    waterWatch: ['#76b7e0','#16688e'],
+    wastewater: ['#65baa8','#24645d'],
+    airWatch: ['#9caae2','#465a92'],
+    waste: ['#c2b879','#666020'],
+    incident: ['#f06460','#aa243a']
+  };
 
   function badge({id,color}){
     const [top,bottom]=pinColors[id]||[color,color];
