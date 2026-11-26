@@ -1,7 +1,7 @@
 (() => {
   const categories = [
     ['hospital','โรงพยาบาล / คลินิก','#a4255c','M12 5v14M5 12h14','amenity','hospital|clinic'],
-    ['fire','สถานีดับเพลิง','#ad4a11','M12 3c0 5-6 6-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11Z','amenity','fire_station'],
+    ['fire','สถานีดับเพลิง','#ad4a11','M4 8h10v9H4zM14 11h4l3 3v3h-7M8 19v1m10-1v1M7 5h4','amenity','fire_station'],
     ['police','สถานีตำรวจ','#284f99','M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6ZM12 8v6m-3-3h6','amenity','police'],
     ['community','ชุมชน','#276944','m3 11 9-7 9 7M6 10v10h12V10m-8 10v-5h4v5','place','city|town|village|hamlet|suburb|neighbourhood'],
     ['school','สถานศึกษา','#7043a4','m2 9 10-5 10 5-10 5ZM6 11v5q6 5 12 0v-5','amenity','school|kindergarten|college|university'],
@@ -11,9 +11,14 @@
     ['business','โรงงาน / ผู้ประกอบการ','#475569','M3 20V9l6 3V8l6 3V4h5v16ZM6 16h2m3 0h2m3 0h2'],
     ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#197568','M12 20V9m0 5C5 14 4 10 4 6q8 0 8 8m0-1q0-9 8-9 0 8-8 9']
   ].map(([id,label,color,path,key,pattern])=>({id,label,color,path,key,pattern}));
-  const incident={color:'#be202c',path:'M12 3c0 5-6 6-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11ZM12 12v5'};
-  function badge({color,path}){
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" fill="'+color+'" stroke="white" stroke-width="2.5"/><path transform="translate(6 6)" d="'+path+'" fill="none" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const incident={id:'incident',color:'#be202c',path:'M12 3c0 5-6 6-6 11a6 6 0 0 0 12 0c0-4-3-7-6-11ZM12 12v5'};
+  function badge({id,color,path}){
+    const isIncident=id==='incident';
+    const frame=isIncident
+      ? '<path d="M18 34S4 24 4 16a14 14 0 0 1 28 0c0 8-14 18-14 18Z" fill="'+color+'" stroke="#fff" stroke-width="2"/>'
+      : '<circle cx="18" cy="18" r="15" fill="#fff" stroke="'+color+'" stroke-width="2.3"/>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+frame+
+      '<path transform="translate(6 '+(isIncident?4:6)+') " d="'+path+'" fill="none" stroke="'+(isIncident?'#fff':color)+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
 
   async function getJSON(url, signal) {
