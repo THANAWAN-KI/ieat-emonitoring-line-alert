@@ -69,7 +69,7 @@
  ].map(d=>({...d,names:['Name'],estates:['IEAT'],rows:[],status:'loading'}));
  const mapIconRing=color=>'<circle cx="12" cy="12" r="11.5" fill="#000" fill-opacity=".18"/><circle cx="12" cy="12" r="9.7" fill="'+color+'" stroke="#fff" stroke-width="2.5"/>';
  const fireIncidentIcon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'+mapIconRing('#b4232d')+'<path d="M12 6.3v6.5m0 3.4v.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>');
- function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel){
+ function bindIncidentSearch(view,map,factory,sources,GraphicsLayer,Graphic,Circle,SketchViewModel,Point){
   // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
   const form=$('coverageIncidentForm'), matches=$('coverageFactoryMatches'), results=$('coverageNearbyResults');
@@ -82,6 +82,28 @@
   const factoryName='ชื่อบริษัทภาษาไทย', oldReg='เลขทะเบียนเดิม', newReg='เลขทะเบียนใหม่';
   const fields=[factoryName,'ชื่อบริษัทภาษาอังกฤษ',oldReg,newReg,'นิคมอุตสาหกรรม'];
   let origin=null,pin=null,name='',picking=false,searchId=0,nearbyId=0,auxiliaryId=0,selectedFactory=null;
+  const placeInput=$('coveragePlaceQuery'), windBox=$('coverageWind');
+  let independent=false;
+  const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
+  const direction=deg=>compass[Math.round(deg/45)%8];
+  function showWind(weather){
+    if(!windBox)return;
+    const arrow=windBox.querySelector('svg'), reading=windBox.querySelector('strong'), detail=windBox.querySelector('small');
+    const speed=Number(weather?.windSpeed), from=weather?.windDegrees;
+    const known=weather?.windSpeed!==''&&weather?.windSpeed!=null&&Number.isFinite(speed)&&speed>=0;
+    const moving=known&&speed>0&&Number.isFinite(from);
+    arrow.toggleAttribute('hidden',!moving);
+    if(moving){
+      const to=(from+180)%360;
+      arrow.style.transform='rotate('+to+'deg)';
+      reading.textContent='จากทิศ'+direction(from)+' → ไปทิศ'+direction(to);
+      detail.textContent='ความเร็ว '+speed+' กม./ชม.'+(weather.time?' · '+weather.time:'');
+    }else{
+      reading.textContent=known&&speed===0?'ลมสงบ · 0 กม./ชม.':origin?(weather?'ไม่มีข้อมูลทิศทางและความเร็วลม':'กำลังโหลดข้อมูลลมที่จุดเกิดเหตุ…'):'เลือกจุดเกิดเหตุเพื่อดูข้อมูลลม';
+      detail.textContent=known&&speed===0?(weather.time||''):'';
+    }
+  }
+  if(windBox){view.container.append(windBox);windBox.hidden=false;showWind();}
   let incidentCallout, calloutRevision=0;
   async function updateIncidentCallout(){
     const revision=++calloutRevision;
@@ -146,7 +168,7 @@
     const box=el('div'),table=el('table');
     const attrs=selectedFactory||{};
     const rows=[
-      ['สถานประกอบการ',name],
+      [independent?'สถานที่เกิดเหตุ':'สถานประกอบการ',name],
       ['นิคมอุตสาหกรรม',attrs['นิคมอุตสาหกรรม']||'ไม่พบข้อมูล'],
       ['เลขทะเบียนใหม่',attrs[newReg]||'ไม่พบข้อมูล'],
       ['เลขทะเบียนเดิม',attrs[oldReg]||'ไม่พบข้อมูล'],
@@ -187,6 +209,7 @@
       const names=preferred.filter(field=>available.has(field));
       if(!names.length&&layer.displayField&&available.has(layer.displayField))names.push(layer.displayField);
       const q=layer.createQuery();
+      if(independent)q.where='1=1';
       q.geometry=circle;q.spatialRelationship='intersects';q.returnGeometry=false;q.num=25;
       q.outFields=names.length?names:[layer.objectIdField];
       if(term&&!layer.title.toLowerCase().includes(term)){
@@ -196,7 +219,7 @@
       const data=await layer.queryFeatures(q);
       return {title:layer.title,truncated:data.exceededTransferLimit||data.features.length===25,items:data.features.map(f=>names.map(field=>f.attributes[field]).filter(Boolean).join(' · ')||'รายการ '+f.attributes[layer.objectIdField])};
     });
-    if(term&&window.IEATDssChemicalCatalog){
+    if(term&&selectedFactory&&window.IEATDssChemicalCatalog){
       tasks.push(window.IEATDssChemicalCatalog.load().then(data=>{
         const ids=new Set(window.IEATDssChemicalCatalog.findCompanies(data,name,'',[]));
         const matching=data.rows.filter(([company,chemical,cas])=>ids.has(company)&&[data.names[chemical],data.cas[cas]].some(value=>String(value).toLowerCase().includes(term)));
@@ -229,7 +252,7 @@
     pinLayer.removeAll();
     pin=new Graphic({geometry:point,symbol:fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
-    view.closePopup();draw();updateNearby();queueReport();
+    view.closePopup();draw();if(!independent)updateNearby();queueReport();
     view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
     message.textContent='จุดเกิดเหตุ · '+name+(fireView?' · ลากหมุดเพื่อย้ายจุด':' · คลิกหมุดแล้วลากเพื่อย้ายจุด');
   }
@@ -252,7 +275,7 @@
         if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
         window.dispatchEvent(new Event('ieat-coverage-context-updated'));
         view.closePopup();
-        message.textContent='กำลังย้ายหมุดจุดเกิดเหตุ';
+        showWind();message.textContent='กำลังย้ายหมุดจุดเกิดเหตุ';
       }
       if(!drag||drag.pin!==pin)return;
       event.stopPropagation();
@@ -266,19 +289,22 @@
       }
     });
   }
-  $('coveragePickIncident').onclick=()=>{picking=true;message.textContent='คลิกบนแผนที่เพื่อกำหนดจุดเกิดเหตุ';$('coverageMap').scrollIntoView({block:'nearest'});};
+  $('coveragePickIncident').onclick=()=>{if(placeInput&&!form.reportValidity())return;picking=true;message.textContent='คลิกบนแผนที่เพื่อกำหนดจุดเกิดเหตุ';$('coverageMap').scrollIntoView({block:'nearest'});};
   view.on('click',event=>{
     if(!picking||!event.mapPoint)return;
-    event.stopPropagation();picking=false;place(event.mapPoint,name||'จุดเกิดเหตุ');
+    event.stopPropagation();picking=false;
+    if(placeInput)selectPlace(event.mapPoint,'จุดเกิดเหตุ ('+event.mapPoint.latitude.toFixed(5)+', '+event.mapPoint.longitude.toFixed(5)+')');
+    else place(event.mapPoint,name||'จุดเกิดเหตุ');
   });
   async function syncReport(manual=true){
-    if(!origin||!selectedFactory){message.textContent='เลือกโรงงานก่อนเปิดรายงาน';return;}
+    if(!origin||(!selectedFactory&&!independent)){message.textContent='เลือกโรงงานก่อนเปิดรายงาน';return;}
     if(!form.reportValidity())return;
     const button=$('coverageOpenReport'),frame=$('emergencyReportFrame');
     const point={lat:origin.latitude,lng:origin.longitude},attrs={...selectedFactory};
     const km=Number(radius.value),incidentType=type.value;
     const revision=incidentRevision;
-    button.disabled=true;
+    if(independent)window.ieatIncidentChosen=true;
+    showWind();button.disabled=true;
     window.ieatCoverageReport={company:name,point,km,incidentType,status:'loading'};
     window.dispatchEvent(new Event('ieat-coverage-context-updated'));
     try{
@@ -295,13 +321,14 @@
       if(!doc?.getElementById('pngBtn')?.onclick||!doc.getElementById('bufferKm1'))throw Error('รายงานยังโหลดไม่เสร็จ');
       if(revision!==incidentRevision)return;
       window.ieatIncidentChosen=true;
-      const context={id:String(Date.now())+'-'+revision,company:name,point,km,incidentType,rows,attributes:attrs,status:'loading'};
+      const context={id:String(Date.now())+'-'+revision,company:name,point,km,incidentType,rows,attributes:attrs,independentLocation:independent,status:'loading'};
       window.ieatCoverageReport=context;
       window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(typeof frame.contentWindow.dssApplyIncidentContext!=='function')throw Error('รายงานเวอร์ชันใหม่ยังไม่พร้อม กรุณารีเฟรชหน้า');
       const summary=await frame.contentWindow.dssApplyIncidentContext(context);
       if(revision!==incidentRevision||!summary)return;
       context.summary=summary;
+      showWind(summary.weather);
       await window.ieatMonitoringReport?.update(context);
       if(revision!==incidentRevision)return;
       context.status='rendering-map';
@@ -312,19 +339,19 @@
       context.status='ready';
       window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(manual)$('dashboardDownloadImage')?.focus({preventScroll:true});
-      message.textContent='อัปเดตโรงงาน ประเภทเหตุ รัศมี แผนที่ รายงาน และข้อความ LINE แล้ว';
-    }catch(error){if(revision===incidentRevision){if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}}
+      message.textContent='อัปเดตจุดเกิดเหตุ รัศมี แผนที่ รายงาน และข้อความ LINE แล้ว';
+    }catch(error){if(revision===incidentRevision){showWind({});if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';}}
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
   radius.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
   type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
-  $('coverageSearchSupport').onclick=()=>{if(origin&&selectedFactory)updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
+  $('coverageSearchSupport').onclick=()=>{if(origin&&(selectedFactory||independent))updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
     event.preventDefault();
     const value=$('coverageFactoryQuery').value.trim();
     if(!value){$('coverageSearchSupport').click();return;}
-    const id=++searchId;
+    const id=++searchId;picking=false;
     const combined=value.match(/^(\d+)\s*\((.+)\)$/);
     const terms=(combined?[combined[1],combined[2]]:[value]).map(term=>sql(term.toUpperCase()));
     message.textContent='กำลังค้นหาโรงงานจากทะเบียน กนอ.…';matches.replaceChildren();
@@ -337,11 +364,12 @@
       if(id!==searchId)return;
       message.textContent=data.features.length?'เลือกโรงงานจากผลค้นหา':'ไม่พบชื่อหรือเลขทะเบียนที่ตรงกัน';
       const select=async feature=>{
+        if(id!==searchId)return;
         const point=feature.geometry?.type==='polygon'?feature.geometry.centroid:feature.geometry;
         if(!point){message.textContent='โรงงานนี้ไม่มีพิกัดสำหรับปักหมุด';return;}
         const label=feature.attributes[factoryName]||feature.attributes['ชื่อบริษัทภาษาอังกฤษ']||'โรงงานที่เลือก';
         hasSearched=false;incidentRevision++;
-        selectedFactory=feature.attributes;
+        independent=false;selectedFactory=feature.attributes;
         matches.replaceChildren();place(point,label);
         hasSearched=true;incidentRevision++;
         await syncReport(true);
@@ -354,6 +382,56 @@
       if(data.exceededTransferLimit||data.features.length===30)matches.append(el('p','แสดงไม่เกิน 30 รายการ โปรดระบุชื่อหรือเลขทะเบียนเพิ่ม'));
     }catch(error){if(id===searchId)message.textContent='ค้นหาทะเบียนโรงงานไม่ได้ กรุณาลองอีกครั้ง';}
   };
+  const validCoordinates=(lat,lng)=>Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=5&&lat<=22&&lng>=97&&lng<=106;
+  function selectPlace(point,label){
+    if(!validCoordinates(point.latitude,point.longitude)){
+      message.textContent='ระบุพิกัดละติจูดและลองจิจูดในประเทศไทย';
+      return;
+    }
+    searchId++;nearbyId++;auxiliaryId++;incidentRevision++;clearTimeout(syncTimer);
+    independent=true;selectedFactory=null;hasSearched=false;picking=false;
+    if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
+    window.dispatchEvent(new Event('ieat-coverage-context-updated'));
+    matches.replaceChildren();
+    place(point,label);
+    hasSearched=true;
+    return syncReport(true);
+  }
+  async function searchPlaces(){
+    if(!form.reportValidity())return;
+    const value=placeInput.value.trim();
+    if(!value){placeInput.focus();return;}
+    const id=++searchId;picking=false;matches.replaceChildren();
+    const coords=value.match(/^([+-]?\d+(?:\.\d+)?)\s*[,\s]\s*([+-]?\d+(?:\.\d+)?)$/);
+    if(coords){
+      const latitude=Number(coords[1]),longitude=Number(coords[2]);
+      if(!validCoordinates(latitude,longitude)){message.textContent='กรอกพิกัดในประเทศไทยตามลำดับละติจูด, ลองจิจูด';return;}
+      return selectPlace(new Point({latitude,longitude}),'จุดเกิดเหตุ ('+latitude.toFixed(5)+', '+longitude.toFixed(5)+')');
+    }
+    message.textContent='กำลังค้นหาสถานที่…';
+    try{
+      const url=new URL('https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates');
+      url.search=new URLSearchParams({SingleLine:value,sourceCountry:'THA',outSR:'4326',maxLocations:'6',f:'json'});
+      const response=await fetch(url,{signal:AbortSignal.timeout(10000)});
+      const data=await response.json();
+      if(id!==searchId)return;
+      if(!response.ok||!Array.isArray(data.candidates))throw Error('geocoding');
+      const candidates=data.candidates.filter(({location})=>validCoordinates(location?.y,location?.x));
+      message.textContent=candidates.length?'เลือกสถานที่จากผลค้นหา แล้วตรวจสอบตำแหน่งหมุด':'ไม่พบสถานที่ ลองเพิ่มชื่ออำเภอหรือจังหวัด หรือปักหมุดบนแผนที่';
+      for(const {location,address} of candidates){
+        const button=el('button',address);button.type='button';
+        button.onclick=()=>{if(id===searchId)selectPlace(new Point({latitude:location.y,longitude:location.x}),address);};
+        matches.append(button);
+      }
+    }catch(error){if(id===searchId)message.textContent='ค้นหาสถานที่ไม่ได้ ลองกรอกพิกัดหรือปักหมุดบนแผนที่';}
+  }
+  if(placeInput){
+    const placeButton=$('coverageSearchPlace');
+    placeButton.disabled=false;
+    placeButton.onclick=searchPlaces;
+    placeInput.addEventListener('input',()=>{searchId++;matches.replaceChildren();});
+    placeInput.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();searchPlaces();}});
+  }
   const runSearch=async event=>{
     event.preventDefault();
     if(!form.reportValidity())return;
@@ -443,8 +521,8 @@
   const host=$('coverageMapView'), status=$('coverageMapStatus');
   if(!host)return;
   if(typeof window.require!=='function'){status.textContent='โหลดระบบแผนที่ไม่ได้';return;}
-  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel','esri/layers/GeoJSONLayer','esri/widgets/DistanceMeasurement2D'],
-    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel,GeoJSONLayer,DistanceMeasurement2D)=>{
+  window.require(['esri/Map','esri/views/MapView','esri/layers/FeatureLayer','esri/layers/GroupLayer','esri/widgets/LayerList','esri/widgets/Expand','esri/widgets/Home','esri/widgets/Legend','esri/layers/GraphicsLayer','esri/Graphic','esri/geometry/Circle','esri/widgets/Sketch/SketchViewModel','esri/layers/GeoJSONLayer','esri/widgets/DistanceMeasurement2D','esri/geometry/Point'],
+    (ArcMap,MapView,FeatureLayer,GroupLayer,LayerList,Expand,Home,Legend,GraphicsLayer,Graphic,Circle,SketchViewModel,GeoJSONLayer,DistanceMeasurement2D,Point)=>{
     // Reuse the fire report's map presentation and layers without changing the incident type.
   const fireView=new URLSearchParams(location.search).get('hazard')==='fire'||document.documentElement.classList.contains('chemical-report-view');
     const riskNames=riskFields.map(f=>f.field);
@@ -846,7 +924,7 @@
       {layer:factory,fields:['ชื่อบริษัทภาษาไทย','เลขทะเบียนใหม่','เลขทะเบียนเดิม']},
       ...support.map((item,i)=>({layer:item,fields:supportData[i].names})),
       ...supplemental.map(item=>({layer:item,fields:[]}))
-    ],GraphicsLayer,Graphic,Circle,SketchViewModel)).catch(()=>{});
+    ],GraphicsLayer,Graphic,Circle,SketchViewModel,Point)).catch(()=>{});
     const layers=[center,zones,businesses,eppZones,...support,...risks,...supplemental];
     view.when(()=>{status.textContent='ซูมเข้าหรือเลือกนิคมฯ เพื่อดูเขตประกอบการและทรัพยากรใกล้เคียง';},()=>{status.textContent='โหลดแผนที่ไม่ได้';});
     Promise.allSettled(layers.map(l=>l.load())).then(results=>{
