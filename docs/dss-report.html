@@ -3439,7 +3439,9 @@ html body #report.dss-field-export #dssFieldBrief .fb-map{height:470px!important
  const norm=value=>window.IEATDssChemicalCatalog.normalize(value);
  const source=()=>window.IEATDssChemicalCatalog.load();
  window.dssLoadReportChemicals=async function(){
-  const request=++sequence,company=state.company,registration=String(state.registration||'').split(' / ').map(norm).filter(v=>v&&v!=='—');
+  const request=++sequence;
+  if(state.independentLocation)return;
+  const company=state.company,registration=String(state.registration||'').split(' / ').map(norm).filter(v=>v&&v!=='—');
   state.hazardCatalog=[];state.chemical='กำลังโหลดข้อมูลสารเคมี';state.chemicalDataTime='';render();
   try{
    const data=await source();if(request!==sequence||company!==state.company)return;
@@ -3457,6 +3459,7 @@ html body #report.dss-field-export #dssFieldBrief .fb-map{height:470px!important
  };
  const previous=selectDssLookup;
  selectDssLookup=async function(item){
+  state.independentLocation=false;
   await previous.apply(this,arguments);
   const button=document.getElementById('pngBtn');button.disabled=true;
   try{await window.dssLoadReportChemicals()}finally{button.disabled=false}
@@ -3948,7 +3951,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
     return {
       id:state.coverageContextId,company:state.company,registration:state.registration,estate:state.estate,address:state.address,
       incidentType:state.event,km,point:{lat:Number(state.lat),lng:Number(state.lng)},radii:getBufferRadii(),
-      weather:{description:state.weather,temperature:state.temp,humidity:state.humidity,windSpeed:state.windSpeed,windDirection:state.windDir,time:state.weatherTime,fetchedTime:state.weatherFetchedTime||''},
+      weather:{description:state.weather,temperature:state.temp,humidity:state.humidity,windSpeed:state.windSpeed,windDirection:state.windDir,windDegrees:state.windDeg,time:state.weatherTime,fetchedTime:state.weatherFetchedTime||''},
       support:(state.supportLocations||[]).filter(p=>Number.isFinite(Number(p.distance))&&Number(p.distance)<=km).map(p=>({...p})),
       supportStatus:Object.fromEntries(types.map(type=>[type,state[type+'Name']||'ไม่พบข้อมูล'])),
       supportTotals:{community:state.communityDistance,cctv:state.cctvDistance},
@@ -3969,11 +3972,23 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
       const p=context.point,km=Number(context.km);
       if(!p||![p.lat,p.lng,km].every(Number.isFinite)||km<.1||km>50)throw Error('ข้อมูลพิกัดหรือรัศมีไม่ถูกต้อง');
       const attrs=context.attributes||{},feature=normalizeEppFeature({attributes:attrs,geometry:{x:p.lng,y:p.lat,spatialReference:{wkid:4326}}});
-      if(state.company!==context.company){
+      const wasIndependent=state.independentLocation===true;
+      if(context.independentLocation){
+        if(!wasIndependent||state.company!==context.company){
+          Object.assign(state,{
+            factoryDetails:[],fieldReadyEquipment:'',fieldAccess:'',incidentDetails:'',incidentStatus:'',
+            occurredAt:'',notificationText:'',fieldIncidentStatusRecorded:false,fieldCoordination:{},fieldCoordinationScope:''
+          });
+          factoryLookup.value='';lookupResults.replaceChildren();
+        }
+        Object.assign(state,{estate:'—',registration:'—',address:context.company,hazardCatalog:[],
+          chemical:'ไม่มีข้อมูลทะเบียนโรงงานสำหรับจุดนี้',chemicalDataSource:'',chemicalDataTime:'',response:'—'});
+      }else if(wasIndependent||state.company!==context.company){
         state.positionSource='factory';state.keepManualPosition=false;
         await selectDssLookup({type:'factory',feature,name:context.company},{deferAnalysis:true});
       }
       if(token!==revision)return null;
+      state.independentLocation=Boolean(context.independentLocation);
       state.company=context.company;state.estate=attrs['นิคมอุตสาหกรรม']||feature.attributes?.IEAT||state.estate;
       state.registration=[attrs['เลขทะเบียนใหม่'],attrs['เลขทะเบียนเดิม']].filter(Boolean).join(' / ')||state.registration;
       state.lat=String(p.lat);state.lng=String(p.lng);state.positionSource='manual';state.keepManualPosition=true;state.positionConfirmed=true;
@@ -3990,7 +4005,7 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
       render();updateMap();
       await Promise.allSettled([loadDssNearby(p.lat,p.lng),loadWeather()]);
       if(token!==revision)return null;
-      if(window.dssLoadReportChemicals)await window.dssLoadReportChemicals();
+      if(!context.independentLocation&&window.dssLoadReportChemicals)await window.dssLoadReportChemicals();
       if(token!==revision)return null;
       state.supportLocations=(state.supportLocations||[]).filter(p=>Number.isFinite(Number(p.distance))&&Number(p.distance)<=km);
       for(const type of ['hospital','fire','police','hydrant','community','cctv']){
