@@ -802,6 +802,11 @@
       url.searchParams.delete('emptyReport');
       if(empty)url.searchParams.set('emptyReport','1');
       url.hash='';
+      if(fireAnalysis&&window.parent!==window&&new URLSearchParams(location.search).get('combinedFire')==='1'){
+        window.parent.postMessage({type:'ieat:open-inline-fire-report',empty},location.origin);
+        openingFireReport=false;
+        return;
+      }
       location.assign(url);
     };
     $('fireApplyRadius').onclick=()=>{
