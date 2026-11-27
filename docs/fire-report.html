@@ -3989,6 +3989,7 @@ html.fire-analysis-page #coverageMapView{
   --fire-map-glass:rgba(248,252,255,.63);
   --fire-map-glass-edge:rgba(255,255,255,.85);
   --fire-map-glass-radius:12px;
+  --fire-map-tool-gap:10px;
   --fire-map-glass-ink:#17374b;
   --fire-map-glass-shadow:0 4px 14px rgba(19,48,69,.16),inset 0 1px 0 rgba(255,255,255,.8);
 }
@@ -4006,6 +4007,12 @@ html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView :is(
 }
 html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView .esri-widget--button{
   width:44px!important;height:44px!important;
+}
+html.fire-analysis-page #coverageMapView :is(.esri-ui-top-left,.esri-ui-top-right,.esri-zoom){
+  gap:var(--fire-map-tool-gap);
+}
+html.fire-analysis-page #coverageMapView :is(.esri-ui-top-left,.esri-ui-top-right) > .esri-component{
+  margin-bottom:0;
 }
 html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView .esri-widget--button:hover{
   background:rgba(248,252,255,.88)!important;
