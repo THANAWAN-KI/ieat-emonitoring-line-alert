@@ -150,13 +150,20 @@
     const scale=view.scale;
     const incidentScreen=origin&&view.toScreen(origin);
     const markerGap=scale>15000?54:44;
-    const labelGap=scale>10000?190:155;
     const priority=['hospital','fire','police','estate','community','school','hydrant','cctv','business'];
     const rank=row=>row===selectedBufferRow?-1:(priority.indexOf(row.category.id)+1||priority.length+1);
     const rows=[...recordByGraphic].sort(([,left],[,right])=>rank(left)-rank(right)||left.distance-right.distance);
-    const markers=[],labels=[],categoryCounts=new Map();
+    const markers=[],categoryCounts=new Map();
     const showOverview=!activeCategory&&!$('fireBufferFilter').value.trim();
     const supportKinds=['hospital','fire','police','hydrant','cctv','community','school','estate'];
+    const host=$('coverageMapView').getBoundingClientRect();
+    const blocked=[];
+    for(const element of [$('coverageMapView').querySelector('.fire-incident-name'),document.querySelector('.fire-map-detail')]){
+      if(!element||element.closest('[hidden]'))continue;
+      const box=element.getBoundingClientRect();
+      if(box.width&&box.height)blocked.push({left:box.left-host.left-5,right:box.right-host.left+5,top:box.top-host.top-5,bottom:box.bottom-host.top+5});
+    }
+    const overlaps=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
     for(const [graphic,row] of rows){
       const selected=row===selectedBufferRow;
       graphic.visible=selected;
@@ -170,16 +177,31 @@
       const screen=view.toScreen(graphic.geometry);
       if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height)continue;
       if(!selected&&((incidentScreen&&Math.abs(screen.x-incidentScreen.x)<88&&Math.abs(screen.y-incidentScreen.y)<64)||
-        markers.some(point=>Math.abs(point.x-screen.x)<markerGap&&Math.abs(point.y-screen.y)<40)))continue;
+        markers.some(({screen:point})=>Math.abs(point.x-screen.x)<markerGap&&Math.abs(point.y-screen.y)<40)||
+        blocked.some(box=>overlaps(box,{left:screen.x-16,right:screen.x+16,top:screen.y-21,bottom:screen.y+13}))))continue;
       graphic.visible=true;
-      markers.push(screen);
+      markers.push({screen,graphic,row});
       categoryCounts.set(kind,count+1);
-      if(!selected&&(scale>fireLabelScale(row.category.id)||
-        labels.some(point=>Math.abs(point.x-screen.x)<labelGap&&Math.abs(point.y-screen.y)<52)))continue;
-      labels.push(screen);
-      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#000',9),
-        text:!selected&&row.name.length>26?row.name.slice(0,25)+'…':row.name,
-        ...(row.category.id==='business'?{xoffset:11,yoffset:0,horizontalAlignment:'left'}:{yoffset:-10})}}));
+    }
+    for(const {screen} of markers)blocked.push({left:screen.x-17,right:screen.x+17,top:screen.y-22,bottom:screen.y+14});
+    if(incidentScreen)blocked.push({left:incidentScreen.x-33,right:incidentScreen.x+33,top:incidentScreen.y-65,bottom:incidentScreen.y+8});
+    const measure=document.createElement('canvas').getContext('2d');
+    if(!measure)return;
+    measure.font='700 12px Sarabun, sans-serif';
+    for(const {screen,graphic,row} of markers){
+      const text=row.name.length>26?row.name.slice(0,25)+'…':row.name;
+      const width=Math.ceil(measure.measureText(text).width)+12;
+      const offsets=[[0,27],[0,-35],[25+width/2,0],[-25-width/2,0]];
+      for(const [dx,dy] of offsets){
+        const x=screen.x+dx,y=screen.y+dy;
+        const box={left:x-width/2,right:x+width/2,top:y-10,bottom:y+10};
+        if(box.left<4||box.right>view.width-4||box.top<4||box.bottom>view.height-4||
+          blocked.some(other=>overlaps(box,other)))continue;
+        blocked.push(box);
+        bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#000',9),
+          text,horizontalAlignment:'center',verticalAlignment:'middle',xoffset:dx*.75,yoffset:-dy*.75}}));
+        break;
+      }
     }
   }
   if(bufferLabels){
@@ -487,7 +509,7 @@
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     if(fireAnalysis||fireReportPage){
-      graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[245,34,53,.12],
+      graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',style:'none',
         outline:{color:'#ed203a',width:2,style:'solid'}}}));
       const edge=circle.rings[0].reduce((top,vertex)=>vertex[1]>top[1]?vertex:top);
       graphics.add(new Graphic({
