@@ -61,23 +61,23 @@
     const [top,bottom]=pinColors[id]||[color,color];
     if(['aqm','wqm','cem'].includes(id)){
       const symbol={
-        aqm:'M5 12h10a3 3 0 1 0-3-3M5 17h16a3 3 0 1 1-3 3M7 22h6',
+        aqm:'M6 15h5l4-5h4l-2 5h6l3-2v6l-3-2h-6l2 5h-4l-4-5H6Z',
         wqm:'M16 6c-3 5-7 9-7 13a7 7 0 1 0 14 0c0-4-4-8-7-13Z',
-        cem:'M7 25h18M10 25l2-12h6l2 12M15 10c-3-3 5-2 4-5'
+        cem:'M6 25V15l7 3v-5l7 4V9h4v16ZM10 22h1m4 0h1m4 0h1'
       }[id];
       const highlight={aqm:'#a68aff',wqm:'#ffcf69',cem:'#72d49c'}[id];
       return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
         '<defs><linearGradient id="station" x2="0" y2="1"><stop stop-color="'+highlight+'"/><stop offset="1" stop-color="'+color+'"/></linearGradient></defs>'+
         '<rect x="5" y="5" width="28" height="28" rx="9" fill="#253e59" opacity=".22"/>'+
         '<rect x="4" y="3" width="28" height="28" rx="8" fill="url(#station)" stroke="white" stroke-width="2"/>'+
-        '<rect x="6.5" y="5.5" width="23" height="23" rx="6" fill="none" stroke="white" stroke-opacity=".38"/>'+
+        '<rect x="6.5" y="5.5" width="23" height="23" rx="6" fill="none" stroke="white" stroke-opacity=".62"/>'+
         '<path transform="translate(5 4) scale(.8)" d="'+symbol+'" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
-    if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13" fill="'+bottom+'" stroke="#fff" stroke-width="3"/><circle cx="18" cy="18" r="4.5" fill="#fff"/></svg>';
+    if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13" fill="#8590a4" stroke="#fff" stroke-width="3"/><circle cx="18" cy="18" r="5" fill="#fff"/></svg>';
     const glyph=id==='estate'
       ? '<circle cx="16" cy="16" r="10"/>'
       : id==='hospital'
-      ? '<path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>'
+      ? '<path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>'
       : glyphs[id];
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
       '<defs><linearGradient id="pin-fill" x1="0" y1="0" x2="0" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="'+top+'"/><stop offset="1" stop-color="'+bottom+'"/></linearGradient></defs>'+
