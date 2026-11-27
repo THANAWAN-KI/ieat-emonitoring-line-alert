@@ -1,7 +1,10 @@
 (() => {
  'use strict';
- const firePointScales={estate:600000,hospital:180000,fire:180000,police:100000,community:65000,school:65000,business:14000,aqm:23000,wqm:23000,cem:23000,environment:35000,waterWatch:35000,wastewater:35000,airWatch:35000,waste:35000,hydrant:18000,cctv:18000};
+ const firePointScales={estate:600000,hospital:180000,fire:180000,police:100000,community:65000,school:65000,business:6500,aqm:14000,wqm:14000,cem:8500,environment:35000,waterWatch:35000,wastewater:35000,airWatch:35000,waste:35000,hydrant:8500,cctv:7500};
  const firePointScale=id=>firePointScales[id]??35000;
+ const fireLabelScales={estate:90000,hospital:38000,fire:38000,police:28000,community:15000,school:15000,
+   business:3200,hydrant:4200,cctv:4000};
+ const fireLabelScale=id=>fireLabelScales[id]??9500;
  const fireLabel=(color,size=10)=>({type:'text',color,haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size,weight:'bold'}});
  const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
@@ -120,20 +123,29 @@
     if(!bufferLabels)return;
     bufferLabels.removeAll();
     if(!externalLayer.visible)return;
-    const occupied=[];
+    const scale=view.scale;
     const incidentScreen=origin&&view.toScreen(origin);
-    const gap=view.scale>28000?105:88;
-    for(const [graphic,row] of recordByGraphic){
-      graphic.visible=row===selectedBufferRow;
-      if(!graphic.visible&&view.scale>firePointScale(row.category.id))continue;
+    const markerGap=scale>15000?104:scale>6500?88:68;
+    const labelGap=scale>10000?190:155;
+    const priority=['hospital','fire','police','estate','community','school','hydrant','cctv','business'];
+    const rank=row=>row===selectedBufferRow?-1:(priority.indexOf(row.category.id)+1||priority.length+1);
+    const rows=[...recordByGraphic].sort(([,left],[,right])=>rank(left)-rank(right)||left.distance-right.distance);
+    const markers=[],labels=[];
+    for(const [graphic,row] of rows){
+      const selected=row===selectedBufferRow;
+      graphic.visible=selected;
+      if(!selected&&scale>firePointScale(row.category.id))continue;
       const screen=view.toScreen(graphic.geometry);
       if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height)continue;
-      if(!graphic.visible&&(occupied.some(point=>Math.abs(point.x-screen.x)<gap&&Math.abs(point.y-screen.y)<48)||
-        (incidentScreen&&Math.abs(screen.x-incidentScreen.x)<85&&Math.abs(screen.y-incidentScreen.y)<70)))continue;
+      if(!selected&&((incidentScreen&&Math.abs(screen.x-incidentScreen.x)<150&&Math.abs(screen.y-incidentScreen.y)<100)||
+        markers.some(point=>Math.abs(point.x-screen.x)<markerGap&&Math.abs(point.y-screen.y)<55)))continue;
       graphic.visible=true;
-      occupied.push(screen);
-      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#243543'),
-        text:row.name.length>30?row.name.slice(0,29)+'…':row.name,
+      markers.push(screen);
+      if(!selected&&(scale>fireLabelScale(row.category.id)||
+        labels.some(point=>Math.abs(point.x-screen.x)<labelGap&&Math.abs(point.y-screen.y)<52)))continue;
+      labels.push(screen);
+      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#243543',9),
+        text:!selected&&row.name.length>26?row.name.slice(0,25)+'…':row.name,
         ...(row.category.id==='business'?{xoffset:11,yoffset:0,horizontalAlignment:'left'}:{yoffset:-10})}}));
     }
   }
@@ -990,7 +1002,7 @@
       if(!category)return;
       item.minScale=firePointScale(kind);
       item.labelsVisible=true;
-      item.labelingInfo=[{minScale:kind==='estate'?180000:item.minScale,labelPlacement:'below-center',
+      item.labelingInfo=[{minScale:fireLabelScale(kind),labelPlacement:'below-center',
         labelExpressionInfo:{expression},symbol:{...fireLabel('#243543'),yoffset:kind==='estate'?-6:-9}}];
     }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
@@ -1134,7 +1146,7 @@
         })),
         defaultSymbol:firePointSymbol('environment',22)
       }:{type:'simple',symbol:monitoringSymbol},
-      labelingInfo:[{minScale:fireMapIcons?17000:150000,labelPlacement:fireMapIcons?'below-center':'above-center',
+      labelingInfo:[{minScale:fireMapIcons?6500:150000,labelPlacement:fireMapIcons?'below-center':'above-center',
         labelExpressionInfo:{expression:fireMapIcons?"DefaultValue($feature.StationTH, $feature.Type)":"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', 'สถานี e-Monitoring')"},
         symbol:fireMapIcons?{...fireLabel('#243543',10),yoffset:3}:fireLabel('#153a38')}],
       featureReduction:fireMapIcons?null:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
