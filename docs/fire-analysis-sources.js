@@ -68,8 +68,11 @@
   function badge({id,color}){
     if(supportGlyphs[id]){
       return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
-        '<rect x="2" y="2" width="32" height="32" rx="10" fill="'+color+'" stroke="#fff" stroke-width="2"/>'+
-        '<path transform="translate(4 4) scale(.875)" d="'+supportGlyphs[id]+'" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        '<defs><linearGradient id="badge-depth" x2="0%" y2="100%"><stop stop-color="#fff" stop-opacity=".34"/><stop offset=".48" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".24"/></linearGradient></defs>'+
+        '<ellipse cx="18" cy="32" rx="11" ry="2.5" fill="#17222a" opacity=".2"/>'+
+        '<circle cx="18" cy="17" r="14" fill="'+color+'"/>'+
+        '<circle cx="18" cy="17" r="14" fill="url(#badge-depth)" stroke="#fff" stroke-width="2"/>'+
+        '<path transform="translate(6 5) scale(.75)" d="'+supportGlyphs[id]+'" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     const [top,bottom]=pinColors[id]||[color,color];
     if(['aqm','wqm','cem'].includes(id)){
