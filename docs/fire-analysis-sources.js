@@ -72,7 +72,7 @@
         '<ellipse cx="18" cy="32" rx="11" ry="2.5" fill="#17222a" opacity=".2"/>'+
         '<circle cx="18" cy="17" r="14" fill="'+color+'"/>'+
         '<circle cx="18" cy="17" r="14" fill="url(#badge-depth)" stroke="#fff" stroke-width="2"/>'+
-        '<path transform="translate(6 5) scale(.75)" d="'+supportGlyphs[id]+'" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        '<path transform="translate(8.08 7.08) scale(.62)" d="'+supportGlyphs[id]+'" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     const [top,bottom]=pinColors[id]||[color,color];
     if(['aqm','wqm','cem'].includes(id)){
