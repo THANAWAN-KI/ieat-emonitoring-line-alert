@@ -342,6 +342,15 @@
           xoffset:fireAnalysis?Math.sin(radians)*88:0,yoffset:fireAnalysis?Math.cos(radians)*88:-77,
           url:'data:image/svg+xml,'+encodeURIComponent((fireAnalysis?analysisWindArrow:fireSources.windArrow)||'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M18 4 28 28 18 23 8 28Z" fill="#2257c8" stroke="#fff" stroke-width="2"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
+        if(fireAnalysis){
+          const fromLabel=compass[Math.round(from/45)%8],toLabel=compass[Math.round(direction/45)%8];
+          windLayer.add(new Graphic({geometry:origin,symbol:{
+            type:'text',text:'ลมที่จุดเกิดเหตุ · ลูกศรชี้ทิศที่ลมพัดไป\nจากทิศ'+fromLabel+' → ไปทิศ'+toLabel+'\nความเร็วลม '+speed+' กม./ชม.',
+            color:'#18394e',backgroundColor:[255,255,255,.95],borderLineColor:'#c7dbe9',borderLineSize:1,
+            font:{family:'Sarabun',size:10,weight:'bold'},horizontalAlignment:'center',verticalAlignment:'top',
+            xoffset:symbol.xoffset,yoffset:symbol.yoffset-39
+          }}));
+        }
       }
     }
     arrow.toggleAttribute('hidden',!moving);
