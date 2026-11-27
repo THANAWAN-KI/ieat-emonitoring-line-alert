@@ -3735,7 +3735,7 @@ html.fire-analysis-page {
   --fire-text:#f1f6f9;
   --fire-muted:#b6c5cd;
   --fire-accent:#65ddc5;
-  --fire-work-height:clamp(650px,calc(100dvh - 108px),1020px);
+  --fire-work-height:max(520px,calc(100dvh - 34px));
 }
 html.fire-analysis-page body{background:#101920;color:var(--fire-text)}
 html.fire-analysis-page #riskmapOverviewPanel .coverage-map-layout{
@@ -3904,9 +3904,11 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .riskmap-overvi
 .fire-analysis-page #coverageMapView .coverage-basemap-control select{width:100%}
 </style>
 <style id="fire-clean-workspace">
-html.fire-analysis-page body{background:#fff;color:#1c3646}
+html.fire-analysis-page,html.fire-analysis-page body{background:#fff!important}
+html.fire-analysis-page body{min-height:100dvh;color:#1c3646}
 html.fire-analysis-page body > main.page{margin-block-end:0!important;padding-block-end:0!important;}
 html.fire-analysis-page body #riskmapOverviewPanel .coverage-map-layout{
+  margin-block-end:0!important;
   background:#fff;border-color:#d6e1e7;box-shadow:0 6px 22px #193b5212;
 }
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage{
