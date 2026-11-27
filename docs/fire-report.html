@@ -2787,7 +2787,9 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
   auxiliaryTitle.textContent='ข้อมูลเพิ่มเติม';
   const wrapSearch=(label,...nodes)=>{
     const section=document.createElement('details'),title=document.createElement('summary');
-    title.textContent=label;section.append(title,...nodes);return section;
+    title.textContent=label;
+    if(document.documentElement.classList.contains('fire-analysis-page'))section.setAttribute('name','fire-additional-search');
+    section.append(title,...nodes);return section;
   };
   const other=wrapSearch('ค้นหาหน่วยงานช่วยเหลือใกล้เคียง',...Array.from(auxiliary.children).slice(1));
   const auxiliaryResults=document.createElement('div');auxiliaryResults.id='coverageAuxiliaryResults';auxiliaryResults.setAttribute('aria-live','polite');other.append(auxiliaryResults);
@@ -4262,6 +4264,48 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fir
   background:linear-gradient(145deg,#ffffff80,#2185d570)!important;border-color:#2185D5!important;
 }
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation):disabled{opacity:.55;cursor:default}
+</style>
+<style id="fire-additional-search-styles">
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search{
+  margin:12px 0 0;padding:10px;
+  border:1px solid #368dd555!important;border-radius:14px;
+  background:linear-gradient(150deg,#fff,#368dd510)!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > summary{
+  margin:0;padding:10px 12px;
+  color:#225d8d!important;font-weight:700;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details{
+  margin:6px 0 0;padding:0;
+  border:1px solid #368dd54a!important;border-radius:10px;
+  background:#ffffffe8!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details > summary{
+  margin:0;padding:10px 12px;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details[open]{
+  padding:0 12px 12px;border-color:#70af1e!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details[open] > summary{
+  margin:0 -12px 10px;
+  border-radius:9px 9px 0 0;background:#70af1e1c;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search summary::marker{color:#368dd5}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search details[open] > summary::marker{color:#507e16}
+html.fire-analysis-page #riskCoverage .dss-auxiliary-search :is(#coverageChemicalSearch,#dssEquipmentNearby){
+  margin:0;padding:0;border:0;background:transparent;
+}
+html.fire-analysis-page #riskCoverage .dss-auxiliary-search #dssEquipmentNearbyTitle{
+  position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+}
+html.fire-analysis-page #riskCoverage .dss-auxiliary-search :is(input,select){max-width:100%;width:100%;box-sizing:border-box}
+html.fire-analysis-page #riskCoverage .dss-auxiliary-search :is(#coverageChemicalForm,#dssEquipmentNearbyForm){
+  display:grid;grid-template-columns:minmax(0,1fr);gap:8px;
+}
+html.fire-analysis-page #riskCoverage .dss-auxiliary-search :is(#coverageChemicalForm,#dssEquipmentNearbyForm) label{margin:0}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search :is(button[type="submit"],#coverageSearchSupport){
+  width:100%;border-color:#368dd580!important;background:linear-gradient(145deg,#fff,#368dd535)!important;
+}
 </style>
 <script id="riskmap-ready">
 (()=>{
