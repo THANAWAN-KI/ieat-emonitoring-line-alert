@@ -149,13 +149,15 @@
     if(!externalLayer.visible)return;
     const scale=view.scale;
     const incidentScreen=origin&&view.toScreen(origin);
-    const markerGap=scale>15000?54:44;
+    const density=scale>100000?{gap:62,total:8,perKind:1}:
+      scale>24000?{gap:52,total:14,perKind:2}:
+      scale>7500?{gap:44,total:24,perKind:4}:{gap:38,total:40,perKind:9};
     const priority=['hospital','fire','police','estate','community','school','hydrant','cctv','business'];
     const rank=row=>row===selectedBufferRow?-1:(priority.indexOf(row.category.id)+1||priority.length+1);
     const rows=[...recordByGraphic].sort(([,left],[,right])=>rank(left)-rank(right)||left.distance-right.distance);
     const markers=[],categoryCounts=new Map();
     const showOverview=!activeCategory&&!$('fireBufferFilter').value.trim();
-    const supportKinds=['hospital','fire','police','hydrant','cctv','community','school','estate'];
+    const overviewMaxScale={estate:600000,hospital:240000,fire:240000,police:180000,community:85000,school:45000,hydrant:24000,cctv:24000,business:7500};
     const host=$('coverageMapView').getBoundingClientRect();
     const blocked=[];
     for(const element of [$('coverageMapView').querySelector('.fire-incident-name'),document.querySelector('.fire-map-detail'),$('coverageWind')]){
@@ -171,14 +173,14 @@
       const count=categoryCounts.get(kind)||0;
       if(!selected){
         if(showOverview&&kind==='hydrant'&&sources.some(({kind,layer})=>kind==='hydrant'&&layer.loaded&&layer.visible&&layer.parent?.visible&&scale<=layer.minScale))continue;
-        if(showOverview&&(!supportKinds.includes(kind)||count>=2||markers.length>=12))continue;
-        const maxScale=showOverview?Math.max(firePointScale(kind),150000):Math.max(firePointScale(kind),100000);
+        if(markers.length>=density.total||(showOverview&&count>=density.perKind))continue;
+        const maxScale=showOverview?(overviewMaxScale[kind]??firePointScale(kind)):Math.max(firePointScale(kind),100000);
         if(scale>maxScale)continue;
       }
       const screen=view.toScreen(graphic.geometry);
       if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height)continue;
       if(!selected&&((incidentScreen&&Math.abs(screen.x-incidentScreen.x)<88&&Math.abs(screen.y-incidentScreen.y)<64)||
-        markers.some(({screen:point})=>Math.abs(point.x-screen.x)<markerGap&&Math.abs(point.y-screen.y)<40)||
+        markers.some(({screen:point})=>Math.abs(point.x-screen.x)<density.gap&&Math.abs(point.y-screen.y)<density.gap)||
         blocked.some(box=>overlaps(box,{left:screen.x-16,right:screen.x+16,top:screen.y-21,bottom:screen.y+13}))))continue;
       graphic.visible=true;
       markers.push({screen,graphic,row});
@@ -190,6 +192,7 @@
     if(!measure)return;
     measure.font='700 12px Sarabun, sans-serif';
     for(const {screen,graphic,row} of markers){
+      if(row!==selectedBufferRow&&scale>Math.max(fireLabelScale(row.category.id),24000))continue;
       const text=row.name.length>26?row.name.slice(0,25)+'…':row.name;
       const width=Math.ceil(measure.measureText(text).width)+12;
       const offsets=[[0,27],[0,-35],[25+width/2,0],[-25-width/2,0]];
@@ -390,7 +393,7 @@
     const moving=known&&speed>0&&Number.isFinite(from);
     if(windLayer){
       windLayer.removeAll();
-      if(moving&&origin){
+      if(moving&&origin&&!fireAnalysis){
         const direction=(from+180)%360;
         const angle=(direction-view.rotation+360)%360;
         const radians=angle*Math.PI/180;
