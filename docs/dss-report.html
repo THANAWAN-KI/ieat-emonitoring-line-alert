@@ -3631,7 +3631,15 @@ html body #report#report.dss-field-document #dssFieldBrief #fbWeather :is(small,
 .report-weather-arrow svg{display:block;width:100%;height:100%}
 </style><script id="report-full-map-preview">
 (function(){
-const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');slot.append(weather);
+const slot=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');
+const fireReport=document.documentElement.dataset.reportTheme==='fire-purple';
+if(fireReport){
+  slot.before(weather);
+  for(const [name,value] of Object.entries({
+    position:'static',inset:'auto',width:'100%','max-width':'none','max-height':'none',
+    overflow:'visible',margin:'0 0 8px',padding:'9px 12px','box-shadow':'none'
+  }))weather.style.setProperty(name,value,'important');
+}else slot.append(weather);
 const image=document.createElement('img');image.id='dashboardReportMapImage';image.alt='แผนที่จาก Dashboard ตามมุมมองปัจจุบัน';slot.prepend(image);
 const zoomTools=document.createElement('div');zoomTools.className='report-map-zoom-controls';zoomTools.setAttribute('role','group');zoomTools.setAttribute('aria-label','ซูมแผนที่รายงาน');
 [['+','ซูมเข้าแผนที่รายงาน',1],['−','ซูมออกแผนที่รายงาน',-1]].forEach(([text,label,delta])=>{const button=document.createElement('button');button.type='button';button.textContent=text;button.setAttribute('aria-label',label);button.title=label;button.onclick=()=>parent.postMessage({type:'dss:report-map-zoom',delta},location.origin);zoomTools.append(button)});
@@ -3942,7 +3950,11 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
       if(!node.querySelector('#fieldBriefMap,table'))node.remove();
     }
     const map=document.getElementById('fieldBriefMap'),weather=document.getElementById('fbWeather');
-    if(map&&weather&&weather.parentElement!==map)map.append(weather);
+    if(map&&weather){
+      if(document.documentElement.dataset.reportTheme==='fire-purple'){
+        if(map.previousElementSibling!==weather)map.before(weather);
+      }else if(weather.parentElement!==map)map.append(weather);
+    }
     const title=map?.closest('.fb-section')?.querySelector('h2');
     const text='2. แผนที่และสภาพอากาศ · รัศมี '+getBufferRadii().join(' / ')+' กม.';
     if(title&&title.textContent!==text)title.textContent=text;
