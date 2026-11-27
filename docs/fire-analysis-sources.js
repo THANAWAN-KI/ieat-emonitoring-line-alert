@@ -65,7 +65,13 @@
         wqm:'M16 6c-3 5-7 9-7 13a7 7 0 1 0 14 0c0-4-4-8-7-13Z',
         cem:'M7 25h18M10 25l2-12h6l2 12M15 10c-3-3 5-2 4-5'
       }[id];
-      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="4" width="28" height="28" rx="8" fill="'+color+'" stroke="#fff" stroke-width="2"/><path transform="translate(2 2)" d="'+symbol+'" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      const highlight={aqm:'#a68aff',wqm:'#ffcf69',cem:'#72d49c'}[id];
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
+        '<defs><linearGradient id="station" x2="0" y2="1"><stop stop-color="'+highlight+'"/><stop offset="1" stop-color="'+color+'"/></linearGradient></defs>'+
+        '<rect x="5" y="5" width="28" height="28" rx="9" fill="#253e59" opacity=".22"/>'+
+        '<rect x="4" y="3" width="28" height="28" rx="8" fill="url(#station)" stroke="white" stroke-width="2"/>'+
+        '<rect x="6.5" y="5.5" width="23" height="23" rx="6" fill="none" stroke="white" stroke-opacity=".38"/>'+
+        '<path transform="translate(5 4) scale(.8)" d="'+symbol+'" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13" fill="'+bottom+'" stroke="#fff" stroke-width="3"/><circle cx="18" cy="18" r="4.5" fill="#fff"/></svg>';
     const glyph=id==='estate'
