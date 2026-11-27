@@ -133,7 +133,8 @@
       graphic.visible=true;
       occupied.push(screen);
       bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#243543'),
-        text:row.name.length>24?row.name.slice(0,23)+'…':row.name,yoffset:-13}}));
+        text:row.name.length>30?row.name.slice(0,29)+'…':row.name,
+        ...(row.category.id==='business'?{xoffset:11,yoffset:0,horizontalAlignment:'left'}:{yoffset:-10})}}));
     }
   }
   if(bufferLabels){
@@ -190,7 +191,7 @@
     };
     const graphicsByRow=new Map();
     for(const row of visible){
-      const graphic=new Graphic({geometry:position(row),symbol:markerSymbol(row.category,row.category.id==='business'?22:34),popupTemplate:{title:row.category.label,content:()=>popup(row)}});
+      const graphic=new Graphic({geometry:position(row),symbol:markerSymbol(row.category,row.category.id==='business'?18:32),popupTemplate:{title:row.category.label,content:()=>popup(row)}});
       graphicsByRow.set(row,graphic);
     }
     recordByGraphic=new Map(Array.from(graphicsByRow,([row,graphic])=>[graphic,row]));
@@ -1135,7 +1136,7 @@
       }:{type:'simple',symbol:monitoringSymbol},
       labelingInfo:[{minScale:fireMapIcons?17000:150000,labelPlacement:fireMapIcons?'below-center':'above-center',
         labelExpressionInfo:{expression:fireMapIcons?"DefaultValue($feature.StationTH, $feature.Type)":"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', 'สถานี e-Monitoring')"},
-        symbol:fireMapIcons?{...fireLabel('#243543',9),yoffset:-2}:fireLabel('#153a38')}],
+        symbol:fireMapIcons?{...fireLabel('#243543',10),yoffset:3}:fireLabel('#153a38')}],
       featureReduction:fireMapIcons?null:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
         labelingInfo:[{labelPlacement:'center-center',labelExpressionInfo:{expression:'Text($feature.cluster_count)'},symbol:{type:'text',color:'#153a38',font:{size:9,weight:'bold'}}}]},
       popupTemplate:{title:'{StationTH}',expressionInfos:[{name:'stationCategory',title:'ประเภทสถานี',expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', DefaultValue($feature.Type, 'ไม่ระบุ'))"}],content:[{type:'fields',fieldInfos:[
