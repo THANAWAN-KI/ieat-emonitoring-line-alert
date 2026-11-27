@@ -4058,17 +4058,21 @@ html.fire-analysis-page #coverageMapView .esri-expand:has(:is(.coverage-basemap-
   --calcite-color-foreground-1:transparent;
   --calcite-popover-background-color:transparent;
   --calcite-popover-border-color:transparent;
-  --calcite-popover-corner-radius:16px;
+  --calcite-popover-corner-radius:24px;
+  --calcite-corner-radius:24px;
 }
 html.fire-analysis-page #coverageMapView .esri-expand
   :is(.esri-expand__content-container,.esri-expand__panel-content):has(:is(.coverage-basemap-control,.esri-measurement-widget-content,.fire-layer-panel,.fire-wind-panel)){
   box-sizing:border-box;
   max-width:min(422px,calc(100vw - 78px));
   padding:16px 18px;
-  border:0;border-radius:16px;
+  border:0;border-radius:24px;overflow:hidden;
   background:linear-gradient(115deg,rgba(249,251,236,.95),rgba(229,246,252,.94));
   color:#172c2a;box-shadow:0 5px 18px #17374b21;
   backdrop-filter:blur(12px) saturate(135%);
+}
+html.fire-analysis-page #coverageMapView .esri-expand__popover-content:has(:is(.coverage-basemap-control,.esri-measurement-widget-content,.fire-layer-panel,.fire-wind-panel)){
+  border-radius:24px;overflow:hidden;
 }
 html.fire-analysis-page #coverageMapView .esri-expand__content-container:has(.coverage-basemap-control){
   width:min(422px,calc(100vw - 78px));
