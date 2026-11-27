@@ -710,7 +710,7 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261127-weather-above-map');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261127-report-typography');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -4521,6 +4521,16 @@ html.fire-inline-report-open body #riskmapReportPanel{
 }
 html.fire-inline-report-open .fire-report-header{padding:16px 20px;border:1px solid #A7A8AA;border-radius:12px}
 html.fire-inline-report-open #riskmapReportPanel .report-workspace-bottom{margin-top:12px}
+</style>
+<style id="fire-report-panel-type">
+html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel .fire-report-header{display:none!important}
+html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel :is(h1,h2,h3,h4,h5,h6,summary){font-size:16px!important;font-weight:700!important}
+html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel :is(p,small,label,textarea,select,button,a){font-size:14px!important;font-weight:300!important}
+html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel #emergencyReportPage .report-download-toolbar :is(#dashboardEditReportText,#dashboardDownloadImage),
+html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel #riskMapLinePanel#riskMapLinePanel :is(label,textarea,select,button,p){
+  font-size:14px!important;font-weight:300!important;
+}
+html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel #riskMapLinePanel#riskMapLinePanel h3{font-size:16px!important;font-weight:700!important}
 </style>
 <script id="riskmap-ready">
 (()=>{
