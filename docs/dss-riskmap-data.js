@@ -482,7 +482,9 @@
     const results=auxiliary?$('coverageAuxiliaryResults'): $('coverageNearbyResults');
     const id=auxiliary?++auxiliaryId:++nearbyId, circle=draw(), term=auxiliary?keyword.value.trim().toLowerCase():'';
     results.replaceChildren(el('p','กำลังค้นหาข้อมูลสนับสนุน…'));
-    const tasks=sources.map(async ({layer,fields:preferred})=>{
+    const agencies=auxiliary&&fireAnalysis&&$('coverageChemicalRadius');
+    const eligible=agencies?sources.filter(({kind})=>['fire','police','hospital','estate'].includes(kind)):sources;
+    const tasks=eligible.map(async ({layer,kind,fields:preferred})=>{
       await layer.load();
       const available=new Set(layer.fields.map(field=>field.name));
       const names=preferred.filter(field=>available.has(field));
@@ -495,10 +497,15 @@
         if(!names.length)return null;
         q.where=names.map(field=>"UPPER("+field+") LIKE '%"+sql(term.toUpperCase())+"%'").join(' OR ');
       }
+      if(agencies){q.outFields=['*'];q.returnGeometry=true;q.outSpatialReference={wkid:4326};}
       const data=await layer.queryFeatures(q);
+      if(agencies)return {title:layer.title,truncated:data.exceededTransferLimit,items:data.features.map(({attributes,geometry})=>({
+        name:names.map(field=>attributes[field]).filter(Boolean).join(' · ')||layer.title,attributes,kind,
+        point:geometry?.type==='point'?geometry:geometry?.centroid
+      }))};
       return {title:layer.title,truncated:data.exceededTransferLimit||data.features.length===25,items:data.features.map(f=>names.map(field=>f.attributes[field]).filter(Boolean).join(' · ')||'รายการ '+f.attributes[layer.objectIdField])};
     });
-    if(term&&selectedFactory&&window.IEATDssChemicalCatalog){
+    if(!agencies&&term&&selectedFactory&&window.IEATDssChemicalCatalog){
       tasks.push(window.IEATDssChemicalCatalog.load().then(data=>{
         const ids=new Set(window.IEATDssChemicalCatalog.findCompanies(data,name,'',[]));
         const matching=data.rows.filter(([company,chemical,cas])=>ids.has(company)&&[data.names[chemical],data.cas[cas]].some(value=>String(value).toLowerCase().includes(term)));
@@ -512,14 +519,28 @@
     const cards=el('div',null,'incident-result-cards');
     if(forReport)results.append(cards);
     settled.forEach((result,i)=>{
-      if(result.status==='rejected'){(forReport?cards:results).append(el('p','โหลดไม่ได้ · '+(sources[i]?.layer.title||'DSS')));return;}
+      if(result.status==='rejected'){(forReport?cards:results).append(el('p','โหลดไม่ได้ · '+(eligible[i]?.layer.title||'DSS')));return;}
       const section=result.value;
       if(!section)return;
       found ||= section.items.length>0;
       if(forReport!==true&&!section.items.length)return;
       const group=el('details'), list=el('ul');
       group.append(el('summary',section.title+' ('+section.items.length+(section.truncated?'+':'')+')'));
-      section.items.forEach(item=>list.append(el('li',item)));
+      section.items.forEach(item=>{
+        const entry=el('li',agencies?item.name:item);
+        if(agencies){
+          const address=Object.entries(item.attributes).find(([key,value])=>value&&/ที่อยู่|address/i.test(key));
+          if(address)entry.append(el('div',String(address[1])));
+          if(Number.isFinite(item.point?.latitude)&&Number.isFinite(item.point?.longitude)){
+            const link=el('a','ดูตำแหน่ง · '+fireSources.distanceKm(origin.latitude,origin.longitude,item.point.latitude,item.point.longitude).toFixed(2)+' กม.');
+            link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(item.point.latitude+','+item.point.longitude);
+            link.target='_blank';link.rel='noopener';
+            const location=el('div');location.append(link);entry.append(location);
+          }
+          appendContact(entry,contactDetails(item.name,item.kind,item.attributes));
+        }
+        list.append(entry);
+      });
       group.append(list);(forReport?cards:results).append(group);
     });
     if(!found)results.append(el('p','ไม่พบรายการที่ตรงกันจากแหล่งที่โหลดสำเร็จ'));
@@ -660,7 +681,7 @@
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
   radius.onchange=()=>{if(fireSources){nearbyId++;externalRequest?.abort();externalRequest=null;externalLayer.removeAll();selectBufferRecord(null);recordByGraphic.clear();if(bufferLabels)bufferLabels.removeAll();$('fireExternalList').replaceChildren();$('fireExternalStatus').textContent='กดอัปเดตรัศมีเพื่อค้นหาใหม่';}incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent=fireSources?'กดอัปเดตรัศมีเพื่อค้นหาตามระยะใหม่':'กดค้นหาเพื่อใช้ระยะค้นหาใหม่ในรายงาน';};
   type.onchange=()=>{incidentRevision++;if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';window.dispatchEvent(new Event('ieat-coverage-context-updated'));draw();message.textContent='กดค้นหาเพื่อใช้ประเภทเหตุใหม่ในรายงาน';};
-  $('coverageSearchSupport').onclick=()=>{if(origin&&(selectedFactory||independent))updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
+  $('coverageSearchSupport').onclick=()=>{if(origin&&(selectedFactory||independent||fireAnalysis))updateNearby(false,true);else message.textContent='ค้นหาและเลือกโรงงานก่อนค้นหาข้อมูลสนับสนุน';};
   const searchFactories=async event=>{
     event.preventDefault();
     const value=$('coverageFactoryQuery').value.trim();
@@ -834,6 +855,7 @@
   const chemicalForm=$('coverageChemicalForm'),chemicalOutput=$('coverageChemicalOutput');
   const chemicalDownload=$('coverageChemicalDownload'),chemicalStatus=$('coverageChemicalStatus');
   if(!chemicalForm)return;
+  const chemicalRadius=$('coverageChemicalRadius')||radius;
   const chemicalKey=()=>[window.ieatCoverageReport?.id,window.ieatCoverageReport?.status,origin?.latitude,origin?.longitude,selectedFactory?.[newReg],radius.value,...new FormData(chemicalForm).values()].join('|');
   let savedChemicalKey='';
   chemicalForm.addEventListener('input',()=>{chemicalDownload.disabled=true;});
@@ -841,12 +863,12 @@
   chemicalForm.onsubmit=async event=>{
     event.preventDefault();
     chemicalOutput.replaceChildren();chemicalDownload.disabled=true;savedChemicalKey='';
-    if(!origin||!selectedFactory||window.ieatCoverageReport?.status!=='ready'){chemicalStatus.textContent='ค้นหาและเลือกโรงงานก่อน';return;}
+    if(!origin||(!fireAnalysis&&(!selectedFactory||window.ieatCoverageReport?.status!=='ready'))){chemicalStatus.textContent='ระบุจุดเกิดเหตุก่อนค้นหา';return;}
     const term=$('coverageChemicalQuery').value.trim().toLowerCase(),scope=$('coverageChemicalScope').value;
     if(!term){chemicalStatus.textContent='กรอกชื่อสารเคมีหรือเลข CAS';return;}
-    const estate=selectedFactory['นิคมอุตสาหกรรม'],km=Number(radius.value);
+    const estate=selectedFactory?.['นิคมอุตสาหกรรม'],km=Number(chemicalRadius.value);
     if(scope==='estate'&&(!estate||estate==='—')){chemicalStatus.textContent='โรงงานที่เลือกไม่มีชื่อนิคมฯ ในทะเบียน';return;}
-    if(scope==='radius'&&!radius.reportValidity())return;
+    if(scope==='radius'&&!chemicalRadius.reportValidity())return;
     const key=chemicalKey(),submit=chemicalForm.querySelector('button');
     submit.disabled=true;chemicalStatus.textContent='กำลังค้นหาสารเคมีจาก DSS…';
     try{
