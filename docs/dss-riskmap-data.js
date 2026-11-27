@@ -1454,10 +1454,26 @@
       }
     }
     view.ui.add(new Expand({view,content:layerPanel,expandIcon:'layers',expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
-    if(dedicatedFireAnalysis)view.ui.add(new Compass({view}),'top-right');
+    const windInfo=$('coverageWind');
+    if(dedicatedFireAnalysis){
+      if(windInfo){
+        const windPanel=el('div',null,'fire-wind-panel');
+        windPanel.append(windInfo);
+        view.ui.add(new Expand({
+          view,
+          content:windPanel,
+          expandIcon:'arrow-up',
+          expandTooltip:'ลมที่จุดเกิดเหตุ',
+          collapseTooltip:'ปิดข้อมูลลมที่จุดเกิดเหตุ',
+          group:'fire-map-tools'
+        }),'top-right');
+      }
+      view.ui.add(new Compass({view}),'top-right');
+    }
     const mapInfo=$('fireMapInfo');
     if(fireMapIcons&&mapInfo){
-      mapInfo.append($('coverageWind'),document.querySelector('#coverageMap .fire-map-key'));
+      if(!dedicatedFireAnalysis&&windInfo)mapInfo.append(windInfo);
+      mapInfo.append(document.querySelector('#coverageMap .fire-map-key'));
       const supportKey=el('ul',null,'fire-support-key');
       for(const category of fireMapIcons.categories.filter(item=>['hospital','fire','police','community','school','hydrant','cctv','business','estate','aqm','wqm','cem'].includes(item.id))){
         const row=el('li'), icon=el('img');
@@ -1487,7 +1503,7 @@
       mapInfo.append(layerLegend);
       new Legend({view,container:legendBody});
       const details=el('details',null,'fire-layer-details');
-      details.append(el('summary','ข้อมูลลมและสัญลักษณ์'),mapInfo);
+      details.append(el('summary',dedicatedFireAnalysis?'คำอธิบายสัญลักษณ์':'ข้อมูลลมและสัญลักษณ์'),mapInfo);
       layerPanel.append(details);
     }else if(!dedicatedFireAnalysis){
       view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
