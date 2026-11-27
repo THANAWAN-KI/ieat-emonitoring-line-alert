@@ -1,6 +1,6 @@
 (() => {
  'use strict';
- const firePointScales={estate:0,hospital:180000,fire:180000,police:100000,community:65000,school:65000,business:14000,aqm:23000,wqm:23000,cem:23000,environment:35000,waterWatch:35000,wastewater:35000,airWatch:35000,waste:35000,hydrant:18000,cctv:18000};
+ const firePointScales={estate:600000,hospital:180000,fire:180000,police:100000,community:65000,school:65000,business:14000,aqm:23000,wqm:23000,cem:23000,environment:35000,waterWatch:35000,wastewater:35000,airWatch:35000,waste:35000,hydrant:18000,cctv:18000};
  const firePointScale=id=>firePointScales[id]??35000;
  const fireLabel=(color,size=10)=>({type:'text',color,haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size,weight:'bold'}});
  const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
@@ -990,7 +990,7 @@
       if(!category)return;
       item.minScale=firePointScale(kind);
       item.labelsVisible=true;
-      item.labelingInfo=[{minScale:kind==='estate'?0:item.minScale,labelPlacement:'below-center',
+      item.labelingInfo=[{minScale:kind==='estate'?180000:item.minScale,labelPlacement:'below-center',
         labelExpressionInfo:{expression},symbol:{...fireLabel('#243543'),yoffset:kind==='estate'?-6:-9}}];
     }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
