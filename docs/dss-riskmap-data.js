@@ -158,7 +158,7 @@
       if(!selected&&(scale>fireLabelScale(row.category.id)||
         labels.some(point=>Math.abs(point.x-screen.x)<labelGap&&Math.abs(point.y-screen.y)<52)))continue;
       labels.push(screen);
-      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#243543',9),
+      bufferLabels.add(new Graphic({geometry:graphic.geometry,symbol:{...fireLabel('#000',9),
         text:!selected&&row.name.length>26?row.name.slice(0,25)+'…':row.name,
         ...(row.category.id==='business'?{xoffset:11,yoffset:0,horizontalAlignment:'left'}:{yoffset:-10})}}));
     }
@@ -325,6 +325,7 @@
   if(fireSources)$('fireBufferFilter').addEventListener('input',()=>paintBuffer());
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
   const direction=deg=>compass[Math.round(deg/45)%8];
+  const analysisWindArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 5 37 50 21 39 5 50Z" fill="#2185d5" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function showWind(weather){
     if(!windBox)return;
     const arrow=windBox.querySelector('svg'), reading=windBox.querySelector('strong'), detail=windBox.querySelector('small');
@@ -339,7 +340,7 @@
         const radians=angle*Math.PI/180;
         const symbol={type:'picture-marker',angle,width:39,height:76,
           xoffset:fireAnalysis?Math.sin(radians)*88:0,yoffset:fireAnalysis?Math.cos(radians)*88:-77,
-          url:'data:image/svg+xml,'+encodeURIComponent(fireSources.windArrow||'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M18 4 28 28 18 23 8 28Z" fill="#2257c8" stroke="#fff" stroke-width="2"/></svg>')};
+          url:'data:image/svg+xml,'+encodeURIComponent((fireAnalysis?analysisWindArrow:fireSources.windArrow)||'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M18 4 28 28 18 23 8 28Z" fill="#2257c8" stroke="#fff" stroke-width="2"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
       }
     }
@@ -355,7 +356,7 @@
     }
   }
   if(windBox){
-    if(fireSources?.windArrow)windBox.querySelector('svg').outerHTML=fireSources.windArrow;
+    if(fireSources?.windArrow)windBox.querySelector('svg').outerHTML=fireAnalysis?analysisWindArrow:fireSources.windArrow;
     if(!fireAnalysis)view.container.append(windBox);
     windBox.hidden=false;showWind();
   }
@@ -453,26 +454,13 @@
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     if(fireAnalysis){
-      const zones=[
-        {fraction:1,fill:[39,153,85,.045],outline:'#218247'},
-        {fraction:2/3,fill:[255,151,44,.065],outline:'#b9560d'},
-        {fraction:1/3,fill:[245,43,52,.08],outline:'#c72036'}
-      ];
-      const boundaries=zones.map(({fraction})=>fraction===1?circle:new Circle({
-        center:origin,radius:Number(radius.value)*fraction,radiusUnit:'kilometers',geodesic:true
+      graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[33,133,213,.08],
+        outline:{color:'#17649e',width:2,style:'solid'}}}));
+      const edge=circle.rings[0].reduce((top,vertex)=>vertex[1]>top[1]?vertex:top);
+      graphics.add(new Graphic({
+        geometry:new Point({x:edge[0],y:edge[1],spatialReference:circle.spatialReference}),
+        symbol:{...fireLabel('#000',11),text:new Intl.NumberFormat('th',{maximumFractionDigits:2}).format(Number(radius.value))+' กม.',yoffset:8}
       }));
-      zones.forEach(({fill,outline,fraction},index)=>{
-        const outer=boundaries[index],inner=boundaries[index+1];
-        const geometry=inner?{type:'polygon',spatialReference:outer.spatialReference,
-          rings:[...outer.rings,...inner.rings.map(ring=>ring.slice().reverse())]}:outer;
-        graphics.add(new Graphic({geometry,symbol:{type:'simple-fill',color:fill,
-          outline:{style:'none'}}}));
-        graphics.add(new Graphic({geometry:outer,symbol:{type:'simple-fill',style:'none',
-          outline:{color:outline,width:1.5,style:'solid'}}}));
-        const north=outer.rings[0].reduce((top,vertex)=>vertex[1]>top[1]?vertex:top);
-        graphics.add(new Graphic({geometry:new Point({x:north[0],y:north[1],spatialReference:outer.spatialReference}),
-          symbol:{...fireLabel(outline,11),text:new Intl.NumberFormat('th',{maximumFractionDigits:2}).format(Number(radius.value)*fraction)+' กม.',yoffset:7}}));
-      });
     }else{
       graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[37,79,194,.10]:[184,46,52,.025],
         outline:fireView?{color:'#3155d4',width:2.5,style:'short-dash'}:{color:'#b82e34',width:1.5}}}));
@@ -1019,7 +1007,7 @@
       item.minScale=firePointScale(kind);
       item.labelsVisible=true;
       item.labelingInfo=[{minScale:fireLabelScale(kind),labelPlacement:'below-center',
-        labelExpressionInfo:{expression},symbol:{...fireLabel('#243543'),yoffset:kind==='estate'?-6:-9}}];
+        labelExpressionInfo:{expression},symbol:{...fireLabel('#000'),yoffset:kind==='estate'?-6:-9}}];
     }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
       visible:!dedicatedFireAnalysis&&['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
@@ -1164,7 +1152,7 @@
       }:{type:'simple',symbol:monitoringSymbol},
       labelingInfo:[{minScale:fireMapIcons?6500:150000,labelPlacement:fireMapIcons?'below-center':'above-center',
         labelExpressionInfo:{expression:fireMapIcons?"DefaultValue($feature.StationTH, $feature.Type)":"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', 'สถานี e-Monitoring')"},
-        symbol:fireMapIcons?{...fireLabel('#243543',10),yoffset:3}:fireLabel('#153a38')}],
+        symbol:fireMapIcons?{...fireLabel('#000',10),yoffset:3}:fireLabel('#153a38')}],
       featureReduction:fireMapIcons?null:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
         labelingInfo:[{labelPlacement:'center-center',labelExpressionInfo:{expression:'Text($feature.cluster_count)'},symbol:{type:'text',color:'#153a38',font:{size:9,weight:'bold'}}}]},
       popupTemplate:{title:'{StationTH}',expressionInfos:[{name:'stationCategory',title:'ประเภทสถานี',expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', DefaultValue($feature.Type, 'ไม่ระบุ'))"}],content:[{type:'fields',fieldInfos:[
