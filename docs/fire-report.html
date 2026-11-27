@@ -545,9 +545,11 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
   <form id="coverageIncidentForm" aria-labelledby="coverageIncidentTitle">
   <h2 id="coverageIncidentTitle">ค้นหาจุดเกิดเหตุ</h2>
   <div class="coverage-incident-controls">
+    <h3 class="coverage-wide fire-step">1. ระบุจุดเกิดเหตุ</h3>
     <label class="coverage-wide">ชื่อโรงงานหรือเลขทะเบียน <input id="coverageFactoryQuery" type="search" placeholder="เช่น 72250000325534 หรือ น.53(1)-3/2553-ญอต."></label>
-    <label>ประเภทเหตุ <select id="coverageIncidentType" required><option value="">ยังไม่ระบุ</option><option>เหตุไฟไหม้</option><option>สารเคมีรั่วไหล</option><option>อุบัติเหตุ</option><option>อื่น ๆ</option></select></label>
-    <label>รัศมีค้นหา (กม.) <input id="coverageIncidentRadius" type="number" min="0.1" max="50" step="0.1" value="5" required></label>
+    <button id="coverageOpenReport" type="button" disabled>ค้นหาโรงงาน</button>
+    <div class="coverage-wide" id="coverageFactoryMatches"></div>
+
     <label class="coverage-wide">ค้นหาข้อมูลสนับสนุน <input id="coverageSupportQuery" type="search" placeholder="ชื่อสารเคมี / CAS / หัวจ่ายน้ำ / โรงงานใกล้เคียง"></label>
     <button id="coverageSearchSupport" type="button">ค้นหาในรัศมี</button>
     <div class="coverage-wide coverage-place-search">
@@ -557,11 +559,13 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
         <button id="coveragePickIncident" type="button">ปักหมุดบนแผนที่</button>
       </div>
     </div>
-    <button id="coverageOpenReport" type="button" disabled>ค้นหาโรงงาน</button>
+    <h3 class="coverage-wide fire-step">2. กำหนดประเภทเหตุและรัศมี</h3>
+    <label>ประเภทเหตุ <select id="coverageIncidentType" required><option value="">ยังไม่ระบุ</option><option>เหตุไฟไหม้</option><option>สารเคมีรั่วไหล</option><option>อุบัติเหตุ</option><option>อื่น ๆ</option></select></label>
+    <label>รัศมีค้นหา (กม.) <input id="coverageIncidentRadius" type="number" min="0.1" max="50" step="0.1" value="5" required></label>
+    <button id="fireApplyRadius" type="button" disabled>อัปเดตรัศมี</button>
+    <h3 class="coverage-wide fire-step">3. ดูผลและจัดทำรายงาน</h3>
   </div>
   <p id="coverageIncidentStatus" role="status"></p>
-  <div id="coverageFactoryMatches"></div>
-  <button id="fireApplyRadius" type="button" disabled>อัปเดตรัศมี</button>
   <div id="coverageNearbyResults" hidden></div>
   <section id="fireExternalPlaces" aria-labelledby="fireExternalTitle" hidden>
     <h2 id="fireExternalTitle">ข้อมูลรอบจุดเกิดเหตุ</h2>
@@ -2830,7 +2834,7 @@ html body header#ieatPortalHeader.standalone-dss-header #hub-alert-button .alert
       if(report.firstElementChild!==toolbar)report.prepend(toolbar);
       if(toolbar.firstElementChild!==editReportButton)toolbar.prepend(editReportButton);
       const search=get('coverageOpenReport');
-      if(search&&searchActions.firstElementChild!==search)searchActions.prepend(search);
+      if(!document.documentElement.classList.contains('fire-analysis-page')&&search&&searchActions.firstElementChild!==search)searchActions.prepend(search);
       const controls=form.querySelector('.coverage-incident-controls');
       if(controls&&searchActions.parentElement!==controls)controls.append(searchActions);
     }
@@ -3442,9 +3446,9 @@ html body #riskmapOverviewPanel #riskCoverage .dss-risk-table tbody tr:hover td{
 html body #riskmapOverviewPanel #riskCoverage #dssBriefPlanRows td:nth-child(7){background:#fff7df!important;color:#795c0a!important}
 html body #riskmapOverviewPanel #riskCoverage :is(a,.factory-name-link){color:#196b45!important}
 html body #riskmapOverviewPanel #riskCoverage :is(button,select,input){border-color:#cbd9ce!important;border-radius:7px!important}
-html body #riskmapOverviewPanel #riskCoverage button{background:#edf6f0!important;color:#195d3d!important}
+html body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation){background:#edf6f0!important;color:#195d3d!important}
 html body #riskmapOverviewPanel #riskCoverage .dss-brief-action{background:#24845a!important;color:white!important;border-radius:7px!important}
-html body #riskmapOverviewPanel #riskCoverage button.factory-name-link{background:transparent!important;border:0!important;padding:0!important}
+html body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation).factory-name-link{background:transparent!important;border:0!important;padding:0!important}
 html body #riskmapOverviewPanel #riskCoverage .dss-chart-track{background:#edf1eb!important}
 html body #riskmapOverviewPanel #riskCoverage .dss-chart-track span{background:#24845a!important}
 html body #riskmapOverviewPanel #riskCoverage #dssResourceChart .dss-chart-track span{background:#e8ba3f!important}
@@ -3495,7 +3499,7 @@ html body #riskmapOverviewPanel #riskCoverage #dssResourceSummary>div{background
 html body #riskmapOverviewPanel #riskCoverage .dss-risk-table td{color:#28352c!important}
 html body #riskmapOverviewPanel #riskCoverage .dss-risk-table tbody tr:nth-child(even) td{background:#f7f9f5!important}
 html body #riskmapOverviewPanel #riskCoverage .dss-risk-table tbody tr:hover td{background:#edf4e9!important}
-html body #riskmapOverviewPanel #riskCoverage button:hover{filter:brightness(.97)}
+html body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation):hover{filter:brightness(.97)}
 html body #riskmapOverviewPanel #coverageMap .esri-widget--button:hover{background:#edf3ed!important}
 </style><style id="riskmap-incident-focus">
 .riskmap-shared-workspace,.riskmap-shared-workspace #riskmapOverviewPanel .coverage-map-layout{max-width:none}
@@ -4226,6 +4230,34 @@ html.fire-analysis-page #coverageMapView .fire-layer-panel :is(.esri-layer-list,
 }
 html.fire-analysis-page #coverageMapView .fire-layer-details summary{padding:5px;cursor:pointer}
 html.fire-analysis-page #coverageMapView .esri-compass .esri-widget--button{border-radius:50%!important}
+</style>
+<style id="fire-analysis-step-styles">
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage,
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(h2,h3,p,summary,label,small,input,select,strong,span,a){
+  color:#303841!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .riskmap-overview-heading h1{color:#2185D5!important}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #coverageIncidentTitle{color:#3A4750!important}
+html.fire-analysis-page #riskCoverage .fire-step{
+  margin:8px 0 2px;padding-top:8px;border-top:1px solid #d9e5ee;
+  font:700 15px/1.4 Sarabun,sans-serif;
+}
+html.fire-analysis-page #riskCoverage #coverageFactoryMatches:empty{display:none}
+html.fire-analysis-page #riskmapOverviewPanel #riskCoverage .report-search-actions{
+  grid-template-columns:minmax(0,1fr)!important;margin-top:0!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation){
+  background:linear-gradient(145deg,#ffffffb8,#2185d535),#2185d526!important;
+  border:1px solid #2185d575!important;border-radius:10px!important;
+  color:#164f78!important;-webkit-text-fill-color:currentColor!important;
+  box-shadow:inset 0 1px 0 #fff,0 2px 8px #2185d522!important;
+  backdrop-filter:blur(10px) saturate(130%);
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation) :is(strong,span){color:inherit!important}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation):is(:hover,:focus-visible,:active,[aria-pressed="true"]):enabled{
+  background:linear-gradient(145deg,#ffffff80,#2185d570)!important;border-color:#2185D5!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation):disabled{opacity:.55;cursor:default}
 </style>
 <script id="riskmap-ready">
 (()=>{
