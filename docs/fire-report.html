@@ -3985,12 +3985,23 @@ html.fire-analysis-page body #riskDashboard#riskDashboard,
 html.fire-analysis-page body #otherPage,
 html.fire-analysis-page #coverageMap > :is(#coverageWind,.fire-map-key,#fireMapInfo){display:none!important}
 
-html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView :is(.esri-widget--button,.esri-expand__container){
-  background:rgba(248,252,255,.63)!important;
-  border:1px solid rgba(255,255,255,.85)!important;
-  border-radius:12px!important;
-  color:#17374b!important;
-  box-shadow:0 4px 14px rgba(19,48,69,.16),inset 0 1px 0 rgba(255,255,255,.8)!important;
+html.fire-analysis-page #coverageMapView{
+  --fire-map-glass:rgba(248,252,255,.63);
+  --fire-map-glass-edge:rgba(255,255,255,.85);
+  --fire-map-glass-radius:12px;
+  --fire-map-glass-ink:#17374b;
+  --fire-map-glass-shadow:0 4px 14px rgba(19,48,69,.16),inset 0 1px 0 rgba(255,255,255,.8);
+}
+html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView :is(
+  .esri-widget--button,.esri-expand__container,
+  .esri-expand__popover-content:has(:is(.esri-measurement-widget-content,.esri-layer-list)),
+  .esri-expand__panel-content:has(:is(.esri-measurement-widget-content,.esri-layer-list))
+){
+  background:var(--fire-map-glass)!important;
+  border:1px solid var(--fire-map-glass-edge)!important;
+  border-radius:var(--fire-map-glass-radius)!important;
+  color:var(--fire-map-glass-ink)!important;
+  box-shadow:var(--fire-map-glass-shadow)!important;
   backdrop-filter:blur(12px) saturate(135%);
 }
 html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView .esri-widget--button{
@@ -4022,9 +4033,13 @@ html.fire-analysis-page #fireMapInfo summary{cursor:pointer}
 </style>
 
 <style id="fire-glass-expanded-tools">
-html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView
-  .esri-expand__container:has(:is(.esri-measurement-widget-content,.esri-layer-list)){
-  background:rgba(240,249,255,.76)!important;
+html.fire-analysis-page #coverageMapView .esri-expand:has(:is(.esri-measurement-widget-content,.esri-layer-list)){
+  --calcite-color-foreground-1:transparent;
+  --calcite-popover-background-color:transparent;
+  --calcite-popover-border-color:transparent;
+}
+html.fire-analysis-page #coverageMapView .esri-widget:has(> .esri-measurement-widget-content){
+  background:transparent;
 }
 html.fire-analysis-page #coverageMapView :is(.esri-measurement-widget-content,.esri-layer-list){
   width:min(320px,calc(100vw - 104px));
@@ -4039,22 +4054,23 @@ html.fire-analysis-page #coverageMapView :is(.esri-measurement-widget-content,.e
 html.fire-analysis-page #coverageMapView .esri-measurement-widget-content{padding:12px}
 html.fire-analysis-page #coverageMapView .esri-measurement-widget-content .esri-button{
   min-height:42px;
-  border:1px solid rgba(72,130,164,.4);
-  border-radius:10px;
-  background:rgba(219,239,251,.82);
-  color:#154867;
+  border:1px solid var(--fire-map-glass-edge);
+  border-radius:var(--fire-map-glass-radius);
+  background:var(--fire-map-glass);
+  color:var(--fire-map-glass-ink);
+  box-shadow:var(--fire-map-glass-shadow);
   font-weight:700;
 }
 html.fire-analysis-page #coverageMapView .esri-measurement-widget-content .esri-button:hover:enabled{
-  background:#cce9fa;
+  background:rgba(248,252,255,.88);
 }
 html.fire-analysis-page #coverageMapView .esri-layer-list{padding:8px}
 html.fire-analysis-page #coverageMapView .esri-layer-list__item{
   margin-block:4px;
-  border:1px solid rgba(114,158,184,.28);
-  border-radius:9px;
-  background:rgba(255,255,255,.52);
-  color:#173d55;
+  border:1px solid rgba(255,255,255,.56);
+  border-radius:var(--fire-map-glass-radius);
+  background:rgba(255,255,255,.28);
+  color:var(--fire-map-glass-ink);
 }
 html.fire-analysis-page #coverageMapView .esri-layer-list__item-content{font-weight:600}
 html.fire-analysis-page #coverageMapView .esri-layer-list__item--invisible .esri-layer-list__item-content{color:#526b7c}
