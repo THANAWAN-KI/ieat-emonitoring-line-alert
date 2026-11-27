@@ -20,6 +20,16 @@
    label.style.left=Math.max(5,Math.min(width-label.offsetWidth-5,x))+'px';
    label.style.top=Math.max(5,Math.min(height-label.offsetHeight-5,point.y-markerHeight*.58-label.offsetHeight/2))+'px';
  }
+ const fireMapTransferKey='ieat-fire-analysis-map-v1';
+ function transferredFireMap(context){
+   try{
+     const saved=JSON.parse(sessionStorage.getItem(fireMapTransferKey)||'null');
+     if(saved&&saved.lat===context?.point?.lat&&saved.lng===context.point.lng&&
+       saved.km===context.km&&saved.incidentType===context.incidentType&&saved.company===context.company&&
+       typeof saved.image==='string'&&saved.image.startsWith('data:image/jpeg;'))return saved.image;
+   }catch{}
+   return null;
+ }
  const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
  const riskMapLayers=new Map();
@@ -761,9 +771,32 @@
     if(fireReportPage)window.ieatSaveFireReportView=()=>{
       if(origin&&form.checkValidity())saveIncident();
     };
-    window.ieatOpenFireDocument=(allowEmpty=false)=>{
+    let openingFireReport=false;
+    window.ieatOpenFireDocument=async (allowEmpty=false)=>{
+      if(openingFireReport)return;
       const empty=allowEmpty&&!origin;
       if(!empty&&!saveIncident())return;
+      openingFireReport=true;
+      try{
+        sessionStorage.removeItem(fireMapTransferKey);
+        if(!empty&&fireAnalysis){
+          const revision=incidentRevision;
+          const savedOrigin=origin, km=Number(radius.value), incidentType=type.value, company=name;
+          message.textContent='กำลังส่งแผนที่ไปหน้ารายงาน…';
+          const image=await window.ieatCaptureCoverageMap({transfer:true});
+          if(revision!==incidentRevision||savedOrigin!==origin||km!==Number(radius.value)||incidentType!==type.value||company!==name){
+            message.textContent='ข้อมูลจุดเกิดเหตุเปลี่ยนแล้ว กรุณาเปิดรายงานอีกครั้ง';
+            openingFireReport=false;
+            return;
+          }
+          if(!saveIncident()){openingFireReport=false;return;}
+          if(image)sessionStorage.setItem(fireMapTransferKey,JSON.stringify({
+            lat:origin.latitude,lng:origin.longitude,km,incidentType,company,image
+          }));
+        }
+      }catch(error){
+        console.warn('Analysis map transfer unavailable; restoring the saved map view instead',error);
+      }
       const url=new URL(location.href);
       url.searchParams.set('workspace','report');
       url.searchParams.delete('emptyReport');
@@ -1381,20 +1414,30 @@
       basemapSelect.onchange=()=>{map.basemap=basemapSelect.value;applyReferencePalette(map);};
       applyReferencePalette(map);
     }
+    let useTransferredFireMap=document.documentElement.classList.contains('fire-document-page');
     window.ieatCoverageMapNavigate=async data=>{
       if(!view.ready)return;
       if(data.type==='dss:report-map-pan'&&[data.dx,data.dy].every(Number.isFinite)){
         const center=view.toMap({x:view.width*(.5-data.dx),y:view.height*(.5-data.dy)});
-        if(center)await view.goTo({target:center,zoom:view.zoom},{animate:false});
+        if(center){
+          useTransferredFireMap=false;
+          await view.goTo({target:center,zoom:view.zoom},{animate:false});
+        }
       }else if(data.type==='dss:report-map-zoom'&&[1,-1].includes(data.delta)){
         const x=Number.isFinite(data.x)?Math.max(0,Math.min(1,data.x)):.5,y=Number.isFinite(data.y)?Math.max(0,Math.min(1,data.y)):.5;
         const target=view.toMap({x:view.width*x,y:view.height*y});
-        if(target)await view.goTo({target,zoom:view.zoom+data.delta},{animate:false});
+        if(target){
+          useTransferredFireMap=false;
+          await view.goTo({target,zoom:view.zoom+data.delta},{animate:false});
+        }
       }
     };
     let previewTimer,previewSequence=0,previewBusy=false,previewAgain=false;
-    window.ieatCaptureCoverageMap=async()=>{
-      if(!view.ready||!window.ieatCoverageReport)return null;
+    window.ieatCaptureCoverageMap=async({transfer=false}={})=>{
+      const context=window.ieatCoverageReport;
+      const transferred=useTransferredFireMap&&transferredFireMap(context);
+      if(transferred)return transferred;
+      if(!view.ready||(!context&&!transfer)||!view.width||!view.height)return null;
       await view.when();
       if(!view.stationary||view.updating)await new Promise((resolve,reject)=>{
         let timer;
@@ -1408,7 +1451,7 @@
       // Capture the entire source viewport so every visible feature is retained.
       const width=1972,height=Math.max(1,Math.round(width*view.height/view.width));
       const callout=await window.ieatCoverageCalloutSnapshot?.();
-      const shot=await view.takeScreenshot({format:'png',width,height});
+      const shot=await view.takeScreenshot({format:transfer?'jpg':'png',quality:90,width,height});
       if(!callout)return shot.dataUrl;
       // ArcGIS screenshots omit HTML overlays. Paint the same label and leader onto the exported map.
       const image=new Image();image.src=shot.dataUrl;await image.decode();
@@ -1435,7 +1478,7 @@
       ctx.scale(textScale,textScale);
       ctx.textBaseline='middle';
       ctx.fillText(callout.text,0,0);
-      ctx.restore();return canvas.toDataURL('image/png');
+      ctx.restore();return transfer?canvas.toDataURL('image/jpeg',.9):canvas.toDataURL('image/png');
     };
     window.ieatSyncCoverageMapPreview=async()=>{
       const context=window.ieatCoverageReport;
