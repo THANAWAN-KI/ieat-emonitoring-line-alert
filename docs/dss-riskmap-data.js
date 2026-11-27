@@ -347,7 +347,7 @@
   if(fireSources)$('fireBufferFilter').addEventListener('input',()=>paintBuffer());
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
   const direction=deg=>compass[Math.round(deg/45)%8];
-  const analysisWindArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 5 37 50 21 39 5 50Z" fill="#2185d5" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const analysisWindArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 5 37 50 21 39 5 50Z" fill="#000000" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function showWind(weather){
     if(!windBox)return;
     const arrow=windBox.querySelector('svg'), reading=windBox.querySelector('strong'), detail=windBox.querySelector('small');
