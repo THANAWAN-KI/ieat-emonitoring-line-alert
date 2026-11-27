@@ -67,11 +67,9 @@
 };
   function badge({id,color}){
     if(supportGlyphs[id]){
-      const ink=['hydrant','police','community','school'].includes(id)?'#142631':'#fff';
       return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
         '<rect x="2" y="2" width="32" height="32" rx="10" fill="'+color+'" stroke="#fff" stroke-width="2"/>'+
-        '<path transform="translate(4 4) scale(.875)" d="'+supportGlyphs[id]+'" fill="none" stroke="'+ink+
-        '" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        '<path transform="translate(4 4) scale(.875)" d="'+supportGlyphs[id]+'" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     const [top,bottom]=pinColors[id]||[color,color];
     if(['aqm','wqm','cem'].includes(id)){
