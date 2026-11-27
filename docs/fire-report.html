@@ -710,7 +710,7 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261126-fire-long-wind');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261127-fire-cream-report');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -4503,6 +4503,16 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #fireExternalLi
 }
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #fireExternalList .fire-result-row > small{white-space:nowrap;text-align:end}
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #fireExternalStatus .fire-source-status{display:block;font-size:12px!important;color:#52616B!important}
+</style>
+<style id="fire-document-cream-theme">
+html.fire-document-page .fire-report-header{background:#F7F6D5;border-color:#A7A8AA;color:#1E1E1E}
+html.fire-document-page .fire-report-header h1,html.fire-document-page #fireReportStatus{color:#1E1E1E}
+html.fire-document-page body #riskmapReportPanel #emergencyReportPage .report-download-toolbar #dashboardDownloadImage:enabled,
+html.fire-document-page body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy:enabled{
+  background:#F7F6D5!important;border-color:#A7A8AA!important;color:#1E1E1E!important;-webkit-text-fill-color:#1E1E1E!important;
+}
+html.fire-document-page body #riskmapReportPanel #emergencyReportPage .report-download-toolbar #dashboardDownloadImage:hover:enabled,
+html.fire-document-page body #riskMapLinePanel#riskMapLinePanel #riskMapLineCopy:hover:enabled{background:#FFF9D8!important}
 </style>
 <script id="riskmap-ready">
 (()=>{
