@@ -15,6 +15,9 @@ iframe{display:block;width:100%;border:0}
 #report-state{margin:0 0 10px}
 #report{height:100vh;height:100dvh}
 #report[hidden]{display:none}
+#report-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+#report-actions button{padding:8px 14px;border:1px solid #24465a;border-radius:6px;background:#24465a;color:#fff;font:inherit;cursor:pointer}
+#report-actions button:disabled{opacity:.55;cursor:default}
 </style>
 </head>
 <body>
@@ -23,6 +26,11 @@ iframe{display:block;width:100%;border:0}
   <section id="report-section" aria-labelledby="report-title">
     <h1 id="report-title" tabindex="-1">รายงานเหตุไฟไหม้</h1>
     <p id="report-state" role="status">ระบุจุดเกิดเหตุด้านบน แล้วกด «ไปหน้ารายงาน»</p>
+    <div id="report-actions" aria-label="เครื่องมือรายงาน">
+      <button id="update" type="button">อัปเดตรายงาน</button>
+      <button id="export" type="button" disabled>ดาวน์โหลด PNG</button>
+      <button id="copy" type="button" disabled>คัดลอกข้อความ LINE</button>
+    </div>
     <iframe id="report" title="รายงานข้อมูลสนับสนุนการรับมือเหตุไฟไหม้" hidden></iframe>
   </section>
 </main>
@@ -31,7 +39,40 @@ const analysis=document.getElementById('analysis');
 const report=document.getElementById('report');
 const state=document.getElementById('report-state');
 const title=document.getElementById('report-title');
+const update=document.getElementById('update'),exportButton=document.getElementById('export'),copy=document.getElementById('copy');
+const childDocument=()=>report.contentDocument;
+let reportObserver, updateTimer;
+function syncActions(){
+  const doc=childDocument();
+  const download=doc?.getElementById('dashboardDownloadImage');
+  const line=doc?.getElementById('riskMapLineText');
+  exportButton.disabled=report.hidden||!download||download.disabled;
+  copy.disabled=report.hidden||!line?.value.trim()||doc.getElementById('riskMapLineCopy')?.disabled;
+}
+update.onclick=()=>{
+  const button=Array.from(analysis.contentDocument?.querySelectorAll('.report-search-actions button')||[])
+    .find(item=>item.textContent.trim()==='ไปหน้ารายงาน');
+  if(!button||button.disabled){state.textContent='รอให้หน้าวิเคราะห์โหลดก่อนอัปเดตรายงาน';return;}
+  state.textContent='กำลังอ่านข้อมูลล่าสุดจากหน้าวิเคราะห์…';
+  clearTimeout(updateTimer);
+  const requestDocument=analysis.contentDocument;
+  updateTimer=setTimeout(()=>{
+    const message=requestDocument.getElementById('coverageIncidentStatus')?.textContent.trim();
+    if(message)state.textContent=message;
+  },1500);
+  button.click();
+};
+exportButton.onclick=()=>{childDocument()?.getElementById('dashboardDownloadImage')?.click();syncActions();};
+copy.onclick=async()=>{
+  const text=childDocument()?.getElementById('riskMapLineText')?.value.trim();
+  if(!text)return;
+  try{await navigator.clipboard.writeText(text);state.textContent='คัดลอกข้อความ LINE แล้ว';}
+  catch{state.textContent='คัดลอกอัตโนมัติไม่ได้ กรุณาเลือกข้อความ LINE ในรายงาน';}
+};
 function openReport(empty){
+  clearTimeout(updateTimer);
+  reportObserver?.disconnect();
+  exportButton.disabled=true;copy.disabled=true;
   const url=new URL('./fire-report.html',location.href);
   url.search=new URLSearchParams({view:'data',hazard:'fire',workspace:'report',v:String(Date.now())});
   if(empty)url.searchParams.set('emptyReport','1');
@@ -57,7 +98,15 @@ analysis.addEventListener('load',()=>{
 });
 report.addEventListener('load',()=>{
   if(report.hidden)return;
-  state.textContent='';
+  const doc=childDocument();
+  const reportStatus=doc?.getElementById('fireReportStatus');
+  if(!reportStatus){state.textContent='โหลดหน้ารายงานไม่ได้';return;}
+  const updateStatus=()=>{state.textContent=reportStatus.textContent;syncActions();};
+  reportObserver?.disconnect();
+  reportObserver=new MutationObserver(updateStatus);
+  reportObserver.observe(reportStatus,{childList:true,characterData:true,subtree:true});
+  reportObserver.observe(doc.body,{attributes:true,attributeFilter:['disabled'],subtree:true});
+  updateStatus();
   const back=report.contentDocument?.getElementById('fireReturnToAnalysis');
   back?.addEventListener('click',event=>{
     event.preventDefault();
