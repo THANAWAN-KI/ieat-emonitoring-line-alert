@@ -3140,8 +3140,11 @@ html body #report.dss-field-export #dssFieldBrief .fb-data-box{font-size:14px!im
    summary.append(el('div','สารที่ได้รับแจ้ง: '+(state.leakChemical||'ยังไม่ยืนยันชนิดสาร')+' · ปริมาณที่แจ้ง: '+(state.leakQuantity||'ยังไม่ยืนยัน')));
   }
   text('fbMapCaption','พิกัด '+Number(state.lat).toFixed(5)+', '+Number(state.lng).toFixed(5)+' · รัศมีค้นหาข้อมูล '+getBufferRadii().join(' / ')+' กม. (ไม่ใช่เขตปลอดภัย)');
-  const weather=document.getElementById('fbWeather');weather.replaceChildren(el('strong','สภาพอากาศบริเวณเกิดเหตุ'));
-  weather.append(el('div','ลม '+(state.windSpeed||'—')+' กม./ชม. · พัดจาก '+(state.windDir||'—'),'fb-wind'),el('div',(state.weather||'—')+' · '+(state.temp||'—')+' °C · ความชื้น '+(state.humidity||'—')+'%'),el('div',state.weatherTime&&state.weatherFetchedTime?'ดึงข้อมูลล่าสุด '+state.weatherFetchedTime:'ยังไม่มีเวลาที่ดึงข้อมูลอากาศ','fb-muted'),el('div','Open-Meteo · ข้อมูลประมาณการจากแบบจำลอง','fb-muted'));
+  const weather=document.getElementById('fbWeather');weather.replaceChildren(el('strong','สภาพอากาศ'));
+  const wind=el('div',undefined,'report-weather-wind');wind.append(el('div','ทิศทางลม','report-weather-wind-label'));
+  const metrics=el('dl',undefined,'report-weather-metrics');
+  [['ลักษณะอากาศ',state.weather||'—'],['อุณหภูมิ',(state.temp||'—')+' °C'],['ความเร็วลม',(state.windSpeed||'—')+' กม./ชม.']].forEach(([label,value])=>{const cell=el('div');cell.append(el('dt',label),el('dd',value));metrics.append(cell)});
+  weather.append(wind,metrics,el('div',state.weatherTime&&state.weatherFetchedTime?'ข้อมูล ณ '+state.weatherFetchedTime:'ยังไม่มีเวลาที่ดึงข้อมูลอากาศ','report-weather-updated'),el('div','ค่าประมาณจากแบบจำลอง Open-Meteo','fb-muted'));
   const support=document.getElementById('fbSupport');support.replaceChildren();
   [['fire','ดับเพลิง'],['hospital','โรงพยาบาล'],['hydrant','หัวจ่ายน้ำ'],['police','ตำรวจ'],['community','ชุมชน'],['cctv','CCTV']].forEach(([key,label])=>{
    const row=el('tr'),value=el('td');value.append(el('span',short(state[key+'Name']||'ยังไม่มีข้อมูล',80)),el('span',state[key+'Distance']||'—','fb-distance'));row.append(el('th',label),value);row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-label','ดูตำแหน่ง '+label);const zoom=()=>window.dssZoomSupport?.(key);row.onclick=zoom;row.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();zoom()}};support.append(row);
@@ -3635,18 +3638,7 @@ const slot=document.getElementById('fieldBriefMap'),weather=document.getElementB
 const fireReport=document.documentElement.dataset.reportTheme==='fire-purple';
 if(fireReport){
   slot.before(weather);
-  const legend=document.createElement('div');legend.className='fire-report-map-key';
-  legend.setAttribute('role','group');legend.setAttribute('aria-label','คำอธิบายสัญลักษณ์แผนที่');
-  const heading=document.createElement('h3');heading.textContent='คำอธิบายสัญลักษณ์';
-  legend.append(heading);
-  for(const [type,label] of [['incident','จุดเกิดเหตุ'],['radius','วงรัศมีค้นหา'],['wind','แนวทิศลม']]){
-    const entry=document.createElement('span'),symbol=document.createElement('i');
-    symbol.className='key-'+type;symbol.setAttribute('aria-hidden','true');
-    entry.append(symbol,label);legend.append(entry);
-  }
-  const source=document.createElement('p');source.textContent='ที่มา: แผนที่วิเคราะห์เหตุไฟไหม้ GIS IEAT EMCC';legend.append(source);
-  slot.after(legend);
-  for(const [name,value] of Object.entries({
+   for(const [name,value] of Object.entries({
     position:'static',inset:'auto',width:'100%','max-width':'none','max-height':'none',
     overflow:'visible',margin:'0 0 8px',padding:'9px 12px','box-shadow':'none'
   }))weather.style.setProperty(name,value,'important');
@@ -3670,8 +3662,8 @@ const nearby=document.createElement('section');nearby.id='reportNearbySupport';s
 function fitImage(){if(!image.naturalWidth||!image.naturalHeight)return;const ratio=image.naturalWidth/image.naturalHeight;slot.style.setProperty('--report-map-aspect',String(ratio));slot.dataset.reportMapRatio=String(1/ratio);if(!window.dssFitFirstReportPage)slot.style.removeProperty('height')}
 image.addEventListener('load',fitImage);
 function paint(){
- const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่และสภาพอากาศ';
- if(weather.parentElement!==slot)slot.append(weather);
+ const title=document.querySelectorAll('#dssFieldBrief>.fb-section>h2')[1];if(title)title.textContent='2. แผนที่จุดเกิดเหตุและพื้นที่โดยรอบ · รัศมี '+(Number(state.bufferKm)||5)+' กม.';
+ if(weather.parentElement!==slot.parentElement)slot.after(weather);
  weather.querySelector('.report-weather-arrow')?.remove();
  weather.querySelector('.report-wind-direction')?.remove();
  const speed=Number(state.windSpeed),deg=Number(state.windDeg);
@@ -3711,25 +3703,18 @@ function showSupport(data){
  const table=document.createElement('table');table.className='grouped-support-table support-reference-table';const body=document.createElement('tbody');
  categories.forEach(([key,label],index)=>{
  const rows=groups.get(key);if(!rows?.length)return;
- const tr=document.createElement('tr'),type=document.createElement('th'),details=document.createElement('td');type.scope='row';
+ const tr=document.createElement('tr'),type=document.createElement('th'),details=document.createElement('td'),distanceCell=document.createElement('td');type.scope='row';
  const badge=document.createElement('span'),category=document.createElement('span');badge.className='support-category-number';badge.textContent=index+1;category.textContent=label;type.append(badge,category);
- rows.slice(0,1).forEach(row=>{
- const entry=document.createElement('div');entry.className='support-place-details';
- const nameLabel=document.createElement('span');nameLabel.className='support-detail-label';nameLabel.textContent='ชื่อสถานที่';
+ const row=rows[0];
  const button=document.createElement('button');button.type='button';button.textContent=row.name;button.title=row.address||row.name;
- button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);
- const distanceLabel=document.createElement('span');distanceLabel.className='support-detail-label';distanceLabel.textContent='ระยะเส้นตรง';
+ button.onclick=()=>parent.postMessage({type:'dss:support',item:{lat:row.lat,lng:row.lon,name:row.name,distance:row.distance/1000,phone:row.phone}},location.origin);details.append(button);
  const distance=document.createElement('span');distance.textContent=row.distance<1000?Math.round(row.distance)+' เมตร':(row.distance/1000).toFixed(2)+' กม.';
- distance.className='support-place-distance';distance.setAttribute('aria-label','ระยะเส้นตรง '+distance.textContent);entry.append(button,distance);details.append(entry);
- });
+ distance.className='support-place-distance';distance.setAttribute('aria-label','ระยะเส้นตรง '+distance.textContent);distanceCell.append(distance);
  if(rows.length>1){const more=document.createElement('span');more.className='support-additional-count';more.textContent='มีจุดอื่นในรัศมีอีก '+(rows.length-1)+' แห่ง';details.append(more);}
- tr.append(type,details);body.append(tr);
+ tr.append(type,details,distanceCell);body.append(tr);
  });
  if(!body.children.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=2;td.textContent=data.unselected?'ค้นหาโรงงานเพื่อแสดงข้อมูลสนับสนุนใกล้จุดเกิดเหตุ':data.loading?'กำลังค้นหาข้อมูลสนับสนุน…':data.failures?.length?'ยังยืนยันรายการไม่ได้ เนื่องจากบางแหล่งข้อมูลเชื่อมต่อไม่สำเร็จ':'ไม่พบจุดสนับสนุนในรัศมี '+data.radius+' กม. จากข้อมูลที่โหลดสำเร็จ';tr.append(td);body.append(tr)}
  table.append(body);nearby.append(table);
- const allButton=document.createElement('button');allButton.type='button';allButton.className='support-all-button';allButton.textContent='ดูข้อมูลสนับสนุนทั้งหมด';allButton.disabled=!!data.unselected||!!data.loading;
- allButton.setAttribute('data-export-exclude','');allButton.onclick=()=>window.dssOpenAllSupport?.();nearby.append(allButton);
- const appendixNote=document.createElement('p');appendixNote.className='support-appendix-reference';appendixNote.textContent='รายชื่อและเบอร์ติดต่อทั้งหมดอยู่ในภาคผนวกข้อมูลสนับสนุน';nearby.append(appendixNote);
 
  if(data.failures?.some(id=>allowed.has(id))){const p=document.createElement('p');p.className='report-nearby-note';p.textContent='บางกลุ่มเชื่อมต่อข้อมูลไม่สำเร็จ';nearby.append(p)}
 }
@@ -4448,6 +4433,71 @@ html[data-report-theme="fire-purple"] #fieldBriefMap>.report-map-zoom-controls{b
 .fire-report-map-key .key-incident{border-radius:50%;background:#ff5353}
 .fire-report-map-key .key-radius{border-radius:50%;border:1px solid #1e1e1e}
 .fire-report-map-key .key-wind{border:1px dashed #71539b;background:#70559729}
+</style>
+
+<style id="first-page-reference-layout-20261127">
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather{
+ position:static!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(0,2.8fr)!important;
+ width:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;
+ margin:10px 0 0!important;padding:10px 12px!important;border:1px solid var(--fire-report-grid,#d6d6d2)!important;
+ border-radius:0!important;background:#fff!important;box-shadow:none!important;gap:8px!important;box-sizing:border-box!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather>strong{
+ grid-column:1/-1!important;text-align:left!important;padding:5px 8px!important;margin:0!important;
+ background:#fff!important;border:1px solid var(--fire-report-grid,#b9b9b9)!important;color:#111!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-wind{
+ grid-column:1/-1!important;display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;align-items:center!important;
+ border:0!important;background:#fff!important;gap:0 8px!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-wind-label{
+ grid-column:2!important;background:transparent!important;border:0!important;padding:0!important;text-align:left!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-arrow{
+ grid-column:1!important;grid-row:1 / 3!important;width:32px!important;height:32px!important;margin:0!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-wind-direction{
+ grid-column:2!important;margin:0!important;padding:0!important;text-align:left!important;font-size:13px!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-metrics{
+ grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:0!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-metrics>div{
+ display:block!important;text-align:center!important;border:0!important;background:#fff!important;padding:3px 8px!important;min-width:0!important;
+}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-metrics>div+div{border-left:1px solid var(--fire-report-grid,#d6d6d2)!important}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-metrics :is(dt,dd){margin:0!important;padding:0!important;border:0!important;background:transparent!important;text-align:center!important;line-height:1.4!important}
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather .report-weather-updated,
+html[data-report-theme="fire-purple"] body #report #dssFieldBrief #fbWeather>.fb-muted{grid-column:1/-1!important;font-size:10px!important;margin:0!important}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport{margin:14px 0 0!important;}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport>h2{
+ margin:0 0 8px!important;padding:0!important;border:0!important;background:transparent!important;
+ color:#111!important;-webkit-text-fill-color:#111!important;font-size:17px!important;font-weight:700!important;
+}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-reference-table{
+ width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;font-size:14px!important;line-height:1.5!important;
+}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-reference-table :is(th,td){
+ border:1px solid #d7d7d7!important;padding:8px 10px!important;vertical-align:top!important;color:#333!important;
+}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-reference-table tbody th{
+ width:24%!important;background:#fff8d8!important;color:#111!important;font-weight:700!important;text-align:left!important;white-space:normal!important;
+}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-reference-table td:nth-child(2){width:58%!important;text-align:left!important;background:#fff!important;}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-reference-table td:nth-child(3){width:18%!important;text-align:right!important;white-space:nowrap!important;background:#fff!important;}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-category-number{
+ display:inline!important;width:auto!important;height:auto!important;margin:0 10px 0 0!important;padding:0!important;
+ background:transparent!important;color:#111!important;-webkit-text-fill-color:#111!important;border:0!important;border-radius:0!important;
+ font:700 16px/1.5 "Sarabun",sans-serif!important;vertical-align:baseline!important;
+}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-reference-table button{
+ display:block!important;width:100%!important;padding:0!important;text-align:left!important;color:#454545!important;
+ background:transparent!important;border:0!important;font:inherit!important;line-height:1.5!important;
+}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-additional-count{display:block!important;margin-top:4px!important;color:#454545!important;font-size:13px!important;}
+html[data-report-theme="fire-purple"] body #report #reportNearbySupport .support-place-distance{font-variant-numeric:tabular-nums!important;white-space:nowrap!important;}
+html[data-report-theme="fire-purple"] body #report .fire-report-map-key{display:none!important;}
+html body #report.dss-field-export #reportNearbySupport .support-reference-table :is(th,td){padding:8px 9px!important;font-size:13px!important;}
 </style>
 </body></html>
 
