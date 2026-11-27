@@ -192,10 +192,9 @@
     if(!measure)return;
     measure.font='700 12px Sarabun, sans-serif';
     for(const {screen,graphic,row} of markers){
-      if(row!==selectedBufferRow&&scale>Math.max(fireLabelScale(row.category.id),24000))continue;
       const text=row.name.length>26?row.name.slice(0,25)+'…':row.name;
       const width=Math.ceil(measure.measureText(text).width)+12;
-      const offsets=[[0,27],[0,-35],[25+width/2,0],[-25-width/2,0]];
+      const offsets=[[0,27],[0,-35],[25+width/2,0],[-25-width/2,0],[22,28],[-22,28],[22,-35],[-22,-35]];
       for(const [dx,dy] of offsets){
         const x=screen.x+dx,y=screen.y+dy;
         const box={left:x-width/2,right:x+width/2,top:y-10,bottom:y+10};
@@ -1226,7 +1225,7 @@
       zones.opacity=.42;
     }
     const parcelGroup=group('พื้นที่และแปลงผู้ประกอบการ กนอ.',[zones,businesses,eppZones]);
-    parcelGroup.visible=!fireView||!!fireMapIcons;
+    parcelGroup.visible=!fireView&&!dedicatedFireAnalysis;
     if(fireMapIcons){
       applyFirePointLabels(center,'estate','$feature["สำนักงานนิคมฯ"]');
     }
