@@ -90,7 +90,7 @@
   const fireSources=window.ieatFireAnalysisSources;
   const fireReportPage=document.documentElement.classList.contains('fire-document-page');
   const fireAnalysis=fireSources&&!fireReportPage;
-  const externalLayer=fireSources&&new GraphicsLayer({title:'สถานที่ใกล้เคียง · OpenStreetMap'});
+  const externalLayer=fireSources&&new GraphicsLayer({title:'จุดข้อมูลในรัศมี',visible:!fireAnalysis});
   const windLayer=fireSources&&new GraphicsLayer({title:'ลูกศรทิศทางลม',listMode:'hide'});
   if(fireSources){map.add(externalLayer);map.add(windLayer);map.reorder(pinLayer,map.layers.length-1);}
   let externalRequest, windRequest, windKey, windWeather;
@@ -122,7 +122,7 @@
     bufferClusters.clear();
     if(!externalLayer.visible)return;
     const groups=[];
-    const gap=view.scale>28000?60:43;
+    const gap=view.scale>28000?76:54;
     for(const [graphic,row] of recordByGraphic){
       graphic.visible=row===selectedBufferRow;
       if(graphic.visible||view.scale>firePointScale(row.category.id))continue;
@@ -143,8 +143,8 @@
         }
         continue;
       }
-      const cluster=new Graphic({geometry:graphic.geometry,symbol:{type:'simple-marker',size:count>99?32:28,
-        color:'#254f63',outline:{color:'#fff',width:2.5}},
+      const cluster=new Graphic({geometry:graphic.geometry,symbol:{type:'simple-marker',size:count>99?26:22,
+        color:'#254f63',outline:{color:'#fff',width:1.5}},
         popupTemplate:{title:number(count)+' จุดใกล้กัน',content:()=>{
           const box=el('div'),list=el('ul');
           for(const member of members.slice(0,12)){
@@ -191,12 +191,13 @@
   });
   async function focusBufferRow(row,graphic){
     selectBufferRecord(row);
+    if(fireAnalysis)externalLayer.visible=true;
     updateBufferVisibility();
     await view.goTo({target:graphic.geometry,zoom:Math.max(view.zoom,16)},{animate:false}).catch(()=>{});
     if(matchMedia('(max-width:850px)').matches)$('coverageMap').scrollIntoView({block:'nearest'});
     view.openPopup({features:[graphic],location:graphic.geometry});
   }
-  function paintBuffer(){
+  function paintBuffer(showOnMap=false){
     externalLayer.removeAll();bufferClusters.clear();
     selectBufferRecord(null);bufferButtons.clear();
     const list=$('fireExternalList'), fragment=document.createDocumentFragment();
@@ -220,6 +221,7 @@
     }
     recordByGraphic=new Map(Array.from(graphicsByRow,([row,graphic])=>[graphic,row]));
     externalLayer.addMany([...graphicsByRow.values()]);
+    if(fireAnalysis)externalLayer.visible=showOnMap&&Boolean(activeCategory||term);
     updateBufferVisibility();
     const limit=50;
     for(const row of visible.slice(0,limit)){
@@ -232,7 +234,7 @@
       fragment.append(button);
     }
     if(!visible.length)fragment.append(el('p','ไม่มีผลตรงกับตัวกรอง'));
-    if(visible.length>limit)fragment.append(el('p','รายการแสดง '+limit+' อันดับแรก · หมุดบนแผนที่ '+number(visible.length)+' จุด'));
+    if(visible.length>limit)fragment.append(el('p','รายการแสดง '+limit+' อันดับแรก จาก '+number(visible.length)+' จุด'));
     list.replaceChildren(fragment);
   }
   function renderCategories(){
@@ -247,7 +249,7 @@
       button.type='button';button.setAttribute('aria-pressed',String(activeCategory===id));
       if(category){const icon=el('img');icon.src=iconUrl(category);icon.alt='';icon.width=22;icon.height=22;button.append(icon);}
       button.append(el('span',(category?.label||'ทั้งหมด')+' '+number(count)));
-      button.onclick=()=>{activeCategory=id;renderCategories();paintBuffer();};
+      button.onclick=()=>{activeCategory=id;renderCategories();paintBuffer(true);};
       host.append(button);
     }
   }
@@ -288,6 +290,7 @@
     const circle=draw(), point=origin, km=Number(radius.value);
     panel.hidden=false;
     bufferRecords=[];activeCategory='';
+    if(fireAnalysis)externalLayer.visible=false;
     $('fireBufferCategories').replaceChildren();list.replaceChildren();
     status.textContent='กำลังค้นหาข้อมูล กนอ. และแหล่งภายนอก ในรัศมี '+km+' กม.…';
     const signal=AbortSignal.any([request.signal,AbortSignal.timeout(35000)]);
@@ -318,7 +321,7 @@
     status.textContent='รัศมี '+km+' กม. · พบ '+number(bufferRecords.length)+' รายการ'+
       (failures.length?' · โหลดไม่ได้: '+failures.join(', '):'');
   }
-  if(fireSources)$('fireBufferFilter').addEventListener('input',paintBuffer);
+  if(fireSources)$('fireBufferFilter').addEventListener('input',()=>paintBuffer(true));
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
   const direction=deg=>compass[Math.round(deg/45)%8];
   function showWind(weather){
@@ -445,9 +448,9 @@
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     if(fireAnalysis){
       const zones=[
-        {fraction:1,fill:[39,153,85,.13],outline:'#218247'},
-        {fraction:2/3,fill:[255,151,44,.17],outline:'#dc741e'},
-        {fraction:1/3,fill:[245,43,52,.18],outline:'#db2034'}
+        {fraction:1,fill:[39,153,85,.045],outline:'#218247'},
+        {fraction:2/3,fill:[255,151,44,.065],outline:'#b9560d'},
+        {fraction:1/3,fill:[245,43,52,.08],outline:'#c72036'}
       ];
       const boundaries=zones.map(({fraction})=>fraction===1?circle:new Circle({
         center:origin,radius:Number(radius.value)*fraction,radiusUnit:'kilometers',geodesic:true
@@ -457,7 +460,9 @@
         const geometry=inner?{type:'polygon',spatialReference:outer.spatialReference,
           rings:[...outer.rings,...inner.rings.map(ring=>ring.slice().reverse())]}:outer;
         graphics.add(new Graphic({geometry,symbol:{type:'simple-fill',color:fill,
-          outline:{color:outline,width:2,style:'short-dash'}}}));
+          outline:{style:'none'}}}));
+        graphics.add(new Graphic({geometry:outer,symbol:{type:'simple-fill',style:'none',
+          outline:{color:outline,width:1.5,style:'solid'}}}));
       });
     }else{
       graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:fireView?[37,79,194,.10]:[184,46,52,.025],
@@ -942,13 +947,14 @@
       popupEnabled:fields.length>0,
       ...(fields.length?{popupTemplate:{title:'{'+fields[0]+'}',content:[{type:'fields',fieldInfos:fields.map(fieldName=>({fieldName}))}]}}:{})
     });
+    const dedicatedFireAnalysis=document.documentElement.classList.contains('fire-analysis-page');
     const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ'],symbol:pin});
-    const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',{visible:true,opacity:.55,minScale:1500000});
+    const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',{visible:!dedicatedFireAnalysis,opacity:.55,minScale:1500000});
     const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',{minScale:350000,symbol:polygon([36,132,90,.12],'#7b9a83')});
     const eppPath='e_PP/FeatureServer/0';
     const zoneField='เขตประกอบการ';
     const eppZones=layer(eppPath,'เขตประกอบการ e-PP',{
-      visible:true,minScale:350000,fields:[zoneField,'นิคมอุตสาหกรรม'],
+      visible:!dedicatedFireAnalysis,minScale:350000,fields:[zoneField,'นิคมอุตสาหกรรม'],
       symbol:polygon([143,150,160,.2],'#8f96a0')
     });
     eppZones.when(async()=>{
@@ -971,7 +977,7 @@
     }).catch(()=>{});
     [zones,businesses,eppZones].forEach(item=>{item.labelsVisible=false;});
     const risks=riskFields.map((f,i)=>layer(eppPath,f.label,{
-      visible:!fireView||document.documentElement.classList.contains('fire-analysis-page'),minScale:fireView?35000:1000000,
+      visible:!fireView,minScale:fireView?35000:1000000,
       symbol:{type:'simple-fill',color:[0,0,0,0],outline:{color:f.color,width:2.2-i*.45}},
       definitionExpression:f.field+" = 'เข้าข่าย'",fields:['ชื่อบริษัทภาษาไทย','นิคมอุตสาหกรรม',...riskNames]
     }));
@@ -996,7 +1002,7 @@
         labelExpressionInfo:{expression},symbol:{...fireLabel(category.color),xoffset:12,yoffset:13}}];
     }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
-      visible:!!fireMapIcons||['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
+      visible:!dedicatedFireAnalysis&&['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
     }));
     const supportColors={fire:'#cc5257',hospital:'#cc5257',hydrant:'#24845a',police:'#24845a',community:'#24845a',communityRisk:'#24845a',waterWatch:'#b88b20',school:'#b88b20',cctv:'#24845a'};
@@ -1044,7 +1050,7 @@
       }).catch(()=>{});
     });
     const publicBase='https://gistdaportal.gistda.or.th/arcgis/rest/services/Hosted/Identity_gdb/FeatureServer/';
-    const supplemental=[[0,'จุดตรวจวัดน้ำ'],[1,'ระบบบำบัดน้ำเสีย'],[2,'สถานีตรวจวัดคุณภาพอากาศ'],[3,'สถานที่รวบรวมและจัดการขยะ']].map(([id,title])=>layer('',title,{url:publicBase+id,visible:!!fireMapIcons,minScale:fireMapIcons?firePointScale(supplementalKinds[id]):0}));
+    const supplemental=[[0,'จุดตรวจวัดน้ำ'],[1,'ระบบบำบัดน้ำเสีย'],[2,'สถานีตรวจวัดคุณภาพอากาศ'],[3,'สถานที่รวบรวมและจัดการขยะ']].map(([id,title])=>layer('',title,{url:publicBase+id,visible:false,minScale:fireMapIcons?firePointScale(supplementalKinds[id]):0}));
     const extraSymbols=[
       supportSymbols.waterWatch,
       badge('<path d="M5 8h14v9H5Zm0 3h14M8 5v3m8-3v3M8 14h2m4 0h2"/>','#168f9a'),
@@ -1124,7 +1130,7 @@
       url:URL.createObjectURL(new Blob([JSON.stringify({type:'FeatureCollection',features:dataset.features})],{type:'application/json'})),
       title:'สถานี e-Monitoring',
       copyright:'การนิคมอุตสาหกรรมแห่งประเทศไทย',
-      visible:true,
+      visible:!dedicatedFireAnalysis,
       minScale:fireMapIcons?firePointScale('environment'):0,
       renderer:{type:'simple',symbol:firePointSymbol('environment',26)||monitoringSymbol},
       labelingInfo:[{minScale:fireMapIcons?28000:150000,labelPlacement:fireMapIcons?'center-right':'above-center',
@@ -1151,7 +1157,7 @@
     if(fireMapIcons&&trafficServiceUrl)window.require(['esri/layers/MapImageLayer'],MapImageLayer=>{
       const traffic=new MapImageLayer({
         url:trafficServiceUrl,
-        title:'สภาพจราจร · Esri',minScale:130000,refreshInterval:5
+        title:'สภาพจราจร · Esri',visible:!dedicatedFireAnalysis,minScale:130000,refreshInterval:5
       });
       traffic.load().then(()=>map.add(traffic)).catch(()=>{
         const note=el('p','สภาพจราจรยังไม่พร้อม · ต้องเชื่อมต่อบริการจราจร Esri ที่มีสิทธิ์เข้าถึง');
