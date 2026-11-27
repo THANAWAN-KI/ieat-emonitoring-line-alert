@@ -90,6 +90,7 @@
   const fireSources=window.ieatFireAnalysisSources;
   const fireReportPage=document.documentElement.classList.contains('fire-document-page');
   const fireAnalysis=fireSources&&!fireReportPage;
+  const incidentMarkerSize=fireAnalysis?76:40;
   const externalLayer=fireSources&&new GraphicsLayer({title:'จุดข้อมูลในรัศมี',visible:!fireAnalysis});
   const windLayer=fireSources&&new GraphicsLayer({title:'ลูกศรทิศทางลม',listMode:'hide'});
   if(fireSources){map.add(externalLayer);map.add(windLayer);map.reorder(pinLayer,map.layers.length-1);}
@@ -122,17 +123,18 @@
     bufferClusters.clear();
     if(!externalLayer.visible)return;
     const groups=[];
+    const incidentScreen=origin&&view.toScreen(origin);
     const gap=view.scale>28000?76:54;
     for(const [graphic,row] of recordByGraphic){
       graphic.visible=row===selectedBufferRow;
       if(graphic.visible||view.scale>firePointScale(row.category.id))continue;
       const screen=view.toScreen(graphic.geometry);
       if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height)continue;
+      if(incidentScreen&&Math.hypot(screen.x-incidentScreen.x,screen.y-incidentScreen.y+incidentMarkerSize*.4)<incidentMarkerSize*.53)continue;
       const group=groups.find(item=>Math.hypot(item.screen.x-screen.x,item.screen.y-screen.y)<gap);
       if(group)group.members.push({graphic,row});
       else groups.push({screen,members:[{graphic,row}]});
     }
-    const incidentScreen=origin&&view.toScreen(origin);
     for(const {screen,members} of groups){
       const {graphic,row}=members[0], count=members.length;
       if(count===1){
@@ -380,14 +382,14 @@
     const width=surface.clientWidth,height=surface.clientHeight;
     layer.hidden=!point||point.x<0||point.y<0||point.x>width||point.y>height||width<80||height<80;
     if(layer.hidden)return;
-    label.textContent=fireSources&&name&&!name.startsWith('จุดเกิดเหตุ')?'จุดเกิดเหตุ · '+name:name||'จุดเกิดเหตุ';
+    label.textContent=!fireAnalysis&&fireSources&&name&&!name.startsWith('จุดเกิดเหตุ')?'จุดเกิดเหตุ · '+name:name||'จุดเกิดเหตุ';
     label.style.maxWidth=Math.min(310,width-32)+'px';
     const w=label.offsetWidth,h=label.offsetHeight;
     const clamp=(n,min,max)=>Math.max(min,Math.min(n,max));
     if(fireAnalysis){
       const below=point.y+8;
       label.style.left=clamp(point.x-w/2,8,width-w-8)+'px';
-      label.style.top=clamp(below+h<=height-8?below:point.y-h-48,8,height-h-8)+'px';
+      label.style.top=clamp(below+h<=height-8?below:point.y-h-incidentMarkerSize-6,8,height-h-8)+'px';
       return;
     }
     const candidates=[[-w-38,-h-65],[38,-h-65],[-w/2,-h-95],[-w-48,34],[48,34],[-w/2,60]].map(([dx,dy])=>({
@@ -531,7 +533,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:fireSources?markerSymbol(fireSources.incident,40):fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireSources?markerSymbol(fireSources.incident,incidentMarkerSize):fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();if(!independent&&!fireSources)updateNearby();queueReport();
     if(!fireSources)view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
@@ -550,7 +552,9 @@
         drag=null;
         if(!pin||picking||event.button>0)return;
         const screen=view.toScreen(pin.geometry),start=event.origin||event;
-        if(!screen||Math.abs(start.x-screen.x)>17||start.y<screen.y-35||start.y>screen.y+6)return;
+        const halfWidth=fireAnalysis?incidentMarkerSize*.37:17;
+        const markerHeight=fireAnalysis?incidentMarkerSize*.9:35;
+        if(!screen||Math.abs(start.x-screen.x)>halfWidth||start.y<screen.y-markerHeight||start.y>screen.y+6)return;
         drag={pin,offsetX:screen.x-start.x,offsetY:screen.y-start.y};
         incidentRevision++;nearbyId++;auxiliaryId++;clearTimeout(syncTimer);
         if(window.ieatCoverageReport)window.ieatCoverageReport.status='changed';
