@@ -4161,7 +4161,7 @@ html.fire-analysis-page #coverageMap .fire-map-detail:has(> :not([hidden])){
   width:min(280px,calc(100% - var(--fire-map-detail-edge) * 2));
   height:var(--fire-map-detail-height);box-sizing:border-box;
   display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch;
-  padding:0;border:1px solid #000!important;border-radius:0!important;overflow:hidden;
+  padding:0;border:1px solid #A5ADB5!important;border-radius:4px!important;overflow:hidden;
   background:#fff!important;color:#203741;
   box-shadow:0 4px 14px #17374b2b,inset 0 1px 0 #fff;
   backdrop-filter:blur(12px) saturate(135%);
@@ -4173,8 +4173,8 @@ html.fire-analysis-page #fireIncidentInset{
 html.fire-analysis-page #fireIncidentInsetView{width:100%;height:100%}
 html.fire-analysis-page .fire-incident-name{
   position:absolute;z-index:3;box-sizing:border-box;padding:4px 9px;
-  border:1px solid #f0e9e6;border-radius:7px;background:#fff;color:#b92329;
-  font:700 15px/1.25 Sarabun,Tahoma,sans-serif;overflow-wrap:anywhere;
+  border:1px solid #f0e9e6;border-radius:7px;background:#fff;color:#202124;
+  font:600 15px/1.25 Sarabun,Tahoma,sans-serif;overflow-wrap:anywhere;
   box-shadow:0 2px 7px #37231d26;pointer-events:none;
 }
 html.fire-analysis-page .fire-incident-name::before{
@@ -4454,11 +4454,12 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #coverageIncide
 html.fire-analysis-page #coverageMap #coverageMapView #coverageWind:not([hidden]){
   position:absolute;inset:12px 66px auto auto;z-index:5;
   width:max-content;max-width:min(330px,calc(100% - 125px));
-  margin:0;padding:12px 14px;border:1px solid #000;border-radius:0;
+  margin:0;padding:12px 14px;border:1px solid #D5D8DC;border-radius:4px;
   background:#fff;color:#26394f;box-shadow:0 4px 16px #24354624;
   font:500 12px/1.4 Sarabun,sans-serif;overflow-wrap:anywhere;
 }
-html.fire-analysis-page #coverageMap #coverageWind strong{color:#5A37C3!important}
+html.fire-analysis-page #coverageMap #coverageWind strong{color:#24465A!important;font-weight:700}
+html.fire-analysis-page #coverageMap #coverageWind small{color:#52616B;font-weight:400}
 @media(max-width:600px){
   html.fire-analysis-page #coverageMap #coverageMapView #coverageWind:not([hidden]){
     inset:10px 60px auto auto;padding:8px 9px;
