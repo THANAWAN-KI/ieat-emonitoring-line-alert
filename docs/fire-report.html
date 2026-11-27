@@ -615,13 +615,14 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
 </div>
   <p id="coverageMapStatus" role="status">กำลังเตรียมแผนที่และชั้นข้อมูล…</p>
   <div id="coverageMapView" aria-label="แผนที่จุดเกิดเหตุและข้อมูลสนับสนุน"></div>
-  <aside id="fireOverviewLegend" aria-labelledby="fireOverviewLegendTitle" hidden>
-    <h3 id="fireOverviewLegendTitle">ตำแหน่งสนับสนุน</h3>
-  </aside>
-  <aside id="fireIncidentInset" aria-labelledby="fireIncidentInsetTitle" hidden>
-    <h3 id="fireIncidentInsetTitle">ซูมจุดเกิดเหตุ</h3>
-    <div id="fireIncidentInsetView"></div>
-  </aside>
+  <div class="fire-map-detail">
+    <aside id="fireOverviewLegend" aria-labelledby="fireOverviewLegendTitle" hidden>
+      <h3 id="fireOverviewLegendTitle">คำอธิบายสัญลักษณ์</h3>
+    </aside>
+    <div id="fireIncidentInset" role="region" aria-label="แผนที่ซูมจุดเกิดเหตุ" hidden>
+      <div id="fireIncidentInsetView"></div>
+    </div>
+  </div>
   <div id="fireMapInfo" aria-label="คำอธิบายสัญลักษณ์แผนที่"></div>
   <div id="coverageWind" role="status" hidden>
     <div class="coverage-wind-compass" aria-hidden="true">
@@ -4106,41 +4107,45 @@ html.fire-analysis-page #coverageMapView :is(.esri-button,.esri-layer-list__visi
 }
 </style>
 <style id="fire-map-symbols-and-inset">
-#fireOverviewLegend[hidden],html:not(.fire-analysis-page) #fireOverviewLegend{display:none!important}
-html.fire-analysis-page #fireOverviewLegend{
-  position:absolute;z-index:5;left:25px;bottom:40px;
-  padding:8px 12px;border:1px solid #fff;border-radius:10px;
-  background:rgba(255,255,255,.94);color:#19344a;box-shadow:0 5px 18px #17374b33;
+.fire-map-detail,
+.fire-map-detail > [hidden]{display:none!important}
+html.fire-analysis-page #coverageMap:has(.fire-map-detail > :not([hidden])){
+  --fire-map-detail-bottom:40px;
+  --fire-map-detail-edge:24px;
+  --fire-map-detail-height:178px;
 }
-html.fire-analysis-page #fireOverviewLegend h3{margin:0 0 3px;font:700 14px/1.3 Sarabun,sans-serif}
+html.fire-analysis-page #coverageMap .fire-map-detail:has(> :not([hidden])){
+  position:absolute;z-index:5;left:var(--fire-map-detail-edge);bottom:var(--fire-map-detail-bottom);
+  width:min(400px,calc(100% - var(--fire-map-detail-edge) * 2));
+  height:var(--fire-map-detail-height);box-sizing:border-box;
+  display:grid!important;grid-template-columns:max-content minmax(0,1fr);align-items:stretch;gap:12px;
+  padding:8px;border:1px solid #434343;background:#fff;color:#222;
+}
+html.fire-analysis-page #fireOverviewLegend h3{margin:0 0 4px;font:700 13px/1.35 Sarabun,sans-serif}
 html.fire-analysis-page #fireOverviewLegend ul{margin:0;padding:0;list-style:none}
-html.fire-analysis-page #fireOverviewLegend li{display:flex;align-items:center;gap:5px;font:600 12px/1.2 Sarabun,sans-serif}
-html.fire-analysis-page #fireOverviewLegend img{width:23px;height:23px}
-html.fire-analysis-page #coverageMap:has(#fireOverviewLegend:not([hidden])) .esri-ui-bottom-left{bottom:205px}
-@media(max-width:600px){
-  html.fire-analysis-page #fireOverviewLegend{left:14px;bottom:34px;padding:5px}
-  html.fire-analysis-page #fireOverviewLegend img{width:17px;height:17px}
-  html.fire-analysis-page #fireOverviewLegend li{font-size:10px}
-  html.fire-analysis-page #coverageMap:has(#fireOverviewLegend:not([hidden])) .esri-ui-bottom-left{bottom:145px}
-}
-
-#fireIncidentInset[hidden],html:not(.fire-analysis-page) #fireIncidentInset{display:none!important}
+html.fire-analysis-page #fireOverviewLegend li{display:flex;align-items:center;gap:5px;font:600 12px/1.25 Sarabun,sans-serif}
+html.fire-analysis-page #fireOverviewLegend img{width:19px;height:19px;flex:none}
 html.fire-analysis-page #fireIncidentInset{
-  position:absolute;z-index:5;right:25px;bottom:40px;
-  width:min(310px,40%);overflow:hidden;border:2px solid #fff;
-  border-radius:12px;background:#eff7fb;box-shadow:0 5px 18px #17374b33;
+  grid-column:2;overflow:hidden;border:1px solid #434343;background:#eff3f4;
 }
-html.fire-analysis-page #fireIncidentInset h3{
-  padding:7px 12px;margin:0;background:#234e77;color:#fff;font:700 14px Sarabun,sans-serif;
+html.fire-analysis-page #fireIncidentInsetView{width:100%;height:100%}
+html.fire-analysis-page #coverageMap:has(.fire-map-detail > :not([hidden])) .esri-ui-bottom-left{
+  bottom:calc(var(--fire-map-detail-bottom) + var(--fire-map-detail-height) + 8px);
 }
-html.fire-analysis-page #fireIncidentInsetView{height:clamp(120px,22vh,210px)}
 html.fire-analysis-page #fireMapInfo .fire-support-key{margin:0 0 8px;padding:0;list-style:none}
 html.fire-analysis-page #fireMapInfo .fire-support-key li{display:flex;align-items:center;gap:6px}
 html.fire-analysis-page #fireMapInfo .fire-support-key img{width:26px;height:26px}
 html.fire-analysis-page #coverageMapView .esri-compass{border-radius:50%!important}
 @media(max-width:600px){
-  html.fire-analysis-page #fireIncidentInset{right:14px;bottom:34px;width:min(205px,48%)}
-  html.fire-analysis-page #fireIncidentInsetView{height:105px}
+  html.fire-analysis-page #coverageMap:has(.fire-map-detail > :not([hidden])){
+    --fire-map-detail-edge:10px;
+    --fire-map-detail-bottom:28px;
+    --fire-map-detail-height:144px;
+  }
+  html.fire-analysis-page #coverageMap .fire-map-detail:has(> :not([hidden])){width:min(310px,calc(100% - 64px));gap:8px;padding:5px}
+  html.fire-analysis-page #fireOverviewLegend h3{font-size:11px}
+  html.fire-analysis-page #fireOverviewLegend img{width:15px;height:15px}
+  html.fire-analysis-page #fireOverviewLegend li{font-size:10px}
 }
 </style>
 <style id="fire-map-tool-cards">
