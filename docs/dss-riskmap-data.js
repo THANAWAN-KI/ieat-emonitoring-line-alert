@@ -1391,7 +1391,19 @@
       if(picker)view.ui.add(new Expand({view,content:picker,expandIcon:'basemap',expandTooltip:'แผนที่พื้นฐาน',collapseTooltip:'ปิดตัวเลือกแผนที่พื้นฐาน',group:'fire-map-tools'}),'top-right');
     }
     view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
-    view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
+    const mapInfo=$('fireMapInfo');
+    if(dedicatedFireAnalysis&&mapInfo){
+      mapInfo.append($('coverageWind'),document.querySelector('#coverageMap .fire-map-key'));
+      const layerLegend=el('details',null,'fire-layer-legend');
+      const legendBody=el('div');
+      layerLegend.append(el('summary','สัญลักษณ์ตามชั้นข้อมูล'),legendBody);
+      mapInfo.append(layerLegend);
+      new Legend({view,container:legendBody});
+      view.ui.add(new Expand({view,content:mapInfo,expandIcon:'legend',
+        expandTooltip:'ข้อมูลลมและสัญลักษณ์',collapseTooltip:'ปิดข้อมูลลมและสัญลักษณ์'}),'bottom-left');
+    }else{
+      view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
+    }
     const factory=layer('e_PP/FeatureServer/0','โรงงานใกล้เคียง');
     if(document.documentElement.classList.contains('chemical-report-view')){
       window.ieatChemicalMap={view,map,layers:[factory,...support]};
