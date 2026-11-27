@@ -604,16 +604,16 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
   <h2 id="coverageMapTitle">แผนที่พื้นที่รอบจุดเกิดเหตุ</h2>
   <div class="coverage-basemap-control"><label for="coverageBasemap">แผนที่พื้นฐาน</label>
     <select id="coverageBasemap" disabled aria-label="เลือกแผนที่พื้นฐาน">
-      <option value="gray-vector">สีเทาอ่อน · โทนแดชบอร์ด</option>
+      <option value="gray-vector" selected>สีเทาอ่อน · โทนแดชบอร์ด</option>
       <option value="topo-vector">ภูมิประเทศ</option>
-      <option value="streets-navigation-vector" selected>แผนที่ถนนโทนอ่อน</option>
+      <option value="streets-navigation-vector">แผนที่ถนนโทนอ่อน</option>
       <option value="streets-vector">แผนที่ถนน</option>
       <option value="satellite">ภาพถ่ายดาวเทียม</option>
       <option value="hybrid">ดาวเทียมพร้อมชื่อสถานที่</option>
       <option value="dark-gray-vector">แผนที่สีเข้ม</option>
     </select>
     <div id="fireBasemapChoices" aria-label="แผนที่พื้นฐาน" hidden>
-      <button type="button" value="streets-navigation-vector"><span style="--preview:url('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/16/30277/51032')"></span>มาตรฐาน</button>
+      <button type="button" value="gray-vector"><span style="--preview:url('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/16/30277/51032')"></span>เทาอ่อน</button>
       <button type="button" value="hybrid"><span style="--preview:url('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/16/30277/51032'),url('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/16/30277/51032')"></span>ผสม</button>
       <button type="button" value="satellite"><span style="--preview:url('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/16/30277/51032')"></span>ดาวเทียม</button>
     </div>
