@@ -486,7 +486,7 @@
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
-    if(fireAnalysis){
+    if(fireAnalysis||fireReportPage){
       graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[245,34,53,.12],
         outline:{color:'#ed203a',width:2,style:'solid'}}}));
       const edge=circle.rings[0].reduce((top,vertex)=>vertex[1]>top[1]?vertex:top);
@@ -1169,7 +1169,8 @@
       applyFirePointLabels(center,'estate','$feature["สำนักงานนิคมฯ"]');
     }
     const referenceBasemap='streets-navigation-vector';
-    const useReferencePalette=document.documentElement.classList.contains('fire-analysis-page');
+    const dedicatedFireMap=document.documentElement.matches('.fire-analysis-page,.fire-document-page');
+    const useReferencePalette=dedicatedFireMap;
     async function styleNavigationBasemap(basemap){
       await basemap.load();
       const palette={
@@ -1469,9 +1470,9 @@
         ctx.beginPath();ctx.roundRect(callout.x,callout.y,callout.width,callout.height,7);ctx.fill();
         ctx.beginPath();ctx.moveTo(x,y-5);ctx.lineTo(x+(left?-5:5),y);ctx.lineTo(x,y+5);ctx.fill();
       }else{
-        ctx.strokeStyle=fireView?'#286ed2':callout.border;ctx.lineWidth=2.5;
+        ctx.strokeStyle=fireView&&!dedicatedFireMap?'#286ed2':callout.border;ctx.lineWidth=2.5;
         ctx.beginPath();ctx.moveTo(callout.line[0],callout.line[1]);ctx.lineTo(callout.line[2],callout.line[3]);ctx.stroke();
-        if(fireView)ctx.strokeStyle='#80b4f4';
+        if(fireView&&!dedicatedFireMap)ctx.strokeStyle='#80b4f4';
         ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
         ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
       }
