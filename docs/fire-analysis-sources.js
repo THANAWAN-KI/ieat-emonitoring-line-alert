@@ -1,12 +1,12 @@
 (() => {
   const categories = [
-    ['hospital','โรงพยาบาล / คลินิก','#9f0812','amenity','hospital|clinic'],
-    ['fire','สถานีดับเพลิง','#dc380f','amenity','fire_station'],
-    ['police','สถานีตำรวจ','#368dd5','amenity','police'],
-    ['community','ชุมชน','#70af1e','place','city|town|village|hamlet|suburb|neighbourhood'],
-    ['school','สถานศึกษา','#7e887a','amenity','school|kindergarten|college|university'],
-    ['hydrant','หัวจ่ายน้ำ','#e1ac26','emergency','fire_hydrant'],
-    ['cctv','กล้อง CCTV','#6347b2','man_made','surveillance'],
+    ['hospital','โรงพยาบาล / คลินิก','#e6004d','amenity','hospital|clinic'],
+    ['fire','สถานีดับเพลิง','#e64f00','amenity','fire_station'],
+    ['police','สถานีตำรวจ','#1f69ff','amenity','police'],
+    ['community','ชุมชน','#008558','place','city|town|village|hamlet|suburb|neighbourhood'],
+    ['school','สถานศึกษา','#6138f5','amenity','school|kindergarten|college|university'],
+    ['hydrant','หัวจ่ายน้ำ','#ffaa00','emergency','fire_hydrant'],
+    ['cctv','กล้อง CCTV','#6138f5','man_made','surveillance'],
     ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#17677e'],
     ['business','โรงงาน / ผู้ประกอบการ','#687181'],
     ['aqm','AQMs · คุณภาพอากาศ','#5A37C3'],
@@ -72,7 +72,7 @@
         '<defs><linearGradient id="badge-depth" x2="0%" y2="100%"><stop stop-color="#fff" stop-opacity=".34"/><stop offset=".48" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".24"/></linearGradient></defs>'+
         '<ellipse cx="18" cy="32" rx="11" ry="2.5" fill="#17222a" opacity=".2"/>'+
         '<circle cx="18" cy="17" r="14" fill="'+color+'"/>'+
-        '<circle cx="18" cy="17" r="14" fill="url(#badge-depth)" stroke="#fff" stroke-width="2"/>'+
+        '<circle cx="18" cy="17" r="14" fill="url(#badge-depth)" stroke="#fff" stroke-opacity=".85" stroke-width="1.5"/>'+
         '<path transform="translate(8.08 7.08) scale(.62)" d="'+supportGlyphs[id]+'" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     const [top,bottom]=pinColors[id]||[color,color];
