@@ -260,6 +260,7 @@
       if(category){const icon=el('img');icon.src=iconUrl(category);icon.alt='';icon.width=22;icon.height=22;button.append(icon);}
       const label=(category?.label||'ทั้งหมด')+' '+number(count);
       if(fireAnalysis){
+        button.style.setProperty('--filter-color',category?.color||'#262626');
         button.title=label;
         button.setAttribute('aria-label',label);
         if(!category){
