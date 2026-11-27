@@ -170,6 +170,7 @@
       const kind=row.category.id;
       const count=categoryCounts.get(kind)||0;
       if(!selected){
+        if(showOverview&&kind==='hydrant'&&sources.some(({kind,layer})=>kind==='hydrant'&&layer.loaded&&layer.visible&&layer.parent?.visible&&scale<=layer.minScale))continue;
         if(showOverview&&(!supportKinds.includes(kind)||count>=2||markers.length>=12))continue;
         const maxScale=showOverview?Math.max(firePointScale(kind),150000):Math.max(firePointScale(kind),100000);
         if(scale>maxScale)continue;
@@ -1062,8 +1063,12 @@
     });
     const dedicatedFireAnalysis=document.documentElement.classList.contains('fire-analysis-page');
     const center=layer('e_PP_2025/FeatureServer/1','จุดศูนย์กลางนิคมฯ / ท่าเรือฯ',{visible:true,fields:['สำนักงานนิคมฯ'],symbol:pin});
-    const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',{visible:!dedicatedFireAnalysis,opacity:.55,minScale:1500000});
-    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',{minScale:350000,symbol:polygon([36,132,90,.12],'#7b9a83')});
+    const zones=layer('Map/FeatureServer/10','เขตประกอบการภายในนิคมฯ (กนอ.)',dedicatedFireAnalysis?{
+      visible:true,minScale:65000,symbol:{type:'simple-fill',style:'none',outline:{color:'#4c277a',width:2}}
+    }:{visible:true,opacity:.55,minScale:1500000});
+    const businesses=layer('EPP_2026_V1/FeatureServer/0','แปลงผู้ประกอบการ EPP 2026',dedicatedFireAnalysis?{
+      visible:true,minScale:24000,symbol:polygon([167,102,241,.58],'#30223e')
+    }:{minScale:350000,symbol:polygon([36,132,90,.12],'#7b9a83')});
     const eppPath='e_PP/FeatureServer/0';
     const zoneField='เขตประกอบการ';
     const eppZones=layer(eppPath,'เขตประกอบการ e-PP',{
@@ -1115,7 +1120,7 @@
         labelExpressionInfo:{expression},symbol:{...fireLabel('#000'),yoffset:kind==='estate'?-6:-9}}];
     }
     const support=datasets.filter(d=>!['estate','business'].includes(d.id)).concat(extraSupport).map(d=>layer(d.path,d.label,{
-      visible:!dedicatedFireAnalysis&&['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
+      visible:dedicatedFireAnalysis?d.id==='hydrant':['fire','hospital','hydrant','police','community','cctv'].includes(d.id),minScale:1000000,symbol:firePointSymbol(d.id==='communityRisk'?'community':d.id)||supportSymbols[d.id],
       fields:[...new Set([...d.names.slice(0,1),...d.estates.slice(0,1)])]
     }));
     const supportColors={fire:'#cc5257',hospital:'#cc5257',hydrant:'#24845a',police:'#24845a',community:'#24845a',communityRisk:'#24845a',waterWatch:'#b88b20',school:'#b88b20',cctv:'#24845a'};
@@ -1149,6 +1154,11 @@
         if(fireMapIcons){
           const field=item.fields.find(field=>field.name===def.names[0])?.name||item.displayField;
           if(field)applyFirePointLabels(item,def.id==='communityRisk'?'community':def.id,'$feature['+JSON.stringify(field)+']');
+          if(dedicatedFireAnalysis&&def.id==='hydrant'){
+            item.minScale=7500;
+            item.renderer={type:'simple',symbol:{type:'simple-marker',style:'circle',size:7,color:'#e61928',outline:{color:'#292021',width:1.25}}};
+            if(item.labelingInfo?.[0])item.labelingInfo[0].minScale=7500;
+          }
         }
         if(fireMapIcons)return;
         item.featureReduction={
@@ -1241,7 +1251,7 @@
       styledBasemap=basemap;
       styleNavigationBasemap(basemap).catch(error=>console.warn('Fire navigation basemap palette:',error));
     }
-    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[...(dedicatedFireAnalysis?[]:[parcelGroup,group('ความเสี่ยงโรงงาน กนอ.',risks)]),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
+    const map=new ArcMap({basemap:$('coverageBasemap')?.value||'gray-vector',layers:[parcelGroup,...(dedicatedFireAnalysis?[]:[group('ความเสี่ยงโรงงาน กนอ.',risks)]),group('ข้อมูลเสริม GISTDA',supplemental),group('ข้อมูลสนับสนุน กนอ.',support),group('ตำแหน่งนิคมฯ กนอ.',[center])]});
     if(fireView)window.ieatMonitoringReport.load().then(dataset=>map.add(new GeoJSONLayer({
       url:URL.createObjectURL(new Blob([JSON.stringify({type:'FeatureCollection',features:dataset.features})],{type:'application/json'})),
       title:'สถานี e-Monitoring',
