@@ -139,7 +139,7 @@
   }
   const categoryById=id=>fireSources.categories.find(category=>category.id===id);
   const iconUrl=category=>'data:image/svg+xml,'+encodeURIComponent(fireSources.badge(category));
-  const markerSymbol=(category,size=29)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size,yoffset:['incident','estate'].includes(category.id)?size*4/9:category.id==='business'?0:size/9});
+  const markerSymbol=(category,size=29)=>({type:'picture-marker',url:iconUrl(category),width:size,height:size,yoffset:category.id==='incident'?size*4/9:category.id==='business'?0:size/9});
   let bufferRecords=[], activeCategory='';
   const bufferLabels=fireAnalysis&&new GraphicsLayer({title:'ชื่อจุดข้อมูลในรัศมี',listMode:'hide'});
   if(bufferLabels)map.add(bufferLabels,map.layers.indexOf(windLayer));
@@ -1082,7 +1082,7 @@
     const supplementalKinds=['waterWatch','wastewater','airWatch','waste'];
     function firePointSymbol(kind,size=26){
       const category=fireMapIcons?.categories.find(item=>item.id===kind);
-      return category?{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category)),width:size,height:size,yoffset:kind==='estate'?size*4/9:['aqm','wqm','cem'].includes(kind)?0:size/9}:null;
+      return category?{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category)),width:size,height:size,yoffset:['aqm','wqm','cem'].includes(kind)?0:size/9}:null;
     }
     function applyFirePointLabels(item,kind,expression){
       const category=fireMapIcons?.categories.find(value=>value.id===kind);
@@ -1156,7 +1156,7 @@
     }}).catch(()=>{}));
     const group=(title,layers)=>new GroupLayer({title,layers,visibilityMode:'independent'});
     if(fireView){
-      center.renderer={type:'simple',symbol:firePointSymbol('estate',46)||svgMarker('<path d="M12 2v7" stroke="#6f695f" stroke-width="1.2"/><path fill="#edb552" stroke="#383630" stroke-width="1.3" d="M3 22V12l6 3v-4l6 3V8h6v14Z"/><path d="M6 19h2m3 0h2m3 0h2" stroke="#383630" stroke-width="1.3"/>',22,22,0)};
+      center.renderer={type:'simple',symbol:firePointSymbol('estate')||svgMarker('<path d="M12 2v7" stroke="#6f695f" stroke-width="1.2"/><path fill="#edb552" stroke="#383630" stroke-width="1.3" d="M3 22V12l6 3v-4l6 3V8h6v14Z"/><path d="M6 19h2m3 0h2m3 0h2" stroke="#383630" stroke-width="1.3"/>',22,22,0)};
       center.labelsVisible=true;
       center.labelingInfo=[{minScale:400000,labelPlacement:'above-center',
         labelExpressionInfo:{expression:'$feature["สำนักงานนิคมฯ"]'},
