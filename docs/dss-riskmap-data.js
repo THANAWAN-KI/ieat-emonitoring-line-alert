@@ -385,6 +385,31 @@
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
   const direction=deg=>compass[Math.round(deg/45)%8];
   const analysisWindArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 5 37 50 21 39 5 50Z" fill="#000000" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function drawAnalysisWind(bearing,speed){
+    const km=Number(radius.value)*.65;
+    if(!Number.isFinite(km)||km<=0)return;
+    const radians=Math.PI/180,lat=origin.latitude*radians,lon=origin.longitude*radians;
+    const destination=(degrees,fraction)=>{
+      const angle=degrees*radians,distance=km*fraction/6371;
+      const y=Math.asin(Math.sin(lat)*Math.cos(distance)+Math.cos(lat)*Math.sin(distance)*Math.cos(angle));
+      const x=lon+Math.atan2(Math.sin(angle)*Math.sin(distance)*Math.cos(lat),Math.cos(distance)-Math.sin(lat)*Math.sin(y));
+      return [x/radians,y/radians];
+    };
+    const start=[origin.longitude,origin.latitude],end=destination(bearing,1),sr={wkid:4326};
+    const sector=[start,...Array.from({length:9},(_,i)=>destination(bearing-20+i*5,1)),start];
+    const tip=new Point({longitude:end[0],latitude:end[1]});
+    windLayer.addMany([
+      new Graphic({geometry:{type:'polygon',rings:[sector],spatialReference:sr},symbol:{
+        type:'simple-fill',color:[10,139,131,.13],outline:{color:'#16877e',width:1.4,style:'short-dash'}
+      }}),
+      new Graphic({geometry:{type:'polyline',paths:[[start,end]],spatialReference:sr},symbol:{
+        type:'simple-line',color:'#16776f',width:2
+      }}),
+      new Graphic({geometry:tip,symbol:{type:'simple-marker',path:'M0 -8 L6 6 L0 3 L-6 6 Z',size:13,
+        angle:(bearing-view.rotation+360)%360,color:'#16776f',outline:{color:'#fff',width:1.25}}}),
+      new Graphic({geometry:tip,symbol:{...fireLabel('#135c56',10),text:speed+' กม./ชม.',yoffset:-15}})
+    ]);
+  }
   function showWind(weather){
     if(!windBox)return;
     const arrow=windBox.querySelector('svg'), reading=windBox.querySelector('strong'), detail=windBox.querySelector('small');
@@ -393,6 +418,7 @@
     const moving=known&&speed>0&&Number.isFinite(from);
     if(windLayer){
       windLayer.removeAll();
+      if(moving&&origin&&fireAnalysis)drawAnalysisWind((from+180)%360,speed);
       if(moving&&origin&&!fireAnalysis){
         const direction=(from+180)%360;
         const angle=(direction-view.rotation+360)%360;
@@ -511,6 +537,7 @@
     if(!origin)return;
     if(pin)pin.popupTemplate={title:'จุดเกิดเหตุ',content:incidentDetails};
     graphics.removeAll();
+    if(fireAnalysis)showWind(windWeather);
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     if(fireAnalysis||fireReportPage){
       graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',style:'none',
