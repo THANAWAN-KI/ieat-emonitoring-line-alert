@@ -4055,21 +4055,30 @@ html.fire-analysis-page #fireMapInfo summary{cursor:pointer}
 
 <style id="fire-glass-expanded-tools">
 html.fire-analysis-page #coverageMapView .esri-expand:has(:is(.coverage-basemap-control,.esri-measurement-widget-content,.fire-layer-panel,.fire-wind-panel)){
-  --calcite-color-foreground-1:#fff;
-  --calcite-popover-background-color:#fff;
-  --calcite-popover-border-color:#e7ebee;
+  --calcite-color-foreground-1:transparent;
+  --calcite-popover-background-color:transparent;
+  --calcite-popover-border-color:transparent;
+  --calcite-popover-corner-radius:16px;
 }
 html.fire-analysis-page #coverageMapView .esri-expand
   :is(.esri-expand__content-container,.esri-expand__panel-content):has(:is(.coverage-basemap-control,.esri-measurement-widget-content,.fire-layer-panel,.fire-wind-panel)){
   box-sizing:border-box;
-  max-width:min(466px,calc(100vw - 78px));
-  padding:12px 16px;
-  border:0;border-radius:2px;
-  background:#fff;color:#20312c;
+  max-width:min(422px,calc(100vw - 78px));
+  padding:16px 18px;
+  border:0;border-radius:16px;
+  background:linear-gradient(115deg,rgba(249,251,236,.95),rgba(229,246,252,.94));
+  color:#172c2a;box-shadow:0 5px 18px #17374b21;
+  backdrop-filter:blur(12px) saturate(135%);
 }
 html.fire-analysis-page #coverageMapView .esri-expand__content-container:has(.coverage-basemap-control){
-  width:min(466px,calc(100vw - 78px));
-  padding:12px clamp(10px,3vw,28px) 15px;
+  width:min(422px,calc(100vw - 78px));
+  padding:clamp(12px,3vw,28px);
+}
+html.fire-analysis-page #coverageMapView .esri-expand__content-container:has(.esri-measurement-widget-content){
+  overflow-x:hidden;
+}
+html.fire-analysis-page #coverageMapView .esri-expand__content-container:has(.esri-measurement-widget-content) .esri-widget{
+  min-width:0;max-width:100%;overflow-x:hidden;
 }
 html.fire-analysis-page #coverageMapView .esri-widget:has(> .esri-measurement-widget-content){
   background:transparent;
@@ -4103,8 +4112,8 @@ html.fire-analysis-page #coverageMapView .esri-measurement-widget-content .esri-
 html.fire-analysis-page #coverageMapView .esri-layer-list{padding:8px}
 html.fire-analysis-page #coverageMapView .esri-layer-list__item{
   margin:0;
-  border:0;border-bottom:1px solid #e8edef;border-radius:0;
-  background:#fff;color:#20312c;
+  border:0;border-bottom:1px solid #b4cbd370;border-radius:0;
+  background:transparent;color:#20312c;
 }
 html.fire-analysis-page #coverageMapView .esri-layer-list__item-content{font-weight:600}
 html.fire-analysis-page #coverageMapView .esri-layer-list__item--invisible .esri-layer-list__item-content{color:#526b7c}
@@ -4187,18 +4196,19 @@ html.fire-analysis-page #coverageMapView .coverage-basemap-control{
 }
 html.fire-analysis-page #coverageMapView .coverage-basemap-control [hidden]{display:none!important}
 html.fire-analysis-page #fireBasemapChoices{
-  display:grid;grid-template-columns:repeat(3,minmax(0,62px));gap:10px;justify-content:start;width:100%;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2.5vw,26px);
+  width:100%;max-width:none;
 }
 html.fire-analysis-page #fireBasemapChoices button{
   min-width:0;padding:0 0 3px;border:0;background:transparent;color:#18343a;
-  font:700 13px Sarabun,sans-serif;cursor:pointer;
+  font:700 clamp(12px,2.2vw,17px)/1.35 Sarabun,sans-serif;cursor:pointer;
 }
 html.fire-analysis-page #fireBasemapChoices span{
-  display:block;box-sizing:border-box;width:100%;aspect-ratio:1.24;margin-bottom:6px;
-  border:2px solid transparent;border-radius:0;
+  display:block;box-sizing:border-box;width:100%;aspect-ratio:1.24;margin-bottom:10px;
+  border:3px solid transparent;border-radius:15px;
   background-color:#d8e8d9;background-image:var(--preview);background-size:cover;background-position:center;
 }
-html.fire-analysis-page #fireBasemapChoices button[aria-pressed=true] span{border-color:#157cc0}
+html.fire-analysis-page #fireBasemapChoices button[aria-pressed=true] span{border-color:#0084ff}
 html.fire-analysis-page #coverageMapView .fire-layer-panel{
   width:min(310px,calc(100vw - 112px));max-height:min(390px,48svh);overflow:auto;
   box-sizing:border-box;padding:0;color:#20312c;
