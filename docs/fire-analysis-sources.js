@@ -1,14 +1,17 @@
 (() => {
   const categories = [
-    ['hospital','โรงพยาบาล / คลินิก','#922653','amenity','hospital|clinic'],
-    ['fire','สถานีดับเพลิง','#a43c21','amenity','fire_station'],
-    ['police','สถานีตำรวจ','#284d96','amenity','police'],
-    ['community','ชุมชน','#186449','place','city|town|village|hamlet|suburb|neighbourhood'],
-    ['school','สถานศึกษา','#693489','amenity','school|kindergarten|college|university'],
+    ['hospital','โรงพยาบาล / คลินิก','#d92262','amenity','hospital|clinic'],
+    ['fire','สถานีดับเพลิง','#c65b10','amenity','fire_station'],
+    ['police','สถานีตำรวจ','#1756b5','amenity','police'],
+    ['community','ชุมชน','#237351','place','city|town|village|hamlet|suburb|neighbourhood'],
+    ['school','สถานศึกษา','#7b3fad','amenity','school|kindergarten|college|university'],
     ['hydrant','หัวจ่ายน้ำ','#076576','emergency','fire_hydrant'],
     ['cctv','กล้อง CCTV','#4b3884','man_made','surveillance'],
-    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#80530e'],
-    ['business','โรงงาน / ผู้ประกอบการ','#3e5160'],
+    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#5A37C3'],
+    ['business','โรงงาน / ผู้ประกอบการ','#687181'],
+    ['aqm','AQMs · คุณภาพอากาศ','#5A37C3'],
+    ['wqm','WQMs · คุณภาพน้ำ','#946107'],
+    ['cem','CEMs · มลพิษจากปล่อง','#237351'],
     ['environment','จุดตรวจวัด / สิ่งแวดล้อม','#356831'],
     ['waterWatch','จุดเฝ้าระวังระดับน้ำ','#16688e'],
     ['wastewater','ระบบบำบัดน้ำเสีย','#24645d'],
@@ -35,18 +38,18 @@
   "incident": '<g transform="scale(.0625)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"><path d="M256,80c-8.66,0-16.58,7.36-16,16l8,216a8,8,0,0,0,8,8h0a8,8,0,0,0,8-8l8-216C272.58,87.36,264.66,80,256,80Z"/><circle cx="256" cy="416" r="16"/></g>',
 };
   const incident={id:'incident',color:'#DE1B4A'};
-  const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 4 38 27H27V76H15V27H4Z" fill="#d32643" stroke="#7e1429" stroke-width="3" stroke-linejoin="round"/></svg>';
+  const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 5 37 50 21 39 5 50Z" fill="#fff" stroke="#365465" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   const pinColors = {
-    hospital: ['#ec73a5','#922653'],
-    fire: ['#f49a63','#a43c21'],
-    police: ['#7ba4f4','#284d96'],
-    community: ['#65b89e','#186449'],
-    school: ['#bc8cdd','#693489'],
+    hospital: ['#fa709e','#d92262'],
+    fire: ['#ffae55','#c65b10'],
+    police: ['#63a5fb','#1756b5'],
+    community: ['#59a983','#237351'],
+    school: ['#be9df4','#7b3fad'],
     hydrant: ['#67c8d8','#076576'],
     cctv: ['#9d91d9','#4b3884'],
-    estate: ['#efbe63','#80530e'],
-    business: ['#a0a9b9','#3e5160'],
+    estate: ['#5A37C3','#5A37C3'],
+    business: ['#adb4c2','#687181'],
     environment: ['#83bd68','#356831'],
     waterWatch: ['#76b7e0','#16688e'],
     wastewater: ['#65baa8','#24645d'],
@@ -56,15 +59,26 @@
 
   function badge({id,color}){
     const [top,bottom]=pinColors[id]||[color,color];
-    const glyph=id==='hospital'
-      ? '<path d="M14 6h4v8h8v4h-8v8h-4v-8H6v-4h8z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>'
+    if(['aqm','wqm','cem'].includes(id)){
+      const symbol={
+        aqm:'M5 12h10a3 3 0 1 0-3-3M5 17h16a3 3 0 1 1-3 3M7 22h6',
+        wqm:'M16 6c-3 5-7 9-7 13a7 7 0 1 0 14 0c0-4-4-8-7-13Z',
+        cem:'M7 25h18M10 25l2-12h6l2 12M15 10c-3-3 5-2 4-5'
+      }[id];
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect x="4" y="4" width="28" height="28" rx="8" fill="'+color+'" stroke="#fff" stroke-width="2"/><path transform="translate(2 2)" d="'+symbol+'" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+    if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13" fill="'+bottom+'" stroke="#fff" stroke-width="3"/><circle cx="18" cy="18" r="4.5" fill="#fff"/></svg>';
+    const glyph=id==='estate'
+      ? '<circle cx="16" cy="16" r="10"/>'
+      : id==='hospital'
+      ? '<path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>'
       : glyphs[id];
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
       '<defs><linearGradient id="pin-fill" x1="0" y1="0" x2="0" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="'+top+'"/><stop offset="1" stop-color="'+bottom+'"/></linearGradient></defs>'+
-      '<path d="M18 30c-1.9 0-1.2-2.5-5.6-4.1a12.8 12.8 0 1 1 11.2 0C19.2 27.5 19.9 30 18 30Z" fill="#fff"/>'+
+      (id==='incident'||id==='estate'?'<path d="M18 30c-1.9 0-1.2-2.5-5.6-4.1a12.8 12.8 0 1 1 11.2 0C19.2 27.5 19.9 30 18 30Z" fill="#fff"/>':'<circle cx="18" cy="14" r="13" fill="#fff"/>')+
       '<circle cx="18" cy="14" r="11.8" fill="url(#pin-fill)"/>'+
       '<g transform="translate(10 6) scale(.5)" fill="#fff">'+glyph+'</g>'+
-      '<circle cx="18" cy="34" r="1.8" fill="'+bottom+'" stroke="#fff" stroke-width="1.25"/></svg>';
+      (id==='incident'||id==='estate'?'<circle cx="18" cy="34" r="1.8" fill="'+bottom+'" stroke="#fff" stroke-width="1.25"/>':'')+'</svg>';
   }
 
   async function getJSON(url, signal) {
