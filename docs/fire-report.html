@@ -4321,6 +4321,81 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-
   outline:2px solid #59636c;outline-offset:2px;
 }
 </style>
+<style id="fire-analysis-solid-panel">
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage{
+  --analysis-ink:#303841;
+  --analysis-line:#d9e2eb;
+  --analysis-surface:#f4f7fa;
+  --analysis-action:#176aa5;
+  padding:clamp(14px,1.4vw,24px)!important;
+  background:#fff!important;color:var(--analysis-ink);
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #coverageIncidentForm{
+  margin:0;padding:0;border:0;background:#fff;box-shadow:none;
+}
+html.fire-analysis-page #riskCoverage #coverageIncidentTitle{margin:0 0 12px;font-size:19px}
+html.fire-analysis-page #riskCoverage .coverage-incident-controls{gap:10px 12px}
+html.fire-analysis-page #riskCoverage .fire-step{
+  margin:4px 0 0;padding:8px 10px;
+  border:0;border-inline-start:3px solid #2185d5;
+  border-radius:0 6px 6px 0;background:var(--analysis-surface);
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(label,input,select){font-size:14px}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(input:not([type="hidden"]),select){
+  min-height:42px;padding:8px 10px;
+  border:1px solid var(--analysis-line)!important;border-radius:7px!important;
+  background:#fff!important;box-shadow:none!important;
+}
+html.fire-analysis-page #riskCoverage #coverageIncidentForm .coverage-place-search{
+  padding:10px;border:1px solid var(--analysis-line);border-radius:8px;background:var(--analysis-surface);
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation){
+  min-height:40px;padding:7px 12px;
+  border:1px solid var(--analysis-line)!important;border-radius:7px!important;
+  background:#fff!important;color:#23597e!important;
+  box-shadow:none!important;backdrop-filter:none!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(#coverageOpenReport,#coverageSearchPlace,.report-search-actions > button,#coverageSearchSupport,button[type="submit"]) {
+  background:var(--analysis-action)!important;border-color:var(--analysis-action)!important;color:#fff!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation):is(:hover,:active):enabled{
+  background:#eaf3fb!important;border-color:#2185d5!important;color:#164f78!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation)[aria-pressed="true"]{
+  background:#eaf3fb!important;border-color:#2185d5!important;color:#164f78!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(button,summary,input,select):focus-visible{
+  outline:2px solid #2185d5;outline-offset:2px;
+}
+html.fire-analysis-page #riskCoverage #coverageIncidentStatus:not(:empty){
+  padding:8px 10px;border-radius:6px;background:var(--analysis-surface);font-size:14px;
+}
+html.fire-analysis-page #riskCoverage #fireExternalPlaces{
+  margin:16px 0 0;padding:14px 0 0!important;border:0;border-top:1px solid var(--analysis-line)!important;
+}
+html.fire-analysis-page #riskCoverage #fireBufferCategories{flex-wrap:wrap;overflow:visible}
+html.fire-analysis-page #riskCoverage #fireExternalList{grid-template-columns:minmax(0,1fr)}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search{
+  margin:16px 0 0;padding:0;border:1px solid var(--analysis-line)!important;
+  border-radius:10px;background:#fff!important;box-shadow:none;backdrop-filter:none;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > summary{
+  padding:11px 12px;color:var(--analysis-ink)!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details{
+  margin:0;border:0!important;border-top:1px solid var(--analysis-line)!important;
+  border-radius:0;background:#fff!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details[open] > summary{
+  border-radius:0;background:var(--analysis-surface);
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search button:not(#fireNavigation){
+  background:#3a4148!important;color:#fff!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search button:not(#fireNavigation):hover:enabled{
+  background:#30363c!important;color:#fff!important;
+}
+</style>
 <script id="riskmap-ready">
 (()=>{
  const ready=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('riskmap-booting')));
