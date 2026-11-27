@@ -710,7 +710,7 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
  const sub=document.createElement('p');sub.textContent='เลือกประเภทเหตุและค้นหาบริษัท เพื่อจัดทำรายงานในหน้านี้';
  heading.append(title,sub);
  frame.loading='lazy';frame.style.height='1800px';
- function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261127-cartographic-report-map');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
+ function reportUrl(){const url=new URL('./dss-report.html',location.href);url.searchParams.set('embedded','dashboard');url.searchParams.set('v','20261127-fire-report-page1-layout');url.searchParams.set('theme','fire-purple');const selected=estate?.selectedOptions[0];if(estate?.value&&selected)url.searchParams.set('estate',selected.textContent.trim());return url.href}
  // Load the embedded report only in the data workspace or on explicit report navigation.
  if(new URLSearchParams(location.search).get('view')==='data')frame.src=reportUrl();
  link.addEventListener('click',event=>{event.preventDefault();const url=reportUrl();if(frame.src!==url)frame.src=url;section.scrollIntoView({behavior:'smooth',block:'start'});});
@@ -4538,4 +4538,53 @@ html:is(.fire-document-page,.fire-inline-report-open) body #riskmapReportPanel #
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
 })();
 </script>
+
+<script id="fire-report-page-one-layout">
+(()=>{
+ const frame=document.getElementById('emergencyReportFrame');if(!frame)return;
+ function apply(){
+  let d;try{d=frame.contentDocument}catch{return}
+  const page=d?.getElementById('report'),brief=d?.getElementById('dssFieldBrief');if(!page||!brief)return;
+  if(!d.getElementById('fire-report-page-one-style')){
+   const st=d.createElement('style');st.id='fire-report-page-one-style';
+   st.textContent=`
+    html body #report #dssFieldBrief #fbWeather{position:static!important;inset:auto!important;display:grid!important;grid-template-columns:minmax(0,1.2fr) minmax(0,2.8fr)!important;width:100%!important;max-width:none!important;max-height:none!important;height:auto!important;overflow:visible!important;margin:10px 0 0!important;padding:10px 12px!important;border:1px solid #d6d6d6!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;gap:8px!important;box-sizing:border-box!important}
+    html body #report #dssFieldBrief #fbWeather>strong{grid-column:1/-1!important;text-align:left!important;padding:5px 8px!important;margin:0!important;background:#fff!important;border:1px solid #b9b9b9!important;color:#111!important;font-size:15px!important;font-weight:700!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-wind{grid-column:1/-1!important;display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;align-items:center!important;gap:0 8px!important;border:0!important;background:#fff!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-wind-label{grid-column:2!important;background:transparent!important;border:0!important;padding:0!important;text-align:left!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-arrow{grid-column:1!important;grid-row:1/3!important;width:32px!important;height:32px!important;margin:0!important}
+    html body #report #dssFieldBrief #fbWeather .report-wind-direction{grid-column:2!important;margin:0!important;padding:0!important;text-align:left!important;font-size:13px!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-metrics{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:0!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-metrics>div{display:block!important;min-width:0!important;text-align:center!important;border:0!important;background:#fff!important;padding:3px 8px!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-metrics>div+div{border-left:1px solid #d6d6d6!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-metrics :is(dt,dd){display:block!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;text-align:center!important;line-height:1.45!important}
+    html body #report #dssFieldBrief #fbWeather .report-weather-updated,html body #report #dssFieldBrief #fbWeather>.fb-muted{grid-column:1/-1!important;font-size:10px!important;margin:0!important}
+    html body #report #reportNearbySupport{margin:14px 0 0!important}
+    html body #report #reportNearbySupport>h2{margin:0 0 8px!important;padding:0!important;border:0!important;background:transparent!important;color:#111!important;font-size:17px!important;font-weight:700!important}
+    html body #report #reportNearbySupport .support-reference-table{width:100%!important;table-layout:fixed!important;border-collapse:collapse!important;font-size:14px!important;line-height:1.5!important}
+    html body #report #reportNearbySupport .support-reference-table :is(th,td){border:1px solid #d7d7d7!important;padding:8px 10px!important;vertical-align:top!important;color:#333!important}
+    html body #report #reportNearbySupport .support-reference-table tbody th{width:24%!important;background:#fff8d8!important;color:#111!important;font-weight:700!important;text-align:left!important}
+    html body #report #reportNearbySupport .support-reference-table td:nth-child(2){width:58%!important;text-align:left!important;background:#fff!important}
+    html body #report #reportNearbySupport .support-reference-table td:nth-child(3){width:18%!important;text-align:right!important;white-space:nowrap!important;background:#fff!important}
+    html body #report #reportNearbySupport .support-reference-table .support-category-number{display:inline!important;width:auto!important;height:auto!important;margin:0 10px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#111!important;font:700 16px/1.5 Sarabun,sans-serif!important;vertical-align:baseline!important}
+    html body #report #reportNearbySupport .support-reference-table button{display:block!important;width:100%!important;padding:0!important;text-align:left!important;color:#454545!important;background:transparent!important;border:0!important;font:inherit!important;line-height:1.5!important}
+    html body #report #reportNearbySupport .support-additional-count{display:block!important;margin-top:4px!important;color:#454545!important;font-size:13px!important}
+    html body #report #reportNearbySupport .support-place-distance{font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+    html body #report #dssFieldBrief .fb-footer,html body #report .dss-page-footer,html body #report .fire-map-key,html body #report .riskmap-map-key,html body #report .fire-report-map-key,html body #report #fireMapInfo,html body #report .map-legend,html body #report .report-map-legend{display:none!important}
+    @media(max-width:650px){html body #report #dssFieldBrief #fbWeather{grid-template-columns:1fr!important}html body #report #dssFieldBrief #fbWeather .report-weather-metrics{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+   `;
+   d.head.append(st);
+  }
+  const clean=()=>{
+   ['#dssFieldBrief .fb-footer','#report .dss-page-footer','#reportNearbySupport .support-all-button','#reportNearbySupport .support-appendix-reference','#report .fire-map-key','#report .riskmap-map-key','#report .fire-report-map-key','#report #fireMapInfo','#report .map-legend','#report .report-map-legend'].forEach(sel=>d.querySelectorAll(sel).forEach(n=>n.remove()));
+   page.querySelectorAll('button,a,p,div,span').forEach(n=>{if(!n.children.length&&/^(ดูข้อมูลสนับสนุนทั้งหมด|รายชื่อและเบอร์ติดต่อทั้งหมดอยู่ในภาคผนวกข้อมูลสนับสนุน)$/.test(n.textContent.trim()))n.remove()});
+  };
+  clean();
+  if(!frame.dataset.firePageOneObserver&&d.defaultView?.MutationObserver){frame.dataset.firePageOneObserver='1';new d.defaultView.MutationObserver(clean).observe(page,{childList:true,subtree:true})}
+ }
+ frame.addEventListener('load',()=>{apply();setTimeout(apply,300);setTimeout(apply,1000)});
+ if(frame.contentDocument?.readyState==='complete')apply();
+})();
+</script>
+
 </body></html>
