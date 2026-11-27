@@ -3701,7 +3701,7 @@ html.fire-analysis-page #coverageMap .riskmap-map-key,html.fire-analysis-page #c
 .fire-analysis-page .fire-map-key .fire-key-wind{
   display:inline-block;width:22px;height:27px;border:0;background:center / contain no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2042%2082%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M21%204%2038%2027H27V76H15V27H4Z%22%20fill%3D%22%23d32643%22%20stroke%3D%22%237e1429%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
 }
-html.fire-analysis-page #coverageWind strong{color:#087c77!important}
+html.fire-analysis-page #coverageWind strong{color:#5A37C3!important}
 
 .fire-map-key .fire-key-wind{color:#067e99;font-size:20px;font-weight:800;line-height:12px}
 html.fire-analysis-page #coverageWind strong{color:#006b84}
@@ -3822,7 +3822,7 @@ html.fire-analysis-page #coverageMap .esri-popup a{color:var(--fire-accent)}
 </style>
 <style id="fire-light-map-mobile">
 html.fire-analysis-page body #riskmapOverviewPanel #coverageMap{
-  border:2px solid #0087d4!important;
+  border:1px solid #000!important;
   background:#f8fafc!important;color:#24374e;
 }
 html.fire-analysis-page #coverageMapStatus,
@@ -4160,7 +4160,7 @@ html.fire-analysis-page #coverageMap .fire-map-detail:has(> :not([hidden])){
   width:min(280px,calc(100% - var(--fire-map-detail-edge) * 2));
   height:var(--fire-map-detail-height);box-sizing:border-box;
   display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch;
-  padding:8px;border:2px solid #000!important;border-radius:0!important;overflow:hidden;
+  padding:0;border:1px solid #000!important;border-radius:0!important;overflow:hidden;
   background:#fff!important;color:#203741;
   box-shadow:0 4px 14px #17374b2b,inset 0 1px 0 #fff;
   backdrop-filter:blur(12px) saturate(135%);
@@ -4196,7 +4196,7 @@ html.fire-analysis-page #coverageMapView .esri-compass{border-radius:50%!importa
     --fire-map-detail-bottom:28px;
     --fire-map-detail-height:144px;
   }
-  html.fire-analysis-page #coverageMap .fire-map-detail:has(> :not([hidden])){width:min(230px,calc(100% - 64px));padding:5px}
+  html.fire-analysis-page #coverageMap .fire-map-detail:has(> :not([hidden])){width:min(230px,calc(100% - 64px))}
 }
 </style>
 <style id="fire-map-tool-cards">
@@ -4453,11 +4453,11 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .riskmap-overvi
 html.fire-analysis-page #coverageMap #coverageMapView #coverageWind:not([hidden]){
   position:absolute;inset:12px 66px auto auto;z-index:5;
   width:max-content;max-width:min(330px,calc(100% - 125px));
-  margin:0;padding:12px 14px;border:2px solid #000;border-radius:0;
+  margin:0;padding:12px 14px;border:1px solid #000;border-radius:0;
   background:#fff;color:#26394f;box-shadow:0 4px 16px #24354624;
   font:500 12px/1.4 Sarabun,sans-serif;overflow-wrap:anywhere;
 }
-html.fire-analysis-page #coverageMap #coverageWind strong{color:#087c77!important}
+html.fire-analysis-page #coverageMap #coverageWind strong{color:#5A37C3!important}
 @media(max-width:600px){
   html.fire-analysis-page #coverageMap #coverageMapView #coverageWind:not([hidden]){
     inset:10px 60px auto auto;padding:8px 9px;
