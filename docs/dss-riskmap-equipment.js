@@ -48,7 +48,7 @@
         const capacity=p[prefix+'volume'],capacityUnit=p[prefix+'volumeUnit']||'';
         const identity=[p.comp_uid||p.comp_no||p.comp_name,name,type,amount,unit,capacity,capacityUnit,x,y].join('|');
         if(seen.has(identity))continue;
-        seen.add(identity);items.push({company:p.comp_name,estate:p.comp_zone||'ไม่ระบุ',name,type,amount,unit,capacity,capacityUnit,distance});
+        seen.add(identity);items.push({company:p.comp_name,estate:p.comp_zone||'ไม่ระบุ',name,type,amount,unit,capacity,capacityUnit,distance,placement:p[prefix+'location']||p[prefix+'position'],address:p.comp_address,phone:p.comp_phone||p.comp_tel||p.comp_telephone||p.company_phone,coordinates:located?[y,x]:null});
       }
     }
     return {items:items.sort((a,b)=>(a.distance??Infinity)-(b.distance??Infinity)),noLocation};
@@ -85,7 +85,16 @@
         for(const item of items){
           const amount=item.amount!=null&&String(item.amount).trim()?'จำนวนตามทะเบียน '+item.amount+' '+item.unit:'ไม่ระบุจำนวน';
           const size=item.capacity!=null&&String(item.capacity).trim()?' · ขนาด '+item.capacity+' '+item.capacityUnit:'';
-          list.append(node('li',item.company+' ('+item.estate+') · '+item.name+' '+item.type+' · '+amount+size+(item.distance==null?' · ไม่มีพิกัด':' · ระยะเส้นตรง '+item.distance.toFixed(2)+' กม.')));
+          const entry=node('li',item.company+' ('+item.estate+') · '+item.name+' '+item.type+' · '+amount+size+(item.distance==null?' · ไม่มีพิกัด':' · ระยะเส้นตรง '+item.distance.toFixed(2)+' กม.'));
+          entry.append(node('div',item.placement?'จุดเก็บ: '+item.placement:'ทะเบียนไม่ระบุจุดเก็บอุปกรณ์'));
+          if(item.address)entry.append(node('div',item.address));
+          if(item.coordinates){
+            const link=node('a','ดูตำแหน่งบริษัท');
+            link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(item.coordinates.join(','));
+            link.target='_blank';link.rel='noopener';entry.append(link);
+          }
+          entry.append(node('div',item.phone?'โทรศัพท์บริษัท: '+item.phone:'ทะเบียนไม่ระบุเบอร์บริษัท'));
+          list.append(entry);
         }
         output.append(list);
       }else output.append(node('p','ไม่พบรายการที่ตรงเงื่อนไขในข้อมูล DSS ที่มีพิกัด'));
