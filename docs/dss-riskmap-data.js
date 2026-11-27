@@ -1604,7 +1604,30 @@
     }
     view.ui.add(new Expand({view,content:layerPanel,expandIcon:'layers',expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
     const windInfo=$('coverageWind');
-    if(dedicatedFireAnalysis)view.ui.add(new Compass({view}),'top-right');
+    if(dedicatedFireAnalysis){
+      view.ui.add(new Compass({view}),'top-right');
+      const fullscreen=el('button',null,'esri-widget esri-widget--button esri-component fire-map-fullscreen-button');
+      fullscreen.type='button';
+      const glyph=el('span',null,'esri-icon-zoom-out-fixed');
+      glyph.setAttribute('aria-hidden','true');
+      fullscreen.append(glyph);
+      const setExpanded=expanded=>{
+        document.documentElement.classList.toggle('fire-map-expanded',expanded);
+        fullscreen.setAttribute('aria-pressed',String(expanded));
+        fullscreen.title=expanded?'ออกจากแผนที่เต็มจอ':'เปิดแผนที่เต็มจอ';
+        fullscreen.setAttribute('aria-label',fullscreen.title);
+        glyph.className=expanded?'esri-icon-zoom-in-fixed':'esri-icon-zoom-out-fixed';
+      };
+      setExpanded(false);
+      fullscreen.addEventListener('click',()=>setExpanded(fullscreen.getAttribute('aria-pressed')!=='true'));
+      document.addEventListener('keydown',event=>{
+        if(event.key==='Escape'&&fullscreen.getAttribute('aria-pressed')==='true'){
+          setExpanded(false);
+          fullscreen.focus({preventScroll:true});
+        }
+      });
+      view.ui.add(fullscreen,'top-right');
+    }
     const mapInfo=$('fireMapInfo');
     if(fireMapIcons&&mapInfo){
       if(!dedicatedFireAnalysis&&windInfo)mapInfo.append(windInfo);
