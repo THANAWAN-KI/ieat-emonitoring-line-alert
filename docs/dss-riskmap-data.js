@@ -139,22 +139,31 @@
     if(!externalLayer.visible)return;
     const scale=view.scale;
     const incidentScreen=origin&&view.toScreen(origin);
-    const markerGap=scale>15000?104:scale>6500?88:68;
+    const markerGap=scale>15000?54:44;
     const labelGap=scale>10000?190:155;
     const priority=['hospital','fire','police','estate','community','school','hydrant','cctv','business'];
     const rank=row=>row===selectedBufferRow?-1:(priority.indexOf(row.category.id)+1||priority.length+1);
     const rows=[...recordByGraphic].sort(([,left],[,right])=>rank(left)-rank(right)||left.distance-right.distance);
-    const markers=[],labels=[];
+    const markers=[],labels=[],categoryCounts=new Map();
+    const showOverview=!activeCategory&&!$('fireBufferFilter').value.trim();
+    const supportKinds=['hospital','fire','police','hydrant','cctv','community','school','estate'];
     for(const [graphic,row] of rows){
       const selected=row===selectedBufferRow;
       graphic.visible=selected;
-      if(!selected&&scale>firePointScale(row.category.id))continue;
+      const kind=row.category.id;
+      const count=categoryCounts.get(kind)||0;
+      if(!selected){
+        if(showOverview&&(!supportKinds.includes(kind)||count>=2||markers.length>=12))continue;
+        const maxScale=showOverview?Math.max(firePointScale(kind),150000):Math.max(firePointScale(kind),100000);
+        if(scale>maxScale)continue;
+      }
       const screen=view.toScreen(graphic.geometry);
       if(!screen||screen.x<0||screen.y<0||screen.x>view.width||screen.y>view.height)continue;
-      if(!selected&&((incidentScreen&&Math.abs(screen.x-incidentScreen.x)<150&&Math.abs(screen.y-incidentScreen.y)<100)||
-        markers.some(point=>Math.abs(point.x-screen.x)<markerGap&&Math.abs(point.y-screen.y)<55)))continue;
+      if(!selected&&((incidentScreen&&Math.abs(screen.x-incidentScreen.x)<88&&Math.abs(screen.y-incidentScreen.y)<64)||
+        markers.some(point=>Math.abs(point.x-screen.x)<markerGap&&Math.abs(point.y-screen.y)<40)))continue;
       graphic.visible=true;
       markers.push(screen);
+      categoryCounts.set(kind,count+1);
       if(!selected&&(scale>fireLabelScale(row.category.id)||
         labels.some(point=>Math.abs(point.x-screen.x)<labelGap&&Math.abs(point.y-screen.y)<52)))continue;
       labels.push(screen);
@@ -454,8 +463,8 @@
     graphics.removeAll();
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     if(fireAnalysis){
-      graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[33,133,213,.08],
-        outline:{color:'#17649e',width:2,style:'solid'}}}));
+      graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',color:[245,34,53,.12],
+        outline:{color:'#ed203a',width:2,style:'solid'}}}));
       const edge=circle.rings[0].reduce((top,vertex)=>vertex[1]>top[1]?vertex:top);
       graphics.add(new Graphic({
         geometry:new Point({x:edge[0],y:edge[1],spatialReference:circle.spatialReference}),
