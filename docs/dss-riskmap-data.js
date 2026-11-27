@@ -1,6 +1,6 @@
 (() => {
  'use strict';
- const firePointScales={estate:0,hospital:180000,fire:180000,police:100000,community:65000,school:65000,business:14000,aqm:42000,wqm:42000,cem:42000,environment:35000,waterWatch:35000,wastewater:35000,airWatch:35000,waste:35000,hydrant:18000,cctv:18000};
+ const firePointScales={estate:0,hospital:180000,fire:180000,police:100000,community:65000,school:65000,business:14000,aqm:23000,wqm:23000,cem:23000,environment:35000,waterWatch:35000,wastewater:35000,airWatch:35000,waste:35000,hydrant:18000,cctv:18000};
  const firePointScale=id=>firePointScales[id]??35000;
  const fireLabel=(color,size=10)=>({type:'text',color,haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size,weight:'bold'}});
  const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
@@ -1129,13 +1129,13 @@
         type:'unique-value',
         valueExpression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'aqm', 'AQMS', 'aqm', 'WQMS', 'wqm', 'CEMS', 'cem', '')",
         uniqueValueInfos:['aqm','wqm','cem'].map(kind=>({
-          value:kind,label:fireMapIcons.categories.find(category=>category.id===kind).label,symbol:firePointSymbol(kind,31)
+          value:kind,label:fireMapIcons.categories.find(category=>category.id===kind).label,symbol:firePointSymbol(kind,22)
         })),
-        defaultSymbol:firePointSymbol('environment',28)
+        defaultSymbol:firePointSymbol('environment',22)
       }:{type:'simple',symbol:monitoringSymbol},
-      labelingInfo:[{minScale:fireMapIcons?42000:150000,labelPlacement:fireMapIcons?'below-center':'above-center',
+      labelingInfo:[{minScale:fireMapIcons?17000:150000,labelPlacement:fireMapIcons?'below-center':'above-center',
         labelExpressionInfo:{expression:fireMapIcons?"DefaultValue($feature.StationTH, $feature.Type)":"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', 'สถานี e-Monitoring')"},
-        symbol:fireMapIcons?{...fireLabel('#243543'),yoffset:-9}:fireLabel('#153a38')}],
+        symbol:fireMapIcons?{...fireLabel('#243543',9),yoffset:-2}:fireLabel('#153a38')}],
       featureReduction:fireMapIcons?null:{type:'cluster',clusterRadius:'38px',clusterMinSize:'18px',clusterMaxSize:'28px',maxScale:30000,
         labelingInfo:[{labelPlacement:'center-center',labelExpressionInfo:{expression:'Text($feature.cluster_count)'},symbol:{type:'text',color:'#153a38',font:{size:9,weight:'bold'}}}]},
       popupTemplate:{title:'{StationTH}',expressionInfos:[{name:'stationCategory',title:'ประเภทสถานี',expression:"Decode(Upper($feature.Type), 'AIR QUALITY', 'AQMs', 'WQMS', 'WQMs', 'CEMS', 'CEMs', DefaultValue($feature.Type, 'ไม่ระบุ'))"}],content:[{type:'fields',fieldInfos:[
