@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>วิเคราะห์และรายงานเหตุไฟไหม้ | EMCC</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#242424;font:16px/1.5 system-ui,sans-serif}
+main{max-width:1920px;margin:auto}
+iframe{display:block;width:100%;border:0}
+#analysis{height:100vh;height:100dvh}
+#report-section{padding:16px 20px;border-top:1px solid #ddd}
+#report-section h1{margin:0 0 8px;font-size:18px}
+#report-state{margin:0 0 10px}
+#report{height:100vh;height:100dvh}
+#report[hidden]{display:none}
+</style>
+</head>
+<body>
+<main>
+  <iframe id="analysis" title="วิเคราะห์เหตุไฟไหม้" src="./fire-report.html?view=data&amp;hazard=fire&amp;combinedFire=1"></iframe>
+  <section id="report-section" aria-labelledby="report-title">
+    <h1 id="report-title" tabindex="-1">รายงานเหตุไฟไหม้</h1>
+    <p id="report-state" role="status">ระบุจุดเกิดเหตุด้านบน แล้วกด «ไปหน้ารายงาน»</p>
+    <iframe id="report" title="รายงานข้อมูลสนับสนุนการรับมือเหตุไฟไหม้" hidden></iframe>
+  </section>
+</main>
+<script>
+const analysis=document.getElementById('analysis');
+const report=document.getElementById('report');
+const state=document.getElementById('report-state');
+const title=document.getElementById('report-title');
+function openReport(empty){
+  const url=new URL('./fire-report.html',location.href);
+  url.search=new URLSearchParams({view:'data',hazard:'fire',workspace:'report',v:String(Date.now())});
+  if(empty)url.searchParams.set('emptyReport','1');
+  state.textContent='กำลังเปิดรายงาน…';
+  report.hidden=false;
+  report.src=url.href;
+  title.focus();
+}
+window.addEventListener('message',event=>{
+  if(event.origin===location.origin&&event.source===analysis.contentWindow&&event.data?.type==='ieat:open-inline-fire-report'){
+    openReport(event.data.empty===true);
+  }
+});
+analysis.addEventListener('load',()=>{
+  const current=new URL(analysis.contentWindow.location.href);
+  if(current.origin!==location.origin||current.searchParams.get('workspace')!=='report')return;
+  const source=new URL('./fire-report.html',location.href);
+  source.search=new URLSearchParams({view:'data',hazard:'fire',combinedFire:'1'});
+  const empty=current.searchParams.has('emptyReport');
+  if(!empty)source.searchParams.set('restoreFire','1');
+  analysis.src=source.href;
+  openReport(empty);
+});
+report.addEventListener('load',()=>{
+  if(report.hidden)return;
+  state.textContent='';
+  const back=report.contentDocument?.getElementById('fireReturnToAnalysis');
+  back?.addEventListener('click',event=>{
+    event.preventDefault();
+    analysis.scrollIntoView({block:'start'});
+  },true);
+});
+</script>
+</body>
+</html>
