@@ -408,14 +408,14 @@
     const tip=new Point({longitude:end[0],latitude:end[1]});
     windLayer.addMany([
       new Graphic({geometry:{type:'polygon',rings:[sector],spatialReference:sr},symbol:{
-        type:'simple-fill',color:[10,139,131,.13],outline:{color:'#16877e',width:1.4,style:'short-dash'}
+        type:'simple-fill',color:[112,85,151,.16],outline:{color:'#71539B',width:1.4,style:'short-dash'}
       }}),
       new Graphic({geometry:{type:'polyline',paths:[[start,end]],spatialReference:sr},symbol:{
-        type:'simple-line',color:'#16776f',width:2
+        type:'simple-line',color:'#563880',width:2
       }}),
       new Graphic({geometry:tip,symbol:{type:'simple-marker',path:'M0 -8 L6 6 L0 3 L-6 6 Z',size:13,
-        angle:(bearing-view.rotation+360)%360,color:'#16776f',outline:{color:'#fff',width:1.25}}}),
-      new Graphic({geometry:tip,symbol:{...fireLabel('#135c56',10),text:speed+' กม./ชม.',yoffset:-15}})
+        angle:(bearing-view.rotation+360)%360,color:'#563880',outline:{color:'#fff',width:1.25}}}),
+      new Graphic({geometry:tip,symbol:{...fireLabel('#473066',10),text:speed+' กม./ชม.',yoffset:-15}})
     ]);
   }
   function showWind(weather){
