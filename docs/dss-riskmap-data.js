@@ -281,6 +281,7 @@
       const button=el('button',null,'fire-result-row'), image=el('img');
       image.src=iconUrl(row.category);image.alt='';image.width=30;image.height=30;
       const detail=el('span');
+      button.title=row.name;
       detail.append(el('strong',row.name),el('small',row.category.label+' · '+row.source));
       button.type='button';button.setAttribute('aria-pressed','false');bufferButtons.set(row,button);button.append(image,detail,el('small',row.intersection?'ตัดวงรัศมี':row.distance.toFixed(2)+' กม.'));
       button.onclick=()=>focusBufferRow(row,graphicsByRow.get(row));
@@ -385,8 +386,8 @@
       }
     }));
     if(externalRequest!==request)return;
-    status.textContent='รัศมี '+km+' กม. · พบ '+number(bufferRecords.length)+' รายการ'+
-      (failures.length?' · โหลดไม่ได้: '+failures.join(', '):'');
+    status.textContent='รัศมี '+km+' กม. · พบ '+number(bufferRecords.length)+' รายการ';
+    if(failures.length)status.append(el('small','โหลดไม่ได้: '+failures.join(', '),'fire-source-status'));
   }
   if(fireSources)$('fireBufferFilter').addEventListener('input',()=>paintBuffer());
   const compass=['เหนือ','ตะวันออกเฉียงเหนือ','ตะวันออก','ตะวันออกเฉียงใต้','ใต้','ตะวันตกเฉียงใต้','ตะวันตก','ตะวันตกเฉียงเหนือ'];
