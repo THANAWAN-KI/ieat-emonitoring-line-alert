@@ -258,7 +258,20 @@
       const button=el('button'), id=category?.id||'';
       button.type='button';button.setAttribute('aria-pressed',String(activeCategory===id));
       if(category){const icon=el('img');icon.src=iconUrl(category);icon.alt='';icon.width=22;icon.height=22;button.append(icon);}
-      button.append(el('span',(category?.label||'ทั้งหมด')+' '+number(count)));
+      const label=(category?.label||'ทั้งหมด')+' '+number(count);
+      if(fireAnalysis){
+        button.title=label;
+        button.setAttribute('aria-label',label);
+        if(!category){
+          const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+          svg.setAttribute('viewBox','0 0 24 24');
+          svg.setAttribute('aria-hidden','true');
+          const path=document.createElementNS(svg.namespaceURI,'path');
+          path.setAttribute('d','M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z');
+          path.setAttribute('fill','currentColor');
+          svg.append(path);button.append(svg);
+        }
+      }else button.append(el('span',label));
       button.onclick=()=>{activeCategory=id;renderCategories();paintBuffer();};
       host.append(button);
     }
