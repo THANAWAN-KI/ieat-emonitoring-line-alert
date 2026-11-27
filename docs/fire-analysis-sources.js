@@ -89,15 +89,13 @@
         '<rect x="6.5" y="5.5" width="23" height="23" rx="6" fill="none" stroke="white" stroke-opacity=".62"/>'+
         '<path transform="translate(5 4) scale(.8)" d="'+symbol+'" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
-    if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13" fill="#8590a4" stroke="#fff" stroke-width="3"/><circle cx="18" cy="18" r="5" fill="#fff"/></svg>';
-    if(id==='estate'){
-      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
-        '<defs><linearGradient id="estate-fill" x1="0" y1="2" x2="0" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#b1aaa7"/><stop offset="1" stop-color="#746e6d"/></linearGradient></defs>'+
-        '<path d="M18 32c-2-1.8-2.1-4.5-6.2-6.3a13 13 0 1 1 12.4 0C20.1 27.5 20 30.2 18 32Z" fill="#fff"/>'+
-        '<circle cx="18" cy="14" r="11.75" fill="url(#estate-fill)"/>'+
-        '<circle cx="18" cy="14" r="4.7" fill="#fff"/>'+
-        '<circle cx="18" cy="34" r="1.65" fill="#746e6d" stroke="#fff" stroke-width="1.15"/></svg>';
-    }
+    if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
+      '<rect x="4" y="4" width="28" height="28" rx="7" fill="#b94b16" stroke="#fff" stroke-width="2"/>'+
+      '<path d="M9 25V14h4v5l6-4v4l8-4v10H9Zm4-3h2m4 0h2m3 0h1" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    if(id==='estate')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
+      '<path d="M18 33c-2-2-3-5-7-7a12 12 0 1 1 14 0c-4 2-5 5-7 7Z" fill="#17677e" stroke="#fff" stroke-width="2"/>'+
+      '<path d="M11 22V12h6v10m0-7h7v7m-14 0h15m-12-7h2m-2 3h2m5 0h2" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'+
+      '<circle cx="18" cy="34" r="1.4" fill="#17677e" stroke="#fff" stroke-width=".8"/></svg>';
     const glyph=id==='hospital'
       ? '<path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>'
       : glyphs[id];
