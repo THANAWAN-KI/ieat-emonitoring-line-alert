@@ -6,6 +6,20 @@
    business:3200,hydrant:4200,cctv:4000};
  const fireLabelScale=id=>fireLabelScales[id]??9500;
  const fireLabel=(color,size=10)=>({type:'text',color,haloColor:'#fff',haloSize:2,font:{family:'Sarabun',size,weight:'bold'}});
+ const fireIncidentPinUrl='data:image/svg+xml,'+encodeURIComponent(
+   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 76"><defs><linearGradient id="red" x2="0%" y2="100%"><stop stop-color="#ff6667"/><stop offset="1" stop-color="#f23c42"/></linearGradient></defs><ellipse cx="32" cy="72" rx="12" ry="3" fill="#652c25" opacity=".18"/><path fill="url(#red)" d="M32 1a30 30 0 0 1 9 58l-9 13-9-13A30 30 0 0 1 32 1Z"/><circle cx="32" cy="31" r="12" fill="#bf2b2b"/></svg>'
+ );
+ function positionFireIncidentLabel(label,point,width,height,markerHeight){
+   label.hidden=!point||point.x<0||point.x>width||point.y<0||point.y>height;
+   if(label.hidden)return;
+   label.style.maxWidth=Math.min(270,Math.max(50,(width-30)/2))+'px';
+   const gap=markerHeight*.46+5;
+   const right=point.x+gap+label.offsetWidth<=width-5||point.x<width/2;
+   label.dataset.side=right?'right':'left';
+   const x=right?point.x+gap:point.x-gap-label.offsetWidth;
+   label.style.left=Math.max(5,Math.min(width-label.offsetWidth-5,x))+'px';
+   label.style.top=Math.max(5,Math.min(height-label.offsetHeight-5,point.y-markerHeight*.58-label.offsetHeight/2))+'px';
+ }
  const webmapId='9c25f3f77ba5481cb481b402177884c2',portalUrl='https://ieat.maps.arcgis.com';
  const base='https://services5.arcgis.com/XbJa06Lil6auloCa/arcgis/rest/services/';
  const riskMapLayers=new Map();
@@ -93,7 +107,7 @@
   const fireSources=window.ieatFireAnalysisSources;
   const fireReportPage=document.documentElement.classList.contains('fire-document-page');
   const fireAnalysis=fireSources&&!fireReportPage;
-  const incidentMarkerSize=fireAnalysis?76:40;
+  const incidentMarkerSize=fireAnalysis?62:40;
   const externalLayer=fireSources&&new GraphicsLayer({title:'จุดข้อมูลในรัศมี',visible:!fireAnalysis});
   const windLayer=fireSources&&new GraphicsLayer({title:'ลูกศรทิศทางลม',listMode:'hide'});
   if(fireSources){map.add(externalLayer);map.add(windLayer);map.reorder(pinLayer,map.layers.length-1);}
@@ -355,7 +369,10 @@
       const layer=el('div'),label=el('div');
       layer.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3';
       label.style.cssText='position:absolute;width:max-content;box-sizing:border-box;padding:7px 11px;background:#fff;border:2px solid '+(fireSources?'#be202c':'#edb800')+';border-radius:9px;color:#172437;text-align:center;font:700 14px Sarabun,sans-serif;overflow-wrap:anywhere';
-      if(fireAnalysis)Object.assign(label.style,{background:'transparent',border:'0',padding:'0',color:'#20252b',font:'700 15px/1.35 Sarabun,sans-serif',webkitTextStroke:'3px #fff',paintOrder:'stroke fill',textShadow:'-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 0 3px #fff'});
+      if(fireAnalysis){
+        label.style.cssText='';
+        label.className='fire-incident-name';
+      }
       const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),line=document.createElementNS(ns,'line');
       svg.style.cssText='position:absolute;inset:0;width:100%;height:100%';
       line.setAttribute('stroke',fireSources?'#be202c':'#edb800');line.setAttribute('stroke-width','2.5');
@@ -373,13 +390,11 @@
     label.textContent=!fireAnalysis&&fireSources&&name&&!name.startsWith('จุดเกิดเหตุ')?'จุดเกิดเหตุ · '+name:name||'จุดเกิดเหตุ';
     label.style.maxWidth=Math.min(310,width-32)+'px';
     const w=label.offsetWidth,h=label.offsetHeight;
-    const clamp=(n,min,max)=>Math.max(min,Math.min(n,max));
     if(fireAnalysis){
-      const below=point.y+8;
-      label.style.left=clamp(point.x-w/2,8,width-w-8)+'px';
-      label.style.top=clamp(below+h<=height-8?below:point.y-h-incidentMarkerSize-6,8,height-h-8)+'px';
+      positionFireIncidentLabel(label,point,width,height,incidentMarkerSize);
       return;
     }
+    const clamp=(n,min,max)=>Math.max(min,Math.min(n,max));
     const candidates=[[-w-38,-h-65],[38,-h-65],[-w/2,-h-95],[-w-48,34],[48,34],[-w/2,60]].map(([dx,dy])=>({
       x:clamp(point.x+dx,12,width-w-12),y:clamp(point.y+dy,12,height-h-12)
     })).filter(({x,y})=>point.x<x-18||point.x>x+w+18||point.y<y-18||point.y-33>y+h+18);
@@ -408,6 +423,7 @@
     return {text:label.textContent,x:label.offsetLeft,y:label.offsetTop,width:label.offsetWidth,height:label.offsetHeight,
       font:css.fontWeight+' '+css.fontSize+' '+css.fontFamily,color:css.color,background:css.backgroundColor,border:css.borderColor,borderWidth:parseFloat(css.borderWidth)||2,
       paddingX:parseFloat(css.paddingLeft)||10,paddingY:parseFloat(css.paddingTop)||6,lineHeight:parseFloat(css.lineHeight)||20,
+      side:fireAnalysis?label.dataset.side:null,
       line:['x1','y1','x2','y2'].map(key=>Number(line.getAttribute(key)))};
   };
   const publishPoint=()=>{window.ieatCoverageIncident=origin&&{company:name,lat:origin.latitude,lng:origin.longitude,km:Number(radius.value)};};
@@ -467,7 +483,7 @@
     const label = {type:'text',text:name||'จุดเกิดเหตุ',color:'#292824',backgroundColor:fireView?'#fffdf6':'#fff',
       borderLineColor:fireView?'#928b7f':'#d8c8df',borderLineSize:1,
       horizontalAlignment:'center',verticalAlignment:'bottom',yoffset:44,font:{family:'Sarabun',size:11,weight:'bold'}};
-    if(fireAnalysis)updateDetailMap?.(origin,pin?.symbol);
+    if(fireAnalysis)updateDetailMap?.(origin,pin?.symbol,name);
     if(fireView)updateIncidentCallout();
     else graphics.addMany([cue,leader,label].map(symbol=>new Graphic({geometry:origin,symbol})));
     return circle;
@@ -525,7 +541,7 @@
     sketch.cancel();
     origin=point;name=label;
     pinLayer.removeAll();
-    pin=new Graphic({geometry:point,symbol:fireSources?markerSymbol(fireSources.incident,incidentMarkerSize):fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
+    pin=new Graphic({geometry:point,symbol:fireAnalysis?{type:'picture-marker',url:fireIncidentPinUrl,width:52,height:incidentMarkerSize,yoffset:incidentMarkerSize*.45}:fireSources?markerSymbol(fireSources.incident,incidentMarkerSize):fireView?{type:'picture-marker',url:fireIncidentIcon,width:34,height:34}:{type:'picture-marker',url:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40"><defs><linearGradient id="pin" x2="1" y2="1"><stop stop-color="#ff9770"/><stop offset=".47" stop-color="#d44938"/><stop offset="1" stop-color="#7b202a"/></linearGradient></defs><path fill="url(#pin)" stroke="#fff" stroke-width="2" d="M16 1C8 1 2 7 2 15c0 10 14 24 14 24s14-14 14-24C30 7 24 1 16 1Z"/><circle cx="16" cy="15" r="8" fill="#fff"/><path stroke="#c64032" stroke-width="2.5" stroke-linecap="round" d="M16 10v6m0 4v.2"/></svg>'),width:26,height:34,yoffset:17}});
     pinLayer.add(pin);
     view.closePopup();draw();if(!independent&&!fireSources)updateNearby();queueReport();
     if(!fireSources)view.goTo({target:point,zoom:Math.max(view.zoom,17)},{animate:false}).catch(()=>{});
@@ -544,7 +560,7 @@
         drag=null;
         if(!pin||picking||event.button>0)return;
         const screen=view.toScreen(pin.geometry),start=event.origin||event;
-        const halfWidth=fireAnalysis?incidentMarkerSize*.37:17;
+        const halfWidth=fireAnalysis?26:17;
         const markerHeight=fireAnalysis?incidentMarkerSize*.9:35;
         if(!screen||Math.abs(start.x-screen.x)>halfWidth||start.y<screen.y-markerHeight||start.y>screen.y+6)return;
         drag={pin,offsetX:screen.x-start.x,offsetY:screen.y-start.y};
@@ -1160,21 +1176,36 @@
     }))).catch(error=>console.warn('Monitoring stations',error));
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
     let detailView,detailPin,detailLabel,detailPoint;
-    function updateDetailMap(point,symbol){
+    const positionDetailLabel=()=>{
+      const screen=detailView.toScreen(detailPoint);
+      positionFireIncidentLabel(detailLabel,screen,detailView.width,detailView.height,detailPin.symbol.height);
+    };
+    function updateDetailMap(point,symbol,title){
       const panel=$('fireIncidentInset');
-      if(!panel||point===detailPoint||!symbol)return;
+      if(!panel||!symbol)return;
+      if(detailLabel)detailLabel.textContent=title||'จุดเกิดเหตุ';
+      if(point===detailPoint)return;
       detailPoint=point;
       const legend=$('fireOverviewLegend');
       if(legend)legend.hidden=false;
       if(!detailView){
         const detailGraphics=new GraphicsLayer();
         detailPin=new Graphic({geometry:point,symbol:symbol.clone()});
-        detailLabel=new Graphic({geometry:point,symbol:{...fireLabel('#243543',11),text:'จุดเกิดเหตุ',yoffset:-13}});
-        detailGraphics.addMany([detailPin,detailLabel]);
+        detailPin.symbol.width=36;
+        detailPin.symbol.height=43;
+        detailPin.symbol.yoffset=19;
+        detailLabel=el('div',title||'จุดเกิดเหตุ','fire-incident-name');
+        detailLabel.hidden=true;
+        panel.append(detailLabel);
+        detailGraphics.add(detailPin);
         const detailMap=new ArcMap({basemap:map.basemap.clone(),layers:[detailGraphics]});
         panel.hidden=false;
         detailView=new MapView({container:$('fireIncidentInsetView'),map:detailMap,center:point,zoom:17,
           ui:{components:['attribution']},constraints:{rotationEnabled:false}});
+        detailView.when(()=>{
+          for(const property of ['viewpoint','width','height'])detailView.watch(property,positionDetailLabel);
+          positionDetailLabel();
+        }).catch(()=>{});
         map.watch('basemap',basemap=>{
           detailMap.basemap=basemap.clone();
           if($('coverageBasemap')?.value===referenceBasemap)styleNavigationBasemap(detailMap.basemap).catch(()=>{});
@@ -1183,7 +1214,6 @@
         return;
       }
       detailPin.geometry=point;
-      detailLabel.geometry=point;
       detailView.center=point;
     }
     const trafficServiceUrl=window.ieatFireTrafficServiceUrl;
@@ -1352,12 +1382,19 @@
       const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
       const ctx=canvas.getContext('2d');ctx.drawImage(image,0,0,width,height);
       ctx.save();ctx.scale(width/view.width,height/view.height);
-      ctx.strokeStyle=fireView?'#286ed2':callout.border;ctx.lineWidth=2.5;
-      ctx.beginPath();ctx.moveTo(callout.line[0],callout.line[1]);ctx.lineTo(callout.line[2],callout.line[3]);ctx.stroke();
-      if(fireView)ctx.strokeStyle='#80b4f4';
-      ctx.fillStyle=fireView?'#fff':callout.background;ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
-      ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
-      ctx.font=callout.font;ctx.fillStyle=fireView?'#000':callout.color;ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillStyle=callout.background;
+      if(callout.side){
+        const left=callout.side==='right',x=left?callout.x:callout.x+callout.width,y=callout.y+callout.height/2;
+        ctx.beginPath();ctx.roundRect(callout.x,callout.y,callout.width,callout.height,7);ctx.fill();
+        ctx.beginPath();ctx.moveTo(x,y-5);ctx.lineTo(x+(left?-5:5),y);ctx.lineTo(x,y+5);ctx.fill();
+      }else{
+        ctx.strokeStyle=fireView?'#286ed2':callout.border;ctx.lineWidth=2.5;
+        ctx.beginPath();ctx.moveTo(callout.line[0],callout.line[1]);ctx.lineTo(callout.line[2],callout.line[3]);ctx.stroke();
+        if(fireView)ctx.strokeStyle='#80b4f4';
+        ctx.fillRect(callout.x,callout.y,callout.width,callout.height);
+        ctx.lineWidth=callout.borderWidth;ctx.strokeRect(callout.x+1,callout.y+1,callout.width-2,callout.height-2);
+      }
+      ctx.font=callout.font;ctx.fillStyle=fireView&&!callout.side?'#000':callout.color;ctx.textAlign='center';ctx.textBaseline='top';
       const textWidth=callout.width-2*(callout.paddingX+callout.borderWidth);
       const measuredWidth=ctx.measureText(callout.text).width;
       const textScale=Math.min(1,textWidth/measuredWidth);
