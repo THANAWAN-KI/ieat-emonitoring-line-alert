@@ -158,7 +158,7 @@
     const supportKinds=['hospital','fire','police','hydrant','cctv','community','school','estate'];
     const host=$('coverageMapView').getBoundingClientRect();
     const blocked=[];
-    for(const element of [$('coverageMapView').querySelector('.fire-incident-name'),document.querySelector('.fire-map-detail')]){
+    for(const element of [$('coverageMapView').querySelector('.fire-incident-name'),document.querySelector('.fire-map-detail'),$('coverageWind')]){
       if(!element||element.closest('[hidden]'))continue;
       const box=element.getBoundingClientRect();
       if(box.width&&box.height)blocked.push({left:box.left-host.left-5,right:box.right-host.left+5,top:box.top-host.top-5,bottom:box.bottom-host.top+5});
@@ -413,7 +413,7 @@
   }
   if(windBox){
     if(fireSources?.windArrow)windBox.querySelector('svg').outerHTML=fireAnalysis?analysisWindArrow:fireSources.windArrow;
-    if(!fireAnalysis)view.container.append(windBox);
+    view.container.append(windBox);
     windBox.hidden=false;showWind();
   }
   if(fireSources)view.watch('rotation',()=>{if(windWeather)showWind(windWeather);});
@@ -1290,8 +1290,6 @@
       if(detailLabel)detailLabel.textContent=title||'จุดเกิดเหตุ';
       if(point===detailPoint)return;
       detailPoint=point;
-      const legend=$('fireOverviewLegend');
-      if(legend)legend.hidden=false;
       if(!detailView){
         const detailGraphics=new GraphicsLayer();
         detailPin=new Graphic({geometry:point,symbol:symbol.clone()});
@@ -1606,21 +1604,7 @@
     }
     view.ui.add(new Expand({view,content:layerPanel,expandIcon:'layers',expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
     const windInfo=$('coverageWind');
-    if(dedicatedFireAnalysis){
-      view.ui.add(new Compass({view}),'top-right');
-      if(windInfo){
-        const windPanel=el('div',null,'fire-wind-panel');
-        windPanel.append(windInfo);
-        view.ui.add(new Expand({
-          view,
-          content:windPanel,
-          expandIcon:'arrow-up',
-          expandTooltip:'ลมที่จุดเกิดเหตุ',
-          collapseTooltip:'ปิดข้อมูลลมที่จุดเกิดเหตุ',
-          group:'fire-map-tools'
-        }),'top-right');
-      }
-    }
+    if(dedicatedFireAnalysis)view.ui.add(new Compass({view}),'top-right');
     const mapInfo=$('fireMapInfo');
     if(fireMapIcons&&mapInfo){
       if(!dedicatedFireAnalysis&&windInfo)mapInfo.append(windInfo);
@@ -1634,20 +1618,6 @@
         supportKey.append(row);
       }
       mapInfo.append(supportKey);
-      const overviewKey=$('fireOverviewLegend');
-      if(overviewKey){
-        const list=el('ul',null,'fire-support-key');
-        const ids=['hospital','fire','police','hydrant','cctv','community','school'];
-        for(const id of ids){
-          const category=fireMapIcons.categories.find(item=>item.id===id);
-          const row=el('li'),icon=el('img');
-          icon.src='data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category));
-          icon.alt='';
-          row.append(icon,el('span',id==='hospital'?'โรงพยาบาล':id==='school'?'โรงเรียน':category.label));
-          list.append(row);
-        }
-        overviewKey.append(list);
-      }
       const layerLegend=el('details',null,'fire-layer-legend');
       const legendBody=el('div');
       layerLegend.append(el('summary','สัญลักษณ์ตามชั้นข้อมูล'),legendBody);
