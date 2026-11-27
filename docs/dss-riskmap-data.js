@@ -1521,12 +1521,34 @@
       const width=1972,height=Math.max(1,Math.round(width*view.height/view.width));
       const callout=await window.ieatCoverageCalloutSnapshot?.();
       const shot=await view.takeScreenshot({format:transfer?'jpg':'png',quality:90,width,height});
-      if(!callout)return shot.dataUrl;
+      let inset, insetBounds;
+      if(transfer&&detailView?.ready&&detailView.stationary&&!detailView.updating){
+        const host=view.container.getBoundingClientRect();
+        const bounds=detailView.container.getBoundingClientRect();
+        if(bounds.width&&bounds.height){
+          try{
+            const shot=await detailView.takeScreenshot({format:'jpg',quality:90});
+            inset=new Image();inset.src=shot.dataUrl;await inset.decode();
+            insetBounds={x:bounds.left-host.left,y:bounds.top-host.top,w:bounds.width,h:bounds.height};
+          }catch{inset=null;}
+        }
+      }
+      if(!callout&&!inset)return shot.dataUrl;
       // ArcGIS screenshots omit HTML overlays. Paint the same label and leader onto the exported map.
       const image=new Image();image.src=shot.dataUrl;await image.decode();
       const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
       const ctx=canvas.getContext('2d');ctx.drawImage(image,0,0,width,height);
       ctx.save();ctx.scale(width/view.width,height/view.height);
+      if(inset){
+        const {x,y,w,h}=insetBounds;
+        ctx.drawImage(inset,x,y,w,h);
+        ctx.strokeStyle='#A5ADB5';ctx.lineWidth=1;ctx.strokeRect(x,y,w,h);
+        ctx.fillStyle='#fff';ctx.fillRect(x,y+h-16,w,16);
+        ctx.fillStyle='#52616B';ctx.font='10px Sarabun, sans-serif';
+        const attribution=detailView.container.querySelector('.esri-attribution')?.innerText.replace(/\s+/g,' ').trim()||'Esri World Imagery';
+        ctx.fillText(attribution,x+4,y+h-5,w-8);
+      }
+      if(!callout){ctx.restore();return canvas.toDataURL('image/jpeg',.9);}
       ctx.fillStyle=callout.background;
       if(callout.side){
         const left=callout.side==='right',x=left?callout.x:callout.x+callout.width,y=callout.y+callout.height/2;
