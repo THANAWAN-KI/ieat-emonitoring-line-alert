@@ -511,7 +511,7 @@
     const circle=new Circle({center:origin,radius:Number(radius.value),radiusUnit:'kilometers',geodesic:true});
     if(fireAnalysis||fireReportPage){
       graphics.add(new Graphic({geometry:circle,symbol:{type:'simple-fill',style:'none',
-        outline:{color:'#ed203a',width:2,style:'solid'}}}));
+        outline:{color:'#000000',width:2,style:'solid'}}}));
       const edge=circle.rings[0].reduce((top,vertex)=>vertex[1]>top[1]?vertex:top);
       graphics.add(new Graphic({
         geometry:new Point({x:edge[0],y:edge[1],spatialReference:circle.spatialReference}),
