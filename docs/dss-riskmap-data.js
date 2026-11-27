@@ -308,7 +308,10 @@
       windLayer.removeAll();
       if(moving&&origin){
         const direction=(from+180)%360;
-        const symbol={type:'picture-marker',angle:(direction-view.rotation+360)%360,width:39,height:76,yoffset:-77,
+        const angle=(direction-view.rotation+360)%360;
+        const radians=angle*Math.PI/180;
+        const symbol={type:'picture-marker',angle,width:39,height:76,
+          xoffset:fireAnalysis?Math.sin(radians)*88:0,yoffset:fireAnalysis?Math.cos(radians)*88:-77,
           url:'data:image/svg+xml,'+encodeURIComponent(fireSources.windArrow||'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path d="M18 4 28 28 18 23 8 28Z" fill="#2257c8" stroke="#fff" stroke-width="2"/></svg>')};
         windLayer.add(new Graphic({geometry:origin,symbol}));
       }
@@ -571,7 +574,15 @@
       externalReady=Promise.allSettled([refreshFireWind(),refreshExternal()]);
       if(fireAnalysis){
         const extent=draw().extent;
-        if(manual)await view.goTo(extent.expand(1.22),{animate:false}).catch(()=>{});
+        if(manual){
+          const target=extent.expand(1.38);
+          const landscape=view.width>=650;
+          if(landscape){
+            const dx=target.width*.24,dy=target.height*.10;
+            target.xmin+=dx;target.xmax+=dx;target.ymin-=dy;target.ymax-=dy;
+          }
+          await view.goTo(target,{animate:false}).catch(()=>{});
+        }
         if(revision!==incidentRevision)return;
         await externalReady;
         if(revision===incidentRevision)message.textContent='จุดเกิดเหตุ · '+name+' · รัศมี '+km+' กม.';
@@ -1135,15 +1146,18 @@
       ]}]}
     }))).catch(error=>console.warn('Monitoring stations',error));
     const view=new MapView({container:host,map,center:[101,14],zoom:5});
-    let detailView,detailPin,detailPoint;
+    let detailView,detailPin,detailLabel,detailPoint;
     function updateDetailMap(point,symbol){
       const panel=$('fireIncidentInset');
       if(!panel||point===detailPoint||!symbol)return;
       detailPoint=point;
+      const legend=$('fireOverviewLegend');
+      if(legend)legend.hidden=false;
       if(!detailView){
         const detailGraphics=new GraphicsLayer();
         detailPin=new Graphic({geometry:point,symbol:symbol.clone()});
-        detailGraphics.add(detailPin);
+        detailLabel=new Graphic({geometry:point,symbol:{...fireLabel('#243543',11),text:'จุดเกิดเหตุ',yoffset:-13}});
+        detailGraphics.addMany([detailPin,detailLabel]);
         const detailMap=new ArcMap({basemap:map.basemap.clone(),layers:[detailGraphics]});
         panel.hidden=false;
         detailView=new MapView({container:$('fireIncidentInsetView'),map:detailMap,center:point,zoom:17,
@@ -1156,6 +1170,7 @@
         return;
       }
       detailPin.geometry=point;
+      detailLabel.geometry=point;
       detailView.center=point;
     }
     const trafficServiceUrl=window.ieatFireTrafficServiceUrl;
@@ -1416,6 +1431,20 @@
         supportKey.append(row);
       }
       mapInfo.append(supportKey);
+      const overviewKey=$('fireOverviewLegend');
+      if(overviewKey){
+        const list=el('ul',null,'fire-support-key');
+        const ids=['hospital','fire','police','hydrant','cctv','community','school'];
+        for(const id of ids){
+          const category=fireMapIcons.categories.find(item=>item.id===id);
+          const row=el('li'),icon=el('img');
+          icon.src='data:image/svg+xml,'+encodeURIComponent(fireMapIcons.badge(category));
+          icon.alt='';
+          row.append(icon,el('span',id==='hospital'?'โรงพยาบาล':id==='school'?'โรงเรียน':category.label));
+          list.append(row);
+        }
+        overviewKey.append(list);
+      }
       const layerLegend=el('details',null,'fire-layer-legend');
       const legendBody=el('div');
       layerLegend.append(el('summary','สัญลักษณ์ตามชั้นข้อมูล'),legendBody);
