@@ -345,7 +345,7 @@
         if(fireAnalysis){
           const fromLabel=compass[Math.round(from/45)%8],toLabel=compass[Math.round(direction/45)%8];
           windLayer.add(new Graphic({geometry:origin,symbol:{
-            type:'text',text:'ลมที่จุดเกิดเหตุ · ลูกศรชี้ทิศที่ลมพัดไป\nจากทิศ'+fromLabel+' → ไปทิศ'+toLabel+'\nความเร็วลม '+speed+' กม./ชม.',
+            type:'text',text:fromLabel+' → '+toLabel+'\n'+speed+' กม./ชม.',
             color:'#18394e',backgroundColor:[255,255,255,.95],borderLineColor:'#c7dbe9',borderLineSize:1,
             font:{family:'Sarabun',size:10,weight:'bold'},horizontalAlignment:'center',verticalAlignment:'top',
             xoffset:symbol.xoffset,yoffset:symbol.yoffset-39
