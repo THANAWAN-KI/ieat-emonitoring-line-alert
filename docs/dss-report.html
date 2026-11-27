@@ -3635,6 +3635,17 @@ const slot=document.getElementById('fieldBriefMap'),weather=document.getElementB
 const fireReport=document.documentElement.dataset.reportTheme==='fire-purple';
 if(fireReport){
   slot.before(weather);
+  const legend=document.createElement('div');legend.className='fire-report-map-key';
+  legend.setAttribute('role','group');legend.setAttribute('aria-label','คำอธิบายสัญลักษณ์แผนที่');
+  const heading=document.createElement('h3');heading.textContent='คำอธิบายสัญลักษณ์';
+  legend.append(heading);
+  for(const [type,label] of [['incident','จุดเกิดเหตุ'],['radius','วงรัศมีค้นหา'],['wind','แนวทิศลม']]){
+    const entry=document.createElement('span'),symbol=document.createElement('i');
+    symbol.className='key-'+type;symbol.setAttribute('aria-hidden','true');
+    entry.append(symbol,label);legend.append(entry);
+  }
+  const source=document.createElement('p');source.textContent='ที่มา: แผนที่วิเคราะห์เหตุไฟไหม้ GIS IEAT EMCC';legend.append(source);
+  slot.after(legend);
   for(const [name,value] of Object.entries({
     position:'static',inset:'auto',width:'100%','max-width':'none','max-height':'none',
     overflow:'visible',margin:'0 0 8px',padding:'9px 12px','box-shadow':'none'
@@ -3956,7 +3967,9 @@ html body #report#report#report#report #fbWeather{border-radius:0!important}
       }else if(weather.parentElement!==map)map.append(weather);
     }
     const title=map?.closest('.fb-section')?.querySelector('h2');
-    const text='2. แผนที่และสภาพอากาศ · รัศมี '+getBufferRadii().join(' / ')+' กม.';
+    const text=(document.documentElement.dataset.reportTheme==='fire-purple'
+      ?'2. แผนที่จุดเกิดเหตุและพื้นที่โดยรอบ · รัศมี '
+      :'2. แผนที่และสภาพอากาศ · รัศมี ')+getBufferRadii().join(' / ')+' กม.';
     if(title&&title.textContent!==text)title.textContent=text;
     // Map sizing is handled by its ResizeObserver, not unrelated report text changes.
   }
@@ -4420,6 +4433,21 @@ html[data-report-theme="fire-purple"] body :is(#report,#dssPageTwo,#dssPageThree
 html[data-report-theme="fire-purple"] body :is(#report,#dssPageTwo,#dssPageThree,.dss-support-appendix) :is(h1,h2,h3,h4,h5,h6,th,caption,summary) > :is(span,strong,b):is(*,#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report#report){
   font-size:16px!important;font-weight:700!important;
 }
+</style>
+<style id="fire-report-cartographic-layout">
+html[data-report-theme="fire-purple"] #dssFieldBrief .fb-section:has(#fieldBriefMap)>h2{text-align:center}
+html[data-report-theme="fire-purple"] #dssFieldBrief #fieldBriefMap{
+  border:1px solid #1e1e1e!important;border-radius:0!important;background:#fff!important;
+}
+html[data-report-theme="fire-purple"] #fieldBriefMap>.report-map-zoom-controls{border-radius:0}
+.fire-report-map-key{display:flex;gap:5px 14px;flex-wrap:wrap;align-items:center;padding:7px 10px;border:1px solid #a7a8aa;border-top:0;background:#fff;color:#1e1e1e}
+.fire-report-map-key h3,.fire-report-map-key p{margin:0}
+.fire-report-map-key p{flex-basis:100%}
+.fire-report-map-key span{display:inline-flex;gap:5px;align-items:center}
+.fire-report-map-key i{display:inline-block;width:10px;height:10px;flex:none}
+.fire-report-map-key .key-incident{border-radius:50%;background:#ff5353}
+.fire-report-map-key .key-radius{border-radius:50%;border:1px solid #1e1e1e}
+.fire-report-map-key .key-wind{border:1px dashed #71539b;background:#70559729}
 </style>
 </body></html>
 
