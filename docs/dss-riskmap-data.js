@@ -693,7 +693,7 @@
     if(placeInput)selectPlace(event.mapPoint,'จุดเกิดเหตุ ('+event.mapPoint.latitude.toFixed(5)+', '+event.mapPoint.longitude.toFixed(5)+')');
     else place(event.mapPoint,name||'จุดเกิดเหตุ');
   });
-  async function syncReport(manual=true){
+  async function syncReport(manual=true,inlineReport=false){
     if(!origin||(!selectedFactory&&!independent)){message.textContent='เลือกโรงงานก่อนเปิดรายงาน';return;}
     if(!form.reportValidity())return;
     const button=$('coverageOpenReport'),frame=$('emergencyReportFrame');
@@ -718,12 +718,12 @@
         if(revision!==incidentRevision)return;
         await externalReady;
         if(revision===incidentRevision)message.textContent='จุดเกิดเหตุ · '+name+' · รัศมี '+km+' กม.';
-        return;
+        if(!inlineReport||revision!==incidentRevision)return;
       }
     }
     if(independent)window.ieatIncidentChosen=true;
     if(!fireSources)showWind();
-    if(fireReportPage)$('fireReportStatus').textContent=name+' · รัศมี '+km+' กม. · กำลังจัดทำรายงาน…';
+    if(fireReportPage||inlineReport)$('fireReportStatus').textContent=name+' · รัศมี '+km+' กม. · กำลังจัดทำรายงาน…';
     button.disabled=true;
     window.ieatCoverageReport={company:name,point,km,incidentType,status:'loading'};
     window.dispatchEvent(new Event('ieat-coverage-context-updated'));
@@ -761,15 +761,16 @@
       if(revision!==incidentRevision)return;
       context.status='rendering-map';
       draw();
-      const mapImage=await window.ieatCaptureCoverageMap();
+      const mapImage=await window.ieatCaptureCoverageMap({transfer:inlineReport});
+      if(!mapImage)throw Error('ยังบันทึกภาพแผนที่ไม่ได้');
       if(revision!==incidentRevision)return;
       frame.contentWindow.dssSetCoverageMapImage(mapImage,context.id);
       context.status='ready';
       window.dispatchEvent(new Event('ieat-coverage-context-updated'));
       if(manual)$('dashboardDownloadImage')?.focus({preventScroll:true});
       message.textContent='อัปเดตจุดเกิดเหตุ รัศมี แผนที่ รายงาน และข้อความ LINE แล้ว';
-      if(fireReportPage)$('fireReportStatus').textContent='รายงานพร้อม · '+name+' · รัศมี '+km+' กม.';
-    }catch(error){if(revision===incidentRevision){showWind({});if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';if(fireReportPage)$('fireReportStatus').textContent=message.textContent;}}
+      if(fireReportPage||inlineReport)$('fireReportStatus').textContent='รายงานพร้อม · '+name+' · รัศมี '+km+' กม.';
+    }catch(error){if(revision===incidentRevision){showWind({});if(window.ieatCoverageReport)window.ieatCoverageReport.status='error';window.dispatchEvent(new Event('ieat-coverage-context-updated'));message.textContent=error.message||'เปิดรายงานไม่ได้ กรุณาลองอีกครั้ง';if(fireReportPage||inlineReport)$('fireReportStatus').textContent=message.textContent;}}
     finally{button.disabled=false;}
   };
   $('coverageOpenReport').onclick=event=>{event.preventDefault();hasSearched=true;incidentRevision++;syncReport(true);};
@@ -836,6 +837,19 @@
     window.ieatOpenFireDocument=async (allowEmpty=false)=>{
       if(openingFireReport)return;
       const empty=allowEmpty&&!origin;
+      if(fireAnalysis&&window.parent===window){
+        if(!origin||(!independent&&!selectedFactory)){message.textContent='เลือกจุดเกิดเหตุก่อนเปิดรายงาน';return;}
+        if(!form.reportValidity())return;
+        const panel=$('riskmapReportPanel');
+        document.documentElement.classList.add('fire-inline-report-open');
+        panel.hidden=false;
+        panel.scrollIntoView({block:'start',behavior:'smooth'});
+        openingFireReport=true;
+        clearTimeout(syncTimer);
+        incidentRevision++;
+        try{await syncReport(false,true);}finally{openingFireReport=false;}
+        return;
+      }
       if(!empty&&!saveIncident())return;
       openingFireReport=true;
       try{
@@ -1578,7 +1592,7 @@
       previewBusy=true;
       const id=previewSequence;
       try{
-        const image=await window.ieatCaptureCoverageMap();
+        const image=await window.ieatCaptureCoverageMap({transfer:dedicatedFireAnalysis});
         if(!image||id!==previewSequence||window.ieatCoverageReport?.id!==context.id)return;
         const frame=$('emergencyReportFrame');
         frame?.contentWindow?.dssSetCoverageMapImage?.(image,context.id);
