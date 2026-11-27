@@ -541,9 +541,8 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
     <a href="https://nawakonnakhonchai-wq.github.io/Emergency_dashboard/" target="_blank" rel="noopener noreferrer">เปิดสถิติส่วนกลางใน Emergency Dashboard</a>
   </section>
   </div>
-  <form id="coverageIncidentForm" aria-labelledby="coverageIncidentTitle" aria-describedby="coverageFactoryGuide">
+  <form id="coverageIncidentForm" aria-labelledby="coverageIncidentTitle">
   <h2 id="coverageIncidentTitle">ค้นหาจุดเกิดเหตุ</h2>
-  <p id="coverageFactoryGuide" class="riskmap-search-guide">ค้นหาจากทะเบียนโรงงาน ชื่อสถานที่ หรือพิกัด แล้วกำหนดรัศมี</p>
   <div class="coverage-incident-controls">
     <label class="coverage-wide">ชื่อโรงงานหรือเลขทะเบียน <input id="coverageFactoryQuery" type="search" placeholder="เช่น 72250000325534 หรือ น.53(1)-3/2553-ญอต."></label>
     <label>ประเภทเหตุ <select id="coverageIncidentType" required><option value="">ยังไม่ระบุ</option><option>เหตุไฟไหม้</option><option>สารเคมีรั่วไหล</option><option>อุบัติเหตุ</option><option>อื่น ๆ</option></select></label>
@@ -559,7 +558,7 @@ html body.fire-rail-collapsed #fireAlertSlot #hub-alert-button { font-size:0; }
     </div>
     <button id="coverageOpenReport" type="button" disabled>ค้นหาโรงงาน</button>
   </div>
-  <p id="coverageIncidentStatus" role="status">ค้นหาชื่อสถานที่ พิกัด หรือโรงงาน แล้วกำหนดรัศมีเพื่อดูพื้นที่ใกล้เคียง</p>
+  <p id="coverageIncidentStatus" role="status"></p>
   <div id="coverageFactoryMatches"></div>
   <button id="fireApplyRadius" type="button" disabled>อัปเดตรัศมี</button>
   <div id="coverageNearbyResults" hidden></div>
@@ -3561,7 +3560,6 @@ if(document.documentElement.classList.contains('fire-risk-view')){
       incidentType.append(option);
     }
   }
-  document.getElementById('coverageFactoryGuide').textContent='เลือกโรงงาน ค้นหาสถานที่หรือพิกัด หรือปักหมุดบนแผนที่ แล้วกำหนดรัศมีเพื่อดูจุดช่วยเหลือและเตรียมรายงาน';
 }
 </script>
 
@@ -3666,7 +3664,7 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .riskmap-overvi
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .riskmap-overview-heading h1{
   color:#fff!important;font-size:23px!important;
 }
-html.fire-analysis-page #coverageFactoryGuide{font-size:13px;line-height:1.6}
+html.fire-analysis-page #coverageIncidentStatus:empty{margin:0}
 html.fire-analysis-page #coverageIncidentForm .coverage-incident-controls{gap:8px}
 html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(input,select,button){
   border-radius:8px!important;border-color:#d6dfea!important;
