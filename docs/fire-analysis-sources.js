@@ -7,7 +7,7 @@
     ['school','สถานศึกษา','#7b3fad','amenity','school|kindergarten|college|university'],
     ['hydrant','หัวจ่ายน้ำ','#076576','emergency','fire_hydrant'],
     ['cctv','กล้อง CCTV','#4b3884','man_made','surveillance'],
-    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#5A37C3'],
+    ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#774AA4'],
     ['business','โรงงาน / ผู้ประกอบการ','#687181'],
     ['aqm','AQMs · คุณภาพอากาศ','#5A37C3'],
     ['wqm','WQMs · คุณภาพน้ำ','#946107'],
@@ -37,7 +37,7 @@
   "waste": "<rect x=\"12\" y=\"12\" width=\"2\" height=\"12\"/><rect x=\"18\" y=\"12\" width=\"2\" height=\"12\"/><path d=\"M4,6V8H6V28a2,2,0,0,0,2,2H24a2,2,0,0,0,2-2V8h2V6ZM8,28V8H24V28Z\"/><rect x=\"12\" y=\"2\" width=\"8\" height=\"2\"/>",
   "incident": '<g transform="scale(.0625)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"><path d="M256,80c-8.66,0-16.58,7.36-16,16l8,216a8,8,0,0,0,8,8h0a8,8,0,0,0,8-8l8-216C272.58,87.36,264.66,80,256,80Z"/><circle cx="256" cy="416" r="16"/></g>',
 };
-  const incident={id:'incident',color:'#DE1B4A'};
+  const incident={id:'incident',color:'#CE1126'};
   const windArrow='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 82" aria-hidden="true"><path d="M21 5 37 50 21 39 5 50Z" fill="#fff" stroke="#365465" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   const pinColors = {
@@ -48,7 +48,7 @@
     school: ['#be9df4','#7b3fad'],
     hydrant: ['#67c8d8','#076576'],
     cctv: ['#9d91d9','#4b3884'],
-    estate: ['#5A37C3','#5A37C3'],
+    estate: ['#774AA4','#774AA4'],
     business: ['#adb4c2','#687181'],
     environment: ['#83bd68','#356831'],
     waterWatch: ['#76b7e0','#16688e'],
@@ -75,7 +75,7 @@
     }
     if(id==='business')return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13" fill="#8590a4" stroke="#fff" stroke-width="3"/><circle cx="18" cy="18" r="5" fill="#fff"/></svg>';
     const glyph=id==='estate'
-      ? '<circle cx="16" cy="16" r="10"/>'
+      ? '<path transform="scale(1.333333)" d="M7 16H8M11.5 16H12.5M16 16H17M18.4 20H5.6C5.03995 20 4.75992 20 4.54601 19.891C4.35785 19.7951 4.20487 19.6422 4.10899 19.454C4 19.2401 4 18.9601 4 18.4V4.8C4 4.51997 4 4.37996 4.0545 4.273C4.10243 4.17892 4.17892 4.10243 4.273 4.0545C4.37996 4 4.51997 4 4.8 4H7.2C7.48003 4 7.62004 4 7.727 4.0545C7.82108 4.10243 7.89757 4.17892 7.9455 4.273C8 4.37996 8 4.51997 8 4.8V9.06863C8 9.67445 8 9.97735 8.1198 10.1176C8.22374 10.2393 8.37967 10.3039 8.53923 10.2914C8.72312 10.2769 8.93731 10.0627 9.36569 9.63431L12.6343 6.36569C13.0627 5.93731 13.2769 5.72312 13.4608 5.70865C13.6203 5.69609 13.7763 5.76068 13.8802 5.88238C14 6.02265 14 6.32556 14 6.93137V9.06863C14 9.67445 14 9.97735 14.1198 10.1176C14.2237 10.2393 14.3797 10.3039 14.5392 10.2914C14.7231 10.2769 14.9373 10.0627 15.3657 9.63431L18.6343 6.36569C19.0627 5.93731 19.2769 5.72312 19.4608 5.70865C19.6203 5.69609 19.7763 5.76068 19.8802 5.88238C20 6.02265 20 6.32556 20 6.93137V18.4C20 18.9601 20 19.2401 19.891 19.454C19.7951 19.6422 19.6422 19.7951 19.454 19.891C19.2401 20 18.9601 20 18.4 20Z" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>'
       : id==='hospital'
       ? '<path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>'
       : glyphs[id];
