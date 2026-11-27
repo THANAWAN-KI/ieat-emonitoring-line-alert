@@ -156,6 +156,9 @@
     const rank=row=>row===selectedBufferRow?-1:(priority.indexOf(row.category.id)+1||priority.length+1);
     const rows=[...recordByGraphic].sort(([,left],[,right])=>rank(left)-rank(right)||left.distance-right.distance);
     const markers=[],categoryCounts=new Map();
+    const estateLayer=sources.find(({kind})=>kind==='estate')?.layer;
+    const estateDisplayed=estateLayer?.loaded&&estateLayer.visible&&estateLayer.parent?.visible&&
+      (!estateLayer.minScale||scale<=estateLayer.minScale);
     const showOverview=!activeCategory&&!$('fireBufferFilter').value.trim();
     const overviewMaxScale={estate:600000,hospital:240000,fire:240000,police:180000,community:85000,school:45000,hydrant:24000,cctv:24000,business:7500};
     const host=$('coverageMapView').getBoundingClientRect();
@@ -172,6 +175,7 @@
       const kind=row.category.id;
       const count=categoryCounts.get(kind)||0;
       if(!selected){
+        if(kind==='estate'&&estateDisplayed&&row.source==='กนอ.')continue;
         if(showOverview&&kind==='hydrant'&&sources.some(({kind,layer})=>kind==='hydrant'&&layer.loaded&&layer.visible&&layer.parent?.visible&&scale<=layer.minScale))continue;
         if(markers.length>=density.total||(showOverview&&count>=density.perKind))continue;
         const maxScale=showOverview?(overviewMaxScale[kind]??firePointScale(kind)):Math.max(firePointScale(kind),100000);
@@ -192,6 +196,7 @@
     if(!measure)return;
     measure.font='700 12px Sarabun, sans-serif';
     for(const {screen,graphic,row} of markers){
+      if(row.category.id==='estate'&&estateDisplayed&&row.source==='กนอ.'&&estateLayer.labelsVisible&&scale<=fireLabelScale('estate'))continue;
       const text=row.name.length>26?row.name.slice(0,25)+'…':row.name;
       const width=Math.ceil(measure.measureText(text).width)+12;
       const offsets=[[0,27],[0,-35],[25+width/2,0],[-25-width/2,0],[22,28],[-22,28],[22,-35],[-22,-35]];
@@ -210,6 +215,9 @@
   if(bufferLabels){
     view.watch('stationary',stationary=>{if(stationary)updateBufferVisibility();});
     externalLayer.watch('visible',updateBufferVisibility);
+    const estateLayer=sources.find(({kind})=>kind==='estate')?.layer;
+    estateLayer?.watch('visible',updateBufferVisibility);
+    estateLayer?.parent?.watch('visible',updateBufferVisibility);
   }
   const connectionLayer=fireAnalysis&&new GraphicsLayer({title:'ระยะเส้นตรงจากจุดเกิดเหตุ',listMode:'hide'});
   if(connectionLayer)map.add(connectionLayer,Math.max(0,map.layers.indexOf(externalLayer)));
