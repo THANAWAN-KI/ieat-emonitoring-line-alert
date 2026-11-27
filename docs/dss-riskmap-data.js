@@ -1421,17 +1421,40 @@
 
     if(fireView){
       const measure=new DistanceMeasurement2D({view});
-      const tool=new Expand({view,content:measure,expandIcon:'measure-line',expandTooltip:'วัดระยะทาง'});
+      const tool=new Expand({view,content:measure,expandIcon:'measure-line',expandTooltip:'วัดระยะทาง',group:'fire-map-tools'});
       tool.watch('expanded',expanded=>{if(!expanded)measure.viewModel.clear();});
       view.ui.add(tool,'top-right');
     }
     view.ui.add(new Home({view}),'top-left');
-    if(dedicatedFireAnalysis)view.ui.add(new Compass({view}),'top-right');
+    const layerList=new LayerList({view,selectionEnabled:false});
+    const layerPanel=dedicatedFireAnalysis?el('div',null,'fire-layer-panel'):layerList;
+    if(dedicatedFireAnalysis){
+      const listHost=el('div');
+      layerPanel.append(el('h3','ชั้นข้อมูลแผนที่'),listHost);
+      layerList.container=listHost;
+    }
     if(document.documentElement.classList.contains('fire-analysis-page')){
       const picker=$('coverageBasemap')?.closest('.coverage-basemap-control');
-      if(picker)view.ui.add(new Expand({view,content:picker,expandIcon:'basemap',expandTooltip:'แผนที่พื้นฐาน',collapseTooltip:'ปิดตัวเลือกแผนที่พื้นฐาน',group:'fire-map-tools'}),'top-right');
+      if(picker){
+        const choices=$('fireBasemapChoices');
+        if(choices){
+          picker.querySelector('label').hidden=true;
+          basemapSelect.hidden=true;
+          choices.hidden=false;
+          const buttons=choices.querySelectorAll('button');
+          const refresh=()=>buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.value===basemapSelect.value)));
+          for(const button of buttons)button.onclick=()=>{
+            basemapSelect.value=button.value;
+            basemapSelect.dispatchEvent(new Event('change',{bubbles:true}));
+          };
+          basemapSelect.addEventListener('change',refresh);
+          refresh();
+        }
+        view.ui.add(new Expand({view,content:picker,expandIcon:'basemap',expandTooltip:'แผนที่พื้นฐาน',collapseTooltip:'ปิดตัวเลือกแผนที่พื้นฐาน',group:'fire-map-tools'}),'top-right');
+      }
     }
-    view.ui.add(new Expand({view,content:new LayerList({view,selectionEnabled:false}),expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
+    view.ui.add(new Expand({view,content:layerPanel,expandIcon:'layers',expandTooltip:'ชั้นข้อมูลแผนที่',group:'fire-map-tools'}),'top-right');
+    if(dedicatedFireAnalysis)view.ui.add(new Compass({view}),'top-right');
     const mapInfo=$('fireMapInfo');
     if(fireMapIcons&&mapInfo){
       mapInfo.append($('coverageWind'),document.querySelector('#coverageMap .fire-map-key'));
@@ -1463,9 +1486,10 @@
       layerLegend.append(el('summary','สัญลักษณ์ตามชั้นข้อมูล'),legendBody);
       mapInfo.append(layerLegend);
       new Legend({view,container:legendBody});
-      view.ui.add(new Expand({view,content:mapInfo,expandIcon:'legend',
-        expandTooltip:'ข้อมูลลมและสัญลักษณ์',collapseTooltip:'ปิดข้อมูลลมและสัญลักษณ์'}),'bottom-left');
-    }else{
+      const details=el('details',null,'fire-layer-details');
+      details.append(el('summary','ข้อมูลลมและสัญลักษณ์'),mapInfo);
+      layerPanel.append(details);
+    }else if(!dedicatedFireAnalysis){
       view.ui.add(new Expand({view,content:new Legend({view}),expandTooltip:'คำอธิบายสัญลักษณ์'}),'bottom-left');
     }
     const factory=layer('e_PP/FeatureServer/0','โรงงานใกล้เคียง');
