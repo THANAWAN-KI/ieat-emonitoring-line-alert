@@ -4020,6 +4020,54 @@ html.fire-analysis-page #fireMapInfo .fire-layer-legend{
 }
 html.fire-analysis-page #fireMapInfo summary{cursor:pointer}
 </style>
+
+<style id="fire-glass-expanded-tools">
+html.fire-analysis-page body #riskmapOverviewPanel #coverageMapView
+  .esri-expand__container:has(:is(.esri-measurement-widget-content,.esri-layer-list)){
+  background:rgba(240,249,255,.76)!important;
+}
+html.fire-analysis-page #coverageMapView :is(.esri-measurement-widget-content,.esri-layer-list){
+  width:min(320px,calc(100vw - 104px));
+  max-height:min(360px,42svh);
+  box-sizing:border-box;
+  overflow:auto;
+  overscroll-behavior:contain;
+  background:transparent;
+  color:#193c53;
+  font-family:Sarabun,Tahoma,sans-serif;
+}
+html.fire-analysis-page #coverageMapView .esri-measurement-widget-content{padding:12px}
+html.fire-analysis-page #coverageMapView .esri-measurement-widget-content .esri-button{
+  min-height:42px;
+  border:1px solid rgba(72,130,164,.4);
+  border-radius:10px;
+  background:rgba(219,239,251,.82);
+  color:#154867;
+  font-weight:700;
+}
+html.fire-analysis-page #coverageMapView .esri-measurement-widget-content .esri-button:hover:enabled{
+  background:#cce9fa;
+}
+html.fire-analysis-page #coverageMapView .esri-layer-list{padding:8px}
+html.fire-analysis-page #coverageMapView .esri-layer-list__item{
+  margin-block:4px;
+  border:1px solid rgba(114,158,184,.28);
+  border-radius:9px;
+  background:rgba(255,255,255,.52);
+  color:#173d55;
+}
+html.fire-analysis-page #coverageMapView .esri-layer-list__item-content{font-weight:600}
+html.fire-analysis-page #coverageMapView .esri-layer-list__item--invisible .esri-layer-list__item-content{color:#526b7c}
+html.fire-analysis-page #coverageMapView .esri-layer-list__visible-toggle{
+  color:#245b7b;
+  border-radius:7px;
+}
+html.fire-analysis-page #coverageMapView .esri-layer-list__visible-toggle:hover{background:rgba(187,222,244,.58)}
+html.fire-analysis-page #coverageMapView :is(.esri-button,.esri-layer-list__visible-toggle):focus-visible{
+  outline:2px solid #24688f;
+  outline-offset:-2px;
+}
+</style>
 <script id="riskmap-ready">
 (()=>{
  const ready=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('riskmap-booting')));
