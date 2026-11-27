@@ -4431,6 +4431,27 @@ html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-
   background:#383838!important;border-color:#383838!important;color:#fff!important;
 }
 </style>
+<style id="fire-analysis-typography">
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage, html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(p,label,input,select,small,span,strong,a,li,td){
+  font-size:14px!important;font-weight:300!important;color:#000!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage input::placeholder{color:#000!important;opacity:1}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation){
+  font-size:14px!important;font-weight:300!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage button:not(#fireNavigation) :is(strong,small,span){color:inherit!important}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #fireExternalList .fire-result-row,
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #fireExternalList .fire-result-row :is(strong,small){color:#000!important}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage :is(h2,h3,h4,h5,h6,summary),
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage #coverageIncidentTitle,
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > summary,
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .dss-auxiliary-search > details > summary{
+  font-size:16px!important;font-weight:700!important;color:#0071bf!important;
+}
+html.fire-analysis-page body #riskmapOverviewPanel #riskCoverage .riskmap-overview-heading h1{
+  font-size:18px!important;font-weight:700!important;color:#0071bf!important;
+}
+</style>
 <script id="riskmap-ready">
 (()=>{
  const ready=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.remove('riskmap-booting')));
