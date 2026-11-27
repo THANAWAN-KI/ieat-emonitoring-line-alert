@@ -1300,7 +1300,7 @@
         detailLabel.hidden=true;
         panel.append(detailLabel);
         detailGraphics.add(detailPin);
-        const detailMap=new ArcMap({basemap:map.basemap.clone(),layers:[detailGraphics]});
+        const detailMap=new ArcMap({basemap:'satellite',layers:[detailGraphics]});
         panel.hidden=false;
         detailView=new MapView({container:$('fireIncidentInsetView'),map:detailMap,center:point,zoom:17,
           ui:{components:['attribution']},constraints:{rotationEnabled:false}});
@@ -1308,11 +1308,6 @@
           for(const property of ['viewpoint','width','height'])detailView.watch(property,positionDetailLabel);
           positionDetailLabel();
         }).catch(()=>{});
-        map.watch('basemap',basemap=>{
-          detailMap.basemap=basemap.clone();
-          if($('coverageBasemap')?.value===referenceBasemap)styleNavigationBasemap(detailMap.basemap).catch(()=>{});
-        });
-        if($('coverageBasemap')?.value===referenceBasemap)styleNavigationBasemap(detailMap.basemap).catch(()=>{});
         return;
       }
       detailPin.geometry=point;
