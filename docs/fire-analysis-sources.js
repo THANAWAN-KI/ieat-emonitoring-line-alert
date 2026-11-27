@@ -1,12 +1,12 @@
 (() => {
   const categories = [
-    ['hospital','โรงพยาบาล / คลินิก','#d92262','amenity','hospital|clinic'],
-    ['fire','สถานีดับเพลิง','#c65b10','amenity','fire_station'],
-    ['police','สถานีตำรวจ','#1756b5','amenity','police'],
-    ['community','ชุมชน','#237351','place','city|town|village|hamlet|suburb|neighbourhood'],
-    ['school','สถานศึกษา','#7b3fad','amenity','school|kindergarten|college|university'],
-    ['hydrant','หัวจ่ายน้ำ','#076576','emergency','fire_hydrant'],
-    ['cctv','กล้อง CCTV','#4b3884','man_made','surveillance'],
+    ['hospital','โรงพยาบาล / คลินิก','#9f0812','amenity','hospital|clinic'],
+    ['fire','สถานีดับเพลิง','#dc380f','amenity','fire_station'],
+    ['police','สถานีตำรวจ','#368dd5','amenity','police'],
+    ['community','ชุมชน','#70af1e','place','city|town|village|hamlet|suburb|neighbourhood'],
+    ['school','สถานศึกษา','#7e887a','amenity','school|kindergarten|college|university'],
+    ['hydrant','หัวจ่ายน้ำ','#e1ac26','emergency','fire_hydrant'],
+    ['cctv','กล้อง CCTV','#6347b2','man_made','surveillance'],
     ['estate','นิคมอุตสาหกรรม / ท่าเรือ','#787271'],
     ['business','โรงงาน / ผู้ประกอบการ','#687181'],
     ['aqm','AQMs · คุณภาพอากาศ','#5A37C3'],
@@ -56,7 +56,23 @@
     waste: ['#c2b879','#666020'],
   };
 
+  const supportGlyphs={
+  "hospital": "M16 8v16M8 16h16",
+  "fire": "M16 28c-6 0-10-4-10-9 0-4 2-7 5-9 0 4 2 4 3 4 3-4 4-7 4-10 5 4 8 9 8 15 0 5-4 9-10 9Z M16 27c-3 0-4-2-4-4s2-4 4-6c2 2 4 4 4 6s-1 4-4 4Z",
+  "police": "M16 28c-7-3-10-7-10-13V7l10-3 10 3v8c0 6-3 10-10 13Z M11 16l3 3 7-7",
+  "hydrant": "M11 28V12h10v16M8 28h16M10 12h12M13 12V9a3 3 0 0 1 6 0v3M11 16H7v6h4m10-6h4v6h-4",
+  "cctv": "M6 8h16v10H6zM22 11l5-3v10l-5-3M14 18v6h8",
+  "community": "M4 16l7-6 7 6m-12-2v12h10v-9m1-6 5-5 7 6m-2-2v16H17m-7 0v-6h3",
+  "school": "m4 12 12-6 12 6-12 6-12-6Zm5 3v7c4 4 10 4 14 0v-7m5-3v8"
+};
   function badge({id,color}){
+    if(supportGlyphs[id]){
+      const ink=['hydrant','police','community','school'].includes(id)?'#142631':'#fff';
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">'+
+        '<rect x="2" y="2" width="32" height="32" rx="10" fill="'+color+'" stroke="#fff" stroke-width="2"/>'+
+        '<path transform="translate(4 4) scale(.875)" d="'+supportGlyphs[id]+'" fill="none" stroke="'+ink+
+        '" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
     const [top,bottom]=pinColors[id]||[color,color];
     if(['aqm','wqm','cem'].includes(id)){
       const symbol={
