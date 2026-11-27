@@ -61,7 +61,7 @@
     const [top,bottom]=pinColors[id]||[color,color];
     if(['aqm','wqm','cem'].includes(id)){
       const symbol={
-        aqm:'M6 15h5l4-5h4l-2 5h6l3-2v6l-3-2h-6l2 5h-4l-4-5H6Z',
+        aqm:'M7 12h12a3 3 0 1 0-3-3M5 17h18a3 3 0 1 1-3 3M8 22h5',
         wqm:'M16 6c-3 5-7 9-7 13a7 7 0 1 0 14 0c0-4-4-8-7-13Z',
         cem:'M6 25V15l7 3v-5l7 4V9h4v16ZM10 22h1m4 0h1m4 0h1'
       }[id];
