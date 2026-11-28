@@ -3,13 +3,82 @@
   "metadata": {
     "source": "TMD RSS",
     "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml",
-    "fetchedAt": "2026-11-28T07:51:22.594922+00:00",
+    "fetchedAt": "2026-11-28T16:54:18.774851+00:00",
     "coverage": "Recent RSS items only, not a complete historical catalog",
     "count": 10,
-    "oldestEvent": 1795718466000,
-    "latestEvent": 1795845523000
+    "oldestEvent": 1795809729000,
+    "latestEvent": 1795876380000
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "tmd-17509",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          96.407,
+          18.827,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 3.1,
+        "place": "ประเทศเมียนมา",
+        "time": 1795876380000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17509",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17508",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.629,
+          22.264,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 2.7,
+        "place": "พรมแดนประเทศลาว - ประเทศจีน",
+        "time": 1795868508000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17508",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "tmd-17507",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          94.865,
+          5.319,
+          null
+        ]
+      },
+      "properties": {
+        "mag": 4.6,
+        "place": "ตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย",
+        "time": 1795854647000,
+        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17507",
+        "source": "TMD",
+        "types": "",
+        "detail": null,
+        "status": "published",
+        "magType": null
+      }
+    },
     {
       "type": "Feature",
       "id": "tmd-17506",
@@ -164,75 +233,6 @@
         "place": "ประเทศเมียนมา",
         "time": 1795809729000,
         "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17500",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17499",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          101.022,
-          19.962,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.7,
-        "place": "ประเทศลาว",
-        "time": 1795776000000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17499",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17498",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          98.184,
-          21.267,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 2.5,
-        "place": "ประเทศเมียนมา",
-        "time": 1795752146000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17498",
-        "source": "TMD",
-        "types": "",
-        "detail": null,
-        "status": "published",
-        "magType": null
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "tmd-17497",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          97.039,
-          19.401,
-          null
-        ]
-      },
-      "properties": {
-        "mag": 1.7,
-        "place": "ประเทศเมียนมา",
-        "time": 1795718466000,
-        "url": "https://earthquake.tmd.go.th/inside-info.html?earthquake=17497",
         "source": "TMD",
         "types": "",
         "detail": null,
